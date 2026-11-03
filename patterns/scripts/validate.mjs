@@ -26,7 +26,7 @@ const needs = {
   "mesh-refracted-pattern": ["grade", "blur", "contrast", "mesh", "refraction", "noise"],
   "mesh-sliced-pattern": ["grade", "blur", "contrast", "mesh", "slice", "noise"],
   "mesh-dithered-pattern": ["grade", "blur", "contrast", "mesh", "dither"],
-  "generative-pattern": ["designSize", "colors", "background", "engine", "tone"],
+  "generative-pattern": ["designSize", "background", "engine", "tone"],
 };
 
 function load(id) {
@@ -60,8 +60,11 @@ for (const id of ids) {
   for (const key of needs[p.recipe] ?? []) if (!(key in (p.settings ?? {}))) errors.push(`${where}: settings.${key} is missing`);
 
   if (p.recipe === "generative-pattern") {
-    // Generative pattern: fixed colors, all tokens that exist.
-    for (const ref of [...(p.settings?.colors ?? []), ...(p.settings?.backdrop ?? []), p.settings?.background]) {
+    // Generative pattern: fixed colors or colorways, all tokens that exist.
+    const looks = p.colorways ?? [p.settings ?? {}];
+    for (const look of looks) if (!look.colors?.length) errors.push(`${where}: needs colors, in settings or in each colorway`);
+    const refs = looks.flatMap((look) => [...(look.colors ?? []), ...(look.backdrop ?? []).map((stop) => stop?.token ?? stop)]);
+    for (const ref of [...refs, p.settings?.background]) {
       if (typeof ref !== "string" || !/^\{.+\}$/.test(ref)) errors.push(`${where}: color ${ref} should be a token like {color.secondary.500}`);
       else if (!tokenExists(ref.slice(1, -1))) errors.push(`${where}: token ${ref} doesn't exist`);
     }
