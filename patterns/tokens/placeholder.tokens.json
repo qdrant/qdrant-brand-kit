@@ -2,37 +2,174 @@
   "$description": "Placeholder values. Juan's design system will replace the values. Keep the names, so every pattern updates on its own.",
   "color": {
     "primary": {
+      "50": {
+        "$type": "color",
+        "$value": "#FDECEF",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
       "100": {
         "$type": "color",
         "$value": "#FCD7DD",
-        "$description": "Placeholder. From Figma variable primary/100."
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#FAAEB3",
+        "$description": "Placeholder. From the qdrant-brand skill."
       },
       "300": {
         "$type": "color",
         "$value": "#FF8792",
         "$description": "Placeholder. From the qdrant-brand skill."
       },
+      "400": {
+        "$type": "color",
+        "$value": "#FF516B",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
       "500": {
         "$type": "color",
         "$value": "#DC244C",
         "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#CC1845",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#BD0C3E",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#9E0D38",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#850D35",
+        "$description": "Placeholder. From the qdrant-brand skill."
       }
     },
     "secondary": {
+      "50": {
+        "$type": "color",
+        "$value": "#E5E8FF",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#DDE0FF",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#C2C5FF",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
       "300": {
         "$type": "color",
         "$value": "#9494FF",
-        "$description": "Placeholder. From Figma variable secondary/300."
+        "$description": "Placeholder. From the qdrant-brand skill."
       },
       "400": {
         "$type": "color",
         "$value": "#7E75FF",
-        "$description": "Placeholder. From Figma variable secondary/400."
+        "$description": "Placeholder. From the qdrant-brand skill."
       },
       "500": {
         "$type": "color",
         "$value": "#6047FF",
-        "$description": "Placeholder. From Figma variable secondary/500."
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#5F36F5",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#522AD8",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#4325AE",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#392689",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      }
+    },
+    "neutral": {
+      "white": {
+        "$type": "color",
+        "$value": "#FFFFFF",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "50": {
+        "$type": "color",
+        "$value": "#F0F3FA",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#E2E7F5",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#D3D9EB",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#CAD0E5",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#ABB1C7",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#898EA3",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#656B7F",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#4E5366",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#303547",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#111824",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#0B0F19",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "black": {
+        "$type": "color",
+        "$value": "#000000",
+        "$description": "Placeholder. From the qdrant-brand skill."
       }
     },
     "teal": {

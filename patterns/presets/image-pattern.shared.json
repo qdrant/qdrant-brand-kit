@@ -24,25 +24,21 @@
   "examples": [
     {
       "name": "Astronauts over crater",
-      "image": "sources/astronauts-crater.webp",
       "library": "Shared by Vanesa",
       "id": "astronauts-crater"
     },
     {
       "name": "Splitting the Ice Block",
-      "image": "sources/splitting-the-ice-block.png",
       "library": "https://qdrant-design-lab.vercel.app/library/8d9b1e13-f792-46de-9174-e4ee7566f3cb",
       "id": "splitting-the-ice-block"
     },
     {
       "name": "Astronaut Drives Lunar Rover",
-      "image": "sources/astronaut-drives-lunar-rover.png",
       "library": "https://qdrant-design-lab.vercel.app/library/d7ddde24-69d5-402e-b72d-0a7fc107248e",
       "id": "astronaut-drives-lunar-rover"
     },
     {
       "name": "Astronaut Holds Exploding Orb",
-      "image": "sources/astronaut-holds-exploding-orb.png",
       "library": "https://qdrant-design-lab.vercel.app/library/6d581177-6af1-4ee3-9f97-6b6671de491d",
       "id": "astronaut-holds-exploding-orb"
     }
@@ -68,6 +64,16 @@
       "high": 98,
       "curve": 70,
       "midtones": 0.6
+    },
+    "mesh": {
+      "$description": "Every mesh point is snapped to the closest token from this list: whole families, or single steps like neutral.950. No grays: light areas use pastel primary and secondary steps and white, dark areas use the deep violets, reds and neutral.950.",
+      "palette": [
+        "primary",
+        "secondary",
+        "neutral.white",
+        "neutral.950"
+      ]
     }
-  }
+  },
+  "$examplesNote": "Test examples. Each has a mesh per look in meshes/<id>.<meshGroup>.json. The PNGs aren't kept: the library link is enough to rebuild a mesh if the grade, blur or contrast change."
 }

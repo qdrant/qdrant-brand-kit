@@ -1,6 +1,6 @@
 // Effects shared by every recipe: the lenticular refraction and the mono noise.
 
-import { hexToRgba } from "./tokens.js";
+import { hexToRgba, nearestTokenWithDistance } from "./tokens.js";
 
 // Lenticular refraction. Lenses run across the image along angle A, and each lens
 // shifts what's behind it. sample(x, y, channel) returns the source color, 0 to 1.
@@ -120,7 +120,9 @@ export function stretchContrast(px, contrast) {
 // short arc between two anchors (red to violet runs through magenta and purple),
 // plus `tolerance` degrees on each side. Brown and burnt red (a warm hue that is also
 // dark and dull) always fail. Near-white, near-black and gray count as neutral.
-export function brandCheck(px, anchors, { tolerance = 30, maxOffBrand = 2 } = {}) {
+// A color that's close to any token in `palette` (OKLab distance under `nearToken`)
+// is also on-brand, so the brand neutrals pass too.
+export function brandCheck(px, anchors, { tolerance = 30, maxOffBrand = 2, palette = [], nearToken = 0.06 } = {}) {
   const [a, b] = anchors.map((hex) => rgbToHsl(...hexToRgba(hex))[0]);
   const arc = hueDelta(a, b); // signed, short way round
   const inRange = (h) => {
@@ -134,7 +136,10 @@ export function brandCheck(px, anchors, { tolerance = 30, maxOffBrand = 2 } = {}
     // Only true grays are neutral. Brown is a dull, dark orange, so it must still count.
     if (s < 0.05 || l < 0.04 || l > 0.96) continue;
     colored++;
-    if (!inRange(h) || isBrown(h, s, l)) off++;
+    if (!inRange(h) || isBrown(h, s, l)) {
+      const near = palette.length && nearestTokenWithDistance(px[i] / 255, px[i + 1] / 255, px[i + 2] / 255, palette).distance < nearToken;
+      if (!near) off++;
+    }
   }
   const offBrand = colored ? (off / colored) * 100 : 0;
   return { offBrand: Math.round(offBrand * 10) / 10, pass: offBrand <= maxOffBrand };

@@ -1,7 +1,10 @@
 // Image source, shared by every image recipe. Turns a library image into a mesh
-// gradient: a small grid of colors (about 11 x 11) that matches the blurred,
-// brand-graded image. Recipes draw from the mesh with smooth curves, so the PNG
-// isn't needed after the mesh is made. A mesh is about 1 to 2 KB of JSON.
+// gradient: code, not an image. It's a small grid of points (about 11 x 11), and each
+// point is a brand color token, like "{color.secondary.700}". For each point, the
+// code reads the color of the blurred, brand-graded image there and picks the
+// closest token in the brand palette, so a pattern can't drift off-brand. Recipes
+// draw smooth curves between the points, so the PNG isn't needed once the mesh is
+// made. When the token values change, every mesh follows.
 //
 // The steps and their values (grade, blur, contrast) come from the shared preset
 // files, so they're the same in every image pattern of a group.
@@ -12,12 +15,13 @@
 // mesh once and keeps only the mesh. The files in sources/ are test examples, and
 // meshes/ holds their meshes.
 
-import { resolveToken, hexToRgba } from "./tokens.js";
+import { resolveToken, hexToRgba, paletteTokens, nearestToken } from "./tokens.js";
 import { brandGrade, stretchContrast } from "./effects.js";
 
-// Image to mesh: { size: n, colors: ["#RRGGBB", ...] }, row by row from the top left.
+// Image to mesh: { size: n, colors: ["{color.secondary.700}", ...] }, row by row from
+// the top left.
 export function imageToMesh(image, tokens, settings) {
-  const { size, grade, blur, contrast } = settings;
+  const { size, grade, blur, contrast, mesh } = settings;
   const anchors = grade.anchors.map((ref) => resolveToken(tokens, ref));
 
   // Step 1: fill the square like CSS object-fit: cover, and grade it to the brand.
@@ -39,25 +43,27 @@ export function imageToMesh(image, tokens, settings) {
   // Step 3: contrast, on the grid.
   stretchContrast(grid, contrast);
 
-  const hex = (v) => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, "0");
+  // Step 4: snap every point to the closest brand token.
+  const palette = paletteTokens(tokens, mesh.palette);
   const colors = [];
-  for (let g = 0; g < n * n; g++) colors.push(`#${hex(grid[g * 4])}${hex(grid[g * 4 + 1])}${hex(grid[g * 4 + 2])}`.toUpperCase());
+  for (let g = 0; g < n * n; g++) colors.push(nearestToken(grid[g * 4] / 255, grid[g * 4 + 1] / 255, grid[g * 4 + 2] / 255, palette).ref);
   return { size: n, colors };
 }
 
 // A source is a mesh (has colors) or an image (made into a mesh first).
-// Returns { sample(x, y, channel) -> 0 to 1, anchors: brand hex colors }.
+// Returns { sample(x, y, channel) -> 0 to 1, anchors: brand hex colors, palette: tokens }.
 export function prepareImage(source, tokens, settings) {
   const anchors = settings.grade.anchors.map((ref) => resolveToken(tokens, ref));
   const mesh = source.colors ? source : imageToMesh(source, tokens, settings);
   const grid = new Float32Array(mesh.size * mesh.size * 4);
-  mesh.colors.forEach((hex, g) => {
-    const [r, gr, b] = hexToRgba(hex);
+  mesh.colors.forEach((ref, g) => {
+    const [r, gr, b] = hexToRgba(resolveToken(tokens, ref));
     grid[g * 4] = r * 255;
     grid[g * 4 + 1] = gr * 255;
     grid[g * 4 + 2] = b * 255;
   });
-  return { sample: smoothSampler(grid, mesh.size, settings.size), anchors };
+  const palette = paletteTokens(tokens, settings.mesh.palette);
+  return { sample: smoothSampler(grid, mesh.size, settings.size), anchors, palette };
 }
 
 // Box-average the image down to an n x n grid of RGBA floats (0 to 255).

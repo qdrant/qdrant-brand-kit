@@ -12,7 +12,7 @@ export function render(canvas, tokens, preset, image) {
   const { size } = preset.settings;
   canvas.width = canvas.height = size;
   const ctx = canvas.getContext("2d");
-  const { sample, anchors } = prepareImage(image, tokens, preset.settings);
+  const { sample, anchors, palette } = prepareImage(image, tokens, preset.settings);
 
   // The smooth image at full size, then Step 4: dither.
   const out = ctx.createImageData(size, size);
@@ -27,5 +27,5 @@ export function render(canvas, tokens, preset, image) {
   ctx.putImageData(out, 0, 0);
 
   // Final test: the output must stay on the brand palette.
-  return brandCheck(out.data, anchors);
+  return brandCheck(out.data, anchors, { palette });
 }
