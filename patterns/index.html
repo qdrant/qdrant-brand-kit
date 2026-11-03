@@ -38,8 +38,12 @@
     <aside id="panel">
       <h2>Pattern</h2>
       <select id="preset"></select>
-      <h2>Color family</h2>
-      <select id="family"></select>
+      <h2>Colorway</h2>
+      <select id="colorway"></select>
+      <div id="family-row">
+        <h2>Color family</h2>
+        <select id="family"></select>
+      </div>
       <h2>Tokens (placeholders)</h2>
       <div id="tokens"></div>
       <h2>Fixed settings</h2>
@@ -49,51 +53,59 @@
   </main>
 
   <script type="module">
-    import { loadTokens, resolveToken } from "./patterns/tokens.js";
+    import { loadTokens, resolveToken, colorwayTokens, familiesFor } from "./patterns/tokens.js";
 
     const getJson = (url) => fetch(url).then((r) => r.json());
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
     const presets = await Promise.all((await getJson("presets/index.json")).map((id) => getJson(`presets/${id}.json`)));
     const canvas = document.getElementById("canvas");
     const presetSelect = document.getElementById("preset");
+    const colorwaySelect = document.getElementById("colorway");
     const familySelect = document.getElementById("family");
     presets.forEach((preset, i) => presetSelect.add(new Option(preset.name, i)));
 
-    let preset, recipe;
+    let preset, recipe, colorway;
 
     const draw = () => {
-      recipe.render(canvas, tokens, preset, familySelect.value);
-      document.getElementById("tokens").innerHTML = Object.values(recipe.colors(preset, familySelect.value))
+      const color = colorwayTokens(colorway, familySelect.value);
+      recipe.render(canvas, tokens, preset, color);
+      document.getElementById("tokens").innerHTML = Object.values(color)
         .map((ref) => {
-          const path = ref.slice(1, -1);
           const hex = resolveToken(tokens, ref);
-          return `<div class="token"><code>${path}</code><span><i style="background:${hex}"></i>${hex}</span></div>`;
+          return `<div class="token"><code>${ref.slice(1, -1)}</code><span><i style="background:${hex}"></i>${hex}</span></div>`;
         })
         .join("");
+    };
+
+    const chooseColorway = () => {
+      colorway = preset.colorways[colorwaySelect.value];
+      document.getElementById("reference").src = colorway.reference ?? "";
+
+      // Only colorways with {family} in them let you pick a family.
+      const usesFamily = colorway.from.includes("{family}") || colorway.to.includes("{family}");
+      document.getElementById("family-row").hidden = !usesFamily;
+      familySelect.innerHTML = "";
+      for (const family of familiesFor(tokens, colorway)) familySelect.add(new Option(family, family));
+      if (colorway.defaultFamily) familySelect.value = colorway.defaultFamily;
+      draw();
     };
 
     const choosePreset = async () => {
       preset = presets[presetSelect.value];
       recipe = await import(`./patterns/${preset.recipe}.js`);
-      document.getElementById("reference").src = preset.reference;
       document.getElementById("settings").textContent = JSON.stringify(preset.settings, null, 2);
-
-      // Any family that has the steps this preset uses can be chosen.
-      const steps = Object.values(preset.colors);
-      familySelect.innerHTML = "";
-      for (const [family, scale] of Object.entries(tokens.color)) {
-        if (steps.every((step) => scale[step])) familySelect.add(new Option(family, family));
-      }
-      familySelect.value = preset.defaultFamily;
-      draw();
+      colorwaySelect.innerHTML = "";
+      preset.colorways.forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
+      chooseColorway();
     };
 
     presetSelect.addEventListener("change", choosePreset);
+    colorwaySelect.addEventListener("change", chooseColorway);
     familySelect.addEventListener("change", draw);
 
     document.getElementById("download").addEventListener("click", () => {
       const link = document.createElement("a");
-      link.download = `${preset.name} ${familySelect.value}.png`;
+      link.download = `${preset.name} - ${colorway.name.replace("{family}", familySelect.value)}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
     });

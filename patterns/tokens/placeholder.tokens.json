@@ -2,6 +2,11 @@
   "$description": "Placeholder values. Juan's design system will replace the values. Keep the names, so every pattern updates on its own.",
   "color": {
     "primary": {
+      "100": {
+        "$type": "color",
+        "$value": "#FCD7DD",
+        "$description": "Placeholder. From Figma variable primary/100."
+      },
       "300": {
         "$type": "color",
         "$value": "#FF8792",
@@ -18,6 +23,11 @@
         "$type": "color",
         "$value": "#9494FF",
         "$description": "Placeholder. From Figma variable secondary/300."
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#7E75FF",
+        "$description": "Placeholder. From Figma variable secondary/400."
       },
       "500": {
         "$type": "color",

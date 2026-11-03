@@ -1,19 +1,14 @@
 // Refracted Gradient (recipe)
 // A gradient, bent into diagonal bands by a lenticular refraction, with noise on top.
-// The values come from a preset in presets/, for example refracted-gradient-01.json.
-// Presets are fixed. The only choice is the color family, and colors are always
+// The values come from a preset in presets/, for example refracted-gradient-a.json.
+// Presets are fixed. The only choice is the colorway, and colors are always
 // token names, never hex.
 
 import { resolveToken, hexToRgba } from "./tokens.js";
 
-export const colors = (preset, family) => ({
-  from: `{color.${family}.${preset.colors.from}}`,
-  to: `{color.${family}.${preset.colors.to}}`,
-});
-
-export function render(canvas, tokens, preset, family = preset.defaultFamily) {
+// color = { from, to } token references, from colorwayTokens() in tokens.js.
+export function render(canvas, tokens, preset, color) {
   const { size, gradient, refraction, noise } = preset.settings;
-  const color = colors(preset, family);
   canvas.width = canvas.height = size;
   const ctx = canvas.getContext("2d");
   const image = ctx.createImageData(size, size);

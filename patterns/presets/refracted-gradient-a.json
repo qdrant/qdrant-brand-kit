@@ -1,0 +1,45 @@
+{
+  "name": "Refracted Gradient A",
+  "recipe": "refracted-gradient",
+  "colorways": [
+    {
+      "name": "One family, 500 → 300",
+      "from": "color.{family}.500",
+      "to": "color.{family}.300",
+      "defaultFamily": "secondary",
+      "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546",
+      "reference": "reference/refracted-gradient-a-family.png"
+    },
+    {
+      "name": "Primary 100 → Secondary 400",
+      "from": "color.primary.100",
+      "to": "color.secondary.400",
+      "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-23406",
+      "reference": "reference/refracted-gradient-a-primary-100-secondary-400.png"
+    }
+  ],
+  "settings": {
+    "size": 1080,
+    "gradient": {
+      "angle": 180
+    },
+    "refraction": {
+      "pattern": "lenticular",
+      "strength": -100,
+      "smoothness": 29,
+      "frost": 0,
+      "dispersion": 100,
+      "x": 50,
+      "y": 50,
+      "r": 24,
+      "a": -120
+    },
+    "noise": {
+      "color": "#C2C5FF",
+      "opacity": 40,
+      "size": 4,
+      "density": 16,
+      "seed": 10
+    }
+  }
+}
