@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Generative Cell Scaling</title>
+  <style>
+    :root { --bg: #0b0e1a; --panel: #151a2e; --text: #e8eaf6; --muted: #8b91b3; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, sans-serif; padding: 16px; }
+    h1 { font-size: 18px; margin: 0 0 4px; }
+    p { color: var(--muted); margin: 0 0 16px; max-width: 900px; }
+    h2 { font-size: 14px; margin: 24px 0 4px; }
+    h2 + p { margin-bottom: 8px; }
+    .row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+    figure { margin: 0; }
+    canvas { display: block; border-radius: 4px; background: var(--panel); }
+    .crop { height: 180px; width: 180px; }
+    figcaption { color: var(--muted); font-size: 11px; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Generative-Hexagon-Pattern-A: what should the hexagons do on bigger canvases?</h1>
+  <p>Each row is one option, drawn at real sizes and shown scaled down to fit. The last image in each row is a 1:1 crop of the 4K version at real pixels, so you can see the actual hexagon size.</p>
+  <div id="sheet"></div>
+
+  <script type="module">
+    import { loadTokens, loadPatterns, renderPattern } from "./patterns/index.js";
+
+    const formats = [
+      { name: "Designed size", width: 1620, height: 1080 },
+      { name: "Square", width: 1080, height: 1080 },
+      { name: "Story 9:16", width: 1080, height: 1920 },
+      { name: "Thin banner 10:1", width: 3000, height: 300 },
+      { name: "4K 16:9", width: 3840, height: 2160 },
+    ];
+    const options = [
+      { cellScaling: "canvas", title: "Option 1: Scale with canvas", text: "Hexagons grow with the canvas, like the other patterns. Every format looks like the designed one; a 4K version is a sharper version of it, with about the same number of hexagons across." },
+      { cellScaling: "fixed", title: "Option 2: Stay 16 px", text: "Hexagons keep their 16 px size. Bigger canvases get many more of them, so a 4K version looks finer and denser, more like a texture." },
+    ];
+
+    // Shrinks a canvas by averaging every source pixel into its thumbnail pixel (a box
+    // filter), so tiny repeating hexagons can't turn into moiré.
+    function shrink(source, w, h) {
+      const src = source.getContext("2d").getImageData(0, 0, source.width, source.height).data;
+      const sum = new Float64Array(w * h * 3);
+      const count = new Float64Array(w * h);
+      for (let y = 0; y < source.height; y++) {
+        const ty = Math.min(h - 1, Math.floor((y * h) / source.height));
+        for (let x = 0; x < source.width; x++) {
+          const t = ty * w + Math.min(w - 1, Math.floor((x * w) / source.width));
+          const i = (y * source.width + x) * 4;
+          sum[t * 3] += src[i];
+          sum[t * 3 + 1] += src[i + 1];
+          sum[t * 3 + 2] += src[i + 2];
+          count[t]++;
+        }
+      }
+      const out = document.createElement("canvas");
+      out.width = w;
+      out.height = h;
+      const ctx = out.getContext("2d");
+      const img = ctx.createImageData(w, h);
+      for (let t = 0; t < w * h; t++) {
+        for (let c = 0; c < 3; c++) img.data[t * 4 + c] = sum[t * 3 + c] / count[t];
+        img.data[t * 4 + 3] = 255;
+      }
+      ctx.putImageData(img, 0, 0);
+      return out;
+    }
+
+    const tokens = await loadTokens("tokens/placeholder.tokens.json");
+    const base = (await loadPatterns()).find((p) => p.name === "Generative-Hexagon-Pattern-A");
+    const sheet = document.getElementById("sheet");
+
+    for (const option of options) {
+      sheet.insertAdjacentHTML("beforeend", `<h2>${option.title}</h2><p>${option.text}</p><div class="row"></div>`);
+      const row = sheet.lastElementChild;
+      const preset = { ...base, settings: { ...base.settings, cellScaling: option.cellScaling } };
+      let big;
+      for (const format of formats) {
+        const figure = document.createElement("figure");
+        row.append(figure);
+        await new Promise((r) => setTimeout(r));
+        // Draw at the real size, then shrink with high-quality resampling: a plain CSS
+        // shrink of thousands of tiny hexagons shows moiré that isn't in the pattern.
+        const canvas = document.createElement("canvas");
+        renderPattern(canvas, tokens, preset, { width: format.width, height: format.height });
+        const banner = format.width / format.height >= 3;
+        const thumbHeight = banner ? Math.round((540 * format.height) / format.width) : 180;
+        const thumbWidth = banner ? 540 : Math.round((180 * format.width) / format.height);
+        // Exactly the display size in device pixels, so the browser never resamples it.
+        const dpr = window.devicePixelRatio || 1;
+        const thumb = shrink(canvas, Math.round(thumbWidth * dpr), Math.round(thumbHeight * dpr));
+        thumb.style.width = thumbWidth + "px";
+        thumb.style.height = thumbHeight + "px";
+        figure.append(thumb);
+        const area = Math.sqrt((format.width * format.height) / (1620 * 1080));
+        const cell = option.cellScaling === "fixed" ? 16 : 16 * area;
+        figure.insertAdjacentHTML("beforeend", `<figcaption>${format.name} · ${format.width} × ${format.height} · hexagon cell ${cell.toFixed(0)} px · about ${Math.floor(format.width / cell)} across</figcaption>`);
+        big = canvas;
+      }
+      // 1:1 crop from the middle of the 4K render.
+      const crop = document.createElement("canvas");
+      crop.className = "crop";
+      crop.width = crop.height = 180;
+      crop.getContext("2d").drawImage(big, big.width / 2 - 90, big.height / 2 - 90, 180, 180, 0, 0, 180, 180);
+      const figure = document.createElement("figure");
+      figure.append(crop);
+      figure.insertAdjacentHTML("beforeend", "<figcaption>4K, real pixels</figcaption>");
+      row.append(figure);
+    }
+  </script>
+</body>
+</html>

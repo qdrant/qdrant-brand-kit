@@ -64,7 +64,7 @@
 
   <script type="module">
     // Uses only the public entry point, patterns/index.js, the same way a tool would.
-    import { loadTokens, resolveToken, loadPatterns, isMeshPattern, choicesFor, renderPattern } from "./patterns/index.js";
+    import { loadTokens, resolveToken, loadPatterns, isMeshPattern, isGenerativePattern, choicesFor, renderPattern } from "./patterns/index.js";
     import { colorwayTokens } from "./patterns/tokens.js";
 
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
@@ -99,6 +99,12 @@
     };
 
     const draw = () => {
+      if (isGenerativePattern(preset)) {
+        renderPattern(canvas, tokens, preset, size());
+        const s = preset.settings;
+        document.getElementById("tokens").innerHTML = [...s.colors, ...(s.backdrop ?? [])].map(swatch).join("");
+        return;
+      }
       if (isMeshPattern(preset)) {
         const check = renderPattern(canvas, tokens, preset, { mesh, ...size() });
         document.getElementById("tokens").innerHTML =
@@ -114,6 +120,11 @@
 
     // Mesh patterns list example meshes. Color patterns list colorways.
     const chooseOption = async () => {
+      if (isGenerativePattern(preset)) {
+        familyRow.hidden = true;
+        draw();
+        return;
+      }
       if (isMeshPattern(preset)) {
         const example = preset.examples[colorwaySelect.value];
         familyRow.hidden = true;
@@ -135,9 +146,12 @@
       preset = presets[presetSelect.value];
       document.getElementById("settings").textContent = JSON.stringify(preset.settings, null, 2);
       document.getElementById("figma").href = preset.figma ?? "";
+      const generative = isGenerativePattern(preset);
+      document.getElementById("option-label").hidden = generative;
+      colorwaySelect.hidden = generative;
       document.getElementById("option-label").textContent = isMeshPattern(preset) ? "Example mesh" : "Colorway";
       colorwaySelect.innerHTML = "";
-      (isMeshPattern(preset) ? preset.examples : preset.colorways).forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
+      if (!generative) (isMeshPattern(preset) ? preset.examples : preset.colorways).forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
       chooseOption();
     };
 
@@ -160,7 +174,7 @@
 
     document.getElementById("download").addEventListener("click", () => {
       const link = document.createElement("a");
-      const parts = [preset.name, colorwaySelect.selectedOptions[0].text, `${canvas.width}x${canvas.height}`];
+      const parts = [preset.name, colorwaySelect.selectedOptions[0]?.text, `${canvas.width}x${canvas.height}`].filter(Boolean);
       if (!familyRow.hidden) parts.push(familySelect.value);
       link.download = `${parts.join(" - ")}.png`;
       link.href = canvas.toDataURL("image/png");

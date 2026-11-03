@@ -23,6 +23,7 @@ import * as colorSliced from "./color-sliced-pattern.js";
 import * as meshRefracted from "./mesh-refracted-pattern.js";
 import * as meshSliced from "./mesh-sliced-pattern.js";
 import * as meshDithered from "./mesh-dithered-pattern.js";
+import * as generative from "./generative-pattern.js";
 import { colorwayTokens, familiesFor } from "./tokens.js";
 import { imageToMesh } from "./mesh-source.js";
 import { loadAllPresets, loadPreset } from "./presets.js";
@@ -39,19 +40,22 @@ export const recipes = {
   "mesh-refracted-pattern": meshRefracted,
   "mesh-sliced-pattern": meshSliced,
   "mesh-dithered-pattern": meshDithered,
+  "generative-pattern": generative,
 };
 
 // Every preset listed in presets/index.json, with its shared settings merged in.
 export const loadPatterns = (base = "presets") => loadAllPresets(base);
 
-// Color patterns take a colorway. Mesh patterns take a mesh.
+// Color patterns take a colorway. Mesh patterns take a mesh. Generative patterns
+// (from Pattern Studio) take nothing: their colors are fixed tokens.
 export const isMeshPattern = (preset) => Boolean(preset.meshGroup);
+export const isGenerativePattern = (preset) => preset.recipe === "generative-pattern";
 
 // The choices a person can make for a pattern. Color patterns: colorways, and for a
 // colorway with {family}, the families that have its steps. Mesh patterns: none,
 // the mesh comes from the picked library image.
 export function choicesFor(preset, tokens) {
-  if (isMeshPattern(preset)) return { colorways: [] };
+  if (isMeshPattern(preset) || isGenerativePattern(preset)) return { colorways: [] };
   return {
     colorways: preset.colorways.map((colorway) => ({
       name: colorway.name,
@@ -63,8 +67,10 @@ export function choicesFor(preset, tokens) {
 
 // Draws a pattern on a canvas at any size and shape: { width, height } in px,
 // 1080 x 1080 when left out. A wide banner, a tall story or a 4K poster all work.
-// options: { colorway: index, family } for color patterns, { mesh } for mesh patterns.
-// Mesh patterns return the brand check: { pass, offBrand: % of off-palette pixels }.
+// options: { colorway: index, family } for color patterns, { mesh } for mesh patterns,
+// nothing for generative patterns (optional { phase } to draw another moment of the
+// loop, for animation later). Mesh patterns return the brand check:
+// { pass, offBrand: % of off-palette pixels }.
 export function renderPattern(canvas, tokens, preset, options = {}) {
   const recipe = recipes[preset.recipe];
   if (!recipe) throw new Error(`Unknown recipe "${preset.recipe}" in ${preset.name}`);
@@ -72,6 +78,7 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
   const height = Math.round(options.height ?? 1080);
   if (!(width >= 1 && height >= 1)) throw new Error(`Width and height must be at least 1 px, got ${width} x ${height}`);
   const frame = makeFrame(width, height);
+  if (isGenerativePattern(preset)) return recipe.render(canvas, tokens, preset, null, frame, { phase: options.phase });
   if (isMeshPattern(preset)) {
     if (!options.mesh) throw new Error(`${preset.name} needs a mesh: createMesh(image, tokens, preset)`);
     return recipe.render(canvas, tokens, preset, options.mesh, frame);

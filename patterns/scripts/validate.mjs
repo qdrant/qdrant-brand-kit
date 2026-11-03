@@ -26,6 +26,7 @@ const needs = {
   "mesh-refracted-pattern": ["grade", "blur", "contrast", "mesh", "refraction", "noise"],
   "mesh-sliced-pattern": ["grade", "blur", "contrast", "mesh", "slice", "noise"],
   "mesh-dithered-pattern": ["grade", "blur", "contrast", "mesh", "dither"],
+  "generative-pattern": ["designSize", "colors", "background", "engine", "tone"],
 };
 
 function load(id) {
@@ -51,14 +52,20 @@ for (const id of ids) {
   const where = p.name ?? id;
 
   // Name and file agree: Color-Refracted-Pattern-A <-> color-refracted-pattern-a.json.
-  if (!/^(Color|Mesh)-[A-Z][a-z]+-Pattern-[A-Z]$/.test(p.name ?? "")) errors.push(`${where}: name should look like Color-Refracted-Pattern-A`);
+  if (!/^(Color|Mesh|Generative)-[A-Z][a-z]+-Pattern-[A-Z]$/.test(p.name ?? "")) errors.push(`${where}: name should look like Color-Refracted-Pattern-A`);
   else if (p.name.toLowerCase() !== id) errors.push(`${where}: file should be presets/${p.name.toLowerCase()}.json`);
 
   if (!recipes.includes(p.recipe)) errors.push(`${where}: recipe "${p.recipe}" isn't registered in patterns/index.js`);
   if (p.settings?.size !== 1080) errors.push(`${where}: settings.size should be 1080`);
   for (const key of needs[p.recipe] ?? []) if (!(key in (p.settings ?? {}))) errors.push(`${where}: settings.${key} is missing`);
 
-  if (p.meshGroup) {
+  if (p.recipe === "generative-pattern") {
+    // Generative pattern: fixed colors, all tokens that exist.
+    for (const ref of [...(p.settings?.colors ?? []), ...(p.settings?.backdrop ?? []), p.settings?.background]) {
+      if (typeof ref !== "string" || !/^\{.+\}$/.test(ref)) errors.push(`${where}: color ${ref} should be a token like {color.secondary.500}`);
+      else if (!tokenExists(ref.slice(1, -1))) errors.push(`${where}: token ${ref} doesn't exist`);
+    }
+  } else if (p.meshGroup) {
     // Mesh pattern: every example has a mesh for this group, made of existing tokens.
     if (!p.examples?.length) errors.push(`${where}: no example meshes`);
     for (const example of p.examples ?? []) {
