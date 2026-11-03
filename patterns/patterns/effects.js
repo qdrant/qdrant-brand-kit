@@ -163,3 +163,45 @@ function hslToRgb(h, s, l) {
   const f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1));
   return [f(0), f(8), f(4)];
 }
+
+// Slice shift. Cuts the image into strips `r` px wide, running across angle A, and
+// slides each strip along its length by `shift`% of the size plus a random amount up
+// to `randomOffset` (Figma units) either way. Softness blends neighboring strips over that many px.
+// sample(x, y, channel) returns the source color, 0 to 1.
+export function sliceShift(px, size, slice, seed, sample) {
+  const a = (slice.a * Math.PI) / 180;
+  const ux = Math.cos(a); // across the strips
+  const uy = Math.sin(a);
+  const vx = -uy; // along the strips
+  const vy = ux;
+  const cx = (slice.x / 100) * size;
+  const cy = (slice.y / 100) * size;
+  const width = Math.max(1, slice.r);
+  const base = (slice.shift / 100) * size;
+  // The same strip always gets the same random offset.
+  const range = slice.randomOffset * FIGMA_OFFSET_TO_PX;
+  const offsetOf = (i) => base + ((Math.imul(i ^ seed, 2654435761) >>> 0) / 4294967296 - 0.5) * 2 * range;
+  const soft = slice.softness;
+
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const u = (x - cx) * ux + (y - cy) * uy;
+      const i = Math.floor(u / width);
+      let offset = offsetOf(i);
+      if (soft > 0) {
+        // Near a strip edge, blend toward the neighbor's offset.
+        const d = u - i * width;
+        if (d < soft / 2) offset += (offsetOf(i - 1) - offset) * (0.5 - d / soft);
+        else if (width - d < soft / 2) offset += (offsetOf(i + 1) - offset) * (0.5 - (width - d) / soft);
+      }
+      const o = (y * size + x) * 4;
+      for (let c = 0; c < 3; c++) px[o + c] = 255 * sample(x + offset * vx, y + offset * vy, c);
+      px[o + 3] = 255;
+    }
+  }
+}
+
+// Figma's slice shift random offset isn't in pixels. Measured on the stripe contrast of
+// Image-Sliced-Pattern-A: Figma's 500 looks like about 125 px. An estimate, since the
+// Figma frame used a different source image.
+const FIGMA_OFFSET_TO_PX = 0.25;

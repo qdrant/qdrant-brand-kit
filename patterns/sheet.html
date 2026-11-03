@@ -22,7 +22,7 @@
   </style>
 </head>
 <body>
-  <h1>Image-Refracted-Pattern contact sheet</h1>
+  <h1>Image pattern contact sheet</h1>
   <p id="status">Rendering…</p>
   <table id="sheet"></table>
 
@@ -33,7 +33,8 @@
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
     const presets = (await loadAllPresets()).filter((p) => p.examples);
     const examples = presets[0].examples;
-    const recipe = await import(`./patterns/${presets[0].recipe}.js`);
+    const recipes = {};
+    for (const p of presets) recipes[p.recipe] ??= await import(`./patterns/${p.recipe}.js`);
     const loadImage = (url) => new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => resolve(img);
@@ -56,7 +57,7 @@
         const canvas = document.createElement("canvas");
         cell.append(canvas);
         await new Promise((r) => setTimeout(r)); // let the page paint between renders
-        const check = recipe.render(canvas, tokens, preset, image);
+        const check = recipes[preset.recipe].render(canvas, tokens, preset, image);
         passed += check.pass;
         cell.insertAdjacentHTML("beforeend", `<div class="check ${check.pass ? "pass" : "fail"}">${check.pass ? "Pass" : "Fail"} · ${check.offBrand}% off-palette</div>`);
         document.getElementById("status").textContent = `Rendering ${++done} of ${total}…`;

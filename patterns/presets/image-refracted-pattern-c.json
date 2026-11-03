@@ -1,7 +1,7 @@
 {
   "name": "Image-Refracted-Pattern-C",
   "recipe": "image-refracted-pattern",
-  "extends": "image-refracted-pattern.shared",
+  "extends": "image-pattern.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50609",
   "reference": "reference/image-refracted-pattern-c.png",
   "settings": {

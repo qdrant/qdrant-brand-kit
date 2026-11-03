@@ -1,5 +1,5 @@
 {
-  "$description": "Shared by every Image-Refracted-Pattern preset. Change a value here and all of them update.",
+  "$description": "Shared by every image preset (Image-Refracted-Pattern and Image-Sliced-Pattern). Change a value here and all of them update.",
   "extends": "shared",
   "source": {
     "$description": "Placeholder. In the tool, the source image is picked from the Design Lab library at render time, so every new library image can become a new pattern.",
