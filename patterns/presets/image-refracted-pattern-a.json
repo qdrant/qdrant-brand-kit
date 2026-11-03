@@ -8,14 +8,14 @@
     "refraction": {
       "pattern": "lenticular",
       "strength": -100,
-      "smoothness": 71,
+      "smoothness": 72,
       "frost": 0,
       "dispersion": 100,
       "edgeWrap": "zero",
       "x": 50,
       "y": 50,
       "r": 24,
-      "a": -124
+      "a": -120
     }
   }
 }

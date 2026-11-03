@@ -14,9 +14,9 @@ export function refract(px, size, refraction, seed, sample) {
   // Measured against the Figma export: at strength -100 each lens keeps 62% of the
   // source inside it.
   const strength = (refraction.strength / 100) * 0.38;
-  // Smoothness blends the lens edges. It's a steep curve: Figma's 29% still gives
-  // sharp 1px edges (measured on Color-Refracted-Pattern-A), 100% only softens the outer 3% of each lens, a few pixels.
-  const soft = 0.003 + 0.027 * (refraction.smoothness / 100) ** 4;
+  // Lens edges are always sharp, about 1px, in every pattern. Smoothness is kept in
+  // the presets as a record of the Figma value, but it doesn't soften the edges.
+  const soft = 0.003;
   const spread = (refraction.dispersion / 100) * 0.04; // color fringing per channel
   const frost = (refraction.frost / 100) * lens * 0.1;
   const rand = mulberry32(seed);

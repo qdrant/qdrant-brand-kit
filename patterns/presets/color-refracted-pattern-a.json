@@ -27,7 +27,7 @@
     "refraction": {
       "pattern": "lenticular",
       "strength": -100,
-      "smoothness": 29,
+      "smoothness": 32,
       "frost": 0,
       "dispersion": 100,
       "x": 50,
