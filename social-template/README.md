@@ -1,5 +1,7 @@
 # Qdrant social post HTML template
 
+> **Draft.** The layouts aren't final yet. Don't build on it until it's approved.
+
 One HTML template for every Qdrant social post. You give it content and a size. It picks the right layout, renders a PNG or JPG at that exact size, and checks the result.
 
 ## Set up (once)

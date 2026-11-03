@@ -1,4 +1,4 @@
-// Checks every pattern before it ships. Run from the repo root:
+// Checks every pattern before it ships. Run from the patterns folder:
 //
 //   node scripts/validate.mjs
 //

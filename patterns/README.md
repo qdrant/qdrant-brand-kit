@@ -80,7 +80,7 @@ Meshes need to be made again only when the grade, blur or contrast in the shared
 
 ## Generative patterns (from Pattern Studio)
 
-Patterns made in Pattern Studio (`Desktop/Tools/qdrant-pattern-studio`) are added from the tool's **Copy code** export:
+Patterns made in Pattern Studio (the `qdrant-pattern-studio` repo) are added from the tool's **Copy code** export:
 
 1. Make a preset that `extends` `generative-pattern.shared`. The shared file holds Pattern Studio's default settings (`engine`), its tone curves (`tones`) and the design size, 1620 × 1080.
 2. In the preset's `settings.engine`, list only the export's `PARAMS` that differ from the shared `engine` (never `width`, `height` or `colors`). If the export's `TONE` isn't one of the shared `tones`, add it there under a new name, and set `settings.tone` to that name.
@@ -109,6 +109,7 @@ If Pattern Studio's engine changes, compile `src/pattern/pattern-engine.ts` agai
 Then run the checks and look at the result:
 
 ```bash
+cd patterns
 node scripts/validate.mjs
 ```
 
@@ -128,6 +129,7 @@ The validator fails on anything that can't render, like a missing recipe, token 
 Serve the folder with any static server, then open `index.html` (one pattern at a time, at any size), `formats.html` (every pattern in six formats, from a square to a 10:1 banner) or `sheet.html` (every Mesh pattern on every example mesh, with its brand check):
 
 ```bash
+cd patterns
 python3 -m http.server 5190
 ```
 
