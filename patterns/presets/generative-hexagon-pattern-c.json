@@ -2,6 +2,32 @@
   "name": "Generative-Hexagon-Pattern-C",
   "recipe": "generative-pattern",
   "source": "Pattern Studio export, 1620 x 1080",
+  "colorways": [
+    {
+      "name": "Dark violet",
+      "colors": [
+        "{color.secondary.800}",
+        "{color.secondary.500}",
+        "{color.secondary.200}"
+      ],
+      "backdrop": [
+        "{color.neutral.950}",
+        "{color.secondary.900}"
+      ]
+    },
+    {
+      "name": "Medium violet",
+      "colors": [
+        "{color.secondary.800}",
+        "{color.secondary.500}",
+        "{color.secondary.200}"
+      ],
+      "backdrop": [
+        "{color.neutral.950}",
+        "{color.secondary.500}"
+      ]
+    }
+  ],
   "settings": {
     "size": 1080,
     "designSize": {
@@ -10,15 +36,6 @@
     },
     "cellScaling": "canvas",
     "phase": 0,
-    "colors": [
-      "{color.secondary.800}",
-      "{color.secondary.500}",
-      "{color.secondary.200}"
-    ],
-    "backdrop": [
-      "{color.neutral.950}",
-      "{color.secondary.900}"
-    ],
     "background": "{color.neutral.950}",
     "engine": {
       "layout": "grid",

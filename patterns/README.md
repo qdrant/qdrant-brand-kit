@@ -143,7 +143,7 @@ python3 -m http.server 5190
 | Mesh-Sliced-Pattern-A | Any library image | [Frame 20713:50540](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50540) | Approved slice shift (tuned by eye) |
 | Generative-Hexagon-Pattern-A | Fixed: secondary 800, 500, 200 on dark violet | Pattern Studio export | Hexagon grid over a noisy diagonal gradient. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Hexagon-Pattern-B | Fixed: primary 800, 500, 300 on red | Pattern Studio export | Small outlined hexagons scattered on a 56 px grid, colored top to bottom. Pixel-identical to the tool at 1620 × 1080 |
-| Generative-Hexagon-Pattern-C | Fixed: secondary 800, 500, 200 on dark violet | Pattern Studio export | Like Hexagon-B, colored from the center out. Pixel-identical to the tool at 1620 × 1080 |
+| Generative-Hexagon-Pattern-C | Dark violet, Medium violet | Pattern Studio export | Like Hexagon-B, colored from the center out. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Burst-Pattern-A | Dark violet, Medium violet, Light violet, Red | Pattern Studio export | 1,100 short lines bursting out from the center. Pixel-identical to the tool at 1620 × 1080 (Medium violet within 2/255: the tool's #090E1A isn't a token, so it uses neutral.950) |
 | Generative-Dash-Pattern-A | Fixed: secondary 800, 500, 200 on dark violet | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Dash-Pattern-B | Fixed: primary 800, 500, 300 on red | Pattern Studio export | Like Dash-A, on a finer 48 px grid with 40 px padding. Pixel-identical to the tool at 1620 × 1080 |
