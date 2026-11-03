@@ -205,3 +205,56 @@ export function sliceShift(px, size, slice, seed, sample) {
 // Image-Sliced-Pattern-A: Figma's 500 looks like about 125 px. An estimate, since the
 // Figma frame used a different source image.
 const FIGMA_OFFSET_TO_PX = 0.25;
+
+// Dither (Figma's Bayer dither). Works in blocks of `size` px. Each block takes the
+// color at its center, and its lightness is pushed through brightness and contrast,
+// then snapped to one of `levels` steps using a 16x16 Bayer threshold matrix. Only
+// lightness is dithered: hue and saturation stay, so the colors can't leave the brand
+// palette (no cyan or green dots). Steps run from `darkest` to `lightest` (%).
+// dither = { style: "bayer16", size: px, levels, brightness: %, contrast, darkest, lightest }
+export function dither(px, size, dither) {
+  const bayer = bayerMatrix(16);
+  const cell = Math.max(1, dither.size);
+  const steps = Math.max(2, dither.levels) - 1;
+  const lo = (dither.darkest ?? 0) / 100;
+  const hi = (dither.lightest ?? 100) / 100;
+  for (let by = 0; by < size; by += cell) {
+    for (let bx = 0; bx < size; bx += cell) {
+      const cx = Math.min(size - 1, bx + (cell >> 1));
+      const cy = Math.min(size - 1, by + (cell >> 1));
+      const c = (cy * size + cx) * 4;
+      const [h, s, l] = rgbToHsl(px[c] / 255, px[c + 1] / 255, px[c + 2] / 255);
+      const adjusted = clamp(((l * dither.brightness) / 100 - 0.5) * dither.contrast + 0.5);
+      const threshold = bayer[((by / cell) % 16) * 16 + ((bx / cell) % 16)];
+      const level = Math.min(steps, Math.floor(adjusted * steps + threshold)) / steps;
+      const [r, g, b] = hslToRgb(h, s, lo + (hi - lo) * level);
+      for (let y = by; y < Math.min(size, by + cell); y++) {
+        for (let x = bx; x < Math.min(size, bx + cell); x++) {
+          const i = (y * size + x) * 4;
+          px[i] = r * 255;
+          px[i + 1] = g * 255;
+          px[i + 2] = b * 255;
+        }
+      }
+    }
+  }
+}
+
+// Bayer ordered-dither matrix, n x n (n a power of 2), values 0 to 1.
+function bayerMatrix(n) {
+  let m = [0];
+  for (let size = 1; size < n; size *= 2) {
+    const next = new Array(size * 2 * size * 2);
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        const v = m[y * size + x] * 4;
+        next[y * 2 * size + x] = v;
+        next[y * 2 * size + x + size] = v + 2;
+        next[(y + size) * 2 * size + x] = v + 3;
+        next[(y + size) * 2 * size + x + size] = v + 1;
+      }
+    }
+    m = next;
+  }
+  return m.map((v) => (v + 0.5) / (n * n));
+}

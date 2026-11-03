@@ -1,18 +1,22 @@
-// Image source, shared by every image recipe (Image-Refracted-Pattern,
-// Image-Sliced-Pattern). Takes a library image and returns a smooth, brand-graded
-// version to sample from. The steps and their values (grade, blur, contrast) come
-// from image-pattern.shared.json, so they're the same in every image pattern.
+// Image source, shared by every image recipe. Turns a library image into a mesh
+// gradient: a small grid of colors (about 11 x 11) that matches the blurred,
+// brand-graded image. Recipes draw from the mesh with smooth curves, so the PNG
+// isn't needed after the mesh is made. A mesh is about 1 to 2 KB of JSON.
+//
+// The steps and their values (grade, blur, contrast) come from the shared preset
+// files, so they're the same in every image pattern of a group.
 //
 // The source image is a placeholder: in the tool it's picked from the Design Lab
 // library by the "source" rule in image-pattern.shared.json (design-approved images
-// from the space moodboard only, never the mascot, never Luma). The files in
-// sources/ are test examples.
+// from the space moodboard only, never the mascot, never Luma). The tool makes the
+// mesh once and keeps only the mesh. The files in sources/ are test examples, and
+// meshes/ holds their meshes.
 
-import { resolveToken } from "./tokens.js";
+import { resolveToken, hexToRgba } from "./tokens.js";
 import { brandGrade, stretchContrast } from "./effects.js";
 
-// Returns { sample(x, y, channel) -> 0 to 1, anchors: brand hex colors }.
-export function prepareImage(image, tokens, settings) {
+// Image to mesh: { size: n, colors: ["#RRGGBB", ...] }, row by row from the top left.
+export function imageToMesh(image, tokens, settings) {
   const { size, grade, blur, contrast } = settings;
   const anchors = grade.anchors.map((ref) => resolveToken(tokens, ref));
 
@@ -25,18 +29,35 @@ export function prepareImage(image, tokens, settings) {
   const graded = tctx.getImageData(0, 0, size, size).data;
   brandGrade(graded, anchors, grade);
 
-  // Step 2: blur. Browser blur is stored in 8 bits and leaves ripples that the
-  // contrast step would turn into a watery texture. Instead, average the image down
-  // to a small grid, blur that, and read it back with a smooth cubic curve, all in
-  // floating point. The result is clean, smooth color fields.
+  // Step 2: blur. Average the image down to a small grid and blur that. Fewer grid
+  // cells for a bigger blur. This grid is the mesh.
   const sigma = blur.radius * FIGMA_BLUR_TO_CSS;
   const n = Math.min(64, Math.max(6, Math.round((size * GRID_PER_BLUR) / sigma)));
   const grid = shrink(graded, size, n);
   blurGrid(grid, n, 1);
 
-  // Step 3: contrast, on the smooth grid.
+  // Step 3: contrast, on the grid.
   stretchContrast(grid, contrast);
-  return { sample: smoothSampler(grid, n, size), anchors };
+
+  const hex = (v) => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, "0");
+  const colors = [];
+  for (let g = 0; g < n * n; g++) colors.push(`#${hex(grid[g * 4])}${hex(grid[g * 4 + 1])}${hex(grid[g * 4 + 2])}`.toUpperCase());
+  return { size: n, colors };
+}
+
+// A source is a mesh (has colors) or an image (made into a mesh first).
+// Returns { sample(x, y, channel) -> 0 to 1, anchors: brand hex colors }.
+export function prepareImage(source, tokens, settings) {
+  const anchors = settings.grade.anchors.map((ref) => resolveToken(tokens, ref));
+  const mesh = source.colors ? source : imageToMesh(source, tokens, settings);
+  const grid = new Float32Array(mesh.size * mesh.size * 4);
+  mesh.colors.forEach((hex, g) => {
+    const [r, gr, b] = hexToRgba(hex);
+    grid[g * 4] = r * 255;
+    grid[g * 4 + 1] = gr * 255;
+    grid[g * 4 + 2] = b * 255;
+  });
+  return { sample: smoothSampler(grid, mesh.size, settings.size), anchors };
 }
 
 // Box-average the image down to an n x n grid of RGBA floats (0 to 255).

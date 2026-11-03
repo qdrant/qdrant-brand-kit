@@ -1,0 +1,24 @@
+{
+  "$description": "Shared by every Image-Dithered-Pattern preset. Same blur and source rule as the other image patterns, but a darker, more saturated grade and no noise.",
+  "extends": "image-pattern.shared",
+  "meshGroup": "image-dithered-pattern",
+  "settings": {
+    "grade": {
+      "anchors": [
+        "{color.primary.500}",
+        "{color.secondary.500}"
+      ],
+      "hueSnap": 100,
+      "minSaturation": 70,
+      "minLightness": 10,
+      "maxLightness": 90,
+      "lift": 0.8
+    },
+    "contrast": {
+      "low": 8,
+      "high": 88,
+      "curve": 40,
+      "midtones": 1.8
+    }
+  }
+}

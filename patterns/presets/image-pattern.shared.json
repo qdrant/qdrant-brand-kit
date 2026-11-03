@@ -1,6 +1,7 @@
 {
   "$description": "Shared by every image preset (Image-Refracted-Pattern and Image-Sliced-Pattern). Change a value here and all of them update.",
   "extends": "shared",
+  "meshGroup": "image-pattern",
   "source": {
     "$description": "Placeholder. In the tool, the source image is picked from the Design Lab library at render time, so every new library image can become a new pattern.",
     "from": "design-lab-library",
@@ -24,22 +25,26 @@
     {
       "name": "Astronauts over crater",
       "image": "sources/astronauts-crater.webp",
-      "library": "Shared by Vanesa"
+      "library": "Shared by Vanesa",
+      "id": "astronauts-crater"
     },
     {
       "name": "Splitting the Ice Block",
       "image": "sources/splitting-the-ice-block.png",
-      "library": "https://qdrant-design-lab.vercel.app/library/8d9b1e13-f792-46de-9174-e4ee7566f3cb"
+      "library": "https://qdrant-design-lab.vercel.app/library/8d9b1e13-f792-46de-9174-e4ee7566f3cb",
+      "id": "splitting-the-ice-block"
     },
     {
       "name": "Astronaut Drives Lunar Rover",
       "image": "sources/astronaut-drives-lunar-rover.png",
-      "library": "https://qdrant-design-lab.vercel.app/library/d7ddde24-69d5-402e-b72d-0a7fc107248e"
+      "library": "https://qdrant-design-lab.vercel.app/library/d7ddde24-69d5-402e-b72d-0a7fc107248e",
+      "id": "astronaut-drives-lunar-rover"
     },
     {
       "name": "Astronaut Holds Exploding Orb",
       "image": "sources/astronaut-holds-exploding-orb.png",
-      "library": "https://qdrant-design-lab.vercel.app/library/6d581177-6af1-4ee3-9f97-6b6671de491d"
+      "library": "https://qdrant-design-lab.vercel.app/library/6d581177-6af1-4ee3-9f97-6b6671de491d",
+      "id": "astronaut-holds-exploding-orb"
     }
   ],
   "settings": {

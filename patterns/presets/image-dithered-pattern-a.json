@@ -1,0 +1,20 @@
+{
+  "name": "Image-Dithered-Pattern-A",
+  "recipe": "image-dithered-pattern",
+  "extends": "image-dithered-pattern.shared",
+  "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128",
+  "reference": "reference/image-dithered-pattern-a.png",
+  "settings": {
+    "dither": {
+      "style": "bayer16",
+      "size": 4,
+      "levels": 4,
+      "brightness": 100,
+      "contrast": 1.24,
+      "mono": false,
+      "monoColor": "{color.secondary.500}",
+      "darkest": 8,
+      "lightest": 96
+    }
+  }
+}

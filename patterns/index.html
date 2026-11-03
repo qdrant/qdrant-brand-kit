@@ -104,7 +104,8 @@
         const source = preset.examples[colorwaySelect.value];
         familyRow.hidden = true;
         document.getElementById("reference").src = preset.reference;
-        sourceImage = await loadImage(source.image);
+        // Patterns render from the example's mesh gradient, not the PNG.
+        sourceImage = await fetch(`meshes/${source.id}.${preset.meshGroup}.json`).then((r) => r.json());
         draw();
         return;
       }

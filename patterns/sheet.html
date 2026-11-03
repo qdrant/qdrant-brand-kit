@@ -24,6 +24,7 @@
 <body>
   <h1>Image pattern contact sheet</h1>
   <p id="status">Rendering…</p>
+  <p>Every pattern is drawn from a mesh gradient (about 2 KB) made from the source image, not from the PNG.</p>
   <table id="sheet"></table>
 
   <script type="module">
@@ -51,8 +52,9 @@
     for (const example of examples) {
       const row = table.insertRow();
       row.innerHTML = `<th class="row"><img src="${example.image}" alt="">${example.name}</th>`;
-      const image = await loadImage(example.image);
       for (const preset of presets) {
+        // Patterns render from the example's mesh gradient, not the PNG.
+        const image = await fetch(`meshes/${example.id}.${preset.meshGroup}.json`).then((r) => r.json());
         const cell = row.insertCell();
         const canvas = document.createElement("canvas");
         cell.append(canvas);
