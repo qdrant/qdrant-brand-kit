@@ -89,7 +89,7 @@ These are placeholders until Juan's design system is connected. They're all CSS 
 ## Not done yet
 
 - Light theme.
-- Running inside Design Lab. Rendering needs a headless browser, so this needs a render tool from Neil (see `NEIL_REQUEST.md`).
+- Running inside Design Lab. Rendering needs a headless browser, so Design Lab needs a render step for this template.
 - The org-wide skill filling this from a chat request.
 
 ## Files
@@ -98,5 +98,4 @@ These are placeholders until Juan's design system is connected. They're all CSS 
 - `template/assets/logos/`: Qdrant logo SVGs from the qdrant-brand skill
 - `render.py`: fill, render, check, contact sheets, gallery
 - `samples/`: sample content, the headshots, and a placeholder partner logo
-- `NEIL_REQUEST.md`: what Design Lab needs to integrate this
 - `requirements.txt`: Python packages for `render.py` (then run `playwright install chromium`, or use an installed Chrome)
