@@ -7,7 +7,13 @@
   "sources": [
     {
       "name": "Astronauts over crater",
-      "image": "sources/astronauts-crater.webp"
+      "image": "sources/astronauts-crater.webp",
+      "library": "Shared by Vanesa"
+    },
+    {
+      "name": "Splitting the Ice Block",
+      "image": "sources/splitting-the-ice-block.png",
+      "library": "https://qdrant-design-lab.vercel.app/library/8d9b1e13-f792-46de-9174-e4ee7566f3cb"
     }
   ],
   "settings": {
