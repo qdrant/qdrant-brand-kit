@@ -1,0 +1,132 @@
+{
+  "version": "0.1.0",
+  "model": {
+    "image": "gpt-image-2.5-sunburst",
+    "endpoint": "images/edits",
+    "options_per_run": 3,
+    "max_tweak_rounds": 3
+  },
+
+  "figma": {
+    "file_key": "8y0svqBDPZX6caRNF6lddG",
+    "master_node": "20808:18496",
+    "poses_component_set": "20774:17744",
+    "backdrop_node": "18887:33975"
+  },
+
+  "locked_character": [
+    "Small chibi astronaut robot, head about 40% of total height, short rounded limbs",
+    "White glossy suit with thin red seam lines",
+    "Red bands at the wrists and ankles",
+    "White helmet with a red stripe across the top and white rounded ear pods",
+    "Black glossy glass visor; the face is shown only as red dot-matrix LED eyes on the visor",
+    "Rounded white chest badge with the red Qdrant Q logo",
+    "Clean, smooth 3D render, soft materials, no dirt, scratches or texture"
+  ],
+
+  "emotions": {
+    "happy":    { "label": "Happy",    "ref": "happy",    "phrase": "two upward curved arcs, like closed smiling eyes" },
+    "cheerful": { "label": "Cheerful", "ref": "cheerful", "phrase": "two bright upward arcs, slightly tilted, relaxed and warm" },
+    "excited":  { "label": "Excited",  "ref": "excited",  "phrase": "two large upward arcs with small sparkle dots beside them" },
+    "playful":  { "label": "Playful",  "ref": "playful",  "phrase": "two sideways V chevrons pointing inward, like squeezed laughing eyes" },
+    "proud":    { "label": "Proud",    "ref": "proud",    "phrase": "left eye an upward arc, right eye a wink, confident" },
+    "friendly": { "label": "Friendly", "ref": "friendly", "phrase": "two soft upward arcs, gentle and welcoming" },
+    "loving":   { "label": "Loving",   "ref": "loving",   "phrase": "two solid heart shapes" },
+    "curious":  { "label": "Curious",  "ref": "curious",  "phrase": "two large round open eyes, attentive" },
+    "focused":  { "label": "Focused",  "ref": "focused",  "phrase": "two small calm eyes looking slightly down, concentrating" },
+    "confused": { "label": "Confused", "ref": "confused", "phrase": "one round eye and one wavy line, with a small question mark between them" },
+    "neutral":  { "label": "Neutral",  "ref": "neutral",  "phrase": "two simple round eyes, calm and steady" },
+    "sad":      { "label": "Sad",      "ref": "sad",      "phrase": "two downward curved arcs, drooping at the outer edges" },
+    "angry":    { "label": "Angry",    "ref": "angry",    "phrase": "two short lines slanting down toward the centre, like frowning brows" }
+  },
+
+  "poses": {
+    "standing_front":  { "label": "Standing front",      "direction": false, "refs": ["happy", "neutral"],   "phrase": "standing upright facing the camera, arms relaxed at the sides" },
+    "waving":          { "label": "Waving",              "direction": true,  "refs": ["proud", "excited"],   "phrase": "standing, one arm raised high with an open hand waving, the other arm relaxed" },
+    "pointing":        { "label": "Pointing",            "direction": true,  "refs": ["helpful", "cheerful"], "phrase": "standing, body turned slightly, one arm fully extended pointing to the {direction}" },
+    "presenting":      { "label": "Presenting",          "direction": true,  "refs": ["loving", "helpful"],  "phrase": "standing, one arm open with palm up, gesturing to the {direction} as if presenting something" },
+    "thumbs_up":       { "label": "Thumbs up",           "direction": false, "refs": ["proud", "happy"],     "phrase": "standing facing the camera, one hand raised giving a thumbs up" },
+    "arms_crossed":    { "label": "Arms crossed",        "direction": false, "refs": ["angry", "neutral"],   "phrase": "standing confidently facing the camera with both arms crossed over the chest" },
+    "thinking":        { "label": "Thinking",            "direction": false, "refs": ["confused", "curious"], "phrase": "standing, one hand touching the bottom of the helmet, head tilted slightly" },
+    "jumping":         { "label": "Jumping",             "direction": false, "refs": ["excited", "proud"],   "phrase": "jumping with both feet off the ground, both arms raised in celebration" },
+    "sitting":         { "label": "Sitting",             "direction": false, "refs": ["friendly", "curious"], "phrase": "sitting on the ground, legs stretched forward, hands resting beside the body" },
+    "sitting_laptop":  { "label": "Sitting with laptop", "direction": false, "refs": ["focused", "friendly"], "phrase": "sitting cross-legged with an open plain grey laptop on the lap, hands on the keyboard" },
+    "side_look":       { "label": "Side look",           "direction": true,  "refs": ["cheerful", "happy"],  "phrase": "body turned three-quarters away, head looking back over the shoulder at the camera" }
+  },
+  "direction_phrases": { "left": "left of the image", "right": "right of the image" },
+
+  "variants": {
+    "default": { "label": "Default suit", "phrase": "Wearing only the default white suit", "extra_ref": null },
+    "hoodie":  { "label": "Red hoodie",   "phrase": "Wearing the red Qdrant hoodie exactly as in the hoodie reference image", "extra_ref": "playful" }
+  },
+
+  "backgrounds": {
+    "transparent": "Fully transparent background, no floor, no shadow, no glow",
+    "fallback_grey": "Plain flat solid #8A8A8A grey background, no gradient, no floor, no shadow"
+  },
+  "background_strategy": "decide_after_test",
+
+  "references": {
+    "_note": "Paths are filled by scripts/export-references.mjs. Image hashes are the original transparent PNG fills in Figma (no glow effects).",
+    "master":   { "path": "references/master.png",   "node": "20808:18496", "hash": "d7e9dc09fc4e564c291875c93b87d7b00fd92359", "pose": "standing front" },
+    "happy":    { "path": "references/happy.png",    "node": "20774:17772", "hash": "d7e9dc09fc4e564c291875c93b87d7b00fd92359", "pose": "standing front" },
+    "focused":  { "path": "references/focused.png",  "node": "20774:17770", "hash": "7593ca3b0831ce7b3d6f59c16f11dd34aa958e5a", "pose": "sitting with laptop" },
+    "curious":  { "path": "references/curious.png",  "node": "20774:17754", "hash": "dbf90495eee5aff4f371e9e1b179901785d0ddf9", "pose": "sitting, big round eyes" },
+    "proud":    { "path": "references/proud.png",    "node": "20774:17756", "hash": "484d91da5927b9d53f89b93d2312cb256c870cef", "pose": "waving with wink" },
+    "neutral":  { "path": "references/neutral.png",  "node": "20774:17758", "hash": "2525d503090f1f6d6d4cca5e014038479ce07251", "pose": "standing, Qdrant logo on visor" },
+    "playful":  { "path": "references/playful.png",  "node": "20774:17792", "hash": "31ca18b9442e592a556249cf99573473564ac32d", "pose": "standing in red hoodie" },
+    "loving":   { "path": "references/loving.png",   "node": "20774:17768", "hash": "1f41f7da568b5c293afebe83c7c8252962179925", "pose": "arms open, heart eyes" },
+    "confused": { "path": "references/confused.png", "node": "20774:17762", "hash": "18b4d339b7bf0f42865eec59e32a7c69202936f9", "pose": "hand on helmet, question mark" },
+    "friendly": { "path": "references/friendly.png", "node": "20774:17766", "hash": "39080d44774113f3c21aed51c846172213cafb65", "pose": "sitting" },
+    "excited":  { "path": "references/excited.png",  "node": "20774:17764", "hash": "c314e8e75008d5e60b1f2f91c6308e0f7d73d0aa", "pose": "leaning, waving" },
+    "sad":      { "path": "references/sad.png",      "node": "20774:17746", "hash": "82ce08238a9b1567be508aa886719242dc04838f", "pose": "standing" },
+    "cheerful": { "path": "references/cheerful.png", "node": "20774:17748", "hash": "b7edb86b6bfb654cb8abba50926fe2219b854b55", "pose": "side look" },
+    "helpful":  { "path": "references/helpful.png",  "node": "20774:17750", "hash": "96046cb25884fc8e7d22c9bc653af898a117a77c", "pose": "standing, text on visor" },
+    "angry":    { "path": "references/angry.png",    "node": "20774:17752", "hash": "c862788a8c290494cfa33fef50d2b9cee31a5a1d", "pose": "arms crossed" }
+  },
+  "reference_selection": "Always send master first, then the pose's refs in order, then the emotion's ref if not already included, then the variant extra_ref. Max 4 images.",
+
+  "backdrop": {
+    "_source": "Figma node 18887:33975 (Gradient-4)",
+    "type": "linear",
+    "angle": "top_to_bottom",
+    "stops": [
+      { "pos": 0, "hex": "#090E1A" },
+      { "pos": 1, "hex": "#6047FF" }
+    ]
+  },
+  "glow": {
+    "_source": "Drop shadow stack on the approved pose components, measured on an 800 px tall component",
+    "color": "#976BFF",
+    "reference_height": 800,
+    "layers": [
+      { "blur": 43.45,  "offset_y": -20.45,  "opacity": 0.10 },
+      { "blur": 79.23,  "offset_y": -79.23,  "opacity": 0.09 },
+      { "blur": 107.35, "offset_y": -178.91, "opacity": 0.05 },
+      { "blur": 127.80, "offset_y": -319.49, "opacity": 0.01 }
+    ],
+    "apply_on": ["gradient"]
+  },
+
+  "sizes": {
+    "slide_16x9":      { "w": 1920, "h": 1080 },
+    "social_square":   { "w": 1080, "h": 1080 },
+    "social_portrait": { "w": 1080, "h": 1350 },
+    "story_9x16":      { "w": 1080, "h": 1920 },
+    "sticker":         { "w": 1024, "h": 1024 }
+  },
+  "placement": {
+    "mascot_height_ratio": 0.78,
+    "positions": ["center", "left", "right"],
+    "side_margin_ratio": 0.08
+  },
+
+  "review_checks": ["logo", "suit_trim", "helmet", "eyes", "proportions", "anatomy", "no_extras", "pose", "framing", "edges"],
+
+  "prompt_files": {
+    "master": "prompts/master.txt",
+    "detail_rewriter": "prompts/detail-rewriter.txt",
+    "tweak": "prompts/tweak.txt",
+    "review": "prompts/review.txt"
+  }
+}

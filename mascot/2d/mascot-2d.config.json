@@ -1,0 +1,103 @@
+{
+  "version": "0.1.0",
+  "style": "2d",
+  "style_label": "Qbot 2D (cartoon)",
+
+  "model": {
+    "image": "gpt-image-2.5-sunburst",
+    "endpoint": "images/edits",
+    "options_per_run": 1,
+    "max_tweak_rounds": 3
+  },
+
+  "rules": {
+    "output": "transparent PNG only, never on a gradient or background",
+    "library_first": true,
+    "never_mix_styles": "Never send 3D Qbot references in a 2D request, or 2D references in a 3D request",
+    "never_with_realistic_imagery": true
+  },
+
+  "figma": {
+    "file_key": "8y0svqBDPZX6caRNF6lddG",
+    "master_node": "20914:19617",
+    "poses_frame": "20914:19618"
+  },
+
+  "locked_style": [
+    "Flat 2D cartoon illustration, clean vector look, like a sticker or app mascot",
+    "Thick, even, solid black outlines around every shape, same weight everywhere",
+    "Flat cel shading: white surfaces with one soft cool-grey shadow tone, no gradients",
+    "Only one gradient allowed: the glossy highlight on the black visor",
+    "No 3D rendering, no realistic lighting, no texture, no grain, no drop shadow"
+  ],
+
+  "locked_character": [
+    "Small chibi astronaut robot, head about 45% of total height, short rounded limbs, rounded mitten hands",
+    "White helmet with a small white rectangular pad on top and white rounded ear pods",
+    "Large black glossy visor with one white curved highlight in the upper left; the face is shown only as coral-red LED eyes on the visor",
+    "White suit with thin coral-red seam lines on the chest, arms and legs",
+    "Thick coral-red bands at the wrists, upper arms, knees and ankles",
+    "Small rounded light-grey chest badge with a grey Qdrant Q logo",
+    "No mouth, no nose, no human face, no text"
+  ],
+
+  "emotions": {
+    "happy":    { "label": "Happy",    "ref": "happy",    "phrase": "two thick smooth upward arcs, like closed smiling eyes" },
+    "cheerful": { "label": "Cheerful", "ref": "happy",    "phrase": "two bright smooth upward arcs, slightly tilted, relaxed and warm" },
+    "excited":  { "label": "Excited",  "ref": "happy",    "phrase": "two large smooth upward arcs with two small sparkle shapes beside them" },
+    "playful":  { "label": "Playful",  "ref": "happy",    "phrase": "two sideways V chevrons pointing inward, like squeezed laughing eyes" },
+    "proud":    { "label": "Proud",    "ref": "happy",    "phrase": "left eye a smooth upward arc, right eye a wink, confident" },
+    "friendly": { "label": "Friendly", "ref": "friendly", "phrase": "two soft smooth upward arcs, gentle and welcoming" },
+    "loving":   { "label": "Loving",   "ref": "loving",   "phrase": "one large heart shape made of small square pixels, centred on the visor" },
+    "curious":  { "label": "Curious",  "ref": "happy",    "phrase": "two large round open eyes, attentive" },
+    "focused":  { "label": "Focused",  "ref": "happy",    "phrase": "two small calm eyes looking slightly down, concentrating" },
+    "confused": { "label": "Confused", "ref": "confused", "phrase": "one frowning squiggle eye and one question mark, both made of small square pixels" },
+    "neutral":  { "label": "Neutral",  "ref": "happy",    "phrase": "two simple round eyes, calm and steady" },
+    "sad":      { "label": "Sad",      "ref": "sad",      "phrase": "two half-closed droopy eyes, flat on top and curved underneath" },
+    "angry":    { "label": "Angry",    "ref": "sad",      "phrase": "two short thick lines slanting down toward the centre, like frowning brows" }
+  },
+  "eye_style_note": "References mix two eye styles: smooth solid shapes (happy, friendly, sad) and small square pixels (confused, loving). Phrases follow the reference for each emotion until Vanesa picks one style.",
+
+  "poses": {
+    "standing_front": { "label": "Standing front",      "direction": false, "refs": ["happy", "sad"],          "phrase": "standing upright facing the camera, arms relaxed at the sides" },
+    "waving":         { "label": "Waving",              "direction": true,  "refs": ["sad", "friendly"],       "phrase": "standing, one arm raised with an open hand waving, the other arm relaxed" },
+    "pointing":       { "label": "Pointing",            "direction": true,  "refs": ["loving", "happy"],       "phrase": "standing, body turned slightly, one arm fully extended pointing to the {direction}" },
+    "presenting":     { "label": "Presenting",          "direction": true,  "refs": ["loving", "sad"],         "phrase": "standing, one arm open with palm up, gesturing to the {direction} as if presenting something" },
+    "thumbs_up":      { "label": "Thumbs up",           "direction": false, "refs": ["happy", "loving"],       "phrase": "standing facing the camera, one hand raised giving a thumbs up" },
+    "arms_crossed":   { "label": "Arms crossed",        "direction": false, "refs": ["happy", "sad"],          "phrase": "standing confidently facing the camera with both arms crossed over the chest" },
+    "thinking":       { "label": "Thinking",            "direction": false, "refs": ["confused", "happy"],     "phrase": "standing, one hand touching the side of the helmet, head tilted slightly" },
+    "jumping":        { "label": "Jumping",             "direction": false, "refs": ["loving", "happy"],       "phrase": "jumping with both feet off the ground, both arms raised in celebration" },
+    "sitting":        { "label": "Sitting",             "direction": false, "refs": ["friendly", "happy"],     "phrase": "sitting on the ground, legs stretched forward, hands resting beside the body" },
+    "sitting_laptop": { "label": "Sitting with laptop", "direction": false, "refs": ["friendly", "happy"],     "phrase": "sitting cross-legged with an open plain grey laptop on the lap, hands on the keyboard, drawn in the same outlined cartoon style" },
+    "side_look":      { "label": "Side look",           "direction": true,  "refs": ["confused", "happy"],     "phrase": "body turned three-quarters away, head looking back over the shoulder at the camera" }
+  },
+  "direction_phrases": { "left": "left of the image", "right": "right of the image" },
+
+  "background_phrase": "Fully transparent background, no floor, no ground shadow, no glow, no outline around the whole figure",
+
+  "references": {
+    "_note": "PNGs here are Figma renders with the background removed. loving.png has the top of the helmet clipped by its Figma frame; scripts/export-references.mjs replaces all five with the uncropped 1024x1024 originals.",
+    "master":   { "path": "references/master.png",   "node": "20914:19617", "hash": "d60a28dfd416aeef5de9e8aaba6827614c4dc05d", "pose": "standing front, happy" },
+    "happy":    { "path": "references/happy.png",    "node": "20914:19619", "hash": "d60a28dfd416aeef5de9e8aaba6827614c4dc05d", "pose": "standing front" },
+    "confused": { "path": "references/confused.png", "node": "20914:19620", "hash": "3d511ae48c31c182f0a141d4681ef7757abf75cd", "pose": "hand on helmet, head tilted" },
+    "friendly": { "path": "references/friendly.png", "node": "20914:19621", "hash": "622550b9cd355b9a1963c75a485feef9e00caa8e", "pose": "sitting, waving" },
+    "loving":   { "path": "references/loving.png",   "node": "20914:19622", "hash": "20e3845710953083ed217fe16c493ff306dad78b", "pose": "standing, arms open" },
+    "sad":      { "path": "references/sad.png",      "node": "20914:19623", "hash": "66b95ce9963ba82a15f326dd937b5d20c9f66a97", "pose": "standing, one hand raised" }
+  },
+  "reference_selection": "Master first, then the pose refs, then the emotion ref if not already included. Max 4 images, 2D only.",
+
+  "finish": {
+    "_note": "No backdrop. Trim to the character, add even transparent padding, export at a fixed long edge.",
+    "padding_ratio": 0.06,
+    "long_edge_px": 2048
+  },
+
+  "review_checks": ["style", "outline", "logo", "suit_trim", "helmet", "eyes", "proportions", "anatomy", "no_extras", "pose", "framing", "edges"],
+
+  "prompt_files": {
+    "master": "prompts/master-2d.txt",
+    "detail_rewriter": "prompts/detail-rewriter.txt",
+    "tweak": "prompts/tweak-2d.txt",
+    "review": "prompts/review-2d.txt"
+  }
+}

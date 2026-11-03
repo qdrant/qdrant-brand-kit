@@ -1,0 +1,29 @@
+The attached images show one character: Qbot, the Qdrant mascot, drawn in its
+2D cartoon style. The first image is the master reference. Draw this exact
+character in this exact drawing style. Do not redesign it and do not change
+the style.
+
+STYLE (must match the references exactly):
+{locked_style}
+
+CHARACTER (must match the references exactly):
+{locked_character}
+
+CHANGE ONLY:
+- LED eyes: {emotion_phrase}
+- Pose: {pose_phrase}
+- {detail_phrase}
+
+FRAMING:
+- Full body, centred, the whole character visible with even margin around it
+- Same outline weight and same level of detail as the references
+
+BACKGROUND:
+- {background_phrase}
+
+NEVER:
+- Render it in 3D, add realistic lighting, shading gradients, texture or grain
+- Add text, numbers, extra logos, a mouth, a nose or a human face
+- Add clothing, accessories, props or other characters unless listed above
+- Change colours, outline weight, proportions or the logo
+- Crop any part of the character

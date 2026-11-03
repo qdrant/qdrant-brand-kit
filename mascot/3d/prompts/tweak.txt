@@ -1,0 +1,7 @@
+Edit the first image. Keep the character exactly as it is, matching the second
+image (the master reference): same design, colours, materials, logo and proportions.
+Keep the LED eye expression, pose, framing and background unchanged.
+
+Change only this: {tweak_phrase}
+
+Do not add text, logos, clothing, props or other characters.

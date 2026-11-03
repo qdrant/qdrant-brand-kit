@@ -1,0 +1,25 @@
+The attached images show one character: Qbot, the Qdrant mascot. The first image
+is the master reference. Recreate this exact character. Do not redesign it.
+
+CHARACTER (must match the references exactly):
+{locked_character}
+
+CHANGE ONLY:
+- LED eyes: {emotion_phrase}
+- Pose: {pose_phrase}
+- {variant_phrase}
+- {detail_phrase}
+
+FRAMING:
+- Full body, centred, the whole character visible with even margin around it
+- Soft even studio light from the front-top, no harsh shadows
+- Camera at the character's chest height, straight on unless the pose says otherwise
+
+BACKGROUND:
+- {background_phrase}
+
+NEVER:
+- Add text, numbers, extra logos, a mouth, a nose or a human face
+- Add clothing, accessories, props or other characters unless listed above
+- Change colours, materials, proportions or the logo
+- Crop any part of the character
