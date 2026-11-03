@@ -15,5 +15,9 @@
       "darkest": 8,
       "lightest": 96
     }
-  }
+  },
+  "alsoInFigma": [
+    "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50566"
+  ],
+  "$alsoInFigmaNote": "Same dither values with a different source image, so it's this preset, not a new one."
 }
