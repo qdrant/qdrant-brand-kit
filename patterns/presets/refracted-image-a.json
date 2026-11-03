@@ -26,6 +26,12 @@
     "blur": {
       "radius": 1000
     },
+    "contrast": {
+      "low": 15,
+      "high": 98,
+      "curve": 70,
+      "midtones": 0.6
+    },
     "refraction": {
       "pattern": "lenticular",
       "strength": -100,

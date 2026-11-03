@@ -6,11 +6,11 @@
 // mascot, never a Luma image.
 
 import { resolveToken } from "./tokens.js";
-import { refract, drawNoise, brandGrade, brandCheck } from "./effects.js";
+import { refract, drawNoise, brandGrade, stretchContrast, brandCheck } from "./effects.js";
 
 // image = a loaded <img> or ImageBitmap of the source.
 export function render(canvas, tokens, preset, image) {
-  const { size, grade, blur, refraction, noise } = preset.settings;
+  const { size, grade, blur, contrast, refraction, noise } = preset.settings;
   const anchors = grade.anchors.map((ref) => resolveToken(tokens, ref));
   canvas.width = canvas.height = size;
   const ctx = canvas.getContext("2d");
@@ -27,7 +27,7 @@ export function render(canvas, tokens, preset, image) {
   brandGrade(graded.data, anchors, grade);
   tctx.putImageData(graded, 0, 0);
 
-  // Step 2: blur. Step 3: refraction. Step 4: noise.
+  // Step 2: blur. Step 3: contrast. Step 4: refraction. Step 5: noise.
 
   const source = document.createElement("canvas");
   source.width = source.height = size;
@@ -43,7 +43,9 @@ export function render(canvas, tokens, preset, image) {
       sctx.restore();
     }
   }
-  const src = sctx.getImageData(0, 0, size, size).data;
+  const blurred = sctx.getImageData(0, 0, size, size);
+  stretchContrast(blurred.data, contrast);
+  const src = blurred.data;
 
   // Edge wrap "Zero": outside the image, keep the nearest edge pixel.
   const sample = (x, y, channel) => {
