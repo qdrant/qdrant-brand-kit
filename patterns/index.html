@@ -15,9 +15,10 @@
     aside { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
     h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 16px 0 8px; }
     h2:first-child { margin-top: 0; }
-    label { display: grid; grid-template-columns: 90px 1fr 44px; align-items: center; gap: 8px; margin: 6px 0; }
-    label input { width: 100%; min-width: 0; }
-    label span:last-child { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+    select { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; }
+    .token span { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+    .token i { width: 16px; height: 16px; border-radius: 4px; display: inline-block; }
+    pre { margin: 0; font-size: 11px; color: var(--muted); max-height: 220px; overflow: auto; }
     code { font-size: 12px; color: #b3b8ff; }
     .token { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
     button { margin-top: 16px; width: 100%; padding: 10px; border: 0; border-radius: 6px; background: #6047ff; color: #fff; font: inherit; cursor: pointer; }
@@ -35,55 +36,42 @@
       <figcaption>Code</figcaption>
     </figure>
     <aside id="panel">
+      <h2>Color family</h2>
+      <select id="family"></select>
       <h2>Tokens (placeholders)</h2>
       <div id="tokens"></div>
-      <h2>Refraction</h2>
-      <div id="refraction"></div>
-      <h2>Noise</h2>
-      <div id="noise"></div>
+      <h2>Fixed settings</h2>
+      <pre id="settings"></pre>
       <button id="download">Download PNG</button>
     </aside>
   </main>
 
   <script type="module">
-    import { loadTokens } from "./patterns/tokens.js";
+    import { loadTokens, resolveToken } from "./patterns/tokens.js";
     import * as pattern from "./patterns/luma-background-10.js";
 
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
-    const params = structuredClone(pattern.defaults);
     const canvas = document.getElementById("canvas");
-    const draw = () => pattern.render(canvas, tokens, params);
+    const select = document.getElementById("family");
 
-    const sliders = {
-      refraction: { strength: [-100, 100], smoothness: [0, 100], frost: [0, 100], dispersion: [0, 100], r: [2, 100], a: [-180, 180] },
-      noise: { size: [1, 12], density: [0, 100] },
+    // Any family that has the 200, 300 and 500 steps can be used.
+    for (const [family, steps] of Object.entries(tokens.color)) {
+      if (["200", "300", "500"].every((step) => steps[step])) select.add(new Option(family, family));
+    }
+    select.value = pattern.defaultFamily;
+
+    const draw = () => {
+      pattern.render(canvas, tokens, select.value);
+      document.getElementById("tokens").innerHTML = Object.values(pattern.colors(select.value))
+        .map((ref) => {
+          const path = ref.slice(1, -1);
+          const hex = resolveToken(tokens, ref);
+          return `<div class="token"><code>${path}</code><span><i style="background:${hex}"></i>${hex}</span></div>`;
+        })
+        .join("");
     };
-    for (const [group, fields] of Object.entries(sliders)) {
-      for (const [key, [min, max]] of Object.entries(fields)) {
-        const label = document.createElement("label");
-        label.innerHTML = `<span>${key}</span><input type="range" min="${min}" max="${max}" value="${params[group][key]}"><span>${params[group][key]}</span>`;
-        const [, input, out] = label.children;
-        input.addEventListener("input", () => {
-          params[group][key] = Number(input.value);
-          out.textContent = input.value;
-          draw();
-        });
-        document.getElementById(group).append(label);
-      }
-    }
-
-    for (const ref of [params.gradient.from, params.gradient.to, params.noise.color]) {
-      const path = ref.slice(1, -1);
-      const node = path.split(".").reduce((o, k) => o[k], tokens);
-      const row = document.createElement("div");
-      row.className = "token";
-      row.innerHTML = `<code>${path}</code><input type="color" value="${node.$value.slice(0, 7)}">`;
-      row.querySelector("input").addEventListener("input", (e) => {
-        node.$value = e.target.value.toUpperCase() + node.$value.slice(7);
-        draw();
-      });
-      document.getElementById("tokens").append(row);
-    }
+    select.addEventListener("change", draw);
+    document.getElementById("settings").textContent = JSON.stringify(pattern.settings, null, 2);
 
     document.getElementById("download").addEventListener("click", () => {
       const link = document.createElement("a");

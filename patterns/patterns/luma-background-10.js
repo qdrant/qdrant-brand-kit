@@ -1,18 +1,16 @@
 // Luma-Background-10
 // A gradient, bent into diagonal bands by a lenticular refraction, with noise on top.
-// Every number below matches the Figma panel. Colors are token names, never hex.
+// Every number matches the Figma panel and is fixed. Only the color family changes,
+// and colors are always token names, never hex.
 
 import { resolveToken, hexToRgba } from "./tokens.js";
 
 export const name = "Luma-Background-10";
 
-export const defaults = {
+// Fixed settings from the Figma panel. These never change for this pattern.
+export const settings = Object.freeze({
   size: 1080,
-  gradient: {
-    from: "{color.secondary.500}",
-    to: "{color.secondary.300}",
-    angle: 180, // degrees, 180 = top to bottom
-  },
+  gradient: { angle: 180 }, // degrees, 180 = top to bottom
   refraction: {
     pattern: "lenticular",
     strength: -100, // -100 to 100
@@ -24,23 +22,28 @@ export const defaults = {
     r: 24, // lens width, % of size
     a: -120, // degrees
   },
-  noise: {
-    color: "{color.pattern.noise}",
-    size: 4, // px
-    density: 16, // %
-    seed: 10,
-  },
-};
+  noise: { size: 4, density: 16, opacity: 80, seed: 10 }, // px, %, %
+});
 
-export function render(canvas, tokens, params = defaults) {
-  const { size, gradient, refraction, noise } = params;
+// The only choice: which color family. The steps are fixed.
+export const defaultFamily = "secondary";
+
+export const colors = (family) => ({
+  from: `{color.${family}.500}`,
+  to: `{color.${family}.300}`,
+  noise: `{color.${family}.200}`,
+});
+
+export function render(canvas, tokens, family = defaultFamily) {
+  const { size, gradient, refraction, noise } = settings;
+  const color = colors(family);
   canvas.width = canvas.height = size;
   const ctx = canvas.getContext("2d");
   const image = ctx.createImageData(size, size);
   const px = image.data;
 
-  const from = hexToRgba(resolveToken(tokens, gradient.from));
-  const to = hexToRgba(resolveToken(tokens, gradient.to));
+  const from = hexToRgba(resolveToken(tokens, color.from));
+  const to = hexToRgba(resolveToken(tokens, color.to));
 
   // Gradient direction, CSS style: 0 = to top, 90 = to right, 180 = to bottom.
   const g = (gradient.angle * Math.PI) / 180;
@@ -80,13 +83,13 @@ export function render(canvas, tokens, params = defaults) {
     }
   }
   ctx.putImageData(image, 0, 0);
-  drawNoise(ctx, tokens, size, noise);
+  drawNoise(ctx, resolveToken(tokens, color.noise), size, noise);
 }
 
 // Scattered specks, like Figma's mono noise effect.
-function drawNoise(ctx, tokens, size, noise) {
-  const [r, g, b, alpha] = hexToRgba(resolveToken(tokens, noise.color));
-  ctx.fillStyle = `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${alpha})`;
+function drawNoise(ctx, hex, size, noise) {
+  const [r, g, b] = hexToRgba(hex);
+  ctx.fillStyle = `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${noise.opacity / 100})`;
   const rand = mulberry32(noise.seed);
   const cell = Math.max(1, noise.size / 2);
   const chance = (noise.density / 100) * 0.055; // tuned to match Figma's speck count
