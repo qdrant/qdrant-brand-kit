@@ -9,8 +9,10 @@
 //   // at any size: here a wide banner.
 //   renderPattern(canvas, tokens, patterns[0], { colorway: 0, family: "secondary", width: 1500, height: 500 });
 //
-//   // A mesh pattern: make the mesh once from a library image, keep only the mesh.
-//   const mesh = createMesh(image, tokens, patterns[2]);
+//   // A mesh pattern: when a library image is approved, check it and make its meshes
+//   // once (see library.js), then render with the mesh for the pattern's meshGroup.
+//   if (canUseImage(info, patterns[2].source).allowed) saveWithImage(meshesForImage(image, tokens, patterns));
+//   const mesh = createMesh(image, tokens, patterns[2]); // or one mesh for one pattern
 //   const check = renderPattern(canvas, tokens, patterns[2], { mesh });
 //   if (!check.pass) { /* off-brand: pick another image */ }
 //
@@ -27,6 +29,7 @@ import { loadAllPresets, loadPreset } from "./presets.js";
 import { makeFrame } from "./effects.js";
 
 export { loadTokens, resolveToken } from "./tokens.js";
+export { canUseImage, meshesForImage } from "./library.js";
 export { loadPreset };
 
 // Recipe name (the "recipe" field in a preset) to its code.

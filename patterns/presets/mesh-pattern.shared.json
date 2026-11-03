@@ -3,9 +3,9 @@
   "extends": "shared",
   "meshGroup": "mesh-pattern",
   "source": {
-    "$description": "Placeholder. In the tool, the source image is picked from the Design Lab library at render time, so every new library image can become a new pattern.",
+    "$description": "The source rule, used by canUseImage() in patterns/library.js. When an image is approved in the Design Lab library and passes this rule, the tool makes its meshes (meshesForImage) and saves them with the image. Patterns then pick any image that has meshes, so the patterns grow with the library.",
     "from": "design-lab-library",
-    "pick": "random",
+    "pick": "random among library images that have meshes",
     "filter": {
       "assetType": "image",
       "approvedOnly": true,

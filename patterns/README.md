@@ -13,6 +13,7 @@ Brand patterns written as code, ready to live in Design Lab as primitives. No im
 | **Colorway** | For Color patterns: the two tokens of the gradient, listed in the preset. | inside the preset |
 | **Mesh** | For Mesh patterns: an 11 × 11 grid of brand tokens made from a library image. About 3.5 KB. | `meshes/<image>.<meshGroup>.json` |
 | **Effects** | Refraction, slice shift, dither, noise, brand grade and check. Shared by all recipes. | `patterns/effects.js` |
+| **Library flow** | Checks a library image against the source rule and makes its meshes. | `patterns/library.js` |
 
 **Color patterns** take a colorway. **Mesh patterns** take a mesh, made once from a library image. The image itself is never kept.
 
@@ -45,15 +46,46 @@ if (!check.pass) {
 - A mesh belongs to a `meshGroup`, not to one pattern. All Mesh-Refracted and Mesh-Sliced patterns share `mesh-pattern` meshes, and Mesh-Dithered uses `mesh-dithered-pattern`. One mesh per image per group.
 - **Library images** for meshes: design-approved, Default (space) moodboard, asset type image, nothing with the mascot or a robot in the prompt, never Luma. The rule is written in `mesh-pattern.shared.json` (`source`). Someone should still look at a new image before it's used: a prompt doesn't always mention everything in the picture.
 
+## Library flow: patterns that grow with the library
+
+Mesh patterns aren't tied to a fixed set of images. Every new image approved in the Design Lab library can become a source, so the patterns grow as the library grows. Design Lab does this when an image is approved:
+
+1. **Check the image** against the source rule:
+
+   ```js
+   const { allowed, reasons } = canUseImage(
+     { assetType: "image", approved: true, moodboard: "Default", title, prompt },
+     patterns.find(isMeshPattern).source,
+   );
+   ```
+
+   If it's not allowed, `reasons` says why, for example "title or prompt mentions robot".
+2. **Make its meshes once**, one per look, and **save them with the image** in the library:
+
+   ```js
+   const meshes = meshesForImage(image, tokens, patterns);
+   // { "mesh-pattern": {...}, "mesh-dithered-pattern": {...} }, about 3.5 KB each
+   ```
+
+3. **Render** any mesh pattern with any image that has meshes, at any size:
+
+   ```js
+   renderPattern(canvas, tokens, preset, { mesh: meshes[preset.meshGroup], width, height });
+   ```
+
+   Pick the image at random, or let the person choose. If the brand check fails, skip that image for that pattern.
+
+Meshes need to be made again only when the grade, blur or contrast in the shared presets change. Token value changes don't need new meshes. The four meshes in `meshes/` are test examples for the preview pages, not the real library.
+
 ## Adding or changing a pattern
 
 | You want to… | Do this |
 | --- | --- |
 | Use **new colors** on an existing Color pattern | Add a colorway to its preset. Not a new pattern. |
-| Use a **new library image** on Mesh patterns | Make a mesh with `createMesh` and store it. Not a new pattern. |
+| Use a **new library image** on Mesh patterns | Nothing: Design Lab makes its meshes when the image is approved (see Library flow). Not a new pattern. |
 | Use **the same effects with new values** | Copy a preset, give it the next letter (B, C…), change the values, add it to `presets/index.json`. |
 | Use **a new effect** | Add the effect to `effects.js`, write a recipe in `patterns/`, register it in `patterns/index.js`, then add a preset. |
-| Change **blur, grade, contrast or noise** for all | Edit the shared preset file. Every pattern that extends it updates. Mesh files need to be made again after a grade, blur or contrast change. |
+| Change **blur, grade, contrast or noise** for all | Edit the shared preset file. Every pattern that extends it updates. After a grade, blur or contrast change, make the meshes again with `meshesForImage` for every library image. |
 | Change **token values** | Edit the tokens file. Patterns and meshes follow on their own. |
 
 Then run the checks and look at the result:
