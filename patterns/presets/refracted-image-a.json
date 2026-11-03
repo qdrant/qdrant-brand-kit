@@ -1,0 +1,38 @@
+{
+  "name": "Refracted Image A",
+  "recipe": "refracted-image",
+  "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574",
+  "reference": "reference/refracted-image-a.png",
+  "sourceRules": "Any space or astronaut image from the Design Lab library (https://qdrant-design-lab.vercel.app/library). Never the mascot, never a Luma image.",
+  "sources": [
+    {
+      "name": "Astronauts over crater",
+      "image": "sources/astronauts-crater.webp"
+    }
+  ],
+  "settings": {
+    "size": 1080,
+    "blur": {
+      "radius": 1000
+    },
+    "refraction": {
+      "pattern": "lenticular",
+      "strength": -100,
+      "smoothness": 71,
+      "frost": 0,
+      "dispersion": 100,
+      "edgeWrap": "zero",
+      "x": 50,
+      "y": 50,
+      "r": 24,
+      "a": -124
+    },
+    "noise": {
+      "color": "#C2C5FF",
+      "opacity": 48,
+      "size": 4,
+      "density": 16,
+      "seed": 10
+    }
+  }
+}
