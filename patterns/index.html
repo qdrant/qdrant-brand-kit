@@ -7,13 +7,14 @@
   <style>
     :root { --bg: #0b0e1a; --panel: #151a2e; --line: #262c47; --text: #e8eaf6; --muted: #8b91b3; }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, sans-serif; }
-    main { display: grid; grid-template-columns: minmax(0, 640px) 280px; gap: 16px; padding: 16px; }
-    figure { margin: 0; }
-    figure canvas { width: 100%; aspect-ratio: 1; display: block; border-radius: 8px; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, sans-serif; height: 100vh; overflow: hidden; }
+    /* Everything fits the window: the pattern is as big as the space allows, never bigger. */
+    main { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 16px; padding: 16px; height: 100vh; }
+    figure { margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; min-height: 0; }
+    figure canvas { width: min(100%, calc(100vh - 72px)); height: auto; aspect-ratio: 1; display: block; border-radius: 8px; }
     figcaption { color: var(--muted); margin-top: 8px; }
     figcaption a { color: #b3b8ff; }
-    aside { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+    aside { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; overflow: auto; min-height: 0; }
     h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 16px 0 8px; }
     h2:first-child { margin-top: 0; }
     select { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; }
@@ -26,7 +27,7 @@
     .check.pass { background: #0f3d2e; color: #7ee2b8; }
     .check.fail { background: #4a1220; color: #ff8792; }
     button { margin-top: 16px; width: 100%; padding: 10px; border: 0; border-radius: 6px; background: #6047ff; color: #fff; font: inherit; cursor: pointer; }
-    @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { body { height: auto; overflow: auto; } main { grid-template-columns: 1fr; height: auto; } figure canvas { width: 100%; } }
   </style>
 </head>
 <body>
