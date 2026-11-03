@@ -10,11 +10,11 @@
       "strength": -100,
       "smoothness": 100,
       "frost": 0,
-      "dispersion": 53,
+      "dispersion": 56,
       "edgeWrap": "zero",
       "x": 50,
       "y": 50,
-      "r": 17.2,
+      "r": 16,
       "a": 90
     }
   }
