@@ -3,7 +3,6 @@
   "recipe": "image-sliced-pattern",
   "extends": "image-pattern.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50540",
-  "reference": "reference/image-sliced-pattern-a.png",
   "settings": {
     "slice": {
       "shift": 0,

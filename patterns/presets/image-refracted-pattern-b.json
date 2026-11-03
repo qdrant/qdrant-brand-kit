@@ -3,7 +3,6 @@
   "recipe": "image-refracted-pattern",
   "extends": "image-pattern.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50585",
-  "reference": "reference/image-refracted-pattern-b.png",
   "settings": {
     "refraction": {
       "pattern": "lenticular",

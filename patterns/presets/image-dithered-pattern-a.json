@@ -3,7 +3,6 @@
   "recipe": "image-dithered-pattern",
   "extends": "image-dithered-pattern.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128",
-  "reference": "reference/image-dithered-pattern-a.png",
   "settings": {
     "dither": {
       "style": "bayer16",

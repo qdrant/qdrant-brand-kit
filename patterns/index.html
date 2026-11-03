@@ -8,10 +8,11 @@
     :root { --bg: #0b0e1a; --panel: #151a2e; --line: #262c47; --text: #e8eaf6; --muted: #8b91b3; }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, sans-serif; }
-    main { display: grid; grid-template-columns: 1fr 1fr 280px; gap: 16px; padding: 16px; }
+    main { display: grid; grid-template-columns: minmax(0, 640px) 280px; gap: 16px; padding: 16px; }
     figure { margin: 0; }
-    figure img, figure canvas { width: 100%; aspect-ratio: 1; display: block; border-radius: 8px; }
+    figure canvas { width: 100%; aspect-ratio: 1; display: block; border-radius: 8px; }
     figcaption { color: var(--muted); margin-top: 8px; }
+    figcaption a { color: #b3b8ff; }
     aside { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
     h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 16px 0 8px; }
     h2:first-child { margin-top: 0; }
@@ -31,12 +32,8 @@
 <body>
   <main>
     <figure>
-      <img id="reference" alt="Figma export of the selected pattern" />
-      <figcaption>Figma</figcaption>
-    </figure>
-    <figure>
       <canvas id="canvas"></canvas>
-      <figcaption>Code</figcaption>
+      <figcaption>Code · <a id="figma" target="_blank" rel="noopener">Open the Figma frame</a></figcaption>
     </figure>
     <aside id="panel">
       <h2>Pattern</h2>
@@ -97,7 +94,6 @@
       if (preset.examples) {
         const source = preset.examples[colorwaySelect.value];
         familyRow.hidden = true;
-        document.getElementById("reference").src = preset.reference;
         // Patterns render from the example's mesh gradient, not the PNG.
         sourceImage = await fetch(`meshes/${source.id}.${preset.meshGroup}.json`).then((r) => r.json());
         draw();
@@ -105,7 +101,7 @@
       }
       sourceImage = null;
       colorway = preset.colorways[colorwaySelect.value];
-      document.getElementById("reference").src = colorway.reference ?? "";
+      document.getElementById("figma").href = colorway.figma ?? preset.figma;
 
       // Only colorways with {family} in them let you pick a family.
       const usesFamily = colorway.from.includes("{family}") || colorway.to.includes("{family}");
@@ -120,6 +116,7 @@
       preset = presets[presetSelect.value];
       recipe = await import(`./patterns/${preset.recipe}.js`);
       document.getElementById("settings").textContent = JSON.stringify(preset.settings, null, 2);
+      document.getElementById("figma").href = preset.figma ?? "";
       document.getElementById("option-label").textContent = preset.examples ? "Source image" : "Colorway";
       colorwaySelect.innerHTML = "";
       (preset.examples ?? preset.colorways).forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
