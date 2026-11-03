@@ -2,6 +2,16 @@
 
 One HTML template for every Qdrant social post. You give it content and a size. It picks the right layout, renders a PNG or JPG at that exact size, and checks the result.
 
+## Set up (once)
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/playwright install chromium   # skip this if Google Chrome is installed
+```
+
+The script uses Google Chrome when it's installed, otherwise Playwright's own Chromium.
+
 ## Run it
 
 ```bash
@@ -98,4 +108,4 @@ These are placeholders until Juan's design system is connected. They're all CSS 
 - `template/assets/logos/`: Qdrant logo SVGs from the qdrant-brand skill
 - `render.py`: fill, render, check, contact sheets, gallery
 - `samples/`: sample content, the headshots, and a placeholder partner logo
-- `requirements.txt`: Python packages for `render.py` (then run `playwright install chromium`, or use an installed Chrome)
+- `requirements.txt`: Python packages for `render.py`

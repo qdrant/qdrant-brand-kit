@@ -236,6 +236,18 @@ def contact_sheet(items, path, title):
     sheet.save(path, quality=90)
 
 
+def launch_browser(pw):
+    """Use the installed Google Chrome if there is one, otherwise Playwright's own Chromium."""
+    try:
+        return pw.chromium.launch(channel="chrome")
+    except Exception:
+        pass
+    try:
+        return pw.chromium.launch()
+    except Exception:
+        sys.exit("No browser found. Install Google Chrome, or run: .venv/bin/playwright install chromium")
+
+
 def write_gallery(results, out):
     """out/index.html: every render with its shape and check results, for review in a browser."""
     cards = []
@@ -280,7 +292,7 @@ def main():
 
     all_ok, results = True, []
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(channel="chrome")
+        browser = launch_browser(pw)
         for name, content, sample in jobs:
             if sample and not content:
                 sp = HERE / "samples" / f"{sample}.json"
