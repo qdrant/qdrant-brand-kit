@@ -22,7 +22,7 @@ export const settings = Object.freeze({
     r: 24, // lens width, % of size
     a: -120, // degrees
   },
-  noise: { color: "#C2C5FF", opacity: 80, size: 4, density: 16, seed: 10 }, // fixed effect color, %, px, %
+  noise: { color: "#C2C5FF", opacity: 40, size: 4, density: 16, seed: 10 }, // fixed effect color, %, px, %
 });
 
 // The only choice: which color family. The two steps are fixed.
