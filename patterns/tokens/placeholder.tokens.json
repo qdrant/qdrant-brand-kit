@@ -1,0 +1,24 @@
+{
+  "$description": "Placeholder values. Juan's design system will replace the values. Keep the names, so every pattern updates on its own.",
+  "color": {
+    "secondary": {
+      "500": {
+        "$type": "color",
+        "$value": "#6047FF",
+        "$description": "Placeholder. From Figma variable secondary/500."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#9494FF",
+        "$description": "Placeholder. From Figma variable secondary/300."
+      }
+    },
+    "pattern": {
+      "noise": {
+        "$type": "color",
+        "$value": "#C2C5FFCC",
+        "$description": "Placeholder. Noise effect color #C2C5FF at 80%."
+      }
+    }
+  }
+}
