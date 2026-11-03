@@ -1,10 +1,10 @@
-// Image-Dithered-Pattern (recipe)
-// A library image, prepared by image-source.js (brand grade, blur, contrast), then
+// Mesh-Dithered-Pattern (recipe)
+// A library image, prepared by mesh-source.js (brand grade, blur, contrast), then
 // turned into a pixel dither (Figma's Bayer dither). No noise: the dither is the
 // texture. The values come from a preset in presets/, for example
-// image-dithered-pattern-a.json. Presets are fixed.
+// mesh-dithered-pattern-a.json. Presets are fixed.
 
-import { prepareImage } from "./image-source.js";
+import { prepareImage } from "./mesh-source.js";
 import { dither, brandCheck } from "./effects.js";
 
 // image = a loaded <img> or ImageBitmap of the source.

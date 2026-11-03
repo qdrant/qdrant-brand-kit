@@ -1,10 +1,10 @@
-// Image-Sliced-Pattern (recipe)
-// A library image, prepared by image-source.js (brand grade, blur, contrast), cut
+// Mesh-Sliced-Pattern (recipe)
+// A library image, prepared by mesh-source.js (brand grade, blur, contrast), cut
 // into thin strips that each slide along their length by a random amount (Figma's
 // slice shift), with noise on top. The values come from a preset in presets/, for
-// example image-sliced-pattern-a.json. Presets are fixed.
+// example mesh-sliced-pattern-a.json. Presets are fixed.
 
-import { prepareImage } from "./image-source.js";
+import { prepareImage } from "./mesh-source.js";
 import { sliceShift, drawNoise, brandCheck } from "./effects.js";
 
 // image = a loaded <img> or ImageBitmap of the source.

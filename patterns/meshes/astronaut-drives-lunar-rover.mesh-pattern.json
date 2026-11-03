@@ -1,7 +1,7 @@
 {
   "source": "Astronaut Drives Lunar Rover",
   "library": "https://qdrant-design-lab.vercel.app/library/d7ddde24-69d5-402e-b72d-0a7fc107248e",
-  "group": "image-pattern",
+  "group": "mesh-pattern",
   "size": 11,
   "colors": [
     "{color.neutral.950}",

@@ -1,7 +1,7 @@
 {
-  "$description": "Shared by every Image-Dithered-Pattern preset. Same blur and source rule as the other image patterns, but a darker, more saturated grade and no noise.",
-  "extends": "image-pattern.shared",
-  "meshGroup": "image-dithered-pattern",
+  "$description": "Shared by every Mesh-Dithered-Pattern preset. Same blur and source rule as the other image patterns, but a darker, more saturated grade and no noise.",
+  "extends": "mesh-pattern.shared",
+  "meshGroup": "mesh-dithered-pattern",
   "settings": {
     "grade": {
       "anchors": [

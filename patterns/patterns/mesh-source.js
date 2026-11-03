@@ -10,7 +10,7 @@
 // files, so they're the same in every image pattern of a group.
 //
 // The source image is a placeholder: in the tool it's picked from the Design Lab
-// library by the "source" rule in image-pattern.shared.json (design-approved images
+// library by the "source" rule in mesh-pattern.shared.json (design-approved images
 // from the space moodboard only, never the mascot, never Luma). The tool makes the
 // mesh once and keeps only the mesh. The files in sources/ are test examples, and
 // meshes/ holds their meshes.

@@ -1,7 +1,7 @@
 {
-  "name": "Image-Sliced-Pattern-A",
-  "recipe": "image-sliced-pattern",
-  "extends": "image-pattern.shared",
+  "name": "Mesh-Sliced-Pattern-A",
+  "recipe": "mesh-sliced-pattern",
+  "extends": "mesh-pattern.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50540",
   "settings": {
     "slice": {

@@ -1,7 +1,7 @@
 {
-  "name": "Image-Refracted-Pattern-A",
-  "recipe": "image-refracted-pattern",
-  "extends": "image-pattern.shared",
+  "name": "Mesh-Refracted-Pattern-A",
+  "recipe": "mesh-refracted-pattern",
+  "extends": "mesh-pattern.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574",
   "settings": {
     "refraction": {

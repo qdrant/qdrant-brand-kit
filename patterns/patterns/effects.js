@@ -207,7 +207,7 @@ export function sliceShift(px, size, slice, seed, sample) {
 }
 
 // Figma's slice shift random offset isn't in pixels. Measured on the stripe contrast of
-// Image-Sliced-Pattern-A: Figma's 500 looks like about 125 px. An estimate, since the
+// Mesh-Sliced-Pattern-A: Figma's 500 looks like about 125 px. An estimate, since the
 // Figma frame used a different source image.
 const FIGMA_OFFSET_TO_PX = 0.25;
 

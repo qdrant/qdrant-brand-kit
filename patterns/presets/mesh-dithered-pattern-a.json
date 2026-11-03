@@ -1,7 +1,7 @@
 {
-  "name": "Image-Dithered-Pattern-A",
-  "recipe": "image-dithered-pattern",
-  "extends": "image-dithered-pattern.shared",
+  "name": "Mesh-Dithered-Pattern-A",
+  "recipe": "mesh-dithered-pattern",
+  "extends": "mesh-dithered-pattern.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128",
   "settings": {
     "dither": {

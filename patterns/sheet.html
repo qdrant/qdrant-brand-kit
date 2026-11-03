@@ -30,7 +30,7 @@
   <script type="module">
     import { loadTokens } from "./patterns/tokens.js";
     import { loadAllPresets } from "./patterns/presets.js";
-    import { prepareImage } from "./patterns/image-source.js";
+    import { prepareImage } from "./patterns/mesh-source.js";
 
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
     const presets = (await loadAllPresets()).filter((p) => p.examples);

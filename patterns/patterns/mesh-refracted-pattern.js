@@ -1,9 +1,9 @@
-// Image-Refracted-Pattern (recipe)
-// A library image, prepared by image-source.js (brand grade, blur, contrast), bent
+// Mesh-Refracted-Pattern (recipe)
+// A library image, prepared by mesh-source.js (brand grade, blur, contrast), bent
 // into bands by a lenticular refraction, with noise on top. The values come from a
-// preset in presets/, for example image-refracted-pattern-a.json. Presets are fixed.
+// preset in presets/, for example mesh-refracted-pattern-a.json. Presets are fixed.
 
-import { prepareImage } from "./image-source.js";
+import { prepareImage } from "./mesh-source.js";
 import { refract, drawNoise, brandCheck } from "./effects.js";
 
 // image = a loaded <img> or ImageBitmap of the source.

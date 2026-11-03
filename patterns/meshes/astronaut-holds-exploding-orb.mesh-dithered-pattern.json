@@ -1,7 +1,7 @@
 {
   "source": "Astronaut Holds Exploding Orb",
   "library": "https://qdrant-design-lab.vercel.app/library/6d581177-6af1-4ee3-9f97-6b6671de491d",
-  "group": "image-dithered-pattern",
+  "group": "mesh-dithered-pattern",
   "size": 11,
   "colors": [
     "{color.neutral.950}",
