@@ -8,7 +8,7 @@
     "refraction": {
       "pattern": "lenticular",
       "strength": -100,
-      "smoothness": 100,
+      "smoothness": 88,
       "frost": 0,
       "dispersion": 56,
       "edgeWrap": "zero",
