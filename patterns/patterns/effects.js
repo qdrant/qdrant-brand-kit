@@ -65,3 +65,74 @@ function mulberry32(seed) {
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 }
+
+// Brand grade. Pulls every hue toward the nearest brand anchor hue, raises
+// saturation and lifts the light, so an image can only produce bright, on-palette
+// colors. anchors = hex colors (resolved tokens).
+// grade = { hueSnap: %, minSaturation: %, minLightness: %, maxLightness: %, lift: gamma }
+export function brandGrade(px, anchors, grade) {
+  const hues = anchors.map((hex) => rgbToHsl(...hexToRgba(hex))[0]);
+  const snap = grade.hueSnap / 100;
+  const minSat = grade.minSaturation / 100;
+  const lo = grade.minLightness / 100;
+  const hi = grade.maxLightness / 100;
+  for (let i = 0; i < px.length; i += 4) {
+    const [h, s, l] = rgbToHsl(px[i] / 255, px[i + 1] / 255, px[i + 2] / 255);
+    const target = nearestHue(h, hues);
+    const nh = h + hueDelta(h, target) * snap;
+    // Lift: a gamma below 1 opens up the shadows, then squeeze into lo..hi.
+    const nl = lo + (hi - lo) * Math.pow(l, grade.lift);
+    const [r, g, b] = hslToRgb((nh + 360) % 360, Math.max(s, minSat), nl);
+    px[i] = r * 255;
+    px[i + 1] = g * 255;
+    px[i + 2] = b * 255;
+  }
+}
+
+// Brand check. Share of colored pixels whose hue falls outside the brand range: the
+// short arc between two anchors (red to violet runs through magenta and purple),
+// plus `tolerance` degrees on each side. Brown and burnt red (a warm hue that is also
+// dark and dull) always fail. Near-white, near-black and gray count as neutral.
+export function brandCheck(px, anchors, { tolerance = 30, maxOffBrand = 2 } = {}) {
+  const [a, b] = anchors.map((hex) => rgbToHsl(...hexToRgba(hex))[0]);
+  const arc = hueDelta(a, b); // signed, short way round
+  const inRange = (h) => {
+    const t = hueDelta(a, h) * Math.sign(arc || 1);
+    return t >= -tolerance && t <= Math.abs(arc) + tolerance;
+  };
+  let colored = 0;
+  let off = 0;
+  for (let i = 0; i < px.length; i += 16) {
+    const [h, s, l] = rgbToHsl(px[i] / 255, px[i + 1] / 255, px[i + 2] / 255);
+    // Only true grays are neutral. Brown is a dull, dark orange, so it must still count.
+    if (s < 0.05 || l < 0.04 || l > 0.96) continue;
+    colored++;
+    if (!inRange(h) || isBrown(h, s, l)) off++;
+  }
+  const offBrand = colored ? (off / colored) * 100 : 0;
+  return { offBrand: Math.round(offBrand * 10) / 10, pass: offBrand <= maxOffBrand };
+}
+
+// Warm (red to yellow, -10° to 60°), darker than mid-tone and not vivid.
+const isBrown = (h, s, l) => Math.abs(hueDelta(25, h)) <= 35 && l < 0.45 && s < 0.65;
+
+const hueDelta = (from, to) => ((to - from + 540) % 360) - 180;
+const nearestHue = (h, hues) => hues.reduce((best, x) => (Math.abs(hueDelta(h, x)) < Math.abs(hueDelta(h, best)) ? x : best));
+
+function rgbToHsl(r, g, b) {
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  if (max === min) return [0, 0, l];
+  const d = max - min;
+  const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  const h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+  return [h * 60, s, l];
+}
+
+function hslToRgb(h, s, l) {
+  const k = (n) => (n + h / 30) % 12;
+  const a = s * Math.min(l, 1 - l);
+  const f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1));
+  return [f(0), f(8), f(4)];
+}

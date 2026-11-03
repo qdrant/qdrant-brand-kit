@@ -21,6 +21,9 @@
     pre { margin: 0; font-size: 11px; color: var(--muted); max-height: 220px; overflow: auto; }
     code { font-size: 12px; color: #b3b8ff; }
     .token { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
+    .check { margin: 10px 0 0; padding: 8px 10px; border-radius: 6px; font-weight: 600; }
+    .check.pass { background: #0f3d2e; color: #7ee2b8; }
+    .check.fail { background: #4a1220; color: #ff8792; }
     button { margin-top: 16px; width: 100%; padding: 10px; border: 0; border-radius: 6px; background: #6047ff; color: #fff; font: inherit; cursor: pointer; }
     @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
   </style>
@@ -74,8 +77,14 @@
 
     const draw = () => {
       if (sourceImage) {
-        recipe.render(canvas, tokens, preset, sourceImage);
-        document.getElementById("tokens").innerHTML = "<code>None. Colors come from the image.</code>";
+        const check = recipe.render(canvas, tokens, preset, sourceImage);
+        const anchors = preset.settings.grade.anchors.map((ref) => {
+          const hex = resolveToken(tokens, ref);
+          return `<div class="token"><code>${ref.slice(1, -1)}</code><span><i style="background:${hex}"></i>${hex}</span></div>`;
+        });
+        document.getElementById("tokens").innerHTML =
+          anchors.join("") +
+          `<p class="check ${check.pass ? "pass" : "fail"}">Brand check: ${check.pass ? "Pass" : "Fail"} · ${check.offBrand}% off-palette</p>`;
         return;
       }
       const color = colorwayTokens(colorway, familySelect.value);

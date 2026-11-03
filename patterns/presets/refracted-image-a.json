@@ -12,6 +12,17 @@
   ],
   "settings": {
     "size": 1080,
+    "grade": {
+      "anchors": [
+        "{color.primary.500}",
+        "{color.secondary.500}"
+      ],
+      "hueSnap": 100,
+      "minSaturation": 45,
+      "minLightness": 40,
+      "maxLightness": 97,
+      "lift": 0.3
+    },
     "blur": {
       "radius": 1000
     },
