@@ -146,6 +146,7 @@ python3 -m http.server 5190
 | Generative-Dash-Pattern-A | Fixed: secondary 800, 500, 200 on dark violet | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Dash-Pattern-B | Fixed: primary 800, 500, 300 on red | Pattern Studio export | Like Dash-A, on a finer 48 px grid with 40 px padding. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Glyph-Pattern-A | Dark violet, Red | Pattern Studio export | Letters of QDRANT in Geist Mono on a 32 px grid, in soft noisy patches. Pixel-identical to the tool at 1620 × 1080. Needs `loadPatternFonts` first |
+| Generative-Glyph-Pattern-B | Fixed: neutral 50 on light violet | Pattern Studio export | Like Glyph-A with outline shaping, in white letters. Pixel-identical to the tool at 1620 × 1080. Needs `loadPatternFonts` first |
 | Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Bayer 16×16, darker grade, no noise. Dithers lightness only |
 
 ## Known limits
