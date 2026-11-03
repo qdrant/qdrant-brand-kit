@@ -5,21 +5,23 @@
 // token names, never hex.
 
 import { resolveToken, hexToRgba } from "./tokens.js";
-import { refract, drawNoise, gradientSampler } from "./effects.js";
+import { refract, drawNoise, gradientSampler, makeFrame } from "./effects.js";
 
 // color = { from, to } token references, from colorwayTokens() in tokens.js.
-export function render(canvas, tokens, preset, color) {
-  const { size, gradient, refraction, noise } = preset.settings;
-  canvas.width = canvas.height = size;
+// frame = makeFrame(width, height): any size or shape. Defaults to 1080 x 1080.
+export function render(canvas, tokens, preset, color, frame = makeFrame()) {
+  const { gradient, refraction, noise } = preset.settings;
+  canvas.width = frame.width;
+  canvas.height = frame.height;
   const ctx = canvas.getContext("2d");
-  const image = ctx.createImageData(size, size);
+  const image = ctx.createImageData(frame.width, frame.height);
 
   const from = hexToRgba(resolveToken(tokens, color.from));
   const to = hexToRgba(resolveToken(tokens, color.to));
 
-  const gradientAt = gradientSampler(from, to, gradient.angle, size);
+  const gradientAt = gradientSampler(from, to, gradient.angle, frame);
 
-  refract(image.data, size, refraction, noise.seed + 1, gradientAt);
+  refract(image.data, frame, refraction, noise.seed + 1, gradientAt);
   ctx.putImageData(image, 0, 0);
-  drawNoise(ctx, size, noise);
+  drawNoise(ctx, frame, noise);
 }

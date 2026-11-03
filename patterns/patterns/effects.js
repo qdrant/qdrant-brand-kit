@@ -1,17 +1,32 @@
-// Effects shared by every recipe: the lenticular refraction and the mono noise.
+// Effects shared by every recipe: refraction, slice shift, dither, noise, and the
+// brand grade and check.
+//
+// Every effect draws into a frame of any width and height. Pixel values in presets
+// (strip widths, offsets, noise grain, dither cells) are written for a 1080 x 1080
+// canvas and scale with the frame, so a pattern keeps its look at any size or shape.
 
 import { hexToRgba, nearestTokenWithDistance } from "./tokens.js";
+
+// The size every preset value is written for.
+export const REFERENCE_SIZE = 1080;
+
+// A canvas of any size. scale is relative to 1080 x 1080, by area, so a wide banner
+// and a tall one of the same area get the same grain and strip widths.
+export function makeFrame(width = REFERENCE_SIZE, height = REFERENCE_SIZE) {
+  return { width, height, scale: Math.sqrt(width * height) / REFERENCE_SIZE };
+}
 
 // Lenticular refraction. Lenses run across the image along angle A, and each lens
 // shifts what's behind it. Like Figma's edge wrap "Zero", sources keep their edge
 // color past the border. sample(x, y, channel) returns the source color, 0 to 1.
-export function refract(px, size, refraction, seed, sample) {
+export function refract(px, frame, refraction, seed, sample) {
+  const { width, height, scale } = frame;
   const a = (refraction.a * Math.PI) / 180;
   const ux = Math.cos(a);
   const uy = Math.sin(a);
-  const cx = (refraction.x / 100) * size;
-  const cy = (refraction.y / 100) * size;
-  const lens = Math.max(1, (refraction.r / 100) * size);
+  const cx = (refraction.x / 100) * width;
+  const cy = (refraction.y / 100) * height;
+  const lens = Math.max(1, (refraction.r / 100) * REFERENCE_SIZE * scale);
   // Measured against the Figma export: at strength -100 each lens keeps 62% of the
   // source inside it.
   const strength = (refraction.strength / 100) * 0.38;
@@ -22,13 +37,13 @@ export function refract(px, size, refraction, seed, sample) {
   const frost = (refraction.frost / 100) * lens * 0.1;
   const rand = mulberry32(seed);
 
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
       const u = (x - cx) * ux + (y - cy) * uy;
       const f = u / lens - Math.floor(u / lens); // 0 to 1 across one lens
       const edge = smoothstep(0, soft, f) * smoothstep(0, soft, 1 - f);
       const shift = strength * (f - 0.5) * lens * edge + (rand() - 0.5) * frost;
-      const i = (y * size + x) * 4;
+      const i = (y * width + x) * 4;
       for (let c = 0; c < 3; c++) {
         const s = shift * (1 + (c - 1) * spread);
         px[i + c] = 255 * sample(x + s * ux, y + s * uy, c);
@@ -39,14 +54,15 @@ export function refract(px, size, refraction, seed, sample) {
 }
 
 // Scattered specks, like Figma's mono noise effect.
-export function drawNoise(ctx, size, noise) {
+export function drawNoise(ctx, frame, noise) {
+  const { width, height, scale } = frame;
   const [r, g, b] = hexToRgba(noise.color);
   ctx.fillStyle = `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${noise.opacity / 100})`;
   const rand = mulberry32(noise.seed);
-  const cell = Math.max(1, noise.size / 2);
+  const cell = Math.max(1, (noise.size / 2) * scale);
   const chance = (noise.density / 100) * 0.055; // tuned to match Figma's speck count
-  for (let y = 0; y < size; y += cell) {
-    for (let x = 0; x < size; x += cell) {
+  for (let y = 0; y < height; y += cell) {
+    for (let x = 0; x < width; x += cell) {
       if (rand() < chance) ctx.fillRect(x, y, cell * (0.5 + rand()), cell * (0.5 + rand()));
     }
   }
@@ -176,15 +192,18 @@ function hslToRgb(h, s, l) {
 // except the center one slides along its length by a random amount up to
 // randomOffset / 2 px either way. Softness blends neighboring strips. Like Figma, the
 // source repeats past its edges. sample(x, y, channel) returns the color, 0 to 1.
-export function sliceShift(px, size, slice, sample) {
+// Pixel values (r, randomOffset, softness) scale with the frame.
+export function sliceShift(px, frame, slice, sample) {
+  const { width: w, height: h, scale } = frame;
   const angle = (-slice.a * Math.PI) / 180;
   const cos = Math.cos(angle);
   const sin = Math.sin(angle);
-  const cx = (slice.x / 100) * size;
-  const cy = (slice.y / 100) * size;
-  const width = Math.max(Math.abs(slice.r), 0.0001);
+  const cx = (slice.x / 100) * w;
+  const cy = (slice.y / 100) * h;
+  const width = Math.max(Math.abs(slice.r) * scale, 0.0001);
   const shift = slice.shift / 100;
-  const softness = Math.min(Math.max(slice.softness, 0), width / 2);
+  const randomOffset = slice.randomOffset * scale;
+  const softness = Math.min(Math.max(slice.softness * scale, 0), width / 2);
   const normalizedSoftness = softness / width;
 
   // One strip's sample position for a rotated point (rx, ry). Returns [x, y, fraction].
@@ -193,13 +212,13 @@ export function sliceShift(px, size, slice, sample) {
     const index = Math.floor(slicePosition);
     const displacement = (figmaRandom(index, index, 0) - 0.5) * (Math.abs(slicePosition - 0.5) >= 0.5 ? 1 : 0);
     const x = rx - index * width * shift;
-    const y = ry + displacement * slice.randomOffset;
+    const y = ry + displacement * randomOffset;
     // Rotate back (inverse rotation) and move to the center.
     return [cos * x + sin * y + cx, -sin * x + cos * y + cy, slicePosition - Math.floor(slicePosition)];
   };
 
-  for (let py = 0; py < size; py++) {
-    for (let px_ = 0; px_ < size; px_++) {
+  for (let py = 0; py < h; py++) {
+    for (let px_ = 0; px_ < w; px_++) {
       const lx = px_ + 0.5 - cx;
       const ly = py + 0.5 - cy;
       const rx = cos * lx - sin * ly;
@@ -212,10 +231,10 @@ export function sliceShift(px, size, slice, sample) {
         const t = clamp((fa / (normalizedSoftness * 2)) * overlap);
         blend = t * t * (3 - 2 * t);
       }
-      const o = (py * size + px_) * 4;
+      const o = (py * w + px_) * 4;
       for (let c = 0; c < 3; c++) {
-        const colorA = sample(wrap(ax, size), wrap(ay, size), c);
-        const colorB = blend < 1 ? sample(wrap(bx, size), wrap(by, size), c) : colorA;
+        const colorA = sample(wrap(ax, w), wrap(ay, h), c);
+        const colorB = blend < 1 ? sample(wrap(bx, w), wrap(by, h), c) : colorA;
         px[o + c] = 255 * (colorB + (colorA - colorB) * blend);
       }
       px[o + 3] = 255;
@@ -255,23 +274,24 @@ function figmaRandom(a, b, c) {
 // slides each strip along its length by `shift`% of the size plus a random amount up
 // to `randomOffset` (Figma units) either way. Softness blends neighboring strips over that many px.
 // sample(x, y, channel) returns the source color, 0 to 1.
-export function meshSliceShift(px, size, slice, seed, sample) {
+export function meshSliceShift(px, frame, slice, seed, sample) {
+  const { width: w, height: h, scale } = frame;
   const a = (slice.a * Math.PI) / 180;
   const ux = Math.cos(a); // across the strips
   const uy = Math.sin(a);
   const vx = -uy; // along the strips
   const vy = ux;
-  const cx = (slice.x / 100) * size;
-  const cy = (slice.y / 100) * size;
-  const width = Math.max(1, slice.r);
-  const base = (slice.shift / 100) * size;
+  const cx = (slice.x / 100) * w;
+  const cy = (slice.y / 100) * h;
+  const width = Math.max(1, slice.r * scale);
+  const base = (slice.shift / 100) * REFERENCE_SIZE * scale;
   // The same strip always gets the same random offset.
-  const range = slice.randomOffset * FIGMA_OFFSET_TO_PX;
+  const range = slice.randomOffset * FIGMA_OFFSET_TO_PX * scale;
   const offsetOf = (i) => base + ((Math.imul(i ^ seed, 2654435761) >>> 0) / 4294967296 - 0.5) * 2 * range;
-  const soft = slice.softness;
+  const soft = slice.softness * scale;
 
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
       const u = (x - cx) * ux + (y - cy) * uy;
       const i = Math.floor(u / width);
       let offset = offsetOf(i);
@@ -281,7 +301,7 @@ export function meshSliceShift(px, size, slice, seed, sample) {
         if (d < soft / 2) offset += (offsetOf(i - 1) - offset) * (0.5 - d / soft);
         else if (width - d < soft / 2) offset += (offsetOf(i + 1) - offset) * (0.5 - (width - d) / soft);
       }
-      const o = (y * size + x) * 4;
+      const o = (y * w + x) * 4;
       for (let c = 0; c < 3; c++) px[o + c] = 255 * sample(x + offset * vx, y + offset * vy, c);
       px[o + 3] = 255;
     }
@@ -300,25 +320,26 @@ const FIGMA_OFFSET_TO_PX = 0.25;
 // palette (no cyan or green dots). Steps run from `darkest` to `lightest` (%).
 // dither = { style: "bayer16", size: px, levels, brightness: %, contrast, darkest, lightest }
 // Figma's Mono option isn't supported: every preset uses it off.
-export function dither(px, size, dither) {
+export function dither(px, frame, dither) {
+  const { width, height, scale } = frame;
   const bayer = bayerMatrix(16);
-  const cell = Math.max(1, dither.size);
+  const cell = Math.max(1, Math.round(dither.size * scale));
   const steps = Math.max(2, dither.levels) - 1;
   const lo = (dither.darkest ?? 0) / 100;
   const hi = (dither.lightest ?? 100) / 100;
-  for (let by = 0; by < size; by += cell) {
-    for (let bx = 0; bx < size; bx += cell) {
-      const cx = Math.min(size - 1, bx + (cell >> 1));
-      const cy = Math.min(size - 1, by + (cell >> 1));
-      const c = (cy * size + cx) * 4;
+  for (let by = 0; by < height; by += cell) {
+    for (let bx = 0; bx < width; bx += cell) {
+      const cx = Math.min(width - 1, bx + (cell >> 1));
+      const cy = Math.min(height - 1, by + (cell >> 1));
+      const c = (cy * width + cx) * 4;
       const [h, s, l] = rgbToHsl(px[c] / 255, px[c + 1] / 255, px[c + 2] / 255);
       const adjusted = clamp(((l * dither.brightness) / 100 - 0.5) * dither.contrast + 0.5);
       const threshold = bayer[((by / cell) % 16) * 16 + ((bx / cell) % 16)];
       const level = Math.min(steps, Math.floor(adjusted * steps + threshold)) / steps;
       const [r, g, b] = hslToRgb(h, s, lo + (hi - lo) * level);
-      for (let y = by; y < Math.min(size, by + cell); y++) {
-        for (let x = bx; x < Math.min(size, bx + cell); x++) {
-          const i = (y * size + x) * 4;
+      for (let y = by; y < Math.min(height, by + cell); y++) {
+        for (let x = bx; x < Math.min(width, bx + cell); x++) {
+          const i = (y * width + x) * 4;
           px[i] = r * 255;
           px[i + 1] = g * 255;
           px[i + 2] = b * 255;
@@ -348,16 +369,19 @@ function bayerMatrix(n) {
 }
 
 // A linear gradient between two colors ([r, g, b, a], 0 to 1), as a sample function.
-// angle is CSS style: 0 = to top, 90 = to right, 180 = to bottom. `fromStop` and
-// `toStop` are the color stops in %, like Figma's (a stop can sit past 100%).
-export function gradientSampler(from, to, angle, size, fromStop = 0, toStop = 100) {
+// angle is CSS style: 0 = to top, 90 = to right, 180 = to bottom, and like CSS the
+// gradient spans the whole frame at any shape. `fromStop` and `toStop` are the color
+// stops in %, like Figma's (a stop can sit past 100%).
+export function gradientSampler(from, to, angle, frame, fromStop = 0, toStop = 100) {
+  const { width, height } = frame;
   const g = (angle * Math.PI) / 180;
   const gx = Math.sin(g);
   const gy = -Math.cos(g);
+  const length = Math.abs(width * gx) + Math.abs(height * gy);
   const a = fromStop / 100;
   const b = toStop / 100;
   return (x, y, channel) => {
-    const along = (x / size - 0.5) * gx + (y / size - 0.5) * gy + 0.5;
+    const along = ((x - width / 2) * gx + (y - height / 2) * gy) / length + 0.5;
     const t = clamp((along - a) / (b - a));
     return from[channel] + (to[channel] - from[channel]) * t;
   };

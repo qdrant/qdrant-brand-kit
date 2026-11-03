@@ -27,18 +27,21 @@ const tokens = await loadTokens("tokens/placeholder.tokens.json");
 const patterns = await loadPatterns(); // every preset in presets/index.json
 
 // Color pattern: pick a colorway, and a family if the colorway allows one.
+// Any size and shape: here a wide banner.
 const { colorways } = choicesFor(patterns[0], tokens);
-renderPattern(canvas, tokens, patterns[0], { colorway: 0, family: "secondary" });
+renderPattern(canvas, tokens, patterns[0], { colorway: 0, family: "secondary", width: 1500, height: 500 });
 
 // Mesh pattern: make the mesh once from a library image, store it, drop the image.
 const mesh = createMesh(image, tokens, patterns[2]);
-const check = renderPattern(canvas, tokens, patterns[2], { mesh });
+const check = renderPattern(canvas, tokens, patterns[2], { mesh, width: 1080, height: 1920 });
 if (!check.pass) {
   // Off-palette: pick another image.
 }
 ```
 
-- Patterns render at **1080 × 1080** on a canvas. Use `canvas.toBlob()` to export.
+- **Any size, any shape.** Pass `width` and `height` in px (1080 × 1080 when left out): a square post, a 9:16 story, a 10:1 banner or a 4K poster. Use `canvas.toBlob()` to export.
+- **The look stays the same at every format.** Preset values are written for 1080 × 1080 and scale with the canvas area: strip and band widths, noise grain and dither cells. Positions and angles are relative to the canvas, and gradients span the whole frame, like CSS.
+- **Meshes cover the frame** like `object-fit: cover`, stretching at most 2× first, so shapes never look squashed and banners still show plenty of color.
 - A mesh belongs to a `meshGroup`, not to one pattern. All Mesh-Refracted and Mesh-Sliced patterns share `mesh-pattern` meshes, and Mesh-Dithered uses `mesh-dithered-pattern`. One mesh per image per group.
 - **Library images** for meshes: design-approved, Default (space) moodboard, asset type image, nothing with the mascot or a robot in the prompt, never Luma. The rule is written in `mesh-pattern.shared.json` (`source`). Someone should still look at a new image before it's used: a prompt doesn't always mention everything in the picture.
 
@@ -72,7 +75,7 @@ The validator fails on anything that can't render, like a missing recipe, token 
 
 ## Preview
 
-Serve the folder with any static server, then open `index.html` (one pattern at a time) or `sheet.html` (every Mesh pattern on every example mesh, with its brand check):
+Serve the folder with any static server, then open `index.html` (one pattern at a time, at any size), `formats.html` (every pattern in six formats, from a square to a 10:1 banner) or `sheet.html` (every Mesh pattern on every example mesh, with its brand check):
 
 ```bash
 python3 -m http.server 5190
@@ -93,7 +96,6 @@ python3 -m http.server 5190
 
 ## Known limits
 
-- **Square only.** Patterns render at 1080 × 1080. Other formats (4:5, 16:9) need the recipes to take a width and a height.
 - **Browser only.** Rendering and `createMesh` use a canvas, so they run in a browser. A server would need a canvas library.
 - **Refraction and dither are tuned by eye**, not ported from Figma's shader code like Slice shift. They match the Figma frames closely, but not bit for bit.
-- **Not fast.** Each pattern draws pixel by pixel in JavaScript: fine for exporting, too slow for live sliders. A WebGL version would fix that.
+- **Not fast.** Each pattern draws pixel by pixel in JavaScript: about 0.1 to 0.6 s for social formats and up to about 4.5 s for 4000 × 4000. Fine for exporting, too slow for live sliders. A WebGL version would fix that.

@@ -11,7 +11,7 @@
     /* Everything fits the window: the pattern is as big as the space allows, never bigger. */
     main { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 16px; padding: 16px; height: 100vh; }
     figure { margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; min-height: 0; }
-    figure canvas { width: min(100%, calc(100vh - 72px)); height: auto; aspect-ratio: 1; display: block; border-radius: 8px; }
+    figure canvas { max-width: 100%; max-height: calc(100vh - 72px); width: auto; height: auto; display: block; border-radius: 8px; }
     figcaption { color: var(--muted); margin-top: 8px; }
     figcaption a { color: #b3b8ff; }
     aside { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; overflow: auto; min-height: 0; }
@@ -27,7 +27,9 @@
     .check.pass { background: #0f3d2e; color: #7ee2b8; }
     .check.fail { background: #4a1220; color: #ff8792; }
     button { margin-top: 16px; width: 100%; padding: 10px; border: 0; border-radius: 6px; background: #6047ff; color: #fff; font: inherit; cursor: pointer; }
-    @media (max-width: 900px) { body { height: auto; overflow: auto; } main { grid-template-columns: 1fr; height: auto; } figure canvas { width: 100%; } }
+    .size { display: grid; grid-template-columns: 1fr auto 1fr; gap: 6px; align-items: center; margin-top: 8px; color: var(--muted); }
+    .size input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; }
+    @media (max-width: 900px) { body { height: auto; overflow: auto; } main { grid-template-columns: 1fr; height: auto; } figure canvas { max-height: none; } }
   </style>
 </head>
 <body>
@@ -39,6 +41,13 @@
     <aside id="panel">
       <h2>Pattern</h2>
       <select id="preset"></select>
+      <h2>Size</h2>
+      <select id="format"></select>
+      <div class="size">
+        <input id="width" type="number" min="1" max="8000" value="1080" aria-label="Width in px" />
+        <span>×</span>
+        <input id="height" type="number" min="1" max="8000" value="1080" aria-label="Height in px" />
+      </div>
       <h2 id="option-label">Colorway</h2>
       <select id="colorway"></select>
       <div id="family-row">
@@ -67,6 +76,22 @@
     const familyRow = document.getElementById("family-row");
     presets.forEach((preset, i) => presetSelect.add(new Option(preset.name, i)));
 
+    // Any size works. These are shortcuts; type any width and height.
+    const formats = [
+      ["Square", 1080, 1080],
+      ["Portrait 4:5", 1080, 1350],
+      ["Story 9:16", 1080, 1920],
+      ["Landscape 16:9", 1920, 1080],
+      ["Wide banner 3:1", 1500, 500],
+      ["Thin banner 10:1", 3000, 300],
+      ["Custom", null, null],
+    ];
+    const formatSelect = document.getElementById("format");
+    const widthInput = document.getElementById("width");
+    const heightInput = document.getElementById("height");
+    formats.forEach(([name, w, h], i) => formatSelect.add(new Option(w ? `${name} · ${w} × ${h}` : name, i)));
+    const size = () => ({ width: Math.max(1, Number(widthInput.value) || 1080), height: Math.max(1, Number(heightInput.value) || 1080) });
+
     let preset, mesh;
     const swatch = (ref) => {
       const hex = resolveToken(tokens, ref);
@@ -75,7 +100,7 @@
 
     const draw = () => {
       if (isMeshPattern(preset)) {
-        const check = renderPattern(canvas, tokens, preset, { mesh });
+        const check = renderPattern(canvas, tokens, preset, { mesh, ...size() });
         document.getElementById("tokens").innerHTML =
           preset.settings.grade.anchors.map(swatch).join("") +
           `<p class="check ${check.pass ? "pass" : "fail"}">Brand check: ${check.pass ? "Pass" : "Fail"} · ${check.offBrand}% off-palette</p>`;
@@ -83,7 +108,7 @@
       }
       const colorway = Number(colorwaySelect.value);
       const family = familyRow.hidden ? undefined : familySelect.value;
-      renderPattern(canvas, tokens, preset, { colorway, family });
+      renderPattern(canvas, tokens, preset, { colorway, family, ...size() });
       document.getElementById("tokens").innerHTML = Object.values(colorwayTokens(preset.colorways[colorway], family)).map(swatch).join("");
     };
 
@@ -119,10 +144,23 @@
     presetSelect.addEventListener("change", choosePreset);
     colorwaySelect.addEventListener("change", chooseOption);
     familySelect.addEventListener("change", draw);
+    formatSelect.addEventListener("change", () => {
+      const [, w, h] = formats[formatSelect.value];
+      if (!w) return;
+      widthInput.value = w;
+      heightInput.value = h;
+      draw();
+    });
+    for (const input of [widthInput, heightInput]) {
+      input.addEventListener("change", () => {
+        formatSelect.value = formats.length - 1; // Custom
+        draw();
+      });
+    }
 
     document.getElementById("download").addEventListener("click", () => {
       const link = document.createElement("a");
-      const parts = [preset.name, colorwaySelect.selectedOptions[0].text];
+      const parts = [preset.name, colorwaySelect.selectedOptions[0].text, `${canvas.width}x${canvas.height}`];
       if (!familyRow.hidden) parts.push(familySelect.value);
       link.download = `${parts.join(" - ")}.png`;
       link.href = canvas.toDataURL("image/png");

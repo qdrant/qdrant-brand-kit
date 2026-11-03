@@ -50,9 +50,11 @@ export function imageToMesh(image, tokens, settings) {
   return { size: n, colors };
 }
 
-// A source is a mesh (has colors) or an image (made into a mesh first).
+// A source is a mesh (has colors) or an image (made into a mesh first). The mesh
+// covers the frame like CSS object-fit: cover, stretching at most 2x, so shapes keep
+// their proportions at any format and banners still show plenty of color.
 // Returns { sample(x, y, channel) -> 0 to 1, anchors: brand hex colors, palette: tokens }.
-export function prepareImage(source, tokens, settings) {
+export function prepareImage(source, tokens, settings, frame = { width: settings.size, height: settings.size }) {
   const anchors = settings.grade.anchors.map((ref) => resolveToken(tokens, ref));
   const mesh = source.colors ? source : imageToMesh(source, tokens, settings);
   const grid = new Float32Array(mesh.size * mesh.size * 4);
@@ -63,7 +65,7 @@ export function prepareImage(source, tokens, settings) {
     grid[g * 4 + 2] = b * 255;
   });
   const palette = paletteTokens(tokens, settings.mesh.palette);
-  return { sample: smoothSampler(grid, mesh.size, settings.size), anchors, palette };
+  return { sample: smoothSampler(grid, mesh.size, frame.width, frame.height), anchors, palette };
 }
 
 // Box-average the image down to an n x n grid of RGBA floats (0 to 255).
@@ -112,12 +114,22 @@ function blurGrid(grid, n, sigma) {
 
 // Reads the grid at full size with cubic B-spline weights: smooth everywhere, no
 // overshoot, no visible grid. Edge wrap "Zero": outside, keep the nearest edge.
-function smoothSampler(grid, n, size) {
+function smoothSampler(grid, n, width, height) {
+  // Cover the frame like CSS object-fit: cover, but let the mesh stretch up to
+  // MAX_MESH_STRETCH first, so very wide or tall frames still show plenty of color
+  // without visibly squashing the shapes.
+  const long = Math.max(width, height);
+  const short = Math.min(width, height);
+  const stretch = Math.min(long / short, MAX_MESH_STRETCH);
+  const spanX = width >= height ? width : width * stretch; // mesh size on screen, x
+  const spanY = width >= height ? height * stretch : height; // mesh size on screen, y
+  const offsetX = (spanX - width) / 2;
+  const offsetY = (spanY - height) / 2;
   const bspline = (t) => [(1 - t) ** 3 / 6, (3 * t ** 3 - 6 * t ** 2 + 4) / 6, (-3 * t ** 3 + 3 * t ** 2 + 3 * t + 1) / 6, t ** 3 / 6];
   const at = (gx, gy, c) => grid[(Math.min(n - 1, Math.max(0, gy)) * n + Math.min(n - 1, Math.max(0, gx))) * 4 + c];
   return (x, y, c) => {
-    const fx = (x / size) * n - 0.5;
-    const fy = (y / size) * n - 0.5;
+    const fx = ((x + offsetX) / spanX) * n - 0.5;
+    const fy = ((y + offsetY) / spanY) * n - 0.5;
     const ix = Math.floor(fx);
     const iy = Math.floor(fy);
     const wx = bspline(fx - ix);
@@ -133,3 +145,6 @@ const FIGMA_BLUR_TO_CSS = 0.12;
 
 // How many grid cells per blur radius. Fewer cells = bigger, softer shapes.
 const GRID_PER_BLUR = 1.2;
+
+// How much a mesh may stretch to fill a wide or tall frame before it's cropped.
+const MAX_MESH_STRETCH = 2;

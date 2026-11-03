@@ -5,8 +5,9 @@
 //   const tokens = await loadTokens("tokens/placeholder.tokens.json");
 //   const patterns = await loadPatterns();             // every preset in presets/index.json
 //
-//   // A color pattern: pick a colorway (and a family if the colorway has {family}).
-//   renderPattern(canvas, tokens, patterns[0], { colorway: 0, family: "secondary" });
+//   // A color pattern: pick a colorway (and a family if the colorway has {family}),
+//   // at any size: here a wide banner.
+//   renderPattern(canvas, tokens, patterns[0], { colorway: 0, family: "secondary", width: 1500, height: 500 });
 //
 //   // A mesh pattern: make the mesh once from a library image, keep only the mesh.
 //   const mesh = createMesh(image, tokens, patterns[2]);
@@ -23,6 +24,7 @@ import * as meshDithered from "./mesh-dithered-pattern.js";
 import { colorwayTokens, familiesFor } from "./tokens.js";
 import { imageToMesh } from "./mesh-source.js";
 import { loadAllPresets, loadPreset } from "./presets.js";
+import { makeFrame } from "./effects.js";
 
 export { loadTokens, resolveToken } from "./tokens.js";
 export { loadPreset };
@@ -56,19 +58,24 @@ export function choicesFor(preset, tokens) {
   };
 }
 
-// Draws a pattern on a canvas at preset.settings.size (1080 x 1080).
+// Draws a pattern on a canvas at any size and shape: { width, height } in px,
+// 1080 x 1080 when left out. A wide banner, a tall story or a 4K poster all work.
 // options: { colorway: index, family } for color patterns, { mesh } for mesh patterns.
 // Mesh patterns return the brand check: { pass, offBrand: % of off-palette pixels }.
 export function renderPattern(canvas, tokens, preset, options = {}) {
   const recipe = recipes[preset.recipe];
   if (!recipe) throw new Error(`Unknown recipe "${preset.recipe}" in ${preset.name}`);
+  const width = Math.round(options.width ?? 1080);
+  const height = Math.round(options.height ?? 1080);
+  if (!(width >= 1 && height >= 1)) throw new Error(`Width and height must be at least 1 px, got ${width} x ${height}`);
+  const frame = makeFrame(width, height);
   if (isMeshPattern(preset)) {
     if (!options.mesh) throw new Error(`${preset.name} needs a mesh: createMesh(image, tokens, preset)`);
-    return recipe.render(canvas, tokens, preset, options.mesh);
+    return recipe.render(canvas, tokens, preset, options.mesh, frame);
   }
   const colorway = preset.colorways[options.colorway ?? 0];
   const family = options.family ?? colorway.defaultFamily;
-  return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family));
+  return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame);
 }
 
 // Turns a library image into a mesh for a mesh pattern: an 11 x 11 grid of brand
