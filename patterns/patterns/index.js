@@ -89,6 +89,25 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
   return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame);
 }
 
+// Generative patterns that draw letters need their fonts loaded first, or the browser
+// draws them in a fallback font. Call once before rendering; it adds the brand fonts
+// from Google Fonts (as Pattern Studio's export does) and waits for them.
+const FONTS_URL = "https://fonts.googleapis.com/css2?family=Mona+Sans:wght@800&family=Geist+Mono:wght@500&display=swap";
+export async function loadPatternFonts(patterns) {
+  const needed = patterns.filter((p) => isGenerativePattern(p) && (p.settings.engine.element === "ascii" || p.settings.engine.shape === "text"));
+  if (!needed.length) return;
+  if (!document.querySelector(`link[href="${FONTS_URL}"]`)) {
+    const link = Object.assign(document.createElement("link"), { rel: "stylesheet", href: FONTS_URL });
+    const loaded = new Promise((resolve) => (link.onload = link.onerror = resolve));
+    document.head.append(link);
+    await loaded;
+  }
+  await Promise.all(needed.flatMap(({ settings: { engine } }) => [
+    document.fonts.load(`500 32px ${engine.glyphFont}`),
+    document.fonts.load(`800 200px ${engine.textFont}`),
+  ]));
+}
+
 // Turns a library image into a mesh for a mesh pattern: an 11 x 11 grid of brand
 // color tokens. Store the result (about 3.5 KB of JSON) and drop the image. Meshes
 // are shared by every pattern with the same meshGroup.

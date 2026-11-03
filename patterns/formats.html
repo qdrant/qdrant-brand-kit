@@ -23,7 +23,7 @@
   <div id="sheet"></div>
 
   <script type="module">
-    import { loadTokens, loadPatterns, isMeshPattern, renderPattern } from "./patterns/index.js";
+    import { loadTokens, loadPatterns, isMeshPattern, renderPattern, loadPatternFonts } from "./patterns/index.js";
 
     // Real output sizes, shown scaled down.
     const formats = [
@@ -37,6 +37,7 @@
 
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
     const patterns = await loadPatterns();
+    await loadPatternFonts(patterns);
     const sheet = document.getElementById("sheet");
     let done = 0;
     let passed = 0;

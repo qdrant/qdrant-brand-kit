@@ -88,6 +88,8 @@ Patterns made in Pattern Studio (`Desktop/Tools/qdrant-pattern-studio`) are adde
 
 At its `designSize`, the pattern is pixel-identical to the tool. At any other size, the field and the elements keep their scale by canvas area, so nothing stretches: a wider canvas shows more of the same field. `cellScaling` sets what the elements do on bigger canvases: `"canvas"` (they grow with it, like every other pattern) or `"fixed"` (they keep their px size, so there are more of them). `generative-scaling.html` shows both side by side.
 
+**Letters need fonts:** patterns that draw letters (Glyph) use Geist Mono. Call `await loadPatternFonts(patterns)` once before rendering, or the browser draws them in a fallback font.
+
 **Static for now, ready to animate:** the engine draws one moment of the tool's loop, at `settings.phase`. To animate, call `renderPattern(canvas, tokens, preset, { phase, width, height })` on every frame with `phase` going from 0 to 2π.
 
 If Pattern Studio's engine changes, compile `src/pattern/pattern-engine.ts` again with esbuild and re-apply the two small additions marked `patterns:` in `generative-engine.js`.
@@ -143,6 +145,7 @@ python3 -m http.server 5190
 | Generative-Burst-Pattern-A | Dark violet, Medium violet, Light violet, Red | Pattern Studio export | 1,100 short lines bursting out from the center. Pixel-identical to the tool at 1620 × 1080 (Medium violet within 2/255: the tool's #090E1A isn't a token, so it uses neutral.950) |
 | Generative-Dash-Pattern-A | Fixed: secondary 800, 500, 200 on dark violet | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Dash-Pattern-B | Fixed: primary 800, 500, 300 on red | Pattern Studio export | Like Dash-A, on a finer 48 px grid with 40 px padding. Pixel-identical to the tool at 1620 × 1080 |
+| Generative-Glyph-Pattern-A | Dark violet, Red | Pattern Studio export | Letters of QDRANT in Geist Mono on a 32 px grid, in soft noisy patches. Pixel-identical to the tool at 1620 × 1080. Needs `loadPatternFonts` first |
 | Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Bayer 16×16, darker grade, no noise. Dithers lightness only |
 
 ## Known limits
