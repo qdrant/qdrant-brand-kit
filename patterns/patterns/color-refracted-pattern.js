@@ -5,7 +5,7 @@
 // token names, never hex.
 
 import { resolveToken, hexToRgba } from "./tokens.js";
-import { refract, drawNoise, clamp } from "./effects.js";
+import { refract, drawNoise, gradientSampler } from "./effects.js";
 
 // color = { from, to } token references, from colorwayTokens() in tokens.js.
 export function render(canvas, tokens, preset, color) {
@@ -17,14 +17,7 @@ export function render(canvas, tokens, preset, color) {
   const from = hexToRgba(resolveToken(tokens, color.from));
   const to = hexToRgba(resolveToken(tokens, color.to));
 
-  // Gradient direction, CSS style: 0 = to top, 90 = to right, 180 = to bottom.
-  const g = (gradient.angle * Math.PI) / 180;
-  const gx = Math.sin(g);
-  const gy = -Math.cos(g);
-  const gradientAt = (x, y, channel) => {
-    const t = clamp((x / size - 0.5) * gx + (y / size - 0.5) * gy + 0.5);
-    return from[channel] + (to[channel] - from[channel]) * t;
-  };
+  const gradientAt = gradientSampler(from, to, gradient.angle, size);
 
   refract(image.data, size, refraction, noise.seed + 1, gradientAt);
   ctx.putImageData(image, 0, 0);
