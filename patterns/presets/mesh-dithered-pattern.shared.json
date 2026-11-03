@@ -1,8 +1,9 @@
 {
-  "$description": "Shared by every Mesh-Dithered-Pattern preset. Same blur and source rule as the other image patterns, but a darker, more saturated grade and no noise.",
+  "$description": "Shared by every Mesh-Dithered-Pattern preset. Same blur and source rule as the other mesh patterns, but a darker, more saturated grade and no noise: the dither is the texture.",
   "extends": "mesh-pattern.shared",
   "meshGroup": "mesh-dithered-pattern",
   "settings": {
+    "noise": null,
     "grade": {
       "anchors": [
         "{color.primary.500}",

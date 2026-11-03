@@ -10,8 +10,6 @@
       "levels": 4,
       "brightness": 100,
       "contrast": 1.24,
-      "mono": false,
-      "monoColor": "{color.secondary.500}",
       "darkest": 8,
       "lightest": 96
     }

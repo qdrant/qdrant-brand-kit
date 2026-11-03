@@ -27,9 +27,10 @@ export function colorwayTokens(colorway, family) {
   return { from: ref(colorway.from), to: ref(colorway.to) };
 }
 
-// The families that have every step a colorway needs.
+// The families that have every step a colorway needs, limited to the colorway's own
+// `families` list when it has one (so neutral can't make a gray gradient).
 export function familiesFor(tokens, colorway) {
-  return Object.keys(tokens.color).filter((family) =>
+  return (colorway.families ?? Object.keys(tokens.color)).filter((family) =>
     [colorway.from, colorway.to].every((path) => {
       const steps = path.replace("{family}", family).split(".").slice(1);
       return steps.reduce((node, key) => node?.[key], tokens.color)?.$value !== undefined;

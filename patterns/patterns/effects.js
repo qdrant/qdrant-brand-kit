@@ -3,7 +3,8 @@
 import { hexToRgba, nearestTokenWithDistance } from "./tokens.js";
 
 // Lenticular refraction. Lenses run across the image along angle A, and each lens
-// shifts what's behind it. sample(x, y, channel) returns the source color, 0 to 1.
+// shifts what's behind it. Like Figma's edge wrap "Zero", sources keep their edge
+// color past the border. sample(x, y, channel) returns the source color, 0 to 1.
 export function refract(px, size, refraction, seed, sample) {
   const a = (refraction.a * Math.PI) / 180;
   const ux = Math.cos(a);
@@ -51,7 +52,7 @@ export function drawNoise(ctx, size, noise) {
   }
 }
 
-export const clamp = (v) => Math.min(1, Math.max(0, v));
+const clamp = (v) => Math.min(1, Math.max(0, v));
 
 function smoothstep(a, b, v) {
   const t = clamp((v - a) / (b - a));
@@ -298,6 +299,7 @@ const FIGMA_OFFSET_TO_PX = 0.25;
 // lightness is dithered: hue and saturation stay, so the colors can't leave the brand
 // palette (no cyan or green dots). Steps run from `darkest` to `lightest` (%).
 // dither = { style: "bayer16", size: px, levels, brightness: %, contrast, darkest, lightest }
+// Figma's Mono option isn't supported: every preset uses it off.
 export function dither(px, size, dither) {
   const bayer = bayerMatrix(16);
   const cell = Math.max(1, dither.size);

@@ -1,35 +1,99 @@
 # Qdrant Pattern Primitives
 
-Brand patterns built in code, so they can live in Design Lab as primitives.
+Brand patterns written as code, ready to live in Design Lab as primitives. No images: every pattern is drawn from color tokens and small settings files, so it stays on-brand and updates when the tokens change.
 
-- `tokens/placeholder.tokens.json`: color tokens in W3C format: full primary, secondary and neutral scales from the qdrant-brand skill. The values are placeholders until Juan's design system is ready. Keep the names.
-- `patterns/`: recipes. A recipe is a set of effects, for example Color-Refracted-Pattern (gradient + refraction + noise), Color-Sliced-Pattern (gradient + slice shift + noise) Mesh-Refracted-Pattern (library image + blur + refraction + noise) Mesh-Sliced-Pattern (library image + blur + slice shift + noise) or Mesh-Dithered-Pattern (library image + blur + Bayer dither, no noise). The image steps they share live in `patterns/mesh-source.js`.
-- `meshes/`: mesh gradients, written as code. Image patterns don't use the PNG. The library image is graded, blurred and turned into an 11 x 11 grid of points, and each point is a **brand color token** like `{color.secondary.700}`: the code reads the color there and picks the closest token (OKLab distance) from the mesh palette in `mesh-pattern.shared.json`. That palette is primary, secondary, white and neutral.950. No mid neutrals, so no grays. About 3.5 KB of JSON per mesh, and when Juan's token values land, every mesh follows. In the tool, the mesh is made once when an image is picked; the PNG isn't kept. Each image has one mesh per look (`meshGroup`): `mesh-pattern` (light) and `mesh-dithered-pattern` (dark).
-- `presets/`: the patterns themselves. Every preset extends `shared.json`, which holds the noise (40%, the same for all patterns). Image presets also extend `mesh-pattern.shared.json`, which holds what never changes between them: blur, brand grade, contrast and the list of source images. Each image preset only holds its effect values (refraction or slice shift).
-- Presets: A preset is a recipe with fixed effect values, named after its recipe and a letter: Color-Refracted-Pattern-A, B and so on. Add new ones to `presets/index.json`.
-- Colorways: the color pairs a preset can use, listed inside the preset. A colorway is two token paths. `{family}` in a path means it works with any family, for example `color.{family}.500 → color.{family}.300`. Fixed pairs, like `color.primary.100 → color.secondary.400`, mix families. New colors mean a new colorway, not a new preset.
-- Source images: a placeholder. In the tool, the source is picked from the [Design Lab library](https://qdrant-design-lab.vercel.app/library) by the `source` rule in `mesh-pattern.shared.json`: asset type image, design-approved, Default (space) moodboard, and no mascot or robot in the prompt. Never Luma images. The test examples are kept only as meshes, with a link back to the library image.
-- `sheet.html`: contact sheet with every image preset on every example image, with its brand check.
-- `index.html`: preview page with each pattern, a link to its Figma frame, and a colorway or source picker.
+## How it fits together
 
-## Run the preview
+| Piece | What it is | Where |
+| --- | --- | --- |
+| **Tokens** | Brand colors in W3C format. Placeholders until Juan's design system lands. Keep the names, swap the values. | `tokens/placeholder.tokens.json` |
+| **Recipe** | A set of effects, as code. One file per recipe. | `patterns/<recipe>.js` |
+| **Preset** | A pattern: a recipe plus fixed values from Figma. Named `<Source>-<Effect>-Pattern-<Letter>`. | `presets/<name>.json` |
+| **Shared settings** | Values every pattern of a kind uses. Change once, all update. | `presets/shared.json`, `presets/mesh-pattern.shared.json`, `presets/mesh-dithered-pattern.shared.json` |
+| **Colorway** | For Color patterns: the two tokens of the gradient, listed in the preset. | inside the preset |
+| **Mesh** | For Mesh patterns: an 11 × 11 grid of brand tokens made from a library image. About 3.5 KB. | `meshes/<image>.<meshGroup>.json` |
+| **Effects** | Refraction, slice shift, dither, noise, brand grade and check. Shared by all recipes. | `patterns/effects.js` |
 
-Serve the folder with any static server and open `index.html`, for example:
+**Color patterns** take a colorway. **Mesh patterns** take a mesh, made once from a library image. The image itself is never kept.
+
+## Using it in a tool
+
+Everything goes through one file, `patterns/index.js`:
+
+```js
+import { loadTokens, loadPatterns, choicesFor, renderPattern, createMesh } from "./patterns/index.js";
+
+const tokens = await loadTokens("tokens/placeholder.tokens.json");
+const patterns = await loadPatterns(); // every preset in presets/index.json
+
+// Color pattern: pick a colorway, and a family if the colorway allows one.
+const { colorways } = choicesFor(patterns[0], tokens);
+renderPattern(canvas, tokens, patterns[0], { colorway: 0, family: "secondary" });
+
+// Mesh pattern: make the mesh once from a library image, store it, drop the image.
+const mesh = createMesh(image, tokens, patterns[2]);
+const check = renderPattern(canvas, tokens, patterns[2], { mesh });
+if (!check.pass) {
+  // Off-palette: pick another image.
+}
+```
+
+- Patterns render at **1080 × 1080** on a canvas. Use `canvas.toBlob()` to export.
+- A mesh belongs to a `meshGroup`, not to one pattern. All Mesh-Refracted and Mesh-Sliced patterns share `mesh-pattern` meshes, and Mesh-Dithered uses `mesh-dithered-pattern`. One mesh per image per group.
+- **Library images** for meshes: design-approved, Default (space) moodboard, asset type image, nothing with the mascot or a robot in the prompt, never Luma. The rule is written in `mesh-pattern.shared.json` (`source`). Someone should still look at a new image before it's used: a prompt doesn't always mention everything in the picture.
+
+## Adding or changing a pattern
+
+| You want to… | Do this |
+| --- | --- |
+| Use **new colors** on an existing Color pattern | Add a colorway to its preset. Not a new pattern. |
+| Use a **new library image** on Mesh patterns | Make a mesh with `createMesh` and store it. Not a new pattern. |
+| Use **the same effects with new values** | Copy a preset, give it the next letter (B, C…), change the values, add it to `presets/index.json`. |
+| Use **a new effect** | Add the effect to `effects.js`, write a recipe in `patterns/`, register it in `patterns/index.js`, then add a preset. |
+| Change **blur, grade, contrast or noise** for all | Edit the shared preset file. Every pattern that extends it updates. Mesh files need to be made again after a grade, blur or contrast change. |
+| Change **token values** | Edit the tokens file. Patterns and meshes follow on their own. |
+
+Then run the checks and look at the result:
+
+```bash
+node scripts/validate.mjs
+```
+
+The validator fails on anything that can't render, like a missing recipe, token or mesh, and warns about values off the 8 grid.
+
+### Rules
+
+- Colors are always **token names**, never hex.
+- **No grays.** Meshes only use primary, secondary, white and neutral.950.
+- Effect values sit on the **8 grid**, except an exact horizontal (90°) and gradient stops copied from Figma.
+- A new letter only when **effect values** change. New colors or images aren't new patterns.
+- When porting a Figma effect, read its shader code with the Figma MCP `get_design_context` tool. Don't guess from screenshots.
+- Don't change the look of an approved pattern while adding a new one. If an effect has to change, give the new pattern its own version.
+
+## Preview
+
+Serve the folder with any static server, then open `index.html` (one pattern at a time) or `sheet.html` (every Mesh pattern on every example mesh, with its brand check):
 
 ```bash
 python3 -m http.server 5190
 ```
 
-## Patterns
+## Patterns (V1)
 
-| Preset | Colorway | Figma | Status |
+| Pattern | Choices | Figma | Notes |
 | --- | --- | --- | --- |
-| Color-Refracted-Pattern-A | One family, 500 → 300 | [Luma-Background-10](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546) | Done |
-| Color-Refracted-Pattern-A | Primary 100 → Secondary 400 | [Luma-Background-10](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-23406) | Done |
-| Mesh-Refracted-Pattern-A | Any library image | [Luma-Background-9](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574) | Done. Tested with 2 library images |
-| Mesh-Refracted-Pattern-B | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50585) | Done. Smoothness 100%, angle -48° |
-| Mesh-Refracted-Pattern-C | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50609) | Done. Dispersion 56%, R 16%, angle 90° (rounded to the 8 grid) |
-| Mesh-Refracted-Pattern-D | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50612) | Done. Dispersion 88%, X 40%, R 16%, angle 144° (8 grid) |
-| Mesh-Sliced-Pattern-A | Any library image | [Luma frame 20713:50540](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50540) | Done. Slice shift: shift 0%, softness 0, random offset 500, R 24 (8 grid), angle -120° |
-| Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Done. Bayer 16x16, size 4, 4 levels, contrast 1.24, darker grade, no noise. Dithers lightness only, so no cyan or green dots |
-| Color-Sliced-Pattern-A | Neutral 950 → Primary 500, Neutral 950 → Secondary 500 | [Frame 20943:36252](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252) | Done. Exact port of Figma's Slice shift shader: shift 200%, softness 0, random offset 500, R 80, angle -160°. Gradient stop at 130.68%. No noise |
+| Color-Refracted-Pattern-A | Any family 500 → 300, or Primary 100 → Secondary 400 | [Luma-Background-10](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546) | Refraction tuned by eye against Figma |
+| Color-Sliced-Pattern-A | Neutral 950 → Primary 500, or Neutral 950 → Secondary 500 | [Frame 20943:36252](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252) | Exact port of Figma's Slice shift shader. No noise |
+| Mesh-Refracted-Pattern-A | Any library image | [Luma-Background-9](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574) | Smoothness 72%, angle -120° |
+| Mesh-Refracted-Pattern-B | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50585) | Smoothness 88%, angle -48° |
+| Mesh-Refracted-Pattern-C | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50609) | Horizontal bands: dispersion 56%, R 16%, angle 90° |
+| Mesh-Refracted-Pattern-D | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50612) | Dispersion 88%, X 40%, R 16%, angle 144° |
+| Mesh-Sliced-Pattern-A | Any library image | [Frame 20713:50540](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50540) | Approved slice shift (tuned by eye) |
+| Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Bayer 16×16, darker grade, no noise. Dithers lightness only |
+
+## Known limits
+
+- **Square only.** Patterns render at 1080 × 1080. Other formats (4:5, 16:9) need the recipes to take a width and a height.
+- **Browser only.** Rendering and `createMesh` use a canvas, so they run in a browser. A server would need a canvas library.
+- **Refraction and dither are tuned by eye**, not ported from Figma's shader code like Slice shift. They match the Figma frames closely, but not bit for bit.
+- **Not fast.** Each pattern draws pixel by pixel in JavaScript: fine for exporting, too slow for live sliders. A WebGL version would fix that.

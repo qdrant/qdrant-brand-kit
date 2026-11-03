@@ -29,14 +29,12 @@
 
   <script type="module">
     import { loadTokens } from "./patterns/tokens.js";
-    import { loadAllPresets } from "./patterns/presets.js";
+    import { loadPatterns, isMeshPattern, renderPattern } from "./patterns/index.js";
     import { prepareImage } from "./patterns/mesh-source.js";
 
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
-    const presets = (await loadAllPresets()).filter((p) => p.examples);
+    const presets = (await loadPatterns()).filter(isMeshPattern);
     const examples = presets[0].examples;
-    const recipes = {};
-    for (const p of presets) recipes[p.recipe] ??= await import(`./patterns/${p.recipe}.js`);
 
     const table = document.getElementById("sheet");
     table.innerHTML = `<tr><th></th>${presets.map((p) => `<th>${p.name}</th>`).join("")}</tr>`;
@@ -60,12 +58,12 @@
       mctx.putImageData(mimg, 0, 0);
       for (const preset of presets) {
         // Patterns render from the example's mesh gradient, not the PNG.
-        const image = await fetch(`meshes/${example.id}.${preset.meshGroup}.json`).then((r) => r.json());
+        const mesh = await fetch(`meshes/${example.id}.${preset.meshGroup}.json`).then((r) => r.json());
         const cell = row.insertCell();
         const canvas = document.createElement("canvas");
         cell.append(canvas);
         await new Promise((r) => setTimeout(r)); // let the page paint between renders
-        const check = recipes[preset.recipe].render(canvas, tokens, preset, image);
+        const check = renderPattern(canvas, tokens, preset, { mesh });
         passed += check.pass;
         cell.insertAdjacentHTML("beforeend", `<div class="check ${check.pass ? "pass" : "fail"}">${check.pass ? "Pass" : "Fail"} · ${check.offBrand}% off-palette</div>`);
         document.getElementById("status").textContent = `Rendering ${++done} of ${total}…`;
