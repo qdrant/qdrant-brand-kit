@@ -1,12 +1,12 @@
 {
   "name": "qbot-mascot-mode",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "export-refs": "node scripts/export-references.mjs",
     "prompt": "node scripts/build-prompt.mjs",
-    "composite": "node scripts/composite.mjs",
+    "finish": "node scripts/finish.mjs",
     "generate": "node scripts/generate.mjs"
   },
   "dependencies": {

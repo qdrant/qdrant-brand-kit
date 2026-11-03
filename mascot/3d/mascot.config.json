@@ -1,17 +1,25 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "style": "3d",
+  "style_label": "Qbot 3D",
   "model": {
     "image": "gpt-image-2.5-sunburst",
     "endpoint": "images/edits",
-    "options_per_run": 3,
+    "options_per_run": 1,
     "max_tweak_rounds": 3
+  },
+
+  "rules": {
+    "output": "transparent PNG only, never on a gradient or background",
+    "library_first": true,
+    "never_mix_styles": "Never send 2D Qbot references in a 3D request, or 3D references in a 2D request",
+    "never_with_realistic_imagery": true
   },
 
   "figma": {
     "file_key": "8y0svqBDPZX6caRNF6lddG",
     "master_node": "20808:18496",
-    "poses_component_set": "20774:17744",
-    "backdrop_node": "18887:33975"
+    "poses_component_set": "20774:17744"
   },
 
   "locked_character": [
@@ -64,10 +72,10 @@
     "transparent": "Fully transparent background, no floor, no shadow, no glow",
     "fallback_grey": "Plain flat solid #8A8A8A grey background, no gradient, no floor, no shadow"
   },
-  "background_strategy": "decide_after_test",
+  "background_strategy": "Native transparent first; fall back to flat grey + BiRefNet cut-out if edges are messy (decided by the feasibility test)",
 
   "references": {
-    "_note": "Paths are filled by scripts/export-references.mjs. Image hashes are the original transparent PNG fills in Figma (no glow effects).",
+    "_note": "Original transparent PNG fills from Figma (no glow effects), matched by image hash. scripts/export-references.mjs re-pulls them if Figma changes.",
     "master":   { "path": "references/master.png",   "node": "20808:18496", "hash": "d7e9dc09fc4e564c291875c93b87d7b00fd92359", "pose": "standing front" },
     "happy":    { "path": "references/happy.png",    "node": "20774:17772", "hash": "d7e9dc09fc4e564c291875c93b87d7b00fd92359", "pose": "standing front" },
     "focused":  { "path": "references/focused.png",  "node": "20774:17770", "hash": "7593ca3b0831ce7b3d6f59c16f11dd34aa958e5a", "pose": "sitting with laptop" },
@@ -86,39 +94,10 @@
   },
   "reference_selection": "Always send master first, then the pose's refs in order, then the emotion's ref if not already included, then the variant extra_ref. Max 4 images.",
 
-  "backdrop": {
-    "_source": "Figma node 18887:33975 (Gradient-4)",
-    "type": "linear",
-    "angle": "top_to_bottom",
-    "stops": [
-      { "pos": 0, "hex": "#090E1A" },
-      { "pos": 1, "hex": "#6047FF" }
-    ]
-  },
-  "glow": {
-    "_source": "Drop shadow stack on the approved pose components, measured on an 800 px tall component",
-    "color": "#976BFF",
-    "reference_height": 800,
-    "layers": [
-      { "blur": 43.45,  "offset_y": -20.45,  "opacity": 0.10 },
-      { "blur": 79.23,  "offset_y": -79.23,  "opacity": 0.09 },
-      { "blur": 107.35, "offset_y": -178.91, "opacity": 0.05 },
-      { "blur": 127.80, "offset_y": -319.49, "opacity": 0.01 }
-    ],
-    "apply_on": ["gradient"]
-  },
-
-  "sizes": {
-    "slide_16x9":      { "w": 1920, "h": 1080 },
-    "social_square":   { "w": 1080, "h": 1080 },
-    "social_portrait": { "w": 1080, "h": 1350 },
-    "story_9x16":      { "w": 1080, "h": 1920 },
-    "sticker":         { "w": 1024, "h": 1024 }
-  },
-  "placement": {
-    "mascot_height_ratio": 0.78,
-    "positions": ["center", "left", "right"],
-    "side_margin_ratio": 0.08
+  "finish": {
+    "_note": "No backdrop. Trim to the character, add even transparent padding, export at a fixed long edge.",
+    "padding_ratio": 0.06,
+    "long_edge_px": 2048
   },
 
   "review_checks": ["logo", "suit_trim", "helmet", "eyes", "proportions", "anatomy", "no_extras", "pose", "framing", "edges"],

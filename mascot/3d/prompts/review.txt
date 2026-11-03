@@ -14,7 +14,7 @@ Checks:
 - no_extras: no text, extra logos, clothing, props or characters beyond the request
 - pose: matches the requested pose
 - framing: full body visible, nothing cropped
-- edges: clean outline on helmet rim, hands and bands (only if background is transparent)
+- edges: clean outline on helmet rim, hands and bands; fully transparent background with no leftover fill, floor or shadow
 
 Respond with JSON only, no markdown:
 {"approved": true|false,

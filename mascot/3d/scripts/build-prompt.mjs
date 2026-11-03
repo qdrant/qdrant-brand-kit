@@ -1,6 +1,6 @@
 // Assembles the Sunburst prompt + ordered reference list from mascot.config.json.
 // Pure function, no network. Usage:
-//   node scripts/build-prompt.mjs --emotion excited --pose pointing --direction right --output transparent
+//   node scripts/build-prompt.mjs --emotion excited --pose pointing --direction right [--background grey]
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -42,7 +42,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   );
   const out = buildRequest({
     emotion: args.emotion, pose: args.pose, direction: args.direction,
-    variant: args.variant, detailPhrase: args.detail, background: args.output === "gradient" ? "grey" : "transparent",
+    variant: args.variant, detailPhrase: args.detail, background: args.background === "grey" ? "grey" : "transparent",
   });
   console.log(out.prompt);
   console.log("\nReferences:", out.refs.map((r) => r.key).join(", "));
