@@ -169,12 +169,92 @@ function hslToRgb(h, s, l) {
   return [f(0), f(8), f(4)];
 }
 
-// Slice shift. Cuts the image into strips `r` px wide, running across angle A, and
+// Slice shift: a direct port of Figma's "Slice shift" shader (version 2).
+// The plane is rotated by angle A around (x, y) and cut into strips `r` px wide.
+// Each strip's content moves sideways by strip number x r x shift, and every strip
+// except the center one slides along its length by a random amount up to
+// randomOffset / 2 px either way. Softness blends neighboring strips. Like Figma, the
+// source repeats past its edges. sample(x, y, channel) returns the color, 0 to 1.
+export function sliceShift(px, size, slice, sample) {
+  const angle = (-slice.a * Math.PI) / 180;
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  const cx = (slice.x / 100) * size;
+  const cy = (slice.y / 100) * size;
+  const width = Math.max(Math.abs(slice.r), 0.0001);
+  const shift = slice.shift / 100;
+  const softness = Math.min(Math.max(slice.softness, 0), width / 2);
+  const normalizedSoftness = softness / width;
+
+  // One strip's sample position for a rotated point (rx, ry). Returns [x, y, fraction].
+  const sliceAt = (rx, ry, blendOffset) => {
+    const slicePosition = (rx - blendOffset) / width + 0.5;
+    const index = Math.floor(slicePosition);
+    const displacement = (figmaRandom(index, index, 0) - 0.5) * (Math.abs(slicePosition - 0.5) >= 0.5 ? 1 : 0);
+    const x = rx - index * width * shift;
+    const y = ry + displacement * slice.randomOffset;
+    // Rotate back (inverse rotation) and move to the center.
+    return [cos * x + sin * y + cx, -sin * x + cos * y + cy, slicePosition - Math.floor(slicePosition)];
+  };
+
+  for (let py = 0; py < size; py++) {
+    for (let px_ = 0; px_ < size; px_++) {
+      const lx = px_ + 0.5 - cx;
+      const ly = py + 0.5 - cy;
+      const rx = cos * lx - sin * ly;
+      const ry = sin * lx + cos * ly;
+      const [ax, ay, fa] = sliceAt(rx, ry, -softness);
+      const [bx, by, fb] = sliceAt(rx, ry, softness);
+      let blend = 1;
+      if (normalizedSoftness > 0) {
+        const overlap = 1.001 - normalizedSoftness <= fb + 1 - fa ? 1 : 0;
+        const t = clamp((fa / (normalizedSoftness * 2)) * overlap);
+        blend = t * t * (3 - 2 * t);
+      }
+      const o = (py * size + px_) * 4;
+      for (let c = 0; c < 3; c++) {
+        const colorA = sample(wrap(ax, size), wrap(ay, size), c);
+        const colorB = blend < 1 ? sample(wrap(bx, size), wrap(by, size), c) : colorA;
+        px[o + c] = 255 * (colorB + (colorA - colorB) * blend);
+      }
+      px[o + 3] = 255;
+    }
+  }
+}
+
+const wrap = (v, size) => ((v % size) + size) % size;
+
+// Figma's shader random: a float in [0, 1) from three floats, bit for bit.
+const f32 = new Float32Array(3);
+const u32 = new Uint32Array(f32.buffer);
+const one = new Float32Array(1);
+const oneBits = new Uint32Array(one.buffer);
+function figmaRandom(a, b, c) {
+  f32[0] = a;
+  f32[1] = b;
+  f32[2] = c;
+  let x = u32[0];
+  let y = u32[1];
+  let z = u32[2];
+  for (let i = 0; i < 3; i++) {
+    const nx = Math.imul(((x >>> 8) ^ y) >>> 0, 1103515245) >>> 0;
+    const ny = Math.imul(((y >>> 8) ^ z) >>> 0, 1103515245) >>> 0;
+    const nz = Math.imul(((z >>> 8) ^ x) >>> 0, 1103515245) >>> 0;
+    x = nx;
+    y = ny;
+    z = nz;
+  }
+  oneBits[0] = ((127 << 23) | ((x ^ y ^ z) & 0x7fffff)) >>> 0;
+  return one[0] - 1;
+}
+
+// Mesh slice shift: the version approved for Mesh-Sliced-Pattern-A. Kept as is on
+// purpose; Color-Sliced-Pattern uses the exact Figma port (sliceShift) instead.
+// Cuts the image into strips `r` px wide, running across angle A, and
 // slides each strip along its length by `shift`% of the size plus a random amount up
-// to `randomOffset` (Figma units) either way. Softness blends neighboring strips over
-// that many px. Strips wrap around the edges, like in Figma.
+// to `randomOffset` (Figma units) either way. Softness blends neighboring strips over that many px.
 // sample(x, y, channel) returns the source color, 0 to 1.
-export function sliceShift(px, size, slice, seed, sample) {
+export function meshSliceShift(px, size, slice, seed, sample) {
   const a = (slice.a * Math.PI) / 180;
   const ux = Math.cos(a); // across the strips
   const uy = Math.sin(a);
@@ -183,12 +263,10 @@ export function sliceShift(px, size, slice, seed, sample) {
   const cx = (slice.x / 100) * size;
   const cy = (slice.y / 100) * size;
   const width = Math.max(1, slice.r);
-  // Shift is a staircase: each strip slides a little more than the one before it,
-  // in proportion to how far it is from the center. Measured on Color-Sliced-Pattern-A.
-  const step = (slice.shift / 100) * width * FIGMA_SHIFT_PER_STRIP;
+  const base = (slice.shift / 100) * size;
   // The same strip always gets the same random offset.
   const range = slice.randomOffset * FIGMA_OFFSET_TO_PX;
-  const offsetOf = (i) => i * step + ((Math.imul(i ^ seed, 2654435761) >>> 0) / 4294967296 - 0.5) * 2 * range;
+  const offsetOf = (i) => base + ((Math.imul(i ^ seed, 2654435761) >>> 0) / 4294967296 - 0.5) * 2 * range;
   const soft = slice.softness;
 
   for (let y = 0; y < size; y++) {
@@ -203,20 +281,11 @@ export function sliceShift(px, size, slice, seed, sample) {
         else if (width - d < soft / 2) offset += (offsetOf(i + 1) - offset) * (0.5 - (width - d) / soft);
       }
       const o = (y * size + x) * 4;
-      // Like Figma, a strip that slides past the edge wraps around to the other side.
-      const sx = wrap(x + offset * vx, size);
-      const sy = wrap(y + offset * vy, size);
-      for (let c = 0; c < 3; c++) px[o + c] = 255 * sample(sx, sy, c);
+      for (let c = 0; c < 3; c++) px[o + c] = 255 * sample(x + offset * vx, y + offset * vy, c);
       px[o + 3] = 255;
     }
   }
 }
-
-const wrap = (v, size) => ((v % size) + size) % size;
-
-// How far each strip slides, per 100% shift, as a share of the strip width. Measured on
-// Color-Sliced-Pattern-A: the wrap steps climb from bottom-left to top-right.
-const FIGMA_SHIFT_PER_STRIP = -0.35;
 
 // Figma's slice shift random offset isn't in pixels. Measured on the stripe contrast of
 // Mesh-Sliced-Pattern-A: Figma's 500 looks like about 125 px. An estimate, since the
@@ -277,13 +346,17 @@ function bayerMatrix(n) {
 }
 
 // A linear gradient between two colors ([r, g, b, a], 0 to 1), as a sample function.
-// angle is CSS style: 0 = to top, 90 = to right, 180 = to bottom.
-export function gradientSampler(from, to, angle, size) {
+// angle is CSS style: 0 = to top, 90 = to right, 180 = to bottom. `fromStop` and
+// `toStop` are the color stops in %, like Figma's (a stop can sit past 100%).
+export function gradientSampler(from, to, angle, size, fromStop = 0, toStop = 100) {
   const g = (angle * Math.PI) / 180;
   const gx = Math.sin(g);
   const gy = -Math.cos(g);
+  const a = fromStop / 100;
+  const b = toStop / 100;
   return (x, y, channel) => {
-    const t = clamp((x / size - 0.5) * gx + (y / size - 0.5) * gy + 0.5);
+    const along = (x / size - 0.5) * gx + (y / size - 0.5) * gy + 0.5;
+    const t = clamp((along - a) / (b - a));
     return from[channel] + (to[channel] - from[channel]) * t;
   };
 }

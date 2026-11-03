@@ -1,6 +1,6 @@
 // Color-Sliced-Pattern (recipe)
 // A gradient between two color tokens, cut into strips that each slide along their
-// length (Figma's slice shift), with noise on top. The values come from a preset in
+// length (Figma's slice shift). Noise is optional: a preset with "noise": null has none. The values come from a preset in
 // presets/, for example color-sliced-pattern-a.json. Presets are fixed. The only
 // choice is the colorway, and colors are always token names, never hex.
 
@@ -16,7 +16,8 @@ export function render(canvas, tokens, preset, color) {
 
   const from = hexToRgba(resolveToken(tokens, color.from));
   const to = hexToRgba(resolveToken(tokens, color.to));
-  sliceShift(image.data, size, slice, noise.seed + 2, gradientSampler(from, to, gradient.angle, size));
+  const source = gradientSampler(from, to, gradient.angle, size, gradient.fromStop, gradient.toStop);
+  sliceShift(image.data, size, slice, source);
   ctx.putImageData(image, 0, 0);
-  drawNoise(ctx, size, noise);
+  if (noise) drawNoise(ctx, size, noise);
 }

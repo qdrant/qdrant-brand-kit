@@ -5,7 +5,7 @@
 // example mesh-sliced-pattern-a.json. Presets are fixed.
 
 import { prepareImage } from "./mesh-source.js";
-import { sliceShift, drawNoise, brandCheck } from "./effects.js";
+import { meshSliceShift, drawNoise, brandCheck } from "./effects.js";
 
 // image = a loaded <img> or ImageBitmap of the source.
 export function render(canvas, tokens, preset, image) {
@@ -16,7 +16,7 @@ export function render(canvas, tokens, preset, image) {
 
   // Step 4: slice shift. Step 5: noise.
   const out = ctx.createImageData(size, size);
-  sliceShift(out.data, size, slice, noise.seed + 2, sample);
+  meshSliceShift(out.data, size, slice, noise.seed + 2, sample);
   ctx.putImageData(out, 0, 0);
   drawNoise(ctx, size, noise);
 
