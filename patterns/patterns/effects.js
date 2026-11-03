@@ -91,7 +91,8 @@ export function brandGrade(px, anchors, grade) {
 
 // Contrast, after the blur. Stretches the image's own lightness range (1st to 99th
 // percentile) to low..high, with an S-curve for punch, so every library image ends
-// up with real darks and highlights. Hue and saturation stay.
+// up with real darks and highlights. Hue and saturation stay. Works on any RGBA
+// array with values 0 to 255, including floats.
 // contrast = { low: %, high: %, curve: %, midtones: gamma, below 1 is brighter }
 export function stretchContrast(px, contrast) {
   const lightness = new Float32Array(px.length / 4);
@@ -104,10 +105,7 @@ export function stretchContrast(px, contrast) {
   const k = contrast.curve / 100;
   for (let i = 0; i < px.length; i += 4) {
     const [h, s] = rgbToHsl(px[i] / 255, px[i + 1] / 255, px[i + 2] / 255);
-    // The blur is stored in 8 bits, and stretching it shows the steps as rings, so
-    // add a fixed dither of up to one step before stretching.
-    const dither = ((Math.imul(i, 2654435761) >>> 0) / 4294967296 - 0.5) / 255;
-    const t = Math.pow(clamp((lightness[i / 4] + dither - p1) / Math.max(0.001, p99 - p1)), contrast.midtones ?? 1);
+    const t = Math.pow(clamp((lightness[i / 4] - p1) / Math.max(0.001, p99 - p1)), contrast.midtones ?? 1);
     const curved = t + k * (t * t * (3 - 2 * t) - t);
     const [r, g, b] = hslToRgb(h, s, lo + (hi - lo) * curved);
     px[i] = r * 255;
