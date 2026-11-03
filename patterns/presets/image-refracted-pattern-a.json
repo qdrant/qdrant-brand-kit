@@ -1,9 +1,9 @@
 {
-  "name": "Refracted Image A",
-  "recipe": "refracted-image",
-  "extends": "refracted-image.shared",
+  "name": "Image-Refracted-Pattern-A",
+  "recipe": "image-refracted-pattern",
+  "extends": "image-refracted-pattern.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574",
-  "reference": "reference/refracted-image-a.png",
+  "reference": "reference/image-refracted-pattern-a.png",
   "settings": {
     "refraction": {
       "pattern": "lenticular",

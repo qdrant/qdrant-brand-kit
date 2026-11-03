@@ -1,6 +1,6 @@
 {
-  "name": "Refracted Gradient A",
-  "recipe": "refracted-gradient",
+  "name": "Color-Refracted-Pattern-A",
+  "recipe": "color-refracted-pattern",
   "extends": "shared",
   "colorways": [
     {
@@ -9,14 +9,14 @@
       "to": "color.{family}.300",
       "defaultFamily": "secondary",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546",
-      "reference": "reference/refracted-gradient-a-family.png"
+      "reference": "reference/color-refracted-pattern-a-family.png"
     },
     {
       "name": "Primary 100 → Secondary 400",
       "from": "color.primary.100",
       "to": "color.secondary.400",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-23406",
-      "reference": "reference/refracted-gradient-a-primary-100-secondary-400.png"
+      "reference": "reference/color-refracted-pattern-a-primary-100-secondary-400.png"
     }
   ],
   "settings": {

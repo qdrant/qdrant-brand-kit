@@ -1,5 +1,5 @@
 {
-  "$description": "Shared by every Refracted Image preset. Change a value here and all of them update.",
+  "$description": "Shared by every Image-Refracted-Pattern preset. Change a value here and all of them update.",
   "extends": "shared",
   "sourceRules": "Any space or astronaut image from the Design Lab library (https://qdrant-design-lab.vercel.app/library). Never the mascot, never a Luma image.",
   "sources": [

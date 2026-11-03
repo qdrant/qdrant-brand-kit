@@ -1,7 +1,7 @@
-// Refracted Image (recipe)
+// Image-Refracted-Pattern (recipe)
 // A library image, graded to the brand palette, blurred (then flattened, like pasting
 // it as a PNG) and bent into diagonal bands by a lenticular refraction, with noise on top. The values come from a preset in presets/, for example
-// refracted-image-a.json. Presets are fixed. The only choice is the source image,
+// image-refracted-pattern-a.json. Presets are fixed. The only choice is the source image,
 // which must be a space or astronaut image from the Design Lab library: never the
 // mascot, never a Luma image.
 

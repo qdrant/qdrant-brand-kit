@@ -1,5 +1,5 @@
 // Loads a preset from presets/. A preset with "extends" starts from that shared file
-// (for example refracted-image.shared.json) and adds its own settings on top.
+// (for example image-refracted-pattern.shared.json) and adds its own settings on top.
 
 const getJson = (url) => fetch(url).then((r) => r.json());
 

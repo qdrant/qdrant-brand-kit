@@ -1,6 +1,6 @@
-// Refracted Gradient (recipe)
+// Color-Refracted-Pattern (recipe)
 // A gradient, bent into diagonal bands by a lenticular refraction, with noise on top.
-// The values come from a preset in presets/, for example refracted-gradient-a.json.
+// The values come from a preset in presets/, for example color-refracted-pattern-a.json.
 // Presets are fixed. The only choice is the colorway, and colors are always
 // token names, never hex.
 
