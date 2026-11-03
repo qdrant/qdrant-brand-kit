@@ -1,0 +1,21 @@
+{
+  "name": "Image-Refracted-Pattern-D",
+  "recipe": "image-refracted-pattern",
+  "extends": "image-refracted-pattern.shared",
+  "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50612",
+  "reference": "reference/image-refracted-pattern-d.png",
+  "settings": {
+    "refraction": {
+      "pattern": "lenticular",
+      "strength": -100,
+      "smoothness": 88,
+      "frost": 0,
+      "dispersion": 88,
+      "edgeWrap": "zero",
+      "x": 40,
+      "y": 50,
+      "r": 16,
+      "a": 144
+    }
+  }
+}
