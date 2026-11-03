@@ -8,7 +8,8 @@ Brand patterns built in code, so they can live in Design Lab as primitives.
 - Presets: A preset is a recipe with fixed effect values, named after its recipe and a letter: Color-Refracted-Pattern-A, B and so on. Add new ones to `presets/index.json`.
 - Colorways: the color pairs a preset can use, listed inside the preset. A colorway is two token paths. `{family}` in a path means it works with any family, for example `color.{family}.500 → color.{family}.300`. Fixed pairs, like `color.primary.100 → color.secondary.400`, mix families. New colors mean a new colorway, not a new preset.
 - `reference/`: the Figma export of each preset, to compare against.
-- `sources/`: source images for image recipes. Only space or astronaut images from the [Design Lab library](https://qdrant-design-lab.vercel.app/library). Never the mascot, never Luma images.
+- `sources/`: test examples only. In the tool, the source image is a placeholder filled from the [Design Lab library](https://qdrant-design-lab.vercel.app/library) by the `source` rule in `image-refracted-pattern.shared.json`: asset type image, design-approved, Default (space) moodboard. Never the mascot, never Luma images. Every new library image can become a new pattern.
+- `sheet.html`: contact sheet with every image preset on every example image, with its brand check.
 - `index.html`: preview page with the Figma version next to the code version, and a color family picker.
 
 ## Run the preview

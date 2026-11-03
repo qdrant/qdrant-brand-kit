@@ -1,9 +1,11 @@
 // Image-Refracted-Pattern (recipe)
 // A library image, graded to the brand palette, blurred (then flattened, like pasting
-// it as a PNG) and bent into diagonal bands by a lenticular refraction, with noise on top. The values come from a preset in presets/, for example
-// image-refracted-pattern-a.json. Presets are fixed. The only choice is the source image,
-// which must be a space or astronaut image from the Design Lab library: never the
-// mascot, never a Luma image.
+// it as a PNG) and bent into bands by a lenticular refraction, with noise on top.
+// The values come from a preset in presets/, for example image-refracted-pattern-a.json.
+// Presets are fixed. The source image is a placeholder: in the tool it's picked from
+// the Design Lab library by the "source" rule in image-refracted-pattern.shared.json
+// (design-approved images from the space moodboard only, never the mascot, never
+// Luma). The files in sources/ are test examples.
 
 import { resolveToken } from "./tokens.js";
 import { refract, drawNoise, brandGrade, stretchContrast, brandCheck } from "./effects.js";

@@ -100,8 +100,8 @@
     // Image presets list source images. Gradient presets list colorways.
     const chooseColorway = async () => {
       const familyRow = document.getElementById("family-row");
-      if (preset.sources) {
-        const source = preset.sources[colorwaySelect.value];
+      if (preset.examples) {
+        const source = preset.examples[colorwaySelect.value];
         familyRow.hidden = true;
         document.getElementById("reference").src = preset.reference;
         sourceImage = await loadImage(source.image);
@@ -125,9 +125,9 @@
       preset = presets[presetSelect.value];
       recipe = await import(`./patterns/${preset.recipe}.js`);
       document.getElementById("settings").textContent = JSON.stringify(preset.settings, null, 2);
-      document.getElementById("option-label").textContent = preset.sources ? "Source image" : "Colorway";
+      document.getElementById("option-label").textContent = preset.examples ? "Source image" : "Colorway";
       colorwaySelect.innerHTML = "";
-      (preset.sources ?? preset.colorways).forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
+      (preset.examples ?? preset.colorways).forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
       chooseColorway();
     };
 

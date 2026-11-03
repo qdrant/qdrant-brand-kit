@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pattern Contact Sheet</title>
+  <style>
+    :root { --bg: #0b0e1a; --panel: #151a2e; --line: #262c47; --text: #e8eaf6; --muted: #8b91b3; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, sans-serif; padding: 16px; }
+    h1 { font-size: 18px; margin: 0 0 4px; }
+    p { color: var(--muted); margin: 0 0 16px; }
+    table { border-collapse: separate; border-spacing: 12px; margin: -12px; }
+    th { color: var(--muted); font-size: 12px; font-weight: 600; text-align: left; vertical-align: bottom; }
+    th.row { width: 140px; vertical-align: middle; }
+    th.row img { width: 140px; aspect-ratio: 1; object-fit: cover; border-radius: 6px; display: block; margin-bottom: 6px; }
+    td { width: 220px; vertical-align: top; }
+    canvas { width: 220px; aspect-ratio: 1; display: block; border-radius: 6px; background: var(--panel); }
+    .check { font-size: 12px; margin-top: 6px; font-weight: 600; }
+    .pass { color: #7ee2b8; }
+    .fail { color: #ff8792; }
+  </style>
+</head>
+<body>
+  <h1>Image-Refracted-Pattern contact sheet</h1>
+  <p id="status">Rendering…</p>
+  <table id="sheet"></table>
+
+  <script type="module">
+    import { loadTokens } from "./patterns/tokens.js";
+    import { loadAllPresets } from "./patterns/presets.js";
+
+    const tokens = await loadTokens("tokens/placeholder.tokens.json");
+    const presets = (await loadAllPresets()).filter((p) => p.examples);
+    const examples = presets[0].examples;
+    const recipe = await import(`./patterns/${presets[0].recipe}.js`);
+    const loadImage = (url) => new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = url;
+    });
+
+    const table = document.getElementById("sheet");
+    table.innerHTML = `<tr><th></th>${presets.map((p) => `<th>${p.name}</th>`).join("")}</tr>`;
+
+    let done = 0;
+    let passed = 0;
+    const total = presets.length * examples.length;
+    for (const example of examples) {
+      const row = table.insertRow();
+      row.innerHTML = `<th class="row"><img src="${example.image}" alt="">${example.name}</th>`;
+      const image = await loadImage(example.image);
+      for (const preset of presets) {
+        const cell = row.insertCell();
+        const canvas = document.createElement("canvas");
+        cell.append(canvas);
+        await new Promise((r) => setTimeout(r)); // let the page paint between renders
+        const check = recipe.render(canvas, tokens, preset, image);
+        passed += check.pass;
+        cell.insertAdjacentHTML("beforeend", `<div class="check ${check.pass ? "pass" : "fail"}">${check.pass ? "Pass" : "Fail"} · ${check.offBrand}% off-palette</div>`);
+        document.getElementById("status").textContent = `Rendering ${++done} of ${total}…`;
+      }
+    }
+    document.getElementById("status").textContent = `${passed} of ${total} pass the brand check.`;
+  </script>
+</body>
+</html>
