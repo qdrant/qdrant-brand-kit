@@ -103,7 +103,7 @@
       if (isGenerativePattern(preset)) {
         const colorway = Number(colorwaySelect.value || 0);
         renderPattern(canvas, tokens, preset, { colorway, ...size() });
-        const look = preset.colorways?.[colorway] ?? preset.settings;
+        const look = preset.colorways[colorway];
         document.getElementById("tokens").innerHTML = [...look.colors, ...(look.backdrop ?? [])].map((ref) => swatch(ref.token ?? ref)).join("");
         return;
       }
@@ -148,13 +148,9 @@
       preset = presets[presetSelect.value];
       document.getElementById("settings").textContent = JSON.stringify(preset.settings, null, 2);
       document.getElementById("figma").href = preset.figma ?? "";
-      const generative = isGenerativePattern(preset);
-      const fixed = generative && !preset.colorways;
-      document.getElementById("option-label").hidden = fixed;
-      colorwaySelect.hidden = fixed;
       document.getElementById("option-label").textContent = isMeshPattern(preset) ? "Example mesh" : "Colorway";
       colorwaySelect.innerHTML = "";
-      if (!fixed) (isMeshPattern(preset) ? preset.examples : preset.colorways).forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
+      (isMeshPattern(preset) ? preset.examples : preset.colorways).forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
       chooseOption();
     };
 

@@ -47,7 +47,7 @@ export const recipes = {
 export const loadPatterns = (base = "presets") => loadAllPresets(base);
 
 // Color patterns take a colorway. Mesh patterns take a mesh. Generative patterns
-// (from Pattern Studio) have fixed tokens, or a few colorways to pick from.
+// (from Pattern Studio) have one or more colorways to pick from.
 export const isMeshPattern = (preset) => Boolean(preset.meshGroup);
 export const isGenerativePattern = (preset) => preset.recipe === "generative-pattern";
 
@@ -56,7 +56,7 @@ export const isGenerativePattern = (preset) => preset.recipe === "generative-pat
 // the mesh comes from the picked library image.
 export function choicesFor(preset, tokens) {
   if (isMeshPattern(preset)) return { colorways: [] };
-  if (isGenerativePattern(preset)) return { colorways: (preset.colorways ?? []).map(({ name }) => ({ name, families: [] })) };
+  if (isGenerativePattern(preset)) return { colorways: preset.colorways.map(({ name }) => ({ name, families: [] })) };
   return {
     colorways: preset.colorways.map((colorway) => ({
       name: colorway.name,
@@ -69,7 +69,7 @@ export function choicesFor(preset, tokens) {
 // Draws a pattern on a canvas at any size and shape: { width, height } in px,
 // 1080 x 1080 when left out. A wide banner, a tall story or a 4K poster all work.
 // options: { colorway: index, family } for color patterns, { mesh } for mesh patterns,
-// { colorway } for generative patterns that have colorways (optional { phase } to draw
+// { colorway } for generative patterns (optional { phase } to draw
 // another moment of the loop, for animation later). Mesh patterns return the brand check:
 // { pass, offBrand: % of off-palette pixels }.
 export function renderPattern(canvas, tokens, preset, options = {}) {

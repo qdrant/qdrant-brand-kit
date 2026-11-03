@@ -35,7 +35,9 @@ function load(id) {
   const preset = read(path);
   if (!preset.extends) return preset;
   const { $description, ...shared } = load(preset.extends);
-  return { ...shared, ...preset, settings: { ...shared.settings, ...preset.settings } };
+  const settings = { ...shared.settings, ...preset.settings };
+  if (shared.settings?.engine || preset.settings?.engine) settings.engine = { ...shared.settings?.engine, ...preset.settings?.engine };
+  return { ...shared, ...preset, settings };
 }
 
 const onGrid = (v) => Number.isInteger(v) && v % 8 === 0;
@@ -56,13 +58,16 @@ for (const id of ids) {
   else if (p.name.toLowerCase() !== id) errors.push(`${where}: file should be presets/${p.name.toLowerCase()}.json`);
 
   if (!recipes.includes(p.recipe)) errors.push(`${where}: recipe "${p.recipe}" isn't registered in patterns/index.js`);
-  if (p.settings?.size !== 1080) errors.push(`${where}: settings.size should be 1080`);
+  if (p.recipe !== "generative-pattern" && p.settings?.size !== 1080) errors.push(`${where}: settings.size should be 1080`);
   for (const key of needs[p.recipe] ?? []) if (!(key in (p.settings ?? {}))) errors.push(`${where}: settings.${key} is missing`);
 
   if (p.recipe === "generative-pattern") {
-    // Generative pattern: fixed colors or colorways, all tokens that exist.
-    const looks = p.colorways ?? [p.settings ?? {}];
-    for (const look of looks) if (!look.colors?.length) errors.push(`${where}: needs colors, in settings or in each colorway`);
+    // Generative pattern: one or more colorways, all tokens that exist, and a tone
+    // curve that's in the shared file.
+    const looks = p.colorways ?? [];
+    if (!looks.length) errors.push(`${where}: no colorways`);
+    for (const look of looks) if (!look.name || !look.colors?.length || !look.backdrop) errors.push(`${where}: every colorway needs a name, colors and a backdrop`);
+    if (!p.settings?.tones?.[p.settings?.tone]) errors.push(`${where}: tone curve "${p.settings?.tone}" isn't in settings.tones`);
     const refs = looks.flatMap((look) => [...(look.colors ?? []), ...(look.backdrop ?? []).map((stop) => stop?.token ?? stop)]);
     for (const ref of [...refs, p.settings?.background]) {
       if (typeof ref !== "string" || !/^\{.+\}$/.test(ref)) errors.push(`${where}: color ${ref} should be a token like {color.secondary.500}`);

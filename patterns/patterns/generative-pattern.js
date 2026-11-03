@@ -9,9 +9,12 @@
 //   "canvas": they grow with the canvas, like every other pattern
 //   "fixed":  they keep their size in px, so a bigger canvas gets more of them
 //
-// Colors: settings.colors and settings.backdrop, or a list of colorways in the preset
-// (same effects, other tokens). A backdrop stop can sit past the bottom of the frame,
-// like Figma's red gradient: { "token": "{color.primary.500}", "at": 1.39 }.
+// Colors: every preset has colorways (same effects, other tokens), one or more. A
+// backdrop stop can sit past the bottom of the frame, like Figma's red gradient:
+// { "token": "{color.primary.500}", "at": 1.39 }.
+//
+// Settings shared by all generative patterns live in generative-pattern.shared.json:
+// Pattern Studio's defaults (engine) and its tone curves (tones), picked by name.
 //
 // Static for now: one moment of the tool's loop, at settings.phase (0 to 2 pi).
 // To animate later, call render() again with a changing options.phase.
@@ -41,7 +44,7 @@ function backdropColors(tokens, stops) {
 // frame = makeFrame(width, height). options = { phase, colorway }.
 export function render(canvas, tokens, preset, _input, frame = makeFrame(), options = {}) {
   const s = preset.settings;
-  const look = preset.colorways?.[options.colorway ?? 0] ?? s;
+  const look = preset.colorways[options.colorway ?? 0];
   const { width, height } = frame;
   canvas.width = width;
   canvas.height = height;
@@ -64,7 +67,8 @@ export function render(canvas, tokens, preset, _input, frame = makeFrame(), opti
 
   ctx.fillStyle = resolveToken(tokens, s.background);
   ctx.fillRect(0, 0, width, height);
-  const tone = (v) => s.tone[Math.max(0, Math.min(s.tone.length - 1, Math.round(v * (s.tone.length - 1))))];
+  const curve = s.tones[s.tone];
+  const tone = (v) => curve[Math.max(0, Math.min(curve.length - 1, Math.round(v * (curve.length - 1))))];
   const phase = options.phase ?? s.phase ?? 0;
   engine.drawCanvas(ctx, params, engine.compute(params, engine.createState(), phase, tone));
 }
