@@ -1,0 +1,21 @@
+{
+  "preset": "event",
+  "series": "Vector Space Day",
+  "title": "Infrastructure Behind 20 Billion+ Vectors",
+  "shortTitle": "20 Billion+ Vectors",
+  "date": "June 11",
+  "location": "San Francisco",
+  "partnerLogo": "partner-logo.png",
+  "speakers": [
+    {
+      "name": "Neil Kanungo",
+      "role": "Head of Developer Relations, Qdrant",
+      "photo": "speaker.png"
+    },
+    {
+      "name": "David Stockton",
+      "role": "Tech Lead",
+      "photo": "speaker-2.png"
+    }
+  ]
+}

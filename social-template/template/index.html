@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qdrant Social Post</title>
+<!--
+  Qdrant social post template, V1 (MKT-479)
+
+  One template for every Qdrant social post, at any size.
+
+  How it works
+    1. Shape: width / height picks the layout.
+         above 3 → Ultra-wide · 1.4–3 → Wide 16:9 · 0.85–1.4 → Square 1:1
+         0.65–0.85 → Portrait 4:5 · below 0.65 → Story 9:16
+    2. Scale: the smaller of (width / reference width) and (height / reference height).
+    3. Sizes: every size in the SIZES table is in px at the shape's reference canvas,
+       and the CSS uses it as size × scale (the --u unit). The 8 px grid holds exactly
+       at the reference canvases; other sizes keep the same proportions.
+
+  Contract with the renderer (render.py, or Design Lab later)
+    - The viewport is the canvas: open the page at the target width × height.
+    - Content: window.__CONTENT__, or ?content=<base64 JSON>, or ?sample=event|announcement|ad.
+      Every field is listed in README.md.
+    - When fonts and images are loaded and the layout is final, window.__READY__ is true
+      and window.__REPORT__ holds the layout report the automatic checks read.
+
+  Where to change things
+    - TOKENS: fonts and colors. Placeholders until Juan's design system is connected.
+    - SIZES: one row per shape (padding, gaps, logo, type, photos, button).
+    - Layout rules per shape: the WIDE and ULTRA-WIDE sections.
+    Rules come from the Qdrant Brand Guide 2.0 and the team's past posts (see README.md).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,400..700&family=Geist+Mono:wght@400&display=block" rel="stylesheet">
+<style>
+  /* ==== TOKENS: placeholders until the design system is connected ==================== */
+  :root {
+    --font-sans: "Mona Sans", system-ui, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, monospace;
+    --stretch-condensed: 75%;                  /* Mona Sans Condensed, for event titles */
+
+    --color-bg: #0B0F19;                       /* neutral/950 */
+    --color-text: #F0F3FA;                     /* text/primary */
+    --color-text-muted: #ABB1C7;               /* neutral/400 */
+    --color-accent: #DC244C;                   /* primary/500 (Qdrant red) */
+    --color-accent-text: #FFFFFF;
+    --photo-gradient: linear-gradient(180deg, #392689 0%, #7E75FF 77%);   /* behind speaker cutouts */
+  }
+
+  /* ==== SIZES: px at each shape's reference canvas ===================================
+     pad = padding (story top/bottom keep app UI clear) · gap-lg/md/sm = spacing
+     title = event caps title · post-title = announcement · hero = ad headline
+     avatar = round speaker photo · compact-w = speaker width when two share a row
+     photo-w / photo-w-sm / photo-h = speaker photo cards on Wide (1–2 / 3 speakers) */
+  [data-shape="square"] {     /* 1080×1080 */
+    --ref-w:1080; --ref-h:1080; --pad-x:64; --pad-y:64; --gap-lg:48; --gap-md:24; --gap-sm:16;
+    --logo-h:80; --title:104; --post-title:104; --hero:144; --eyebrow:56; --body:36; --detail:40; --icon:40; --series:32;
+    --name:40; --role:32; --avatar:96; --compact-w:440; --photo-w:240; --photo-w-sm:192; --photo-h:336; --button-h:80; }
+  [data-shape="portrait"] {   /* 1080×1350 */
+    --ref-w:1080; --ref-h:1350; --pad-x:64; --pad-y:64; --gap-lg:64; --gap-md:24; --gap-sm:16;
+    --logo-h:80; --title:120; --post-title:120; --hero:160; --eyebrow:56; --body:40; --detail:40; --icon:40; --series:32;
+    --name:40; --role:32; --avatar:120; --compact-w:440; --photo-w:320; --photo-w-sm:240; --photo-h:440; --button-h:80; }
+  [data-shape="story"] {      /* 1080×1920 */
+    --ref-w:1080; --ref-h:1920; --pad-x:64; --pad-y:128; --pad-top:256; --pad-bottom:344; --gap-lg:64; --gap-md:32; --gap-sm:24;
+    --logo-h:96; --title:144; --post-title:120; --hero:200; --eyebrow:64; --body:44; --detail:56; --icon:56; --series:48;
+    --name:48; --role:36; --avatar:128; --compact-w:952; --photo-w:416; --photo-w-sm:288; --photo-h:576; --button-h:112; }
+  [data-shape="wide"] {       /* 1920×1080 */
+    --ref-w:1920; --ref-h:1080; --pad-x:80; --pad-y:80; --gap-lg:64; --gap-md:40; --gap-sm:24;
+    --logo-h:96; --title:120; --post-title:104; --hero:144; --eyebrow:56; --body:40; --detail:48; --icon:56; --series:40;
+    --name:48; --role:32; --avatar:120; --compact-w:440; --photo-w:416; --photo-w-sm:288; --photo-h:576; --button-h:104; }
+  [data-shape="ultrawide"] {  /* 3000×400 */
+    --ref-w:3000; --ref-h:400; --pad-x:96; --pad-y:48; --gap-lg:64; --gap-md:32; --gap-sm:16;
+    --logo-h:80; --title:120; --post-title:96; --hero:104; --eyebrow:40; --body:36; --detail:32; --icon:32; --series:32;
+    --name:40; --role:32; --avatar:96; --compact-w:560; --photo-w:240; --photo-w-sm:192; --photo-h:336; --button-h:64; }
+
+  /* ==== CANVAS ======================================================================= */
+  html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: var(--color-bg); }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  #post {
+    --u: 1px;                                  /* set by the script to the scale */
+    position: relative; width: 100vw; height: 100vh; overflow: hidden;
+    padding: calc(var(--pad-top, var(--pad-y)) * var(--u)) calc(var(--pad-x) * var(--u)) calc(var(--pad-bottom, var(--pad-y)) * var(--u));
+    display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--gap-lg) * var(--u));
+    font-family: var(--font-sans); color: var(--color-text);
+    font-feature-settings: "ss01" 1, "ss05" 1;
+  }
+  .bg { position: absolute; inset: 0; z-index: 0; background: var(--color-bg) center / cover no-repeat; }   /* background slot */
+  #post > :not(.bg) { position: relative; z-index: 1; }
+
+  /* ==== HEADER: logos left; series and button right ================================== */
+  .header { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--gap-md) * var(--u)); flex: none; }
+  .logos { display: flex; align-items: center; gap: calc(var(--gap-md) * var(--u)); flex: none; }
+  .logos img { height: calc(var(--logo-h) * var(--u)); width: auto; display: block; }
+  .header-right { display: flex; align-items: center; gap: calc(var(--gap-md) * var(--u)); min-width: 0; }
+  .series { font-weight: 600; font-size: calc(var(--series) * var(--u)); line-height: 1.2; letter-spacing: -0.01em;
+    color: var(--color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .button { flex: none; display: inline-flex; align-items: center; justify-content: center;
+    height: calc(var(--button-h) * var(--u)); padding: 0 calc(var(--button-h) * 0.5 * var(--u));
+    border-radius: calc(var(--button-h) * 0.22 * var(--u)); background: var(--color-accent); color: var(--color-accent-text);
+    font-weight: 600; font-size: calc(var(--button-h) * 0.44 * var(--u)); line-height: 1; white-space: nowrap; }
+  /* With a partner logo the header is full: the series moves above the title, the button under the text. */
+  .body > .series { white-space: normal; }
+  .body > .button { align-self: flex-start; margin-top: calc(var(--gap-md) * var(--u)); }
+
+  /* Partnership lockup (Brand Guide 2.0, p. 20–21): Qdrant logo + partner logo at the same height,
+     a plus the size of the clear-space cube, one cube of space each side. At an 80 px logo: 48 px. */
+  .logos .partner { max-width: calc(var(--logo-h) * 4 * var(--u)); object-fit: contain; }
+  .logos:has(.plus:not([hidden])) { gap: calc(var(--logo-h) * 0.6 * var(--u)); }
+  .plus { position: relative; width: calc(var(--logo-h) * 0.6 * var(--u)); height: calc(var(--logo-h) * 0.6 * var(--u)); flex: none; }
+  .plus::before, .plus::after { content: ""; position: absolute; background: var(--color-text); }
+  .plus::before { left: 50%; top: 0; bottom: 0; width: calc(var(--logo-h) * 0.05 * var(--u)); transform: translateX(-50%); }
+  .plus::after { top: 50%; left: 0; right: 0; height: calc(var(--logo-h) * 0.05 * var(--u)); transform: translateY(-50%); }
+
+  /* ==== BODY: eyebrow, title, body copy, details ===================================== */
+  .body { display: flex; flex-direction: column; gap: calc(var(--gap-md) * var(--u)); min-width: 0; }
+  /* Line limits: text past its limit is hidden (and fails the "text fits" check). The bottom padding
+     gives descenders (g, y, p) room, so tight line heights don't clip them. */
+  .clamp { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: break-word;
+    padding-bottom: 0.2em; margin-bottom: -0.2em; }
+  .eyebrow { font-weight: 600; font-size: calc(var(--eyebrow) * var(--u)); line-height: 1.2; letter-spacing: -0.009em;
+    color: var(--color-text-muted); -webkit-line-clamp: var(--eyebrow-lines, 2); }
+  .title { margin: 0; font-weight: 600; line-height: 1.05; letter-spacing: -0.017em; text-wrap: balance;
+    -webkit-line-clamp: var(--title-lines, 3); }
+  [data-title-style="caps"] .title     { font-size: calc(var(--title) * var(--u)); font-stretch: var(--stretch-condensed); text-transform: uppercase; }
+  [data-title-style="sentence"] .title { font-size: calc(var(--post-title) * var(--u)); }
+  [data-title-style="hero"] .title     { font-size: calc(var(--hero) * var(--u)); }
+  .copy { font-weight: 400; font-size: calc(var(--body) * var(--u)); line-height: 1.3; color: var(--color-text-muted);
+    text-wrap: pretty; -webkit-line-clamp: var(--body-lines, 2); }
+  /* Emphasis (Brand Guide 2.0): Qdrant red for one word or phrase in a heading, SemiBold for key terms in body copy. */
+  .title em { font-style: normal; color: var(--color-accent); }
+  .copy strong { font-weight: 600; color: var(--color-text); }
+  .details { display: flex; flex-direction: column; gap: calc(var(--gap-sm) * var(--u)); }
+  .detail { display: flex; align-items: center; gap: calc(var(--gap-sm) * var(--u)); font-family: var(--font-mono);
+    font-size: calc(var(--detail) * var(--u)); line-height: 1.2; letter-spacing: -0.01em; color: var(--color-text-muted); white-space: nowrap; }
+  .detail svg { width: calc(var(--icon) * var(--u)); height: calc(var(--icon) * var(--u)); flex: none;
+    stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ==== SPEAKERS: Compact (round photo, text beside) or Feature cards (Wide) ========= */
+  .speakers { display: flex; flex-direction: column; gap: calc(var(--gap-md) * var(--u)); flex: none; }
+  .speaker-row { display: flex; align-items: flex-start; gap: calc(var(--gap-lg) * var(--u)); }
+  .photo { background: var(--photo-gradient); overflow: hidden; flex: none; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+  .speaker.compact { display: flex; align-items: center; gap: calc(32 * var(--u)); max-width: 100%; }
+  .speaker-row > .speaker.compact:not(:only-child) { width: calc(var(--compact-w) * var(--u)); }
+  .speaker.compact .photo { width: calc(var(--avatar) * var(--u)); height: calc(var(--avatar) * var(--u)); border-radius: 50%; }
+  .speaker.feature { display: flex; flex-direction: column; align-items: center; gap: calc(32 * var(--u)); width: calc(var(--card-w) * var(--u)); }
+  .speaker.feature .photo { width: 100%; height: calc(var(--photo-h) * var(--u)); border-radius: calc(16 * var(--u)); }
+  .speaker.feature .who { text-align: center; }
+  .who { min-width: 0; }
+  .name { font-weight: 600; font-size: calc(var(--name) * var(--u)); line-height: 1.1; letter-spacing: -0.01em; }
+  .role { font-weight: 400; font-size: calc(var(--role) * var(--u)); line-height: 1.3; color: var(--color-text-muted); }
+  .name, .role { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; padding-bottom: 0.12em; }
+
+  /* ==== WIDE 16:9: text left, speaker photo cards right ============================== */
+  #post[data-shape="wide"] {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr);
+    column-gap: calc(var(--gap-lg) * var(--u)); row-gap: calc(var(--gap-lg) * var(--u));
+  }
+  #post[data-shape="wide"][data-speakers="0"] { grid-template-columns: minmax(0, 1fr); }
+  [data-shape="wide"] .header { grid-column: 1; grid-row: 1; }
+  [data-shape="wide"]:not([data-speakers="0"]) .header { justify-content: flex-start; gap: calc(var(--gap-lg) * var(--u)); }
+  [data-shape="wide"] .body { grid-column: 1; grid-row: 2; }
+  [data-shape="wide"][data-speakers="0"] .body { max-width: calc(1056 * var(--u)); }   /* right side free for artwork */
+  [data-shape="wide"][data-title-style="hero"] { --title-lines: 2; }
+  [data-shape="wide"] .details { margin-top: auto; }
+  /* With photo cards and a partner, the lockup goes to the bottom left at 80 px, as in the VSD partner posts. */
+  .body > .logos { --logo-h: 80; margin-top: calc(var(--gap-lg) * var(--u)); }
+  [data-shape="wide"] .speakers { grid-column: 2; grid-row: 1 / 3; flex-direction: row; align-items: flex-start; align-self: start;
+    gap: calc(32 * var(--u)); }                /* cards 32 apart, as in the VSD posts */
+  [data-shape="wide"][data-speakers="1"], [data-shape="wide"][data-speakers="2"] { --card-w: var(--photo-w); }
+  [data-shape="wide"][data-speakers="3"] { --card-w: var(--photo-w-sm); }
+  [data-shape="wide"][data-speakers="2"] .speaker:nth-child(2) { margin-top: calc(128 * var(--u)); }     /* second card lower */
+  [data-shape="wide"][data-speakers="3"] .speaker:nth-child(odd) { margin-top: calc(96 * var(--u)); }    /* middle card highest */
+
+  /* ==== ULTRA-WIDE: one row: logos, text, speakers, then series and button ============ */
+  #post[data-shape="ultrawide"] { flex-direction: row; align-items: center; justify-content: flex-start;
+    --title-lines: 1; --body-lines: 1; --eyebrow-lines: 1; }
+  [data-shape="ultrawide"] .header { display: contents; }
+  [data-shape="ultrawide"] .logos, [data-shape="ultrawide"] .header-right { position: relative; z-index: 1; }
+  [data-shape="ultrawide"] .logos { order: 1; }
+  [data-shape="ultrawide"] .body { order: 2; flex: 0 1 auto; gap: calc(var(--gap-sm) * var(--u)); }
+  [data-shape="ultrawide"] .speakers { order: 3; gap: calc(var(--gap-md) * var(--u)); }
+  [data-shape="ultrawide"] .header-right { order: 4; margin-left: auto; }
+  [data-shape="ultrawide"] .title { white-space: nowrap; text-overflow: ellipsis; display: block; }
+  [data-shape="ultrawide"] .details { flex-direction: row; gap: calc(var(--gap-md) * var(--u)); }
+  [data-shape="ultrawide"] .speaker-row > .speaker.compact:not(:only-child) { width: auto; }   /* even gaps */
+</style>
+</head>
+<body>
+<div id="post">
+  <div class="bg" data-slot="background"></div>
+  <header class="header">
+    <div class="logos">
+      <img class="logo" data-slot="logo" src="assets/logos/Qdrant-Logo-Red-White.svg" alt="Qdrant">
+      <span class="plus" aria-hidden="true" hidden></span>
+      <img class="partner" data-slot="partnerLogo" alt="Partner" hidden>
+    </div>
+    <div class="header-right">
+      <div class="series" data-slot="series" hidden></div>
+      <div class="button" data-slot="button" hidden></div>
+    </div>
+  </header>
+  <div class="body">
+    <div class="eyebrow clamp" data-slot="eyebrow" hidden></div>
+    <h1 class="title clamp" data-slot="title"></h1>
+    <div class="copy clamp" data-slot="body" hidden></div>
+    <div class="details" data-slot="details" hidden></div>
+  </div>
+  <div class="speakers" data-slot="speakers" hidden></div>
+</div>
+
+<script>
+(function () {
+  // ==== Settings ====================================================================
+  // Built-in samples for opening the file in a browser (?sample=…). Real content comes from the renderer.
+  const SAMPLES = {
+    event: { preset: "event", series: "Vector Space Talks", title: "On-device AI RAG using *Qdrant Edge*", shortTitle: "Qdrant Edge RAG",
+      date: "September 26", time: "5:00 PM CET", location: "Berlin",
+      speakers: [{ name: "Neil Kanungo", role: "Head of Developer Relations, Qdrant", photo: "../samples/speaker.png" }] },
+    announcement: { preset: "announcement", title: "Qdrant now available in *AWS Marketplace*", shortTitle: "Qdrant on AWS Marketplace",
+      body: "Deploy vector search for AI agents in a few clicks.", partnerLogo: "../samples/partner-logo.png", button: "Learn More" },
+    ad: { preset: "ad", eyebrow: "The right answer was in the docs.", title: "Your RAG buried it.",
+      body: "Poor recall and lost-in-the-middle hide your best context. **Fix retrieval at the source.**", button: "Learn More" },
+  };
+  const PRESET_TITLE = { event: "caps", announcement: "sentence", ad: "hero" };
+  function shapeFor(ratio) {
+    if (ratio > 3) return "ultrawide";
+    if (ratio >= 1.4) return "wide";
+    if (ratio >= 0.85) return "square";
+    if (ratio >= 0.65) return "portrait";
+    return "story";
+  }
+  // Lucide icons (the brand icon set): calendar, timer, map-pin.
+  const ICONS = {
+    date: '<svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>',
+    time: '<svg viewBox="0 0 24 24"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg>',
+    location: '<svg viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>',
+  };
+
+  // ==== Helpers =====================================================================
+  const $ = s => document.querySelector(s);
+  const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const show = (node, on) => { node.hidden = !on; };
+  const isColor = v => /^#|^rgb|^hsl/.test(v);
+  // *word* in the title shows in Qdrant red; **term** in the body is SemiBold.
+  const mark = (text, re, tag) => esc(text).replace(re, `<${tag}>$1</${tag}>`);
+  function readContent() {
+    if (window.__CONTENT__) return window.__CONTENT__;
+    const q = new URLSearchParams(location.search);
+    if (q.get("content")) return JSON.parse(decodeURIComponent(escape(atob(q.get("content")))));
+    return SAMPLES[q.get("sample") || "event"];
+  }
+
+  // ==== 1. Shape and scale ==========================================================
+  const c = readContent();
+  const post = $("#post");
+  const W = window.innerWidth, H = window.innerHeight;
+  const shape = c.shape || shapeFor(W / H);
+  post.dataset.shape = shape;
+  const cs = getComputedStyle(post);
+  const scale = Math.min(W / +cs.getPropertyValue("--ref-w"), H / +cs.getPropertyValue("--ref-h"));
+  post.style.setProperty("--u", scale + "px");
+  post.dataset.titleStyle = c.titleStyle || PRESET_TITLE[c.preset] || "sentence";
+  const warnings = [];
+
+  // ==== 2. Fill the slots ===========================================================
+  if (c.background) {                          // plain dark placeholder unless a color or image is given
+    if (isColor(c.background)) $(".bg").style.backgroundColor = c.background;
+    else $(".bg").style.backgroundImage = `url("${c.background}")`;
+  }
+  if (c.partnerLogo) {
+    $(".partner").src = c.partnerLogo; show($(".partner"), true); show($(".plus"), true);
+    if (c.background && !isColor(c.background))
+      warnings.push("Partnership lockup over an image: the logo rules say not to place it over a busy image. Check the background is calm behind the logos.");
+  }
+  // With a partner logo the header is full: the series moves above the title and the button under the
+  // text, as in the partner posts. On ultra-wide the series always sits above the title.
+  const crowded = c.partnerLogo && shape !== "ultrawide";
+  if (c.series) { $(".series").textContent = c.series; show($(".series"), true); if (crowded || shape === "ultrawide") $(".body").prepend($(".series")); }
+  if (c.button) { $(".button").textContent = c.button; show($(".button"), true); if (crowded) $(".body").append($(".button")); }
+  if (c.eyebrow) { $(".eyebrow").textContent = c.eyebrow; show($(".eyebrow"), true); }
+  $(".title").innerHTML = mark((shape === "ultrawide" && c.shortTitle) || c.title || "", /\*([^*]+)\*/g, "em");
+  if (c.body) { $(".copy").innerHTML = mark(c.body, /\*\*([^*]+)\*\*/g, "strong"); show($(".copy"), true); }
+  const details = ["date", "time", "location"].filter(k => c[k]);
+  if (details.length) {
+    for (const k of details) { const d = el("div", "detail", ICONS[k] + `<span>${esc(c[k])}</span>`); d.dataset.slot = k; $(".details").appendChild(d); }
+    show($(".details"), true);
+  }
+
+  // ==== 3. Speakers =================================================================
+  // Wide: photo cards. Elsewhere: compact, 2–3 speakers on two rows (3 = 2 + 1); stories one per row.
+  const people = (c.speakers || []).slice(0, 3);
+  post.dataset.speakers = people.length;
+  if (shape === "wide" && c.partnerLogo && people.length) $(".body").append($(".logos"));
+  if (people.length) {
+    const box = $(".speakers");
+    const feature = shape === "wide";
+    const card = p => {
+      const s = el("div", "speaker " + (feature ? "feature" : "compact"));
+      const ph = el("div", "photo"); if (p.photo) { const i = el("img"); i.src = p.photo; i.alt = ""; ph.appendChild(i); }
+      const who = el("div", "who", `<div class="name">${esc(p.name || "")}</div>` + (p.role ? `<div class="role">${esc(p.role)}</div>` : ""));
+      s.append(ph, who); return s;
+    };
+    if (feature) people.forEach(p => box.appendChild(card(p)));
+    else {
+      const rows = people.length === 3 && shape !== "story" ? [[0, 1], [2]] : people.map((_, i) => [i]);
+      for (const r of rows) { const row = el("div", "speaker-row"); r.forEach(i => row.appendChild(card(people[i]))); box.appendChild(row); }
+    }
+    show(box, true);
+  }
+
+  // ==== 4. When ready: last fixes, then the report for the automatic checks =========
+  const rect = n => { const r = n.getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; };
+  const inked = n => {                          // slot box without the descender room
+    const r = rect(n), pb = parseFloat(getComputedStyle(n).paddingBottom) || 0;
+    return n.classList.contains("clamp") ? { ...r, h: r.h - pb } : r;
+  };
+  const lines = n => { const rg = document.createRange(); rg.selectNodeContents(n); return [...rg.getClientRects()].map(r => ({ x: r.x, y: r.y, w: r.width, h: r.height })); };
+  // Cut off = a whole extra line hidden (allow half a line for descenders).
+  const truncated = n => { const lh = parseFloat(getComputedStyle(n).lineHeight) || 0;
+    return n.scrollHeight - n.clientHeight > lh * 0.5 || n.scrollWidth - n.clientWidth > 2; };
+  const images = [...document.images].filter(i => !i.closest("[hidden]") && i.getAttribute("src"));
+
+  Promise.all([document.fonts.ready, ...images.map(i => i.decode().catch(() => null))]).then(() => {
+    // Banners are only 400 px tall: if the text doesn't fit inside the padding, drop the eyebrow.
+    if (shape === "ultrawide" && !$(".eyebrow").hidden) {
+      const ps = getComputedStyle(post), r = $(".body").getBoundingClientRect();
+      if (r.top < parseFloat(ps.paddingTop) - 1 || r.bottom > H - parseFloat(ps.paddingBottom) + 1) {
+        $(".eyebrow").hidden = true;
+        warnings.push("Eyebrow left out: the banner is too short for eyebrow, title, body and details together.");
+      }
+    }
+    const texts = {};
+    for (const n of document.querySelectorAll(".eyebrow, .title, .copy, .series, .detail, .name, .role, .button")) {
+      if (n.closest("[hidden]")) continue;
+      const key = n.closest("[data-slot]")?.dataset.slot + (n.classList.contains("name") ? ".name" : n.classList.contains("role") ? ".role" : "");
+      (texts[key] ||= []).push({ color: getComputedStyle(n).color, lines: lines(n), truncated: truncated(n), rect: rect(n),
+        onAccent: n.classList.contains("button") });
+    }
+    const slots = {};
+    const speakers = [...document.querySelectorAll(".speaker")];
+    for (const n of document.querySelectorAll(".logos > :not([hidden]), .series:not([hidden]), .button:not([hidden]), .eyebrow:not([hidden]), .title, .copy:not([hidden]), .detail, .speaker"))
+      slots[(n.dataset.slot || n.className.split(" ").join(".")) + (n.classList.contains("speaker") ? "-" + speakers.indexOf(n) : "")] = inked(n);
+    // Where the header's right-hand content ends, to compare with the right padding.
+    const right = [...document.querySelectorAll(".header-right > :not([hidden])")];
+    const headerEnd = right.length && shape !== "ultrawide" && !(shape === "wide" && people.length)
+      ? Math.max(...right.map(n => n.getBoundingClientRect().right)) : null;
+    const ps = getComputedStyle(post), logo = $(".logo");
+    window.__REPORT__ = {
+      size: { w: W, h: H, ratio: +(W / H).toFixed(3) }, shape, scale: +scale.toFixed(4), titleStyle: post.dataset.titleStyle,
+      padding: { left: parseFloat(ps.paddingLeft), right: parseFloat(ps.paddingRight), top: parseFloat(ps.paddingTop), bottom: parseFloat(ps.paddingBottom) },
+      texts, slots, warnings, headerEnd,
+      logo: { rect: rect(logo), loaded: logo.complete && logo.naturalWidth > 0 },
+      type: { heading: parseFloat(getComputedStyle($(".title")).fontSize),
+              body: $(".copy").hidden ? null : parseFloat(getComputedStyle($(".copy")).fontSize) },
+      broken: images.filter(i => !i.naturalWidth).map(i => i.getAttribute("src")),
+      fonts: [...document.fonts].filter(f => f.status === "loaded").map(f => `${f.family} ${f.weight} ${f.stretch}`),
+    };
+    window.__READY__ = true;
+  });
+})();
+</script>
+</body>
+</html>
