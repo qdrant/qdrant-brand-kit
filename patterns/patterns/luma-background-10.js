@@ -89,7 +89,7 @@ function drawNoise(ctx, tokens, size, noise) {
   ctx.fillStyle = `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${alpha})`;
   const rand = mulberry32(noise.seed);
   const cell = Math.max(1, noise.size / 2);
-  const chance = (noise.density / 100) * 0.12;
+  const chance = (noise.density / 100) * 0.055; // tuned to match Figma's speck count
   for (let y = 0; y < size; y += cell) {
     for (let x = 0; x < size; x += cell) {
       if (rand() < chance) ctx.fillRect(x, y, cell * (0.5 + rand()), cell * (0.5 + rand()));
