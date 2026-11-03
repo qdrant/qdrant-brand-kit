@@ -28,7 +28,7 @@
 <body>
   <main>
     <figure>
-      <img src="reference/luma-background-10.png" alt="Luma-Background-10 exported from Figma" />
+      <img id="reference" alt="Figma export of the selected pattern" />
       <figcaption>Figma</figcaption>
     </figure>
     <figure>
@@ -36,6 +36,8 @@
       <figcaption>Code</figcaption>
     </figure>
     <aside id="panel">
+      <h2>Pattern</h2>
+      <select id="preset"></select>
       <h2>Color family</h2>
       <select id="family"></select>
       <h2>Tokens (placeholders)</h2>
@@ -48,21 +50,20 @@
 
   <script type="module">
     import { loadTokens, resolveToken } from "./patterns/tokens.js";
-    import * as pattern from "./patterns/luma-background-10.js";
 
+    const getJson = (url) => fetch(url).then((r) => r.json());
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
+    const presets = await Promise.all((await getJson("presets/index.json")).map((id) => getJson(`presets/${id}.json`)));
     const canvas = document.getElementById("canvas");
-    const select = document.getElementById("family");
+    const presetSelect = document.getElementById("preset");
+    const familySelect = document.getElementById("family");
+    presets.forEach((preset, i) => presetSelect.add(new Option(preset.name, i)));
 
-    // Any family that has the 300 and 500 steps can be used.
-    for (const [family, steps] of Object.entries(tokens.color)) {
-      if (["300", "500"].every((step) => steps[step])) select.add(new Option(family, family));
-    }
-    select.value = pattern.defaultFamily;
+    let preset, recipe;
 
     const draw = () => {
-      pattern.render(canvas, tokens, select.value);
-      document.getElementById("tokens").innerHTML = Object.values(pattern.colors(select.value))
+      recipe.render(canvas, tokens, preset, familySelect.value);
+      document.getElementById("tokens").innerHTML = Object.values(recipe.colors(preset, familySelect.value))
         .map((ref) => {
           const path = ref.slice(1, -1);
           const hex = resolveToken(tokens, ref);
@@ -70,17 +71,34 @@
         })
         .join("");
     };
-    select.addEventListener("change", draw);
-    document.getElementById("settings").textContent = JSON.stringify(pattern.settings, null, 2);
+
+    const choosePreset = async () => {
+      preset = presets[presetSelect.value];
+      recipe = await import(`./patterns/${preset.recipe}.js`);
+      document.getElementById("reference").src = preset.reference;
+      document.getElementById("settings").textContent = JSON.stringify(preset.settings, null, 2);
+
+      // Any family that has the steps this preset uses can be chosen.
+      const steps = Object.values(preset.colors);
+      familySelect.innerHTML = "";
+      for (const [family, scale] of Object.entries(tokens.color)) {
+        if (steps.every((step) => scale[step])) familySelect.add(new Option(family, family));
+      }
+      familySelect.value = preset.defaultFamily;
+      draw();
+    };
+
+    presetSelect.addEventListener("change", choosePreset);
+    familySelect.addEventListener("change", draw);
 
     document.getElementById("download").addEventListener("click", () => {
       const link = document.createElement("a");
-      link.download = `${pattern.name}.png`;
+      link.download = `${preset.name} ${familySelect.value}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
     });
 
-    draw();
+    choosePreset();
   </script>
 </body>
 </html>

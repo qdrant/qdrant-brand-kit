@@ -1,0 +1,27 @@
+{
+  "name": "Refracted Gradient 01",
+  "recipe": "refracted-gradient",
+  "figma": {
+    "name": "Luma-Background-10",
+    "url": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546"
+  },
+  "reference": "reference/refracted-gradient-01.png",
+  "colors": { "from": "500", "to": "300" },
+  "defaultFamily": "secondary",
+  "settings": {
+    "size": 1080,
+    "gradient": { "angle": 180 },
+    "refraction": {
+      "pattern": "lenticular",
+      "strength": -100,
+      "smoothness": 29,
+      "frost": 0,
+      "dispersion": 100,
+      "x": 50,
+      "y": 50,
+      "r": 24,
+      "a": -120
+    },
+    "noise": { "color": "#C2C5FF", "opacity": 40, "size": 4, "density": 16, "seed": 10 }
+  }
+}

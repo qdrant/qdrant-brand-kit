@@ -1,41 +1,19 @@
-// Luma-Background-10
+// Refracted Gradient (recipe)
 // A gradient, bent into diagonal bands by a lenticular refraction, with noise on top.
-// Every number matches the Figma panel and is fixed. Only the color family changes,
-// and colors are always token names, never hex.
+// The values come from a preset in presets/, for example refracted-gradient-01.json.
+// Presets are fixed. The only choice is the color family, and colors are always
+// token names, never hex.
 
 import { resolveToken, hexToRgba } from "./tokens.js";
 
-export const name = "Luma-Background-10";
-
-// Fixed settings from the Figma panel. These never change for this pattern.
-export const settings = Object.freeze({
-  size: 1080,
-  gradient: { angle: 180 }, // degrees, 180 = top to bottom
-  refraction: {
-    pattern: "lenticular",
-    strength: -100, // -100 to 100
-    smoothness: 29, // %
-    frost: 0, // %
-    dispersion: 100, // %
-    x: 50, // % of width
-    y: 50, // % of height
-    r: 24, // lens width, % of size
-    a: -120, // degrees
-  },
-  noise: { color: "#C2C5FF", opacity: 40, size: 4, density: 16, seed: 10 }, // fixed effect color, %, px, %
+export const colors = (preset, family) => ({
+  from: `{color.${family}.${preset.colors.from}}`,
+  to: `{color.${family}.${preset.colors.to}}`,
 });
 
-// The only choice: which color family. The two steps are fixed.
-export const defaultFamily = "secondary";
-
-export const colors = (family) => ({
-  from: `{color.${family}.500}`,
-  to: `{color.${family}.300}`,
-});
-
-export function render(canvas, tokens, family = defaultFamily) {
-  const { size, gradient, refraction, noise } = settings;
-  const color = colors(family);
+export function render(canvas, tokens, preset, family = preset.defaultFamily) {
+  const { size, gradient, refraction, noise } = preset.settings;
+  const color = colors(preset, family);
   canvas.width = canvas.height = size;
   const ctx = canvas.getContext("2d");
   const image = ctx.createImageData(size, size);
