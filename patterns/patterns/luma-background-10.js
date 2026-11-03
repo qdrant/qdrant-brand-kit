@@ -22,16 +22,15 @@ export const settings = Object.freeze({
     r: 24, // lens width, % of size
     a: -120, // degrees
   },
-  noise: { size: 4, density: 16, opacity: 80, seed: 10 }, // px, %, %
+  noise: { color: "#C2C5FF", opacity: 80, size: 4, density: 16, seed: 10 }, // fixed effect color, %, px, %
 });
 
-// The only choice: which color family. The steps are fixed.
+// The only choice: which color family. The two steps are fixed.
 export const defaultFamily = "secondary";
 
 export const colors = (family) => ({
   from: `{color.${family}.500}`,
   to: `{color.${family}.300}`,
-  noise: `{color.${family}.200}`,
 });
 
 export function render(canvas, tokens, family = defaultFamily) {
@@ -61,8 +60,10 @@ export function render(canvas, tokens, family = defaultFamily) {
   const cx = (refraction.x / 100) * size;
   const cy = (refraction.y / 100) * size;
   const lens = Math.max(1, (refraction.r / 100) * size);
-  const strength = refraction.strength / 100;
-  const soft = Math.max(0.001, refraction.smoothness / 200);
+  // Measured against the Figma export: at strength -100 each lens keeps 62% of the
+  // gradient inside it, and the edges between lenses are sharp 1px steps.
+  const strength = (refraction.strength / 100) * 0.38;
+  const soft = Math.max(0.001, (refraction.smoothness / 100) * 0.01);
   const spread = (refraction.dispersion / 100) * 0.04; // color fringing per channel
   const frost = (refraction.frost / 100) * lens * 0.1;
   const rand = mulberry32(noise.seed + 1);
@@ -83,12 +84,12 @@ export function render(canvas, tokens, family = defaultFamily) {
     }
   }
   ctx.putImageData(image, 0, 0);
-  drawNoise(ctx, resolveToken(tokens, color.noise), size, noise);
+  drawNoise(ctx, size, noise);
 }
 
 // Scattered specks, like Figma's mono noise effect.
-function drawNoise(ctx, hex, size, noise) {
-  const [r, g, b] = hexToRgba(hex);
+function drawNoise(ctx, size, noise) {
+  const [r, g, b] = hexToRgba(noise.color);
   ctx.fillStyle = `rgba(${r * 255}, ${g * 255}, ${b * 255}, ${noise.opacity / 100})`;
   const rand = mulberry32(noise.seed);
   const cell = Math.max(1, noise.size / 2);

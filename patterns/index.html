@@ -54,9 +54,9 @@
     const canvas = document.getElementById("canvas");
     const select = document.getElementById("family");
 
-    // Any family that has the 200, 300 and 500 steps can be used.
+    // Any family that has the 300 and 500 steps can be used.
     for (const [family, steps] of Object.entries(tokens.color)) {
-      if (["200", "300", "500"].every((step) => steps[step])) select.add(new Option(family, family));
+      if (["300", "500"].every((step) => steps[step])) select.add(new Option(family, family));
     }
     select.value = pattern.defaultFamily;
 

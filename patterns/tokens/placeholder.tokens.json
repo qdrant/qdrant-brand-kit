@@ -2,19 +2,40 @@
   "$description": "Placeholder values. Juan's design system will replace the values. Keep the names, so every pattern updates on its own.",
   "color": {
     "primary": {
-      "200": { "$type": "color", "$value": "#FAAEB3", "$description": "Placeholder. From the qdrant-brand skill." },
-      "300": { "$type": "color", "$value": "#FF8792", "$description": "Placeholder. From the qdrant-brand skill." },
-      "500": { "$type": "color", "$value": "#DC244C", "$description": "Placeholder. From the qdrant-brand skill." }
+      "300": {
+        "$type": "color",
+        "$value": "#FF8792",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#DC244C",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      }
     },
     "secondary": {
-      "200": { "$type": "color", "$value": "#C2C5FF", "$description": "Placeholder. From the qdrant-brand skill." },
-      "300": { "$type": "color", "$value": "#9494FF", "$description": "Placeholder. From Figma variable secondary/300." },
-      "500": { "$type": "color", "$value": "#6047FF", "$description": "Placeholder. From Figma variable secondary/500." }
+      "300": {
+        "$type": "color",
+        "$value": "#9494FF",
+        "$description": "Placeholder. From Figma variable secondary/300."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#6047FF",
+        "$description": "Placeholder. From Figma variable secondary/500."
+      }
     },
     "teal": {
-      "200": { "$type": "color", "$value": "#80CBC4", "$description": "Placeholder guess. Not in the brand docs yet." },
-      "300": { "$type": "color", "$value": "#4DB6AC", "$description": "Placeholder guess. Not in the brand docs yet." },
-      "500": { "$type": "color", "$value": "#009688", "$description": "Placeholder. From the qdrant-brand skill." }
+      "300": {
+        "$type": "color",
+        "$value": "#4DB6AC",
+        "$description": "Placeholder guess. Not in the brand docs yet."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#009688",
+        "$description": "Placeholder. From the qdrant-brand skill."
+      }
     }
   }
 }
