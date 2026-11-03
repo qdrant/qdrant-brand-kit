@@ -1,0 +1,12 @@
+{
+  "$description": "Shared by every preset. The noise never changes between patterns.",
+  "settings": {
+    "noise": {
+      "color": "#C2C5FF",
+      "opacity": 40,
+      "size": 4,
+      "density": 16,
+      "seed": 10
+    }
+  }
+}

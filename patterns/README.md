@@ -4,7 +4,7 @@ Brand patterns built in code, so they can live in Design Lab as primitives.
 
 - `tokens/placeholder.tokens.json`: color tokens in W3C format. The values are placeholders until Juan's design system is ready. Keep the names.
 - `patterns/`: recipes. A recipe is a set of effects, for example Refracted Gradient (gradient + refraction + noise) or Refracted Image (library image + blur + refraction + noise). Shared effects live in `patterns/effects.js`.
-- `presets/`: the patterns themselves. Image presets extend `refracted-image.shared.json`, which holds what never changes between them: blur, brand grade, contrast, noise and the list of source images. Each image preset only holds its refraction values.
+- `presets/`: the patterns themselves. Every preset extends `shared.json`, which holds the noise (40%, the same for all patterns). Image presets also extend `refracted-image.shared.json`, which holds what never changes between them: blur, brand grade, contrast and the list of source images. Each image preset only holds its refraction values.
 - Presets: A preset is a recipe with fixed effect values, named after its recipe and a letter: Refracted Gradient A, B and so on. Add new ones to `presets/index.json`.
 - Colorways: the color pairs a preset can use, listed inside the preset. A colorway is two token paths. `{family}` in a path means it works with any family, for example `color.{family}.500 → color.{family}.300`. Fixed pairs, like `color.primary.100 → color.secondary.400`, mix families. New colors mean a new colorway, not a new preset.
 - `reference/`: the Figma export of each preset, to compare against.

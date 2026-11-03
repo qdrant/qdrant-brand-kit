@@ -1,6 +1,7 @@
 {
   "name": "Refracted Gradient A",
   "recipe": "refracted-gradient",
+  "extends": "shared",
   "colorways": [
     {
       "name": "One family, 500 → 300",
@@ -33,13 +34,6 @@
       "y": 50,
       "r": 24,
       "a": -120
-    },
-    "noise": {
-      "color": "#C2C5FF",
-      "opacity": 40,
-      "size": 4,
-      "density": 16,
-      "seed": 10
     }
   }
 }
