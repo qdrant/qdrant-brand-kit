@@ -57,10 +57,10 @@
 
   <script type="module">
     import { loadTokens, resolveToken, colorwayTokens, familiesFor } from "./patterns/tokens.js";
+    import { loadAllPresets } from "./patterns/presets.js";
 
-    const getJson = (url) => fetch(url).then((r) => r.json());
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
-    const presets = await Promise.all((await getJson("presets/index.json")).map((id) => getJson(`presets/${id}.json`)));
+    const presets = await loadAllPresets();
     const canvas = document.getElementById("canvas");
     const presetSelect = document.getElementById("preset");
     const colorwaySelect = document.getElementById("colorway");

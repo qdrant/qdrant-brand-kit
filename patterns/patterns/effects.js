@@ -12,9 +12,11 @@ export function refract(px, size, refraction, seed, sample) {
   const cy = (refraction.y / 100) * size;
   const lens = Math.max(1, (refraction.r / 100) * size);
   // Measured against the Figma export: at strength -100 each lens keeps 62% of the
-  // source inside it, and the edges between lenses are sharp 1px steps.
+  // source inside it.
   const strength = (refraction.strength / 100) * 0.38;
-  const soft = 0.003;
+  // Smoothness blends the lens edges. It's a steep curve: Figma's 29% still gives
+  // sharp 1px edges (measured on Refracted Gradient A), 100% blends the outer 8% of each lens edge.
+  const soft = 0.003 + 0.08 * (refraction.smoothness / 100) ** 4;
   const spread = (refraction.dispersion / 100) * 0.04; // color fringing per channel
   const frost = (refraction.frost / 100) * lens * 0.1;
   const rand = mulberry32(seed);

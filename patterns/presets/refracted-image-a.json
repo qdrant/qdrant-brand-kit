@@ -1,43 +1,10 @@
 {
   "name": "Refracted Image A",
   "recipe": "refracted-image",
+  "extends": "refracted-image.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574",
   "reference": "reference/refracted-image-a.png",
-  "sourceRules": "Any space or astronaut image from the Design Lab library (https://qdrant-design-lab.vercel.app/library). Never the mascot, never a Luma image.",
-  "sources": [
-    {
-      "name": "Astronauts over crater",
-      "image": "sources/astronauts-crater.webp",
-      "library": "Shared by Vanesa"
-    },
-    {
-      "name": "Splitting the Ice Block",
-      "image": "sources/splitting-the-ice-block.png",
-      "library": "https://qdrant-design-lab.vercel.app/library/8d9b1e13-f792-46de-9174-e4ee7566f3cb"
-    }
-  ],
   "settings": {
-    "size": 1080,
-    "grade": {
-      "anchors": [
-        "{color.primary.500}",
-        "{color.secondary.500}"
-      ],
-      "hueSnap": 100,
-      "minSaturation": 45,
-      "minLightness": 40,
-      "maxLightness": 97,
-      "lift": 0.3
-    },
-    "blur": {
-      "radius": 1000
-    },
-    "contrast": {
-      "low": 15,
-      "high": 98,
-      "curve": 70,
-      "midtones": 0.6
-    },
     "refraction": {
       "pattern": "lenticular",
       "strength": -100,
@@ -49,13 +16,6 @@
       "y": 50,
       "r": 24,
       "a": -124
-    },
-    "noise": {
-      "color": "#C2C5FF",
-      "opacity": 48,
-      "size": 4,
-      "density": 16,
-      "seed": 10
     }
   }
 }
