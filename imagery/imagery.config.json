@@ -1,0 +1,65 @@
+{
+  "version": "0.1.0",
+  "_source": "Design Lab brand kit 0.1.0, read on 2026-11-04: brand-kit/primitives/imagery.yaml, profiles/image.yaml, profiles/blog-article-imagery.yaml, Image styles tab",
+
+  "model": {
+    "image": "not confirmed",
+    "image_size": "1536x1024",
+    "options_per_run": 3,
+    "options_note": "3 options of the same scene, different camera, moment or framing. The first is the most literal."
+  },
+
+  "styles": {
+    "default": "default",
+    "list": {
+      "default": {
+        "label": "Default",
+        "description": "The original Design Lab moodboard. Used when a request doesn't name another one.",
+        "guidance": "styles/default/style.md",
+        "max_references": 10,
+        "reference_max_px": 1024,
+        "references": [
+          "styles/default/references/01-image-245.png",
+          "styles/default/references/02-image-252.png",
+          "styles/default/references/03-15-col3-image-248.png",
+          "styles/default/references/04-image-226.png",
+          "styles/default/references/05-18-col3-image-246.png",
+          "styles/default/references/06-image-254.png",
+          "styles/default/references/07-image-215.png",
+          "styles/default/references/08-02-col1-image-183.png",
+          "styles/default/references/09-16-col3-image-179.png",
+          "styles/default/references/10-14-col2-image-256.png"
+        ],
+        "references_note": "Every reference is sent with every generation, in slot order."
+      }
+    }
+  },
+
+  "channels": {
+    "blog":              { "label": "Blog post hero",    "w": 2002, "h": 1122 },
+    "technical_article": { "label": "Technical article", "w": 898,  "h": 300 },
+    "event":             { "label": "Event",             "w": 1080, "h": 1080 },
+    "social_square":     { "label": "Social, square",    "w": 1080, "h": 1080 },
+    "social_portrait":   { "label": "Social, portrait",  "w": 1080, "h": 1350 },
+    "social_wide":       { "label": "Social, wide",      "w": 1920, "h": 1080 }
+  },
+
+  "rules": {
+    "no_text_in_images": "No text, letters, numbers, logos or watermarks. Words on a design come from its template.",
+    "title_never_over_subject": true,
+    "faithful_to_request": "Keep the person's subject, action and setting. Add nothing they didn't ask for.",
+    "describe_scene_not_style": "The style's references set the look; prompts describe only the scene.",
+    "never_with_mascot": "The mascot and realistic imagery are never combined (routing handoff, 2026-10-23)."
+  },
+
+  "review": {
+    "ai": true,
+    "human_approval": false,
+    "checklist": "guidance/review.md"
+  },
+
+  "guidance_files": {
+    "all_images": "guidance/images.md",
+    "invariants": "guidance/invariants.md"
+  }
+}

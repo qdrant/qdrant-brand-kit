@@ -5,6 +5,7 @@ The building blocks for Qdrant Design Lab, written as code. Each folder is one p
 | Primitive | Status | What it is |
 | --- | --- | --- |
 | [`patterns/`](patterns/) | V1, ready to plug in | Brand background and generative patterns at any size and shape, drawn from color tokens. |
+| [`imagery/`](imagery/) | Copied from Design Lab, live there | Generated images in a Qdrant style: rules, channel sizes, review checklist and the Default moodboard references. |
 | [`mascot/`](mascot/) | Handoff, untested on Sunburst | Qbot in 3D (main) and 2D, with approved poses, prompts and scripts for new poses as transparent PNGs. |
 | [`social-template/`](social-template/) | Draft | One HTML template for Qdrant social posts at any size, with a render script and brand checks (MKT-479). |
 
