@@ -1,0 +1,27 @@
+# Mascot-only (legacy). From the outputs matrix (brand-kit/overview/index.html, draft) and docs/build-plan.md Appendix A.
+id: mascot-cutout
+label: Mascot-only (legacy)
+availability: everyone   # everyone, admins (testing) or off. Whether it can be made at all is computed (Brand kit → Output types)
+medium: digital
+kind: image
+legacy: true
+canvas:
+  default: cutout
+  presets:
+    - id: cutout
+      width: 1024
+      height: 1536
+      unit: px
+      label: "Transparent cut-out, sized to the mascot"
+export: [png]
+primitives:
+  required: [mascot]
+  optional: [color]
+  discouraged: [imagery, patterns, logo, cobrand, fonts]
+generator_hints: { image_size: 1024x1536 }
+checks: [resolution, primitives]
+review: { ai: true, human_approval: false }
+options: 1   # one per pose
+transparent: true
+notes: "Today's Mascot-only: one transparent PNG per pose, references from the Mascot moodboard."
+

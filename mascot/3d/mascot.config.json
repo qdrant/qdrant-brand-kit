@@ -63,6 +63,13 @@
   },
   "direction_phrases": { "left": "left of the image", "right": "right of the image" },
 
+  "mood_groups": {
+    "_source": "Design Lab brand-kit/primitives/mascot.yaml and guidance/mascot.md (2026-11-04)",
+    "default": ["happy", "excited", "cheerful", "playful", "friendly", "proud", "loving"],
+    "context": { "curious": "research or Q&A", "helpful": "getting started", "focused": "hands-on workshops", "confused": "debugging", "neutral": "when the title calls for it" },
+    "on_request_only": ["sad", "angry"]
+  },
+
   "variants": {
     "default": { "label": "Default suit", "phrase": "Wearing only the default white suit", "extra_ref": null },
     "hoodie":  { "label": "Red hoodie",   "phrase": "Wearing the red Qdrant hoodie exactly as in the hoodie reference image", "extra_ref": "playful" }

@@ -1,0 +1,15 @@
+# The Qdrant mascot. Official moods are 1024x1024 source drawings; crop and glow per mood are in moods.json.
+id: mascot
+label: Mascot
+moods_file: mascot/moods.json
+moods_dir: mascot/moods
+poses_file: ../config/mascot-poses.yaml   # presets for generated poses (repo root config)
+default_moods: [happy, excited, cheerful, playful, friendly, proud, loving]   # mix-and-match rule 5: upbeat by default
+context_moods: [curious, helpful, focused, confused, neutral]                  # when the title calls for them
+on_request_only: [sad, angry]
+rules:
+  allowed_backgrounds: ok_with_white_mascot    # patterns.json flag (mix-and-match rule 3)
+  glow_color: core.color.mascotGlow
+  min_height: { px: 240, mm: 40 }              # confirm with design
+  max_crop: 0.4                                # share of the figure that may be cut by a frame edge. confirm with design
+

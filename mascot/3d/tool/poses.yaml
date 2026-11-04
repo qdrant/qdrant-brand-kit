@@ -1,0 +1,42 @@
+# Preset poses for the standalone mascot (transparent PNG). Admins can edit these in
+# Admin → Prompts. Each `prompt` is sent to the image model as the pose, inside
+# prompts/mascot-pose.md. Keep poses achievable with the mascot's short, stubby limbs,
+# and describe the eyes: the visor shows only two red pixel eyes, no mouth.
+poses:
+  - id: waving
+    label: Waving
+    prompt: standing and waving hello with one hand raised beside the helmet, happy arc eyes
+  - id: thumbs-up
+    label: Thumbs up
+    prompt: standing with one arm forward giving a thumbs up, happy arc eyes
+  - id: presenting
+    label: Presenting
+    prompt: standing at a slight angle, one arm extended to the side with an open hand as if presenting something next to it, friendly arc eyes
+  - id: laptop
+    label: On a laptop
+    prompt: sitting cross-legged with a small open grey laptop on its lap, typing, focused eyes looking down at the screen
+  - id: celebrating
+    label: Celebrating
+    prompt: jumping with both arms up in celebration, excited arc eyes
+  - id: thinking
+    label: Thinking
+    prompt: standing with one hand touching the side of the visor as if thinking, head tilted slightly, curious round eyes
+  - id: heart
+    label: Heart hands
+    prompt: standing holding both hands together in front of the chest making a heart shape, the visor showing a single red pixel heart instead of eyes
+  - id: trophy
+    label: Holding a trophy
+    prompt: holding a small golden trophy close to the chest with both hands, proud happy arc eyes
+  - id: sitting
+    label: Sitting
+    prompt: sitting on the ground with legs stretched forward and hands resting beside it, relaxed happy arc eyes
+  - id: floating
+    label: Floating in space
+    prompt: floating weightlessly, body tilted, arms and legs slightly spread, delighted arc eyes
+  - id: running
+    label: Running
+    prompt: running forward mid-stride with arms swinging, determined eyes
+  - id: pointing
+    label: Pointing up
+    prompt: standing and pointing upwards with one hand as if showing something above, excited arc eyes
+

@@ -14,4 +14,6 @@ Qbot, the Qdrant mascot, as a Design Lab primitive. Two styles, each a handoff p
 
 ## Notes
 
+- Design Lab has only the 3D mascot today. The 2D style isn't in its brand kit yet.
+- `3d/tool/` mirrors Design Lab's mascot files. See `3d/README.md` for where the two differ.
 - Unlike the other primitives, the mascot needs images: `references/` are model inputs. `previews/` and `samples/` are only for checking the look.

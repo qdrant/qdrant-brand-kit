@@ -23,6 +23,14 @@ The main mascot style in Design Lab. People pick an approved pose from the libra
 | `scripts/finish.mjs` | Trim, even transparent padding, 2048 px long edge | Same as `2d/`, tested there |
 | `scripts/export-references.mjs` | Re-pulls the 14 pose PNGs from Figma by image hash | Needs `FIGMA_TOKEN` |
 | `scripts/generate.mjs` | Reference Sunburst edits call, 1 image | Not run, verify params |
+| `tool/` | Copies of the mascot files in Design Lab's brand kit (2026-11-04): mood rules, crops and glow per mood, the 12 pose presets, the Mascot-only output type | Mirror of the live tool |
+
+## Differences from Design Lab (2026-11-04)
+
+- **Poses:** Design Lab offers 12 presets (`tool/poses.yaml`), each with the eyes written into the pose. This package has 11 poses plus a separate emotion chip and a left/right direction. Not merged yet.
+- **Character description:** Design Lab's invariants say "a red cap on top of the helmet" and "no extra stripes or bands". The Figma renders show a red stripe over the helmet, red seam lines on the suit and red bands at the wrists and ankles, as `mascot.config.json` says. Design Lab's text needs fixing, not this one.
+- **Mood groups:** copied from Design Lab into `mood_groups` in the config: upbeat moods by default, context moods when the title calls for them, sad and angry only on request.
+- **Model and references:** Design Lab generates at 1024×1536, one image per pose, with references from its Mascot moodboard. Which images that moodboard holds isn't visible in the Brand kit.
 
 ## Quick start
 
