@@ -1,0 +1,26 @@
+/* Qdrant logo size and clear space on a canvas.
+   Load after primitives/layout/layout.css: it uses .qd-canvas, data-shape and --qd-canvas-u.
+
+   Logo height in px at each shape's reference canvas (Vanesa, 2026-11-04). It scales with the
+   canvas like the rest of layout/, and never goes under 24 px (Brand Guide 2.0 minimum, 90×24). */
+.qd-canvas[data-shape="ultrawide"] { --qd-canvas-logo-height: 72; } /* 3000×400 */
+.qd-canvas[data-shape="wide"]      { --qd-canvas-logo-height: 80; } /* 1920×1080 */
+.qd-canvas[data-shape="square"]    { --qd-canvas-logo-height: 72; } /* 1080×1080 */
+.qd-canvas[data-shape="portrait"]  { --qd-canvas-logo-height: 72; } /* 1080×1350 */
+.qd-canvas[data-shape="story"]     { --qd-canvas-logo-height: 80; } /* 1080×1920 */
+
+.qd-canvas {
+  --qd-logo-height: max(24px, calc(var(--qd-canvas-logo-height) * var(--qd-canvas-u)));
+  /* Clear space on all four sides: the brandmark's inner cube, 0.375 × the logo height
+     (30 px at an 80 px logo, measured in Figma). The canvas margin counts as clear space. */
+  --qd-logo-clear: calc(var(--qd-logo-height) * 0.375);
+}
+
+/* The logo itself: one of the SVGs in this folder, never redrawn. Width follows the file (300×80). */
+.qd-logo {
+  display: block;
+  flex: none;
+  align-self: flex-start;
+  height: var(--qd-logo-height);
+  width: auto;
+}

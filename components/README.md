@@ -2,7 +2,7 @@
 
 Ready-made pieces for Qdrant creatives, built only from [`primitives/`](../primitives/) (colors, type, spacing, layout) and [`brand-assets/`](../brand-assets/) (patterns, imagery, mascot). Modelled on Primer Brand's components, which sit apart from its layout rules.
 
-**None approved yet.** Until there are some, an agent should say so and ask before laying out a creative.
+**Only the partner lockup is approved so far, and no posts.** Until there are post components, an agent should say so and ask before laying out a creative.
 
 ## Two kinds
 
@@ -27,3 +27,4 @@ Add a row here when it's approved:
 
 | Component | Kind | Use it for | Shapes | Approved |
 | --- | --- | --- | --- | --- |
+| [`partner-lockup`](partner-lockup/) | Part | Qdrant logo + partner logo: plus for collaborations and case studies, divider for regular co-branding | All | Vanesa, 2026-11-04 |

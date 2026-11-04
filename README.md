@@ -25,6 +25,7 @@ Brand materials that components use.
 
 | Folder | Status | What it is |
 | --- | --- | --- |
+| [`brand-assets/logo/`](brand-assets/logo/) | V1 | The Qdrant logo and brandmark as SVG from Figma, which version on which background, size per shape, clear space and placement. |
 | [`brand-assets/patterns/`](brand-assets/patterns/) | V1, ready to plug in | Brand background and generative patterns at any size and shape, drawn from color tokens. |
 | [`brand-assets/imagery/`](brand-assets/imagery/) | Copied from Design Lab, live there | Generated images in a Qdrant style: rules, channel sizes, review checklist and the Default moodboard references. Plus how to prepare speaker headshots. |
 | [`brand-assets/mascot/`](brand-assets/mascot/) | Handoff, untested on Sunburst | Qbot in 3D (main) and 2D, with approved poses, prompts and scripts for new poses as transparent PNGs. |
@@ -33,7 +34,7 @@ Brand materials that components use.
 
 | Folder | Status | What it is |
 | --- | --- | --- |
-| [`components/`](components/) | None approved yet | Ready-made parts (button, speaker card, partner lockup…) and whole posts (event promo, announcement…), built only from primitives and brand assets. |
+| [`components/`](components/) | Partner lockup approved, no posts yet | Ready-made parts (button, speaker card, partner lockup…) and whole posts (event promo, announcement…), built only from primitives and brand assets. |
 
 The old social post template lives in its own archived repo: [qdrant-social-template](https://github.com/vanesaajdini/qdrant-social-template).
 

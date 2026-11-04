@@ -1,0 +1,44 @@
+/* Partner lockup: the Qdrant logo + a plus or a divider + the partner's logo.
+   Load after primitives/layout/layout.css and brand-assets/logo/logo.css: it sizes everything
+   from --qd-logo-height, so the lockup takes the logo's place at the logo's size.
+
+   Spacing measured on Brand Guide 2.0 slide 20 (Figma djCexPSttVyDjQXDo9Rka4, node 1:8532),
+   as a share of the logo height h:
+   - gap between each logo and the separator: 2 cube widths = 0.65 h (52 px at an 80 px logo)
+   - plus: 0.6 h square (48 px at 80), stroke 0.07 h (about 6 px at 80)
+   - divider: 1 line at the logo height, 0.03 h wide, never under 1 px */
+.qd-partner-lockup {
+  --qd-lockup-gap: calc(var(--qd-logo-height) * 0.65);
+  display: flex;
+  flex: none;
+  align-self: flex-start;
+  align-items: center;
+  gap: var(--qd-lockup-gap);
+  height: var(--qd-logo-height);
+  color: inherit; /* plus and divider follow the text color: white on dark, dark on the light card */
+}
+
+/* Both logos the same height, never stretched. */
+.qd-partner-lockup > img {
+  display: block;
+  height: var(--qd-logo-height);
+  width: auto;
+}
+
+.qd-partner-lockup__plus {
+  --qd-lockup-plus: calc(var(--qd-logo-height) * 0.6);
+  --qd-lockup-stroke: calc(var(--qd-logo-height) * 0.07);
+  flex: none;
+  width: var(--qd-lockup-plus);
+  height: var(--qd-lockup-plus);
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% var(--qd-lockup-stroke) no-repeat,
+    linear-gradient(currentColor, currentColor) center / var(--qd-lockup-stroke) 100% no-repeat;
+}
+
+.qd-partner-lockup__divider {
+  flex: none;
+  width: max(1px, calc(var(--qd-logo-height) * 0.03));
+  height: var(--qd-logo-height);
+  background: currentColor;
+}

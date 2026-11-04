@@ -28,6 +28,7 @@ Run these on every creative before it's shown. Render it at the exact size and l
 | --- | --- |
 | Text fits | Any text is cut off, or descenders (g, y, p) are clipped. |
 | Contrast | Text is below WCAG AA against what's behind it: 4.5:1 for body text, 3:1 from 24 px ([colors/](../colors/)). |
-| Logo | The Qdrant logo is missing, redrawn, under 24 px tall, or something sits in its clear space. Partner lockups follow the logo rules. |
+| Logo | The Qdrant logo is missing, redrawn or recolored, not one of the files in [`brand-assets/logo/`](../../brand-assets/logo/), the wrong version for its background (Dark on plain dark, White on patterns, Light on the light card), smaller than its shape's size or under 24 px tall, or something sits in its clear space (0.375 × its height). |
+| Partner lockup | The two logos aren't the same height, one is stretched, their treatments don't match (one full color, one one-color), the gaps or plus aren't the [component's](../../components/partner-lockup/), or it sits over a busy image. |
 | Type | Off the type scale, Bold instead of SemiBold, right-aligned, or with effects on text ([typography/](../typography/)). |
 | Images load | A photo, logo or font didn't load. |

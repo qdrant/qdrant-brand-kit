@@ -97,7 +97,10 @@ Never allowed:
 - **Must:** the Qdrant logo leads the content, at its **top-left**:
   - on the canvas, inside the margins, when text sits on the canvas or in a zone;
   - on the card, inside its padding, when text sits on a light card.
-- Size, clear space and the other logo checks are in [`primitives/layout/checks.md`](../primitives/layout/checks.md).
+- **Must:** the right version for the background: **Dark** on plain dark and dark images, **White** on any pattern, **Light** on the light card. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
+- When it can't sit top-left (no room, a busy area, the visual must lead), the agent moves it following the Brand Guide's placement rules and says where and why.
+- With a partner, the [partner lockup](../components/partner-lockup/) takes the logo's place.
+- The logo checks are in [`primitives/layout/checks.md`](../primitives/layout/checks.md).
 
 ## 9. Text length
 
