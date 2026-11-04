@@ -1,4 +1,4 @@
-// Measures a rendered creative for tools/check.py. tools/render.py adds this script to every page.
+// Measures a rendered creative for review/check.py. review/render.py adds this script to every page.
 // It only records what is on the page (positions, sizes, fonts, colors, files). Mechanics only:
 // every rule and brand value is applied later by check.py, from the repo's own files.
 (function () {

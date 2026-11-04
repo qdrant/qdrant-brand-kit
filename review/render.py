@@ -2,17 +2,17 @@
 """Render a creative at exact sizes and measure it.
 
 Usage:
-  python3 tools/render.py page.html --sizes 1080x1080,1080x1350,1080x1920 --out OUT_DIR [--name alt-1]
+  python3 review/render.py page.html --sizes 1080x1080,1080x1350,1080x1920 --out OUT_DIR [--name alt-1]
 
 For each size it writes OUT_DIR/<name>-<shape>.png (exactly W x H) and OUT_DIR/<name>-<shape>.json
-(what tools/measure.js found on the page), plus <name>-<shape>.bg.png (the same render with the text
-hidden, for the contrast check). Then run tools/check.py on the JSON files.
+(what review/measure.js found on the page), plus <name>-<shape>.bg.png (the same render with the text
+hidden, for the contrast check). Then run review/check.py on the JSON files.
 
 How it serves the page (no files are copied anywhere):
   /          -> the folder that holds page.html (or --root)
   /repo/...  -> this repo, so pages load  /repo/primitives/layout/layout.css  etc.
                (a page one folder deeper can also use ../repo/...)
-  /tools/... -> this folder; /tools/measure.js is added to every page automatically
+  /review/... -> this folder; /review/measure.js is added to every page automatically
 
 The page gets ?w=W&h=H. primitives/layout/canvas.js reads them, so the shape is always right,
 whatever size Chrome gives the window. Mechanics only: no brand values live in this script.
@@ -43,7 +43,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def translate_path(self, path):
         p = path.split("?", 1)[0].split("#", 1)[0]
-        for prefix, root in (("/repo/", REPO), ("/tools/", TOOLS)):
+        for prefix, root in (("/repo/", REPO), ("/review/", TOOLS)):
             if p.startswith(prefix):
                 return os.path.join(root, p[len(prefix):])
         return os.path.join(self.server.page_root, p.lstrip("/"))
@@ -52,7 +52,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         path = self.translate_path(self.path)
         if path.endswith(".html") and os.path.isfile(path):
             html = open(path, encoding="utf-8").read()
-            tag = '<script src="/tools/measure.js"></script>'
+            tag = '<script src="/review/measure.js"></script>'
             html = html.replace("</body>", tag + "</body>") if "</body>" in html else html + tag
             data = html.encode("utf-8")
             self.send_response(200)

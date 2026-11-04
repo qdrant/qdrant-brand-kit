@@ -137,7 +137,7 @@ Every crop is editorial, never accidental.
 - **What counts as a "large" empty band:** no threshold yet.
 - **Minimum size:** `mascot/3d/tool/mascot.yaml` has 240 px (marked "confirm with design"). Its `max_crop: 0.4` doesn't fit the Close-up and Peek crops; the crop table above replaces it once Design Lab is updated.
 - **Pose landmarks:** a table per pose (face box, chest logo box, neck, upper chest and waist rows) so every agent crops the same way. Measured so far, in the 1024 × 1024 source: excited waist 680, happy below the chest logo 710, playful upper chest 535.
-- **Checker:** `tools/check.py` doesn't measure the Qbot rules yet (row "Qbot" in [`primitives/layout/checks.md`](../primitives/layout/checks.md)); judge them by eye until it does.
+- **Checker:** `review/check.py` doesn't measure the Qbot rules yet (row "Qbot" in [`primitives/layout/checks.md`](../primitives/layout/checks.md)); judge them by eye until it does.
 - **The crop for the happy pose** in `tool/moods.json` doesn't match Figma: see [`mascot/3d/`](../brand-assets/mascot/3d/), "In progress".
 
 ## 7. Product screens

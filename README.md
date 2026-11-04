@@ -40,11 +40,11 @@ Brand materials that components use.
 
 The old social post template lives in its own archived repo: [qdrant-social-template](https://github.com/vanesaajdini/qdrant-social-template).
 
-## Tools
+## Review
 
 | Folder | Status | What it is |
 | --- | --- | --- |
-| [`tools/`](tools/) | New | Render a creative at exact sizes, check it against the rules, make a contact sheet. Mechanics only: every value comes from the repo. |
+| [`review/`](review/) | New | Review a creative before it's shown: render it at exact sizes, check it against the rules, make a contact sheet. Mechanics only: every value comes from the repo. |
 
 ## Shared rules
 

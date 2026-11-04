@@ -10,7 +10,7 @@
     return "story";
   }
   function fit() {
-    // ?w=1080&h=1350 wins over the window (tools/render.py uses it: headless Chrome's window
+    // ?w=1080&h=1350 wins over the window (review/render.py uses it: headless Chrome's window
     // height isn't reliable). Otherwise the window size.
     var q = new URLSearchParams(location.search);
     var w = +q.get("w") || window.innerWidth, h = +q.get("h") || window.innerHeight;

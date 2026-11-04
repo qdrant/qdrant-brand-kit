@@ -2,7 +2,7 @@
 """Contact sheet: every render in one labelled PNG.
 
 Usage:
-  python3 tools/sheet.py OUT_DIR [--out OUT_DIR/contact-sheet.png] [--width 2400]
+  python3 review/sheet.py OUT_DIR [--out OUT_DIR/contact-sheet.png] [--width 2400]
 
 Rows are the names (alt-1, alt-2, …), columns the shapes, in the order
 ultrawide, wide, square, portrait, story. Labels use the repo's Mona Sans. Needs Pillow.

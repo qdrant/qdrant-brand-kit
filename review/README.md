@@ -1,6 +1,8 @@
-# Tools
+# Review
 
-Render a creative at exact sizes, check it against the repo's rules, and put the results on one contact sheet. For agents and people making creatives, and for testing the repo.
+Review a creative before it's shown: render it at exact sizes, check it against the repo's rules, and put the results on one contact sheet. For agents and people making creatives, and for testing the repo.
+
+For generated images, also use the image checklist in [`brand-assets/imagery/guidance/review.md`](../brand-assets/imagery/guidance/review.md). A brand taste review (scoring and calibrated likes and dislikes) will be added here later.
 
 **Mechanics only.** These scripts never decide a size, color or layout. Every rule value comes from the repo's own files (`primitives/layout/layout.tokens.json`, `primitives/typography/typography.tokens.json`, `brand-assets/logo/logo.css`). If the repo doesn't give a value, the check says so instead of guessing.
 
@@ -16,9 +18,9 @@ Needs Google Chrome and Python 3 with Pillow (`pip install pillow`). Nothing els
 ## Use
 
 ```bash
-python3 tools/render.py my-ad.html --out out/ --name alt-1 --sizes 1080x1080,1080x1350,1080x1920
-python3 tools/check.py "out/*.json" --md out/report.md
-python3 tools/sheet.py out/
+python3 review/render.py my-ad.html --out out/ --name alt-1 --sizes 1080x1080,1080x1350,1080x1920
+python3 review/check.py "out/*.json" --md out/report.md
+python3 review/sheet.py out/
 ```
 
 Write the page like this:

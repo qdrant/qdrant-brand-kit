@@ -2,9 +2,9 @@
 """Check rendered creatives against the repo's rules.
 
 Usage:
-  python3 tools/check.py OUT_DIR/*.json [--md report.md]
+  python3 review/check.py OUT_DIR/*.json [--md report.md]
 
-Reads the measurements tools/render.py wrote, and the PNG next to each. Every rule value comes from
+Reads the measurements review/render.py wrote, and the PNG next to each. Every rule value comes from
 the repo's own files (layout tokens, typography tokens, logo.css), never from this script. If a value
 is missing in the repo, the check says so instead of guessing.
 

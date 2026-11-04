@@ -12,7 +12,7 @@ This repo is the Qdrant marketing brand system: the rules and materials for **cr
    - [`primitives/layout/checks.md`](primitives/layout/checks.md): what every creative must pass.
    - Then **only** what you use: [`brand-assets/logo/`](brand-assets/logo/), [`patterns/`](brand-assets/patterns/), [`imagery/`](brand-assets/imagery/) (incl. `headshots/`), [`mascot/`](brand-assets/mascot/), and the parts in [`components/`](components/) (button, headshot-card, headshot-circle, partner-lockup).
 3. **Build** in HTML/CSS with the repo's CSS and classes. Never redraw the logo, a part or a pattern.
-4. **Render and check** with [`tools/`](tools/): `render.py`, `check.py`, `sheet.py`. Fix every fail, then look at each render yourself (the checker lists what it can't judge).
+4. **Review it** with [`review/`](review/): `render.py`, `check.py`, `sheet.py`. Fix every fail, then look at each render yourself (the checker lists what it can't judge).
 5. **Show** the contact sheet and say what you'd ask or change.
 
 ## Never
