@@ -102,4 +102,4 @@ Secondary has an optional leading icon (GitHub logo, 18 / 20 / 22px, gap 8 / 10 
 
 ## Approved by / date
 
-Not approved yet.
+Vanesa, 2026-11-04.

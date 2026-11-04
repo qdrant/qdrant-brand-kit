@@ -102,4 +102,4 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 
 ## Approved by / date
 
-Not approved yet.
+Vanesa, 2026-11-04.

@@ -95,4 +95,4 @@ Use `.qd-grid`. Rows are a `section` gap apart.
 
 ## Approved by / date
 
-Not approved yet.
+Vanesa, 2026-11-04.
