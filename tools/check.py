@@ -133,8 +133,8 @@ def check_one(m, rules):
     if not cr:
         add("Text sizes", "missing in repo", "no semantic.creative in typography.tokens.json", "typography README")
     else:
-        story = shape == "story"
-        val = lambda k: px(cr[k]["$extensions"]["qdrant"]["story"] if story else cr[k]["$value"])
+        ext = lambda k: cr[k].get("$extensions", {}).get("qdrant", {})
+        val = lambda k: px(ext(k).get(shape, cr[k]["$value"]))
         sizes = sorted({round(t["fontSize"], 1) for t in main}, reverse=True)
         add("Two text sizes", len(sizes) <= 2, f"sizes used: {sizes} px (button and speaker parts not counted)",
             "guidelines §11 rule 6")
