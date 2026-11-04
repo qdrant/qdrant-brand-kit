@@ -83,11 +83,62 @@ Never allowed:
 - Qbot and a product screen together.
 - Charts or stats straight on a pattern. Put them on a card, or use a plain background.
 
-## 6. Qbot on a pattern
+## 6. Qbot in a creative
 
-- Qbot works on **any** pattern, in any family or colorway.
-- Qbot may **overlap the edge of a card**, but never covers text, the logo or the button.
-- One Qbot per creative. 3D and 2D are never mixed ([`brand-assets/mascot/`](../brand-assets/mascot/)).
+Qbot is one hero (section 5). It works on **any** pattern, in any family or colorway, or on the plain background. One Qbot per creative; 3D and 2D are never mixed ([`brand-assets/mascot/`](../brand-assets/mascot/)). Decided by Vanesa on 2026-11-04, from the examples in the [Brand Design System, Mascot section](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18151) (examples 1 to 5, left to right).
+
+### Where it sits
+
+- **Must: text first, Qbot below.** The logo, title, supporting line and button sit at the top; Qbot fills the space under them. Never put Qbot between two text blocks. (An exception to section 11 rule 7, like the Zone layout.)
+- **Suggest:** bottom center, or toward the bottom-right corner.
+- **Must: no large empty band above Qbot.** If Qbot sits at the bottom with a lot of room over its head, make it bigger or show more of the body.
+- **Wide and ultra-wide:** the text block takes half the grid on the left (6 of 12 columns); Qbot fills the right half, anchored to the bottom.
+- **Zone layout:** Qbot stands in the pattern zone. Its head may rise above the zone line into the plain zone, as long as it touches no text, logo or button.
+
+### How big
+
+- **Must: Qbot fills the free space below the text** (on wide, the right half). The space starts one `section` gap under the lowest text, logo or button and runs to the canvas edge that trims Qbot. A longer title means a smaller Qbot. The crop names what shows; the size always follows the free space.
+
+### Crops
+
+Every crop is editorial, never accidental.
+
+| Crop | What shows | Example |
+| --- | --- | --- |
+| Full figure | The whole body, inside the canvas or just touching the bottom edge | 1, 3 |
+| Half body | Cut at the waist by the bottom edge | 5 |
+| Close-up | Head and chest, cut below the chest logo | 2 |
+| Peek | Head and shoulders, cut at the upper chest, never right under the helmet | 4 |
+
+- **Must: never cut the face.** Keep the chest logo whole, except in the Peek crop.
+- **Must: only the bottom edge trims Qbot,** plus the right edge when Qbot sits in the bottom-right corner. Never the top or the left edge.
+- **Stories:** measure the crop from the bottom safe-zone line (344 px from the bottom). The face and the chest logo stay above that line; the body below it runs off the edge.
+- Clothing on a pose (the hoodie wordmark, for example) may show. It's part of the character.
+
+### Direction and pose
+
+- **Must:** in a corner, Qbot faces or turns toward the canvas and the text. No side views looking out of the frame.
+- Moods follow the mascot mood groups: upbeat by default, context moods when the title calls for them, sad and angry only on request.
+
+### Overlaps
+
+- **Must: Qbot never covers text, the logo or the button.** Its glow may sit behind text as long as the contrast check passes.
+- Qbot may overlap the edge of a card and the zone line.
+
+### Glow
+
+- **Must:** the glow is on or off per mood, as [`mascot/3d/tool/moods.json`](../brand-assets/mascot/3d/tool/moods.json) sets it (the Figma mascot component).
+- Use `.qd-mascot--glow` from [`mascot/3d/mascot.css`](../brand-assets/mascot/3d/mascot.css). It follows Qbot's outline and matches the Figma component. The glow barely shows on violet patterns and reads best on the plain dark background; that's expected.
+
+### In progress (2026-11-04, Vanesa continues on 2026-11-05)
+
+- **Wide contrast:** at 6 columns the supporting line can land on the light end of a Color-Refracted pattern and fail contrast (2.91 in the test). Not decided: shorten the line, use another pattern on wide (which breaks section 10), or accept it.
+- **How far a crop may stretch:** "no empty band" can show more body than the crop's name. No limit yet (the test capped the Peek at row 700 and the Close-up at row 800 of the 1024 source).
+- **What counts as a "large" empty band:** no threshold yet.
+- **Minimum size:** `mascot/3d/tool/mascot.yaml` has 240 px (marked "confirm with design"). Its `max_crop: 0.4` doesn't fit the Close-up and Peek crops; the crop table above replaces it once Design Lab is updated.
+- **Pose landmarks:** a table per pose (face box, chest logo box, neck, upper chest and waist rows) so every agent crops the same way. Measured so far, in the 1024 × 1024 source: excited waist 680, happy below the chest logo 710, playful upper chest 535.
+- **Checker:** `tools/check.py` doesn't measure the Qbot rules yet (row "Qbot" in [`primitives/layout/checks.md`](../primitives/layout/checks.md)); judge them by eye until it does.
+- **The crop for the happy pose** in `tool/moods.json` doesn't match Figma: see [`mascot/3d/`](../brand-assets/mascot/3d/), "In progress".
 
 ## 7. Product screens
 
@@ -126,7 +177,7 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 4. **Suggest: left-aligned by default.** Centered is fine when the whole composition is symmetric and nothing sits beside the text, e.g. a title with the date and time under it, or a story with one centered hero. The agent decides.
 5. **Must: never mix alignments, never right-align.** All the text in a creative is either left-aligned or centered. Left-aligned items share the same left edge.
 6. **Must: two text sizes.** One title in Mona Sans SemiBold, Title Case, sized by its length, and one supporting size for everything else (body, date, time, place). Names and roles inside the headshot parts are the only exception. Sizes and the Geist Mono rule (one or two words only) are in [`primitives/typography/`](../primitives/typography/), "Text in creatives". Mona Sans is always Title Case; Mona Sans Condensed is always all caps and only for special occasions, when asked.
-7. **Must: spread the content, top and bottom.** The logo and title block are anchored at the top margin, the supporting line and the button at the bottom margin, and the visual (pattern zone, Qbot, speakers, product screen) fills the space between. Never stack everything at the top with empty space below. **Exception, the Zone layout (section 4):** all the text stays in the plain zone, the button goes beside the logo, and the pattern zone holds only the visual (decided 2026-11-04).
+7. **Must: spread the content, top and bottom.** The logo and title block are anchored at the top margin, the supporting line and the button at the bottom margin, and the visual (pattern zone, Qbot, speakers, product screen) fills the space between. Never stack everything at the top with empty space below. **Exception, the Zone layout (section 4):** all the text stays in the plain zone, the button goes beside the logo, and the pattern zone holds only the visual (decided 2026-11-04). **Exception, Qbot (section 6):** all the text, the button included, sits at the top and Qbot fills the space below (decided 2026-11-04).
 8. **Must: text blocks are at least half the grid wide:** 3 of 6 columns on square and portrait, 6 of 12 on wide, 2 of 4 on story. If the text doesn't fit beside the visual at that width, it goes above or below it. Never squeeze text into a narrow column (decided 2026-11-04).
 9. **Suggest: related things sit close, unrelated things further apart.** The `tight` gap inside a group (date + place), `group` between items in a block (title + supporting line), `section` between blocks (text vs speakers) ([`primitives/layout/`](../primitives/layout/)). Leftover space goes between the top block and the bottom block, where the visual is, never spread evenly between every line.
 10. **Must: the button goes in one of two places,** at its own size, never full width ([`components/button/`](../components/button/)):

@@ -14,6 +14,7 @@ The main mascot style in Design Lab. People pick an approved pose from the libra
 
 | Path | What it is | Status |
 | --- | --- | --- |
+| `mascot.css` | `.qd-mascot` and `.qd-mascot--glow` for creatives: the Figma component's glow as drop-shadows, scaled with Qbot's size. Placement rules are in [guidelines/](../../../guidelines/) section 6 | Ready, matched to Figma 2026-11-04 |
 | `mascot.config.json` | Single source of truth: locked character, 13 emotions (Figma mood names), mood groups, the 12 Design Lab pose presets, variants, references, finish settings | Ready |
 | `prompts/` | Master (Sunburst), detail rewriter, tweak, review prompts | Ready, untested on Sunburst |
 | `references/master.png` | Master character, transparent PNG, 1002×1442 | Ready |
@@ -51,3 +52,9 @@ npm run finish -- references/loving.png --out test.png
 - Background path A (native transparent) vs B (grey + BiRefNet): decided by the feasibility test
 - One automatic retry when a generation fails the review: waiting on Neil to confirm it fits the monthly cost cap
 - Who can promote outputs into the approved library
+
+## In progress (2026-11-04, Vanesa continues on 2026-11-05)
+
+- **`tool/moods.json` crop for happy** doesn't match the Figma mascot frame (built from it, the frame was off by a mean of 32 / 255; a plain `object-fit: cover` matched). The other moods' `rect` and `crop` aren't checked yet. The file mirrors Design Lab, so the fix goes there too.
+- **`tool/mascot.yaml`:** `min_height` 240 px is still to confirm, and `max_crop: 0.4` doesn't fit the Close-up and Peek crops in guidelines section 6.
+- **Pose landmarks** (face box, chest logo box, neck, upper chest and waist rows per pose), so agents crop the same way: see guidelines section 6, "In progress".

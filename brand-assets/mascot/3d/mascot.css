@@ -1,0 +1,33 @@
+/* Qbot (3D) in creatives. Load primitives/colors/colors.css first.
+   Placement rules: guidelines/README.md section 6 (Vanesa, 2026-11-04).
+
+   Use an approved pose PNG from references/ as it is (1024x1024, transparent).
+   Crop its empty margins in CSS with object-view-box (source px), so the <img> box
+   is only the visible figure, cut at the crop row:
+
+     <img class="qd-mascot qd-mascot--glow" src=".../references/happy.png"
+          style="object-view-box: inset(40px 120px 314px 120px); --qd-mascot-glow-scale: 1.2">
+
+   Glow: on or off per mood, as tool/moods.json says. */
+
+.qd-mascot {
+  display: block;
+  max-width: none;
+  object-fit: fill;
+}
+
+/* The Figma mascot component's shadow stack (Brand Design System, node 20774:17772),
+   as drop-shadows so it follows Qbot's outline. Matched against Figma on 2026-11-04
+   (mean difference 0.34 / 255); a box-shadow on the box does not match.
+   Figma blurs are halved: CSS drop-shadow takes the standard deviation.
+   --qd-mascot-glow-scale = Qbot's size ÷ its size in the 556 x 800 component.
+   The fifth Figma layer (0% opacity) is left out. */
+.qd-mascot--glow {
+  --g: var(--qd-mascot-glow-scale, 1);
+  --qd-mascot-glow: var(--qd-color-mascotGlow, #976BFF);
+  filter:
+    drop-shadow(0 calc(-20.447px * var(--g))  calc(21.725px * var(--g)) color-mix(in srgb, var(--qd-mascot-glow) 10%, transparent))
+    drop-shadow(0 calc(-79.233px * var(--g))  calc(39.617px * var(--g)) color-mix(in srgb, var(--qd-mascot-glow) 9%, transparent))
+    drop-shadow(0 calc(-178.914px * var(--g)) calc(53.674px * var(--g)) color-mix(in srgb, var(--qd-mascot-glow) 5%, transparent))
+    drop-shadow(0 calc(-319.489px * var(--g)) calc(63.898px * var(--g)) color-mix(in srgb, var(--qd-mascot-glow) 1%, transparent));
+}

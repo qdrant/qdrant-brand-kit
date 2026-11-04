@@ -21,6 +21,7 @@ This repo is the Qdrant marketing brand system: the rules and materials for **cr
 - Change an approved pattern, the logo or an approved part. Never redraw them.
 - Use Bold for titles, right-align text, mix alignments, or use more than two text sizes outside the headshot parts.
 - Put Qbot with headshots or with a generated image, or use two heroes.
+- Put Qbot between text blocks or over text, the logo or the button, or cut its face ([`guidelines/`](guidelines/) section 6). Use `.qd-mascot--glow` from `brand-assets/mascot/3d/mascot.css`, never your own glow.
 - Use red as a background without the person's yes.
 - Spend money (Design Lab or image generations) without asking first.
 - Save working files, renders or photos inside this repo. Work in a folder outside it, with absolute paths.
