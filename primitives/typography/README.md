@@ -79,7 +79,7 @@ Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabN
 | Title, 11 words or more | same | 64 | 72 |
 | Supporting (body, date, time, place) | Mona Sans Regular, line height 1.2, letter spacing -0.5 | 36 | 40 |
 
-- **Title Case, Mona Sans regular width.** All caps and the condensed width (`social-event-title`, `display-condensed-*`) are for special occasions only, when the person asks for them.
+- **Mona Sans is always Title Case, never all caps.** **Mona Sans Condensed is always all caps**, and only for special occasions, when the person asks for it (`social-event-title`, `display-condensed-*`).
 - **Geist Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans.
 - **Ultrawide** (3000×400) sizes aren't set yet: ask.
 - The `social-*` styles above stay as the Figma reference. For creatives, use this table.
