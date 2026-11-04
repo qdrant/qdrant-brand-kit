@@ -40,10 +40,10 @@ def check(path):
     if w != h:
         problems.append(f"is {w}x{h}, needs to be square")
     if min(w, h) < MIN_SIZE:
-        problems.append(f"is {min(w, h)} px, needs at least {MIN_SIZE} px (boost resolution in Figma)")
+        problems.append(f"is {min(w, h)} px, needs at least {MIN_SIZE} px (use a bigger photo with prepare-headshot.py)")
 
     if "A" not in im.getbands() and "transparency" not in im.info:
-        problems.append("has no transparency: remove the background in Figma")
+        problems.append("has no transparency: run prepare-headshot.py to remove the background")
         return problems
     im = im.convert("RGBA")
     alpha = im.getchannel("A")

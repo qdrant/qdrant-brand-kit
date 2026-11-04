@@ -20,7 +20,7 @@ Generated images in a Qdrant image style: blog heroes, article images, social an
 | `guidance/review.md` | The review checklist |
 | `styles/default/style.md` | Default style guidance |
 | `styles/default/references/` | The 10 Default moodboard images, in slot order, as stored in Design Lab |
-| `headshots/` | Choosing and preparing speaker photos (Brand Guide slide 56) without Figma: `prepare-headshot.py` and `check-headshot.py`. Not generated images |
+| `headshots/` | Choosing and preparing speaker photos (Brand Guide slide 56): `prepare-headshot.py` and `check-headshot.py`. Not generated images |
 
 ## Channel sizes
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Turn a speaker's photo into a headshot cutout, without Figma.
+"""Turn a speaker's photo into a headshot cutout.
 
 Usage:
   python3 prepare-headshot.py photo.jpg                 # writes photo-cutout.png next to it
@@ -75,8 +75,7 @@ def remove_background(im):
     except ImportError:
         raise ValueError(
             "the photo still has its background, and rembg isn't installed.\n"
-            '  - install it: pip install "rembg[cpu]"\n'
-            "  - or remove the background in any tool you have and run this again on the PNG."
+            '  - install it: pip install "rembg[cpu]"'
         )
     return remove(im.convert("RGB")).convert("RGBA")
 

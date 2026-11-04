@@ -4,7 +4,7 @@ How to choose and prepare a speaker's photo before it goes into [`headshot-card`
 
 Qdrant doesn't shoot these photos. The job is choosing a good one and treating it the same way every time. From Brand Guide 2.0, slide 56 "Headshot Treatment" (Figma `djCexPSttVyDjQXDo9Rka4`, [node 1:12057](https://www.figma.com/design/djCexPSttVyDjQXDo9Rka4/?node-id=1-12057)).
 
-**No Figma needed.** `prepare-headshot.py` does the whole treatment on your own computer. Figma is one other way to do it, not a requirement.
+Photos are prepared with `prepare-headshot.py`, using open-source tools that run on your own computer.
 
 | File | What it is |
 | --- | --- |
@@ -47,13 +47,7 @@ Nothing here is installed by the brand system. Whoever runs the script installs 
 | rembg | Removing the background | `pip install "rembg[cpu]"` (downloads a ~170 MB model the first time) |
 | Real-ESRGAN (optional) | Boosting small photos | The portable `realesrgan-ncnn-vulkan` from the [releases page](https://github.com/xinntao/Real-ESRGAN/releases), on the PATH. No Python needed |
 
-If rembg is missing, the script still works on photos whose background is already removed, and says what to install when it isn't.
-
-### Other ways to remove the background
-
-Any tool works as long as the result passes `check-headshot.py`: Figma (Image → Image tools (AI) → Remove background, and Boost Resolution), or another editor. Then run `prepare-headshot.py` on the PNG to get the same adjustments and framing as everyone else.
-
-Avoid online background removers for speakers' photos unless the speaker has agreed: they upload the photo to a third party.
+If rembg is missing, the script still works on photos that are already cutouts, and says what to install when a photo still has its background.
 
 ## 3. The standard framing
 
@@ -70,7 +64,7 @@ The components rely on this framing to place the head.
 python3 brand-assets/imagery/headshots/check-headshot.py path/to/cutout.png
 ```
 
-`prepare-headshot.py` already runs this. Run it on its own for cutouts made another way. It checks: transparent background, square and at least 512 px, color (not black and white), the head not cut off and 2 to 8% from the top, shoulders running off the bottom, and not a close-up. It can't judge lighting or expression: that's the checklist in step 1.
+`prepare-headshot.py` already runs this at the end. Run it on its own to recheck a cutout. It checks: transparent background, square and at least 512 px, color (not black and white), the head not cut off and 2 to 8% from the top, shoulders running off the bottom, and not a close-up. It can't judge lighting or expression: that's the checklist in step 1.
 
 ## Examples
 
@@ -80,3 +74,8 @@ python3 brand-assets/imagery/headshots/check-headshot.py path/to/cutout.png
 
 - **Every speaker has a photo.** If one is missing, ask for it. Don't make a post without it.
 - **Never with Qbot.** Headshots and the mascot don't appear in the same creative.
+- **Prepare with `prepare-headshot.py` only.** Never upload speakers' photos to online background removers.
+
+## Still open
+
+- **Design Lab tool:** so people can prepare a headshot from Claude or the Create screen without installing anything. Design Lab would run `prepare-headshot.py` on its server. To request from Neil.
