@@ -37,3 +37,7 @@
 
 /* A list of circles: one per row on story, two per row on square and portrait, one row on ultrawide.
    Use .qd-grid with --qd-span (see README). Rows are a section gap apart. */
+
+/* On a pattern: put .qd-on-pattern on the canvas or the row. Roles switch to neutral-300, which
+   keeps 3:1 down to secondary-500 (text.secondary fails on violet patterns). Vanesa, 2026-11-04. */
+.qd-on-pattern .qd-headshot-circle__role { color: var(--qd-color-neutral-300); }

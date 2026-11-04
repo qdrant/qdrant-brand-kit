@@ -119,16 +119,17 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 
 1. **Must: never make up content.** Use only the copy, dates, speakers and links the person gives. Write copy only when asked.
 2. **Suggest: reading order.** Logo → title → supporting line → date, time and place → speakers → button. On tall sizes it runs top to bottom. On wide sizes, text is on the left and the visual on the right.
-3. **Suggest: avoid eyebrows** (the small label above the title). They make creatives look AI-generated. Don't suggest one; use one only when the person asks for it. A series or event type ("Vector Space Talks", "Webinar") will go in a badge component, still to come.
+3. **Suggest: avoid eyebrows** (the small label above the title). They make creatives look AI-generated. Don't suggest one; use one only when the person asks for it. A series or event type ("Vector Space Talks", "Webinar") will go in a badge component, still to come. Until the badge exists, leave the series out (decided 2026-11-04).
 4. **Suggest: left-aligned by default.** Centered is fine when the whole composition is symmetric and nothing sits beside the text, e.g. a title with the date and time under it, or a story with one centered hero. The agent decides.
 5. **Must: never mix alignments, never right-align.** All the text in a creative is either left-aligned or centered. Left-aligned items share the same left edge.
 6. **Must: two text sizes.** One title in Mona Sans SemiBold, Title Case, sized by its length, and one supporting size for everything else (body, date, time, place). Names and roles inside the headshot parts are the only exception. Sizes and the Geist Mono rule (one or two words only) are in [`primitives/typography/`](../primitives/typography/), "Text in creatives". Mona Sans is always Title Case; Mona Sans Condensed is always all caps and only for special occasions, when asked.
 7. **Must: spread the content, top and bottom.** The logo and title block are anchored at the top margin, the supporting line and the button at the bottom margin, and the visual (pattern zone, Qbot, speakers, product screen) fills the space between. Never stack everything at the top with empty space below.
-8. **Suggest: related things sit close, unrelated things further apart.** The `tight` gap inside a group (date + place), `group` between items in a block (title + supporting line), `section` between blocks (text vs speakers) ([`primitives/layout/`](../primitives/layout/)). Leftover space goes between the top block and the bottom block, where the visual is, never spread evenly between every line.
-9. **Must: the button goes in one of two places,** at its own size, never full width ([`components/button/`](../components/button/)):
+8. **Must: text blocks are at least half the grid wide:** 3 of 6 columns on square and portrait, 6 of 12 on wide, 2 of 4 on story. If the text doesn't fit beside the visual at that width, it goes above or below it. Never squeeze text into a narrow column (decided 2026-11-04).
+9. **Suggest: related things sit close, unrelated things further apart.** The `tight` gap inside a group (date + place), `group` between items in a block (title + supporting line), `section` between blocks (text vs speakers) ([`primitives/layout/`](../primitives/layout/)). Leftover space goes between the top block and the bottom block, where the visual is, never spread evenly between every line.
+10. **Must: the button goes in one of two places,** at its own size, never full width ([`components/button/`](../components/button/)):
    - last in the text block, aligned with the text; or
    - top-right, level with the logo and **the same height as the logo** (never taller), when there isn't room at the bottom or the visual needs it, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635).
-10. **Ask: if the content doesn't fit, ask.** If it can't fit the size without breaking a rule, ask the person to cut it. Never shrink text below the type scale.
+11. **Ask: if the content doesn't fit, ask.** If it can't fit the size without breaking a rule, ask the person to cut it. Never shrink text below the type scale.
 
 ## Changing these rules
 

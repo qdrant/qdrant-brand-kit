@@ -66,6 +66,7 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 - **Always a photo.** Every speaker has one. If a photo is missing, stop and ask for it. Never use initials, a silhouette or text only in its place.
 - **Prepared cutouts only.** Every photo is a cutout that passes [`brand-assets/imagery/headshots/`](../../brand-assets/imagery/headshots/): the slide 56 checklist and `check-headshot.py`.
 - **Background:** plain `background.default`, or a brand pattern from [`patterns/`](../../brand-assets/patterns/). Never a generated image.
+- **Role color on a pattern:** add `qd-on-pattern` to the canvas or row. Roles then use `neutral-300` instead of `text.secondary`, which fails contrast on violet patterns (decided 2026-11-04).
 - **Never with Qbot.** Headshots and the mascot don't appear in the same creative.
 - **Same treatment for everyone** in a post: same span, same gradient.
 
