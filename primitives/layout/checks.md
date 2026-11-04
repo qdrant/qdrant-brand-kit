@@ -13,14 +13,14 @@ Run these on every creative before it's shown. Render it at the exact size and l
 | Balanced margins | Content looks heavier on one side: the right-hand item doesn't reach the right margin while the left one sits on the left margin. |
 | No overlaps | Two slots overlap, unless one is a background or image meant to sit behind. |
 | Parts | A piece isn't one of the approved parts in [components/](../../components/), or a part is redrawn or changed. |
-| Composition | It breaks a Must rule in [guidelines/](../../guidelines/) section 11: made-up content, an eyebrow, mixed or right alignment, more than one title or 3 text sizes, a button out of its two places or full width. |
+| Composition | It breaks a Must rule in [guidelines/](../../guidelines/) section 11: made-up content, mixed or right alignment, more than one title or 3 text sizes, a button out of its two places or full width. |
 
 ## Box
 
 | Check | Fails when |
 | --- | --- |
 | Elevation | A card isn't one step lighter than what's behind it, or cards are nested more than two levels. |
-| Colors | A box uses red, `overlay`, `popover` or a light-theme color as its fill. Exception: `.qd-box--light-card` on a full-bleed pattern, the only light piece allowed ([guidelines/](../../guidelines/) section 4). It fails if it's on anything else, nested, or there's more than one. |
+| Colors | A box uses red, `overlay` or `popover` as its fill, or a light fill on a dark creative. Exception: `.qd-box--light-card` on a full-bleed pattern, the only light piece allowed ([guidelines/](../../guidelines/) section 4). It fails if it's on anything else, nested, or there's more than one. |
 | Borders | A border is used for decoration and not to separate things. |
 
 ## From the other primitives
@@ -29,7 +29,7 @@ Run these on every creative before it's shown. Render it at the exact size and l
 | --- | --- |
 | Text fits | Any text is cut off, or descenders (g, y, p) are clipped. |
 | Contrast | Text is below WCAG AA against what's behind it: 4.5:1 for body text, 3:1 from 24 px ([colors/](../colors/)). |
-| Logo | The Qdrant logo is missing, redrawn or recolored, not one of the files in [`brand-assets/logo/`](../../brand-assets/logo/), the wrong version for its background (Dark on plain dark, White on patterns, Light on the light card), smaller than its shape's size or under 24 px tall, or something sits in its clear space (0.375 × its height). |
+| Logo | The Qdrant logo is missing, redrawn or recolored, not one of the files in [`brand-assets/logo/`](../../brand-assets/logo/), the wrong version for its background (Dark on plain dark, White on patterns, Light on the light card and on a light canvas), smaller than its shape's size or under 24 px tall, or something sits in its clear space (0.375 × its height). |
 | Partner lockup | The two logos aren't the same height, one is stretched, their treatments don't match (one full color, one one-color), the gaps or plus aren't the [component's](../../components/partner-lockup/), or it sits over a busy image. |
 | Type | Off the type scale, Bold instead of SemiBold, right-aligned, or with effects on text ([typography/](../typography/)). |
 | Images load | A photo, logo or font didn't load. |

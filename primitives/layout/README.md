@@ -96,7 +96,7 @@ Padding, fill and border, all from tokens. Pick the style by intent:
 
 Rules:
 - **One step lighter per level.** A card on the canvas is `surface`. A card inside a card becomes `surface-raised` on its own. Never more than two levels.
-- **Dark theme, with one exception.** The colors/ rule keeps light for print, documents and light-mode UIs. The only light piece in a creative is `.qd-box--light-card`, and only on a full-bleed pattern (decided 2026-11-04).
+- **Dark by default.** For a light creative, put `data-theme="light"` on the canvas: the background, text and boxes switch to the light theme. On a dark creative, the only light piece is `.qd-box--light-card`, and only on a full-bleed pattern (decided 2026-11-04).
 - **Red is never a box fill.** It's for buttons and highlights.
 - **Borders only separate things.** They're never decoration.
 - Glows, gradients and photos as backgrounds come from brand-assets/ (patterns, imagery), not Box.

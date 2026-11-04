@@ -53,7 +53,8 @@ Use one of these four. Patterns always bleed off the canvas edges they touch.
 Rules:
 
 - **Must:** text never sits on a busy part of a pattern. If no area is calm enough, use the light card or the zone layout.
-- **Must:** the light card only sits on a full-bleed pattern. It's the only light piece in a creative.
+- **Must:** the light card only sits on a full-bleed pattern. On a dark creative it's the only light piece.
+- **Suggest:** dark is the default. Light creatives (the whole canvas on the light theme) are allowed for some moments, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635) (decided 2026-11-04).
 - **Zone placement**, by shape (see [`primitives/layout/`](../primitives/layout/) for shapes):
 
   | Shape | Pattern zone | Text zone |
@@ -97,7 +98,7 @@ Never allowed:
 - **Must:** the Qdrant logo leads the content, at its **top-left**:
   - on the canvas, inside the margins, when text sits on the canvas or in a zone;
   - on the card, inside its padding, when text sits on a light card.
-- **Must:** the right version for the background: **Dark** on plain dark and dark images, **White** on any pattern, **Light** on the light card. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
+- **Must:** the right version for the background: **Dark** on plain dark and dark images, **White** on any pattern, **Light** on the light card and on a light canvas. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
 - When it can't sit top-left (no room, a busy area, the visual must lead), the agent moves it following the Brand Guide's placement rules and says where and why.
 - With a partner, the [partner lockup](../components/partner-lockup/) takes the logo's place.
 - The logo checks are in [`primitives/layout/checks.md`](../primitives/layout/checks.md).
@@ -118,7 +119,7 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 
 1. **Must: never make up content.** Use only the copy, dates, speakers and links the person gives. Write copy only when asked.
 2. **Suggest: reading order.** Logo → title → supporting line → date, time and place → speakers → button. On tall sizes it runs top to bottom. On wide sizes, text is on the left and the visual on the right.
-3. **Must: no eyebrows** (the small label above the title). They make creatives look AI-generated. A series or event type ("Vector Space Talks", "Webinar") will go in a badge component, still to come. Until then, leave it out or ask.
+3. **Suggest: avoid eyebrows** (the small label above the title). They make creatives look AI-generated. Don't suggest one; use one only when the person asks for it. A series or event type ("Vector Space Talks", "Webinar") will go in a badge component, still to come.
 4. **Suggest: left-aligned by default.** Centered is fine when the whole composition is symmetric and nothing sits beside the text, e.g. a title with the date and time under it, or a story with one centered hero. The agent decides.
 5. **Must: never mix alignments, never right-align.** All the text in a creative is either left-aligned or centered. Left-aligned items share the same left edge.
 6. **Must: one title, and it's the biggest text.** At most 3 text sizes outside the parts: title, supporting text, small details ([`primitives/typography/`](../primitives/typography/)).

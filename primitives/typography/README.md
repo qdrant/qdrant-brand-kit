@@ -61,7 +61,7 @@ The default weight is in each token; `$extensions.qdrant.weights` lists the weig
 | `social-event-series` | 32px | 600 | 1.2 | -0.5px |
 | `social-post-hero` | 144px | 600 | 1.05 | -1.8px |
 | `social-post-title` | 104px | 600 | 1.05 | -1.8px |
-| `social-post-eyebrow` | 56px | 600 | 1.2 | -0.5px |
+| `social-post-eyebrow` (not recommended: only when asked, see [guidelines/](../../guidelines/) section 11) | 56px | 600 | 1.2 | -0.5px |
 | `social-post-body` | 32px | 400 | 1.3 | 0 |
 
 `luma-title` (104px, 600) is the Luma cover title, added in Design Lab.
