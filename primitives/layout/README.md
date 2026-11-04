@@ -102,7 +102,47 @@ Rules:
 - **Borders only separate things.** They're never decoration.
 - Glows, gradients and photos as backgrounds come from brand-assets/ (patterns, imagery), not Box.
 - The light card is mostly for guide downloads and documentation promotions, and never holds a big headshot ([`guidelines/`](../../guidelines/) section 4).
-- Padding is the shape's `group` gap. The light card's padding is never less than the logo's clear space (0.375 × logo height), so it's 27 on square and portrait. Corners are `radius.md` (8 px at the reference canvas).
+- Padding is the shape's `group` gap. Corners are `radius.md` (8 px at the reference canvas). The light card in a creative uses the book layout below instead.
+
+### Light card layout (`.qd-book`)
+
+From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (card 794.4 × 979.2 in a 1440 frame), approved by Vanesa on 2026-11-04. A vertical card like a guide or a document, on a full-bleed pattern. Every value is a share of the card width **W**, so it scales with the canvas.
+
+| | Value | At 1080 square (W 594) |
+| --- | --- | --- |
+| Card width | 55% of the canvas on square, 65% on portrait, 75% on story. Wide and ultrawide: not set yet | 594 |
+| Card shape | 0.81 (794.4 : 979.2), about 4:5, vertical | 594 × 737 |
+| Position | Centered on the canvas. Story: card and button centered together inside the safe area | |
+| Padding | 0.0846 W left and right, 0.0967 W top and bottom | 50 / 57 |
+| Corners | 0.0242 W | 14 |
+| Fill | `background.light-surface`, text `text.on-light` | |
+| Logo | Light logo, 0.0967 W tall (smaller than the canvas logo) | 57 |
+| Logo to title | 0.0604 W | 36 |
+| Title | Mona Sans SemiBold, 0.0846 W, line height 1.1 | 50 |
+| Divider | `border-on-light`, 1 px, between the top block (logo + title) and the bottom block | |
+| Divider to text | 0.0846 W | 50 |
+| Supporting text | Mona Sans Regular, 0.0483 W, line height 1.3, at the card's bottom padding | 29 |
+| Button | Outside the card, centered below it, 0.0544 W gap. Height 0.157 W; text, padding and corners keep the button's proportions | gap 32, height 93 |
+
+- The top block sits at the top padding and the bottom block at the bottom padding; the space between stays empty.
+- The card is centered, so it isn't tied to grid columns. Text inside it aligns to the card's padding.
+- Only on a full-bleed pattern. Never with a big headshot; use `headshot-circle` if a speaker is needed.
+
+```html
+<div class="qd-canvas">
+  <!-- full-bleed pattern behind -->
+  <div class="qd-book">
+    <div class="qd-box--light-card qd-book__card">
+      <div class="qd-book__top">
+        <img class="qd-logo" src="brand-assets/logo/qdrant-logo-light.svg" alt="Qdrant">
+        <p class="qd-book__title">…</p>
+      </div>
+      <div class="qd-book__bottom"><p class="qd-book__text">…</p></div>
+    </div>
+    <span class="qd-button qd-book__cta">Get the Guide</span>
+  </div>
+</div>
+```
 
 These styles come from recent Qdrant web sections in Figma (customer stat cards, the cluster bento grid, the hero). Those frames use a newer neutral scale (`Neutral/N10` `#090E1A`, `N20` `#161E33`) than colors/. Box uses token names only, so the values can be swapped when Juan's design system lands.
 

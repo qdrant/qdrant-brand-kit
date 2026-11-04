@@ -43,7 +43,7 @@ Part.
    - Radius: 0.5 × text
 4. **Other canvas sizes scale** like the rest of [`layout/`](../../primitives/layout/): by the smaller of width ÷ reference width and height ÷ reference height. Put the button inside a `.qd-canvas` and the CSS does this.
 5. **SemiBold (600)**, the same weight as the Figma button and every heading style in `typography/`. Not Bold, even though most creatives on the Campaigns page used Bold.
-6. **Placement:** last in the text block, aligned with the text, or top-right level with the logo. Never full width ([`guidelines/`](../../guidelines/) section 11, rule 10).
+6. **Placement:** last in the text block, aligned with the text, or top-right level with the logo. **Exception, the light card:** outside the card, centered below it, sized by the card (`.qd-book__cta`, see [`layout/`](../../primitives/layout/) "Light card layout"). Never full width ([`guidelines/`](../../guidelines/) section 11, rule 10).
 7. **Beside the logo, the same height as the logo.** Add `qd-button--beside-logo`: the height becomes the logo's height for the shape (72 or 80 px) and the text, padding and corners follow it in the same proportions. The button is never taller than the logo next to it (decided 2026-11-04).
 6. **One button per post.**
 

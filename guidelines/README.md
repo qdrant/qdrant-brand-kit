@@ -54,6 +54,7 @@ Rules:
 
 - **Must:** text never sits on a busy part of a pattern. If no area is calm enough, use the light card or the zone layout.
 - **Must:** the light card only sits on a full-bleed pattern. On a dark creative it's the only light piece.
+- **Must: the light card is a book.** A vertical card shaped like a guide or a document (0.81, about 4:5), centered on a full-bleed pattern, with the pattern showing on every side. It never fills the frame. Width: **55%** of the canvas on square, **65%** on portrait, **75%** on story. The button sits **outside the card, centered below it**. Use `.qd-book` from [`primitives/layout/`](../primitives/layout/), built from the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (decided 2026-11-04).
 - **Suggest:** use the light card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, or the zone layout (decided 2026-11-04).
 - **Must:** never put a big headshot ([`headshot-card`](../components/headshot-card/)) inside the light card. If a light-card creative needs a speaker, use [`headshot-circle`](../components/headshot-circle/) (decided 2026-11-04).
 - **Suggest:** dark is the default. Light creatives (the whole canvas on the light theme) are allowed for some moments, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635) (decided 2026-11-04).

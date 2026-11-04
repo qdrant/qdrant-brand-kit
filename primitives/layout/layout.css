@@ -89,7 +89,7 @@
 .qd-stack--section { gap: var(--qd-gap-section); }
 .qd-stack--push { margin-top: auto; } /* sends a stack to the bottom of its column or canvas */
 
-/* Box: padding, fill and border from tokens. Plain by default. Dark theme only. */
+/* Box: padding, fill and border from tokens. Plain by default. The light card and the light theme rules are below. */
 .qd-box {
   padding: var(--qd-gap-group);
   border-radius: calc(8 * var(--qd-canvas-u)); /* radius.md at the reference canvas */
@@ -108,9 +108,72 @@
   color: var(--qd-color-text-on-light);
 }
 .qd-box--light-card p { color: var(--qd-color-text-body-on-light); }
+.qd-box--light-card .qd-title { color: var(--qd-color-text-on-light); } /* the title stayed near-white on the card */
 .qd-box--light-card hr { border: 0; border-top: var(--qd-box-border-width) solid var(--qd-color-border-on-light); }
 .qd-box--outline {
   background: transparent;
   border: var(--qd-box-border-width) solid var(--qd-color-border-on-dark);
 }
 .qd-grid--joined > .qd-box--outline { border-radius: 0; }
+
+
+/* Light card layout ("book"). From the Get-the-Guide ad, Figma 8y0svqBDPZX6caRNF6lddG node 20958:18153
+   (card 794.4 × 979.2 in a 1440 frame), approved by Vanesa 2026-11-04. A vertical card like a guide or a
+   document, centered on a full-bleed pattern, with the button centered below it. Every size is a share of
+   the card width W, so the card scales with the canvas.
+   Markup: .qd-book > .qd-box--light-card.qd-book__card (> .qd-book__top [logo, .qd-book__title] +
+   .qd-book__bottom [.qd-book__text]) + .qd-button.qd-book__cta */
+.qd-canvas[data-shape="square"]   { --qd-book-share: 0.55; } /* card width ÷ canvas width */
+.qd-canvas[data-shape="portrait"] { --qd-book-share: 0.65; }
+.qd-canvas[data-shape="story"]    { --qd-book-share: 0.75; }
+/* wide and ultrawide: not set yet (the card would be taller than the canvas). */
+.qd-canvas {
+  --qd-book-w: calc(var(--qd-canvas-ref-w) * var(--qd-book-share, 0.55)); /* W in reference px */
+  --qd-book-h: calc(var(--qd-book-w) * 979.2 / 794.4);                      /* shape 0.81, about 4:5 */
+  --qd-book-gap: calc(var(--qd-book-w) * 0.0544);                            /* card to button */
+  --qd-book-cta: calc(var(--qd-book-w) * 0.157);                             /* button height */
+}
+.qd-canvas > .qd-book { position: absolute; inset: 0; z-index: 1; } /* tops below are measured from the canvas edge */
+.qd-book__card {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(var(--qd-canvas-height) * 0.5px - var(--qd-book-h) / 2 * var(--qd-canvas-u)); /* centered on the canvas */
+  width: calc(var(--qd-book-w) * var(--qd-canvas-u));
+  height: calc(var(--qd-book-h) * var(--qd-canvas-u));
+  padding: calc(var(--qd-book-w) * 0.0967 * var(--qd-canvas-u)) calc(var(--qd-book-w) * 0.0846 * var(--qd-canvas-u));
+  border-radius: calc(var(--qd-book-w) * 0.0242 * var(--qd-canvas-u));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* The logo on the card is smaller than on the canvas: 0.0967 W. */
+  --qd-logo-height: calc(var(--qd-book-w) * 0.0967 * var(--qd-canvas-u));
+}
+/* Story: card and button are centered together inside the safe area, so the button clears the app UI. */
+.qd-canvas[data-shape="story"] .qd-book__card {
+  top: calc((var(--qd-canvas-margin-top) * var(--qd-canvas-u))
+    + (var(--qd-canvas-height) * 1px - (var(--qd-canvas-margin-top) + var(--qd-canvas-margin-bottom)) * var(--qd-canvas-u)
+       - (var(--qd-book-h) + var(--qd-book-gap) + var(--qd-book-cta)) * var(--qd-canvas-u)) / 2);
+}
+.qd-book__top { display: flex; flex-direction: column; align-items: flex-start; gap: calc(var(--qd-book-w) * 0.0604 * var(--qd-canvas-u)); }
+.qd-book__card .qd-book__title, .qd-book__card .qd-book__text { margin: 0; font-family: var(--qd-font-family-sans); font-feature-settings: var(--qd-font-features); color: var(--qd-color-text-on-light); letter-spacing: calc(-0.6 * var(--qd-canvas-u)); }
+.qd-book__title { font-weight: var(--qd-font-weight-semibold); font-size: calc(var(--qd-book-w) * 0.0846 * var(--qd-canvas-u)); line-height: 1.1; }
+.qd-book__bottom { border-top: var(--qd-box-border-width) solid var(--qd-color-border-on-light); padding-top: calc(var(--qd-book-w) * 0.0846 * var(--qd-canvas-u)); }
+.qd-book__text { font-weight: var(--qd-font-weight-regular); font-size: calc(var(--qd-book-w) * 0.0483 * var(--qd-canvas-u)); line-height: 1.3; }
+/* The button scales with the card (0.157 W tall), keeping the button's 2.25 / 1.25 / 0.5 proportions. */
+.qd-book__cta.qd-button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(var(--qd-canvas-height) * 0.5px + (var(--qd-book-h) / 2 + var(--qd-book-gap)) * var(--qd-canvas-u));
+  --qd-button-height: var(--qd-book-cta);
+  --qd-button-text: calc(var(--qd-book-cta) / 2.25);
+  --qd-button-pad: calc(var(--qd-book-cta) / 2.25 * 1.25);
+  --qd-button-radius: calc(var(--qd-book-cta) / 2.25 * 0.5);
+}
+.qd-canvas[data-shape="story"] .qd-book__cta.qd-button {
+  top: calc((var(--qd-canvas-margin-top) * var(--qd-canvas-u))
+    + (var(--qd-canvas-height) * 1px - (var(--qd-canvas-margin-top) + var(--qd-canvas-margin-bottom)) * var(--qd-canvas-u)
+       - (var(--qd-book-h) + var(--qd-book-gap) + var(--qd-book-cta)) * var(--qd-canvas-u)) / 2
+    + (var(--qd-book-h) + var(--qd-book-gap)) * var(--qd-canvas-u));
+}

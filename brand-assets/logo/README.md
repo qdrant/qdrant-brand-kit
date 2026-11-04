@@ -54,7 +54,7 @@ Equal to the brandmark's **inner cube** on all four sides: 0.375 × the logo hei
 
 ## Placement
 
-- **Default: top-left**, leading the content. On the canvas inside the margins when text sits on the canvas or in a zone; on the light card inside its padding when text sits on the card ([guidelines/](../../guidelines/) section 8).
+- **Default: top-left**, leading the content. On the canvas inside the margins when text sits on the canvas or in a zone; on the light card inside its padding when text sits on the card ([guidelines/](../../guidelines/) section 8). On the light card the logo is smaller: 0.0967 × the card width, about 57 px on a 1080 square ([`layout/`](../../primitives/layout/) "Light card layout", decided 2026-11-04).
 - **When it has to move** (no room, a busy or low-contrast area, or the visual must lead), the agent picks the spot that makes sense, following the Brand Guide (slide 19), and says where and why:
   - **Top:** upper left preferred, upper right allowed. For functional layouts.
   - **Bottom:** lower left preferred, lower right allowed. When other elements or the visual must take priority.
