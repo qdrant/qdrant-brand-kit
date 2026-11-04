@@ -13,10 +13,11 @@ Covers image canvases only. Web page layout stays in [`spacing/`](../spacing/) (
 
 ## Steps for an agent
 
-1. **Pick the shape** from width ÷ height (table below). It sets the reference canvas, margins, columns and gaps.
-2. **Pick an approved post component** from [`components/`](../../components/) for that shape. Don't invent a layout. If none fits, say so and ask.
-3. **Build it** with the four pieces below. Load `primitives/colors/colors.css`, `primitives/typography/typography.css` and `primitives/layout/layout.css`. Colors come from [`colors/`](../colors/), type from [`typography/`](../typography/), images from [`imagery/`](../../brand-assets/imagery/), backgrounds from [`patterns/`](../../brand-assets/patterns/), the mascot from [`mascot/`](../../brand-assets/mascot/).
-4. **Run the checks** in [`checks.md`](checks.md). Fix and check again before showing it.
+1. **Read [`guidelines/`](../../guidelines/) and ask its questions first** (tone, pattern or image, hero, red, other sizes). It decides which pattern, hero and canvas layout to use.
+2. **Pick the shape** from width ÷ height (table below). It sets the reference canvas, margins, columns and gaps.
+3. **Pick an approved post component** from [`components/`](../../components/) for that shape. Don't invent a layout. If none fits, say so and ask.
+4. **Build it** with the four pieces below. Load `primitives/colors/colors.css`, `primitives/typography/typography.css` and `primitives/layout/layout.css`. Colors come from [`colors/`](../colors/), type from [`typography/`](../typography/), images from [`imagery/`](../../brand-assets/imagery/), backgrounds from [`patterns/`](../../brand-assets/patterns/), the mascot from [`mascot/`](../../brand-assets/mascot/).
+5. **Run the checks** in [`checks.md`](checks.md). Fix and check again before showing it.
 
 ## Shapes
 

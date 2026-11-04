@@ -43,6 +43,6 @@ Use `dataviz.1` to `dataviz.8` in order: red, violet, teal, light blue, orange, 
 
 - **Dark theme is the default.** Light only for print, documents and light-mode UIs.
 - **Red is an accent.** Never a large background fill. Design Lab caps a red fill at 15% of the canvas (to confirm with design).
-- **Two gradients, never on text.** `gradient.brand` for hero moments, `gradient.headshot` only behind headshot cutouts. No others.
+- **Two gradients, never on text.** `gradient.brand` for hero moments, `gradient.headshot` only behind headshot cutouts. No others, except the subtle `primary-500` → `primary-700` fill inside the [button](../../components/button/), which is part of that component.
 - **Contrast:** text on dark uses `text.primary` or `text.secondary`. Never light gray on medium gray. Design Lab checks WCAG AA: 4.5 for body text, 3.0 for text from 24 px.
 - **Charts:** never rely on color alone to carry meaning.

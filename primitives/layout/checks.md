@@ -19,7 +19,7 @@ Run these on every creative before it's shown. Render it at the exact size and l
 | Check | Fails when |
 | --- | --- |
 | Elevation | A card isn't one step lighter than what's behind it, or cards are nested more than two levels. |
-| Colors | A box uses red, `overlay`, `popover` or a light-theme color as its fill. |
+| Colors | A box uses red, `overlay`, `popover` or a light-theme color as its fill. Exception: `.qd-box--light-card` on a full-bleed pattern, the only light piece allowed ([guidelines/](../../guidelines/) section 4). It fails if it's on anything else, nested, or there's more than one. |
 | Borders | A border is used for decoration and not to separate things. |
 
 ## From the other primitives

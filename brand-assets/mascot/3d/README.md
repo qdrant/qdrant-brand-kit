@@ -4,11 +4,11 @@ The main mascot style in Design Lab. People pick an approved pose from the libra
 
 ## Rules
 
-- **Output:** transparent PNG only. Never on a gradient or background, no size picker.
+- **Output:** the generated file is a transparent PNG only, never baked onto a gradient or background, no size picker.
 - **Library first:** the 14 approved poses download instantly, no generation.
 - **New poses:** 1 generation per pose, then approve, tweak (max 3 rounds) or regenerate.
 - **Styles never mix:** 3D requests send only 3D references.
-- **Never over realistic imagery.** The mascot appears on a background only inside the 1:1 title image.
+- **Never over realistic imagery.** In creatives, Qbot can sit on any brand pattern or the plain dark background, as the one hero, following [guidelines/](../../../guidelines/) sections 5 and 6 (decided 2026-11-04; replaces "only inside the 1:1 title image").
 
 ## What's inside
 
