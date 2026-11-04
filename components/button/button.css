@@ -33,7 +33,7 @@
     var(--qd-color-primary-400);
   color: var(--qd-color-neutral-white);
   font-family: var(--qd-font-family-sans);
-  font-weight: var(--qd-font-weight-semibold); /* open: Bold in current creatives */
+  font-weight: var(--qd-font-weight-semibold); /* SemiBold, same as headings. Not Bold. */
   font-size: calc(var(--qd-button-text) * var(--qd-canvas-u));
   line-height: 1.5;
   white-space: nowrap;
