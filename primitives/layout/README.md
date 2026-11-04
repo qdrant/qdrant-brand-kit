@@ -91,10 +91,11 @@ Padding, fill and border, all from tokens. Pick the style by intent:
 | `.qd-box` | Plain: padding only, no fill or border | Default. Most text sits straight on the canvas |
 | `.qd-box--card` | Fill one elevation step lighter (`background.surface`) with a thin `border.on-dark` | A stat, a quote, a speaker: something that should read as one unit |
 | `.qd-box--outline` | Border only, no fill | Cells of a bento grid. Inside `.qd-grid--joined` they share their lines |
+| `.qd-box--light-card` | Light fill (`background.light-surface`), dark text (`text.on-light`, body `text.body-on-light`), divider `border.on-light` | Text over a full-bleed pattern, like the Get-the-Guide ads (Figma 18921:37171). Only on a pattern, never nested |
 
 Rules:
 - **One step lighter per level.** A card on the canvas is `surface`. A card inside a card becomes `surface-raised` on its own. Never more than two levels.
-- **Dark theme only.** The colors/ rule keeps light for print, documents and light-mode UIs.
+- **Dark theme, with one exception.** The colors/ rule keeps light for print, documents and light-mode UIs. The only light piece in a creative is `.qd-box--light-card`, and only on a full-bleed pattern (decided 2026-11-04).
 - **Red is never a box fill.** It's for buttons and highlights.
 - **Borders only separate things.** They're never decoration.
 - Glows, gradients and photos as backgrounds come from brand-assets/ (patterns, imagery), not Box.

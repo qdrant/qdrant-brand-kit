@@ -99,6 +99,12 @@
   border: var(--qd-box-border-width) solid var(--qd-color-border-on-dark);
 }
 .qd-box--card .qd-box--card { background: var(--qd-color-background-surface-raised); } /* level 2, the deepest */
+.qd-box--light-card {
+  background: var(--qd-color-background-light-surface);
+  color: var(--qd-color-text-on-light);
+}
+.qd-box--light-card p { color: var(--qd-color-text-body-on-light); }
+.qd-box--light-card hr { border: 0; border-top: var(--qd-box-border-width) solid var(--qd-color-border-on-light); }
 .qd-box--outline {
   background: transparent;
   border: var(--qd-box-border-width) solid var(--qd-color-border-on-dark);

@@ -332,7 +332,7 @@
     }
   },
   "box": {
-    "$description": "Dark theme only (colors/: light is for print, documents and light-mode UIs). Each nested card is one elevation step lighter; at most two levels.",
+    "$description": "Dark theme, plus one light card for text over a full-bleed pattern. Each nested dark card is one elevation step lighter; at most two levels.",
     "padding": {
       "$type": "string",
       "$value": "canvas.shape.*.gap.group"
@@ -368,6 +368,25 @@
         "$type": "color",
         "$value": "{semantic.color.border.on-dark}",
         "$description": "Border only, no fill. Cells in a joined grid share their lines."
+      }
+    },
+    "light-card": {
+      "$description": "Text card over a full-bleed pattern (Figma: Get-The-Guide-Ads 18921:37171). Never nested, never on a plain background.",
+      "background": {
+        "$type": "color",
+        "$value": "{semantic.color.background.light-surface}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{semantic.color.text.on-light}"
+      },
+      "text-body": {
+        "$type": "color",
+        "$value": "{semantic.color.text.body-on-light}"
+      },
+      "divider": {
+        "$type": "color",
+        "$value": "{semantic.color.border.on-light}"
       }
     }
   },

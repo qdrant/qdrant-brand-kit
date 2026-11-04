@@ -13,6 +13,12 @@ Tokens and rules only. No finished designs.
 | [`primitives/spacing/`](primitives/spacing/) | Interim values | The 8px space scale, corner radius and web page layout constants. |
 | [`primitives/layout/`](primitives/layout/) | V1 | Canvas, Grid, Stack and Box for social posts, ads and banners at any size: shapes, margins, safe zones, columns, gap roles, Box styles and checks. |
 
+## Guidelines: choosing and combining
+
+| Folder | Status | What it is |
+| --- | --- | --- |
+| [`guidelines/`](guidelines/) | V1 | Which pattern to pick by tone, when red is allowed, how patterns cover the canvas, one hero per creative, Qbot and product screens on patterns, logo, headline length, and what to ask the person first. |
+
 ## Brand assets
 
 Brand materials that components use.
