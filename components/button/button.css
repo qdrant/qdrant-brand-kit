@@ -1,0 +1,41 @@
+/* Qdrant Button for creatives. Main / Default only.
+   Load primitives/colors/colors.css, primitives/typography/typography.css and
+   primitives/layout/layout.css first. The button must sit inside a .qd-canvas.
+
+   Every number below is px at the shape's reference canvas. The canvas scales it with
+   --qd-canvas-u, so the button works at any size.
+
+   Interim: based on the Qdrant Web Design button (Figma ubPe8s8pViytom0Mapcno8, node 793-2956)
+   until the Brand Design System button replaces it. */
+
+/* Text size per shape. Height, padding and radius follow the text size
+   (2.25×, 1.25× and 0.5×, rounded to the 8px grid). */
+.qd-canvas[data-shape="ultrawide"] { --qd-button-text: 32; --qd-button-height: 72;  --qd-button-pad: 40; --qd-button-radius: 16; }
+.qd-canvas[data-shape="wide"],
+.qd-canvas[data-shape="square"],
+.qd-canvas[data-shape="portrait"]  { --qd-button-text: 36; --qd-button-height: 80;  --qd-button-pad: 48; --qd-button-radius: 16; }
+.qd-canvas[data-shape="story"]     { --qd-button-text: 48; --qd-button-height: 112; --qd-button-pad: 64; --qd-button-radius: 24; }
+
+.qd-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  height: calc(var(--qd-button-height) * var(--qd-canvas-u));
+  padding: 0 calc(var(--qd-button-pad) * var(--qd-canvas-u));
+  border-radius: calc(var(--qd-button-radius) * var(--qd-canvas-u));
+  /* Figma: Primary/P50 to #BE003A, mapped to the nearest token. */
+  background: linear-gradient(to bottom, var(--qd-color-primary-500), var(--qd-color-primary-700));
+  /* Top inner highlight. Figma: 2px at 16px text, scaled with the text. */
+  box-shadow: inset 0
+    calc(var(--qd-button-text) / 8 * var(--qd-canvas-u))
+    calc(var(--qd-button-text) / 16 * var(--qd-canvas-u))
+    var(--qd-color-primary-400);
+  color: var(--qd-color-neutral-white);
+  font-family: var(--qd-font-family-sans);
+  font-weight: var(--qd-font-weight-semibold); /* open: Bold in current creatives */
+  font-size: calc(var(--qd-button-text) * var(--qd-canvas-u));
+  line-height: 1.5;
+  white-space: nowrap;
+  font-feature-settings: "ss01" 1, "ss05" 1;
+}
