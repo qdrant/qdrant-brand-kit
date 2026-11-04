@@ -10,13 +10,12 @@ Covers image canvases only. Web page layout stays in [`spacing/`](../spacing/) (
 | `layout.css` | The same as `--qd-canvas-*` variables, plus the `.qd-canvas`, `.qd-grid`, `.qd-stack` and `.qd-box` classes |
 | `canvas.js` | Optional. Sets the shape and size from the window, for one file rendered at many sizes |
 | `checks.md` | What to check before a creative is done |
-| `compositions/` | Approved layouts to choose from. None approved yet |
 
 ## Steps for an agent
 
 1. **Pick the shape** from width ÷ height (table below). It sets the reference canvas, margins, columns and gaps.
-2. **Pick an approved composition** from [`compositions/`](compositions/) for that shape. Don't invent one. If none fits, say so and ask.
-3. **Build it** with the four pieces below. Load `colors/colors.css`, `typography/typography.css` and `layout/layout.css`. Colors come from [`colors/`](../colors/), type from [`typography/`](../typography/), images from [`imagery/`](../imagery/), backgrounds from [`patterns/`](../patterns/), the mascot from [`mascot/`](../mascot/).
+2. **Pick an approved post component** from [`components/`](../../components/) for that shape. Don't invent a layout. If none fits, say so and ask.
+3. **Build it** with the four pieces below. Load `primitives/colors/colors.css`, `primitives/typography/typography.css` and `primitives/layout/layout.css`. Colors come from [`colors/`](../colors/), type from [`typography/`](../typography/), images from [`imagery/`](../../brand-assets/imagery/), backgrounds from [`patterns/`](../../brand-assets/patterns/), the mascot from [`mascot/`](../../brand-assets/mascot/).
 4. **Run the checks** in [`checks.md`](checks.md). Fix and check again before showing it.
 
 ## Shapes
@@ -45,7 +44,7 @@ The post itself: size, margins and safe zones. Everything goes inside it.
 </div>
 ```
 
-Width and height are plain numbers in px. For one file rendered at many sizes, add `<script src="layout/canvas.js"></script>` instead. It sets all three from the window. The canvas is a column with `section` gaps between its children and the dark background.
+Width and height are plain numbers in px. For one file rendered at many sizes, add `<script src="primitives/layout/canvas.js"></script>` instead. It sets all three from the window. The canvas is a column with `section` gaps between its children and the dark background.
 
 ## Grid
 
@@ -98,7 +97,7 @@ Rules:
 - **Dark theme only.** The colors/ rule keeps light for print, documents and light-mode UIs.
 - **Red is never a box fill.** It's for buttons and highlights.
 - **Borders only separate things.** They're never decoration.
-- Glows, gradients and photos as backgrounds come from patterns/ and imagery/, not Box.
+- Glows, gradients and photos as backgrounds come from brand-assets/ (patterns, imagery), not Box.
 - Padding is the shape's `group` gap. Corners are `radius.md` (8 px at the reference canvas).
 
 These styles come from recent Qdrant web sections in Figma (customer stat cards, the cluster bento grid, the hero). Those frames use a newer neutral scale (`Neutral/N10` `#090E1A`, `N20` `#161E33`) than colors/. Box uses token names only, so the values can be swapped when Juan's design system lands.
@@ -109,6 +108,6 @@ Not defined yet. Print sizes, bleed and safe area go here once the social side i
 
 ## To decide later
 
-- Compositions: which layouts each shape offers.
+- Components: which post layouts each shape offers (in [`components/`](../../components/)).
 - Whether Design Lab gets a `brand-kit/primitives/layout.yaml` (a request for Neil).
 - Grid columns and Box line colors, once there's a Figma social grid or Juan's system lands.

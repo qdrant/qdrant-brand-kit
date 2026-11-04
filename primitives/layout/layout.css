@@ -1,5 +1,5 @@
 /* Qdrant canvas layout: Canvas, Grid, Stack, Box. Same values as layout.tokens.json.
-   Load colors/colors.css first (Box uses --qd-color-*).
+   Load primitives/colors/colors.css first (Box uses --qd-color-*).
 
    Every number below is px at the shape's reference canvas. The canvas turns it into a
    length with --qd-canvas-u (the scale), so one creative works at any size. */
