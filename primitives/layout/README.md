@@ -15,7 +15,7 @@ Covers image canvases only. Web page layout stays in [`spacing/`](../spacing/) (
 
 1. **Read [`guidelines/`](../../guidelines/) and ask its questions first** (tone, pattern or image, hero, red, other sizes). It decides which pattern, hero and canvas layout to use.
 2. **Pick the shape** from width ÷ height (table below). It sets the reference canvas, margins, columns and gaps.
-3. **Pick an approved post component** from [`components/`](../../components/) for that shape. Don't invent a layout. If none fits, say so and ask.
+3. **Compose it** from the content you're given, following [`guidelines/`](../../guidelines/) section 11 (Composition) and using only the approved parts in [`components/`](../../components/). There are no fixed post templates.
 4. **Build it** with the four pieces below. Load `primitives/colors/colors.css`, `primitives/typography/typography.css` and `primitives/layout/layout.css`. Colors come from [`colors/`](../colors/), type from [`typography/`](../typography/), images from [`imagery/`](../../brand-assets/imagery/), backgrounds from [`patterns/`](../../brand-assets/patterns/), the mascot from [`mascot/`](../../brand-assets/mascot/).
 5. **Run the checks** in [`checks.md`](checks.md). Fix and check again before showing it.
 
@@ -78,7 +78,7 @@ The gap is a role, never a px value:
 | Class | Use it between |
 | --- | --- |
 | `.qd-stack--tight` | Things that belong together: icon + text, name + role, date + time |
-| `.qd-stack--group` (default) | Items in the same block: eyebrow + title + body, a row of speakers |
+| `.qd-stack--group` (default) | Items in the same block: title + supporting line, a row of speakers |
 | `.qd-stack--section` | Separate blocks: header vs speakers, text vs logo lockup |
 
 `.qd-stack--row` makes it a row. `.qd-stack--push` sends it to the bottom of its column or the canvas.
@@ -110,6 +110,5 @@ Not defined yet. Print sizes, bleed and safe area go here once the social side i
 
 ## To decide later
 
-- Components: which post layouts each shape offers (in [`components/`](../../components/)).
 - Whether Design Lab gets a `brand-kit/primitives/layout.yaml` (a request for Neil).
 - Grid columns and Box line colors, once there's a Figma social grid or Juan's system lands.

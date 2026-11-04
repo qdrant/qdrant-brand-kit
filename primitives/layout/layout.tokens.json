@@ -328,7 +328,7 @@
       }
     },
     "gap": {
-      "$description": "Pick the role, then read the value for the shape. tight: things that belong together (icon + text, name + role, date + time). group: items in one block (eyebrow + title + body, a row of speakers). section: separate blocks (header vs speakers, text vs logo lockup)."
+      "$description": "Pick the role, then read the value for the shape. tight: things that belong together (icon + text, name + role, date + time). group: items in one block (title + supporting line, a row of speakers). section: separate blocks (header vs speakers, text vs logo lockup)."
     }
   },
   "box": {

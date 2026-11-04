@@ -34,7 +34,7 @@ Brand materials that components use.
 
 | Folder | Status | What it is |
 | --- | --- | --- |
-| [`components/`](components/) | Partner lockup approved, no posts yet | Ready-made parts (button, speaker card, partner lockup…) and whole posts (event promo, announcement…), built only from primitives and brand assets. |
+| [`components/`](components/) | Button, headshot card, headshot circle, partner lockup approved | Ready-made parts, built only from primitives and brand assets. No fixed post templates: creatives are composed by the rules in `guidelines/` section 11. |
 
 The old social post template lives in its own archived repo: [qdrant-social-template](https://github.com/vanesaajdini/qdrant-social-template).
 

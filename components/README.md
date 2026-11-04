@@ -2,14 +2,9 @@
 
 Ready-made pieces for Qdrant creatives, built only from [`primitives/`](../primitives/) (colors, type, spacing, layout) and [`brand-assets/`](../brand-assets/) (patterns, imagery, mascot). Modelled on Primer Brand's components, which sit apart from its layout rules.
 
-**Four parts are approved so far (button, headshot card, headshot circle, partner lockup), and no posts.** Until there are post components, an agent should say so and ask before laying out a creative.
+**Components are parts only.** There are no fixed post templates: an agent lays out each creative itself, following [`guidelines/`](../guidelines/) section 11 (Composition) and using the parts below (decided 2026-11-04).
 
-## Two kinds
-
-| Kind | What it is | Examples |
-| --- | --- | --- |
-| **Part** | One piece used inside a post | Button, speaker card, partner logo lockup, stat card, date / time / place row |
-| **Post** | A whole layout for one kind of post, made from parts | Event promo, announcement, customer stat, quote |
+A part is one piece used inside a creative: a button, a speaker card, the partner lockup, a badge, a stat card.
 
 ## Adding one
 
@@ -17,10 +12,8 @@ One folder per component, `components/<name>/`, with a `README.md` that has:
 
 - **Sketch:** a picture of it on every shape it supports.
 - **Use it for:** e.g. event with speakers, product announcement, customer stat.
-- **Kind:** part or post.
-- **Shapes:** which of ultrawide, wide, square, portrait and story it works on (posts only).
-- **Slots per shape:** column start and span, order, and the gap role between each slot (posts), or size and inner gaps (parts).
-- **Parts used** (posts only).
+- **Shapes:** which of ultrawide, wide, square, portrait and story it works on.
+- **Size and inner gaps** per shape.
 - **Approved by / date.**
 
 Add a row here when it's approved:

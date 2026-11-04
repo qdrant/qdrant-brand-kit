@@ -12,7 +12,8 @@ Run these on every creative before it's shown. Render it at the exact size and l
 | Gap roles | A gap isn't one of the shape's tight, group or section values, or the role doesn't match (e.g. `section` between name and role). |
 | Balanced margins | Content looks heavier on one side: the right-hand item doesn't reach the right margin while the left one sits on the left margin. |
 | No overlaps | Two slots overlap, unless one is a background or image meant to sit behind. |
-| Component | The layout isn't an approved post component for that shape ([components/](../../components/)). |
+| Parts | A piece isn't one of the approved parts in [components/](../../components/), or a part is redrawn or changed. |
+| Composition | It breaks a Must rule in [guidelines/](../../guidelines/) section 11: made-up content, an eyebrow, mixed or right alignment, more than one title or 3 text sizes, a button out of its two places or full width. |
 
 ## Box
 

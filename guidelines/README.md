@@ -112,6 +112,22 @@ Never allowed:
 - **Suggest:** when the same creative goes to several sizes or channels, use the **same pattern and colorway** in all of them, so they read as one.
 - Carousels and campaigns have no rule yet. Each asset can pick its own pattern within the tone.
 
+## 11. Composition
+
+There are no fixed post templates. An agent lays out each creative itself, from the content it's given, following these rules and using only the approved parts in [`components/`](../components/). Decided by Vanesa on 2026-11-04.
+
+1. **Must: never make up content.** Use only the copy, dates, speakers and links the person gives. Write copy only when asked.
+2. **Suggest: reading order.** Logo → title → supporting line → date, time and place → speakers → button. On tall sizes it runs top to bottom. On wide sizes, text is on the left and the visual on the right.
+3. **Must: no eyebrows** (the small label above the title). They make creatives look AI-generated. A series or event type ("Vector Space Talks", "Webinar") will go in a badge component, still to come. Until then, leave it out or ask.
+4. **Suggest: left-aligned by default.** Centered is fine when the whole composition is symmetric and nothing sits beside the text, e.g. a title with the date and time under it, or a story with one centered hero. The agent decides.
+5. **Must: never mix alignments, never right-align.** All the text in a creative is either left-aligned or centered. Left-aligned items share the same left edge.
+6. **Must: one title, and it's the biggest text.** At most 3 text sizes outside the parts: title, supporting text, small details ([`primitives/typography/`](../primitives/typography/)).
+7. **Suggest: related things sit close, unrelated things further apart.** The `tight` gap inside a group (date + place), `group` between items in a block (title + supporting line), `section` between blocks (text vs speakers) ([`primitives/layout/`](../primitives/layout/)). Leftover space goes in one place, between the text and the visual or speakers, not spread evenly.
+8. **Must: the button goes in one of two places,** at its own size, never full width ([`components/button/`](../components/button/)):
+   - last in the text block, aligned with the text; or
+   - top-right, level with the logo, when there isn't room at the bottom or the visual needs it, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635).
+9. **Ask: if the content doesn't fit, ask.** If it can't fit the size without breaking a rule, ask the person to cut it. Never shrink text below the type scale.
+
 ## Changing these rules
 
 Ask Vanesa first. Add the date and what changed next to the rule.

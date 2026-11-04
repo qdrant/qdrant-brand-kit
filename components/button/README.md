@@ -41,6 +41,7 @@ Part.
    - Radius: 0.5 × text
 4. **Other canvas sizes scale** like the rest of [`layout/`](../../primitives/layout/): by the smaller of width ÷ reference width and height ÷ reference height. Put the button inside a `.qd-canvas` and the CSS does this.
 5. **SemiBold (600)**, the same weight as the Figma button and every heading style in `typography/`. Not Bold, even though most creatives on the Campaigns page used Bold.
+6. **Placement:** last in the text block, aligned with the text, or top-right level with the logo. Never full width ([`guidelines/`](../../guidelines/) section 11, rule 8).
 6. **One button per post.**
 
 ## Size and inner gaps
@@ -97,7 +98,6 @@ Secondary has an optional leading icon (GitHub logo, 18 / 20 / 22px, gap 8 / 10 
 ## Still open
 
 - **Icons:** allowed in creatives? Which, leading or trailing?
-- **Placement:** where the button goes in a post (last in the text block, aligned left, on the grid, ever full width).
 - **Over patterns or images:** does it need anything extra to stand out?
 
 ## Approved by / date
