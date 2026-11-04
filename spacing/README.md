@@ -40,7 +40,7 @@ The scale keeps going in 8px steps.
 
 ## Web and landing page layout
 
-Designed at a 1440px viewport, content centered in a fixed container.
+Designed at a 1440px viewport, content centered in a fixed container. For social posts, ads and banners, see [`layout/`](../layout/).
 
 | Token | Value | Note |
 | --- | --- | --- |

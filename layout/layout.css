@@ -1,0 +1,106 @@
+/* Qdrant canvas layout: Canvas, Grid, Stack, Box. Same values as layout.tokens.json.
+   Load colors/colors.css first (Box uses --qd-color-*).
+
+   Every number below is px at the shape's reference canvas. The canvas turns it into a
+   length with --qd-canvas-u (the scale), so one creative works at any size. */
+
+/* Per-shape values. A canvas picks one with data-shape. */
+.qd-canvas[data-shape="ultrawide"] { /* above 3, 3000×400 */
+  --qd-canvas-ref-w: 3000; --qd-canvas-ref-h: 400;
+  --qd-canvas-margin-x: 96; --qd-canvas-margin-top: 48; --qd-canvas-margin-bottom: 48;
+  --qd-canvas-columns: 12; --qd-canvas-gutter: 48;
+  --qd-canvas-gap-tight: 16; --qd-canvas-gap-group: 32; --qd-canvas-gap-section: 64;
+}
+.qd-canvas[data-shape="wide"] { /* 1.4 to 3, 1920×1080 */
+  --qd-canvas-ref-w: 1920; --qd-canvas-ref-h: 1080;
+  --qd-canvas-margin-x: 80; --qd-canvas-margin-top: 80; --qd-canvas-margin-bottom: 80;
+  --qd-canvas-columns: 12; --qd-canvas-gutter: 40;
+  --qd-canvas-gap-tight: 24; --qd-canvas-gap-group: 40; --qd-canvas-gap-section: 64;
+}
+.qd-canvas[data-shape="square"] { /* 0.85 up to 1.4, 1080×1080 */
+  --qd-canvas-ref-w: 1080; --qd-canvas-ref-h: 1080;
+  --qd-canvas-margin-x: 64; --qd-canvas-margin-top: 64; --qd-canvas-margin-bottom: 64;
+  --qd-canvas-columns: 6; --qd-canvas-gutter: 32;
+  --qd-canvas-gap-tight: 16; --qd-canvas-gap-group: 24; --qd-canvas-gap-section: 48;
+}
+.qd-canvas[data-shape="portrait"] { /* 0.65 up to 0.85, 1080×1350 */
+  --qd-canvas-ref-w: 1080; --qd-canvas-ref-h: 1350;
+  --qd-canvas-margin-x: 64; --qd-canvas-margin-top: 64; --qd-canvas-margin-bottom: 64;
+  --qd-canvas-columns: 6; --qd-canvas-gutter: 32;
+  --qd-canvas-gap-tight: 16; --qd-canvas-gap-group: 24; --qd-canvas-gap-section: 48;
+}
+.qd-canvas[data-shape="story"] { /* below 0.65, 1080×1920; top and bottom clear the app UI */
+  --qd-canvas-ref-w: 1080; --qd-canvas-ref-h: 1920;
+  --qd-canvas-margin-x: 64; --qd-canvas-margin-top: 256; --qd-canvas-margin-bottom: 344;
+  --qd-canvas-columns: 4; --qd-canvas-gutter: 32;
+  --qd-canvas-gap-tight: 24; --qd-canvas-gap-group: 32; --qd-canvas-gap-section: 64;
+}
+
+/* Canvas: the post itself. Set data-shape, --qd-canvas-width and --qd-canvas-height (numbers, px).
+   canvas.js can fill all three from the window size. */
+.qd-canvas {
+  --qd-canvas-u: min(
+    var(--qd-canvas-width) / var(--qd-canvas-ref-w) * 1px,
+    var(--qd-canvas-height) / var(--qd-canvas-ref-h) * 1px
+  );
+  --qd-gap-tight: calc(var(--qd-canvas-gap-tight) * var(--qd-canvas-u));
+  --qd-gap-group: calc(var(--qd-canvas-gap-group) * var(--qd-canvas-u));
+  --qd-gap-section: calc(var(--qd-canvas-gap-section) * var(--qd-canvas-u));
+  --qd-gutter: calc(var(--qd-canvas-gutter) * var(--qd-canvas-u));
+  --qd-box-border-width: max(1px, var(--qd-canvas-u));
+
+  position: relative;
+  box-sizing: border-box;
+  width: calc(var(--qd-canvas-width) * 1px);
+  height: calc(var(--qd-canvas-height) * 1px);
+  overflow: hidden;
+  padding:
+    calc(var(--qd-canvas-margin-top) * var(--qd-canvas-u))
+    calc(var(--qd-canvas-margin-x) * var(--qd-canvas-u))
+    calc(var(--qd-canvas-margin-bottom) * var(--qd-canvas-u));
+  display: flex;
+  flex-direction: column;
+  gap: var(--qd-gap-section);
+  background: var(--qd-color-background-default);
+  color: var(--qd-color-text-primary);
+}
+.qd-canvas *, .qd-canvas *::before, .qd-canvas *::after { box-sizing: border-box; }
+
+/* Grid: the shape's columns, for placing blocks. Children span all columns unless they set
+   --qd-span (and optionally --qd-start). */
+.qd-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--qd-canvas-columns), minmax(0, 1fr));
+  column-gap: var(--qd-gutter);
+  row-gap: var(--qd-gap-section);
+}
+.qd-grid > * { grid-column: var(--qd-start, auto) / span var(--qd-span, var(--qd-canvas-columns)); }
+.qd-grid--fill { flex: 1 1 auto; } /* takes the height left in the canvas */
+
+/* Joined grid: outlined cells that share their lines (bento). Cells need .qd-box--outline. */
+.qd-grid--joined { column-gap: 0; row-gap: 0; padding: 0 0 var(--qd-box-border-width) var(--qd-box-border-width); }
+.qd-grid--joined > .qd-box--outline { margin: 0 0 calc(-1 * var(--qd-box-border-width)) calc(-1 * var(--qd-box-border-width)); }
+
+/* Stack: one row or column of items. The gap is a role, never a px value. */
+.qd-stack { display: flex; flex-direction: column; gap: var(--qd-gap-group); min-width: 0; }
+.qd-stack--row { flex-direction: row; align-items: center; }
+.qd-stack--tight { gap: var(--qd-gap-tight); }
+.qd-stack--group { gap: var(--qd-gap-group); }
+.qd-stack--section { gap: var(--qd-gap-section); }
+.qd-stack--push { margin-top: auto; } /* sends a stack to the bottom of its column or canvas */
+
+/* Box: padding, fill and border from tokens. Plain by default. Dark theme only. */
+.qd-box {
+  padding: var(--qd-gap-group);
+  border-radius: calc(8 * var(--qd-canvas-u)); /* radius.md at the reference canvas */
+}
+.qd-box--card {
+  background: var(--qd-color-background-surface);
+  border: var(--qd-box-border-width) solid var(--qd-color-border-on-dark);
+}
+.qd-box--card .qd-box--card { background: var(--qd-color-background-surface-raised); } /* level 2, the deepest */
+.qd-box--outline {
+  background: transparent;
+  border: var(--qd-box-border-width) solid var(--qd-color-border-on-dark);
+}
+.qd-grid--joined > .qd-box--outline { border-radius: 0; }

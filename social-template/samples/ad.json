@@ -1,7 +1,0 @@
-{
-  "preset": "ad",
-  "eyebrow": "The right answer was in the docs.",
-  "title": "Your RAG buried it.",
-  "body": "Poor recall and lost-in-the-middle hide your best context. **Fix retrieval at the source.**",
-  "button": "Learn More"
-}

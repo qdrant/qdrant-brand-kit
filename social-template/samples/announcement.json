@@ -1,8 +1,0 @@
-{
-  "preset": "announcement",
-  "title": "Qdrant now available in *AWS Marketplace*",
-  "shortTitle": "Qdrant on AWS Marketplace",
-  "body": "Deploy vector search for AI agents in a few clicks.",
-  "partnerLogo": "partner-logo.png",
-  "button": "Learn More"
-}
