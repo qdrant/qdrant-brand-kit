@@ -70,7 +70,7 @@ The default weight is in each token; `$extensions.qdrant.weights` lists the weig
 
 Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabNex7sSJ`) and the Vector Space Day banner (Brand-Collateral `2183:41590`). Sizes in px at the reference canvas (see [`layout/`](../layout/)); they scale with the canvas.
 
-**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception. **On the light card** the title and supporting text have their own two sizes, set by the card's width (0.0846 W and 0.0483 W, about 50 and 29 at 1080 square), from the Get-the-Guide ad ([`layout/`](../layout/) "Light card layout", decided 2026-11-04). **Button text doesn't count:** it scales with the [button](../../components/button/) and is independent of these text styles (decided 2026-11-04).
+**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception. **On the light card** the title and supporting text have their own two sizes, set by the card's width (0.0846 W and 0.0483 W, about 50 and 29 at 1080 square), from the Get-the-Guide ad ([`layout/`](../layout/) "Light card layout", decided 2026-11-04). Title Case there too, even for long supporting sentences (the Figma reference uses sentence case; Vanesa kept Title Case, 2026-11-04). **Button text doesn't count:** it scales with the [button](../../components/button/) and is independent of these text styles (decided 2026-11-04).
 
 | | Font | Square, portrait | Wide | Story |
 | --- | --- | --- | --- | --- |
