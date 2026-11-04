@@ -16,7 +16,7 @@ Before making a creative, settle these with the person. Skip a question only whe
 
 | Ask | Why |
 | --- | --- |
-| Is the tone **community / playful** or **serious / technical**? | It picks the pattern family (section 2). |
+| Is the tone **community / playful** or **serious / technical**? | It suggests the pattern family (section 2). |
 | **Pattern or generated image** as the background? Suggest an image for storytelling and blog heroes, a pattern for everything else. | The person decides. |
 | Should it have a **hero**: Qbot, a product screen, or nothing? | Only one hero per creative (section 5). |
 | Does it need to **grab a lot of attention**? | Only then can the background be red (section 3). |
@@ -24,7 +24,7 @@ Before making a creative, settle these with the person. Skip a question only whe
 
 ## 2. Pick the pattern by tone
 
-**Must:** the tone decides the pattern family. Inside a family, any pattern and colorway can be used.
+**Suggest:** the tone points to a pattern family. There's no hard restriction: any pattern can be used for any tone, but community themes use more playful language, so they lean to the playful Color patterns, and serious themes lean to Mesh and Generative (decided 2026-11-04). Inside a family, any pattern and colorway can be used.
 
 | Tone | Family | Patterns |
 | --- | --- | --- |
@@ -100,7 +100,7 @@ Never allowed:
   - on the card, inside its padding, when text sits on a light card.
 - **Must:** the right version for the background: **Dark** on plain dark and dark images, **White** on any pattern, **Light** on the light card and on a light canvas. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
 - When it can't sit top-left (no room, a busy area, the visual must lead), the agent moves it following the Brand Guide's placement rules and says where and why.
-- With a partner, the [partner lockup](../components/partner-lockup/) takes the logo's place.
+- With a partner, the [partner lockup](../components/partner-lockup/) takes the logo's place. When the lockup is the **only content** (e.g. a partner blog hero), it's the hero: centered both ways, 8 of 12 columns wide (decided 2026-11-04).
 - The logo checks are in [`primitives/layout/checks.md`](../primitives/layout/checks.md).
 
 ## 9. Text length

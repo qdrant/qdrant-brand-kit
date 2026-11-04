@@ -70,7 +70,7 @@ The default weight is in each token; `$extensions.qdrant.weights` lists the weig
 
 Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabNex7sSJ`) and the Vector Space Day banner (Brand-Collateral `2183:41590`). Sizes in px at the reference canvas (see [`layout/`](../layout/)); they scale with the canvas.
 
-**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception.
+**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception. **Button text doesn't count:** it scales with the [button](../../components/button/) and is independent of these text styles (decided 2026-11-04).
 
 | | Font | Square, portrait | Wide | Story |
 | --- | --- | --- | --- | --- |

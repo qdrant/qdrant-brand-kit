@@ -34,6 +34,8 @@ Part.
    | `portrait` | 1080×1350 | 36px |
    | `story` | 1080×1920 | 48px |
 
+   Button text is part of the button: it scales with the button's height and is not one of the creative's two text sizes ([`typography/`](../../primitives/typography/) "Text in creatives", decided 2026-11-04).
+
    36px matches the ads sub-copy rule (36–40px) in [`typography/`](../../primitives/typography/). Story is larger, in line with the 46–50px used on current story creatives.
 3. **Everything else follows the text size**, in the same proportions as the Figma button, rounded to the 8px grid.
    - Height: 2.25 × text

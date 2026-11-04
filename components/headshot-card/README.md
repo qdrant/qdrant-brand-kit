@@ -30,12 +30,16 @@ Each card spans whole columns of the shape's grid. Every card in a row has the s
 | Shape | 1 speaker | 2 speakers | 3 speakers | 4 speakers |
 | --- | --- | --- | --- | --- |
 | `wide` 1920×1080 (12 cols) | span 4, right | span 3 each, right | span 3 each, right | span 3 each, full width |
-| `square` 1080×1080 (6 cols) | span 3, right | span 3 each | span 2 each | use `headshot-circle` |
+| `square` 1080×1080 (6 cols) | span 2, right | span 3 each | span 2 each | use `headshot-circle` |
 | `portrait` 1080×1350 (6 cols) | span 3, right | span 3 each | span 2 each | use `headshot-circle` |
-| `story` 1080×1920 (4 cols) | span 4 | span 2 each | use `headshot-circle` | use `headshot-circle` |
+| `story` 1080×1920 (4 cols) | span 2, right, or `headshot-circle` (the person picks) | span 2 each | use `headshot-circle` | use `headshot-circle` |
 | `ultrawide` 3000×400 | use `headshot-circle` | | | |
 
-"Right" means the cards take the last columns and the title sits in the columns to their left. Otherwise the title sits above the row.
+"Right" means the cards take the last columns. On `wide` the title sits in the columns to their left. On `square`, `portrait` and `story` the title stays full width at the top margin (a 96 px title doesn't fit beside the card), and the supporting block and button sit in the columns to the left of the card, on the bottom margin. Otherwise the title sits above the row.
+
+**Story, 1 speaker:** offer both and let the person pick (decided 2026-11-04): a span-2 card beside the text (more impactful), or a [`headshot-circle`](../headshot-circle/) in the text block with the pattern zone below (quieter, a little empty but fine).
+
+**The title on a speaker post** is usually the talk title, with the event name as the supporting line. Ask the person each time (decided 2026-11-04).
 
 More than 4 speakers: use `headshot-circle`.
 
@@ -94,7 +98,7 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 ```
 
 - Add `qd-headshot-row--2`, `--3` or `--4` for the count, and `qd-headshot-row--stagger` if you want the optional stagger.
-- For a title beside the cards (1 to 3 speakers on wide, 1 on square and portrait), give the cards `--qd-start` and put the title in the same row with `grid-row: 1` and the columns to the left.
+- For a title beside the cards (1 to 3 speakers on wide), give the cards `--qd-start` and put the title in the same row with `grid-row: 1` and the columns to the left.
 - The CSS reserves one line for the name and one for the role. Long names that wrap push the card up a little.
 
 ## Still open

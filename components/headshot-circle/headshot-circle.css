@@ -41,3 +41,8 @@
 /* On a pattern: put .qd-on-pattern on the canvas or the row. Roles switch to neutral-300, which
    keeps 3:1 down to secondary-500 (text.secondary fails on violet patterns). Vanesa, 2026-11-04. */
 .qd-on-pattern .qd-headshot-circle__role { color: var(--qd-color-neutral-300); }
+
+/* On the light card: the card's `p` color would make name and role the same. Keep the hierarchy
+   with the light text tokens (Vanesa, 2026-11-04). */
+.qd-box--light-card .qd-headshot-circle__name { color: var(--qd-color-text-on-light); }
+.qd-box--light-card .qd-headshot-circle__role { color: var(--qd-color-text-body-on-light); }

@@ -102,6 +102,8 @@
 [data-theme="light"] .qd-box--card,
 [data-theme="light"] .qd-box--outline { border-color: var(--qd-color-border-on-light); }
 .qd-box--light-card {
+  /* At least the logo's clear space, since the logo sits on the card (Vanesa, 2026-11-04). */
+  padding: max(var(--qd-gap-group), var(--qd-logo-clear, 0px));
   background: var(--qd-color-background-light-surface);
   color: var(--qd-color-text-on-light);
 }
