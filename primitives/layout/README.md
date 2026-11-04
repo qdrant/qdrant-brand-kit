@@ -152,5 +152,7 @@ Not defined yet. Print sizes, bleed and safe area go here once the social side i
 
 ## To decide later
 
+- **In progress (2026-11-04):** light card (`.qd-book`) size on `wide` and `ultrawide`. At 55% of the width the card would be taller than the canvas, so these shapes need their own rule (probably sized by height). Vanesa continues on 2026-11-05.
+
 - Whether Design Lab gets a `brand-kit/primitives/layout.yaml` (a request for Neil).
 - Grid columns and Box line colors, once there's a Figma social grid or Juan's system lands.
