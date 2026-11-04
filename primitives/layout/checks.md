@@ -13,7 +13,7 @@ Run these on every creative before it's shown. Render it at the exact size and l
 | Balanced margins | Content looks heavier on one side: the right-hand item doesn't reach the right margin while the left one sits on the left margin. |
 | No overlaps | Two slots overlap, unless one is a background or image meant to sit behind. |
 | Parts | A piece isn't one of the approved parts in [components/](../../components/), or a part is redrawn or changed. |
-| Composition | It breaks a Must rule in [guidelines/](../../guidelines/) section 11: made-up content, mixed or right alignment, more than one title or 3 text sizes, a button out of its two places or full width. |
+| Composition | It breaks a Must rule in [guidelines/](../../guidelines/) section 11: made-up content, mixed or right alignment, more than two text sizes outside the headshot parts, a title off the size-by-length scale or in caps when not asked, Geist Mono on more than two words, everything stacked at the top with empty space below, a button out of its two places, full width, or taller than the logo beside it. |
 
 ## Box
 

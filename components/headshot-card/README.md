@@ -51,15 +51,15 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 | Head to card top | the shape's `group` gap |
 | Name | H3 SemiBold, 48, line height 1.1, `text.primary`, centered |
 | Role | H5 Regular, 32, line height 1.3, `text.secondary`, centered |
-| Stagger, 2 speakers | 2 × `section` gap. The first card is raised |
-| Stagger, 3 and 4 speakers | 1 × `section` gap. The middle card(s) are raised |
+| Photo shape | Portrait **5:7** (width : height), always. From the Vector Space Day banner (392×544, Brand-Collateral `2183:41590`) |
+| Stagger (optional) | 2 speakers: 2 × `section` gap, the first card raised. 3 and 4: 1 × `section` gap, the middle card(s) raised. Off by default: add `qd-headshot-row--stagger` |
 
 ## The photo
 
-1. **The head sits near the top.** The cutout scales so the top of the head is one `group` gap below the card's top edge. No big empty gradient above the head.
-2. **Never a close-up.** The photo grows to at most 1.1× the card's width. A little of each shoulder can run off the sides, as in the Figma frames, but the shoulders always show. This caps the card's height.
-3. **Speakers sit on the bottom margin.** The row takes the height left in the canvas, and the cards line up at its bottom. On tall shapes the extra space is between the title and the cards. Put event details there.
-4. **The photo is anchored to the bottom** of the card and centered.
+1. **The card is always portrait 5:7.** It never stretches or squashes to fit the space (decided 2026-11-04, after the test made short, wide cards).
+2. **The photo fills the card.** The cutout scales so the top of the head is one `group` gap below the card's top edge, anchored to the bottom and centered. The shoulders run off the sides, as in the Vector Space Day banner.
+3. **Speakers sit on the bottom margin.** The cards line up at the bottom of the row. The space above them belongs to the visual area between the top and bottom blocks ([`guidelines/`](../../guidelines/) section 11, rule 7).
+4. **No room: smaller span, then circles.** If 5:7 cards at the span in the table don't fit the height left, drop every card to the next smaller span (e.g. 3 → 2 on square). If they still don't fit, use [`headshot-circle`](../headshot-circle/). Never squash the card's shape.
 
 ## Rules
 
@@ -92,7 +92,7 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 </div>
 ```
 
-- Add `qd-headshot-row--2`, `--3` or `--4` for the stagger.
+- Add `qd-headshot-row--2`, `--3` or `--4` for the count, and `qd-headshot-row--stagger` if you want the optional stagger.
 - For a title beside the cards (1 to 3 speakers on wide, 1 on square and portrait), give the cards `--qd-start` and put the title in the same row with `grid-row: 1` and the columns to the left.
 - The CSS reserves one line for the name and one for the role. Long names that wrap push the card up a little.
 

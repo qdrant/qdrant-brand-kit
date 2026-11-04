@@ -16,6 +16,15 @@
 .qd-canvas[data-shape="portrait"]  { --qd-button-text: 36; --qd-button-height: 80;  --qd-button-pad: 48; --qd-button-radius: 16; }
 .qd-canvas[data-shape="story"]     { --qd-button-text: 48; --qd-button-height: 112; --qd-button-pad: 64; --qd-button-radius: 24; }
 
+/* Top-right, level with the logo: same height as the logo, never taller (Vanesa, 2026-11-04).
+   Text, padding and corners keep the 2.25 / 1.25 / 0.5 proportions. Needs brand-assets/logo/logo.css. */
+.qd-button.qd-button--beside-logo {
+  height: var(--qd-logo-height);
+  font-size: calc(var(--qd-logo-height) / 2.25);
+  padding: 0 calc(var(--qd-logo-height) * 1.25 / 2.25);
+  border-radius: calc(var(--qd-logo-height) * 0.5 / 2.25);
+}
+
 .qd-button {
   display: inline-flex;
   align-items: center;

@@ -66,6 +66,24 @@ The default weight is in each token; `$extensions.qdrant.weights` lists the weig
 
 `luma-title` (104px, 600) is the Luma cover title, added in Design Lab.
 
+### Text in creatives (social posts, ads, banners)
+
+Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabNex7sSJ`) and the Vector Space Day banner (Brand-Collateral `2183:41590`). Sizes in px at the reference canvas (see [`layout/`](../layout/)); they scale with the canvas.
+
+**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception.
+
+| | Font | Square, portrait, wide | Story |
+| --- | --- | --- | --- |
+| Title, up to 6 words | Mona Sans SemiBold, Title Case, line height 1.05, letter spacing -1.8 | 96 | 104 |
+| Title, 7 to 10 words | same | 80 | 88 |
+| Title, 11 words or more | same | 64 | 72 |
+| Supporting (body, date, time, place) | Mona Sans Regular, line height 1.2, letter spacing -0.5 | 36 | 40 |
+
+- **Title Case, Mona Sans regular width.** All caps and the condensed width (`social-event-title`, `display-condensed-*`) are for special occasions only, when the person asks for them.
+- **Geist Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans.
+- **Ultrawide** (3000×400) sizes aren't set yet: ask.
+- The `social-*` styles above stay as the Figma reference. For creatives, use this table.
+
 The values are guidance: adjust for the medium, scale, screen and production method when needed.
 
 ## Sizes per channel

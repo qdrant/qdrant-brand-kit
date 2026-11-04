@@ -24,11 +24,12 @@
 .qd-headshot-row > * { grid-column: var(--qd-start, auto) / span var(--qd-span, var(--qd-canvas-columns)); }
 .qd-headshot-row--2 { --qd-headshot-stagger: calc(2 * var(--qd-gap-section)); }
 
-/* Stagger: raised cards lift by one stagger step. 2 cards: the first. 3: the middle. 4: the middle two. */
-.qd-headshot-row--2 > :nth-child(1),
-.qd-headshot-row--3 > :nth-child(2),
-.qd-headshot-row--4 > :nth-child(2),
-.qd-headshot-row--4 > :nth-child(3) { margin-bottom: var(--qd-headshot-stagger); }
+/* Optional stagger (add .qd-headshot-row--stagger): raised cards lift by one stagger step.
+   2 cards: the first. 3: the middle. 4: the middle two. */
+.qd-headshot-row--stagger.qd-headshot-row--2 > :nth-child(1),
+.qd-headshot-row--stagger.qd-headshot-row--3 > :nth-child(2),
+.qd-headshot-row--stagger.qd-headshot-row--4 > :nth-child(2),
+.qd-headshot-row--stagger.qd-headshot-row--4 > :nth-child(3) { margin-bottom: var(--qd-headshot-stagger); }
 
 .qd-headshot-card {
   container-type: inline-size;
@@ -38,15 +39,12 @@
   min-width: 0;
 }
 
-/* Photo height: fill the row, but never taller than the cutout at 1.1× the card width plus the
-   head gap. Past that the photo becomes a close-up and the shoulders are cut (slide 56 misuse). */
+/* Photo: always portrait 5:7 (Vector Space Day banner, 392×544). It never stretches to fill the
+   row. If 5:7 cards don't fit the height left, use headshot-circle instead (see README). */
 .qd-headshot-card__photo {
   position: relative;
   overflow: hidden;
-  height: min(
-    100cqw * 1.1 + var(--qd-gap-group),
-    100cqh - var(--qd-headshot-stagger) - var(--qd-gap-group) - var(--qd-headshot-name-h)
-  );
+  aspect-ratio: 5 / 7;
   border-radius: calc(16 * var(--qd-canvas-u)); /* radius.lg */
   background: var(--qd-gradient-headshot);
 }
