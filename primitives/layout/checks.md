@@ -13,7 +13,7 @@ Run these on every creative before it's shown. Render it at the exact size and l
 | Balanced margins | Content looks heavier on one side: the right-hand item doesn't reach the right margin while the left one sits on the left margin. |
 | No overlaps | Two slots overlap, unless one is a background or image meant to sit behind. |
 | Parts | A piece isn't one of the approved parts in [components/](../../components/), or a part is redrawn or changed. |
-| Composition | It breaks a Must rule in [guidelines/](../../guidelines/) section 11: made-up content, mixed or right alignment, more than two text sizes outside the headshot parts, a title off the size-by-length scale, Mona Sans not in Title Case, Mona Sans Condensed not in all caps or used when not asked, Geist Mono on more than two words, everything stacked at the top with empty space below, a text block narrower than half the grid, a series or event type shown before the badge exists, a button out of its two places, full width, or taller than the logo beside it. |
+| Composition | It breaks a Must rule in [guidelines/](../../guidelines/) section 11: made-up content, mixed or right alignment, more than two text sizes outside the headshot parts, a title off the size-by-length scale, Mona Sans not in Title Case, Mona Sans Condensed not in all caps or used when not asked, Geist Mono on more than two words, everything stacked at the top with empty space below (except the Zone layout, where all text stays in the plain zone), text or the button on the pattern zone of a Zone layout, a text block narrower than half the grid, a series or event type shown before the badge exists, a button out of its two places, full width, or taller than the logo beside it. |
 
 ## Box
 
