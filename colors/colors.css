@@ -1,0 +1,90 @@
+:root {
+  /* Generated from colors.tokens.json. Values from the qdrant-brand skill (interim). */
+  --qd-color-primary-50: #FDECEF;
+  --qd-color-primary-100: #FCD7DD;
+  --qd-color-primary-200: #FAAEB3;
+  --qd-color-primary-300: #FF8792;
+  --qd-color-primary-400: #FF516B;
+  --qd-color-primary-500: #DC244C;
+  --qd-color-primary-600: #CC1845;
+  --qd-color-primary-700: #BD0C3E;
+  --qd-color-primary-800: #9E0D38;
+  --qd-color-primary-900: #850D35;
+  --qd-color-secondary-50: #E5E8FF;
+  --qd-color-secondary-100: #DDE0FF;
+  --qd-color-secondary-200: #C2C5FF;
+  --qd-color-secondary-300: #9494FF;
+  --qd-color-secondary-400: #7E75FF;
+  --qd-color-secondary-500: #6047FF;
+  --qd-color-secondary-600: #5F36F5;
+  --qd-color-secondary-700: #522AD8;
+  --qd-color-secondary-800: #4325AE;
+  --qd-color-secondary-900: #392689;
+  --qd-color-neutral-white: #FFFFFF;
+  --qd-color-neutral-50: #F0F3FA;
+  --qd-color-neutral-100: #E2E7F5;
+  --qd-color-neutral-200: #D3D9EB;
+  --qd-color-neutral-300: #CAD0E5;
+  --qd-color-neutral-400: #ABB1C7;
+  --qd-color-neutral-500: #898EA3;
+  --qd-color-neutral-600: #656B7F;
+  --qd-color-neutral-700: #4E5366;
+  --qd-color-neutral-800: #303547;
+  --qd-color-neutral-900: #111824;
+  --qd-color-neutral-950: #0B0F19;
+  --qd-color-neutral-black: #000000;
+  --qd-color-teal-500: #009688;
+  --qd-color-lightBlue-500: #03A9F4;
+  --qd-color-orange-500: #FF9800;
+  --qd-color-purple-500: #9C27B0;
+  --qd-color-green-500: #4CAF50;
+  --qd-color-cyan-500: #00BCD4;
+  --qd-color-indigo-500: #3F51B5;
+  --qd-color-yellow-500: #FFEB3B;
+  --qd-color-red-500: #F44336;
+  --qd-color-mascotGlow: #976BFF;
+
+  --qd-color-background-default: #0B0F19;
+  --qd-color-background-surface: #111824;
+  --qd-color-background-surface-raised: #141A2A;
+  --qd-color-background-overlay: #212635;
+  --qd-color-background-popover: #2B303E;
+  --qd-color-background-light: #FFFFFF;
+  --qd-color-background-light-surface: #F7F8FA;
+  --qd-color-text-primary: #F0F3FA;
+  --qd-color-text-secondary: #656B7F;
+  --qd-color-text-disabled: #ABB1C7;
+  --qd-color-text-on-light: #0B0F19;
+  --qd-color-text-body-on-light: #303547;
+  --qd-color-text-on-accent: #FFFFFF;
+  --qd-color-accent-primary: #DC244C;
+  --qd-color-accent-primary-hover: #CC1845;
+  --qd-color-accent-primary-pressed: #BD0C3E;
+  --qd-color-accent-secondary: #6047FF;
+  --qd-color-border-on-dark: #4E5366;
+  --qd-color-border-on-light: #D3D9EB;
+  --qd-color-status-success: #00897B;
+  --qd-color-status-error: #D32F2F;
+  --qd-color-status-warning: #EF6C00;
+  --qd-color-status-info: #29B6F6;
+  --qd-color-dataviz-1: #DC244C;
+  --qd-color-dataviz-2: #6047FF;
+  --qd-color-dataviz-3: #009688;
+  --qd-color-dataviz-4: #03A9F4;
+  --qd-color-dataviz-5: #FF9800;
+  --qd-color-dataviz-6: #9C27B0;
+  --qd-color-dataviz-7: #4CAF50;
+  --qd-color-dataviz-8: #00BCD4;
+
+  --qd-gradient-brand: linear-gradient(135deg, #DC244C, #6047FF);
+}
+
+/* Light theme. Accent red stays the same in both themes. */
+[data-theme="light"] {
+  --qd-color-background-default: #FFFFFF;
+  --qd-color-background-surface: #F7F8FA;
+  --qd-color-background-surface-raised: #F0F3FA;
+  --qd-color-text-primary: #0B0F19;
+  --qd-color-text-secondary: #656B7F;
+  --qd-color-text-disabled: #898EA3;
+}

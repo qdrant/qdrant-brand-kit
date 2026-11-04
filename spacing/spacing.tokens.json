@@ -1,0 +1,132 @@
+{
+  "$description": "Qdrant spacing: an 8px grid. Values from the qdrant-brand skill (qdrant/skills-internal skills/design), interim until Juan's design system lands.",
+  "core": {
+    "space": {
+      "half": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "Micro-spacing only"
+      },
+      "1": {
+        "$type": "dimension",
+        "$value": "8px"
+      },
+      "2": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "3": {
+        "$type": "dimension",
+        "$value": "24px"
+      },
+      "4": {
+        "$type": "dimension",
+        "$value": "32px"
+      },
+      "5": {
+        "$type": "dimension",
+        "$value": "40px"
+      },
+      "6": {
+        "$type": "dimension",
+        "$value": "48px"
+      },
+      "7": {
+        "$type": "dimension",
+        "$value": "56px"
+      },
+      "8": {
+        "$type": "dimension",
+        "$value": "64px"
+      },
+      "9": {
+        "$type": "dimension",
+        "$value": "72px"
+      },
+      "10": {
+        "$type": "dimension",
+        "$value": "80px"
+      },
+      "11": {
+        "$type": "dimension",
+        "$value": "88px"
+      }
+    },
+    "radius": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "Badges, pills, tags, copy buttons"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "Cards, buttons, inputs, code blocks"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "Hero and CTA containers, prominent cards"
+      },
+      "full": {
+        "$type": "dimension",
+        "$value": "9999px",
+        "$description": "Pills"
+      },
+      "card-luma": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$description": "Luma cover cards. Added in Design Lab"
+      }
+    }
+  },
+  "semantic": {
+    "layout": {
+      "viewport": {
+        "$type": "dimension",
+        "$value": "1440px",
+        "$description": "Design width for web and landing pages"
+      },
+      "content-width": {
+        "$type": "dimension",
+        "$value": "1110px"
+      },
+      "side-padding": {
+        "$type": "dimension",
+        "$value": "165px",
+        "$description": "Off-grid on purpose: (1440 - 1110) / 2"
+      },
+      "column-gap": {
+        "$type": "dimension",
+        "$value": "30px",
+        "$description": "Off-grid on purpose: 3 x 350 + 2 x 30 = 1110"
+      },
+      "narrow-content": {
+        "$type": "dimension",
+        "$value": "800px",
+        "$description": "FAQ and other narrow content"
+      },
+      "nav-height": {
+        "$type": "dimension",
+        "$value": "110px"
+      },
+      "section-padding-min": {
+        "$type": "dimension",
+        "$value": "80px",
+        "$description": "No web section goes below this"
+      },
+      "section-padding-max": {
+        "$type": "dimension",
+        "$value": "120px"
+      },
+      "heading-to-content-min": {
+        "$type": "dimension",
+        "$value": "40px"
+      },
+      "heading-to-content-max": {
+        "$type": "dimension",
+        "$value": "64px"
+      }
+    }
+  }
+}

@@ -1,0 +1,403 @@
+{
+  "$description": "Qdrant colors. Values from the qdrant-brand skill (qdrant/skills-internal skills/design), interim until Juan's design system lands. Keep the names; only values change.",
+  "core": {
+    "color": {
+      "primary": {
+        "50": {
+          "$type": "color",
+          "$value": "#FDECEF"
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#FCD7DD"
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#FAAEB3"
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#FF8792"
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#FF516B"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#DC244C"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#CC1845"
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#BD0C3E"
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#9E0D38"
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#850D35"
+        }
+      },
+      "secondary": {
+        "50": {
+          "$type": "color",
+          "$value": "#E5E8FF"
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#DDE0FF"
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#C2C5FF"
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#9494FF"
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#7E75FF"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#6047FF"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#5F36F5"
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#522AD8"
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#4325AE"
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#392689"
+        }
+      },
+      "neutral": {
+        "white": {
+          "$type": "color",
+          "$value": "#FFFFFF"
+        },
+        "50": {
+          "$type": "color",
+          "$value": "#F0F3FA"
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#E2E7F5"
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#D3D9EB"
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#CAD0E5"
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#ABB1C7"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#898EA3"
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#656B7F"
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#4E5366"
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#303547"
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#111824"
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#0B0F19"
+        },
+        "black": {
+          "$type": "color",
+          "$value": "#000000"
+        }
+      },
+      "teal": {
+        "500": {
+          "$type": "color",
+          "$value": "#009688",
+          "$description": "Charts and data visualization only"
+        }
+      },
+      "lightBlue": {
+        "500": {
+          "$type": "color",
+          "$value": "#03A9F4",
+          "$description": "Charts and data visualization only"
+        }
+      },
+      "orange": {
+        "500": {
+          "$type": "color",
+          "$value": "#FF9800",
+          "$description": "Charts and data visualization only"
+        }
+      },
+      "purple": {
+        "500": {
+          "$type": "color",
+          "$value": "#9C27B0",
+          "$description": "Charts and data visualization only"
+        }
+      },
+      "green": {
+        "500": {
+          "$type": "color",
+          "$value": "#4CAF50",
+          "$description": "Charts and data visualization only"
+        }
+      },
+      "cyan": {
+        "500": {
+          "$type": "color",
+          "$value": "#00BCD4",
+          "$description": "Charts and data visualization only"
+        }
+      },
+      "indigo": {
+        "500": {
+          "$type": "color",
+          "$value": "#3F51B5",
+          "$description": "Charts and data visualization only"
+        }
+      },
+      "yellow": {
+        "500": {
+          "$type": "color",
+          "$value": "#FFEB3B",
+          "$description": "Charts and data visualization only"
+        }
+      },
+      "red": {
+        "500": {
+          "$type": "color",
+          "$value": "#F44336",
+          "$description": "Charts and data visualization only"
+        }
+      },
+      "mascotGlow": {
+        "$type": "color",
+        "$value": "#976BFF",
+        "$description": "Mascot glow only (Design Lab)"
+      }
+    },
+    "gradient": {
+      "brand": {
+        "$type": "gradient",
+        "$value": [
+          {
+            "color": "{core.color.primary.500}",
+            "position": 0
+          },
+          {
+            "color": "{core.color.secondary.500}",
+            "position": 1
+          }
+        ],
+        "$description": "Red to violet, 135deg. Hero moments only, never on text."
+      }
+    }
+  },
+  "semantic": {
+    "color": {
+      "background": {
+        "default": {
+          "$type": "color",
+          "$value": "{core.color.neutral.950}"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "{core.color.neutral.900}"
+        },
+        "surface-raised": {
+          "$type": "color",
+          "$value": "#141A2A"
+        },
+        "overlay": {
+          "$type": "color",
+          "$value": "#212635"
+        },
+        "popover": {
+          "$type": "color",
+          "$value": "#2B303E"
+        },
+        "light": {
+          "$type": "color",
+          "$value": "{core.color.neutral.white}"
+        },
+        "light-surface": {
+          "$type": "color",
+          "$value": "#F7F8FA"
+        }
+      },
+      "text": {
+        "primary": {
+          "$type": "color",
+          "$value": "{core.color.neutral.50}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{core.color.neutral.600}"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{core.color.neutral.400}"
+        },
+        "on-light": {
+          "$type": "color",
+          "$value": "{core.color.neutral.950}"
+        },
+        "body-on-light": {
+          "$type": "color",
+          "$value": "{core.color.neutral.800}"
+        },
+        "on-accent": {
+          "$type": "color",
+          "$value": "{core.color.neutral.white}"
+        }
+      },
+      "accent": {
+        "primary": {
+          "$type": "color",
+          "$value": "{core.color.primary.500}"
+        },
+        "primary-hover": {
+          "$type": "color",
+          "$value": "{core.color.primary.600}"
+        },
+        "primary-pressed": {
+          "$type": "color",
+          "$value": "{core.color.primary.700}"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{core.color.secondary.500}"
+        }
+      },
+      "border": {
+        "on-dark": {
+          "$type": "color",
+          "$value": "{core.color.neutral.700}"
+        },
+        "on-light": {
+          "$type": "color",
+          "$value": "{core.color.neutral.200}"
+        }
+      },
+      "status": {
+        "success": {
+          "$type": "color",
+          "$value": "#00897B"
+        },
+        "error": {
+          "$type": "color",
+          "$value": "#D32F2F"
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "#EF6C00"
+        },
+        "info": {
+          "$type": "color",
+          "$value": "#29B6F6"
+        }
+      },
+      "dataviz": {
+        "1": {
+          "$type": "color",
+          "$value": "{core.color.primary.500}"
+        },
+        "2": {
+          "$type": "color",
+          "$value": "{core.color.secondary.500}"
+        },
+        "3": {
+          "$type": "color",
+          "$value": "{core.color.teal.500}"
+        },
+        "4": {
+          "$type": "color",
+          "$value": "{core.color.lightBlue.500}"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "{core.color.orange.500}"
+        },
+        "6": {
+          "$type": "color",
+          "$value": "{core.color.purple.500}"
+        },
+        "7": {
+          "$type": "color",
+          "$value": "{core.color.green.500}"
+        },
+        "8": {
+          "$type": "color",
+          "$value": "{core.color.cyan.500}"
+        }
+      }
+    }
+  },
+  "theme": {
+    "light": {
+      "color": {
+        "background": {
+          "default": {
+            "$type": "color",
+            "$value": "{core.color.neutral.white}"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#F7F8FA"
+          },
+          "surface-raised": {
+            "$type": "color",
+            "$value": "{core.color.neutral.50}"
+          }
+        },
+        "text": {
+          "primary": {
+            "$type": "color",
+            "$value": "{core.color.neutral.950}"
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "{core.color.neutral.600}"
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{core.color.neutral.500}"
+          }
+        }
+      }
+    }
+  }
+}

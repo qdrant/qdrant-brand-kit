@@ -1,0 +1,32 @@
+:root {
+  /* Generated from spacing.tokens.json. Values from the qdrant-brand skill (interim). */
+  --qd-space-half: 4px;
+  --qd-space-1: 8px;
+  --qd-space-2: 16px;
+  --qd-space-3: 24px;
+  --qd-space-4: 32px;
+  --qd-space-5: 40px;
+  --qd-space-6: 48px;
+  --qd-space-7: 56px;
+  --qd-space-8: 64px;
+  --qd-space-9: 72px;
+  --qd-space-10: 80px;
+  --qd-space-11: 88px;
+
+  --qd-radius-sm: 4px;
+  --qd-radius-md: 8px;
+  --qd-radius-lg: 16px;
+  --qd-radius-full: 9999px;
+  --qd-radius-card-luma: 32px;
+
+  --qd-layout-viewport: 1440px;
+  --qd-layout-content-width: 1110px;
+  --qd-layout-side-padding: 165px;
+  --qd-layout-column-gap: 30px;
+  --qd-layout-narrow-content: 800px;
+  --qd-layout-nav-height: 110px;
+  --qd-layout-section-padding-min: 80px;
+  --qd-layout-section-padding-max: 120px;
+  --qd-layout-heading-to-content-min: 40px;
+  --qd-layout-heading-to-content-max: 64px;
+}

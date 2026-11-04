@@ -1,0 +1,33 @@
+@import url("./fonts/fonts.css");
+
+:root {
+  /* Generated from typography.tokens.json. Values from the qdrant-brand skill (interim). */
+  --qd-font-family-sans: "Mona Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --qd-font-family-mono: "Geist Mono", "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
+  --qd-font-weight-regular: 400;
+  --qd-font-weight-medium: 500;
+  --qd-font-weight-semibold: 600;
+  --qd-font-weight-bold: 700;
+  --qd-font-features: "ss05" on, "ss06" on;
+
+  --qd-type-display-2-size: 104px; --qd-type-display-2-weight: 700; --qd-type-display-2-line-height: 1.05; --qd-type-display-2-letter-spacing: -1.8px;
+  --qd-type-display-1-size: 80px; --qd-type-display-1-weight: 600; --qd-type-display-1-line-height: 1.05; --qd-type-display-1-letter-spacing: -1.8px;
+  --qd-type-h1-size: 64px; --qd-type-h1-weight: 600; --qd-type-h1-line-height: 1.1; --qd-type-h1-letter-spacing: -1.5px;
+  --qd-type-h2-size: 56px; --qd-type-h2-weight: 600; --qd-type-h2-line-height: 1.1; --qd-type-h2-letter-spacing: -0.5px;
+  --qd-type-h3-size: 48px; --qd-type-h3-weight: 600; --qd-type-h3-line-height: 1.1; --qd-type-h3-letter-spacing: -0.5px;
+  --qd-type-h4-size: 40px; --qd-type-h4-weight: 600; --qd-type-h4-line-height: 1.2; --qd-type-h4-letter-spacing: -0.5px;
+  --qd-type-h5-size: 32px; --qd-type-h5-weight: 600; --qd-type-h5-line-height: 1.3; --qd-type-h5-letter-spacing: -0.5px;
+  --qd-type-h6-size: 24px; --qd-type-h6-weight: 600; --qd-type-h6-line-height: 1.3; --qd-type-h6-letter-spacing: -0.5px;
+  --qd-type-text-xl-size: 20px; --qd-type-text-xl-weight: 400; --qd-type-text-xl-line-height: 1.5; --qd-type-text-xl-letter-spacing: -0.2px;
+  --qd-type-text-lg-size: 18px; --qd-type-text-lg-weight: 400; --qd-type-text-lg-line-height: 1.5; --qd-type-text-lg-letter-spacing: 0px;
+  --qd-type-text-md-size: 16px; --qd-type-text-md-weight: 400; --qd-type-text-md-line-height: 1.5; --qd-type-text-md-letter-spacing: 0px;
+  --qd-type-text-sm-size: 14px; --qd-type-text-sm-weight: 400; --qd-type-text-sm-line-height: 1.5; --qd-type-text-sm-letter-spacing: 0px;
+  --qd-type-text-xs-size: 12px; --qd-type-text-xs-weight: 400; --qd-type-text-xs-line-height: 1.5; --qd-type-text-xs-letter-spacing: 0px;
+  --qd-type-mono-xl-size: 20px; --qd-type-mono-xl-weight: 400; --qd-type-mono-xl-line-height: 1.5; --qd-type-mono-xl-letter-spacing: -0.2px;
+  --qd-type-mono-h6-size: 24px; --qd-type-mono-h6-weight: 400; --qd-type-mono-h6-line-height: 1.3; --qd-type-mono-h6-letter-spacing: -0.5px;
+  --qd-type-mono-sm-size: 14px; --qd-type-mono-sm-weight: 400; --qd-type-mono-sm-line-height: 1.5; --qd-type-mono-sm-letter-spacing: 0px;
+  --qd-type-luma-title-size: 104px; --qd-type-luma-title-weight: 600; --qd-type-luma-title-line-height: 1.05; --qd-type-luma-title-letter-spacing: -1.8px;
+}
+
+/* Required: double-storey a and g. Never override font-feature-settings. */
+html, body { font-family: var(--qd-font-family-sans); font-feature-settings: var(--qd-font-features); }

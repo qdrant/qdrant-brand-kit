@@ -4,6 +4,9 @@ The building blocks for Qdrant Design Lab, written as code. Each folder is one p
 
 | Primitive | Status | What it is |
 | --- | --- | --- |
+| [`colors/`](colors/) | Interim values | The palette as tokens and CSS variables: core scales, semantic roles, dark and light themes, data viz, the brand gradient. |
+| [`typography/`](typography/) | Interim values | Mona Sans and Geist Mono (font files included), the type scale, ss05/ss06, slide and document sizes. |
+| [`spacing/`](spacing/) | Interim values | The 8px space scale, corner radius and web page layout constants. |
 | [`patterns/`](patterns/) | V1, ready to plug in | Brand background and generative patterns at any size and shape, drawn from color tokens. |
 | [`imagery/`](imagery/) | Copied from Design Lab, live there | Generated images in a Qdrant style: rules, channel sizes, review checklist and the Default moodboard references. |
 | [`mascot/`](mascot/) | Handoff, untested on Sunburst | Qbot in 3D (main) and 2D, with approved poses, prompts and scripts for new poses as transparent PNGs. |
@@ -11,7 +14,7 @@ The building blocks for Qdrant Design Lab, written as code. Each folder is one p
 
 ## Shared rules
 
-- **Tokens are placeholders.** Colors and text styles come from Juan's design system. Until it lands, keep the token names and swap only the values.
+- **Tokens are placeholders.** Colors and text styles come from Juan's design system. Until it lands, keep the token names and swap only the values. `colors/`, `typography/` and `spacing/` hold the interim values, from the qdrant-brand skill, with Design Lab's token names.
 - **Code, not images.** Primitives are drawn from tokens and small settings files, so they stay on-brand when the tokens change.
 - **Any size.** Every primitive works at any width and height, from a square post to a wide banner.
 
