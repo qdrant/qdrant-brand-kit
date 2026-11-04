@@ -77,6 +77,7 @@
   --qd-color-dataviz-8: #00BCD4;
 
   --qd-gradient-brand: linear-gradient(135deg, #DC244C, #6047FF);
+  --qd-gradient-headshot: linear-gradient(204deg, rgb(57 38 137 / 0.7) 7.6%, rgb(126 117 255 / 0.7) 80.1%); /* secondary-900 → secondary-400, 70% */
 }
 
 /* Light theme. Accent red stays the same in both themes. */

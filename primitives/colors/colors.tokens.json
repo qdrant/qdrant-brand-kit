@@ -223,6 +223,22 @@
           }
         ],
         "$description": "Red to violet, 135deg. Hero moments only, never on text."
+      },
+      "headshot": {
+        "$type": "gradient",
+        "$value": [
+          {
+            "color": "{core.color.secondary.900}",
+            "position": 0.076,
+            "opacity": 0.7
+          },
+          {
+            "color": "{core.color.secondary.400}",
+            "position": 0.801,
+            "opacity": 0.7
+          }
+        ],
+        "$description": "Violet, 204deg, both stops at 70%. Only behind headshot cutouts (components/headshot-card, headshot-circle). From Figma Brand-Collateral, node 2183:29300."
       }
     }
   },

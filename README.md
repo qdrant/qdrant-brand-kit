@@ -8,7 +8,7 @@ Tokens and rules only. No finished designs.
 
 | Folder | Status | What it is |
 | --- | --- | --- |
-| [`primitives/colors/`](primitives/colors/) | Interim values | The palette as tokens and CSS variables: core scales, semantic roles, dark and light themes, data viz, the brand gradient. |
+| [`primitives/colors/`](primitives/colors/) | Interim values | The palette as tokens and CSS variables: core scales, semantic roles, dark and light themes, data viz, the brand and headshot gradients. |
 | [`primitives/typography/`](primitives/typography/) | Interim values | Mona Sans and Geist Mono (font files included), every Figma text style (incl. condensed, mono and social), sizes per channel, hierarchy, emphasis and misuse rules. |
 | [`primitives/spacing/`](primitives/spacing/) | Interim values | The 8px space scale, corner radius and web page layout constants. |
 | [`primitives/layout/`](primitives/layout/) | V1 | Canvas, Grid, Stack and Box for social posts, ads and banners at any size: shapes, margins, safe zones, columns, gap roles, Box styles and checks. |
@@ -26,7 +26,7 @@ Brand materials that components use.
 | Folder | Status | What it is |
 | --- | --- | --- |
 | [`brand-assets/patterns/`](brand-assets/patterns/) | V1, ready to plug in | Brand background and generative patterns at any size and shape, drawn from color tokens. |
-| [`brand-assets/imagery/`](brand-assets/imagery/) | Copied from Design Lab, live there | Generated images in a Qdrant style: rules, channel sizes, review checklist and the Default moodboard references. |
+| [`brand-assets/imagery/`](brand-assets/imagery/) | Copied from Design Lab, live there | Generated images in a Qdrant style: rules, channel sizes, review checklist and the Default moodboard references. Plus how to prepare speaker headshots. |
 | [`brand-assets/mascot/`](brand-assets/mascot/) | Handoff, untested on Sunburst | Qbot in 3D (main) and 2D, with approved poses, prompts and scripts for new poses as transparent PNGs. |
 
 ## Components

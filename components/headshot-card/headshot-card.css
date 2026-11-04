@@ -1,0 +1,82 @@
+/* Headshot card: a speaker's cutout on the headshot gradient, with name and role below.
+   Load primitives/colors/colors.css, primitives/typography/typography.css and
+   primitives/layout/layout.css first. Cards sit in a .qd-headshot-row inside a .qd-canvas.
+
+   Every number below is px at the shape's reference canvas, scaled with --qd-canvas-u.
+   Cutouts must pass brand-assets/imagery/headshots/check-headshot.py (square PNG, transparent
+   background, top of the head about 4% below the top edge).
+
+   From Figma Brand-Collateral (JQqxFCf33xbYJiOlHhtOjg), nodes 2183:29298, 2183:17250, 2183:32097. */
+
+/* Row of 1–4 cards. A grid on the shape's columns that takes the height left in the canvas.
+   Give each card its span with --qd-span (see README). Add the count as a modifier. */
+.qd-headshot-row {
+  --qd-headshot-stagger: var(--qd-gap-section);
+  --qd-headshot-name-h: calc(96 * var(--qd-canvas-u)); /* one line of name + one line of role */
+  flex: 1 1 auto;
+  min-height: 0;
+  container-type: size;
+  display: grid;
+  grid-template-columns: repeat(var(--qd-canvas-columns), minmax(0, 1fr));
+  column-gap: var(--qd-gutter);
+  align-items: end; /* speakers sit on the bottom margin */
+}
+.qd-headshot-row > * { grid-column: var(--qd-start, auto) / span var(--qd-span, var(--qd-canvas-columns)); }
+.qd-headshot-row--2 { --qd-headshot-stagger: calc(2 * var(--qd-gap-section)); }
+
+/* Stagger: raised cards lift by one stagger step. 2 cards: the first. 3: the middle. 4: the middle two. */
+.qd-headshot-row--2 > :nth-child(1),
+.qd-headshot-row--3 > :nth-child(2),
+.qd-headshot-row--4 > :nth-child(2),
+.qd-headshot-row--4 > :nth-child(3) { margin-bottom: var(--qd-headshot-stagger); }
+
+.qd-headshot-card {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: var(--qd-gap-group);
+  min-width: 0;
+}
+
+/* Photo height: fill the row, but never taller than the cutout at 1.1× the card width plus the
+   head gap. Past that the photo becomes a close-up and the shoulders are cut (slide 56 misuse). */
+.qd-headshot-card__photo {
+  position: relative;
+  overflow: hidden;
+  height: min(
+    100cqw * 1.1 + var(--qd-gap-group),
+    100cqh - var(--qd-headshot-stagger) - var(--qd-gap-group) - var(--qd-headshot-name-h)
+  );
+  border-radius: calc(16 * var(--qd-canvas-u)); /* radius.lg */
+  background: var(--qd-gradient-headshot);
+}
+/* The head sits one group gap below the top edge. 0.957 = the cutout below the 4.3% head line. */
+.qd-headshot-card__photo img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: calc((100% - var(--qd-gap-group)) / 0.957);
+  width: auto;
+  max-width: none;
+  transform: translateX(-50%);
+}
+
+.qd-headshot-card__name,
+.qd-headshot-card__role {
+  margin: 0;
+  text-align: center;
+  letter-spacing: calc(-0.5 * var(--qd-canvas-u));
+}
+.qd-headshot-card__name { /* H3 SemiBold */
+  font-size: calc(48 * var(--qd-canvas-u));
+  font-weight: var(--qd-font-weight-semibold);
+  line-height: 1.1;
+  color: var(--qd-color-text-primary);
+}
+.qd-headshot-card__role { /* H5 Regular */
+  font-size: calc(32 * var(--qd-canvas-u));
+  font-weight: var(--qd-font-weight-regular);
+  line-height: 1.3;
+  color: var(--qd-color-text-secondary);
+}
+.qd-headshot-card__text { display: flex; flex-direction: column; }

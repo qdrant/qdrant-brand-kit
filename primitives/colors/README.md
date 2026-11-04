@@ -17,6 +17,7 @@ The Qdrant palette as tokens. Values come from the qdrant-brand skill ([skills-i
 | Extended (teal, light blue, orange, purple, green, cyan, indigo, yellow, red) | 500 | Charts and data visualization only |
 | `mascotGlow` | `#976BFF` | The mascot's glow only |
 | `gradient.brand` | `#DC244C` → `#6047FF`, 135° | Hero moments only |
+| `gradient.headshot` | `secondary-900` → `secondary-400`, both at 70%, 204° | Only behind headshots ([`headshot-card`](../../components/headshot-card/), [`headshot-circle`](../../components/headshot-circle/)) |
 
 ## Roles
 
@@ -42,6 +43,6 @@ Use `dataviz.1` to `dataviz.8` in order: red, violet, teal, light blue, orange, 
 
 - **Dark theme is the default.** Light only for print, documents and light-mode UIs.
 - **Red is an accent.** Never a large background fill. Design Lab caps a red fill at 15% of the canvas (to confirm with design).
-- **The gradient is never applied to text**, and it's the only gradient.
+- **Two gradients, never on text.** `gradient.brand` for hero moments, `gradient.headshot` only behind headshot cutouts. No others.
 - **Contrast:** text on dark uses `text.primary` or `text.secondary`. Never light gray on medium gray. Design Lab checks WCAG AA: 4.5 for body text, 3.0 for text from 24 px.
 - **Charts:** never rely on color alone to carry meaning.
