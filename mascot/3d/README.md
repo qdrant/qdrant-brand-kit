@@ -14,7 +14,7 @@ The main mascot style in Design Lab. People pick an approved pose from the libra
 
 | Path | What it is | Status |
 | --- | --- | --- |
-| `mascot.config.json` | Single source of truth: locked character, 13 emotions (Figma mood names), 11 poses, variants, references, finish settings | Ready |
+| `mascot.config.json` | Single source of truth: locked character, 13 emotions (Figma mood names), mood groups, the 12 Design Lab pose presets, variants, references, finish settings | Ready |
 | `prompts/` | Master (Sunburst), detail rewriter, tweak, review prompts | Ready, untested on Sunburst |
 | `references/master.png` | Master character, transparent PNG, 1002×1442 | Ready |
 | `references/*.png` (14 poses) | Original transparent PNGs from Figma, no glow, 1024×1024 | Ready, match the Figma image hashes |
@@ -27,7 +27,7 @@ The main mascot style in Design Lab. People pick an approved pose from the libra
 
 ## Differences from Design Lab (2026-11-04)
 
-- **Poses:** Design Lab offers 12 presets (`tool/poses.yaml`), each with the eyes written into the pose. This package has 11 poses plus a separate emotion chip and a left/right direction. Not merged yet.
+- **Poses:** the config uses Design Lab's 12 presets (`tool/poses.yaml`), phrases word for word, since 2026-11-04. They replace the 11 poses from the Oct 21 brief, and the left/right direction is gone. Each phrase describes the eyes; an emotion chip is optional and overrides them. Each pose's `refs` are the closest approved renders, chosen in this repo: Design Lab sends its own Mascot moodboard instead.
 - **Character description:** Design Lab's invariants say "a red cap on top of the helmet" and "no extra stripes or bands". The Figma renders show a red stripe over the helmet, red seam lines on the suit and red bands at the wrists and ankles, as `mascot.config.json` says. Design Lab's text needs fixing, not this one.
 - **Mood groups:** copied from Design Lab into `mood_groups` in the config: upbeat moods by default, context moods when the title calls for them, sad and angry only on request.
 - **Model and references:** Design Lab generates at 1024×1536, one image per pose, with references from its Mascot moodboard. Which images that moodboard holds isn't visible in the Brand kit.
@@ -36,7 +36,8 @@ The main mascot style in Design Lab. People pick an approved pose from the libra
 
 ```bash
 npm install
-npm run prompt -- --emotion excited --pose pointing --direction right
+npm run prompt -- --pose waving                 # eyes come from the pose
+npm run prompt -- --pose heart --emotion loving  # or pick the eyes
 npm run finish -- references/loving.png --out test.png
 ```
 

@@ -1,6 +1,6 @@
 // Reference implementation of one 3D Mascot run (1 image per new pose).
 // NOT RUN YET: verify parameter names against your Sunburst integration.
-//   OPENAI_API_KEY=xxx node scripts/generate.mjs --emotion excited --pose pointing --direction right [--background grey]
+//   OPENAI_API_KEY=xxx node scripts/generate.mjs --pose waving [--emotion excited] [--background grey]
 import OpenAI, { toFile } from "openai";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";

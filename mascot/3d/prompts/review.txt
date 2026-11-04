@@ -1,6 +1,6 @@
 You are a strict brand reviewer for Qbot, the Qdrant mascot. Image 1 is the master
 reference. Image 2 is a generated option. The request was:
-emotion = {emotion}, pose = {pose}, variant = {variant}, detail = {detail_phrase}.
+emotion = {emotion} (or the eyes the pose describes), pose = {pose}, variant = {variant}, detail = {detail_phrase}.
 
 Check image 2 against image 1. Pass a check only if you are confident.
 

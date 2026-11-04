@@ -49,18 +49,21 @@
   },
 
   "poses": {
-    "standing_front":  { "label": "Standing front",      "direction": false, "refs": ["happy", "neutral"],   "phrase": "standing upright facing the camera, arms relaxed at the sides" },
-    "waving":          { "label": "Waving",              "direction": true,  "refs": ["proud", "excited"],   "phrase": "standing, one arm raised high with an open hand waving, the other arm relaxed" },
-    "pointing":        { "label": "Pointing",            "direction": true,  "refs": ["helpful", "cheerful"], "phrase": "standing, body turned slightly, one arm fully extended pointing to the {direction}" },
-    "presenting":      { "label": "Presenting",          "direction": true,  "refs": ["loving", "helpful"],  "phrase": "standing, one arm open with palm up, gesturing to the {direction} as if presenting something" },
-    "thumbs_up":       { "label": "Thumbs up",           "direction": false, "refs": ["proud", "happy"],     "phrase": "standing facing the camera, one hand raised giving a thumbs up" },
-    "arms_crossed":    { "label": "Arms crossed",        "direction": false, "refs": ["angry", "neutral"],   "phrase": "standing confidently facing the camera with both arms crossed over the chest" },
-    "thinking":        { "label": "Thinking",            "direction": false, "refs": ["confused", "curious"], "phrase": "standing, one hand touching the bottom of the helmet, head tilted slightly" },
-    "jumping":         { "label": "Jumping",             "direction": false, "refs": ["excited", "proud"],   "phrase": "jumping with both feet off the ground, both arms raised in celebration" },
-    "sitting":         { "label": "Sitting",             "direction": false, "refs": ["friendly", "curious"], "phrase": "sitting on the ground, legs stretched forward, hands resting beside the body" },
-    "sitting_laptop":  { "label": "Sitting with laptop", "direction": false, "refs": ["focused", "friendly"], "phrase": "sitting cross-legged with an open plain grey laptop on the lap, hands on the keyboard" },
-    "side_look":       { "label": "Side look",           "direction": true,  "refs": ["cheerful", "happy"],  "phrase": "body turned three-quarters away, head looking back over the shoulder at the camera" }
+    "_source": "Design Lab brand-kit/mascot/poses.yaml (2026-11-04), phrases verbatim. Each phrase already describes the eyes; an emotion chip, if given, overrides them. refs = the closest approved renders.",
+    "waving":      { "label": "Waving", "direction": false, "refs": ["proud",  "excited"], "phrase": "standing and waving hello with one hand raised beside the helmet, happy arc eyes" },
+    "thumbs-up":   { "label": "Thumbs up", "direction": false, "refs": ["proud",  "happy"], "phrase": "standing with one arm forward giving a thumbs up, happy arc eyes" },
+    "presenting":  { "label": "Presenting", "direction": false, "refs": ["loving",  "helpful"], "phrase": "standing at a slight angle, one arm extended to the side with an open hand as if presenting something next to it, friendly arc eyes" },
+    "laptop":      { "label": "On a laptop", "direction": false, "refs": ["focused",  "friendly"], "phrase": "sitting cross-legged with a small open grey laptop on its lap, typing, focused eyes looking down at the screen" },
+    "celebrating": { "label": "Celebrating", "direction": false, "refs": ["excited",  "proud"], "phrase": "jumping with both arms up in celebration, excited arc eyes" },
+    "thinking":    { "label": "Thinking", "direction": false, "refs": ["confused",  "curious"], "phrase": "standing with one hand touching the side of the visor as if thinking, head tilted slightly, curious round eyes" },
+    "heart":       { "label": "Heart hands", "direction": false, "refs": ["loving",  "happy"], "phrase": "standing holding both hands together in front of the chest making a heart shape, the visor showing a single red pixel heart instead of eyes" },
+    "trophy":      { "label": "Holding a trophy", "direction": false, "refs": ["proud",  "happy"], "phrase": "holding a small golden trophy close to the chest with both hands, proud happy arc eyes" },
+    "sitting":     { "label": "Sitting", "direction": false, "refs": ["friendly",  "curious"], "phrase": "sitting on the ground with legs stretched forward and hands resting beside it, relaxed happy arc eyes" },
+    "floating":    { "label": "Floating in space", "direction": false, "refs": ["excited",  "happy"], "phrase": "floating weightlessly, body tilted, arms and legs slightly spread, delighted arc eyes" },
+    "running":     { "label": "Running", "direction": false, "refs": ["cheerful",  "excited"], "phrase": "running forward mid-stride with arms swinging, determined eyes" },
+    "pointing":    { "label": "Pointing up", "direction": false, "refs": ["helpful",  "cheerful"], "phrase": "standing and pointing upwards with one hand as if showing something above, excited arc eyes" }
   },
+
   "direction_phrases": { "left": "left of the image", "right": "right of the image" },
 
   "mood_groups": {
