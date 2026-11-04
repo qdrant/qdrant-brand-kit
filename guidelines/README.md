@@ -54,6 +54,8 @@ Rules:
 
 - **Must:** text never sits on a busy part of a pattern. If no area is calm enough, use the light card or the zone layout.
 - **Must:** the light card only sits on a full-bleed pattern. On a dark creative it's the only light piece.
+- **Suggest:** use the light card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, or the zone layout (decided 2026-11-04).
+- **Must:** never put a big headshot ([`headshot-card`](../components/headshot-card/)) inside the light card. If a light-card creative needs a speaker, use [`headshot-circle`](../components/headshot-circle/) (decided 2026-11-04).
 - **Suggest:** dark is the default. Light creatives (the whole canvas on the light theme) are allowed for some moments, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635) (decided 2026-11-04).
 - **Zone placement**, by shape (see [`primitives/layout/`](../primitives/layout/) for shapes):
 

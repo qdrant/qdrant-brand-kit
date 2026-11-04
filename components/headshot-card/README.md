@@ -72,6 +72,10 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 - **Background:** plain `background.default`, or a brand pattern from [`patterns/`](../../brand-assets/patterns/). Never a generated image.
 - **Role color on a pattern:** add `qd-on-pattern` to the canvas or row. Roles then use `neutral-300` instead of `text.secondary`, which fails contrast on violet patterns (decided 2026-11-04).
 - **Never with Qbot.** Headshots and the mascot don't appear in the same creative.
+- **Never inside the light card.** Big headshots don't go on `.qd-box--light-card`. Use [`headshot-circle`](../headshot-circle/) there (decided 2026-11-04).
+- **Never across a zone line.** In a zone layout the card sits wholly on one background: never half on the plain zone and half on the pattern (decided 2026-11-04).
+- **Opaque card.** The 70% headshot gradient sits on an opaque `background.default` base, so a pattern never shows through the card. The CSS does this (decided 2026-11-04).
+- **Suggest:** for speaker posts, full bleed with text on top is the preferred layout: logo and title at the top, supporting block and button bottom-left, card on the right on the bottom margin (Vanesa's pick from the 2026-11-04 test).
 - **Same treatment for everyone** in a post: same span, same gradient.
 
 ## How to use

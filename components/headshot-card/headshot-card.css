@@ -46,7 +46,8 @@
   overflow: hidden;
   aspect-ratio: 5 / 7;
   border-radius: calc(16 * var(--qd-canvas-u)); /* radius.lg */
-  background: var(--qd-gradient-headshot);
+  /* Gradient on an opaque base: the 70% gradient alone lets a pattern show through (Vanesa, 2026-11-04). */
+  background: var(--qd-gradient-headshot), var(--qd-color-background-default);
 }
 /* The head sits one group gap below the top edge. 0.957 = the cutout below the 4.3% head line. */
 .qd-headshot-card__photo img {
