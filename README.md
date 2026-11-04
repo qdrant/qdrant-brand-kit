@@ -1,6 +1,6 @@
-# Qdrant Labs Primitives
+# Qdrant Marketing Brand System
 
-The building blocks for Qdrant creatives, written as code. Organised like [Primer Brand](https://primer.style/brand/): rules first, then brand assets, then the components built from both. Each folder has its own README.
+The building blocks for Qdrant marketing creatives (social posts, ads, banners, events), written as code. The product UI has its own design system. Organised like [Primer Brand](https://primer.style/brand/): rules first, then brand assets, then the components built from both. Each folder has its own README.
 
 ## Primitives: the rules
 
