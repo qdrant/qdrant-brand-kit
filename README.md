@@ -2,6 +2,8 @@
 
 The building blocks for Qdrant marketing creatives (social posts, ads, banners, events), written as code. The product UI has its own design system. Organised like [Primer Brand](https://primer.style/brand/): rules first, then brand assets, then the components built from both. Each folder has its own README.
 
+**Agents: start with [`AGENTS.md`](AGENTS.md).** It gives the reading order and the rules never to break.
+
 ## Primitives: the rules
 
 Tokens and rules only. No finished designs.
@@ -37,6 +39,12 @@ Brand materials that components use.
 | [`components/`](components/) | Button, headshot card, headshot circle, partner lockup approved | Ready-made parts, built only from primitives and brand assets. No fixed post templates: creatives are composed by the rules in `guidelines/` section 11. |
 
 The old social post template lives in its own archived repo: [qdrant-social-template](https://github.com/vanesaajdini/qdrant-social-template).
+
+## Tools
+
+| Folder | Status | What it is |
+| --- | --- | --- |
+| [`tools/`](tools/) | New | Render a creative at exact sizes, check it against the rules, make a contact sheet. Mechanics only: every value comes from the repo. |
 
 ## Shared rules
 

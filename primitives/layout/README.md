@@ -17,7 +17,7 @@ Covers image canvases only. Web page layout stays in [`spacing/`](../spacing/) (
 2. **Pick the shape** from width ÷ height (table below). It sets the reference canvas, margins, columns and gaps.
 3. **Compose it** from the content you're given, following [`guidelines/`](../../guidelines/) section 11 (Composition) and using only the approved parts in [`components/`](../../components/). There are no fixed post templates.
 4. **Build it** with the four pieces below. Load `primitives/colors/colors.css`, `primitives/typography/typography.css` and `primitives/layout/layout.css`. Colors come from [`colors/`](../colors/), type from [`typography/`](../typography/), images from [`imagery/`](../../brand-assets/imagery/), backgrounds from [`patterns/`](../../brand-assets/patterns/), the mascot from [`mascot/`](../../brand-assets/mascot/).
-5. **Run the checks** in [`checks.md`](checks.md). Fix and check again before showing it.
+5. **Run the checks** in [`checks.md`](checks.md), with [`tools/check.py`](../../tools/) for the measurable ones. Fix and check again before showing it.
 
 ## Shapes
 
@@ -45,7 +45,7 @@ The post itself: size, margins and safe zones. Everything goes inside it.
 </div>
 ```
 
-Width and height are plain numbers in px. For one file rendered at many sizes, add `<script src="primitives/layout/canvas.js"></script>` instead. It sets all three from the window. The canvas is a column with `section` gaps between its children and the dark background.
+Width and height are plain numbers in px. For one file rendered at many sizes, add `<script src="primitives/layout/canvas.js"></script>` instead. It sets all three from the window, or from `?w=&h=` in the URL when given (what [`tools/render.py`](../../tools/render.py) uses). The canvas is a column with `section` gaps between its children and the dark background.
 
 ## Grid
 

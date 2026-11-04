@@ -50,3 +50,30 @@
 
 /* Required: double-storey a and g. Never override font-feature-settings. */
 html, body { font-family: var(--qd-font-family-sans); font-feature-settings: var(--qd-font-features); }
+
+/* Text in creatives (README, "Text in creatives"). Use inside a .qd-canvas: sizes scale with the
+   canvas. Pick the title class by word count: short up to 6 words, medium 7-10, long 11+. */
+.qd-canvas { --qd-creative-title-short: 96; --qd-creative-title-medium: 80; --qd-creative-title-long: 64; --qd-creative-supporting: 36; }
+.qd-canvas[data-shape="story"] { --qd-creative-title-short: 104; --qd-creative-title-medium: 88; --qd-creative-title-long: 72; --qd-creative-supporting: 40; }
+.qd-title, .qd-supporting {
+  margin: 0;
+  font-family: var(--qd-font-family-sans);
+  font-feature-settings: var(--qd-font-features);
+  color: var(--qd-color-text-primary);
+}
+.qd-title {
+  --qd-title-size: var(--qd-creative-title-short);
+  font-size: calc(var(--qd-title-size) * var(--qd-canvas-u));
+  font-weight: var(--qd-font-weight-semibold);
+  line-height: 1.05;
+  letter-spacing: calc(-1.8 * var(--qd-canvas-u));
+  text-wrap: balance;
+}
+.qd-title--medium { --qd-title-size: var(--qd-creative-title-medium); }
+.qd-title--long { --qd-title-size: var(--qd-creative-title-long); }
+.qd-supporting {
+  font-size: calc(var(--qd-creative-supporting) * var(--qd-canvas-u));
+  font-weight: var(--qd-font-weight-regular);
+  line-height: 1.2;
+  letter-spacing: calc(-0.5 * var(--qd-canvas-u));
+}

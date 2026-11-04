@@ -776,6 +776,52 @@
         "$type": "dimension",
         "$value": "9pt"
       }
+    },
+    "creative": {
+      "$description": "Text in creatives (social posts, ads, banners). Two sizes only: one title, one supporting size. px at the shape's reference canvas, scaled with the canvas. $value is square, portrait and wide; $extensions.qdrant.story is story. Ultrawide not set: ask. Decided by Vanesa 2026-11-04.",
+      "title-short": {
+        "$type": "dimension",
+        "$value": "96px",
+        "$description": "Title up to 6 words. Mona Sans SemiBold, Title Case, line height 1.05, letter spacing -1.8px",
+        "$extensions": {
+          "qdrant": {
+            "story": "104px",
+            "maxWords": 6
+          }
+        }
+      },
+      "title-medium": {
+        "$type": "dimension",
+        "$value": "80px",
+        "$description": "Title of 7 to 10 words",
+        "$extensions": {
+          "qdrant": {
+            "story": "88px",
+            "maxWords": 10
+          }
+        }
+      },
+      "title-long": {
+        "$type": "dimension",
+        "$value": "64px",
+        "$description": "Title of 11 words or more",
+        "$extensions": {
+          "qdrant": {
+            "story": "72px",
+            "maxWords": null
+          }
+        }
+      },
+      "supporting": {
+        "$type": "dimension",
+        "$value": "36px",
+        "$description": "Everything else: body, date, time, place. Mona Sans Regular, line height 1.2, letter spacing -0.5px",
+        "$extensions": {
+          "qdrant": {
+            "story": "40px"
+          }
+        }
+      }
     }
   }
 }

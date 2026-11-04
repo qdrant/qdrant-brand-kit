@@ -82,6 +82,7 @@ Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabN
 - **Mona Sans is always Title Case, never all caps.** **Mona Sans Condensed is always all caps**, and only for special occasions, when the person asks for it (`social-event-title`, `display-condensed-*`).
 - **Geist Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans.
 - **Ultrawide** (3000×400) sizes aren't set yet: ask.
+- **In code:** `.qd-title` (short), `.qd-title--medium`, `.qd-title--long` and `.qd-supporting` in `typography.css`, inside a `.qd-canvas`. Values are in `typography.tokens.json` under `semantic.creative`.
 - The `social-*` styles above stay as the Figma reference. For creatives, use this table.
 
 The values are guidance: adjust for the medium, scale, screen and production method when needed.
