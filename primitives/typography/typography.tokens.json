@@ -59,9 +59,17 @@
         "$value": {
           "fontFamily": "{core.font.family.sans}",
           "fontSize": "104px",
-          "fontWeight": 700,
+          "fontWeight": 600,
           "lineHeight": 1.05,
           "letterSpacing": "-1.8px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
         }
       },
       "display-1": {
@@ -72,6 +80,52 @@
           "fontWeight": 600,
           "lineHeight": 1.05,
           "letterSpacing": "-1.8px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        }
+      },
+      "display-condensed-2": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "104px",
+          "fontWeight": 600,
+          "lineHeight": 1.05,
+          "letterSpacing": "-1.8px",
+          "fontStretch": "75%"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            500,
+            600,
+            700
+          ],
+          "qdrant.textTransform": "uppercase"
+        }
+      },
+      "display-condensed-1": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "80px",
+          "fontWeight": 600,
+          "lineHeight": 1.05,
+          "letterSpacing": "-1.8px",
+          "fontStretch": "75%"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            500,
+            600,
+            700
+          ],
+          "qdrant.textTransform": "uppercase"
         }
       },
       "h1": {
@@ -82,6 +136,14 @@
           "fontWeight": 600,
           "lineHeight": 1.1,
           "letterSpacing": "-1.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
         }
       },
       "h2": {
@@ -92,6 +154,14 @@
           "fontWeight": 600,
           "lineHeight": 1.1,
           "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
         }
       },
       "h3": {
@@ -102,6 +172,14 @@
           "fontWeight": 600,
           "lineHeight": 1.1,
           "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
         }
       },
       "h4": {
@@ -112,6 +190,14 @@
           "fontWeight": 600,
           "lineHeight": 1.2,
           "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
         }
       },
       "h5": {
@@ -124,8 +210,10 @@
           "letterSpacing": "-0.5px"
         },
         "$extensions": {
-          "qdrant.alsoAllowedWeights": [
+          "qdrant.weights": [
             400,
+            500,
+            600,
             700
           ]
         }
@@ -140,9 +228,11 @@
           "letterSpacing": "-0.5px"
         },
         "$extensions": {
-          "qdrant.alsoAllowedWeights": [
+          "qdrant.weights": [
             400,
-            500
+            500,
+            600,
+            700
           ]
         }
       },
@@ -156,8 +246,11 @@
           "letterSpacing": "-0.2px"
         },
         "$extensions": {
-          "qdrant.alsoAllowedWeights": [
-            600
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
           ]
         }
       },
@@ -171,9 +264,11 @@
           "letterSpacing": "0px"
         },
         "$extensions": {
-          "qdrant.alsoAllowedWeights": [
+          "qdrant.weights": [
+            400,
             500,
-            600
+            600,
+            700
           ]
         }
       },
@@ -187,8 +282,11 @@
           "letterSpacing": "0px"
         },
         "$extensions": {
-          "qdrant.alsoAllowedWeights": [
-            600
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
           ]
         }
       },
@@ -202,9 +300,11 @@
           "letterSpacing": "0px"
         },
         "$extensions": {
-          "qdrant.alsoAllowedWeights": [
+          "qdrant.weights": [
+            400,
             500,
-            600
+            600,
+            700
           ]
         }
       },
@@ -216,16 +316,105 @@
           "fontWeight": 400,
           "lineHeight": 1.5,
           "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
         }
       },
-      "mono-xl": {
+      "mono-h1": {
         "$type": "typography",
         "$value": {
           "fontFamily": "{core.font.family.mono}",
-          "fontSize": "20px",
+          "fontSize": "64px",
           "fontWeight": 400,
-          "lineHeight": 1.5,
-          "letterSpacing": "-0.2px"
+          "lineHeight": 1.1,
+          "letterSpacing": "-1.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        }
+      },
+      "mono-h2": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.mono}",
+          "fontSize": "56px",
+          "fontWeight": 400,
+          "lineHeight": 1.1,
+          "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        }
+      },
+      "mono-h3": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.mono}",
+          "fontSize": "48px",
+          "fontWeight": 400,
+          "lineHeight": 1.2,
+          "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        },
+        "$description": "120% line height in Figma (H3 in Mona Sans is 110%)"
+      },
+      "mono-h4": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.mono}",
+          "fontSize": "40px",
+          "fontWeight": 400,
+          "lineHeight": 1.2,
+          "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        }
+      },
+      "mono-h5": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.mono}",
+          "fontSize": "32px",
+          "fontWeight": 400,
+          "lineHeight": 1.3,
+          "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
         }
       },
       "mono-h6": {
@@ -236,6 +425,68 @@
           "fontWeight": 400,
           "lineHeight": 1.3,
           "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        }
+      },
+      "mono-xl": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.mono}",
+          "fontSize": "20px",
+          "fontWeight": 400,
+          "lineHeight": 1.5,
+          "letterSpacing": "-0.2px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        }
+      },
+      "mono-lg": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.mono}",
+          "fontSize": "18px",
+          "fontWeight": 400,
+          "lineHeight": 1.5,
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        }
+      },
+      "mono-md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.mono}",
+          "fontSize": "16px",
+          "fontWeight": 400,
+          "lineHeight": 1.5,
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
         }
       },
       "mono-sm": {
@@ -247,7 +498,169 @@
           "lineHeight": 1.5,
           "letterSpacing": "0px"
         },
-        "$description": "Code snippets (skill: Geist Mono 14px). Added in Design Lab"
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        }
+      },
+      "mono-xs": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.mono}",
+          "fontSize": "12px",
+          "fontWeight": 400,
+          "lineHeight": 1.5,
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400,
+            500,
+            600,
+            700
+          ]
+        }
+      },
+      "social-event-title": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "104px",
+          "fontWeight": 600,
+          "lineHeight": 1.05,
+          "letterSpacing": "-1.8px",
+          "fontStretch": "75%"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ],
+          "qdrant.textTransform": "uppercase"
+        }
+      },
+      "social-event-detail": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.mono}",
+          "fontSize": "40px",
+          "fontWeight": 400,
+          "lineHeight": 1.2,
+          "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400
+          ]
+        }
+      },
+      "social-event-speaker-name": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "40px",
+          "fontWeight": 600,
+          "lineHeight": 1.1,
+          "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ]
+        }
+      },
+      "social-event-speaker-role": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "32px",
+          "fontWeight": 400,
+          "lineHeight": 1.3,
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400
+          ]
+        }
+      },
+      "social-event-series": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "32px",
+          "fontWeight": 600,
+          "lineHeight": 1.2,
+          "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ]
+        }
+      },
+      "social-post-hero": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "144px",
+          "fontWeight": 600,
+          "lineHeight": 1.05,
+          "letterSpacing": "-1.8px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ]
+        }
+      },
+      "social-post-title": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "104px",
+          "fontWeight": 600,
+          "lineHeight": 1.05,
+          "letterSpacing": "-1.8px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ]
+        }
+      },
+      "social-post-eyebrow": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "56px",
+          "fontWeight": 600,
+          "lineHeight": 1.2,
+          "letterSpacing": "-0.5px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ]
+        }
+      },
+      "social-post-body": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.sans}",
+          "fontSize": "32px",
+          "fontWeight": 400,
+          "lineHeight": 1.3,
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            400
+          ]
+        }
       },
       "luma-title": {
         "$type": "typography",
@@ -257,6 +670,11 @@
           "fontWeight": 600,
           "lineHeight": 1.05,
           "letterSpacing": "-1.8px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ]
         },
         "$description": "Luma cover titles. Added in Design Lab"
       }
@@ -289,6 +707,48 @@
       "footnote": {
         "$type": "dimension",
         "$value": "12pt"
+      }
+    },
+    "channels": {
+      "website-hero": {
+        "$type": "dimension",
+        "$value": "64px",
+        "$description": "Mobile: 40px"
+      },
+      "website-body": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "16-20px desktop, 16-18px mobile"
+      },
+      "ads-heading-min": {
+        "$type": "dimension",
+        "$value": "80px",
+        "$description": "Minimum, at the reference canvas"
+      },
+      "ads-subcopy": {
+        "$type": "dimension",
+        "$value": "36px",
+        "$description": "36-40px"
+      },
+      "ads-legal": {
+        "$type": "dimension",
+        "$value": "12px",
+        "$description": "12-16px"
+      },
+      "print-street-poster": {
+        "$type": "dimension",
+        "$value": "64pt",
+        "$description": "64-148pt, A0-A2"
+      },
+      "print-event-backdrop": {
+        "$type": "dimension",
+        "$value": "240pt",
+        "$description": "240-560pt; logos large enough for camera shots"
+      },
+      "print-a4-body": {
+        "$type": "dimension",
+        "$value": "10pt",
+        "$description": "10-12pt, 300 DPI"
       }
     },
     "documents": {
