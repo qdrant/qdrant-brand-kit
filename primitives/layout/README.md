@@ -34,6 +34,7 @@ Sizes in px at the reference canvas.
 - **Blog post hero, 2002×1122:** ratio 1.78, so it's `wide`, at 1.04× (margin 83, logo 83). Pattern or generated image, decided per post (guidelines section 1). With a partner lockup as the only content, see [`partner-lockup`](../../components/partner-lockup/).
 - **LinkedIn profile cover, 1584×396:** ratio 4, so it's `ultrawide`, at 0.528× (decided by Vanesa on 2026-11-11). LinkedIn's profile photo covers the bottom-left, so:
   - The **logo** stays top-left. Keep the **bottom-left** clear: pattern only, no text, no visual.
+  - **Dark only.** No light creatives on the cover: the light version was tried and not preferred (Vanesa, 2026-11-11).
   - The **heading** goes on the **right**, on the grid, left-aligned and centered top to bottom. Title sizes are the ultrawide ones in [`typography/`](../typography/).
   - **No visual:** heading on columns 9 to 12, title-short (128).
   - **With Qbot:** Qbot sits after the heading, never before it ([`guidelines/`](../../guidelines/) section 6), and the title steps down one size (104). Two placements: Qbot full height at the right margin, cut at the waist with the chest logo whole, heading on columns 7 to 9; or a bigger Qbot cut at the upper chest (the Peek crop), heading on columns 6 to 8. Beside Qbot the heading may be narrower than half the grid ([`guidelines/`](../../guidelines/) section 11 rule 8).
