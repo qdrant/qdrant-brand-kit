@@ -1,5 +1,6 @@
 {
   "name": "Generative-Glyph-Pattern-A",
+  "textMask": "none",
   "recipe": "generative-pattern",
   "extends": "generative-pattern.shared",
   "source": "Pattern Studio export, 1620 x 1080",

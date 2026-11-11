@@ -50,18 +50,24 @@ Width and height are plain numbers in px. For one file rendered at many sizes, a
 
 ## Pattern mask
 
-When text sits on a full-bleed pattern, mask the pattern so the text sits on a calm neutral ([`guidelines/`](../../guidelines/) section 4, decided 2026-11-11, replaces the Zone layout). The pattern is 100% where the visual sits and fades to 4% behind the text. The canvas shows **neutral 950** behind it on a dark creative and **neutral 100** on a light one.
+For patterns whose small details would cross the text, mask the pattern so the text sits on a calm neutral ([`guidelines/`](../../guidelines/) section 4, decided 2026-11-11, replaces the Zone layout). Only when the pattern's preset has `textMask` set to `soft-1` or `soft-2`; with `none`, the text sits straight on the pattern. The pattern is 100% where the visual sits and fades softly behind the text. The canvas shows **neutral 950** behind it on a dark creative and **neutral 100** on a light one.
 
 ```html
 <div class="qd-canvas qd-canvas--masked" data-shape="square">
-  <canvas class="qd-pattern-mask" style="position:absolute; inset:0; --qd-mask-hold: 280px; --qd-mask-full: 496px"></canvas>
+  <canvas class="qd-pattern-mask qd-pattern-mask--soft-2" style="position:absolute; inset:0; --qd-mask-edge: 400px"></canvas>
   …
 </div>
 ```
 
-- `--qd-mask-hold`: where the fade starts, 0.7 × the text block's far edge (its bottom on square, portrait and story; its right edge on wide and ultra-wide).
-- `--qd-mask-full`: where the pattern is back to 100%, the text block's far edge + 2 `section` gaps.
-- Both in px from the canvas top (from the left on wide and ultra-wide, where the fade runs left to right). Measure the text block after the fonts load.
+- `--qd-mask-edge`: the text block's far edge in px, measured after the fonts load. Its bottom (from the canvas top) on square, portrait and story; its right edge (from the canvas left) on wide and ultra-wide, where the fade runs left to right.
+- The strength class sets the rest:
+
+  | Class | Behind the text | Fade starts | Pattern back to 100% |
+  | --- | --- | --- | --- |
+  | `--soft-1` | 4% | 0.5 × the edge | the edge + 4 `section` gaps |
+  | `--soft-2` | 10% | 0.3 × the edge | the edge + 6 `section` gaps |
+
+- The fade is an eased curve, so there's no visible line between the masked part and the pattern.
 
 ## Grid
 

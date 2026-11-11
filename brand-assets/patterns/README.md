@@ -135,6 +135,17 @@ cd patterns
 python3 -m http.server 5190
 ```
 
+## Text on a pattern: `textMask`
+
+A preset can say whether text on it needs the pattern mask from [`primitives/layout/`](../../primitives/layout/) (decided by Vanesa on 2026-11-11, rules in [`guidelines/`](../../guidelines/) section 4). It's only a setting for the layout: it never changes how the pattern renders.
+
+| `textMask` | Meaning | Presets |
+| --- | --- | --- |
+| `"soft-1"` | Mask, 4% behind the text | Generative-Dash-Pattern-A |
+| `"soft-2"` | Mask, 10% behind the text | Color-Sliced-Pattern-B |
+| `"none"` | No mask, text sits straight on the pattern | Color-Sliced-Pattern-A, Color-Refracted-Pattern-A, Generative-Glyph-Pattern-A, Generative-Hexagon-Pattern-C |
+| not set | Not decided yet: render it with and without the mask and ask | every other preset |
+
 ## Patterns (V1)
 
 | Pattern | Choices | Figma | Notes |

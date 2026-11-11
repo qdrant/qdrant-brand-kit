@@ -178,20 +178,50 @@
     + (var(--qd-book-h) + var(--qd-book-gap)) * var(--qd-canvas-u));
 }
 
-/* Pattern mask (Vanesa, 2026-11-11). Replaces the Zone layout. The pattern covers the whole canvas
-   at 100% where the visual sits and fades to 4% behind the text, over a solid neutral:
+/* Pattern mask (Vanesa, 2026-11-11). Replaces the Zone layout. Only for patterns whose small
+   details (letters, dashes) would cross the text: the preset's "textMask" says which strength.
+   The pattern covers the whole canvas at 100% where the visual sits and fades softly (an eased
+   curve, no visible edge) to a low opacity behind the text, over a solid neutral:
    neutral-950 on a dark creative, neutral-100 on a light one.
-   Put .qd-canvas--masked on the canvas and .qd-pattern-mask on the pattern layer, then set, in px
-   from the canvas top (from the left on wide and ultrawide, where the text is on the left):
-     --qd-mask-hold  where the fade starts: 0.7 × the text block's far edge
-     --qd-mask-full  where the pattern is back to 100%: the text block's far edge + 2 section gaps */
+   Put .qd-canvas--masked on the canvas and .qd-pattern-mask plus its strength
+   (.qd-pattern-mask--soft-1 or --soft-2) on the pattern layer, then set one value on the layer:
+     --qd-mask-edge  the text block's far edge in px: its bottom, from the canvas top, on square,
+                     portrait and story; its right edge, from the canvas left, on wide and ultrawide.
+   Measure it after the fonts load. The strength sets where the fade starts and ends from it. */
 .qd-canvas.qd-canvas--masked { background: var(--qd-color-neutral-950); }
 .qd-canvas.qd-canvas--masked[data-theme="light"] { background: var(--qd-color-neutral-100); }
 .qd-pattern-mask {
-  --qd-mask-low: 0.04;
   --qd-mask-direction: to bottom;
-  -webkit-mask-image: linear-gradient(var(--qd-mask-direction), rgb(0 0 0 / var(--qd-mask-low)) var(--qd-mask-hold, 0px), #000 var(--qd-mask-full, 50%));
-  mask-image: linear-gradient(var(--qd-mask-direction), rgb(0 0 0 / var(--qd-mask-low)) var(--qd-mask-hold, 0px), #000 var(--qd-mask-full, 50%));
+  --qd-mask-hold: calc(var(--qd-mask-edge, 0px) * var(--qd-mask-hold-k));
+  --qd-mask-full: calc(var(--qd-mask-edge, 0px) + var(--qd-mask-full-gaps) * var(--qd-gap-section));
+  -webkit-mask-image: linear-gradient(var(--qd-mask-direction),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.0),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.028)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.1),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.104)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.2),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.216)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.3),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.352)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.4),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.5)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.5),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.648)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.6),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.784)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.7),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.896)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.8),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.972)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.9),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 1.0)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 1.0));
+  mask-image: linear-gradient(var(--qd-mask-direction),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.0),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.028)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.1),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.104)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.2),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.216)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.3),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.352)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.4),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.5)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.5),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.648)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.6),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.784)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.7),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.896)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.8),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.972)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.9),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 1.0)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 1.0));
 }
+/* Soft 1: 4% behind the text, fade from half the text block to 4 section gaps below it. Dash patterns. */
+.qd-pattern-mask, .qd-pattern-mask--soft-1 { --qd-mask-low: 0.04; --qd-mask-hold-k: 0.5; --qd-mask-full-gaps: 4; }
+/* Soft 2: 10% behind the text, fade from a third of the text block to 6 section gaps below it. Color-Sliced-Pattern-B. */
+.qd-pattern-mask.qd-pattern-mask--soft-2 { --qd-mask-low: 0.10; --qd-mask-hold-k: 0.3; --qd-mask-full-gaps: 6; }
 .qd-canvas[data-shape="wide"] .qd-pattern-mask,
 .qd-canvas[data-shape="ultrawide"] .qd-pattern-mask { --qd-mask-direction: to right; }

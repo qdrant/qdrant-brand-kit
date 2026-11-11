@@ -1,5 +1,6 @@
 {
   "name": "Color-Sliced-Pattern-A",
+  "textMask": "none",
   "recipe": "color-sliced-pattern",
   "extends": "shared",
   "colorways": [

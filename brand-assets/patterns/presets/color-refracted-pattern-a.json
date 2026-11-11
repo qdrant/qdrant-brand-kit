@@ -1,5 +1,6 @@
 {
   "name": "Color-Refracted-Pattern-A",
+  "textMask": "none",
   "recipe": "color-refracted-pattern",
   "extends": "shared",
   "colorways": [

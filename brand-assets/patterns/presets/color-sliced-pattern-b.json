@@ -1,5 +1,6 @@
 {
   "name": "Color-Sliced-Pattern-B",
+  "textMask": "soft-2",
   "recipe": "color-sliced-pattern",
   "extends": "shared",
   "$description": "Color-Sliced-Pattern-A's slices with a layer of QDRANT letters on top, in matching colors: red letters on the red slices, violet on the violet.",
