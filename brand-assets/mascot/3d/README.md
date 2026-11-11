@@ -26,6 +26,29 @@ The main mascot style in Design Lab. People pick an approved pose from the libra
 | `scripts/generate.mjs` | Reference Sunburst edits call, 1 image | Not run, verify params |
 | `tool/` | Copies of the mascot files in Design Lab's brand kit (2026-11-04): mood rules, crops and glow per mood, the 12 pose presets, the Mascot-only output type | Mirror of the live tool |
 
+## Pose outlines
+
+Where each approved pose actually is inside its 1024 × 1024 PNG (alpha above 20), measured 2026-11-11. Use it to place Qbot by its outline, not its image box ([`guidelines/`](../../../guidelines/) section 6): crop with `object-view-box: inset(top right bottom left)`, where right = 1024 − right edge and bottom = 1024 − bottom edge, and set `aspect-ratio` to width / height. Glow is from `tool/moods.json`.
+
+| Pose | Left | Top | Right | Bottom | Width × height | Glow |
+| --- | --- | --- | --- | --- | --- | --- |
+| angry | 210 | 13 | 795 | 939 | 585 × 926 | on |
+| cheerful | 202 | 29 | 716 | 929 | 514 × 900 | off |
+| confused | 214 | 21 | 812 | 922 | 598 × 901 | off |
+| curious | 175 | 3 | 863 | 925 | 688 × 922 | on |
+| excited | 149 | 17 | 868 | 901 | 719 × 884 | on |
+| focused | 230 | 8 | 882 | 896 | 652 × 888 | on |
+| friendly | 175 | 75 | 801 | 905 | 626 × 830 | on |
+| happy | 188 | 8 | 821 | 981 | 633 × 973 | on |
+| helpful | 209 | 13 | 793 | 922 | 584 × 909 | off |
+| loving | 137 | 14 | 884 | 930 | 747 × 916 | on |
+| neutral | 210 | 15 | 797 | 929 | 587 × 914 | on |
+| playful | 201 | 13 | 802 | 910 | 601 × 897 | on |
+| proud | 165 | 23 | 814 | 926 | 649 × 903 | on |
+| sad | 212 | 14 | 902 | 928 | 690 × 914 | on |
+
+Crop rows for Half body, Close-up and Peek are still measured by eye (guidelines section 6, "In progress").
+
 ## Differences from Design Lab (2026-11-04)
 
 - **Poses:** the config uses Design Lab's 12 presets (`tool/poses.yaml`), phrases word for word, since 2026-11-04. They replace the 11 poses from the Oct 21 brief, and the left/right direction is gone. Each phrase describes the eyes; an emotion chip is optional and overrides them. Each pose's `refs` are the closest approved renders, chosen in this repo: Design Lab sends its own Mascot moodboard instead.

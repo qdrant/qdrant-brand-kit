@@ -136,7 +136,14 @@ def check_one(m, rules):
     off = []
     lefts = [("text", t["box"]) for t in main] + [("logo", l["rect"]) for l in m["logos"] if not l.get("inBook")] + \
             [("card", c["rect"]) for c in m["cards"]]
+    # Text after an icon on the same row starts after the icon and a tight gap; the icon is what sits on the grid.
+    icon_ends = [(i["rect"]["x"] + i["rect"]["w"], i["rect"]["y"], i["rect"]["h"]) for i in m.get("icons", [])]
+    def after_icon(r):
+        return any(0 <= r["x"] - ex <= S["gut"] * u + 2 and abs((r["y"] + r["h"] / 2) - (iy + ih / 2)) <= ih
+                   for ex, iy, ih in icon_ends)
     for kind, r in lefts:
+        if kind == "text" and after_icon(r):
+            continue
         if min(abs(r["x"] - s) for s in starts) > 2:
             off.append(f"{kind} left edge {round(r['x'])}")
     for b in m["buttons"]:

@@ -94,6 +94,11 @@ Never allowed:
 - Qbot and a product screen together.
 - Charts or stats straight on a pattern. Put them on a card, or use a plain background.
 
+**Generated images in a creative** (decided 2026-11-11):
+
+- **Must: text never sits on the image's subject** (`title_never_over_subject` in [`imagery/`](../brand-assets/imagery/)). Text goes on calm, dark sky or ground and passes the contrast check. If no crop keeps the text off the subject, pick another image.
+- **Must: place the image so its subject balances the text.** With text on the left, move the subject into the right part of the canvas, so the empty side isn't left bare. Scale or shift the image to do it (it always covers the canvas), and keep enlarging small: generate the image at the channel's size when you can.
+
 ## 6. Qbot in a creative
 
 Qbot is one hero (section 5). It works on **any** pattern, in any family or colorway, or on the plain background. One Qbot per creative; 3D and 2D are never mixed ([`brand-assets/mascot/`](../brand-assets/mascot/)). Decided by Vanesa on 2026-11-04, from the examples in the [Brand Design System, Mascot section](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18151) (examples 1 to 5, left to right).
@@ -109,6 +114,8 @@ Qbot is one hero (section 5). It works on **any** pattern, in any family or colo
 
 ### How big
 
+- **Must: place Qbot by its outline, not by its image box** (decided 2026-11-11). Every pose's PNG has empty margins that differ from pose to pose. Crop to the pose's outline (the table in [`mascot/3d/`](../brand-assets/mascot/3d/), "Pose outlines") so the top of the helmet and the feet are the edges you place.
+- **Must: equal gaps.** A full figure keeps the **same gap to the top, the right and the bottom** of the canvas: the canvas side margin. On tall shapes, where the text sits above it, the gap to the right and the bottom is the side margin. A Peek keeps the same gap to the top and the right, and only the bottom edge cuts it. Qbot never looks dropped in at random.
 - **Must: Qbot fills the free space below the text** (on wide, the right half). The space starts one `section` gap under the lowest text, logo or button and runs to the canvas edge that trims Qbot. A longer title means a smaller Qbot. The crop names what shows; the size always follows the free space.
 
 ### Crops
@@ -117,10 +124,10 @@ Every crop is editorial, never accidental.
 
 | Crop | What shows | Example |
 | --- | --- | --- |
-| Full figure | The whole body, inside the canvas or just touching the bottom edge | 1, 3 |
+| Full figure | The whole body, inside the canvas, with an equal gap to the edges around it (below) | 1, 3 |
 | Half body | Cut at the waist by the bottom edge | 5 |
 | Close-up | Head and chest, cut below the chest logo | 2 |
-| Peek | Head and shoulders, cut at the upper chest, never right under the helmet | 4 |
+| Peek | Head and shoulders, cut at the upper chest, never right under the helmet. Equal gap to the top and the right edge; only the bottom edge cuts it | 4 |
 
 - **Must: never cut the face.** Keep the chest logo whole, except in the Peek crop.
 - **Must: only the bottom edge trims Qbot,** plus the right edge when Qbot sits in the bottom-right corner. Never the top or the left edge.
@@ -197,7 +204,7 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 
    **Must: the button always sits in a corner, never in the middle of the layout.** Top-right beside the logo only when the text block spans the full width, so the button lands on the right margin. When the text block takes only part of the width (e.g. wide and ultra-wide with Qbot or a visual in the right half), the button goes **last in the text block, after the supporting text**, so logo, title, supporting text and button read as one vertical, left-aligned column (decided 2026-11-11).
 11. **Ask: if the content doesn't fit, ask.** If it can't fit the size without breaking a rule, ask the person to cut it. Never shrink text below the type scale.
-12. **Must: icons follow [`brand-assets/icons/`](../brand-assets/icons/).** Lucide only, outline, one color: a 400 on dark, a 500 on light, 3:1 or more. Next to supporting text (mostly the date / time / place row), the same height as that text, a `tight` gap away. Never in buttons, under any circumstance. Icons don't count as a text size (decided 2026-11-11).
+12. **Must: icons follow [`brand-assets/icons/`](../brand-assets/icons/).** Lucide only, outline, one color: a 400 on dark, a 500 on light, white on a pattern that isn't masked, 3:1 or more. **Suggest: put one before each date, time and place line by default** (calendar, clock, map pin; decided 2026-11-11). Next to supporting text (mostly the date / time / place row), the same height as that text, a `tight` gap away. Never in buttons, under any circumstance. Icons don't count as a text size (decided 2026-11-11).
 
 ## Changing these rules
 

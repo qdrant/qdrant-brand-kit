@@ -22,6 +22,14 @@ Generated images in a Qdrant image style: blog heroes, article images, social an
 | `styles/default/references/` | The 10 Default moodboard images, in slot order, as stored in Design Lab |
 | `headshots/` | Choosing and preparing speaker photos (Brand Guide slide 56): `prepare-headshot.py` and `check-headshot.py`. Not generated images |
 
+## In creatives
+
+When a creative uses a generated image as its background ([`guidelines/`](../../guidelines/) section 5, decided 2026-11-11):
+
+- **Text never on the subject.** `title_never_over_subject: true` in `imagery.config.json` means the title (and all other text) sits on calm, empty parts of the image, never on the person, object or effect the image is about.
+- **Balance.** Place the subject on the side away from the text, so it balances the text block and the composition has no bare half.
+- **No Qbot** on an image, ever.
+
 ## Channel sizes
 
 | Channel | Size |

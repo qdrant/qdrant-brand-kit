@@ -119,7 +119,7 @@ Body text scales with its heading: keep body copy between **20% and 40%** of the
 
 ## Emphasis
 
-- **Headings:** Qdrant red on a single word or phrase.
+- **Headings: no highlight by default** (decided 2026-11-11). A highlighted word competes with the red button and the red of the logo mark. If the person asks for one, only **Qdrant red** (`accent.primary`) on a single word or phrase, never another color, and never on a red background or a red-heavy pattern, where it doesn't stand out.
 - **Body text:** SemiBold for important terms only. Keep the rest Regular.
 - Use emphasis sparingly, especially in long text.
 
