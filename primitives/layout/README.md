@@ -77,7 +77,7 @@ For patterns whose small details would cross the text, mask the pattern so the t
   | `--soft-2` | 10% | the edge (all text stays at 10%) | the edge + 6 `section` gaps |
 
 - The fade is an eased curve, so there's no visible line between the masked part and the pattern.
-- **Wide: one smooth gradient instead** (decided 2026-11-11). On `wide`, the mask is a single gradient across the whole canvas with a gentle (quadratic) start: the strength's low value at the left edge, rising slowly behind the text and reaching 100% at 95% of the width. There's no hold and no step, so `--qd-mask-edge` isn't needed there. The CSS does it; ultra-wide (LinkedIn cover) keeps its own right-side mask.
+- **One smooth gradient on every shape** (decided 2026-11-11). The mask is a single gradient across the whole canvas with a gentle (quadratic) start: the strength's low value on the text side, rising slowly and reaching 100% at 95% of the way across (down on square, portrait and story; to the right on wide; to the left with `--from-right`, e.g. the LinkedIn cover). There's no hold and no step, so `--qd-mask-edge` isn't needed. The CSS does it.
 - **Text on the right** (the LinkedIn profile cover): add `.qd-pattern-mask--from-right`. The fade then runs from the right edge, and `--qd-mask-edge` is the text block's left edge measured from the canvas's right edge.
 
 ## Grid
