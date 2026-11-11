@@ -154,7 +154,7 @@ When the answer differs by colorway (Burst-A, Glyph-B), `textMask` sits on the c
 
 | Pattern | Choices | Figma | Notes |
 | --- | --- | --- | --- |
-| Color-Refracted-Pattern-A | Any family 500 → 300, or Primary 100 → Secondary 400 | [Luma-Background-10](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546) | Refraction tuned by eye against Figma |
+| Color-Refracted-Pattern-A | Secondary or teal 500 → 300, or Primary 100 → Secondary 400. The red family (primary 500 → 300) was removed on 2026-11-11 | [Luma-Background-10](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546) | Refraction tuned by eye against Figma |
 | Color-Sliced-Pattern-A | Neutral 950 → Primary 500, or Neutral 950 → Secondary 500 | [Frame 20943:36252](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252) | Exact port of Figma's Slice shift shader. No noise **Not the default:** use Color-Sliced-Pattern-B (with letters); A only behind headshots (Vanesa, 2026-11-11). |
 | Color-Sliced-Pattern-B | Red (primary letters on Neutral 950 → Primary 500), Violet (secondary letters on Neutral 950 → Secondary 500) | Pattern Studio export (layer) | Color-Sliced-A with a layer of QDRANT letters on top (`generative-glyph-layer-a`: 24 px grid, letters 0.55, noise 4.5). The layer matches the tool pixel for pixel at 1920 × 1080. Needs `loadPatternFonts` first |
 | Mesh-Refracted-Pattern-A | Any library image | [Luma-Background-9](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574) | Smoothness 72%, angle -120° |
