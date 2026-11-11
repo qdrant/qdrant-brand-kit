@@ -32,6 +32,12 @@ Sizes in px at the reference canvas.
 | `story` | below 0.65 | 1080×1920 | 64 / 256 / 344 | 4 × 214, gutter 32 | 24 / 32 / 64 |
 
 - **Blog post hero, 2002×1122:** ratio 1.78, so it's `wide`, at 1.04× (margin 83, logo 83). Pattern or generated image, decided per post (guidelines section 1). With a partner lockup as the only content, see [`partner-lockup`](../../components/partner-lockup/).
+- **LinkedIn profile cover, 1584×396:** ratio 4, so it's `ultrawide`, at 0.528× (decided by Vanesa on 2026-11-11). LinkedIn's profile photo covers the bottom-left, so:
+  - The **logo** stays top-left. Keep the **bottom-left** clear: pattern only, no text, no visual.
+  - The **heading** goes on the **right**, on the grid, left-aligned and centered top to bottom. Title sizes are the ultrawide ones in [`typography/`](../typography/).
+  - **No visual:** heading on columns 9 to 12, title-short (128).
+  - **With Qbot:** Qbot sits after the heading, never before it ([`guidelines/`](../../guidelines/) section 6), and the title steps down one size (104). Two placements: Qbot full height at the right margin, cut at the waist with the chest logo whole, heading on columns 7 to 9; or a bigger Qbot cut at the upper chest (the Peek crop), heading on columns 6 to 8. Beside Qbot the heading may be narrower than half the grid ([`guidelines/`](../../guidelines/) section 11 rule 8).
+  - If the pattern needs a mask, the heading is on the right, so use `.qd-pattern-mask--from-right` (below).
 - **Story safe zones:** 256 px top and 344 px bottom keep text clear of the profile bar, reply box and stickers. Only backgrounds and images go there.
 - **Other sizes:** the scale is the smaller of width ÷ reference width and height ÷ reference height. Every value is multiplied by it, so a 1200×627 post uses the Wide values at 0.58×. The 8 px grid holds exactly at the reference canvases.
 - The column counts were worked out for this folder (whole px, on the 8 px grid). They don't come from Figma or the brand skill yet.
@@ -68,6 +74,7 @@ For patterns whose small details would cross the text, mask the pattern so the t
   | `--soft-2` | 10% | 0.3 × the edge | the edge + 6 `section` gaps |
 
 - The fade is an eased curve, so there's no visible line between the masked part and the pattern.
+- **Text on the right** (the LinkedIn profile cover): add `.qd-pattern-mask--from-right`. The fade then runs from the right edge, and `--qd-mask-edge` is the text block's left edge measured from the canvas's right edge.
 
 ## Grid
 

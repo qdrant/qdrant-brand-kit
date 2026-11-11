@@ -236,6 +236,9 @@
 .qd-pattern-mask, .qd-pattern-mask--soft-1 { --qd-mask-low: 0.04; --qd-mask-hold-k: 0.5; --qd-mask-full-gaps: 4; }
 /* Soft 2: 10% behind the text, fade from a third of the text block to 6 section gaps below it. Color-Sliced-Pattern-B. */
 .qd-pattern-mask.qd-pattern-mask--soft-2 { --qd-mask-low: 0.10; --qd-mask-hold-k: 0.3; --qd-mask-full-gaps: 6; }
+/* Text on the right (LinkedIn profile cover): the fade runs from the right edge, and --qd-mask-edge
+   is the text block's left edge measured from the canvas's right edge (Vanesa, 2026-11-11). */
+.qd-canvas[data-shape] .qd-pattern-mask.qd-pattern-mask--from-right { --qd-mask-direction: to left; }
 .qd-canvas[data-shape="wide"] .qd-pattern-mask,
 .qd-canvas[data-shape="ultrawide"] .qd-pattern-mask { --qd-mask-direction: to right; }
 

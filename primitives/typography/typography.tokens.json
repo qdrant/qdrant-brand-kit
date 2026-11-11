@@ -778,7 +778,7 @@
       }
     },
     "creative": {
-      "$description": "Text in creatives (social posts, ads, banners). Two sizes only: one title, one supporting size. px at the shape's reference canvas, scaled with the canvas. $value is square and portrait; $extensions.qdrant.story and .wide are those shapes. Ultrawide not set: ask. Decided by Vanesa 2026-11-04.",
+      "$description": "Text in creatives (social posts, ads, banners). Two sizes only: one title, one supporting size. px at the shape's reference canvas, scaled with the canvas. $value is square and portrait; $extensions.qdrant.story and .wide are those shapes. $extensions.qdrant.ultrawide is ultrawide (same as wide, decided 2026-11-11 from the LinkedIn cover). Decided by Vanesa 2026-11-04.",
       "title-short": {
         "$type": "dimension",
         "$value": "96px",
@@ -787,7 +787,8 @@
           "qdrant": {
             "story": "104px",
             "maxWords": 6,
-            "wide": "128px"
+            "wide": "128px",
+            "ultrawide": "128px"
           }
         }
       },
@@ -799,7 +800,8 @@
           "qdrant": {
             "story": "88px",
             "maxWords": 10,
-            "wide": "104px"
+            "wide": "104px",
+            "ultrawide": "104px"
           }
         }
       },
@@ -811,7 +813,8 @@
           "qdrant": {
             "story": "72px",
             "maxWords": null,
-            "wide": "88px"
+            "wide": "88px",
+            "ultrawide": "88px"
           }
         }
       },
@@ -822,7 +825,8 @@
         "$extensions": {
           "qdrant": {
             "story": "40px",
-            "wide": "40px"
+            "wide": "40px",
+            "ultrawide": "40px"
           }
         }
       }

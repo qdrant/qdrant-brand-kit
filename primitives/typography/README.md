@@ -72,18 +72,18 @@ Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabN
 
 **Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception. **On the light card** the title and supporting text have their own two sizes, set by the card's width (0.0846 W and 0.0483 W, about 50 and 29 at 1080 square), from the Get-the-Guide ad ([`layout/`](../layout/) "Light card layout", decided 2026-11-04). Title Case there too, even for long supporting sentences (the Figma reference uses sentence case; Vanesa kept Title Case, 2026-11-04). **Button text doesn't count:** it scales with the [button](../../components/button/) and is independent of these text styles (decided 2026-11-04).
 
-| | Font | Square, portrait | Wide | Story |
-| --- | --- | --- | --- | --- |
-| Title, up to 6 words | Mona Sans SemiBold, Title Case, line height 1.05, letter spacing -1.8 | 96 | 128 | 104 |
-| Title, 7 to 10 words | same | 80 | 104 | 88 |
-| Title, 11 words or more | same | 64 | 88 | 72 |
-| Supporting (body, date, time, place) | Mona Sans Regular, line height 1.2, letter spacing -0.5 | 36 | 40 | 40 |
+| | Font | Square, portrait | Wide | Ultrawide | Story |
+| --- | --- | --- | --- | --- | --- |
+| Title, up to 6 words | Mona Sans SemiBold, Title Case, line height 1.05, letter spacing -1.8 | 96 | 128 | 128 | 104 |
+| Title, 7 to 10 words | same | 80 | 104 | 104 | 88 |
+| Title, 11 words or more | same | 64 | 88 | 88 | 72 |
+| Supporting (body, date, time, place) | Mona Sans Regular, line height 1.2, letter spacing -0.5 | 36 | 40 | 40 | 40 |
 
 - **Mona Sans titles are always Title Case, never all caps.** Supporting text (date, place, body sentences) stays in normal sentence case (decided 2026-11-11). **Mona Sans Condensed is always all caps**, and only for special occasions, when the person asks for it (`social-event-title`, `display-condensed-*`).
 - **Geist Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans.
 - **Longer titles step down** to the next size by word count, never in between and never below the 11+ size. If it still doesn't fit, ask the person to shorten it.
 - **Wide** follows the Vector Space Day banner (128 on 1920, decided 2026-11-04).
-- **Ultrawide** (3000×400) sizes aren't set yet: ask.
+- **Ultrawide** uses the wide sizes (decided 2026-11-11 from the LinkedIn profile cover, 1584×396: a 128 title reads at LinkedIn's small display size). **Beside Qbot** on the LinkedIn cover, the title steps down one size (128 → 104), so Qbot stays the bigger shape ([`layout/`](../layout/) "LinkedIn profile cover"). Not yet tried on a full 3000×400 banner.
 - **In code:** `.qd-title` (short), `.qd-title--medium`, `.qd-title--long` and `.qd-supporting` in `typography.css`, inside a `.qd-canvas`. Values are in `typography.tokens.json` under `semantic.creative`.
 - The `social-*` styles above stay as the Figma reference. For creatives, use this table.
 

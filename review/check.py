@@ -152,8 +152,13 @@ def check_one(m, rules):
             words = len(" ".join(t["text"] for t in titles).split())
             want = "title-short" if words <= 6 else "title-medium" if words <= 10 else "title-long"
             exp = val(want) * u
-            add("Title size by length", abs(top - exp) <= 1.5,
-                f"{words} words → {want} {val(want):g} at reference = {exp:.1f} px; used {top:.1f} px",
+            # Ultrawide beside Qbot (LinkedIn cover): the title steps down one size (typography README).
+            step = {"title-short": "title-medium", "title-medium": "title-long"}.get(want)
+            qbot = shape == "ultrawide" and any("/mascot/" in i.get("src", "") for i in m["images"])
+            ok_size = abs(top - exp) <= 1.5 or (qbot and step and abs(top - val(step) * u) <= 1.5)
+            add("Title size by length", ok_size,
+                f"{words} words → {want} {val(want):g} at reference = {exp:.1f} px; used {top:.1f} px"
+                + (f" (one step down to {step} {val(step):g} allowed beside Qbot)" if qbot and step else ""),
                 "typography README, Text in creatives")
             sup = val("supporting") * u
             others = sorted({round(t["fontSize"], 1) for t in main if abs(t["fontSize"] - top) >= 0.5})
