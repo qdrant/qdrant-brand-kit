@@ -20,7 +20,8 @@
   height: calc(80 * var(--qd-canvas-u));
   border-radius: 50%;
   overflow: hidden;
-  background: var(--qd-gradient-headshot);
+  /* Gradient on an opaque base, like the card: a pattern never shows through (Vanesa, 2026-11-11). */
+  background: var(--qd-gradient-headshot), var(--qd-color-background-default);
 }
 .qd-headshot-circle__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 

@@ -62,6 +62,7 @@ Use `.qd-grid`. Rows are a `section` gap apart.
 ## Rules
 
 - **Always a photo.** Every speaker has one. If a photo is missing, stop and ask for it. Never use initials, a silhouette or text only in its place.
+- **Opaque circle.** The 70% headshot gradient sits on an opaque `background.default` base, so a pattern never shows through the circle. The CSS does this (decided 2026-11-11).
 - **Prepared cutouts only.** Every photo is a cutout that passes [`brand-assets/imagery/headshots/`](../../brand-assets/imagery/headshots/): the slide 56 checklist and `check-headshot.py`.
 - **Background:** plain `background.default`, a `.qd-box--card`, the light card (book), or a brand pattern from [`patterns/`](../../brand-assets/patterns/). Never a generated image. On Color-Sliced (red or violet), use Color-Sliced-Pattern-A, without the letters, so they don't compete with the faces ([`guidelines/`](../../guidelines/) section 2).
 - **Role color on a pattern:** add `qd-on-pattern` to the canvas or row. Roles then use `neutral-300` instead of `text.secondary`, which fails contrast on violet patterns (decided 2026-11-04).

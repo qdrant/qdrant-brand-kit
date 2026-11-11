@@ -25,11 +25,12 @@
 .qd-headshot-row--2 { --qd-headshot-stagger: calc(2 * var(--qd-gap-section)); }
 
 /* Optional stagger (add .qd-headshot-row--stagger): raised cards lift by one stagger step.
-   2 cards: the first. 3: the middle. 4: the middle two. */
-.qd-headshot-row--stagger.qd-headshot-row--2 > :nth-child(1),
-.qd-headshot-row--stagger.qd-headshot-row--3 > :nth-child(2),
-.qd-headshot-row--stagger.qd-headshot-row--4 > :nth-child(2),
-.qd-headshot-row--stagger.qd-headshot-row--4 > :nth-child(3) { margin-bottom: var(--qd-headshot-stagger); }
+   2 cards: the first. 3: the middle. 4: the middle two.
+   Counted among the cards only, so a title in the same row is never lifted (fixed 2026-11-11). */
+.qd-headshot-row--stagger.qd-headshot-row--2 > :nth-child(1 of .qd-headshot-card),
+.qd-headshot-row--stagger.qd-headshot-row--3 > :nth-child(2 of .qd-headshot-card),
+.qd-headshot-row--stagger.qd-headshot-row--4 > :nth-child(2 of .qd-headshot-card),
+.qd-headshot-row--stagger.qd-headshot-row--4 > :nth-child(3 of .qd-headshot-card) { margin-bottom: var(--qd-headshot-stagger); }
 
 .qd-headshot-card {
   container-type: inline-size;

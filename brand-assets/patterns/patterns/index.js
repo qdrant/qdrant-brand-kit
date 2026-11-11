@@ -103,18 +103,23 @@ function renderBase(canvas, tokens, preset, options) {
 }
 
 // Generative patterns that draw letters need their fonts loaded first, or the browser
-// draws them in a fallback font. Call once before rendering; it adds the brand fonts
-// from Google Fonts (as Pattern Studio's export does) and waits for them.
-const FONTS_URL = "https://fonts.googleapis.com/css2?family=Mona+Sans:wght@800&family=Geist+Mono:wght@500&display=swap";
+// draws them in a fallback font. Call once before rendering; it loads the repo's own
+// Mona Sans and Geist Mono (primitives/typography/fonts), no network (2026-11-11; it used
+// to fetch them from Google Fonts, as Pattern Studio's export does).
+const FONT_DIR = new URL("../../../primitives/typography/fonts/", import.meta.url);
+const LOCAL_FONTS = [
+  ["Mona Sans", "MonaSansVF[wdth,wght,opsz,ital].ttf", "200 900"],
+  ["Geist Mono", "GeistMono[wght].ttf", "100 900"],
+];
 export async function loadPatternFonts(patterns) {
   const needed = patterns.flatMap((p) => [p, ...(p.layers ?? [])]).filter((p) => isGenerativePattern(p) && (p.settings.engine.element === "ascii" || p.settings.engine.shape === "text"));
   if (!needed.length) return;
-  if (!document.querySelector(`link[href="${FONTS_URL}"]`)) {
-    const link = Object.assign(document.createElement("link"), { rel: "stylesheet", href: FONTS_URL });
-    const loaded = new Promise((resolve) => (link.onload = link.onerror = resolve));
-    document.head.append(link);
-    await loaded;
-  }
+  await Promise.all(LOCAL_FONTS.map(async ([family, file, weight]) => {
+    const has = [...document.fonts].some((f) => f.family.replace(/["']/g, "") === family && f.status === "loaded" && f.weight === weight);
+    if (has) return;
+    const face = new FontFace(family, `url("${new URL(file, FONT_DIR).href.replace(/\[/g, "%5B").replace(/\]/g, "%5D")}")`, { weight });
+    document.fonts.add(await face.load());
+  }));
   await Promise.all(needed.flatMap(({ settings: { engine } }) => [
     document.fonts.load(`500 32px ${engine.glyphFont}`),
     document.fonts.load(`800 200px ${engine.textFont}`),

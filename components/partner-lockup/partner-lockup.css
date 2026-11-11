@@ -42,3 +42,20 @@
   height: var(--qd-logo-height);
   background: currentColor;
 }
+
+/* Lockup on its own (the only content, e.g. a partner blog hero): add .qd-partner-lockup--hero.
+   Centered both ways on the canvas and sized so the whole lockup spans 8 of the 12 wide columns.
+   Set --qd-lockup-units on the lockup: its full width in logo heights =
+   3.75 (Qdrant logo) + 1.3 (two gaps) + 0.6 (plus) or 0.03 (divider) + the partner logo's width ÷ height.
+   Example, Microsoft (4.683) with the plus: 3.75 + 1.3 + 0.6 + 4.683 = 10.333 (Vanesa, 2026-11-11). */
+.qd-canvas > .qd-partner-lockup--hero,
+.qd-partner-lockup.qd-partner-lockup--hero {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  align-self: center;
+  --qd-lockup-span: calc((var(--qd-canvas-width) * 1px - 2 * var(--qd-canvas-margin-x) * var(--qd-canvas-u)
+    - (var(--qd-canvas-columns) - 1) * var(--qd-gutter)) * 8 / var(--qd-canvas-columns) + 7 * var(--qd-gutter));
+  --qd-logo-height: calc(var(--qd-lockup-span) / var(--qd-lockup-units, 10.333));
+}

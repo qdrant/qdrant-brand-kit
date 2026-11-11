@@ -73,8 +73,8 @@ For patterns whose small details would cross the text, mask the pattern so the t
 
   | Class | Behind the text | Fade starts | Pattern back to 100% |
   | --- | --- | --- | --- |
-  | `--soft-1` | 4% | 0.5 × the edge | the edge + 4 `section` gaps |
-  | `--soft-2` | 10% | 0.3 × the edge | the edge + 6 `section` gaps |
+  | `--soft-1` | 4% | the edge (all text stays at 4%) | the edge + 4 `section` gaps |
+  | `--soft-2` | 10% | the edge (all text stays at 10%) | the edge + 6 `section` gaps |
 
 - The fade is an eased curve, so there's no visible line between the masked part and the pattern.
 - **Text on the right** (the LinkedIn profile cover): add `.qd-pattern-mask--from-right`. The fade then runs from the right edge, and `--qd-mask-edge` is the text block's left edge measured from the canvas's right edge.
@@ -157,6 +157,8 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 
 - The top block sits at the top padding and the bottom block at the bottom padding; the space between stays empty.
 - **Wide (1920×1080): a landscape card** (decided 2026-11-11). The card is 5:4 and 72% of the canvas height (973 × 778 at 1920×1080), the largest that fits with the button inside the margins. Card and button are centered together. Every value above stays a share of W, where W is the portrait card's width at that height (631), except the title and supporting text, which are **1.5×** (80 and 46 px) so the card doesn't look empty.
+- **Slides on wide (no button): `.qd-book--slide`** (decided 2026-11-11). The card is centered on its own, both ways, and is **16:10** (1244 × 778 at 1920×1080) so speakers or an info list fit beside each other. The pattern still shows on every side.
+- **Info list on the card:** one Lucide icon per line (map-pin = place, calendar = date, clock = time), at the card's text size (the CSS sets it), `neutral-500` from `icons.css`, a `tight` gap. Speakers as `headshot-circle`, beside the list. The event type is never in this list ([`guidelines/`](../../guidelines/) section 11, rule 3).
 - **Ultrawide: no light card.** There's no use case for it (decided 2026-11-11).
 - The card is centered, so it isn't tied to grid columns. Text inside it aligns to the card's padding.
 - Only on **Color-Sliced-Pattern-B**, red or violet, with its letter layer (decided 2026-11-11). Never with a big headshot; use `headshot-circle` if a speaker is needed.
