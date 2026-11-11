@@ -1,5 +1,6 @@
 {
   "name": "Color-Sliced-Pattern-A",
+  "$description": "Not the default: use Color-Sliced-Pattern-B (the same slices with the QDRANT letter layer) in most creatives. Use A, without letters, only in creatives with headshots (Vanesa, 2026-11-11).",
   "textMask": "none",
   "recipe": "color-sliced-pattern",
   "extends": "shared",

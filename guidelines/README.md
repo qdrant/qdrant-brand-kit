@@ -33,6 +33,8 @@ Before making a creative, settle these with the person. Skip a question only whe
 
 Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (decided 2026-11-11).
 
+**Color-Sliced (red and violet): use Color-Sliced-Pattern-B, with the QDRANT letter layer, by default** (about 8 creatives in 10). Color-Sliced-Pattern-A, the slices without letters, only in creatives with headshots, where the letters would compete with the faces (decided 2026-11-11).
+
 The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patterns/).
 
 ## 3. Red backgrounds
