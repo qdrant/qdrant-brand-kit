@@ -37,7 +37,7 @@ Each card spans whole columns of the shape's grid. Every card in a row has the s
 
 "Right" means the cards take the last columns. On `wide` the title sits in the columns to their left. On `square`, `portrait` and `story` the title stays full width at the top margin (a 96 px title doesn't fit beside the card), and the supporting block and button sit in the columns to the left of the card, on the bottom margin. Otherwise the title sits above the row.
 
-**Story, 1 speaker:** offer both and let the person pick (decided 2026-11-04): a span-2 card beside the text (more impactful), or a [`headshot-circle`](../headshot-circle/) in the text block with the pattern zone below (quieter, a little empty but fine).
+**Story, 1 speaker:** offer both and let the person pick (decided 2026-11-04): a span-2 card beside the text (more impactful), or a [`headshot-circle`](../headshot-circle/) in the text block with the pattern below (quieter, a little empty but fine).
 
 **The title on a speaker post** is usually the talk title, with the event name as the supporting line. Ask the person each time (decided 2026-11-04).
 
@@ -73,7 +73,7 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 - **Role color on a pattern:** add `qd-on-pattern` to the canvas or row. Roles then use `neutral-300` instead of `text.secondary`, which fails contrast on violet patterns (decided 2026-11-04).
 - **Never with Qbot.** Headshots and the mascot don't appear in the same creative.
 - **Never inside the light card.** Big headshots don't go on `.qd-box--light-card`. Use [`headshot-circle`](../headshot-circle/) there (decided 2026-11-04).
-- **Never across a zone line.** In a zone layout the card sits wholly on one background: never half on the plain zone and half on the pattern (decided 2026-11-04).
+- **Never across the pattern mask's fade.** With the pattern mask, the card sits wholly on the full-strength pattern or wholly on the masked part, never half on each (decided 2026-11-04 for the Zone layout, carried over to the mask 2026-11-11).
 - **Opaque card.** The 70% headshot gradient sits on an opaque `background.default` base, so a pattern never shows through the card. The CSS does this (decided 2026-11-04).
 - **Suggest:** for speaker posts, full bleed with text on top is the preferred layout: logo and title at the top, supporting block and button bottom-left, card on the right on the bottom margin (Vanesa's pick from the 2026-11-04 test).
 - **Same treatment for everyone** in a post: same span, same gradient.

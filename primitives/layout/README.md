@@ -48,6 +48,21 @@ The post itself: size, margins and safe zones. Everything goes inside it.
 
 Width and height are plain numbers in px. For one file rendered at many sizes, add `<script src="primitives/layout/canvas.js"></script>` instead. It sets all three from the window, or from `?w=&h=` in the URL when given (what [`review/render.py`](../../review/render.py) uses). The canvas is a column with `section` gaps between its children and the dark background.
 
+## Pattern mask
+
+When text sits on a full-bleed pattern, mask the pattern so the text sits on a calm neutral ([`guidelines/`](../../guidelines/) section 4, decided 2026-11-11, replaces the Zone layout). The pattern is 100% where the visual sits and fades to 4% behind the text. The canvas shows **neutral 950** behind it on a dark creative and **neutral 100** on a light one.
+
+```html
+<div class="qd-canvas qd-canvas--masked" data-shape="square">
+  <canvas class="qd-pattern-mask" style="position:absolute; inset:0; --qd-mask-hold: 280px; --qd-mask-full: 496px"></canvas>
+  …
+</div>
+```
+
+- `--qd-mask-hold`: where the fade starts, 0.7 × the text block's far edge (its bottom on square, portrait and story; its right edge on wide and ultra-wide).
+- `--qd-mask-full`: where the pattern is back to 100%, the text block's far edge + 2 `section` gaps.
+- Both in px from the canvas top (from the left on wide and ultra-wide, where the fade runs left to right). Measure the text block after the fonts load.
+
 ## Grid
 
 For placing blocks: text next to an image, a row of speaker cards, a bento grid. Children span every column unless they set `--qd-span` (and `--qd-start` to pick the first column).

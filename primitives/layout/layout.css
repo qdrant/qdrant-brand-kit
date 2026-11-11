@@ -177,3 +177,21 @@
        - (var(--qd-book-h) + var(--qd-book-gap) + var(--qd-book-cta)) * var(--qd-canvas-u)) / 2
     + (var(--qd-book-h) + var(--qd-book-gap)) * var(--qd-canvas-u));
 }
+
+/* Pattern mask (Vanesa, 2026-11-11). Replaces the Zone layout. The pattern covers the whole canvas
+   at 100% where the visual sits and fades to 4% behind the text, over a solid neutral:
+   neutral-950 on a dark creative, neutral-100 on a light one.
+   Put .qd-canvas--masked on the canvas and .qd-pattern-mask on the pattern layer, then set, in px
+   from the canvas top (from the left on wide and ultrawide, where the text is on the left):
+     --qd-mask-hold  where the fade starts: 0.7 × the text block's far edge
+     --qd-mask-full  where the pattern is back to 100%: the text block's far edge + 2 section gaps */
+.qd-canvas.qd-canvas--masked { background: var(--qd-color-neutral-950); }
+.qd-canvas.qd-canvas--masked[data-theme="light"] { background: var(--qd-color-neutral-100); }
+.qd-pattern-mask {
+  --qd-mask-low: 0.04;
+  --qd-mask-direction: to bottom;
+  -webkit-mask-image: linear-gradient(var(--qd-mask-direction), rgb(0 0 0 / var(--qd-mask-low)) var(--qd-mask-hold, 0px), #000 var(--qd-mask-full, 50%));
+  mask-image: linear-gradient(var(--qd-mask-direction), rgb(0 0 0 / var(--qd-mask-low)) var(--qd-mask-hold, 0px), #000 var(--qd-mask-full, 50%));
+}
+.qd-canvas[data-shape="wide"] .qd-pattern-mask,
+.qd-canvas[data-shape="ultrawide"] .qd-pattern-mask { --qd-mask-direction: to right; }

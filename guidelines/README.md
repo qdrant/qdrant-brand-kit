@@ -41,31 +41,24 @@ The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patter
 
 ## 4. How the pattern covers the canvas
 
-Use one of these four. Patterns always bleed off the canvas edges they touch.
+Use one of these three. Patterns always bleed off the canvas edges they touch. The Zone layout (pattern in one zone, plain background in the rest) is no longer an option: use the pattern mask instead (Vanesa, 2026-11-11).
 
 | Layout | What it looks like | Text goes | Example |
 | --- | --- | --- | --- |
 | **Full bleed + light card** | Pattern covers the whole canvas. A light card sits on it. | On the card (`.qd-box--light-card`) | [Get-the-Guide ad, dark](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18921-37171) and [pastel](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18935-39510) |
-| **Full bleed, text on top** | Pattern covers the whole canvas. | Only on a calm area: dark, low detail, and passing the contrast check | |
-| **Zone** | Pattern fills one zone. The rest is the plain background (dark, or light on a light creative). | All of it in the plain zone, with the button beside the logo. The pattern zone holds only the visual | [Hybrid Cloud post](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18841-19294) |
+| **Full bleed, text on top** | Pattern covers the whole canvas. When the text needs it, the pattern is masked: 100% where the visual sits, fading to almost nothing behind the text. | On a calm area of the pattern, or on the masked part | |
 | **Product screen** | Pattern covers the whole canvas behind a framed screen. | Outside the screen, on a calm area or a card | [Qdrant Cloud screen](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18841-20954) |
 
 Rules:
 
-- **Must:** text never sits on a busy part of a pattern. If no area is calm enough, use the light card or the zone layout.
+- **Must:** text never sits on a busy part of a pattern. If no area is calm enough, mask the pattern or use the light card.
+- **Must: the pattern mask** (decided 2026-11-11). The pattern keeps covering the whole canvas but is masked with a gradient: 100% where the visual sits, fading to 4% behind the text. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`primitives/layout/`](../primitives/layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself.
+- **Must:** with the mask, the logo sits on the plain neutral, so it's the **Dark** logo on a dark creative and the **Light** logo on a light one (section 8).
 - **Must:** the light card only sits on a full-bleed pattern. On a dark creative it's the only light piece.
 - **Must: the light card is a book.** A vertical card shaped like a guide or a document (0.81, about 4:5), centered on a full-bleed pattern, with the pattern showing on every side. It never fills the frame. Width: **55%** of the canvas on square, **65%** on portrait, **75%** on story. The button sits **outside the card, centered below it**. Use `.qd-book` from [`primitives/layout/`](../primitives/layout/), built from the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (decided 2026-11-04).
-- **Suggest:** use the light card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, or the zone layout (decided 2026-11-04).
+- **Suggest:** use the light card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, masked when the text needs it (decided 2026-11-04, mask 2026-11-11).
 - **Must:** never put a big headshot ([`headshot-card`](../components/headshot-card/)) inside the light card. If a light-card creative needs a speaker, use [`headshot-circle`](../components/headshot-circle/) (decided 2026-11-04).
 - **Suggest:** dark is the default. Light creatives (the whole canvas on the light theme) are allowed for some moments, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635) (decided 2026-11-04).
-- **Zone placement**, by shape (see [`primitives/layout/`](../primitives/layout/) for shapes):
-
-  | Shape | Pattern zone | Text zone |
-  | --- | --- | --- |
-  | Portrait, story, square | Bottom, about 40 to 50 % of the height | Top |
-  | Wide, ultra-wide | Right side, about 40 to 50 % of the width | Left |
-
-  The split falls on a grid line. The zone bleeds off the three edges it touches.
 
 ## 5. One hero
 
@@ -89,11 +82,11 @@ Qbot is one hero (section 5). It works on **any** pattern, in any family or colo
 
 ### Where it sits
 
-- **Must: text first, Qbot below.** The logo, title, supporting line and button sit at the top; Qbot fills the space under them. Never put Qbot between two text blocks. (An exception to section 11 rule 7, like the Zone layout.)
+- **Must: text first, Qbot below.** The logo, title, supporting line and button sit at the top; Qbot fills the space under them. Never put Qbot between two text blocks. (An exception to section 11 rule 7, like the pattern mask.)
 - **Suggest:** bottom center, or toward the bottom-right corner.
 - **Must: no large empty band above Qbot.** If Qbot sits at the bottom with a lot of room over its head, make it bigger or show more of the body.
 - **Wide and ultra-wide:** the text block takes half the grid on the left (6 of 12 columns); Qbot fills the right half, anchored to the bottom.
-- **Zone layout:** Qbot stands in the pattern zone. Its head may rise above the zone line into the plain zone, as long as it touches no text, logo or button.
+- **Pattern mask:** Qbot stands on the full-strength part of the pattern. Its head may rise into the faded part, as long as it touches no text, logo or button.
 
 ### How big
 
@@ -123,7 +116,7 @@ Every crop is editorial, never accidental.
 ### Overlaps
 
 - **Must: Qbot never covers text, the logo or the button.** Its glow may sit behind text as long as the contrast check passes.
-- Qbot may overlap the edge of a card and the zone line.
+- Qbot may overlap the edge of a card.
 
 ### Glow
 
@@ -150,9 +143,9 @@ Every crop is editorial, never accidental.
 ## 8. Logo
 
 - **Must:** the Qdrant logo leads the content, at its **top-left**:
-  - on the canvas, inside the margins, when text sits on the canvas or in a zone;
+  - on the canvas, inside the margins, when text sits on the canvas;
   - on the card, inside its padding, when text sits on a light card.
-- **Must:** the right version for the background: **Dark** on plain dark and dark images, **White** on any pattern, **Light** on the light card and on a light canvas. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
+- **Must:** the right version for the background: **Dark** on plain dark, dark images and the masked part of a dark creative, **White** on any pattern at full strength, **Light** on the light card, on a light canvas and on the masked part of a light creative. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
 - When it can't sit top-left (no room, a busy area, the visual must lead), the agent moves it following the Brand Guide's placement rules and says where and why.
 - With a partner, the [partner lockup](../components/partner-lockup/) takes the logo's place. When the lockup is the **only content** (e.g. a partner blog hero), it's the hero: centered both ways, 8 of 12 columns wide (decided 2026-11-04).
 - The logo checks are in [`primitives/layout/checks.md`](../primitives/layout/checks.md).
@@ -177,7 +170,7 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 4. **Suggest: left-aligned by default.** Centered is fine when the whole composition is symmetric and nothing sits beside the text, e.g. a title with the date and time under it, or a story with one centered hero. The agent decides.
 5. **Must: never mix alignments, never right-align.** All the text in a creative is either left-aligned or centered. Left-aligned items share the same left edge.
 6. **Must: two text sizes.** One title in Mona Sans SemiBold, Title Case, sized by its length, and one supporting size for everything else (body, date, time, place). Names and roles inside the headshot parts are the only exception. Sizes and the Geist Mono rule (one or two words only) are in [`primitives/typography/`](../primitives/typography/), "Text in creatives". Mona Sans is always Title Case; Mona Sans Condensed is always all caps and only for special occasions, when asked.
-7. **Must: spread the content, top and bottom.** The logo and title block are anchored at the top margin, the supporting line and the button at the bottom margin, and the visual (pattern zone, Qbot, speakers, product screen) fills the space between. Never stack everything at the top with empty space below. **Exception, the Zone layout (section 4):** all the text stays in the plain zone, the button goes beside the logo, and the pattern zone holds only the visual (decided 2026-11-04). **Exception, Qbot (section 6):** all the text, the button included, sits at the top and Qbot fills the space below (decided 2026-11-04).
+7. **Must: spread the content, top and bottom.** The logo and title block are anchored at the top margin, the supporting line and the button at the bottom margin, and the visual (Qbot, speakers, product screen) fills the space between. Never stack everything at the top with empty space below. **Exception, the pattern mask (section 4):** all the text sits at the top on the masked part, the button goes beside the logo, and the visual fills the space below, where the pattern is at 100% (decided 2026-11-11, replaces the Zone layout). **Exception, Qbot (section 6):** all the text, the button included, sits at the top and Qbot fills the space below (decided 2026-11-04).
 8. **Must: text blocks are at least half the grid wide:** 3 of 6 columns on square and portrait, 6 of 12 on wide, 2 of 4 on story. If the text doesn't fit beside the visual at that width, it goes above or below it. Never squeeze text into a narrow column (decided 2026-11-04).
 9. **Suggest: related things sit close, unrelated things further apart.** The `tight` gap inside a group (date + place), `group` between items in a block (title + supporting line), `section` between blocks (text vs speakers) ([`primitives/layout/`](../primitives/layout/)). Leftover space goes between the top block and the bottom block, where the visual is, never spread evenly between every line.
 10. **Must: the button goes in one of two places,** at its own size, never full width ([`components/button/`](../components/button/)):

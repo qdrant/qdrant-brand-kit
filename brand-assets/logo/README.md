@@ -26,9 +26,9 @@ Exported as SVG from the Qdrant Brand Design System file (`8y0svqBDPZX6caRNF6ldd
 
 | Background | Version |
 | --- | --- |
-| Plain dark canvas, dark Box, dark image | **Dark** |
-| Any pattern: violet, red, mesh, generative | **White** |
-| Light card, light background | **Light** (Black only when color isn't wanted) |
+| Plain dark canvas, dark Box, dark image, the masked part of a dark creative | **Dark** |
+| Any pattern at full strength: violet, red, mesh, generative | **White** |
+| Light card, light background, the masked part of a light creative | **Light** (Black only when color isn't wanted) |
 
 - Never the Dark logo on red: the red brandmark disappears.
 - No effects, outlines or shadows. Don't distort, rotate, reposition its parts, change the typeface or use other colors (Brand Guide slide 17).
@@ -54,7 +54,7 @@ Equal to the brandmark's **inner cube** on all four sides: 0.375 × the logo hei
 
 ## Placement
 
-- **Default: top-left**, leading the content. On the canvas inside the margins when text sits on the canvas or in a zone; on the light card inside its padding when text sits on the card ([guidelines/](../../guidelines/) section 8). On the light card the logo is smaller: 0.0967 × the card width, about 57 px on a 1080 square ([`layout/`](../../primitives/layout/) "Light card layout", decided 2026-11-04).
+- **Default: top-left**, leading the content. On the canvas inside the margins when text sits on the canvas; on the light card inside its padding when text sits on the card ([guidelines/](../../guidelines/) section 8). On the light card the logo is smaller: 0.0967 × the card width, about 57 px on a 1080 square ([`layout/`](../../primitives/layout/) "Light card layout", decided 2026-11-04).
 - **When it has to move** (no room, a busy or low-contrast area, or the visual must lead), the agent picks the spot that makes sense, following the Brand Guide (slide 19), and says where and why:
   - **Top:** upper left preferred, upper right allowed. For functional layouts.
   - **Bottom:** lower left preferred, lower right allowed. When other elements or the visual must take priority.
