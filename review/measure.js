@@ -33,6 +33,7 @@
   }
   function role(el) {
     if (el.closest(".qd-button")) return "button";
+    if (el.closest(".qd-book__card")) return "book";
     if (el.closest(".qd-headshot-card__name, .qd-headshot-circle__name")) return "speaker-name";
     if (el.closest(".qd-headshot-card__role, .qd-headshot-circle__role")) return "speaker-role";
     return "text";
@@ -43,7 +44,7 @@
   }
   function run() {
     var canvas = document.querySelector(".qd-canvas");
-    var out = { canvas: null, texts: [], images: [], logos: [], buttons: [], cards: [], circles: [], icons: [], blocks: [], fonts: {} };
+    var out = { canvas: null, texts: [], images: [], logos: [], buttons: [], cards: [], circles: [], icons: [], books: [], blocks: [], fonts: {} };
     if (canvas) {
       out.canvas = rect(canvas);
       out.canvas.shape = canvas.dataset.shape || null;
@@ -67,11 +68,12 @@
           var holder = el.closest(".qd-headshot-card__photo, .qd-headshot-circle__photo");
           // A headshot is cropped by its card or circle: measure what's visible, not the whole photo.
           var info = { src: src(el), rect: rect(holder || el), loaded: el.complete && el.naturalWidth > 0,
-                       cls: holder ? "headshot" : (el.className || "") };
+                       cls: holder ? "headshot" : (el.className || ""), inBook: !!el.closest(".qd-book") };
           out.images.push(info);
           if (el.classList.contains("qd-logo") || /brand-assets\/logo\//.test(info.src)) out.logos.push(info);
         }
-        if (el.classList.contains("qd-button")) out.buttons.push({ rect: rect(el), cls: el.className, text: el.textContent.trim() });
+        if (el.classList.contains("qd-button")) out.buttons.push({ rect: rect(el), cls: el.className, text: el.textContent.trim(), inBook: !!el.closest(".qd-book") });
+        if (el.classList.contains("qd-book__card")) out.books.push({ rect: rect(el) });
         if (el.tagName.toLowerCase() === "svg" && el.closest(".qd-canvas") === canvas && !el.closest("svg:not(:scope)")) {
           // Every inline SVG that isn't inside another one: icons should be svg.qd-icon (brand-assets/icons/).
           var s2 = getComputedStyle(el), shapes = el.querySelectorAll("path, circle, rect, line, polyline, polygon, ellipse");
@@ -90,7 +92,7 @@
             viewBox: el.getAttribute("viewBox"), strokeWidth: el.getAttribute("stroke-width"),
             stroke: s2.stroke, color: s2.color, filled: filled, nonScaling: nonScaling,
             transform: s2.transform, filter: s2.filter, boxShadow: s2.boxShadow,
-            inButton: !!el.closest(".qd-button"), textSize: near
+            inButton: !!el.closest(".qd-button"), onLightCard: !!el.closest(".qd-box--light-card"), textSize: near
           });
         }
         if (el.classList.contains("qd-headshot-card__photo")) out.cards.push({ rect: rect(el) });

@@ -132,7 +132,7 @@ Rules:
 - **Borders only separate things.** They're never decoration.
 - Glows, gradients and photos as backgrounds come from brand-assets/ (patterns, imagery), not Box.
 - The light card is mostly for guide downloads and documentation promotions, and never holds a big headshot ([`guidelines/`](../../guidelines/) section 4).
-- Padding is the shape's `group` gap. Corners are `radius.md` (8 px at the reference canvas). The light card in a creative uses the book layout below instead.
+- Padding is the shape's `group` gap (the light card: at least the logo's clear space). Corners are `radius.md` (8 px at the reference canvas). The light card in a creative uses the book layout below instead.
 
 ### Light card layout (`.qd-book`)
 
@@ -142,7 +142,7 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 | --- | --- | --- |
 | Card width | 55% of the canvas on square, 65% on portrait, 75% on story. **Wide:** a landscape card, see below. **Ultrawide:** no light card | 594 |
 | Card shape | 0.81 (794.4 : 979.2), about 4:5, vertical | 594 × 737 |
-| Position | Centered on the canvas. Story: card and button centered together inside the safe area | |
+| Position | Card and button centered together inside the margins (the safe area on story), on every shape (2026-11-11) | |
 | Padding | 0.0846 W left and right, 0.0967 W top and bottom | 50 / 57 |
 | Corners | 0.0242 W | 14 |
 | Fill | `background.light-surface`, text `text.on-light` | |
@@ -158,7 +158,7 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 - **Wide (1920×1080): a landscape card** (decided 2026-11-11). The card is 5:4 and 72% of the canvas height (973 × 778 at 1920×1080), the largest that fits with the button inside the margins. Card and button are centered together. Every value above stays a share of W, where W is the portrait card's width at that height (631), except the title and supporting text, which are **1.5×** (80 and 46 px) so the card doesn't look empty.
 - **Ultrawide: no light card.** There's no use case for it (decided 2026-11-11).
 - The card is centered, so it isn't tied to grid columns. Text inside it aligns to the card's padding.
-- Only on a full-bleed pattern. Never with a big headshot; use `headshot-circle` if a speaker is needed.
+- Only on **Color-Sliced-Pattern-B**, red or violet, with its letter layer (decided 2026-11-11). Never with a big headshot; use `headshot-circle` if a speaker is needed.
 
 ```html
 <div class="qd-canvas">

@@ -14,8 +14,8 @@ Needs Pillow.
 """
 import argparse, glob, json, os, re, sys
 
-TOOLS = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(TOOLS)
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(HERE)
 SMALL = {"a", "an", "and", "as", "at", "but", "by", "for", "in", "of", "on", "or", "the", "to", "vs", "via", "with"}
 
 
@@ -28,7 +28,9 @@ def icon_colors():
     css = open(os.path.join(REPO, "primitives/colors/colors.css")).read()
     found = re.findall(r"--qd-color-([a-z-]+)-(400|500):\s*#([0-9A-Fa-f]{6})", css)
     pick = lambda step: {f"{n}-{s}": tuple(int(h[i:i + 2], 16) for i in (0, 2, 4)) for n, s, h in found if s == step}
-    return {"dark": pick("400"), "light": pick("500")}
+    # Only colors that keep 3:1 on the plain background (README "Colors"): drops green, cyan, orange, yellow on light.
+    keep = lambda d, bg: {k: v for k, v in d.items() if contrast(v, bg) >= 3}
+    return {"dark": keep(pick("400"), (11, 15, 25)), "light": keep(pick("500"), (255, 255, 255))}
 
 
 def load_rules():
@@ -127,13 +129,15 @@ def check_one(m, rules):
     starts = [L + k * (S["col"] + S["gut"]) * u for k in range(S["cols"])]
     ends = [L + (k * (S["col"] + S["gut"]) + S["col"]) * u for k in range(S["cols"])]
     off = []
-    lefts = [("text", t["box"]) for t in main] + [("logo", l["rect"]) for l in m["logos"]] + \
+    lefts = [("text", t["box"]) for t in main] + [("logo", l["rect"]) for l in m["logos"] if not l.get("inBook")] + \
             [("card", c["rect"]) for c in m["cards"]]
     for kind, r in lefts:
         if min(abs(r["x"] - s) for s in starts) > 2:
             off.append(f"{kind} left edge {round(r['x'])}")
     for b in m["buttons"]:
         r = b["rect"]
+        if b.get("inBook"):
+            continue  # the light card's button is centered below the card, not on the grid
         if min(abs(r["x"] - s) for s in starts) > 2 and min(abs(r["x"] + r["w"] - e) for e in ends) > 2:
             off.append(f"button at {round(r['x'])}")
     add("On the grid", not off, "edges on column lines" if not off else "; ".join(off[:4]), "checks.md, On the grid")
@@ -212,12 +216,37 @@ def check_one(m, rules):
         add("Contrast", not lows, "all text passes at the 5th-percentile pixel behind it" if not lows else "; ".join(lows[:4]),
             "checks.md, Contrast")
 
+    if m.get("books"):
+        # The light card (book): its own sizes, from primitives/layout/README "Light card layout".
+        bk = m["books"][0]["rect"]
+        wide = shape == "wide"
+        biss = []
+        if shape == "ultrawide":
+            biss.append("no light card on ultrawide")
+        ratio = bk["w"] / bk["h"]
+        want_ratio = 1.25 if wide else 794.4 / 979.2
+        if abs(ratio - want_ratio) > 0.02:
+            biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
+        Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
+        k = 1.5 if wide else 1.0
+        btexts = [t for t in texts if t["role"] == "book"]
+        if btexts:
+            top = max(t["fontSize"] for t in btexts)
+            if abs(top - 0.0846 * k * Wb) > 1.5:
+                biss.append(f"title {top:.0f} px, wanted {0.0846 * k * Wb:.0f}")
+        blogo = [l for l in m["logos"] if l.get("inBook")]
+        if blogo and abs(blogo[0]["rect"]["h"] - 0.0967 * Wb) > 1.5:
+            biss.append(f"logo {blogo[0]['rect']['h']:.0f} px, wanted {0.0967 * Wb:.0f}")
+        add("Light card", not biss, "; ".join(biss) or f"card {bk['w']:.0f}×{bk['h']:.0f}, sizes match W={Wb:.0f}",
+            "layout README, Light card layout")
     if not m["logos"]:
         add("Logo", False, "no Qdrant logo found", "guidelines §8")
     else:
         lg = m["logos"][0]
         r = lg["rect"]
         want = max(24, logo_h.get(shape, 0) * u)
+        if lg.get("inBook"):
+            want = 24  # the light card has its own, smaller logo (checked under "Light card")
         issues = []
         if "brand-assets/logo/" not in lg["src"]:
             issues.append("not a file from brand-assets/logo/")
@@ -270,10 +299,12 @@ def check_one(m, rules):
     add("No overlaps", not ov, "none" if not ov else "; ".join(ov[:4]), "checks.md, No overlaps")
 
     if m.get("icons"):
-        allowed = icon_colors()[(m["canvas"] or {}).get("theme") == "light" and "light" or "dark"]
+        palettes = icon_colors()
         probs = []
         for ic in m["icons"]:
             r = ic["rect"]
+            light = ic.get("onLightCard") or (m["canvas"] or {}).get("theme") == "light"
+            allowed = palettes["light" if light else "dark"]
             where = f"icon at {round(r['x'])},{round(r['y'])}"
             if not ic["isIcon"]:
                 probs.append(f"{where}: an SVG without .qd-icon")
@@ -292,7 +323,7 @@ def check_one(m, rules):
             col = rgb(ic["stroke"] if ic["stroke"].startswith("rgb") else ic["color"])
             name = next((k for k, v in allowed.items() if v == col), None)
             if not name:
-                probs.append(f"{where}: color rgb{col} isn't an allowed {'500' if allowed is icon_colors()['light'] else '400'}")
+                probs.append(f"{where}: color rgb{col} isn't an allowed {'500' if light else '400'}")
             if bg is not None:
                 box = (max(0, int(r["x"])), max(0, int(r["y"])), min(W, int(r["x"] + r["w"])), min(H, int(r["y"] + r["h"])))
                 if box[2] > box[0] and box[3] > box[1]:
@@ -315,7 +346,11 @@ LOOK = ["Hierarchy: one clear title, calm supporting text, nothing competing",
         "Text sits on a calm area of any pattern",
         "Right logo version for the background (Dark / White / Light)",
         "One hero; no eyebrow or series (until the badge); no made-up content",
-        "Icons are real Lucide icons, not redrawn (no files in the repo to compare against)"]
+        "Icons are real Lucide icons, not redrawn (no files in the repo to compare against)",
+        "Pattern: the right one for the tone and layout (light card: Color-Sliced-Pattern-B only; Color-Sliced-A only with headshots)",
+        "Pattern mask: used when the preset's textMask says so, soft and with no visible edge",
+        "Qbot rules (guidelines section 6): placement, crop, glow, never before the text",
+        "Button in a corner: beside the logo only with a full-width text block, otherwise last in the text block"]
 
 
 def main():

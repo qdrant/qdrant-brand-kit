@@ -46,7 +46,7 @@ Part.
 6. **Placement:** last in the text block, aligned with the text, or top-right level with the logo. **Always in a corner, never mid-layout:** top-right only when the text block spans the full width; when the text block is only part of the width (e.g. wide with a visual on the right), the button goes last in the text block ([`guidelines/`](../../guidelines/) section 11, rule 10, decided 2026-11-11). **Exception, the light card:** outside the card, centered below it, sized by the card (`.qd-book__cta`, see [`layout/`](../../primitives/layout/) "Light card layout"). Never full width ([`guidelines/`](../../guidelines/) section 11, rule 10).
 7. **Beside the logo, the same height as the logo.** Add `qd-button--beside-logo`: the height becomes the logo's height for the shape (72 or 80 px) and the text, padding and corners follow it in the same proportions. The button is never taller than the logo next to it (decided 2026-11-04).
 8. **Never an icon.** The button is text only, in every use and every type, Main and Secondary (decided 2026-11-11).
-6. **One button per post.**
+9. **One button per post.**
 
 ## Size and inner gaps
 

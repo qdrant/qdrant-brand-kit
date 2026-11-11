@@ -6,7 +6,7 @@ Copied from Design Lab `brand-kit/guidance/invariants.md` on 2026-11-04.
 
 ## Text in generated images
 
-Generated images never contain text, letters, numbers, logos or watermarks. Words on a design come from its template.
+Generated images never contain text, letters, numbers, logos or watermarks. Words on a design are set in code on top of the image, following [`guidelines/`](../../../guidelines/) section 11.
 
 ## Mascot
 

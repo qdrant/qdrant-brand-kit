@@ -10,7 +10,7 @@ What it does, in order (Brand Guide 2.0, slide 56):
   1. Remove the background, with rembg (open source, runs on this computer, photos never leave it).
      Skipped when the photo is already a cutout with a transparent background.
   2. Boost resolution, with Real-ESRGAN, only when the photo is too small for a 1024 px cutout and the
-     realesrgan-ncnn-vulkan program is installed. Otherwise a photo under 512 px is rejected: ask
+     realesrgan-ncnn-vulkan program is installed. Otherwise a photo under 480 px is rejected: ask
      for a bigger one.
   3. Adjust brightness, contrast and saturation, the same mild correction for everyone.
   4. Crop to the standard framing: square, top of the head 4% below the top edge, shoulders running

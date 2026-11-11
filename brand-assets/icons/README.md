@@ -33,7 +33,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 
 ## Colors
 
-- **On dark backgrounds, a 400 color. On light backgrounds, a 500 color.** It must keep **3:1** contrast with what's behind it, so it's easy to scan.
+- **On dark backgrounds, a 400 color. On light backgrounds, a 500 color.** The light card counts as a light background, even in a dark creative. It must keep **3:1** contrast with what's behind it, so it's easy to scan.
 - Measured on the backgrounds in [`colors/`](../../primitives/colors/):
 
   | Background | Allowed | Not allowed (under 3:1) |

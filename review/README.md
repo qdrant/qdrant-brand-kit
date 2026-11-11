@@ -4,7 +4,7 @@ Review a creative before it's shown: render it at exact sizes, check it against 
 
 For generated images, also use the image checklist in [`brand-assets/imagery/guidance/review.md`](../brand-assets/imagery/guidance/review.md). A brand taste review (scoring and calibrated likes and dislikes) will be added here later.
 
-**Mechanics only.** These scripts never decide a size, color or layout. Every rule value comes from the repo's own files (`primitives/layout/layout.tokens.json`, `primitives/typography/typography.tokens.json`, `brand-assets/logo/logo.css`). If the repo doesn't give a value, the check says so instead of guessing.
+**Mechanics only.** These scripts never decide a size, color or layout. Every rule value comes from the repo's own files (`primitives/layout/layout.tokens.json`, `primitives/typography/typography.tokens.json`, `brand-assets/logo/logo.css`, `primitives/colors/colors.css`). If the repo doesn't give a value, the check says so instead of guessing.
 
 | File | What it does |
 | --- | --- |

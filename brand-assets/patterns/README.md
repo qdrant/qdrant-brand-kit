@@ -76,7 +76,7 @@ Mesh patterns aren't tied to a fixed set of images. Every new image approved in 
 
    Pick the image at random, or let the person choose. If the brand check fails, skip that image for that pattern.
 
-Meshes need to be made again only when the grade, blur or contrast in the shared presets change. Token value changes don't need new meshes. The four meshes in `meshes/` are test examples for the preview pages, not the real library.
+Meshes need to be made again only when the grade, blur or contrast in the shared presets change. Token value changes don't need new meshes. The mesh files in `meshes/` (4 test images × 2 mesh groups) are test examples for the preview pages, not the real library.
 
 ## Generative patterns (from Pattern Studio)
 
@@ -111,7 +111,7 @@ If Pattern Studio's engine changes, compile `src/pattern/pattern-engine.ts` agai
 Then run the checks and look at the result:
 
 ```bash
-cd patterns
+cd brand-assets/patterns
 node scripts/validate.mjs
 ```
 
@@ -131,7 +131,7 @@ The validator fails on anything that can't render, like a missing recipe, token 
 Serve the folder with any static server, then open `index.html` (one pattern at a time, at any size), `formats.html` (every pattern in six formats, from a square to a 10:1 banner) or `sheet.html` (every Mesh pattern on every example mesh, with its brand check):
 
 ```bash
-cd patterns
+cd brand-assets/patterns
 python3 -m http.server 5190
 ```
 

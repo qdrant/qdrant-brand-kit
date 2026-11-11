@@ -4,7 +4,7 @@ Ready-made pieces for Qdrant creatives, built only from [`primitives/`](../primi
 
 **Components are parts only.** There are no fixed post templates: an agent lays out each creative itself, following [`guidelines/`](../guidelines/) section 11 (Composition) and using the parts below (decided 2026-11-04).
 
-A part is one piece used inside a creative: a button, a speaker card, the partner lockup, a badge, a stat card.
+A part is one piece used inside a creative: a button, a speaker card, the partner lockup, a stat card, or the badge (still to come).
 
 ## Adding one
 
