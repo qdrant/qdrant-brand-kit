@@ -46,23 +46,14 @@ Use one of these three. Patterns always bleed off the canvas edges they touch. T
 | Layout | What it looks like | Text goes | Example |
 | --- | --- | --- | --- |
 | **Full bleed + light card** | Pattern covers the whole canvas. A light card sits on it. | On the card (`.qd-box--light-card`) | [Get-the-Guide ad, dark](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18921-37171) and [pastel](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18935-39510) |
-| **Full bleed, text on top** | Pattern covers the whole canvas. When the pattern's small details would cross the text, the pattern is masked: 100% where the visual sits, fading softly behind the text. | On the pattern when it's calm, or on the masked part | |
+| **Full bleed, text on top** | Pattern covers the whole canvas. When the text needs it, the pattern is masked: 100% where the visual sits, fading to almost nothing behind the text. | On a calm area of the pattern, or on the masked part | |
 | **Product screen** | Pattern covers the whole canvas behind a framed screen. | Outside the screen, on a calm area or a card | [Qdrant Cloud screen](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18841-20954) |
 
 Rules:
 
 - **Must:** text never sits on a busy part of a pattern. If no area is calm enough, mask the pattern or use the light card.
-- **Must: mask only when the pattern needs it** (decided 2026-11-11). Not every pattern needs a mask. Mask it only when its small details (letters, dashes, small marks) cross the text and make it hard to read. Each pattern's preset says so in `textMask`:
-
-  | `textMask` | Patterns | What to do |
-  | --- | --- | --- |
-  | `soft-1` | Generative-Dash-Pattern-A | Mask, 4% behind the text: the dashes must never cross a line of text |
-  | `soft-2` | Color-Sliced-Pattern-B | Mask, 10% behind the text: a hint of the pattern stays, so it reads as one background |
-  | `none` | Color-Sliced-Pattern-A, Color-Refracted-Pattern-A, Generative-Glyph-Pattern-A, Generative-Hexagon-Pattern-C | No mask: text sits straight on the pattern |
-  | not set | Every other pattern | Not decided yet: render it with and without the mask and ask |
-
-- **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to the preset's strength behind the text, with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). Use `.qd-canvas--masked` and `.qd-pattern-mask--soft-1` or `--soft-2` from [`primitives/layout/`](../primitives/layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself.
-- **Must:** with the mask, the logo sits on the plain neutral, so it's the **Dark** logo on a dark creative and the **Light** logo on a light one (section 8). Without the mask it's the **White** logo on the pattern.
+- **Must: the pattern mask** (decided 2026-11-11). The pattern keeps covering the whole canvas but is masked with a gradient: 100% where the visual sits, fading to 4% behind the text. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`primitives/layout/`](../primitives/layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself.
+- **Must:** with the mask, the logo sits on the plain neutral, so it's the **Dark** logo on a dark creative and the **Light** logo on a light one (section 8).
 - **Must:** the light card only sits on a full-bleed pattern. On a dark creative it's the only light piece.
 - **Must: the light card is a book.** A vertical card shaped like a guide or a document (0.81, about 4:5), centered on a full-bleed pattern, with the pattern showing on every side. It never fills the frame. Width: **55%** of the canvas on square, **65%** on portrait, **75%** on story. The button sits **outside the card, centered below it**. Use `.qd-book` from [`primitives/layout/`](../primitives/layout/), built from the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (decided 2026-11-04).
 - **Suggest:** use the light card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, masked when the text needs it (decided 2026-11-04, mask 2026-11-11).
