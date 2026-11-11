@@ -142,9 +142,11 @@ A preset can say whether text on it needs the pattern mask from [`primitives/lay
 | `textMask` | Meaning | Presets |
 | --- | --- | --- |
 | `"soft-1"` | Mask, 4% behind the text | Generative-Dash-Pattern-A |
-| `"soft-2"` | Mask, 10% behind the text | Color-Sliced-Pattern-B |
-| `"none"` | No mask, text sits straight on the pattern | Color-Sliced-Pattern-A, Color-Refracted-Pattern-A, Generative-Glyph-Pattern-A, Generative-Hexagon-Pattern-C |
-| not set | Not decided yet: render it with and without the mask and ask | every other preset |
+| `"soft-2"` | Mask, 10% behind the text | Color-Sliced-Pattern-B, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Dark violet) |
+| `"none"` | No mask, text sits straight on the pattern | Color-Sliced-Pattern-A, Color-Refracted-Pattern-A, Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet), Generative-Hexagon-Pattern-B, Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Light violet) |
+| not set | Not decided yet: render it with and without the mask and ask | every other preset or colorway (Glyph-B Light violet is being tested on a light creative) |
+
+When the answer differs by colorway (Burst-A, Glyph-B), `textMask` sits on the colorway instead of the preset.
 
 ## Patterns (V1)
 

@@ -6,6 +6,7 @@
   "colorways": [
     {
       "name": "Dark violet",
+      "textMask": "soft-2",
       "colors": [
         "{color.secondary.800}",
         "{color.secondary.500}",
@@ -30,6 +31,7 @@
     },
     {
       "name": "Light violet",
+      "textMask": "none",
       "colors": [
         "{color.secondary.800}",
         "{color.secondary.500}",

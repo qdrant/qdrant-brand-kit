@@ -57,9 +57,11 @@ Rules:
   | `textMask` | Patterns | What to do |
   | --- | --- | --- |
   | `soft-1` | Generative-Dash-Pattern-A | Mask, 4% behind the text: the dashes must never cross a line of text |
-  | `soft-2` | Color-Sliced-Pattern-B | Mask, 10% behind the text: a hint of the pattern stays, so it reads as one background |
-  | `none` | Color-Sliced-Pattern-A, Color-Refracted-Pattern-A, Generative-Glyph-Pattern-A, Generative-Hexagon-Pattern-C | No mask: text sits straight on the pattern |
-  | not set | Every other pattern | Not decided yet: render it with and without the mask and ask |
+  | `soft-2` | Color-Sliced-Pattern-B, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Dark violet) | Mask, 10% behind the text: a hint of the pattern stays, so it reads as one background |
+  | `none` | Color-Sliced-Pattern-A, Color-Refracted-Pattern-A, Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet), Generative-Hexagon-Pattern-B, Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Light violet) | No mask: text sits straight on the pattern |
+  | not set | Every other pattern or colorway, incl. Glyph-B Light violet (in progress: a soft mask on a light creative, being tested 2026-11-11) | Not decided yet: render it with and without the mask and ask |
+
+  When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
 
 - **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to the preset's strength behind the text, with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). Use `.qd-canvas--masked` and `.qd-pattern-mask--soft-1` or `--soft-2` from [`primitives/layout/`](../primitives/layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself.
 - **Must:** with the mask, the logo sits on the plain neutral, so it's the **Dark** logo on a dark creative and the **Light** logo on a light one (section 8). Without the mask it's the **White** logo on the pattern.

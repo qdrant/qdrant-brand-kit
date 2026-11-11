@@ -16,6 +16,7 @@
     },
     {
       "name": "Medium violet",
+      "textMask": "none",
       "colors": [
         "{color.secondary.800}",
         "{color.secondary.500}",
