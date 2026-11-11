@@ -171,18 +171,6 @@
         "$value": "#000000",
         "$description": "Placeholder. From the qdrant-brand skill."
       }
-    },
-    "teal": {
-      "300": {
-        "$type": "color",
-        "$value": "#4DB6AC",
-        "$description": "Placeholder guess. Not in the brand docs yet."
-      },
-      "500": {
-        "$type": "color",
-        "$value": "#009688",
-        "$description": "Placeholder. From the qdrant-brand skill."
-      }
     }
   }
 }

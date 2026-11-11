@@ -11,10 +11,9 @@
       "defaultFamily": "secondary",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546",
       "families": [
-        "secondary",
-        "teal"
+        "secondary"
       ],
-      "$familiesNote": "Families this colorway may use. Neutral is left out: it would make a gray gradient. Primary (red) removed by Vanesa on 2026-11-11: few use cases, and backgrounds lean violet."
+      "$familiesNote": "Families this colorway may use. Neutral is left out: it would make a gray gradient. Primary (red) removed by Vanesa on 2026-11-11: few use cases, and backgrounds lean violet. Teal removed the same day: no teal patterns."
     },
     {
       "name": "Primary 100 → Secondary 400",

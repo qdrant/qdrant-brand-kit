@@ -39,6 +39,7 @@ The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patter
 
 ## 3. Red backgrounds
 
+- **Must: patterns are violet or red, never another color.** No teal or other colors in a pattern background, ever (decided 2026-11-11). Red only in its approved presets and colorways.
 - **Must:** violet is the default. A red pattern background (a red colorway, Hexagon-B, Dash-B) is only for creatives that need to **grab a lot of attention and be more impactful**.
 - **Ask:** never pick red on your own. Offer it, and use it only when the person says yes.
 - Everywhere else, red stays an accent (buttons, highlights), as [`primitives/colors/`](../primitives/colors/) says.
