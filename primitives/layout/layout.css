@@ -264,6 +264,56 @@
 .qd-canvas[data-shape] .qd-pattern-mask.qd-pattern-mask--from-right { --qd-mask-direction: to left; }
 .qd-canvas[data-shape="wide"] .qd-pattern-mask,
 .qd-canvas[data-shape="ultrawide"] .qd-pattern-mask { --qd-mask-direction: to right; }
+/* Wide: one smooth gradient across the whole canvas instead of hold-then-fade, with a gentle
+   (quadratic) start: the pattern begins as a whisper behind the text at the left edge and builds to
+   full strength at 95% of the width. No step, no visible edge (Vanesa picked it over S-curve and
+   cubic, 2026-11-11). --qd-mask-low still sets the strength at the text side; --qd-mask-edge isn't used. */
+.qd-canvas[data-shape="wide"] .qd-pattern-mask {
+  -webkit-mask-image: linear-gradient(var(--qd-mask-direction),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0000)) 0.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0025)) 4.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0100)) 9.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0225)) 14.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0400)) 19.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0625)) 23.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0900)) 28.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.1225)) 33.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.1600)) 38.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.2025)) 42.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.2500)) 47.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.3025)) 52.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.3600)) 57.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.4225)) 61.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.4900)) 66.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.5625)) 71.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.6400)) 76.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.7225)) 80.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.8100)) 85.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.9025)) 90.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 1.0000)) 95.00%);
+  mask-image: linear-gradient(var(--qd-mask-direction),
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0000)) 0.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0025)) 4.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0100)) 9.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0225)) 14.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0400)) 19.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0625)) 23.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.0900)) 28.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.1225)) 33.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.1600)) 38.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.2025)) 42.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.2500)) 47.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.3025)) 52.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.3600)) 57.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.4225)) 61.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.4900)) 66.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.5625)) 71.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.6400)) 76.00%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.7225)) 80.75%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.8100)) 85.50%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.9025)) 90.25%,
+    rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 1.0000)) 95.00%);
+}
 
 /* Wide: the button sits below the landscape card (card and button centered together). */
 .qd-canvas[data-shape="wide"] .qd-book__cta.qd-button {
