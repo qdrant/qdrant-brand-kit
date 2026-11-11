@@ -131,7 +131,7 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 
 | | Value | At 1080 square (W 594) |
 | --- | --- | --- |
-| Card width | 55% of the canvas on square, 65% on portrait, 75% on story. Wide and ultrawide: not set yet | 594 |
+| Card width | 55% of the canvas on square, 65% on portrait, 75% on story. **Wide:** a landscape card, see below. **Ultrawide:** no light card | 594 |
 | Card shape | 0.81 (794.4 : 979.2), about 4:5, vertical | 594 × 737 |
 | Position | Centered on the canvas. Story: card and button centered together inside the safe area | |
 | Padding | 0.0846 W left and right, 0.0967 W top and bottom | 50 / 57 |
@@ -146,6 +146,8 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 | Button | Outside the card, centered below it, 0.0544 W gap. Height 0.157 W; text, padding and corners keep the button's proportions | gap 32, height 93 |
 
 - The top block sits at the top padding and the bottom block at the bottom padding; the space between stays empty.
+- **Wide (1920×1080): a landscape card** (decided 2026-11-11). The card is 5:4 and 72% of the canvas height (973 × 778 at 1920×1080), the largest that fits with the button inside the margins. Card and button are centered together. Every value above stays a share of W, where W is the portrait card's width at that height (631), except the title and supporting text, which are **1.5×** (80 and 46 px) so the card doesn't look empty.
+- **Ultrawide: no light card.** There's no use case for it (decided 2026-11-11).
 - The card is centered, so it isn't tied to grid columns. Text inside it aligns to the card's padding.
 - Only on a full-bleed pattern. Never with a big headshot; use `headshot-circle` if a speaker is needed.
 
@@ -172,8 +174,6 @@ These styles come from recent Qdrant web sections in Figma (customer stat cards,
 Not defined yet. Print sizes, bleed and safe area go here once the social side is approved. Until then, use the vendor spec.
 
 ## To decide later
-
-- **In progress (2026-11-04):** light card (`.qd-book`) size on `wide` and `ultrawide`. At 55% of the width the card would be taller than the canvas, so these shapes need their own rule (probably sized by height). Vanesa continues on 2026-11-05.
 
 - Whether Design Lab gets a `brand-kit/primitives/layout.yaml` (a request for Neil).
 - Grid columns and Box line colors, once there's a Figma social grid or Juan's system lands.
