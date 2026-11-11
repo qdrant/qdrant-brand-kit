@@ -45,6 +45,10 @@ When a creative uses a generated image as its background ([`guidelines/`](../../
 
 Add `styles/<name>/` with a `style.md` and up to 10 `references/`, and a matching entry under `styles.list` in the config. In Design Lab, a style is a moodboard (Brand kit → Image styles).
 
+## Images in a creative
+
+How an image sits in a creative is in [`guidelines/`](../../guidelines/) section 5, "Generated images in a creative". When you generate one for a creative, ask for room for the text: the subject in the lower half or on the side away from the text, with about 40% empty sky on the text side, and a small subject rather than one that fills the frame (decided 2026-11-11).
+
 ## Open issues
 
 - **Default style guidance is empty.** Design Lab only has the placeholder text, so the references carry the whole style.

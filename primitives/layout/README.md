@@ -40,6 +40,7 @@ Sizes in px at the reference canvas.
   - **No visual:** heading on columns 9 to 12, title-short (128).
   - **With Qbot:** Qbot sits after the heading, never before it ([`guidelines/`](../../guidelines/) section 6), and the title steps down one size (104). Two placements: Qbot full height at the right margin, cut at the waist with the chest logo whole, heading on columns 7 to 9; or a bigger Qbot cut at the upper chest (the Peek crop), heading on columns 6 to 8. Beside Qbot the heading may be narrower than half the grid ([`guidelines/`](../../guidelines/) section 11 rule 8).
   - If the pattern needs a mask, the heading is on the right, so use `.qd-pattern-mask--from-right` (below).
+- **Between groups:** 2 × `section` (96 on square and portrait, 128 on wide and story, 128 on ultrawide). The header, heading, body and visual are separate groups, with this one gap between each ([`guidelines/`](../../guidelines/) section 11, rule 9, decided 2026-11-11). No token yet: use `calc(2 * var(--qd-gap-section))`.
 - **Story safe zones:** 256 px top and 344 px bottom keep text clear of the profile bar, reply box and stickers. Only backgrounds and images go there.
 - **Other sizes:** the scale is the smaller of width ÷ reference width and height ÷ reference height. Every value is multiplied by it, so a 1200×627 post uses the Wide values at 0.58×. The 8 px grid holds exactly at the reference canvases.
 - The column counts were worked out for this folder (whole px, on the 8 px grid). They don't come from Figma or the brand skill yet.
