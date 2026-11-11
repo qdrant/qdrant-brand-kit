@@ -12,7 +12,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 
 - **Lucide only.** Never another set, never mixed styles, never a redrawn or edited icon.
 - **Outline, one color.** Lucide's own drawing: 24×24 grid, round caps and joins, no fill.
-- **Clean backgrounds only.** A plain area, or a calm, masked part of a pattern, like text.
+- **Clean backgrounds only.** A plain area, a calm, masked part of a pattern, or a calm pattern that isn't masked, like text.
 
 ## Sizes
 
@@ -33,6 +33,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 
 ## Colors
 
+- **On a pattern that isn't masked** (violet or red mid-tones, where a 400 disappears): **white**, the same color as the text beside it, with `.qd-icon--on-pattern` (decided 2026-11-11).
 - **On dark backgrounds, a 400 color. On light backgrounds, a 500 color.** The light card counts as a light background, even in a dark creative. It must keep **3:1** contrast with what's behind it, so it's easy to scan.
 - Measured on the backgrounds in [`colors/`](../../primitives/colors/):
 
@@ -49,6 +50,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
   | `.qd-icon` (default) | `neutral-400` | `neutral-500` |
   | `.qd-icon--primary` | `primary-400` | `primary-500` |
   | `.qd-icon--secondary` | `secondary-400` | `secondary-500` |
+| `.qd-icon--on-pattern` | white (`text.primary`), only on a pattern that isn't masked | not used |
   | `.qd-icon--indigo`, `--purple`, `--red`, `--teal` | not allowed | the 500 |
 
 ## In creatives

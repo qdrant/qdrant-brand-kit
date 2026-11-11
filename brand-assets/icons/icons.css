@@ -28,6 +28,9 @@
 /* Colors. Dark is the default theme; [data-theme="light"] switches to the 500s. */
 .qd-icon--primary   { --qd-icon-color: var(--qd-color-primary-400); }
 .qd-icon--secondary { --qd-icon-color: var(--qd-color-secondary-400); }
+/* On a pattern that isn't masked (violet or red mid-tones), the 400s disappear: use white, the text color
+   beside it (Vanesa, 2026-11-11). Still 3:1 or more. */
+.qd-icon--on-pattern { --qd-icon-color: var(--qd-color-text-primary); }
 
 [data-theme="light"] .qd-icon            { --qd-icon-color: var(--qd-color-neutral-500); }
 [data-theme="light"] .qd-icon--primary   { --qd-icon-color: var(--qd-color-primary-500); }

@@ -30,7 +30,12 @@ def icon_colors():
     pick = lambda step: {f"{n}-{s}": tuple(int(h[i:i + 2], 16) for i in (0, 2, 4)) for n, s, h in found if s == step}
     # Only colors that keep 3:1 on the plain background (README "Colors"): drops green, cyan, orange, yellow on light.
     keep = lambda d, bg: {k: v for k, v in d.items() if contrast(v, bg) >= 3}
-    return {"dark": keep(pick("400"), (11, 15, 25)), "light": keep(pick("500"), (255, 255, 255))}
+    dark = keep(pick("400"), (11, 15, 25))
+    # White (text.primary) is allowed on a pattern that isn't masked: .qd-icon--on-pattern (README "Colors").
+    tp = re.search(r"--qd-color-text-primary:\s*#([0-9A-Fa-f]{6})", css)
+    if tp:
+        dark["text-primary (on pattern)"] = tuple(int(tp.group(1)[i:i + 2], 16) for i in (0, 2, 4))
+    return {"dark": dark, "light": keep(pick("500"), (255, 255, 255))}
 
 
 def load_rules():
