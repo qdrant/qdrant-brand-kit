@@ -54,7 +54,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 ## In creatives
 
 - **Where:** next to supporting text, mostly the date / time / place row ([`guidelines/`](../../guidelines/) section 11, rule 12). One icon per line, before the text.
-- **Never in buttons.** Buttons in creatives are text only ([`components/button/`](../../components/button/)).
+- **Never in buttons,** under any circumstance. Buttons are text only ([`components/button/`](../../components/button/)).
 - **Icons aren't a text size.** They don't count toward the two text sizes.
 
 ```html

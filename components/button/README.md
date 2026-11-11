@@ -45,7 +45,7 @@ Part.
 5. **SemiBold (600)**, the same weight as the Figma button and every heading style in `typography/`. Not Bold, even though most creatives on the Campaigns page used Bold.
 6. **Placement:** last in the text block, aligned with the text, or top-right level with the logo. **Exception, the light card:** outside the card, centered below it, sized by the card (`.qd-book__cta`, see [`layout/`](../../primitives/layout/) "Light card layout"). Never full width ([`guidelines/`](../../guidelines/) section 11, rule 10).
 7. **Beside the logo, the same height as the logo.** Add `qd-button--beside-logo`: the height becomes the logo's height for the shape (72 or 80 px) and the text, padding and corners follow it in the same proportions. The button is never taller than the logo next to it (decided 2026-11-04).
-8. **No icons in creatives.** The button is text only in posts, ads and banners (decided 2026-11-11). The leading GitHub icon below is for web use only.
+8. **Never an icon.** The button is text only, in every use and every type, Main and Secondary (decided 2026-11-11).
 6. **One button per post.**
 
 ## Size and inner gaps
@@ -96,8 +96,6 @@ From the Figma button, at web size (XS / MD / LG = 36 / 40 / 48px tall, SemiBold
 | Secondary / Hover | none | 2px `neutral-400` | white |
 | Secondary / Focused | none | 2px `neutral-50` | white |
 | Secondary / Disabled | none | 1px `neutral-700` | white at 20% |
-
-Secondary has an optional leading icon (GitHub logo, 18 / 20 / 22px, gap 8 / 10 / 12px).
 
 ## Still open
 
