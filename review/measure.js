@@ -73,7 +73,7 @@
           if (el.classList.contains("qd-logo") || /brand-assets\/logo\//.test(info.src)) out.logos.push(info);
         }
         if (el.classList.contains("qd-button")) out.buttons.push({ rect: rect(el), cls: el.className, text: el.textContent.trim(), inBook: !!el.closest(".qd-book") });
-        if (el.classList.contains("qd-book__card")) out.books.push({ rect: rect(el) });
+        if (el.classList.contains("qd-book__card")) out.books.push({ rect: rect(el), slide: !!el.closest(".qd-book--slide") });
         if (el.tagName.toLowerCase() === "svg" && el.closest(".qd-canvas") === canvas && !el.closest("svg:not(:scope)")) {
           // Every inline SVG that isn't inside another one: icons should be svg.qd-icon (brand-assets/icons/).
           var s2 = getComputedStyle(el), shapes = el.querySelectorAll("path, circle, rect, line, polyline, polygon, ellipse");

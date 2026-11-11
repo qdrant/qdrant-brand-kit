@@ -236,7 +236,8 @@ def check_one(m, rules):
         if shape == "ultrawide":
             biss.append("no light card on ultrawide")
         ratio = bk["w"] / bk["h"]
-        want_ratio = 1.25 if wide else 794.4 / 979.2
+        slide = wide and m["books"][0].get("slide")
+        want_ratio = (1.6 if slide else 1.25) if wide else 794.4 / 979.2  # .qd-book--slide is 16:10
         if abs(ratio - want_ratio) > 0.02:
             biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
         Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
