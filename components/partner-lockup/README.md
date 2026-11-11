@@ -69,7 +69,7 @@ The plus and divider take the text color: white on dark and on patterns, dark on
 
 ## In progress
 
-- **Calm pattern behind a centered lockup** (2026-11-04, not decided yet): a centered lockup needs a calm area behind it. Dense pattern detail showing through the gaps of a partner symbol fails (e.g. Hexagon-A behind Microsoft's squares); sparse Hexagon-C works best, Burst-A works as a focal point. Proposed: if the busy part lands behind the lockup, switch to another approved preset, never change a preset. Waiting for Vanesa's OK.
+- **Calm pattern behind a centered lockup** (2026-11-04, not decided yet): a centered lockup needs a calm area behind it. Dense pattern detail showing through the gaps of a partner symbol fails (e.g. the former Hexagon-A behind Microsoft's squares; that preset was removed on 2026-11-11); sparse Hexagon-C works best, Burst-A works as a focal point. Proposed: if the busy part lands behind the lockup, switch to another approved preset, never change a preset. Waiting for Vanesa's OK.
 
 ## Approved by / date
 

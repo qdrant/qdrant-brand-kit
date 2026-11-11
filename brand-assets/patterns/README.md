@@ -147,7 +147,6 @@ python3 -m http.server 5190
 | Mesh-Refracted-Pattern-C | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50609) | Horizontal bands: dispersion 56%, R 16%, angle 90° |
 | Mesh-Refracted-Pattern-D | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50612) | Dispersion 88%, X 40%, R 16%, angle 144° |
 | Mesh-Sliced-Pattern-A | Any library image | [Frame 20713:50540](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50540) | Approved slice shift (tuned by eye) |
-| Generative-Hexagon-Pattern-A | Dark violet | Pattern Studio export | Hexagon grid over a noisy diagonal gradient. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Hexagon-Pattern-B | Red | Pattern Studio export | Small outlined hexagons scattered on a 56 px grid, colored top to bottom. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Hexagon-Pattern-C | Dark violet, Medium violet | Pattern Studio export | Like Hexagon-B, colored from the center out. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Burst-Pattern-A | Dark violet, Medium violet, Light violet, Red | Pattern Studio export | 1,100 short lines bursting out from the center. Pixel-identical to the tool at 1620 × 1080 (Medium violet within 2/255: the tool's #090E1A isn't a token, so it uses neutral.950) |
