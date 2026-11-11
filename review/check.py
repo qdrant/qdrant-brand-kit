@@ -283,12 +283,12 @@ def check_one(m, rules):
             beside = r["y"] < lr["y"] + lr["h"] and lr["y"] < r["y"] + r["h"]
             if beside and abs(r["h"] - lr["h"]) > 1.5:
                 bissues.append(f"beside the logo but {r['h']:.0f} px tall vs logo {lr['h']:.0f}")
-    add("Button", not bissues, "; ".join(bissues) or (f"{len(m['buttons'])} button(s) OK" if m["buttons"] else "no button"),
+    add("Button", (not bissues) if m["buttons"] else "n/a", "; ".join(bissues) or (f"{len(m['buttons'])} button(s) OK" if m["buttons"] else "no button"),
         "guidelines §11 rule 10, button README")
 
     bad_cards = [f"{c['rect']['w']:.0f}×{c['rect']['h']:.0f}" for c in m["cards"]
                  if abs(c["rect"]["w"] / c["rect"]["h"] - 5 / 7) > 0.02]
-    add("Headshot cards 5:7", not bad_cards, "; ".join(bad_cards) or (f"{len(m['cards'])} card(s)" if m["cards"] else "no cards"),
+    add("Headshot cards 5:7", (not bad_cards) if m["cards"] else "n/a", "; ".join(bad_cards) or (f"{len(m['cards'])} card(s)" if m["cards"] else "no cards"),
         "headshot-card README")
     roles = [t for t in texts if t["role"] == "speaker-role"]
     if roles and m["canvas"].get("theme") != "light":
@@ -394,7 +394,7 @@ def main():
             r = next((x for x in all_res[n] if x["check"] == c), None)
             if not r:
                 row.append("–"); continue
-            mark = {"pass": "✅", "fail": "❌"}.get(r["result"], "👀")
+            mark = {"pass": "✅", "fail": "❌", "n/a": "–"}.get(r["result"], "👀")
             fails += r["result"] == "fail"
             row.append(mark)
         lines.append(f"| {c} | " + " | ".join(row) + " |")
@@ -403,7 +403,7 @@ def main():
     for n in names:
         lines.append(f"\n**{n}**")
         for r in all_res[n]:
-            if r["result"] != "pass":
+            if r["result"] not in ("pass", "n/a"):
                 lines.append(f"- {r['check']} ({r['result']}): {r['detail']}  _[{r['rule']}]_")
     lines.append("\n## Look at it yourself\n")
     lines += [f"- [ ] {x}" for x in LOOK]

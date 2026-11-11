@@ -18,6 +18,7 @@ The page gets ?w=W&h=H. primitives/layout/canvas.js reads them, so the shape is 
 whatever size Chrome gives the window. Mechanics only: no brand values live in this script.
 Needs Google Chrome and Pillow (pip install pillow).
 """
+import urllib.parse
 import argparse, functools, http.server, json, os, re, socketserver, subprocess, sys, tempfile, threading
 
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
@@ -42,7 +43,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         pass
 
     def translate_path(self, path):
-        p = path.split("?", 1)[0].split("#", 1)[0]
+        p = urllib.parse.unquote(path.split("?", 1)[0].split("#", 1)[0])  # e.g. MonaSansVF%5Bwdth...%5D.ttf
         for prefix, root in (("/repo/", REPO), ("/review/", TOOLS)):
             if p.startswith(prefix):
                 return os.path.join(root, p[len(prefix):])
@@ -84,6 +85,7 @@ def main():
     ap.add_argument("--sizes", default="1080x1080,1080x1350,1080x1920")
     ap.add_argument("--out", required=True)
     ap.add_argument("--name", default=None)
+    ap.add_argument("--params", default="", help="extra query parameters for the page, e.g. 'alt=2&photo=b'")
     ap.add_argument("--root", default=None, help="folder served at / (default: the page's folder). "
                     "Use it when the page loads files from a parent folder, e.g. ../inputs/photo.png")
     a = ap.parse_args()
@@ -94,6 +96,8 @@ def main():
     if not os.path.exists(CHROME):
         sys.exit("Google Chrome not found at " + CHROME)
     page = os.path.abspath(a.page)
+    if not os.path.isfile(page):
+        sys.exit("Page not found: " + page)
     name = a.name or os.path.splitext(os.path.basename(page))[0]
     os.makedirs(a.out, exist_ok=True)
     root = os.path.abspath(a.root) if a.root else os.path.dirname(page)
@@ -106,7 +110,7 @@ def main():
     for size in a.sizes.split(","):
         w, h = (int(x) for x in size.lower().split("x"))
         shape = shape_for(w, h)
-        url = f"http://127.0.0.1:{port}/{rel}?w={w}&h={h}"
+        url = f"http://127.0.0.1:{port}/{rel}?w={w}&h={h}" + ("&" + a.params.lstrip("&?") if a.params else "")
         png = os.path.join(a.out, f"{name}-{shape}.png")
         with tempfile.TemporaryDirectory() as tmp:
             raw = os.path.join(tmp, "raw.png")

@@ -2,10 +2,12 @@
 """Contact sheet: every render in one labelled PNG.
 
 Usage:
-  python3 review/sheet.py OUT_DIR [--out OUT_DIR/contact-sheet.png] [--width 2400]
+  python3 review/sheet.py OUT_DIR [--out OUT_DIR/contact-sheet.png] [--width 2400] [--label alt-1="Comet, imagery" ...]
 
 Rows are the names (alt-1, alt-2, …), columns the shapes, in the order
-ultrawide, wide, square, portrait, story. Labels use the repo's Mona Sans. Needs Pillow.
+ultrawide, wide, square, portrait, story. An option of a shape (<name>-<shape>-b.png)
+gets its own column next to that shape. --label replaces a row's name with your text.
+Labels use the repo's Mona Sans. Needs Pillow.
 """
 import argparse, glob, os, re
 from PIL import Image, ImageDraw, ImageFont
@@ -19,18 +21,22 @@ def main():
     ap.add_argument("dir")
     ap.add_argument("--out", default=None)
     ap.add_argument("--width", type=int, default=2400)
+    ap.add_argument("--label", action="append", default=[], help='row label, e.g. alt-1="Comet, imagery"')
     a = ap.parse_args()
     found = {}
     for f in glob.glob(os.path.join(a.dir, "*.png")):
-        m = re.match(r"(.+)-(%s)\.png$" % "|".join(ORDER), os.path.basename(f))
+        m = re.match(r"(.+)-(%s)(-[a-z0-9]+)?\.png$" % "|".join(ORDER), os.path.basename(f))
         if m:
-            found.setdefault(m.group(1), {})[m.group(2)] = f
+            found.setdefault(m.group(1), {})[m.group(2) + (m.group(3) or "")] = f
     if not found:
         raise SystemExit("No <name>-<shape>.png files in " + a.dir)
     rows = sorted(found)
-    cols = [s for s in ORDER if any(s in found[r] for r in rows)]
+    keys = {k for r in rows for k in found[r]}
+    cols = sorted(keys, key=lambda k: (ORDER.index(k.split("-")[0]), k))
+    labels = dict(x.split("=", 1) for x in a.label)
     font = lambda n: ImageFont.truetype(os.path.join(REPO, "primitives/typography/fonts/MonaSans-SemiBold.ttf"), n)
-    pad, label_w, head_h = 24, 220, 60
+    pad, head_h = 24, 60
+    label_w = max(220, max(int(font(28).getlength(labels.get(r, r))) for r in rows) + 2 * pad)
     cell_w = (a.width - label_w - pad * (len(cols) + 1)) // len(cols)
     def scaled(f):
         im = Image.open(f).convert("RGB")
@@ -43,7 +49,7 @@ def main():
         d.text((label_w + pad + j * (cell_w + pad), 18), c, fill=(20, 22, 30), font=font(28))
     y = head_h
     for r, h in zip(rows, row_h):
-        d.text((pad, y + 8), r, fill=(20, 22, 30), font=font(28))
+        d.text((pad, y + 8), labels.get(r, r), fill=(20, 22, 30), font=font(28))
         for j, c in enumerate(cols):
             if c in imgs[r]:
                 sheet.paste(imgs[r][c], (label_w + pad + j * (cell_w + pad), y))

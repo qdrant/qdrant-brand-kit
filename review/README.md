@@ -11,7 +11,7 @@ For generated images, also use the image checklist in [`brand-assets/imagery/gui
 | `render.py` | Opens a page in headless Chrome at each size, saves `<name>-<shape>.png` (exactly W×H), a `.bg.png` with the text hidden (for contrast), and `<name>-<shape>.json` with the measurements |
 | `measure.js` | Added to the page by `render.py`. Records positions, sizes, fonts, colors and files. No rules |
 | `check.py` | Runs the checks from [`primitives/layout/checks.md`](../primitives/layout/checks.md) and the type, logo, button and headshot rules on the measurements. Writes a table and lists what to look at by eye |
-| `sheet.py` | Puts every render in one labelled `contact-sheet.png`: rows are names, columns are shapes |
+| `sheet.py` | Puts every render in one labelled `contact-sheet.png`: rows are names, columns are shapes. An option of a shape (`<name>-<shape>-b.png`) gets its own column; `--label name="text"` replaces a row's name |
 
 Needs Google Chrome and Python 3 with Pillow (`pip install pillow`). Nothing else is installed.
 
@@ -20,7 +20,8 @@ Needs Google Chrome and Python 3 with Pillow (`pip install pillow`). Nothing els
 ```bash
 python3 review/render.py my-ad.html --out out/ --name alt-1 --sizes 1080x1080,1080x1350,1080x1920
 python3 review/check.py "out/*.json" --md out/report.md
-python3 review/sheet.py out/
+python3 review/sheet.py out/ --label alt-1="Comet, imagery"
+python3 review/render.py my-ad.html --out out/ --name alt-2 --params "photo=b"   # extra query parameters for the page
 ```
 
 Write the page like this:
