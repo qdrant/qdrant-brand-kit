@@ -94,7 +94,7 @@ Qbot is one hero (section 5). It works on **any** pattern, in any family or colo
 - **Must: text first, Qbot below.** The logo, title, supporting line and button sit at the top; Qbot fills the space under them. Never put Qbot between two text blocks. (An exception to section 11 rule 7, like the pattern mask.)
 - **Suggest:** bottom center, or toward the bottom-right corner.
 - **Must: no large empty band above Qbot.** If Qbot sits at the bottom with a lot of room over its head, make it bigger or show more of the body.
-- **Wide and ultra-wide:** the text block takes half the grid on the left (6 of 12 columns); Qbot fills the right half, anchored to the bottom.
+- **Wide and ultra-wide:** the text block takes half the grid on the left (6 of 12 columns); Qbot fills the right half, anchored to the bottom. The button goes last in the text block, after the supporting text, not beside the logo (section 11, rule 10).
 - **Pattern mask:** Qbot stands on the full-strength part of the pattern. Its head may rise into the faded part, as long as it touches no text, logo or button.
 
 ### How big
@@ -185,6 +185,8 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 10. **Must: the button goes in one of two places,** at its own size, never full width ([`components/button/`](../components/button/)):
    - last in the text block, aligned with the text; or
    - top-right, level with the logo and **the same height as the logo** (never taller), when there isn't room at the bottom or the visual needs it, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635).
+
+   **Must: the button always sits in a corner, never in the middle of the layout.** Top-right beside the logo only when the text block spans the full width, so the button lands on the right margin. When the text block takes only part of the width (e.g. wide and ultra-wide with Qbot or a visual in the right half), the button goes **last in the text block, after the supporting text**, so logo, title, supporting text and button read as one vertical, left-aligned column (decided 2026-11-11).
 11. **Ask: if the content doesn't fit, ask.** If it can't fit the size without breaking a rule, ask the person to cut it. Never shrink text below the type scale.
 12. **Must: icons follow [`brand-assets/icons/`](../brand-assets/icons/).** Lucide only, outline, one color: a 400 on dark, a 500 on light, 3:1 or more. Next to supporting text (mostly the date / time / place row), the same height as that text, a `tight` gap away. Never in buttons, under any circumstance. Icons don't count as a text size (decided 2026-11-11).
 
