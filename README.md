@@ -28,6 +28,7 @@ Brand materials that components use.
 | Folder | Status | What it is |
 | --- | --- | --- |
 | [`brand-assets/logo/`](brand-assets/logo/) | V1 | The Qdrant logo and brandmark as SVG from Figma, which version on which background, size per shape, clear space and placement. |
+| [`brand-assets/icons/`](brand-assets/icons/) | V1 | Lucide icons: rules only, no files. Style, sizes, stroke, colors per background, where icons go in creatives. |
 | [`brand-assets/patterns/`](brand-assets/patterns/) | V1, ready to plug in | Brand background and generative patterns at any size and shape, drawn from color tokens. |
 | [`brand-assets/imagery/`](brand-assets/imagery/) | Copied from Design Lab, live there | Generated images in a Qdrant style: rules, channel sizes, review checklist and the Default moodboard references. Plus how to prepare speaker headshots. |
 | [`brand-assets/mascot/`](brand-assets/mascot/) | Handoff, untested on Sunburst | Qbot in 3D (main) and 2D, with approved poses, prompts and scripts for new poses as transparent PNGs. |

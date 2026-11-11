@@ -10,7 +10,7 @@ This repo is the Qdrant marketing brand system: the rules and materials for **cr
    - [`primitives/typography/README.md`](primitives/typography/README.md), "Text in creatives": the title scale and the one supporting size. Classes `.qd-title` (`--medium`, `--long`) and `.qd-supporting`.
    - [`primitives/layout/README.md`](primitives/layout/README.md): shapes, margins, grid, gap roles, Box, and "Steps for an agent".
    - [`primitives/layout/checks.md`](primitives/layout/checks.md): what every creative must pass.
-   - Then **only** what you use: [`brand-assets/logo/`](brand-assets/logo/), [`patterns/`](brand-assets/patterns/), [`imagery/`](brand-assets/imagery/) (incl. `headshots/`), [`mascot/`](brand-assets/mascot/), and the parts in [`components/`](components/) (button, headshot-card, headshot-circle, partner-lockup).
+   - Then **only** what you use: [`brand-assets/logo/`](brand-assets/logo/), [`icons/`](brand-assets/icons/), [`patterns/`](brand-assets/patterns/), [`imagery/`](brand-assets/imagery/) (incl. `headshots/`), [`mascot/`](brand-assets/mascot/), and the parts in [`components/`](components/) (button, headshot-card, headshot-circle, partner-lockup).
 3. **Build** in HTML/CSS with the repo's CSS and classes. Never redraw the logo, a part or a pattern.
 4. **Review it** with [`review/`](review/): `render.py`, `check.py`, `sheet.py`. Fix every fail, then look at each render yourself (the checker lists what it can't judge).
 5. **Show** the contact sheet and say what you'd ask or change.
@@ -22,6 +22,7 @@ This repo is the Qdrant marketing brand system: the rules and materials for **cr
 - Use Bold for titles, right-align text, mix alignments, or use more than two text sizes outside the headshot parts.
 - Put Qbot with headshots or with a generated image, or use two heroes.
 - Put Qbot between text blocks or over text, the logo or the button, or cut its face ([`guidelines/`](guidelines/) section 6). Use `.qd-mascot--glow` from `brand-assets/mascot/3d/mascot.css`, never your own glow.
+- Use an icon that isn't from Lucide, or put an icon in a button ([`brand-assets/icons/`](brand-assets/icons/)).
 - Use red as a background without the person's yes.
 - Spend money (Design Lab or image generations) without asking first.
 - Save working files, renders or photos inside this repo. Work in a folder outside it, with absolute paths.

@@ -5,7 +5,8 @@
   // ?qd-bg=1: hide all text, so render.py can photograph what sits behind it (contrast check).
   if (new URLSearchParams(location.search).get("qd-bg")) {
     var st = document.createElement("style");
-    st.textContent = "*{color:transparent!important;text-shadow:none!important;-webkit-text-stroke:0!important}";
+    st.textContent = "*{color:transparent!important;text-shadow:none!important;-webkit-text-stroke:0!important}" +
+      "svg.qd-icon{visibility:hidden!important}";
     document.head.appendChild(st);
   }
   function rect(el) {
@@ -42,7 +43,7 @@
   }
   function run() {
     var canvas = document.querySelector(".qd-canvas");
-    var out = { canvas: null, texts: [], images: [], logos: [], buttons: [], cards: [], circles: [], blocks: [], fonts: {} };
+    var out = { canvas: null, texts: [], images: [], logos: [], buttons: [], cards: [], circles: [], icons: [], blocks: [], fonts: {} };
     if (canvas) {
       out.canvas = rect(canvas);
       out.canvas.shape = canvas.dataset.shape || null;
@@ -71,6 +72,27 @@
           if (el.classList.contains("qd-logo") || /brand-assets\/logo\//.test(info.src)) out.logos.push(info);
         }
         if (el.classList.contains("qd-button")) out.buttons.push({ rect: rect(el), cls: el.className, text: el.textContent.trim() });
+        if (el.tagName.toLowerCase() === "svg" && el.closest(".qd-canvas") === canvas && !el.closest("svg:not(:scope)")) {
+          // Every inline SVG that isn't inside another one: icons should be svg.qd-icon (brand-assets/icons/).
+          var s2 = getComputedStyle(el), shapes = el.querySelectorAll("path, circle, rect, line, polyline, polygon, ellipse");
+          var filled = Array.prototype.some.call(shapes, function (p) {
+            var f = getComputedStyle(p).fill; return f && f !== "none" && !/rgba\(.*,\s*0\)$/.test(f);
+          });
+          var nonScaling = Array.prototype.some.call(shapes, function (p) { return getComputedStyle(p).vectorEffect === "non-scaling-stroke"; });
+          var row = el.parentElement, near = null;
+          if (row) Array.prototype.forEach.call(row.querySelectorAll("*"), function (t) {
+            if (near || t === el || el.contains(t)) return;
+            if (Array.prototype.some.call(t.childNodes, function (n) { return n.nodeType === 3 && n.textContent.trim(); }))
+              near = parseFloat(getComputedStyle(t).fontSize);
+          });
+          out.icons.push({
+            rect: rect(el), cls: el.getAttribute("class") || "", isIcon: el.classList.contains("qd-icon"),
+            viewBox: el.getAttribute("viewBox"), strokeWidth: el.getAttribute("stroke-width"),
+            stroke: s2.stroke, color: s2.color, filled: filled, nonScaling: nonScaling,
+            transform: s2.transform, filter: s2.filter, boxShadow: s2.boxShadow,
+            inButton: !!el.closest(".qd-button"), textSize: near
+          });
+        }
         if (el.classList.contains("qd-headshot-card__photo")) out.cards.push({ rect: rect(el) });
         if (el.classList.contains("qd-headshot-circle__photo")) out.circles.push({ rect: rect(el) });
       });

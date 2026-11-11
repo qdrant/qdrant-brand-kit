@@ -23,6 +23,14 @@ def px(v):
     return float(str(v).replace("px", ""))
 
 
+def icon_colors():
+    """Allowed icon colors from the repo: every 400 for dark, every 500 for light (brand-assets/icons)."""
+    css = open(os.path.join(REPO, "primitives/colors/colors.css")).read()
+    found = re.findall(r"--qd-color-([a-z-]+)-(400|500):\s*#([0-9A-Fa-f]{6})", css)
+    pick = lambda step: {f"{n}-{s}": tuple(int(h[i:i + 2], 16) for i in (0, 2, 4)) for n, s, h in found if s == step}
+    return {"dark": pick("400"), "light": pick("500")}
+
+
 def load_rules():
     lay = json.load(open(os.path.join(REPO, "primitives/layout/layout.tokens.json")))["canvas"]["shape"]
     shapes = {}
@@ -256,6 +264,39 @@ def check_one(m, rules):
                 ov.append(f"image {os.path.basename(img['src'])} × \"{t['text'][:12]}\"")
     add("No overlaps", not ov, "none" if not ov else "; ".join(ov[:4]), "checks.md, No overlaps")
 
+    if m.get("icons"):
+        allowed = icon_colors()[(m["canvas"] or {}).get("theme") == "light" and "light" or "dark"]
+        probs = []
+        for ic in m["icons"]:
+            r = ic["rect"]
+            where = f"icon at {round(r['x'])},{round(r['y'])}"
+            if not ic["isIcon"]:
+                probs.append(f"{where}: an SVG without .qd-icon")
+            if ic["inButton"]:
+                probs.append(f"{where}: in a button")
+            if abs(r["w"] - r["h"]) > 1:
+                probs.append(f"{where}: stretched ({r['w']:.0f}×{r['h']:.0f})")
+            if ic["viewBox"] != "0 0 24 24" or ic["filled"]:
+                probs.append(f"{where}: not Lucide's outline (viewBox {ic['viewBox']}, filled={ic['filled']})")
+            if ic["nonScaling"]:
+                probs.append(f"{where}: stroke doesn't scale")
+            if ic["transform"] not in ("none", "") or ic["filter"] not in ("none", "") or ic["boxShadow"] not in ("none", ""):
+                probs.append(f"{where}: rotated or with effects")
+            if ic["textSize"] and abs(r["h"] - ic["textSize"]) > 1.5:
+                probs.append(f"{where}: {r['h']:.0f} px, its text is {ic['textSize']:.0f} px")
+            col = rgb(ic["stroke"] if ic["stroke"].startswith("rgb") else ic["color"])
+            name = next((k for k, v in allowed.items() if v == col), None)
+            if not name:
+                probs.append(f"{where}: color rgb{col} isn't an allowed {'500' if allowed is icon_colors()['light'] else '400'}")
+            if bg is not None:
+                box = (max(0, int(r["x"])), max(0, int(r["y"])), min(W, int(r["x"] + r["w"])), min(H, int(r["y"] + r["h"])))
+                if box[2] > box[0] and box[3] > box[1]:
+                    cs_ = sorted(contrast(col, p) for p in list(bg.crop(box).getdata())[::5])
+                    c5 = cs_[int(len(cs_) * 0.05)]
+                    if c5 < 3:
+                        probs.append(f"{where}: contrast {c5:.2f} < 3")
+        add("Icons", not probs, "; ".join(probs[:4]) or f"{len(m['icons'])} icon(s) OK", "brand-assets/icons README")
+
     missing = [os.path.basename(i["src"]) for i in m["images"] if not i["loaded"]]
     fonts = [f for f in m.get("fontsUsed", []) if f in m["fonts"] and not m["fonts"][f]]
     add("Images and fonts load", not missing and not fonts,
@@ -268,7 +309,8 @@ LOOK = ["Hierarchy: one clear title, calm supporting text, nothing competing",
         "Crops: heads and shoulders as in the headshot rules, nothing cut badly",
         "Text sits on a calm area of any pattern",
         "Right logo version for the background (Dark / White / Light)",
-        "One hero; no eyebrow or series (until the badge); no made-up content"]
+        "One hero; no eyebrow or series (until the badge); no made-up content",
+        "Icons are real Lucide icons, not redrawn (no files in the repo to compare against)"]
 
 
 def main():

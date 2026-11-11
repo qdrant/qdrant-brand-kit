@@ -177,6 +177,7 @@ There are no fixed post templates. An agent lays out each creative itself, from 
    - last in the text block, aligned with the text; or
    - top-right, level with the logo and **the same height as the logo** (never taller), when there isn't room at the bottom or the visual needs it, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635).
 11. **Ask: if the content doesn't fit, ask.** If it can't fit the size without breaking a rule, ask the person to cut it. Never shrink text below the type scale.
+12. **Must: icons follow [`brand-assets/icons/`](../brand-assets/icons/).** Lucide only, outline, one color: a 400 on dark, a 500 on light, 3:1 or more. Next to supporting text (mostly the date / time / place row), the same height as that text, a `tight` gap away. Never in buttons. Icons don't count as a text size (decided 2026-11-11).
 
 ## Changing these rules
 

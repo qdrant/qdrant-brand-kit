@@ -14,7 +14,7 @@ The Qdrant palette as tokens. Values come from the qdrant-brand skill ([skills-i
 | `primary` (Qdrant red) | 500 `#DC244C` | CTAs, highlights, the logo. 600 hover, 700 pressed |
 | `secondary` (violet) | 500 `#6047FF` | Charts, secondary CTAs, code highlights |
 | `neutral` | 950 `#0B0F19` | Backgrounds, surfaces, text, borders |
-| Extended (teal, light blue, orange, purple, green, cyan, indigo, yellow, red) | 500 | Charts and data visualization only |
+| Extended (teal, light blue, orange, purple, green, cyan, indigo, yellow, red) | 500 | Charts and data visualization only. Exception: icons on light backgrounds |
 | `mascotGlow` | `#976BFF` | The mascot's glow only |
 | `gradient.brand` | `#DC244C` → `#6047FF`, 135° | Hero moments only |
 | `gradient.headshot` | `secondary-900` → `secondary-400`, both at 70%, 204° | Only behind headshots ([`headshot-card`](../../components/headshot-card/), [`headshot-circle`](../../components/headshot-circle/)) |
@@ -46,3 +46,4 @@ Use `dataviz.1` to `dataviz.8` in order: red, violet, teal, light blue, orange, 
 - **Two gradients, never on text.** `gradient.brand` for hero moments, `gradient.headshot` only behind headshot cutouts. No others, except the subtle `primary-500` → `primary-700` fill inside the [button](../../components/button/), which is part of that component.
 - **Contrast:** text on dark uses `text.primary` or `text.secondary`. Never light gray on medium gray. Design Lab checks WCAG AA: 4.5 for body text, 3.0 for text from 24 px.
 - **Charts:** never rely on color alone to carry meaning.
+- **Icons:** a 400 on dark backgrounds, a 500 on light ones, at 3:1 or more. This includes the extended palette on light backgrounds, the one exception to "charts only" ([`brand-assets/icons/`](../../brand-assets/icons/), decided 2026-11-11).
