@@ -111,6 +111,7 @@ for (const id of ids) {
     }
     if (layer.recipe !== "generative-pattern") errors.push(`${where}: layer ${id} should be a generative pattern`);
     if (layer.settings?.background) errors.push(`${where}: layer ${id} should have no background`);
+    if ((layer.colorways?.length ?? 0) !== (p.colorways?.length ?? 0)) errors.push(`${where}: layer ${id} needs one colorway per pattern colorway (${p.colorways?.length}), in the same order`);
     if (!layer.settings?.tones?.[layer.settings?.tone]) errors.push(`${where}: layer ${id} tone curve "${layer.settings?.tone}" isn't in settings.tones`);
     for (const look of layer.colorways ?? []) {
       for (const ref of [...(look.colors ?? []), ...(look.backdrop ?? []).map((s) => s?.token ?? s)]) {

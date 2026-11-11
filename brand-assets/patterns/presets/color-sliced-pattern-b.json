@@ -2,12 +2,18 @@
   "name": "Color-Sliced-Pattern-B",
   "recipe": "color-sliced-pattern",
   "extends": "shared",
-  "$description": "Color-Sliced-Pattern-A's red slices with a layer of QDRANT letters on top.",
+  "$description": "Color-Sliced-Pattern-A's slices with a layer of QDRANT letters on top, in matching colors: red letters on the red slices, violet on the violet.",
   "colorways": [
     {
       "name": "Neutral 950 → Primary 500",
       "from": "color.neutral.950",
       "to": "color.primary.500",
+      "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
+    },
+    {
+      "name": "Neutral 950 → Secondary 500",
+      "from": "color.neutral.950",
+      "to": "color.secondary.500",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
     }
   ],

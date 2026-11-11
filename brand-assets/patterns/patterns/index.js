@@ -74,10 +74,12 @@ export function choicesFor(preset, tokens) {
 // { pass, offBrand: % of off-palette pixels }.
 export function renderPattern(canvas, tokens, preset, options = {}) {
   const result = renderBase(canvas, tokens, preset, options);
-  // Layers (transparent generative patterns) are drawn on top, in order.
+  // Layers (transparent generative patterns) are drawn on top, in order. A layer's
+  // colorways pair with the pattern's by position: colorway 1 of the pattern draws
+  // colorway 1 of the layer.
   for (const layer of preset.layers ?? []) {
     const top = document.createElement("canvas");
-    renderBase(top, tokens, layer, { width: canvas.width, height: canvas.height, phase: options.phase });
+    renderBase(top, tokens, layer, { width: canvas.width, height: canvas.height, phase: options.phase, colorway: options.colorway });
     canvas.getContext("2d").drawImage(top, 0, 0);
   }
   return result;

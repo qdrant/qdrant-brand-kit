@@ -2,7 +2,7 @@
   "name": "Generative-Glyph-Layer-A",
   "recipe": "generative-pattern",
   "extends": "generative-pattern.shared",
-  "$description": "A transparent layer of QDRANT letters, drawn on top of another pattern (see \"layers\" in Color-Sliced-Pattern-B). Not a pattern on its own, so it's not in index.json.",
+  "$description": "A transparent layer of QDRANT letters, drawn on top of another pattern (see \"layers\" in Color-Sliced-Pattern-B). Its colorways pair with the pattern's by position. Not a pattern on its own, so it's not in index.json.",
   "source": "Pattern Studio export, 1920 x 1080, transparent background",
   "colorways": [
     {
@@ -11,6 +11,15 @@
         "{color.primary.800}",
         "{color.primary.500}",
         "{color.primary.300}"
+      ],
+      "backdrop": null
+    },
+    {
+      "name": "Violet",
+      "colors": [
+        "{color.secondary.800}",
+        "{color.secondary.500}",
+        "{color.secondary.200}"
       ],
       "backdrop": null
     }
@@ -38,11 +47,12 @@
       "threshold": 0,
       "density": "stochastic",
       "element": "ascii",
-      "scale": 0.52,
+      "scale": 0.55,
       "glyphs": "word",
       "ramp": "QDRANT",
       "colorMap": "random",
-      "backdrop": "none"
+      "backdrop": "none",
+      "noiseScale": 4.5
     }
   }
 }

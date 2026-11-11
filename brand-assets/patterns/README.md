@@ -89,7 +89,7 @@ Patterns made in Pattern Studio (the `qdrant-pattern-studio` repo) are added fro
 
 At its `designSize`, the pattern is pixel-identical to the tool. At any other size, the field and the elements keep their scale by canvas area, so nothing stretches: a wider canvas shows more of the same field. `cellScaling` sets what the elements do on bigger canvases: `"canvas"` (they grow with it, like every other pattern) or `"fixed"` (they keep their px size, so there are more of them). `generative-scaling.html` shows both side by side.
 
-**Layers:** a preset can list `"layers"`: transparent generative presets drawn on top of it, in order. A layer has `"background": null` and a colorway with `"backdrop": null`, and isn't in `presets/index.json`, because it isn't a pattern on its own. Color-Sliced-Pattern-B uses `generative-glyph-layer-a`. Adding a layer to a pattern is an effect change, so it gets a new letter.
+**Layers:** a preset can list `"layers"`: transparent generative presets drawn on top of it, in order. A layer has `"background": null`, one colorway per pattern colorway in the same order, each with `"backdrop": null`, and isn't in `presets/index.json`, because it isn't a pattern on its own. Color-Sliced-Pattern-B uses `generative-glyph-layer-a`. Adding a layer to a pattern is an effect change, so it gets a new letter.
 
 **Letters need fonts:** patterns that draw letters (Glyph) use Geist Mono. Call `await loadPatternFonts(patterns)` once before rendering, or the browser draws them in a fallback font.
 
@@ -141,7 +141,7 @@ python3 -m http.server 5190
 | --- | --- | --- | --- |
 | Color-Refracted-Pattern-A | Any family 500 → 300, or Primary 100 → Secondary 400 | [Luma-Background-10](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546) | Refraction tuned by eye against Figma |
 | Color-Sliced-Pattern-A | Neutral 950 → Primary 500, or Neutral 950 → Secondary 500 | [Frame 20943:36252](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252) | Exact port of Figma's Slice shift shader. No noise |
-| Color-Sliced-Pattern-B | Neutral 950 → Primary 500 (red only) | Pattern Studio export (layer) | Color-Sliced-A red with a layer of QDRANT letters on top (`generative-glyph-layer-a`). The layer matches the tool pixel for pixel at 1920 × 1080. Needs `loadPatternFonts` first |
+| Color-Sliced-Pattern-B | Red (primary letters on Neutral 950 → Primary 500), Violet (secondary letters on Neutral 950 → Secondary 500) | Pattern Studio export (layer) | Color-Sliced-A with a layer of QDRANT letters on top (`generative-glyph-layer-a`: 24 px grid, letters 0.55, noise 4.5). The layer matches the tool pixel for pixel at 1920 × 1080. Needs `loadPatternFonts` first |
 | Mesh-Refracted-Pattern-A | Any library image | [Luma-Background-9](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574) | Smoothness 72%, angle -120° |
 | Mesh-Refracted-Pattern-B | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50585) | Smoothness 88%, angle -48° |
 | Mesh-Refracted-Pattern-C | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50609) | Horizontal bands: dispersion 56%, R 16%, angle 90° |
