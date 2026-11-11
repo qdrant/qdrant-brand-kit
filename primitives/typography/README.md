@@ -24,7 +24,7 @@ Every style comes in Regular (400), Medium (500), SemiBold (600) and Bold (700) 
 
 - **Titles and headings: SemiBold.** Never Bold, including Display 1 and 2.
 - **Body text: Regular,** with SemiBold for key terms.
-- Medium and Bold exist in the styles but aren't part of the brand rules yet.
+- Medium and Bold exist in the styles but aren't part of the brand rules yet. One exception: speaker names in [`headshot-circle`](../../components/headshot-circle/) use **Medium**, as in the Figma agenda slot (decided 2026-11-11).
 
 The default weight is in each token; `$extensions.qdrant.weights` lists the weights Figma has for that style.
 
@@ -79,7 +79,7 @@ Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabN
 | Title, 11 words or more | same | 64 | 88 | 72 |
 | Supporting (body, date, time, place) | Mona Sans Regular, line height 1.2, letter spacing -0.5 | 36 | 40 | 40 |
 
-- **Mona Sans is always Title Case, never all caps.** **Mona Sans Condensed is always all caps**, and only for special occasions, when the person asks for it (`social-event-title`, `display-condensed-*`).
+- **Mona Sans titles are always Title Case, never all caps.** Supporting text (date, place, body sentences) stays in normal sentence case (decided 2026-11-11). **Mona Sans Condensed is always all caps**, and only for special occasions, when the person asks for it (`social-event-title`, `display-condensed-*`).
 - **Geist Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans.
 - **Longer titles step down** to the next size by word count, never in between and never below the 11+ size. If it still doesn't fit, ask the person to shorten it.
 - **Wide** follows the Vector Space Day banner (128 on 1920, decided 2026-11-04).

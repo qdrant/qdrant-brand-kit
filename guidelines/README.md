@@ -28,8 +28,10 @@ Before making a creative, settle these with the person. Skip a question only whe
 
 | Tone | Family | Patterns |
 | --- | --- | --- |
-| Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Refracted-Pattern-A, Color-Sliced-Pattern-A |
-| Serious / technical | Mesh and generative patterns | Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A, every Generative pattern (Hexagon, Burst, Dash, Glyph), in any colorway |
+| Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Refracted-Pattern-A, Color-Sliced-Pattern-A, Color-Sliced-Pattern-B |
+| Serious / technical | Mesh and generative patterns | Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A, every Generative pattern (Hexagon, Burst, Dash, Glyph), in any colorway, and Color-Sliced-Pattern-B |
+
+Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (decided 2026-11-11).
 
 The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patterns/).
 
@@ -62,6 +64,8 @@ Rules:
   | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask and ask |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
+
+  **When text still fails contrast on a `none` pattern** (e.g. the supporting line on the light end of Color-Refracted-Pattern-A on wide), mask it anyway: `soft-2`, or `soft-1` if `soft-2` still fails (decided 2026-11-11).
 
 - **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to the preset's strength behind the text, with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). Use `.qd-canvas--masked` and `.qd-pattern-mask--soft-1` or `--soft-2` from [`primitives/layout/`](../primitives/layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself.
 - **Must:** with the mask, the logo sits on the plain neutral, so it's the **Dark** logo on a dark creative and the **Light** logo on a light one (section 8). Without the mask it's the **White** logo on the pattern.
@@ -134,9 +138,8 @@ Every crop is editorial, never accidental.
 - **Must:** the glow is on or off per mood, as [`mascot/3d/tool/moods.json`](../brand-assets/mascot/3d/tool/moods.json) sets it (the Figma mascot component).
 - Use `.qd-mascot--glow` from [`mascot/3d/mascot.css`](../brand-assets/mascot/3d/mascot.css). It follows Qbot's outline and matches the Figma component. The glow barely shows on violet patterns and reads best on the plain dark background; that's expected.
 
-### In progress (2026-11-04, Vanesa continues on 2026-11-05)
+### Still open (from 2026-11-04, checked 2026-11-11)
 
-- **Wide contrast:** at 6 columns the supporting line can land on the light end of a Color-Refracted pattern and fail contrast (2.91 in the test). Not decided: shorten the line, use another pattern on wide (which breaks section 10), or accept it.
 - **How far a crop may stretch:** "no empty band" can show more body than the crop's name. No limit yet (the test capped the Peek at row 700 and the Close-up at row 800 of the 1024 source).
 - **What counts as a "large" empty band:** no threshold yet.
 - **Minimum size:** `mascot/3d/tool/mascot.yaml` has 240 px (marked "confirm with design"). Its `max_crop: 0.4` doesn't fit the Close-up and Peek crops; the crop table above replaces it once Design Lab is updated.
@@ -180,7 +183,7 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 3. **Suggest: avoid eyebrows** (the small label above the title). They make creatives look AI-generated. Don't suggest one; use one only when the person asks for it. A series or event type ("Vector Space Talks", "Webinar") will go in a badge component, still to come. Until the badge exists, leave the series out (decided 2026-11-04).
 4. **Suggest: left-aligned by default.** Centered is fine when the whole composition is symmetric and nothing sits beside the text, e.g. a title with the date and time under it, or a story with one centered hero. The agent decides.
 5. **Must: never mix alignments, never right-align.** All the text in a creative is either left-aligned or centered. Left-aligned items share the same left edge.
-6. **Must: two text sizes.** One title in Mona Sans SemiBold, Title Case, sized by its length, and one supporting size for everything else (body, date, time, place). Names and roles inside the headshot parts are the only exception. Sizes and the Geist Mono rule (one or two words only) are in [`primitives/typography/`](../primitives/typography/), "Text in creatives". Mona Sans is always Title Case; Mona Sans Condensed is always all caps and only for special occasions, when asked.
+6. **Must: two text sizes.** One title in Mona Sans SemiBold, Title Case, sized by its length, and one supporting size for everything else (body, date, time, place). Names and roles inside the headshot parts are the only exception. Sizes and the Geist Mono rule (one or two words only) are in [`primitives/typography/`](../primitives/typography/), "Text in creatives". Mona Sans titles are always Title Case (supporting text stays in sentence case); Mona Sans Condensed is always all caps and only for special occasions, when asked.
 7. **Must: spread the content, top and bottom.** The logo and title block are anchored at the top margin, the supporting line and the button at the bottom margin, and the visual (Qbot, speakers, product screen) fills the space between. Never stack everything at the top with empty space below. **Exception, the pattern mask (section 4):** all the text sits at the top on the masked part, the button goes beside the logo when the text block is full width (on wide and ultra-wide, last in the text block: rule 10), and the visual fills the space below, where the pattern is at 100% (decided 2026-11-11, replaces the Zone layout). **Exception, Qbot (section 6):** all the text, the button included, sits at the top and Qbot fills the space below (decided 2026-11-04).
 8. **Must: text blocks are at least half the grid wide:** 3 of 6 columns on square and portrait, 6 of 12 on wide, 2 of 4 on story. If the text doesn't fit beside the visual at that width, it goes above or below it. Never squeeze text into a narrow column (decided 2026-11-04).
 9. **Suggest: related things sit close, unrelated things further apart.** The `tight` gap inside a group (date + place), `group` between items in a block (title + supporting line), `section` between blocks (text vs speakers) ([`primitives/layout/`](../primitives/layout/)). Leftover space goes between the top block and the bottom block, where the visual is, never spread evenly between every line.
