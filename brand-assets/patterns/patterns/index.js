@@ -73,6 +73,17 @@ export function choicesFor(preset, tokens) {
 // another moment of the loop, for animation later). Mesh patterns return the brand check:
 // { pass, offBrand: % of off-palette pixels }.
 export function renderPattern(canvas, tokens, preset, options = {}) {
+  const result = renderBase(canvas, tokens, preset, options);
+  // Layers (transparent generative patterns) are drawn on top, in order.
+  for (const layer of preset.layers ?? []) {
+    const top = document.createElement("canvas");
+    renderBase(top, tokens, layer, { width: canvas.width, height: canvas.height, phase: options.phase });
+    canvas.getContext("2d").drawImage(top, 0, 0);
+  }
+  return result;
+}
+
+function renderBase(canvas, tokens, preset, options) {
   const recipe = recipes[preset.recipe];
   if (!recipe) throw new Error(`Unknown recipe "${preset.recipe}" in ${preset.name}`);
   const width = Math.round(options.width ?? 1080);
@@ -94,7 +105,7 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
 // from Google Fonts (as Pattern Studio's export does) and waits for them.
 const FONTS_URL = "https://fonts.googleapis.com/css2?family=Mona+Sans:wght@800&family=Geist+Mono:wght@500&display=swap";
 export async function loadPatternFonts(patterns) {
-  const needed = patterns.filter((p) => isGenerativePattern(p) && (p.settings.engine.element === "ascii" || p.settings.engine.shape === "text"));
+  const needed = patterns.flatMap((p) => [p, ...(p.layers ?? [])]).filter((p) => isGenerativePattern(p) && (p.settings.engine.element === "ascii" || p.settings.engine.shape === "text"));
   if (!needed.length) return;
   if (!document.querySelector(`link[href="${FONTS_URL}"]`)) {
     const link = Object.assign(document.createElement("link"), { rel: "stylesheet", href: FONTS_URL });

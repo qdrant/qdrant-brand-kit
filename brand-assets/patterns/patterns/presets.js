@@ -1,15 +1,18 @@
 // Loads a preset from presets/. A preset with "extends" starts from that shared file
 // (for example mesh-pattern.shared.json) and adds its own settings on top. Generative
 // presets list only the Pattern Studio settings they change, so "engine" is merged
-// key by key too.
+// key by key too. A preset with "layers" also loads those presets, drawn on top.
 
 const getJson = (url) => fetch(url).then((r) => r.json());
 
 export async function loadPreset(id, base = "presets") {
-  const preset = await getJson(`${base}/${id}.json`);
-  if (!preset.extends) return preset;
-  const { $description, ...shared } = await loadPreset(preset.extends, base);
-  return { ...shared, ...preset, settings: mergeSettings(shared.settings, preset.settings) };
+  let preset = await getJson(`${base}/${id}.json`);
+  if (preset.extends) {
+    const { $description, ...shared } = await loadPreset(preset.extends, base);
+    preset = { ...shared, ...preset, settings: mergeSettings(shared.settings, preset.settings) };
+  }
+  if (preset.layers) preset = { ...preset, layers: await Promise.all(preset.layers.map((layer) => loadPreset(layer, base))) };
+  return preset;
 }
 
 export function mergeSettings(shared = {}, own = {}) {

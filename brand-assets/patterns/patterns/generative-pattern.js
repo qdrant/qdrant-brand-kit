@@ -65,8 +65,11 @@ export function render(canvas, tokens, preset, _input, frame = makeFrame(), opti
     for (const key of PIXEL_SIZES) params[key] = s.engine[key] * scale;
   }
 
-  ctx.fillStyle = resolveToken(tokens, s.background);
-  ctx.fillRect(0, 0, width, height);
+  // A layer drawn on top of another pattern has no background.
+  if (s.background) {
+    ctx.fillStyle = resolveToken(tokens, s.background);
+    ctx.fillRect(0, 0, width, height);
+  }
   const curve = s.tones[s.tone];
   const tone = (v) => curve[Math.max(0, Math.min(curve.length - 1, Math.round(v * (curve.length - 1))))];
   const phase = options.phase ?? s.phase ?? 0;

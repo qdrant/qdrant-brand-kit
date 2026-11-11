@@ -100,6 +100,25 @@ for (const id of ids) {
     }
   }
 
+  // Layers: transparent generative presets drawn on top. Same token and tone checks.
+  for (const id of p.layers ?? []) {
+    let layer;
+    try {
+      layer = load(id);
+    } catch (e) {
+      errors.push(`${where}: layer ${e.message}`);
+      continue;
+    }
+    if (layer.recipe !== "generative-pattern") errors.push(`${where}: layer ${id} should be a generative pattern`);
+    if (layer.settings?.background) errors.push(`${where}: layer ${id} should have no background`);
+    if (!layer.settings?.tones?.[layer.settings?.tone]) errors.push(`${where}: layer ${id} tone curve "${layer.settings?.tone}" isn't in settings.tones`);
+    for (const look of layer.colorways ?? []) {
+      for (const ref of [...(look.colors ?? []), ...(look.backdrop ?? []).map((s) => s?.token ?? s)]) {
+        if (!tokenExists(ref.slice(1, -1))) errors.push(`${where}: layer ${id} token ${ref} doesn't exist`);
+      }
+    }
+  }
+
   // Effect values on the 8 grid (90° and Figma-only values like 130.68% are allowed).
   for (const [effect, keys] of [["refraction", ["smoothness", "dispersion", "r", "a"]], ["slice", ["r", "a"]]]) {
     for (const key of keys) {

@@ -1,0 +1,48 @@
+{
+  "name": "Generative-Glyph-Layer-A",
+  "recipe": "generative-pattern",
+  "extends": "generative-pattern.shared",
+  "$description": "A transparent layer of QDRANT letters, drawn on top of another pattern (see \"layers\" in Color-Sliced-Pattern-B). Not a pattern on its own, so it's not in index.json.",
+  "source": "Pattern Studio export, 1920 x 1080, transparent background",
+  "colorways": [
+    {
+      "name": "Red",
+      "colors": [
+        "{color.primary.800}",
+        "{color.primary.500}",
+        "{color.primary.300}"
+      ],
+      "backdrop": null
+    }
+  ],
+  "settings": {
+    "designSize": {
+      "width": 1920,
+      "height": 1080
+    },
+    "background": null,
+    "engine": {
+      "cell": 24,
+      "padding": 16,
+      "shape": "text",
+      "text": "",
+      "size": 0.5,
+      "softness": 0.04,
+      "noiseAmount": 0.45,
+      "blend": "mix",
+      "drift": 0.63,
+      "warp": 0.19,
+      "seed": 101,
+      "zoom": 1,
+      "rotation": 0,
+      "threshold": 0,
+      "density": "stochastic",
+      "element": "ascii",
+      "scale": 0.52,
+      "glyphs": "word",
+      "ramp": "QDRANT",
+      "colorMap": "random",
+      "backdrop": "none"
+    }
+  }
+}
