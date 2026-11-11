@@ -57,9 +57,9 @@ Rules:
   | `textMask` | Patterns | What to do |
   | --- | --- | --- |
   | `soft-1` | Generative-Dash-Pattern-A | Mask, 4% behind the text: the dashes must never cross a line of text |
-  | `soft-2` | Color-Sliced-Pattern-B, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Dark violet) | Mask, 10% behind the text: a hint of the pattern stays, so it reads as one background |
+  | `soft-2` | Color-Sliced-Pattern-B, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet, as a dark creative: white text, Dark logo, neutral 950) | Mask, 10% behind the text: a hint of the pattern stays, so it reads as one background |
   | `none` | Color-Sliced-Pattern-A, Color-Refracted-Pattern-A, Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet), Generative-Hexagon-Pattern-B, Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Light violet) | No mask: text sits straight on the pattern |
-  | not set | Every other pattern or colorway, incl. Glyph-B Light violet (in progress: a soft mask on a light creative, being tested 2026-11-11) | Not decided yet: render it with and without the mask and ask |
+  | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask and ask |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
 

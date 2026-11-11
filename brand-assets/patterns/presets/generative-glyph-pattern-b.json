@@ -6,6 +6,7 @@
   "colorways": [
     {
       "name": "Light violet",
+      "textMask": "soft-2",
       "colors": [
         "{color.neutral.50}"
       ],
