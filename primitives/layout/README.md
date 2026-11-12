@@ -31,7 +31,7 @@ Sizes in px at the reference canvas.
 | `portrait` | 0.65 up to 0.85 | 1080×1350 | 64 / 64 / 64 | 6 × 132, gutter 32 | 16 / 24 / 48 |
 | `story` | below 0.65 | 1080×1920 | 64 / 256 / 344 | 4 × 214, gutter 32 | 24 / 32 / 64 |
 
-- **Blog post hero, 2002×1122:** ratio 1.78, so it's `wide`, at 1.04× (margin 83, logo 83). Pattern or generated image, decided per post (guidelines section 1). With a partner lockup as the only content, see [`partner-lockup`](../../components/partner-lockup/).
+- **Blog post hero, 916×458:** the size on qdrant.tech (decided by Vanesa on 2026-11-12, replaces 2002×1122). Ratio 2, so it's `wide`, at 0.424× (margin 34, logo 34). Pattern or generated image, decided per post (guidelines section 1). With a partner lockup as the only content, see [`partner-lockup`](../../components/partner-lockup/).
 - **LinkedIn profile cover, 1584×396:** ratio 4, so it's `ultrawide`, at 0.528× (decided by Vanesa on 2026-11-11). LinkedIn's profile photo covers the bottom-left, so:
   - The **logo** stays top-left. Keep the **bottom-left** clear: pattern only, no text, no visual.
   - **Dark only.** No light creatives on the cover: the light version was tried and not preferred (Vanesa, 2026-11-11).
