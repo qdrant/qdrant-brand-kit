@@ -30,5 +30,5 @@ This repo is the Qdrant marketing brand system: the rules and materials for **cr
 ## Changing the repo
 
 - **Ask Vanesa before changing any rule or file**, and say what you'd change and why. Rules come with a decision date.
-- Other chats edit this folder too: commit only the files you changed, and push. If a push to `main` fails with a GitHub "Internal Server Error", push to a temporary branch, run `gh api -X PATCH repos/vanesaajdini/qdrant-mkt-brand-system/git/refs/heads/main -f sha=<sha> -F force=false`, then delete the branch.
+- Other chats edit this folder too: commit only the files you changed, and push. If a push to `main` fails with a GitHub "Internal Server Error", push to a temporary branch, run `gh api -X PATCH repos/qdrant/qdrant-brand-kit/git/refs/heads/main -f sha=<sha> -F force=false`, then delete the branch.
 - **When a rule changes, update this file in the same commit** if the change touches anything listed here.
