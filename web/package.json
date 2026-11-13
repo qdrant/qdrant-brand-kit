@@ -1,0 +1,20 @@
+{
+  "name": "@qdrant/web",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "@qdrant/design-system": "workspace:*",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  },
+  "exports": {
+    "./sections/*": "./sections/*.tsx"
+  }
+}
