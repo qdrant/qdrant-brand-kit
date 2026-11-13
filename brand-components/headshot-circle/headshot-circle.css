@@ -1,0 +1,49 @@
+/* Headshot circle: a small round cutout on the headshot gradient, with name and role beside it.
+   Load primitives/colors/colors.css, primitives/typography/typography.css and
+   guidelines/layout/layout.css first. Must sit inside a .qd-canvas.
+
+   Every number below is px at the shape's reference canvas, scaled with --qd-canvas-u.
+   Cutouts must pass brand-assets/imagery/headshots/check-headshot.py.
+
+   From Figma Brand-Collateral (JQqxFCf33xbYJiOlHhtOjg), Agenda-Slot node 2183:34418. */
+
+.qd-headshot-circle {
+  display: flex;
+  align-items: center;
+  gap: var(--qd-gap-group);
+  min-width: 0;
+}
+
+.qd-headshot-circle__photo {
+  flex: none;
+  width: calc(80 * var(--qd-canvas-u));
+  height: calc(80 * var(--qd-canvas-u));
+  border-radius: 50%;
+  overflow: hidden;
+  /* Gradient on an opaque base, like the card: a pattern never shows through (Vanesa, 2026-11-11). */
+  background: var(--qd-gradient-headshot), var(--qd-color-background-default);
+}
+.qd-headshot-circle__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.qd-headshot-circle__text { display: flex; flex-direction: column; min-width: 0; }
+.qd-headshot-circle__name,
+.qd-headshot-circle__role {
+  margin: 0;
+  font-size: calc(32 * var(--qd-canvas-u));
+  line-height: 1.3;
+  letter-spacing: calc(-0.5 * var(--qd-canvas-u));
+}
+.qd-headshot-circle__name { font-weight: var(--qd-font-weight-medium); color: var(--qd-color-text-primary); }  /* H5 Medium */
+.qd-headshot-circle__role { font-weight: var(--qd-font-weight-regular); color: var(--qd-color-text-secondary); } /* H5 Regular */
+
+/* A list of circles: one per row on story, two per row on square and portrait, one row on ultrawide.
+   Use .qd-grid with --qd-span (see README). Rows are a section gap apart. */
+
+/* On a pattern: put .qd-on-pattern on the canvas or the row. Roles switch to neutral-300, which
+   keeps 3:1 down to the patterns' violet midtone (indigo-600; text.secondary fails there). Vanesa, 2026-11-04. */
+.qd-on-pattern .qd-headshot-circle__role { color: var(--qd-color-neutral-300); }
+
+/* On the light card: the card's `p` color would make name and role the same. Keep the hierarchy
+   with the light text tokens (Vanesa, 2026-11-04). */
+.qd-box--light-card .qd-headshot-circle__name { color: var(--qd-color-text-on-light); }
+.qd-box--light-card .qd-headshot-circle__role { color: var(--qd-color-text-body-on-light); }

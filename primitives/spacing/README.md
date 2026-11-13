@@ -1,46 +1,36 @@
 # Spacing
 
-Qdrant's 8px grid, page layout and corner radius as tokens. Values come from the qdrant-brand skill ([skills-internal/skills/design](https://github.com/qdrant/skills-internal/blob/main/skills/design/SKILL.md)). Names match Design Lab's `brand-kit/tokens/tokens.json`.
+Qdrant's spacing scale as tokens, plus the web page layout constants. The scale comes from the Figma file **Qdrant Design System Primitives** (`UUpGTk4Ifmpr0FwNr6pXVg`, exported 2026-11-12). Corner radius has its own folder now: [`radius/`](../radius/).
 
 | File | What it is |
 | --- | --- |
-| `spacing.tokens.json` | W3C tokens: space scale, radius, web layout constants |
-| `spacing.css` | `--qd-space-*`, `--qd-radius-*` and `--qd-layout-*` variables |
+| `spacing.tokens.json` | The source. W3C tokens: `spacing` (the Figma scale, exact) and `layout` (web page constants) |
+| `spacing.css` | Generated from the JSON by [`../build.mjs`](../build.mjs): `--qd-spacing-*` and `--qd-layout-*` variables. Never edit it by hand |
 
-## Space scale
+## Spacing scale
 
-Every spacing value is a multiple of 8. 4px half-steps are for micro-spacing inside small components only.
+A 4 px grid. A token is named by its value in px, so `spacing.16` is 16 px (`--qd-spacing-16`). Use only these values:
 
-| Token | Value | Common use |
-| --- | --- | --- |
-| `space.half` | 4px | Micro-spacing only |
-| `space.1` | 8px | Icon to text, chip padding |
-| `space.2` | 16px | Default gap between elements |
-| `space.3` | 24px | Card padding, small section gap |
-| `space.4` | 32px | Medium section gap |
-| `space.5` | 40px | Section padding |
-| `space.6` | 48px | Large section gap |
-| `space.7` | 56px | Feature section gap |
-| `space.8` | 64px | Page section break |
-| `space.9` | 72px | Large section break |
-| `space.10` | 80px | Major section break |
-| `space.11` | 88px | Hero padding |
+| Token | 0 | 4 | 8 | 12 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 | 80 | 88 | 96 | 104 | 112 | 120 | 144 | 160 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
-The scale keeps going in 8px steps.
+In Tailwind (the shadcn design system, when it lands) the class number is the value ÷ 4: `p-4` is 16 px.
 
-## Corner radius
+| Common use | Token |
+| --- | --- |
+| Micro-spacing inside small components | 4, 8, 12 |
+| Icon to text, chip padding | 8 |
+| Default gap between elements | 16 |
+| Card padding, small section gap | 24 |
+| Medium and large section gaps | 32, 48 |
+| Section padding | 40 to 80 |
+| Hero padding | 88 and up |
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `radius.sm` | 4px | Badges, pills, tags, copy buttons |
-| `radius.md` | 8px | Cards, buttons, inputs, code blocks |
-| `radius.lg` | 16px | Hero and CTA containers, prominent cards |
-| `radius.full` | 9999px | Pill shapes |
-| `radius.card-luma` | 32px | Luma cover cards (added in Design Lab) |
+Before 2026-11-12 this was an 8 px scale named by step (`space.1` = 8 px to `space.11` = 88 px, and `space.half` = 4 px). Nothing outside this folder used those names. Creatives don't use this scale: their margins and gaps scale with the canvas ([`layout/`](../../guidelines/layout/)).
 
 ## Web and landing page layout
 
-Designed at a 1440px viewport, content centered in a fixed container. For social posts, ads and banners, see [`layout/`](../layout/).
+Designed at a 1440px viewport, content centered in a fixed container. For social posts, ads and banners, see [`layout/`](../../guidelines/layout/). These move to `web/` when that folder exists.
 
 | Token | Value | Note |
 | --- | --- | --- |
@@ -53,11 +43,11 @@ Designed at a 1440px viewport, content centered in a fixed container. For social
 | `layout.section-padding-min` / `-max` | 80px / 120px | Hero and content sections; CTA sections use 120px |
 | `layout.heading-to-content-min` / `-max` | 40px / 64px | Gap between a heading block and its content |
 
-Centered section titles can be constrained to 730–980px.
+Centered section titles can be constrained to 730 to 980px.
 
 ## Rules
 
-- **No values off the scale.** 10px, 36px or 50px don't exist. Use the nearest multiple of 8.
+- **No values off the scale.** 10px, 20px, 36px or 50px don't exist. Use the nearest token.
 - **Web sections never go below 80px** of vertical padding.
 - **Don't under-space the heading block.** 16px or 24px between a heading and its content is too tight on a marketing page.
 - **Marketing pages need more room than product UI.** A 16px gap is fine in a dashboard, cramped on a landing page.

@@ -1,0 +1,378 @@
+{
+  "$description": "Paper elevation (MUI levels 0 to 24) for the product, Qdrant Cloud, while it runs on MUI. Not used by creatives, Design Lab or brand and marketing work: those use the background roles in colors/. Copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12. elevation.css is generated from this file by primitives/build.mjs.",
+  "paper-elevation": {
+    "$description": "MUI-style paper elevation for the product (Qdrant Cloud). Light and dark sets. Brand and marketing use the background roles instead.",
+    "light": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.neutral.25}"
+      },
+      "0": {
+        "$type": "color",
+        "$value": "{color.neutral.25}"
+      },
+      "1": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "2": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "3": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "4": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "5": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "6": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "7": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "8": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "9": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "10": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "11": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "12": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "13": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "14": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "15": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "16": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "17": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "18": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "19": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "20": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "21": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "22": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "23": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      },
+      "24": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      }
+    },
+    "dark": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.neutral.950}"
+      },
+      "0": {
+        "$type": "color",
+        "$value": "{color.neutral.950}"
+      },
+      "1": {
+        "$type": "color",
+        "$value": "{color.neutral.925}"
+      },
+      "2": {
+        "$type": "color",
+        "$value": "{color.neutral.900}"
+      },
+      "3": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0902,
+            0.1176,
+            0.1608
+          ],
+          "hex": "#171e29"
+        }
+      },
+      "4": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.098,
+            0.1294,
+            0.1725
+          ],
+          "hex": "#19212c"
+        }
+      },
+      "5": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1059,
+            0.1373,
+            0.1843
+          ],
+          "hex": "#1b232f"
+        }
+      },
+      "6": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1098,
+            0.1451,
+            0.1922
+          ],
+          "hex": "#1c2531"
+        }
+      },
+      "7": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1176,
+            0.1529,
+            0.2039
+          ],
+          "hex": "#1e2734"
+        }
+      },
+      "8": {
+        "$type": "color",
+        "$value": "{color.neutral.850}"
+      },
+      "9": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1255,
+            0.1608,
+            0.2118
+          ],
+          "hex": "#202936"
+        }
+      },
+      "10": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1294,
+            0.1686,
+            0.2196
+          ],
+          "hex": "#212b38"
+        }
+      },
+      "11": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1333,
+            0.1725,
+            0.2235
+          ],
+          "hex": "#222c39"
+        }
+      },
+      "12": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1373,
+            0.1765,
+            0.2275
+          ],
+          "hex": "#232d3a"
+        }
+      },
+      "13": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1412,
+            0.1804,
+            0.2314
+          ],
+          "hex": "#242e3b"
+        }
+      },
+      "14": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.149,
+            0.1804,
+            0.2353
+          ],
+          "hex": "#262e3c"
+        }
+      },
+      "15": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1529,
+            0.1843,
+            0.2392
+          ],
+          "hex": "#272f3d"
+        }
+      },
+      "16": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1529,
+            0.1882,
+            0.2431
+          ],
+          "hex": "#27303e"
+        }
+      },
+      "17": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1569,
+            0.1922,
+            0.2471
+          ],
+          "hex": "#28313f"
+        }
+      },
+      "18": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1608,
+            0.1922,
+            0.2471
+          ],
+          "hex": "#29313f"
+        }
+      },
+      "19": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1647,
+            0.1961,
+            0.251
+          ],
+          "hex": "#2a3240"
+        }
+      },
+      "20": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1647,
+            0.2,
+            0.2549
+          ],
+          "hex": "#2a3341"
+        }
+      },
+      "21": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1686,
+            0.2,
+            0.2549
+          ],
+          "hex": "#2b3341"
+        }
+      },
+      "22": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1686,
+            0.2039,
+            0.2588
+          ],
+          "hex": "#2b3442"
+        }
+      },
+      "23": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1725,
+            0.2039,
+            0.2588
+          ],
+          "hex": "#2c3442"
+        }
+      },
+      "24": {
+        "$type": "color",
+        "$value": "{color.neutral.800}"
+      }
+    }
+  }
+}

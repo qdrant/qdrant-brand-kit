@@ -10,6 +10,17 @@
   font-display: block;
   font-feature-settings: "ss05" on, "ss06" on;
 }
+/* Figma's display family: Mona Sans at 75% width, from the same variable font. The single
+   font-stretch value pins the width axis, so text in this family is always condensed. */
+@font-face {
+  font-family: "Mona Sans Condensed";
+  src: url("./MonaSansVF[wdth,wght,opsz,ital].ttf") format("truetype");
+  font-weight: 200 900;
+  font-stretch: 75%;
+  font-style: normal;
+  font-display: block;
+  font-feature-settings: "ss05" on, "ss06" on;
+}
 @font-face {
   font-family: "Geist Mono";
   src: url("./GeistMono[wght].ttf") format("truetype");

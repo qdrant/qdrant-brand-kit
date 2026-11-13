@@ -1,0 +1,396 @@
+{
+  "$description": "Qdrant canvas layout for social posts and other image canvases. All dimensions are px at the shape's reference canvas; at other sizes multiply by the scale. Web page layout stays in spacing/ (layout.*). Grid columns derived for this primitive (2026-11-04), not from Figma or the brand skill.",
+  "canvas": {
+    "scale": {
+      "$type": "string",
+      "$value": "min(width / reference.width, height / reference.height)",
+      "$description": "How px at the reference canvas map to the real size."
+    },
+    "shape": {
+      "ultrawide": {
+        "ratio": {
+          "$description": "Width / height above 3.",
+          "min": {
+            "$type": "number",
+            "$value": 3
+          }
+        },
+        "reference": {
+          "width": {
+            "$type": "dimension",
+            "$value": "3000px"
+          },
+          "height": {
+            "$type": "dimension",
+            "$value": "400px"
+          }
+        },
+        "margin": {
+          "x": {
+            "$type": "dimension",
+            "$value": "96px"
+          },
+          "top": {
+            "$type": "dimension",
+            "$value": "48px"
+          },
+          "bottom": {
+            "$type": "dimension",
+            "$value": "48px"
+          }
+        },
+        "grid": {
+          "columns": {
+            "$type": "number",
+            "$value": 12
+          },
+          "column": {
+            "$type": "dimension",
+            "$value": "190px"
+          },
+          "gutter": {
+            "$type": "dimension",
+            "$value": "48px"
+          }
+        },
+        "gap": {
+          "tight": {
+            "$type": "dimension",
+            "$value": "16px"
+          },
+          "group": {
+            "$type": "dimension",
+            "$value": "32px"
+          },
+          "section": {
+            "$type": "dimension",
+            "$value": "64px"
+          }
+        }
+      },
+      "wide": {
+        "ratio": {
+          "$description": "Width / height 1.4 to 3.",
+          "min": {
+            "$type": "number",
+            "$value": 1.4
+          },
+          "max": {
+            "$type": "number",
+            "$value": 3
+          }
+        },
+        "reference": {
+          "width": {
+            "$type": "dimension",
+            "$value": "1920px"
+          },
+          "height": {
+            "$type": "dimension",
+            "$value": "1080px"
+          }
+        },
+        "margin": {
+          "x": {
+            "$type": "dimension",
+            "$value": "80px"
+          },
+          "top": {
+            "$type": "dimension",
+            "$value": "80px"
+          },
+          "bottom": {
+            "$type": "dimension",
+            "$value": "80px"
+          }
+        },
+        "grid": {
+          "columns": {
+            "$type": "number",
+            "$value": 12
+          },
+          "column": {
+            "$type": "dimension",
+            "$value": "110px"
+          },
+          "gutter": {
+            "$type": "dimension",
+            "$value": "40px"
+          }
+        },
+        "gap": {
+          "tight": {
+            "$type": "dimension",
+            "$value": "24px"
+          },
+          "group": {
+            "$type": "dimension",
+            "$value": "40px"
+          },
+          "section": {
+            "$type": "dimension",
+            "$value": "64px"
+          }
+        }
+      },
+      "square": {
+        "ratio": {
+          "$description": "Width / height 0.85 up to 1.4.",
+          "min": {
+            "$type": "number",
+            "$value": 0.85
+          },
+          "max": {
+            "$type": "number",
+            "$value": 1.4
+          }
+        },
+        "reference": {
+          "width": {
+            "$type": "dimension",
+            "$value": "1080px"
+          },
+          "height": {
+            "$type": "dimension",
+            "$value": "1080px"
+          }
+        },
+        "margin": {
+          "x": {
+            "$type": "dimension",
+            "$value": "64px"
+          },
+          "top": {
+            "$type": "dimension",
+            "$value": "64px"
+          },
+          "bottom": {
+            "$type": "dimension",
+            "$value": "64px"
+          }
+        },
+        "grid": {
+          "columns": {
+            "$type": "number",
+            "$value": 6
+          },
+          "column": {
+            "$type": "dimension",
+            "$value": "132px"
+          },
+          "gutter": {
+            "$type": "dimension",
+            "$value": "32px"
+          }
+        },
+        "gap": {
+          "tight": {
+            "$type": "dimension",
+            "$value": "16px"
+          },
+          "group": {
+            "$type": "dimension",
+            "$value": "24px"
+          },
+          "section": {
+            "$type": "dimension",
+            "$value": "48px"
+          }
+        }
+      },
+      "portrait": {
+        "ratio": {
+          "$description": "Width / height 0.65 up to 0.85.",
+          "min": {
+            "$type": "number",
+            "$value": 0.65
+          },
+          "max": {
+            "$type": "number",
+            "$value": 0.85
+          }
+        },
+        "reference": {
+          "width": {
+            "$type": "dimension",
+            "$value": "1080px"
+          },
+          "height": {
+            "$type": "dimension",
+            "$value": "1350px"
+          }
+        },
+        "margin": {
+          "x": {
+            "$type": "dimension",
+            "$value": "64px"
+          },
+          "top": {
+            "$type": "dimension",
+            "$value": "64px"
+          },
+          "bottom": {
+            "$type": "dimension",
+            "$value": "64px"
+          }
+        },
+        "grid": {
+          "columns": {
+            "$type": "number",
+            "$value": 6
+          },
+          "column": {
+            "$type": "dimension",
+            "$value": "132px"
+          },
+          "gutter": {
+            "$type": "dimension",
+            "$value": "32px"
+          }
+        },
+        "gap": {
+          "tight": {
+            "$type": "dimension",
+            "$value": "16px"
+          },
+          "group": {
+            "$type": "dimension",
+            "$value": "24px"
+          },
+          "section": {
+            "$type": "dimension",
+            "$value": "48px"
+          }
+        }
+      },
+      "story": {
+        "ratio": {
+          "$description": "Width / height below 0.65.",
+          "max": {
+            "$type": "number",
+            "$value": 0.65
+          }
+        },
+        "reference": {
+          "width": {
+            "$type": "dimension",
+            "$value": "1080px"
+          },
+          "height": {
+            "$type": "dimension",
+            "$value": "1920px"
+          }
+        },
+        "margin": {
+          "x": {
+            "$type": "dimension",
+            "$value": "64px"
+          },
+          "top": {
+            "$type": "dimension",
+            "$value": "256px",
+            "$description": "Story: clears the profile bar"
+          },
+          "bottom": {
+            "$type": "dimension",
+            "$value": "344px",
+            "$description": "Story: clears the reply box and stickers"
+          }
+        },
+        "grid": {
+          "columns": {
+            "$type": "number",
+            "$value": 4
+          },
+          "column": {
+            "$type": "dimension",
+            "$value": "214px"
+          },
+          "gutter": {
+            "$type": "dimension",
+            "$value": "32px"
+          }
+        },
+        "gap": {
+          "tight": {
+            "$type": "dimension",
+            "$value": "24px"
+          },
+          "group": {
+            "$type": "dimension",
+            "$value": "32px"
+          },
+          "section": {
+            "$type": "dimension",
+            "$value": "64px"
+          }
+        }
+      }
+    },
+    "gap": {
+      "$description": "Pick the role, then read the value for the shape. tight: things that belong together (icon + text, name + role, date + time). group: items in one block (title + supporting line, a row of speakers). section: separate blocks (header vs speakers, text vs logo lockup)."
+    }
+  },
+  "box": {
+    "$description": "Dark theme, plus one light card for text over a full-bleed pattern. Each nested dark card is one elevation step lighter; at most two levels.",
+    "padding": {
+      "$type": "string",
+      "$value": "canvas.shape.*.gap.group"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.sm}",
+      "$description": "At the reference canvas."
+    },
+    "border-width": {
+      "$type": "dimension",
+      "$value": "1px",
+      "$description": "At the reference canvas, never thinner than 1px."
+    },
+    "card": {
+      "background": {
+        "$type": "color",
+        "$value": "{semantic.color.background.raised}",
+        "$description": "Level 1: a card on the canvas."
+      },
+      "background-nested": {
+        "$type": "color",
+        "$value": "{semantic.color.background.overlay}",
+        "$description": "Level 2: a card inside a card."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{semantic.color.border.on-dark}"
+      }
+    },
+    "outline": {
+      "border": {
+        "$type": "color",
+        "$value": "{semantic.color.border.on-dark}",
+        "$description": "Border only, no fill. Cells in a joined grid share their lines."
+      }
+    },
+    "light-card": {
+      "$description": "Text card over a full-bleed pattern (Figma: Get-The-Guide-Ads 18921:37171). Never nested, never on a plain background.",
+      "background": {
+        "$type": "color",
+        "$value": "{semantic.color.background.light-surface}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{semantic.color.text.on-light}"
+      },
+      "text-body": {
+        "$type": "color",
+        "$value": "{semantic.color.text.body-on-light}"
+      },
+      "divider": {
+        "$type": "color",
+        "$value": "{semantic.color.border.on-light}"
+      }
+    }
+  },
+  "print": {
+    "$description": "Not defined yet. Print sizes, bleed and safe area come here once the social side is approved."
+  }
+}

@@ -1,6 +1,6 @@
 # Logo
 
-The Qdrant logo for creatives: the files, which one goes on which background, its size per shape, clear space and placement. For the logo next to a partner's, use the [`partner-lockup`](../../components/partner-lockup/) component.
+The Qdrant logo for creatives: the files, which one goes on which background, its size per shape, clear space and placement. For the logo next to a partner's, use the [`partner-lockup`](../../brand-components/partner-lockup/) component.
 
 Rules follow **Brand Guide 2.0** (Figma `djCexPSttVyDjQXDo9Rka4`, logo slides 10 to 21). Where the qdrant-brand design skill disagrees (minimum size, clear space, variant names), the Brand Guide wins.
 
@@ -35,7 +35,7 @@ Exported as SVG from the Qdrant Brand Design System file (`8y0svqBDPZX6caRNF6ldd
 
 ## Size
 
-Logo height in px at each shape's reference canvas. `logo.css` scales it with `--qd-canvas-u`, like the margins and gaps in [`layout/`](../../primitives/layout/).
+Logo height in px at each shape's reference canvas. `logo.css` scales it with `--qd-canvas-u`, like the margins and gaps in [`layout/`](../../guidelines/layout/).
 
 | Shape | Reference | Logo (w × h) | Clear space |
 | --- | --- | --- | --- |
@@ -54,7 +54,7 @@ Equal to the brandmark's **inner cube** on all four sides: 0.375 × the logo hei
 
 ## Placement
 
-- **Default: top-left**, leading the content. On the canvas inside the margins when text sits on the canvas; on the light card inside its padding when text sits on the card ([guidelines/](../../guidelines/) section 8). On the light card the logo is smaller: 0.0967 × the card width, about 57 px on a 1080 square ([`layout/`](../../primitives/layout/) "Light card layout", decided 2026-11-04).
+- **Default: top-left**, leading the content. On the canvas inside the margins when text sits on the canvas; on the light card inside its padding when text sits on the card ([guidelines/](../../guidelines/) section 8). On the light card the logo is smaller: 0.0967 × the card width, about 57 px on a 1080 square ([`layout/`](../../guidelines/layout/) "Light card layout", decided 2026-11-04).
 - **When it has to move** (no room, a busy or low-contrast area, or the visual must lead), the agent picks the spot that makes sense, following the Brand Guide (slide 19), and says where and why:
   - **Top:** upper left preferred, upper right allowed. For functional layouts.
   - **Bottom:** lower left preferred, lower right allowed. When other elements or the visual must take priority.
@@ -64,7 +64,7 @@ Equal to the brandmark's **inner cube** on all four sides: 0.375 × the logo hei
 ## Use
 
 ```html
-<link rel="stylesheet" href="primitives/layout/layout.css">
+<link rel="stylesheet" href="guidelines/layout/layout.css">
 <link rel="stylesheet" href="brand-assets/logo/logo.css">
 
 <div class="qd-canvas" data-shape="square" style="--qd-canvas-width: 1080; --qd-canvas-height: 1080">

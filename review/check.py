@@ -24,22 +24,24 @@ def px(v):
 
 
 def icon_colors():
-    """Allowed icon colors from the repo: every 400 for dark, every 500 for light (brand-assets/icons)."""
+    """Allowed icon colors from the repo: every 400 for dark, every 600 for light (brand-assets/icons)."""
     css = open(os.path.join(REPO, "primitives/colors/colors.css")).read()
-    found = re.findall(r"--qd-color-([a-z-]+)-(400|500):\s*#([0-9A-Fa-f]{6})", css)
+    found = re.findall(r"--qd-color-([a-z-]+)-(400|600):\s*#([0-9A-Fa-f]{6})", css)
     pick = lambda step: {f"{n}-{s}": tuple(int(h[i:i + 2], 16) for i in (0, 2, 4)) for n, s, h in found if s == step}
-    # Only colors that keep 3:1 on the plain background (README "Colors"): drops green, cyan, orange, yellow on light.
+    # Only colors that keep 3:1 on the plain background (README "Colors"). The dark background is background.default.
     keep = lambda d, bg: {k: v for k, v in d.items() if contrast(v, bg) >= 3}
-    dark = keep(pick("400"), (11, 15, 25))
+    bg = re.search(r"--qd-color-background-default:\s*#([0-9A-Fa-f]{6})", css)
+    dark_bg = tuple(int(bg.group(1)[i:i + 2], 16) for i in (0, 2, 4)) if bg else (7, 11, 17)
+    dark = keep(pick("400"), dark_bg)
     # White (text.primary) is allowed on a pattern that isn't masked: .qd-icon--on-pattern (README "Colors").
     tp = re.search(r"--qd-color-text-primary:\s*#([0-9A-Fa-f]{6})", css)
     if tp:
         dark["text-primary (on pattern)"] = tuple(int(tp.group(1)[i:i + 2], 16) for i in (0, 2, 4))
-    return {"dark": dark, "light": keep(pick("500"), (255, 255, 255))}
+    return {"dark": dark, "light": keep(pick("600"), (255, 255, 255))}
 
 
 def load_rules():
-    lay = json.load(open(os.path.join(REPO, "primitives/layout/layout.tokens.json")))["canvas"]["shape"]
+    lay = json.load(open(os.path.join(REPO, "guidelines/layout/layout.tokens.json")))["canvas"]["shape"]
     shapes = {}
     for name, s in lay.items():
         if name.startswith("$"):
@@ -229,7 +231,7 @@ def check_one(m, rules):
             "checks.md, Contrast")
 
     if m.get("books"):
-        # The light card (book): its own sizes, from primitives/layout/README "Light card layout".
+        # The light card (book): its own sizes, from guidelines/layout/README "Light card layout".
         bk = m["books"][0]["rect"]
         wide = shape == "wide"
         biss = []
@@ -336,7 +338,7 @@ def check_one(m, rules):
             col = rgb(ic["stroke"] if ic["stroke"].startswith("rgb") else ic["color"])
             name = next((k for k, v in allowed.items() if v == col), None)
             if not name:
-                probs.append(f"{where}: color rgb{col} isn't an allowed {'500' if light else '400'}")
+                probs.append(f"{where}: color rgb{col} isn't an allowed {'600' if light else '400'}")
             if bg is not None:
                 box = (max(0, int(r["x"])), max(0, int(r["y"])), min(W, int(r["x"] + r["w"])), min(H, int(r["y"] + r["h"])))
                 if box[2] > box[0] and box[3] > box[1]:

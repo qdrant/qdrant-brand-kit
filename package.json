@@ -1,0 +1,31 @@
+{
+  "name": "qdrant-brand-kit",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Qdrant brand system: primitives, guidelines, brand assets, brand components, the shadcn design system, web sections and the studio.",
+  "scripts": {
+    "dev": "pnpm --filter studio dev",
+    "build": "pnpm --filter studio build",
+    "lint": "eslint .",
+    "typecheck": "pnpm -r typecheck",
+    "format": "prettier --write \"design-system/**/*.{ts,tsx,css}\" \"web/**/*.{ts,tsx}\" \"studio/**/*.{ts,tsx}\"",
+    "tokens": "node primitives/build.mjs",
+    "tokens:check": "node primitives/build.mjs --check"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10",
+    "@next/eslint-plugin-next": "^16.4.4",
+    "eslint": "^10",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.14.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "typescript": "^5",
+    "typescript-eslint": "^8"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

@@ -1,6 +1,6 @@
 # Headshots
 
-How to choose and prepare a speaker's photo before it goes into [`headshot-card`](../../../components/headshot-card/) or [`headshot-circle`](../../../components/headshot-circle/). Used for speakers, event guests, new team members and YouTube thumbnails.
+How to choose and prepare a speaker's photo before it goes into [`headshot-card`](../../../brand-components/headshot-card/) or [`headshot-circle`](../../../brand-components/headshot-circle/). Used for speakers, event guests, new team members and YouTube thumbnails.
 
 Qdrant doesn't shoot these photos. The job is choosing a good one and treating it the same way every time. From Brand Guide 2.0, slide 56 "Headshot Treatment" (Figma `djCexPSttVyDjQXDo9Rka4`, [node 1:12057](https://www.figma.com/design/djCexPSttVyDjQXDo9Rka4/?node-id=1-12057)).
 

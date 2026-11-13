@@ -1,0 +1,14 @@
+# Prettier formats only the code packages (design-system, web, studio).
+# Everything else is hand-written to its own conventions: never reformat it.
+primitives/
+guidelines/
+brand-assets/
+brand-components/
+review/
+*.md
+node_modules/
+.next/
+dist/
+coverage/
+pnpm-lock.yaml
+.pnpm-store/

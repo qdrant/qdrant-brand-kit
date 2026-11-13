@@ -1,0 +1,61 @@
+/* Partner lockup: the Qdrant logo + a plus or a divider + the partner's logo.
+   Load after guidelines/layout/layout.css and brand-assets/logo/logo.css: it sizes everything
+   from --qd-logo-height, so the lockup takes the logo's place at the logo's size.
+
+   Spacing measured on Brand Guide 2.0 slide 20 (Figma djCexPSttVyDjQXDo9Rka4, node 1:8532),
+   as a share of the logo height h:
+   - gap between each logo and the separator: 2 cube widths = 0.65 h (52 px at an 80 px logo)
+   - plus: 0.6 h square (48 px at 80), stroke 0.07 h (about 6 px at 80)
+   - divider: 1 line at the logo height, 0.03 h wide, never under 1 px */
+.qd-partner-lockup {
+  --qd-lockup-gap: calc(var(--qd-logo-height) * 0.65);
+  display: flex;
+  flex: none;
+  align-self: flex-start;
+  align-items: center;
+  gap: var(--qd-lockup-gap);
+  height: var(--qd-logo-height);
+  color: inherit; /* plus and divider follow the text color: white on dark, dark on the light card */
+}
+
+/* Both logos the same height, never stretched. */
+.qd-partner-lockup > img {
+  display: block;
+  height: var(--qd-logo-height);
+  width: auto;
+}
+
+.qd-partner-lockup__plus {
+  --qd-lockup-plus: calc(var(--qd-logo-height) * 0.6);
+  --qd-lockup-stroke: calc(var(--qd-logo-height) * 0.07);
+  flex: none;
+  width: var(--qd-lockup-plus);
+  height: var(--qd-lockup-plus);
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% var(--qd-lockup-stroke) no-repeat,
+    linear-gradient(currentColor, currentColor) center / var(--qd-lockup-stroke) 100% no-repeat;
+}
+
+.qd-partner-lockup__divider {
+  flex: none;
+  width: max(1px, calc(var(--qd-logo-height) * 0.03));
+  height: var(--qd-logo-height);
+  background: currentColor;
+}
+
+/* Lockup on its own (the only content, e.g. a partner blog hero): add .qd-partner-lockup--hero.
+   Centered both ways on the canvas and sized so the whole lockup spans 8 of the 12 wide columns.
+   Set --qd-lockup-units on the lockup: its full width in logo heights =
+   3.75 (Qdrant logo) + 1.3 (two gaps) + 0.6 (plus) or 0.03 (divider) + the partner logo's width ÷ height.
+   Example, Microsoft (4.683) with the plus: 3.75 + 1.3 + 0.6 + 4.683 = 10.333 (Vanesa, 2026-11-11). */
+.qd-canvas > .qd-partner-lockup--hero,
+.qd-partner-lockup.qd-partner-lockup--hero {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  align-self: center;
+  --qd-lockup-span: calc((var(--qd-canvas-width) * 1px - 2 * var(--qd-canvas-margin-x) * var(--qd-canvas-u)
+    - (var(--qd-canvas-columns) - 1) * var(--qd-gutter)) * 8 / var(--qd-canvas-columns) + 7 * var(--qd-gutter));
+  --qd-logo-height: calc(var(--qd-lockup-span) / var(--qd-lockup-units, 10.333));
+}

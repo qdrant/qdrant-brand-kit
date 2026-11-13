@@ -1,0 +1,13 @@
+# The code packages. Everything else in the repo (primitives, guidelines, brand assets,
+# brand components, review) is plain files, not part of the workspace. The mascot scripts
+# in brand-assets/mascot keep their own package.json and aren't listed here on purpose.
+packages:
+  - "design-system"
+  - "web"
+  - "studio"
+
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  msw: false
