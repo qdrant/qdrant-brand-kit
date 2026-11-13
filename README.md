@@ -1,6 +1,6 @@
 # Qdrant Marketing Brand System
 
-The building blocks for Qdrant marketing creatives (social posts, ads, banners, events), written as code. The product UI has its own design system. Organised like [Primer Brand](https://primer.style/brand/): rules first, then brand assets, then the components built from both. Each folder has its own README.
+The building blocks for Qdrant marketing creatives (social posts, ads, banners, events) and the design system for web UI, written as code. Product UI comes later and will use the same design system. Organised like [Primer Brand](https://primer.style/brand/): rules first, then brand assets, then the components built from both. Each folder has its own README.
 
 **Agents: start with [`AGENTS.md`](AGENTS.md).** It gives the reading order and the rules never to break.
 
@@ -45,6 +45,16 @@ Brand materials that components use.
 
 The old social post template lives in its own archived repo: [qdrant-social-template](https://github.com/vanesaajdini/qdrant-social-template).
 
+## Design system, web and studio
+
+Code packages in one pnpm workspace. Run `pnpm install` once from the repo root, then `pnpm dev` to open the studio.
+
+| Folder | Status | What it is |
+| --- | --- | --- |
+| [`design-system/`](design-system/) | New, 2026-11-12 | The UI component library: shadcn on Base UI, styled only through the primitives. Dark by default, with a light theme |
+| [`web/`](web/) | New, empty | Sections of the marketing web pages, built from the design system |
+| [`studio/`](studio/) | New, preview page | The workshop app that shows the design system and the web sections on the real tokens. Never ships |
+
 ## Review
 
 | Folder | Status | What it is |
@@ -63,6 +73,8 @@ The old social post template lives in its own archived repo: [qdrant-social-temp
 - **A token** (colors, type, spacing, radius, and other scales): a folder in `primitives/`.
 - **A rule for choosing and combining** (layout, composition): `guidelines/`, or a folder inside it.
 - **A brand material** (patterns, images, mascot, logos): a folder in `brand-assets/`.
-- **A ready-made piece:** a folder in `brand-components/`. See [its README](brand-components/README.md).
+- **A ready-made piece for creatives:** a folder in `brand-components/`. See [its README](brand-components/README.md).
+- **A UI component:** `design-system/components/qdrant/`, or a shadcn component from the studio. See [its README](design-system/README.md).
+- **A web section:** a file in `web/sections/`. See [its README](web/README.md).
 
 Each folder gets its own `README.md` (what it is, how to use it, how to add to it) and a row in the right table above.
