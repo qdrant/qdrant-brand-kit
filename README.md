@@ -53,7 +53,7 @@ Code packages in one pnpm workspace. Run `pnpm install` once from the repo root,
 | --- | --- | --- |
 | [`design-system/`](design-system/) | New, 2026-11-12 | The UI component library: shadcn on Base UI, styled only through the primitives. Dark by default, with a light theme |
 | [`web/`](web/) | New, empty | Sections of the marketing web pages, built from the design system |
-| [`studio/`](studio/) | New, preview page | The workshop app that shows the design system and the web sections on the real tokens. Never ships |
+| [`studio/`](studio/) | New, 2026-11-12 | The workshop app: every design system component with its states, the web sections, and live controls to try values. Never ships |
 
 ## Review
 

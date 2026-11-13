@@ -20,6 +20,8 @@ export default tseslint.config(
     "brand-assets/**",
     "brand-components/**",
     "review/**",
+    // shadcn's example demos, copied as-is by studio/scripts/fetch-examples.mjs
+    "studio/examples/**",
   ]),
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -33,6 +35,11 @@ export default tseslint.config(
     // effects. Shown as warnings so the components stay as shadcn ships them.
     files: ["design-system/components/ui/**/*.tsx", "design-system/hooks/**/*.ts"],
     rules: { "react-hooks/set-state-in-effect": "warn" },
+  },
+  {
+    // Node scripts (the lint config itself, studio/scripts).
+    files: ["**/*.mjs"],
+    languageOptions: { globals: { ...globals.node } },
   },
   {
     files: ["studio/**/*.{ts,tsx}"],

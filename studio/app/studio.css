@@ -1,0 +1,13 @@
+/* Studio-only rules for the live controls (lib/overrides.ts). Not part of the design system:
+   a value you keep goes into design-system/ or primitives/, with a line in design-system/DESIGN.md. */
+
+/* Mona Sans width for headings and titles: 75% (condensed) to 125% (expanded). */
+.studio-canvas :where(h1, h2, h3, h4, h5, h6, [data-slot$="-title"]) {
+  font-stretch: var(--studio-heading-stretch, 100%);
+}
+
+/* Glow: emitted light around the primary button, in the accent color. 0 is no glow. */
+.studio-canvas .qd-ui-button {
+  --tw-shadow: 0 0 calc(var(--studio-glow, 0) * 32px)
+    color-mix(in srgb, var(--primary) calc(var(--studio-glow, 0) * 70%), transparent);
+}

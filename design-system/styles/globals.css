@@ -25,13 +25,9 @@
 @source "../../web/**/*.{ts,tsx}";
 @source "../**/*.{ts,tsx}";
 
-@theme inline {
-  --font-sans: var(--qd-font-family-sans);
-  --font-mono: var(--qd-font-family-mono);
-  --font-heading: var(--qd-font-family-sans);
-  --font-display: var(--qd-font-family-display);
-
-  /* shadcn's radius names, snapped to the nearest Qdrant radius (primitives/radius). */
+/* shadcn's radius names, snapped to the nearest Qdrant radius (primitives/radius). Not inline, so the
+   classes read these variables at runtime and the studio can try other radii live. */
+@theme {
   --radius-xs: var(--qd-radius-xs);
   --radius-sm: var(--qd-radius-xs);
   --radius-md: var(--qd-radius-sm);
@@ -40,6 +36,13 @@
   --radius-2xl: var(--qd-radius-md);
   --radius-3xl: var(--qd-radius-md);
   --radius-4xl: var(--qd-radius-lg);
+}
+
+@theme inline {
+  --font-sans: var(--qd-font-family-sans);
+  --font-mono: var(--qd-font-family-mono);
+  --font-heading: var(--qd-font-family-sans);
+  --font-display: var(--qd-font-family-display);
 
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
