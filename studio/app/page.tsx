@@ -23,6 +23,7 @@ function Preview({ theme }: { theme: "dark" | "light" }) {
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center gap-2">
         <Button>Start Free</Button>
+        <Button disabled>Disabled</Button>
         <Button variant="secondary">Secondary</Button>
         <Button variant="outline">Outline</Button>
         <Button variant="ghost">Ghost</Button>

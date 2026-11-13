@@ -4,9 +4,11 @@ The call to action in a post ("Start Free", "Register", "Read more"). Written as
 
 **Interim.** Based on the Qdrant Web Design button that the current system still uses (Figma [Qdrant Web Design, node 793-2956](https://www.figma.com/design/ubPe8s8pViytom0Mapcno8/Qdrant-Web-Design?node-id=793-2956)). The Qdrant Brand Design System button (file `8y0svqBDPZX6caRNF6lddG`, node `13872:1092`) replaces it later.
 
+**The look comes from the design system** (since 2026-11-12): [`design-system/styles/components/button.css`](../../design-system/styles/components/button.css) holds the fill, the inner highlight, the label color and weight, and the web states, as `--qd-ui-button-*` variables. The web Button in the design system reads the same file, so the two always match. This folder only sizes the button for the canvas. To change the look, change that file, never `button.css` here.
+
 | File | What it is |
 | --- | --- |
-| `button.css` | `.qd-button`, sized per shape. Uses only `--qd-` tokens and the canvas scale |
+| `button.css` | `.qd-button`, sized per shape with the canvas scale. Imports the look from the design system, so pages only load this file |
 | `sketch.png` | The button on every shape, plus the three sizes at real size |
 
 ## Sketch
@@ -60,7 +62,7 @@ In px at the reference canvas:
 
 ## Colors
 
-Token names only. Figma colors that have no token use the nearest one. Moved to the Figma primitive names on 2026-11-12: the brand red is `amaranth-600`, the same `#DC244C` as before.
+Set in [`design-system/styles/components/button.css`](../../design-system/styles/components/button.css), token names only. Figma colors that have no token use the nearest one. Moved to the Figma primitive names on 2026-11-12: the brand red is `amaranth-600`, the same `#DC244C` as before.
 
 | Part | Token | Figma |
 | --- | --- | --- |
@@ -84,6 +86,8 @@ Token names only. Figma colors that have no token use the nearest one. Moved to 
 ```
 
 ## Web states (reference, not for creatives)
+
+The design system's Button uses these states from the shared look file (hover, focus, disabled for Main). Secondary isn't wired to a web variant yet.
 
 From the Figma button, at web size (XS / MD / LG = 36 / 40 / 48px tall, SemiBold 16 / 16 / 18px, side padding 20 / 22 / 28px, radius 8px). Colors mapped to the nearest tokens.
 

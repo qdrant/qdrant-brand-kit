@@ -12,6 +12,8 @@
 @import "../../primitives/border-width/border-width.css";
 /* The palette as Tailwind colors, with Tailwind's defaults cleared (generated). */
 @import "./tokens.css";
+/* Component looks shared with the brand components (plain CSS variables). */
+@import "./components/button.css";
 
 /* Themes: data-theme="dark" (the default) or "light", on <html> for the whole page and on any element
    for one section. `dark:` and `light:` follow the closest scope: a dark section inside a light page
@@ -118,6 +120,30 @@
   --border: var(--qd-color-border-on-light);
   --input: var(--qd-color-neutral-500);
   --sidebar-border: var(--qd-color-border-on-light);
+}
+
+/* The Qdrant button look (components/button.css) on the Button's default variant (class qd-ui-button).
+   Unlayered, so it wins over the variant's Tailwind classes. The box-shadow keeps Tailwind's ring
+   variables, so the focus ring still shows over the inner highlight. */
+.qd-ui-button {
+  background-image: var(--qd-ui-button-fill);
+  color: var(--qd-ui-button-text-color);
+  font-family: var(--qd-ui-button-font);
+  font-weight: var(--qd-ui-button-weight);
+  --tw-inset-shadow: inset 0 calc(1em * var(--qd-ui-button-highlight-y)) calc(1em * var(--qd-ui-button-highlight-blur)) var(--qd-ui-button-highlight);
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow, 0 0 transparent), var(--tw-ring-offset-shadow, 0 0 transparent), var(--tw-ring-shadow, 0 0 transparent), var(--tw-shadow, 0 0 transparent);
+}
+.qd-ui-button:hover {
+  background-image: var(--qd-ui-button-fill-hover);
+  --qd-ui-button-highlight: var(--qd-ui-button-highlight-hover);
+}
+.qd-ui-button:focus-visible {
+  --tw-ring-color: var(--qd-ui-button-focus-ring);
+}
+.qd-ui-button:disabled,
+.qd-ui-button[aria-disabled="true"] {
+  background-image: var(--qd-ui-button-fill-disabled);
+  opacity: 1;
 }
 
 @layer base {

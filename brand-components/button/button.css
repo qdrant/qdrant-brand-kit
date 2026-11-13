@@ -1,6 +1,12 @@
+@import "../../design-system/styles/components/button.css";
+
 /* Qdrant Button for creatives. Main / Default only.
    Load primitives/colors/colors.css, primitives/typography/typography.css and
    guidelines/layout/layout.css first. The button must sit inside a .qd-canvas.
+
+   The look (fill, inner highlight, label color and weight) comes from the design system,
+   design-system/styles/components/button.css, imported above: the same values as the web Button.
+   This file only sizes the button for the canvas.
 
    Every number below is px at the shape's reference canvas. The canvas scales it with
    --qd-canvas-u, so the button works at any size.
@@ -33,16 +39,15 @@
   height: calc(var(--qd-button-height) * var(--qd-canvas-u));
   padding: 0 calc(var(--qd-button-pad) * var(--qd-canvas-u));
   border-radius: calc(var(--qd-button-radius) * var(--qd-canvas-u));
-  /* Figma: Primary/P50 to #BE003A, mapped to the nearest primitive (amaranth-600 is the brand red). */
-  background: linear-gradient(to bottom, var(--qd-color-amaranth-600), var(--qd-color-amaranth-700));
-  /* Top inner highlight. Figma: 2px at 16px text, scaled with the text. */
+  /* The look, from the design system. The highlight's offset and blur are shares of the text size. */
+  background: var(--qd-ui-button-fill);
   box-shadow: inset 0
-    calc(var(--qd-button-text) / 8 * var(--qd-canvas-u))
-    calc(var(--qd-button-text) / 16 * var(--qd-canvas-u))
-    var(--qd-color-amaranth-500);
-  color: var(--qd-color-neutral-0);
-  font-family: var(--qd-font-family-sans);
-  font-weight: var(--qd-font-weight-semibold); /* SemiBold, same as headings. Not Bold. */
+    calc(var(--qd-button-text) * var(--qd-ui-button-highlight-y) * var(--qd-canvas-u))
+    calc(var(--qd-button-text) * var(--qd-ui-button-highlight-blur) * var(--qd-canvas-u))
+    var(--qd-ui-button-highlight);
+  color: var(--qd-ui-button-text-color);
+  font-family: var(--qd-ui-button-font);
+  font-weight: var(--qd-ui-button-weight); /* SemiBold, same as headings. Not Bold. */
   font-size: calc(var(--qd-button-text) * var(--qd-canvas-u));
   line-height: 1.5;
   white-space: nowrap;

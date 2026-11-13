@@ -1,0 +1,32 @@
+/* The Qdrant button's look, defined once for the design system's Button (components/ui/button.tsx)
+   and the creative button (brand-components/button/button.css). Colors, type and the inner highlight
+   only: each component keeps its own sizes (the creative button scales with the canvas).
+
+   Plain CSS variables, no Tailwind, so creatives can load it as-is. Needs primitives/colors/colors.css
+   and primitives/typography/typography.css first. The --qd-ui- prefix keeps these apart from the
+   creative button's own per-shape numbers (--qd-button-text, --qd-button-height...).
+
+   Values: the approved button (Qdrant Web Design, Figma ubPe8s8pViytom0Mapcno8, node 793-2956), with the
+   web states from brand-components/button/README.md. The Brand Design System button (Figma
+   8y0svqBDPZX6caRNF6lddG, node 13872:1092) will replace them here, in this one file. */
+:root {
+  /* Fill: brand red to a darker red, top to bottom. Hover is flat; disabled is a lighter red. */
+  --qd-ui-button-fill: linear-gradient(to bottom, var(--qd-color-amaranth-600), var(--qd-color-amaranth-700));
+  --qd-ui-button-fill-hover: linear-gradient(to bottom, var(--qd-color-amaranth-600), var(--qd-color-amaranth-600));
+  --qd-ui-button-fill-disabled: linear-gradient(to bottom, var(--qd-color-amaranth-400), var(--qd-color-amaranth-400));
+
+  /* Top inner highlight, a lighter red line along the top edge. Offset and blur are shares of the
+     button's text size (Figma: 2px and 1px at 16px text), so it scales with any button size. */
+  --qd-ui-button-highlight: var(--qd-color-amaranth-500);
+  --qd-ui-button-highlight-hover: var(--qd-color-amaranth-400);
+  --qd-ui-button-highlight-y: 0.125;
+  --qd-ui-button-highlight-blur: 0.0625;
+
+  /* Label: white, Mona Sans SemiBold (never Bold). */
+  --qd-ui-button-text-color: var(--qd-color-neutral-0);
+  --qd-ui-button-font: var(--qd-font-family-sans);
+  --qd-ui-button-weight: var(--qd-font-weight-semibold);
+
+  /* Focus (web only): a 2px ring in the brand red at 40%. */
+  --qd-ui-button-focus-ring: color-mix(in srgb, var(--qd-color-amaranth-600) 40%, transparent);
+}
