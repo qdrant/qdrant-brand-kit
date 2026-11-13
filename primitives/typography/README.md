@@ -26,7 +26,7 @@ Every style comes in Regular (400), Medium (500), SemiBold (600) and Bold (700) 
 
 - **Titles and headings: SemiBold.** Never Bold, including Display 1 and 2.
 - **Body text: Regular,** with SemiBold for key terms.
-- Medium and Bold exist in the styles but aren't part of the brand rules yet. One exception: speaker names in [`headshot-circle`](../../components/headshot-circle/) use **Medium**, as in the Figma agenda slot (decided 2026-11-11).
+- Medium and Bold exist in the styles but aren't part of the brand rules yet. One exception: speaker names in [`headshot-circle`](../../brand-components/headshot-circle/) use **Medium**, as in the Figma agenda slot (decided 2026-11-11).
 
 The default weight is in each token; `$extensions.qdrant.weights` lists the weights Figma has for that style.
 
@@ -82,9 +82,9 @@ Letter spacing is in px, as in Figma, so the same value gives the same spacing a
 
 ### Text in creatives (social posts, ads, banners)
 
-Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabNex7sSJ`) and the Vector Space Day banner (Brand-Collateral `2183:41590`). Sizes in px at the reference canvas (see [`layout/`](../layout/)); they scale with the canvas.
+Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabNex7sSJ`) and the Vector Space Day banner (Brand-Collateral `2183:41590`). Sizes in px at the reference canvas (see [`layout/`](../../guidelines/layout/)); they scale with the canvas.
 
-**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception. **On the light card** the title and supporting text have their own two sizes, set by the card's width (0.0846 W and 0.0483 W, about 50 and 29 at 1080 square), from the Get-the-Guide ad ([`layout/`](../layout/) "Light card layout", decided 2026-11-04). Title Case there too, even for long supporting sentences (the Figma reference uses sentence case; Vanesa kept Title Case, 2026-11-04). **Button text doesn't count:** it scales with the [button](../../components/button/) and is independent of these text styles (decided 2026-11-04).
+**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception. **On the light card** the title and supporting text have their own two sizes, set by the card's width (0.0846 W and 0.0483 W, about 50 and 29 at 1080 square), from the Get-the-Guide ad ([`layout/`](../../guidelines/layout/) "Light card layout", decided 2026-11-04). Title Case there too, even for long supporting sentences (the Figma reference uses sentence case; Vanesa kept Title Case, 2026-11-04). **Button text doesn't count:** it scales with the [button](../../brand-components/button/) and is independent of these text styles (decided 2026-11-04).
 
 | | Font | Square, portrait | Wide | Ultrawide | Story |
 | --- | --- | --- | --- | --- | --- |
@@ -97,7 +97,7 @@ Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabN
 - **Geist Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans.
 - **Longer titles step down** to the next size by word count, never in between and never below the 11+ size. If it still doesn't fit, ask the person to shorten it.
 - **Wide** follows the Vector Space Day banner (128 on 1920, decided 2026-11-04).
-- **Ultrawide** uses the wide sizes (decided 2026-11-11 from the LinkedIn profile cover, 1584×396: a 128 title reads at LinkedIn's small display size). **Beside Qbot** on the LinkedIn cover, the title steps down one size (128 → 104), so Qbot stays the bigger shape ([`layout/`](../layout/) "LinkedIn profile cover"). Not yet tried on a full 3000×400 banner.
+- **Ultrawide** uses the wide sizes (decided 2026-11-11 from the LinkedIn profile cover, 1584×396: a 128 title reads at LinkedIn's small display size). **Beside Qbot** on the LinkedIn cover, the title steps down one size (128 → 104), so Qbot stays the bigger shape ([`layout/`](../../guidelines/layout/) "LinkedIn profile cover"). Not yet tried on a full 3000×400 banner.
 - **In code:** `.qd-title` (short), `.qd-title--medium`, `.qd-title--long` and `.qd-supporting` in `typography.css`, inside a `.qd-canvas`. Values are in `typography.tokens.json` under `semantic.creative`.
 - The `social-*` styles above stay as the Figma reference. For creatives, use this table.
 

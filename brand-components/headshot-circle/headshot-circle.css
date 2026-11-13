@@ -1,6 +1,6 @@
 /* Headshot circle: a small round cutout on the headshot gradient, with name and role beside it.
    Load primitives/colors/colors.css, primitives/typography/typography.css and
-   primitives/layout/layout.css first. Must sit inside a .qd-canvas.
+   guidelines/layout/layout.css first. Must sit inside a .qd-canvas.
 
    Every number below is px at the shape's reference canvas, scaled with --qd-canvas-u.
    Cutouts must pass brand-assets/imagery/headshots/check-headshot.py.

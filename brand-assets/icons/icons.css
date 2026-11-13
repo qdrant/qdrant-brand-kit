@@ -1,5 +1,5 @@
 /* Icons: Lucide only (lucide.dev), outline, one color. Load after primitives/colors/colors.css,
-   primitives/typography/typography.css and primitives/layout/layout.css.
+   primitives/typography/typography.css and guidelines/layout/layout.css.
 
    Paste the Lucide SVG inline and add .qd-icon. Keep Lucide's viewBox="0 0 24 24", fill="none",
    stroke="currentColor" and stroke-width="2": the stroke then scales with the icon (slide 39).

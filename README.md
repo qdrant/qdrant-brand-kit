@@ -17,13 +17,13 @@ Tokens and rules only. No finished designs. Each folder's `.tokens.json` is the 
 | [`primitives/border-width/`](primitives/border-width/) | Figma primitives, 2026-11-12 | Border widths: hairline, thin, medium, thick. |
 | [`primitives/breakpoints/`](primitives/breakpoints/) | Figma primitives, 2026-11-12 | Breakpoints for web UI, xs to xl. |
 | [`primitives/elevation/`](primitives/elevation/) | Figma primitives, 2026-11-12. Product only | Paper elevation 0 to 24 for Qdrant Cloud on MUI. Not used by creatives or marketing. |
-| [`primitives/layout/`](primitives/layout/) | V1 | Canvas, Grid, Stack and Box for social posts, ads and banners at any size: shapes, margins, safe zones, columns, gap roles, Box styles and checks. |
 
 ## Guidelines: choosing and combining
 
 | Folder | Status | What it is |
 | --- | --- | --- |
 | [`guidelines/`](guidelines/) | V1 | Which pattern to pick by tone, when red is allowed, how patterns cover the canvas, one hero per creative, Qbot and product screens on patterns, logo, headline length, and what to ask the person first. |
+| [`guidelines/layout/`](guidelines/layout/) | V1 | Canvas, Grid, Stack and Box for social posts, ads and banners at any size: shapes, margins, safe zones, columns, gap roles, Box styles and checks. |
 
 ## Brand assets
 
@@ -37,11 +37,11 @@ Brand materials that components use.
 | [`brand-assets/imagery/`](brand-assets/imagery/) | Copied from Design Lab, live there | Generated images in a Qdrant style: rules, channel sizes, review checklist and the Default moodboard references. Plus how to prepare speaker headshots. |
 | [`brand-assets/mascot/`](brand-assets/mascot/) | Handoff, untested on Sunburst | Qbot in 3D (main) and 2D, with approved poses, prompts and scripts for new poses as transparent PNGs. |
 
-## Components
+## Brand components
 
 | Folder | Status | What it is |
 | --- | --- | --- |
-| [`components/`](components/) | Button, headshot card, headshot circle, partner lockup approved | Ready-made parts, built only from primitives and brand assets. No fixed post templates: creatives are composed by the rules in `guidelines/` section 11. |
+| [`brand-components/`](brand-components/) | Button, headshot card, headshot circle, partner lockup approved | Ready-made parts for creatives, built only from primitives and brand assets. They belong to the brand: the design system and the web will have their own components. No fixed post templates: creatives are composed by the rules in `guidelines/` section 11. |
 
 The old social post template lives in its own archived repo: [qdrant-social-template](https://github.com/vanesaajdini/qdrant-social-template).
 
@@ -60,8 +60,9 @@ The old social post template lives in its own archived repo: [qdrant-social-temp
 
 ## Adding something
 
-- **A rule** (tokens, scales, layout): a folder in `primitives/`.
+- **A token** (colors, type, spacing, radius, and other scales): a folder in `primitives/`.
+- **A rule for choosing and combining** (layout, composition): `guidelines/`, or a folder inside it.
 - **A brand material** (patterns, images, mascot, logos): a folder in `brand-assets/`.
-- **A ready-made piece:** a folder in `components/`. See [its README](components/README.md).
+- **A ready-made piece:** a folder in `brand-components/`. See [its README](brand-components/README.md).
 
 Each folder gets its own `README.md` (what it is, how to use it, how to add to it) and a row in the right table above.

@@ -1,6 +1,6 @@
 /* Headshot card: a speaker's cutout on the headshot gradient, with name and role below.
    Load primitives/colors/colors.css, primitives/typography/typography.css and
-   primitives/layout/layout.css first. Cards sit in a .qd-headshot-row inside a .qd-canvas.
+   guidelines/layout/layout.css first. Cards sit in a .qd-headshot-row inside a .qd-canvas.
 
    Every number below is px at the shape's reference canvas, scaled with --qd-canvas-u.
    Cutouts must pass brand-assets/imagery/headshots/check-headshot.py (square PNG, transparent

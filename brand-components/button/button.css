@@ -1,6 +1,6 @@
 /* Qdrant Button for creatives. Main / Default only.
    Load primitives/colors/colors.css, primitives/typography/typography.css and
-   primitives/layout/layout.css first. The button must sit inside a .qd-canvas.
+   guidelines/layout/layout.css first. The button must sit inside a .qd-canvas.
 
    Every number below is px at the shape's reference canvas. The canvas scales it with
    --qd-canvas-u, so the button works at any size.

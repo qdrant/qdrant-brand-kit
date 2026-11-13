@@ -36,7 +36,7 @@ Before 2026-11-12 the families were `primary` (red, main at 500) and `secondary`
 | Token | Value | Use |
 | --- | --- | --- |
 | `gradient.brand` | `amaranth-600` → `indigo-600`, 135° | Hero moments only |
-| `gradient.headshot` | `indigo-900` → `indigo-400`, both at 70%, 204° | Only behind headshots ([`headshot-card`](../../components/headshot-card/), [`headshot-circle`](../../components/headshot-circle/)) |
+| `gradient.headshot` | `indigo-900` → `indigo-400`, both at 70%, 204° | Only behind headshots ([`headshot-card`](../../brand-components/headshot-card/), [`headshot-circle`](../../brand-components/headshot-circle/)) |
 
 ## Roles
 
@@ -53,7 +53,7 @@ Use the roles, never a primitive step, unless a README names one.
 | `border.on-dark` / `border.on-light` | `neutral-700` | `neutral-200` |
 | `accent.primary` | `amaranth-600` | `amaranth-600` |
 
-- The four background roles are the brand and marketing roles decided with the Figma primitives. A card is `raised`; a card inside a card is `overlay` ([`layout/`](../layout/) "Box").
+- The four background roles are the brand and marketing roles decided with the Figma primitives. A card is `raised`; a card inside a card is `overlay` ([`layout/`](../../guidelines/layout/) "Box").
 - Also: `background.light` (`neutral-0`) and `background.light-surface` (`neutral-25`, the light card) for light pieces on a dark creative; `text.disabled`, `text.on-light`, `text.body-on-light` (documents), `text.on-accent` (white on a filled button); `accent.primary-hover` (700), `accent.primary-pressed` (800), `accent.secondary` (`indigo-600`); `status.success` (`teal-600`), `status.error` (`red-500`), `status.warning` (`orange-500`), `status.info` (`blue-400`).
 
 ## Data visualization
@@ -80,7 +80,7 @@ Supporting colors in marketing: on dark backgrounds, step 500 of any family. On 
 
 - **Dark theme is the default.** Light for print, documents, light-mode UIs, and some light moments in creatives, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635) (decided 2026-11-04).
 - **Amaranth is an accent** in UI and text: buttons, highlights, small marks. **Red pattern backgrounds are allowed** for creatives that need to grab attention (a red colorway, Hexagon-B, Dash-B), as [`guidelines/`](../../guidelines/) section 3 says (decided 2026-11-04). Never a flat amaranth fill behind text.
-- **Two gradients, never on text.** `gradient.brand` for hero moments, `gradient.headshot` only behind headshot cutouts. No others, except the subtle `amaranth-600` → `amaranth-700` fill inside the [button](../../components/button/), which is part of that component.
+- **Two gradients, never on text.** `gradient.brand` for hero moments, `gradient.headshot` only behind headshot cutouts. No others, except the subtle `amaranth-600` → `amaranth-700` fill inside the [button](../../brand-components/button/), which is part of that component.
 - **Never a hex value** in a creative, a component or a page. Use the variables.
 - **Contrast:** text on dark uses `text.primary` or `text.secondary`. Never light gray on medium gray. Design Lab checks WCAG AA: 4.5 for body text, 3.0 for text from 24 px.
 - **Charts:** never rely on color alone to carry meaning.

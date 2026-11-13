@@ -2,7 +2,7 @@
 
 How to lay out a Qdrant social post, ad or banner at any size. Modelled on [Primer Brand's layout](https://primer.style/brand/layout/), with four pieces: **Canvas**, **Grid**, **Stack** and **Box**.
 
-Covers image canvases only. Web page layout stays in [`spacing/`](../spacing/) (`--qd-layout-*`). Print comes later (see [Print](#print)).
+Covers image canvases only. Web page layout stays in [`spacing/`](../../primitives/spacing/) (`--qd-layout-*`). Print comes later (see [Print](#print)).
 
 | File | What it is |
 | --- | --- |
@@ -13,10 +13,10 @@ Covers image canvases only. Web page layout stays in [`spacing/`](../spacing/) (
 
 ## Steps for an agent
 
-1. **Read [`guidelines/`](../../guidelines/) and ask its questions first** (tone, pattern or image, hero, red, other sizes). It decides which pattern, hero and canvas layout to use.
+1. **Read [`guidelines/`](../) and ask its questions first** (tone, pattern or image, hero, red, other sizes). It decides which pattern, hero and canvas layout to use.
 2. **Pick the shape** from width ÷ height (table below). It sets the reference canvas, margins, columns and gaps.
-3. **Compose it** from the content you're given, following [`guidelines/`](../../guidelines/) section 11 (Composition) and using only the approved parts in [`components/`](../../components/). There are no fixed post templates.
-4. **Build it** with the four pieces below. Load `primitives/colors/colors.css`, `primitives/typography/typography.css` and `primitives/layout/layout.css`. Colors come from [`colors/`](../colors/), type from [`typography/`](../typography/), images from [`imagery/`](../../brand-assets/imagery/), backgrounds from [`patterns/`](../../brand-assets/patterns/), the mascot from [`mascot/`](../../brand-assets/mascot/).
+3. **Compose it** from the content you're given, following [`guidelines/`](../) section 11 (Composition) and using only the approved parts in [`brand-components/`](../../brand-components/). There are no fixed post templates.
+4. **Build it** with the four pieces below. Load `primitives/colors/colors.css`, `primitives/typography/typography.css` and `guidelines/layout/layout.css`. Colors come from [`colors/`](../../primitives/colors/), type from [`typography/`](../../primitives/typography/), images from [`imagery/`](../../brand-assets/imagery/), backgrounds from [`patterns/`](../../brand-assets/patterns/), the mascot from [`mascot/`](../../brand-assets/mascot/).
 5. **Run the checks** in [`checks.md`](checks.md), with [`review/check.py`](../../review/) for the measurable ones. Fix and check again before showing it.
 
 ## Shapes
@@ -31,16 +31,16 @@ Sizes in px at the reference canvas.
 | `portrait` | 0.65 up to 0.85 | 1080×1350 | 64 / 64 / 64 | 6 × 132, gutter 32 | 16 / 24 / 48 |
 | `story` | below 0.65 | 1080×1920 | 64 / 256 / 344 | 4 × 214, gutter 32 | 24 / 32 / 64 |
 
-- **Blog post hero, 916×458:** the size on qdrant.tech (decided by Vanesa on 2026-11-12, replaces 2002×1122). Ratio 2, so it's `wide`, at 0.424× (margin 34, logo 34). Pattern or generated image, decided per post (guidelines section 1). With a partner lockup as the only content, see [`partner-lockup`](../../components/partner-lockup/).
+- **Blog post hero, 916×458:** the size on qdrant.tech (decided by Vanesa on 2026-11-12, replaces 2002×1122). Ratio 2, so it's `wide`, at 0.424× (margin 34, logo 34). Pattern or generated image, decided per post (guidelines section 1). With a partner lockup as the only content, see [`partner-lockup`](../../brand-components/partner-lockup/).
 - **LinkedIn profile cover, 1584×396:** ratio 4, so it's `ultrawide`, at 0.528× (decided by Vanesa on 2026-11-11). LinkedIn's profile photo covers the bottom-left, so:
   - The **logo** stays top-left. Keep the **bottom-left** clear: pattern only, no text, no visual.
   - **Dark only.** No light creatives on the cover: the light version was tried and not preferred (Vanesa, 2026-11-11).
   - **Suggest, by team:** pattern-only covers (no visual, serious generative patterns like Burst or Hexagon) for **Sales** and other customer-facing roles; covers with Qbot (more playful) for **DevRel**. A recommendation only: anyone can pick the one they prefer (Vanesa, 2026-11-11).
-  - The **heading** goes on the **right**, on the grid, left-aligned and centered top to bottom. Title sizes are the ultrawide ones in [`typography/`](../typography/).
+  - The **heading** goes on the **right**, on the grid, left-aligned and centered top to bottom. Title sizes are the ultrawide ones in [`typography/`](../../primitives/typography/).
   - **No visual:** heading on columns 9 to 12, title-short (128).
-  - **With Qbot:** Qbot sits after the heading, never before it ([`guidelines/`](../../guidelines/) section 6), and the title steps down one size (104). Two placements: Qbot full height at the right margin, cut at the waist with the chest logo whole, heading on columns 7 to 9; or a bigger Qbot cut at the upper chest (the Peek crop), heading on columns 6 to 8. Beside Qbot the heading may be narrower than half the grid ([`guidelines/`](../../guidelines/) section 11 rule 8).
+  - **With Qbot:** Qbot sits after the heading, never before it ([`guidelines/`](../) section 6), and the title steps down one size (104). Two placements: Qbot full height at the right margin, cut at the waist with the chest logo whole, heading on columns 7 to 9; or a bigger Qbot cut at the upper chest (the Peek crop), heading on columns 6 to 8. Beside Qbot the heading may be narrower than half the grid ([`guidelines/`](../) section 11 rule 8).
   - If the pattern needs a mask, the heading is on the right, so use `.qd-pattern-mask--from-right` (below).
-- **Between groups:** 2 × `section` (96 on square and portrait, 128 on wide and story, 128 on ultrawide). The header, heading, body and visual are separate groups, with this one gap between each ([`guidelines/`](../../guidelines/) section 11, rule 9, decided 2026-11-11). No token yet: use `calc(2 * var(--qd-gap-section))`.
+- **Between groups:** 2 × `section` (96 on square and portrait, 128 on wide and story, 128 on ultrawide). The header, heading, body and visual are separate groups, with this one gap between each ([`guidelines/`](../) section 11, rule 9, decided 2026-11-11). No token yet: use `calc(2 * var(--qd-gap-section))`.
 - **Story safe zones:** 256 px top and 344 px bottom keep text clear of the profile bar, reply box and stickers. Only backgrounds and images go there.
 - **Other sizes:** the scale is the smaller of width ÷ reference width and height ÷ reference height. Every value is multiplied by it, so a 1200×627 post uses the Wide values at 0.58×. The 8 px grid holds exactly at the reference canvases.
 - The column counts were worked out for this folder (whole px, on the 8 px grid). They don't come from Figma or the brand skill yet.
@@ -55,11 +55,11 @@ The post itself: size, margins and safe zones. Everything goes inside it.
 </div>
 ```
 
-Width and height are plain numbers in px. For one file rendered at many sizes, add `<script src="primitives/layout/canvas.js"></script>` instead. It sets all three from the window, or from `?w=&h=` in the URL when given (what [`review/render.py`](../../review/render.py) uses). The canvas is a column with `section` gaps between its children and the dark background.
+Width and height are plain numbers in px. For one file rendered at many sizes, add `<script src="guidelines/layout/canvas.js"></script>` instead. It sets all three from the window, or from `?w=&h=` in the URL when given (what [`review/render.py`](../../review/render.py) uses). The canvas is a column with `section` gaps between its children and the dark background.
 
 ## Pattern mask
 
-For patterns whose small details would cross the text, mask the pattern so the text sits on a calm neutral ([`guidelines/`](../../guidelines/) section 4, decided 2026-11-11, replaces the Zone layout). Only when the pattern's preset has `textMask` set to `soft-1` or `soft-2`; with `none`, the text sits straight on the pattern. The pattern is 100% where the visual sits and fades softly behind the text. The canvas shows **neutral 950** behind it on a dark creative and **neutral 100** on a light one.
+For patterns whose small details would cross the text, mask the pattern so the text sits on a calm neutral ([`guidelines/`](../) section 4, decided 2026-11-11, replaces the Zone layout). Only when the pattern's preset has `textMask` set to `soft-1` or `soft-2`; with `none`, the text sits straight on the pattern. The pattern is 100% where the visual sits and fades softly behind the text. The canvas shows **neutral 950** behind it on a dark creative and **neutral 100** on a light one.
 
 ```html
 <div class="qd-canvas qd-canvas--masked" data-shape="square">
@@ -133,7 +133,7 @@ Rules:
 - **Red is never a box fill.** It's for buttons and highlights.
 - **Borders only separate things.** They're never decoration.
 - Glows, gradients and photos as backgrounds come from brand-assets/ (patterns, imagery), not Box.
-- The light card is mostly for guide downloads and documentation promotions, and never holds a big headshot ([`guidelines/`](../../guidelines/) section 4).
+- The light card is mostly for guide downloads and documentation promotions, and never holds a big headshot ([`guidelines/`](../) section 4).
 - Padding is the shape's `group` gap (the light card: at least the logo's clear space). Corners are `radius.sm` (8 px at the reference canvas). The light card in a creative uses the book layout below instead.
 
 ### Light card layout (`.qd-book`)
@@ -159,7 +159,7 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 - The top block sits at the top padding and the bottom block at the bottom padding; the space between stays empty.
 - **Wide (1920×1080): a landscape card** (decided 2026-11-11). The card is 5:4 and 72% of the canvas height (973 × 778 at 1920×1080), the largest that fits with the button inside the margins. Card and button are centered together. Every value above stays a share of W, where W is the portrait card's width at that height (631), except the title and supporting text, which are **1.5×** (80 and 46 px) so the card doesn't look empty.
 - **Slides on wide (no button): `.qd-book--slide`** (decided 2026-11-11). The card is centered on its own, both ways, and is **16:10** (1244 × 778 at 1920×1080) so speakers or an info list fit beside each other. The pattern still shows on every side.
-- **Info list on the card:** one Lucide icon per line (map-pin = place, calendar = date, clock = time), at the card's text size (the CSS sets it), `neutral-500` from `icons.css`, a `tight` gap. Speakers as `headshot-circle`, beside the list. The event type is never in this list ([`guidelines/`](../../guidelines/) section 11, rule 3).
+- **Info list on the card:** one Lucide icon per line (map-pin = place, calendar = date, clock = time), at the card's text size (the CSS sets it), `neutral-500` from `icons.css`, a `tight` gap. Speakers as `headshot-circle`, beside the list. The event type is never in this list ([`guidelines/`](../) section 11, rule 3).
 - **Ultrawide: no light card.** There's no use case for it (decided 2026-11-11).
 - The card is centered, so it isn't tied to grid columns. Text inside it aligns to the card's padding.
 - Only on **Color-Sliced-Pattern-B**, red or violet, with its letter layer (decided 2026-11-11). Never with a big headshot; use `headshot-circle` if a speaker is needed.
@@ -180,7 +180,7 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 </div>
 ```
 
-These styles come from recent Qdrant web sections in Figma (customer stat cards, the cluster bento grid, the hero). Box uses role names only, so it follows the Figma neutrals in [`colors/`](../colors/) (since 2026-11-12).
+These styles come from recent Qdrant web sections in Figma (customer stat cards, the cluster bento grid, the hero). Box uses role names only, so it follows the Figma neutrals in [`colors/`](../../primitives/colors/) (since 2026-11-12).
 
 ## Print
 

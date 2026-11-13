@@ -41,7 +41,7 @@ def icon_colors():
 
 
 def load_rules():
-    lay = json.load(open(os.path.join(REPO, "primitives/layout/layout.tokens.json")))["canvas"]["shape"]
+    lay = json.load(open(os.path.join(REPO, "guidelines/layout/layout.tokens.json")))["canvas"]["shape"]
     shapes = {}
     for name, s in lay.items():
         if name.startswith("$"):
@@ -231,7 +231,7 @@ def check_one(m, rules):
             "checks.md, Contrast")
 
     if m.get("books"):
-        # The light card (book): its own sizes, from primitives/layout/README "Light card layout".
+        # The light card (book): its own sizes, from guidelines/layout/README "Light card layout".
         bk = m["books"][0]["rect"]
         wide = shape == "wide"
         biss = []

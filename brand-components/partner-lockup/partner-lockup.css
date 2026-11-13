@@ -1,5 +1,5 @@
 /* Partner lockup: the Qdrant logo + a plus or a divider + the partner's logo.
-   Load after primitives/layout/layout.css and brand-assets/logo/logo.css: it sizes everything
+   Load after guidelines/layout/layout.css and brand-assets/logo/logo.css: it sizes everything
    from --qd-logo-height, so the lockup takes the logo's place at the logo's size.
 
    Spacing measured on Brand Guide 2.0 slide 20 (Figma djCexPSttVyDjQXDo9Rka4, node 1:8532),

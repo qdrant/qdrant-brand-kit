@@ -10,11 +10,11 @@ hidden, for the contrast check). Then run review/check.py on the JSON files.
 
 How it serves the page (no files are copied anywhere):
   /          -> the folder that holds page.html (or --root)
-  /repo/...  -> this repo, so pages load  /repo/primitives/layout/layout.css  etc.
+  /repo/...  -> this repo, so pages load  /repo/guidelines/layout/layout.css  etc.
                (a page one folder deeper can also use ../repo/...)
   /review/... -> this folder; /review/measure.js is added to every page automatically
 
-The page gets ?w=W&h=H. primitives/layout/canvas.js reads them, so the shape is always right,
+The page gets ?w=W&h=H. guidelines/layout/canvas.js reads them, so the shape is always right,
 whatever size Chrome gives the window. Mechanics only: no brand values live in this script.
 Needs Google Chrome and Pillow (pip install pillow).
 """

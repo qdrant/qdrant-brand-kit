@@ -26,11 +26,11 @@ In Tailwind (the shadcn design system, when it lands) the class number is the va
 | Section padding | 40 to 80 |
 | Hero padding | 88 and up |
 
-Before 2026-11-12 this was an 8 px scale named by step (`space.1` = 8 px to `space.11` = 88 px, and `space.half` = 4 px). Nothing outside this folder used those names. Creatives don't use this scale: their margins and gaps scale with the canvas ([`layout/`](../layout/)).
+Before 2026-11-12 this was an 8 px scale named by step (`space.1` = 8 px to `space.11` = 88 px, and `space.half` = 4 px). Nothing outside this folder used those names. Creatives don't use this scale: their margins and gaps scale with the canvas ([`layout/`](../../guidelines/layout/)).
 
 ## Web and landing page layout
 
-Designed at a 1440px viewport, content centered in a fixed container. For social posts, ads and banners, see [`layout/`](../layout/). These move to `web/` when that folder exists.
+Designed at a 1440px viewport, content centered in a fixed container. For social posts, ads and banners, see [`layout/`](../../guidelines/layout/). These move to `web/` when that folder exists.
 
 | Token | Value | Note |
 | --- | --- | --- |

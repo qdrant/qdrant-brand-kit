@@ -2,7 +2,7 @@
 
 The big headshot: a speaker's cutout on the headshot gradient in a tall card with rounded corners, with name and role centered below. For speakers who are the point of the post. For a small, quieter headshot use [`headshot-circle`](../headshot-circle/).
 
-From Figma Brand-Collateral (`JQqxFCf33xbYJiOlHhtOjg`): [2 speakers](https://www.figma.com/design/JQqxFCf33xbYJiOlHhtOjg/Brand-Collateral?node-id=2183-29298), [3 speakers](https://www.figma.com/design/JQqxFCf33xbYJiOlHhtOjg/Brand-Collateral?node-id=2183-17250), [4 speakers](https://www.figma.com/design/JQqxFCf33xbYJiOlHhtOjg/Brand-Collateral?node-id=2183-32097). Sizes follow this repo's [layout grid](../../primitives/layout/), not the 8-column grid in those frames.
+From Figma Brand-Collateral (`JQqxFCf33xbYJiOlHhtOjg`): [2 speakers](https://www.figma.com/design/JQqxFCf33xbYJiOlHhtOjg/Brand-Collateral?node-id=2183-29298), [3 speakers](https://www.figma.com/design/JQqxFCf33xbYJiOlHhtOjg/Brand-Collateral?node-id=2183-17250), [4 speakers](https://www.figma.com/design/JQqxFCf33xbYJiOlHhtOjg/Brand-Collateral?node-id=2183-32097). Sizes follow this repo's [layout grid](../../guidelines/layout/), not the 8-column grid in those frames.
 
 | File | What it is |
 | --- | --- |
@@ -49,7 +49,7 @@ More than 4 speakers: use `headshot-circle`.
 
 ## Size and inner gaps
 
-In px at the reference canvas. Every value scales with the canvas (see [`layout/`](../../primitives/layout/)).
+In px at the reference canvas. Every value scales with the canvas (see [`layout/`](../../guidelines/layout/)).
 
 | Part | Value |
 | --- | --- |
@@ -88,8 +88,8 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 ```html
 <link rel="stylesheet" href="primitives/colors/colors.css">
 <link rel="stylesheet" href="primitives/typography/typography.css">
-<link rel="stylesheet" href="primitives/layout/layout.css">
-<link rel="stylesheet" href="components/headshot-card/headshot-card.css">
+<link rel="stylesheet" href="guidelines/layout/layout.css">
+<link rel="stylesheet" href="brand-components/headshot-card/headshot-card.css">
 
 <div class="qd-canvas" data-shape="square" style="--qd-canvas-width: 1080; --qd-canvas-height: 1080">
   <h1>…</h1>

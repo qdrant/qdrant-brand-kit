@@ -39,7 +39,7 @@ On any shape it can also be chosen on purpose, for a quieter post.
 
 ## Size and inner gaps
 
-In px at the reference canvas. Every value scales with the canvas (see [`layout/`](../../primitives/layout/)).
+In px at the reference canvas. Every value scales with the canvas (see [`layout/`](../../guidelines/layout/)).
 
 | Part | Value |
 | --- | --- |
@@ -75,8 +75,8 @@ Use `.qd-grid`. Rows are a `section` gap apart.
 ```html
 <link rel="stylesheet" href="primitives/colors/colors.css">
 <link rel="stylesheet" href="primitives/typography/typography.css">
-<link rel="stylesheet" href="primitives/layout/layout.css">
-<link rel="stylesheet" href="components/headshot-circle/headshot-circle.css">
+<link rel="stylesheet" href="guidelines/layout/layout.css">
+<link rel="stylesheet" href="brand-components/headshot-circle/headshot-circle.css">
 
 <div class="qd-canvas" data-shape="square" style="--qd-canvas-width: 1080; --qd-canvas-height: 1080">
   <h1>…</h1>

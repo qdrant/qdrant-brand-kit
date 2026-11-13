@@ -1,6 +1,6 @@
 # Breakpoints
 
-Qdrant's breakpoints as tokens, from the Figma file **Qdrant Design System Primitives** (`UUpGTk4Ifmpr0FwNr6pXVg`, exported 2026-11-12). New on 2026-11-12. For web UI only: creatives pick a shape from their width and height instead ([`layout/`](../layout/)).
+Qdrant's breakpoints as tokens, from the Figma file **Qdrant Design System Primitives** (`UUpGTk4Ifmpr0FwNr6pXVg`, exported 2026-11-12). New on 2026-11-12. For web UI only: creatives pick a shape from their width and height instead ([`layout/`](../../guidelines/layout/)).
 
 | File | What it is |
 | --- | --- |

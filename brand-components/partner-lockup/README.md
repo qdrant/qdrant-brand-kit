@@ -53,9 +53,9 @@ The plus and divider take the text color: white on dark and on patterns, dark on
 ## Use
 
 ```html
-<link rel="stylesheet" href="primitives/layout/layout.css">
+<link rel="stylesheet" href="guidelines/layout/layout.css">
 <link rel="stylesheet" href="brand-assets/logo/logo.css">
-<link rel="stylesheet" href="components/partner-lockup/partner-lockup.css">
+<link rel="stylesheet" href="brand-components/partner-lockup/partner-lockup.css">
 
 <div class="qd-canvas" data-shape="square" style="--qd-canvas-width: 1080; --qd-canvas-height: 1080">
   <div class="qd-partner-lockup">

@@ -41,9 +41,9 @@ Part.
    - Height: 2.25 × text
    - Side padding: 1.25 × text
    - Radius: 0.5 × text
-4. **Other canvas sizes scale** like the rest of [`layout/`](../../primitives/layout/): by the smaller of width ÷ reference width and height ÷ reference height. Put the button inside a `.qd-canvas` and the CSS does this.
+4. **Other canvas sizes scale** like the rest of [`layout/`](../../guidelines/layout/): by the smaller of width ÷ reference width and height ÷ reference height. Put the button inside a `.qd-canvas` and the CSS does this.
 5. **SemiBold (600)**, the same weight as the Figma button and every heading style in `typography/`. Not Bold, even though most creatives on the Campaigns page used Bold.
-6. **Placement:** last in the text block, aligned with the text, or top-right level with the logo. **Always in a corner, never mid-layout:** top-right only when the text block spans the full width; when the text block is only part of the width (e.g. wide with a visual on the right), the button goes last in the text block ([`guidelines/`](../../guidelines/) section 11, rule 10, decided 2026-11-11). **Exception, the light card:** outside the card, centered below it, sized by the card (`.qd-book__cta`, see [`layout/`](../../primitives/layout/) "Light card layout"). Never full width ([`guidelines/`](../../guidelines/) section 11, rule 10).
+6. **Placement:** last in the text block, aligned with the text, or top-right level with the logo. **Always in a corner, never mid-layout:** top-right only when the text block spans the full width; when the text block is only part of the width (e.g. wide with a visual on the right), the button goes last in the text block ([`guidelines/`](../../guidelines/) section 11, rule 10, decided 2026-11-11). **Exception, the light card:** outside the card, centered below it, sized by the card (`.qd-book__cta`, see [`layout/`](../../guidelines/layout/) "Light card layout"). Never full width ([`guidelines/`](../../guidelines/) section 11, rule 10).
 7. **Beside the logo, the same height as the logo.** Add `qd-button--beside-logo`: the height becomes the logo's height for the shape (72 or 80 px) and the text, padding and corners follow it in the same proportions. The button is never taller than the logo next to it (decided 2026-11-04).
 8. **Never an icon.** The button is text only, in every use and every type, Main and Secondary (decided 2026-11-11).
 9. **One button per post.**
@@ -74,8 +74,8 @@ Token names only. Figma colors that have no token use the nearest one. Moved to 
 ```html
 <link rel="stylesheet" href="primitives/colors/colors.css">
 <link rel="stylesheet" href="primitives/typography/typography.css">
-<link rel="stylesheet" href="primitives/layout/layout.css">
-<link rel="stylesheet" href="components/button/button.css">
+<link rel="stylesheet" href="guidelines/layout/layout.css">
+<link rel="stylesheet" href="brand-components/button/button.css">
 
 <div class="qd-canvas" data-shape="square" style="--qd-canvas-width: 1080; --qd-canvas-height: 1080">
   …

@@ -20,5 +20,5 @@ Tailwind v4 has no theme namespace for border widths, so the design system adds 
 
 ## Rules
 
-- **Borders only separate things.** They're never decoration ([`layout/`](../layout/) "Box").
-- Creatives use their own canvas-scaled line width (`--qd-box-border-width` in [`layout/`](../layout/)), not this scale.
+- **Borders only separate things.** They're never decoration ([`layout/`](../../guidelines/layout/) "Box").
+- Creatives use their own canvas-scaled line width (`--qd-box-border-width` in [`layout/`](../../guidelines/layout/)), not this scale.

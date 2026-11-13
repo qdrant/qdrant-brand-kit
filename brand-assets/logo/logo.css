@@ -1,5 +1,5 @@
 /* Qdrant logo size and clear space on a canvas.
-   Load after primitives/layout/layout.css: it uses .qd-canvas, data-shape and --qd-canvas-u.
+   Load after guidelines/layout/layout.css: it uses .qd-canvas, data-shape and --qd-canvas-u.
 
    Logo height in px at each shape's reference canvas (Vanesa, 2026-11-04). It scales with the
    canvas like the rest of layout/, and never goes under 24 px (Brand Guide 2.0 minimum, 90×24). */
