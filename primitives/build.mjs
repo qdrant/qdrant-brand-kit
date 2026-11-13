@@ -108,13 +108,13 @@ const outputs = {};
   out.push("", "  /* Brand names (aliases) */");
   for (const [[name], token] of leaves(c.brand)) out.push(line(`--qd-color-brand-${name}`, hex(token.$value), aliasName(token.$value)));
   for (const [[name], token] of leaves(c.asset)) out.push(line(`--qd-color-${name}`, hex(token.$value)));
-  out.push("", "  /* Roles: dark theme, the default */");
-  for (const [path, token] of leaves(c.semantic.color)) out.push(line(`--qd-color-${path.join("-")}`, hex(token.$value), aliasName(token.$value)));
   out.push("");
   for (const [[name], token] of leaves(c.gradient)) {
     const g = gradient(token);
     out.push(line(`--qd-gradient-${name}`, g.value, g.note));
   }
+  out.push("}", "", '/* Roles: dark theme, the default. Also on [data-theme="dark"], so a dark section inside a light page switches back. */', ":root,", '[data-theme="dark"] {');
+  for (const [path, token] of leaves(c.semantic.color)) out.push(line(`--qd-color-${path.join("-")}`, hex(token.$value), aliasName(token.$value)));
   out.push("}", "", "/* Light theme. Accent colors stay the same in both themes. */", '[data-theme="light"] {');
   for (const [path, token] of leaves(c.theme.light.color)) out.push(line(`--qd-color-${path.join("-")}`, hex(token.$value), aliasName(token.$value)));
   out.push("}", "");
@@ -149,8 +149,31 @@ outputs["primitives/breakpoints/breakpoints.css"] = dimensionCss("breakpoints.to
   outputs["primitives/elevation/elevation.css"] = [
     header("elevation.tokens.json"),
     "/* Product only (Qdrant Cloud on MUI). Creatives and marketing use the background roles in colors.css. */",
-    ":root {", ...block(p.dark), "}", "", '[data-theme="light"] {', ...block(p.light), "}", "",
+    ":root,", '[data-theme="dark"] {', ...block(p.dark), "}", "", '[data-theme="light"] {', ...block(p.light), "}", "",
   ].join("\n");
+}
+
+// design-system/styles/tokens.css: the palette as Tailwind theme colors (bg-indigo-600, text-neutral-400...).
+// Tailwind's default palette is cleared, so only Qdrant colors exist. Values point at the --qd-* variables.
+{
+  const c = docs.colors;
+  const out = [
+    header("primitives/colors/colors.tokens.json"),
+    "/* The Qdrant palette as Tailwind colors. Tailwind's default palette is cleared on purpose: only these exist. */",
+    "@theme inline {",
+    "  --color-*: initial;",
+    "  --color-white: var(--qd-color-neutral-0);",
+    "  --color-black: var(--qd-color-neutral-1000);",
+  ];
+  for (const [family, steps] of Object.entries(c.color)) {
+    if (family.startsWith("$")) continue;
+    for (const [[step], token] of leaves(steps)) {
+      if (!token.$deprecated) out.push(`  --color-${family}-${step}: var(--qd-color-${family}-${step});`);
+    }
+  }
+  for (const [[name]] of leaves(c.brand)) out.push(`  --color-brand-${name}: var(--qd-color-brand-${name});`);
+  out.push("}", "");
+  outputs["design-system/styles/tokens.css"] = out.join("\n");
 }
 
 // Patterns keep their own token names (Design Lab and its stored meshes use them). Each token says

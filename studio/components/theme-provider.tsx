@@ -9,9 +9,11 @@ function ThemeProvider({
 }: React.ComponentProps<typeof NextThemesProvider>) {
   return (
     <NextThemesProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
+      // Qdrant themes: dark by default, light with data-theme="light" (primitives/colors).
+      attribute="data-theme"
+      themes={["dark", "light"]}
+      defaultTheme="dark"
+      enableSystem={false}
       disableTransitionOnChange
       {...props}
     >

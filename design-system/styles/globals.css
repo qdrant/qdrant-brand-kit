@@ -1,129 +1,130 @@
+/* The design system's stylesheet: Tailwind, the Qdrant primitives, and shadcn's tokens mapped onto them.
+   Every color, font and radius comes from primitives/ (the --qd-* variables). Never a hex value in this file. */
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+/* The Qdrant primitives, the single source of truth (generated from primitives/*.tokens.json). */
+@import "../../primitives/colors/colors.css";
+@import "../../primitives/typography/typography.css"; /* brings fonts/fonts.css */
+@import "../../primitives/spacing/spacing.css";
+@import "../../primitives/radius/radius.css";
+@import "../../primitives/border-width/border-width.css";
+/* The palette as Tailwind colors, with Tailwind's defaults cleared (generated). */
+@import "./tokens.css";
+
+/* Themes: data-theme="dark" (the default) or "light", on <html> for the whole page and on any element
+   for one section. `dark:` and `light:` follow the closest scope: a dark section inside a light page
+   is dark, and a light section inside a dark page is light. Always set data-theme on <html>. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *):not(:where([data-theme="dark"] [data-theme="light"], [data-theme="dark"] [data-theme="light"] *)));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *):not(:where([data-theme="light"] [data-theme="dark"], [data-theme="light"] [data-theme="dark"] *)));
+
 @source "../../studio/**/*.{ts,tsx}";
 @source "../../web/**/*.{ts,tsx}";
 @source "../**/*.{ts,tsx}";
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --color-sidebar-ring: var(--sidebar-ring);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
-    --color-chart-5: var(--chart-5);
-    --color-chart-4: var(--chart-4);
-    --color-chart-3: var(--chart-3);
-    --color-chart-2: var(--chart-2);
-    --color-chart-1: var(--chart-1);
-    --color-ring: var(--ring);
-    --color-input: var(--input);
-    --color-border: var(--border);
-    --color-destructive: var(--destructive);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-accent: var(--accent);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-muted: var(--muted);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-secondary: var(--secondary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-primary: var(--primary);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-popover: var(--popover);
-    --color-card-foreground: var(--card-foreground);
-    --color-card: var(--card);
-    --color-foreground: var(--foreground);
-    --color-background: var(--background);
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
-    --font-sans: var(--font-sans);
+  --font-sans: var(--qd-font-family-sans);
+  --font-mono: var(--qd-font-family-mono);
+  --font-heading: var(--qd-font-family-sans);
+  --font-display: var(--qd-font-family-display);
+
+  /* shadcn's radius names, snapped to the nearest Qdrant radius (primitives/radius). */
+  --radius-xs: var(--qd-radius-xs);
+  --radius-sm: var(--qd-radius-xs);
+  --radius-md: var(--qd-radius-sm);
+  --radius-lg: var(--qd-radius-sm);
+  --radius-xl: var(--qd-radius-sm);
+  --radius-2xl: var(--qd-radius-md);
+  --radius-3xl: var(--qd-radius-md);
+  --radius-4xl: var(--qd-radius-lg);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
 }
 
-:root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.153 0.006 107.1);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.153 0.006 107.1);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.153 0.006 107.1);
-    --primary: oklch(0.228 0.013 107.4);
-    --primary-foreground: oklch(0.988 0.003 106.5);
-    --secondary: oklch(0.966 0.005 106.5);
-    --secondary-foreground: oklch(0.228 0.013 107.4);
-    --muted: oklch(0.966 0.005 106.5);
-    --muted-foreground: oklch(0.58 0.031 107.3);
-    --accent: oklch(0.966 0.005 106.5);
-    --accent-foreground: oklch(0.228 0.013 107.4);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.93 0.007 106.5);
-    --input: oklch(0.93 0.007 106.5);
-    --ring: oklch(0.737 0.021 106.9);
-    --chart-1: oklch(0.88 0.011 106.6);
-    --chart-2: oklch(0.58 0.031 107.3);
-    --chart-3: oklch(0.466 0.025 107.3);
-    --chart-4: oklch(0.394 0.023 107.4);
-    --chart-5: oklch(0.286 0.016 107.4);
-    --radius: 0.45rem;
-    --sidebar: oklch(0.988 0.003 106.5);
-    --sidebar-foreground: oklch(0.153 0.006 107.1);
-    --sidebar-primary: oklch(0.228 0.013 107.4);
-    --sidebar-primary-foreground: oklch(0.988 0.003 106.5);
-    --sidebar-accent: oklch(0.966 0.005 106.5);
-    --sidebar-accent-foreground: oklch(0.228 0.013 107.4);
-    --sidebar-border: oklch(0.93 0.007 106.5);
-    --sidebar-ring: oklch(0.737 0.021 106.9);
+/* shadcn's tokens, mapped by meaning onto the Qdrant roles (primitives/colors/README.md "Roles").
+   Declared on :root and on every [data-theme] element, so a section switched to light recomputes them.
+   shadcn's `secondary`, `muted` and `accent` are neutral surfaces, not Qdrant's violet or red. */
+:root,
+[data-theme] {
+  --background: var(--qd-color-background-default);
+  --foreground: var(--qd-color-text-primary);
+  --card: var(--qd-color-background-raised);
+  --card-foreground: var(--qd-color-text-primary);
+  --popover: var(--qd-color-background-overlay);
+  --popover-foreground: var(--qd-color-text-primary);
+  --primary: var(--qd-color-accent-primary);
+  --primary-foreground: var(--qd-color-text-on-accent);
+  --secondary: var(--qd-color-background-highlight);
+  --secondary-foreground: var(--qd-color-text-primary);
+  --muted: var(--qd-color-background-highlight);
+  --muted-foreground: var(--qd-color-text-secondary);
+  --accent: var(--qd-color-background-highlight);
+  --accent-foreground: var(--qd-color-text-primary);
+  --destructive: var(--qd-color-status-error);
+  --border: var(--qd-color-border-on-dark);
+  /* Inputs, checkboxes and focus rings need 3:1 against the background (Figma contrast rules). */
+  --input: var(--qd-color-neutral-600);
+  --ring: var(--qd-color-accent-primary);
+  --chart-1: var(--qd-color-dataviz-1);
+  --chart-2: var(--qd-color-dataviz-2);
+  --chart-3: var(--qd-color-dataviz-3);
+  --chart-4: var(--qd-color-dataviz-4);
+  --chart-5: var(--qd-color-dataviz-5);
+  --radius: var(--qd-radius-sm);
+  --sidebar: var(--qd-color-background-raised);
+  --sidebar-foreground: var(--qd-color-text-primary);
+  --sidebar-primary: var(--qd-color-accent-primary);
+  --sidebar-primary-foreground: var(--qd-color-text-on-accent);
+  --sidebar-accent: var(--qd-color-background-highlight);
+  --sidebar-accent-foreground: var(--qd-color-text-primary);
+  --sidebar-border: var(--qd-color-border-on-dark);
+  --sidebar-ring: var(--qd-color-accent-primary);
 }
 
-.dark {
-    --background: oklch(0.153 0.006 107.1);
-    --foreground: oklch(0.988 0.003 106.5);
-    --card: oklch(0.228 0.013 107.4);
-    --card-foreground: oklch(0.988 0.003 106.5);
-    --popover: oklch(0.228 0.013 107.4);
-    --popover-foreground: oklch(0.988 0.003 106.5);
-    --primary: oklch(0.93 0.007 106.5);
-    --primary-foreground: oklch(0.228 0.013 107.4);
-    --secondary: oklch(0.286 0.016 107.4);
-    --secondary-foreground: oklch(0.988 0.003 106.5);
-    --muted: oklch(0.286 0.016 107.4);
-    --muted-foreground: oklch(0.737 0.021 106.9);
-    --accent: oklch(0.286 0.016 107.4);
-    --accent-foreground: oklch(0.988 0.003 106.5);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.58 0.031 107.3);
-    --chart-1: oklch(0.88 0.011 106.6);
-    --chart-2: oklch(0.58 0.031 107.3);
-    --chart-3: oklch(0.466 0.025 107.3);
-    --chart-4: oklch(0.394 0.023 107.4);
-    --chart-5: oklch(0.286 0.016 107.4);
-    --sidebar: oklch(0.228 0.013 107.4);
-    --sidebar-foreground: oklch(0.988 0.003 106.5);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.988 0.003 106.5);
-    --sidebar-accent: oklch(0.286 0.016 107.4);
-    --sidebar-accent-foreground: oklch(0.988 0.003 106.5);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.58 0.031 107.3);
+/* Light: the background and text roles switch in primitives/colors. Borders have their own light role,
+   and inputs keep 3:1 on white with neutral-500. */
+[data-theme="light"] {
+  --border: var(--qd-color-border-on-light);
+  --input: var(--qd-color-neutral-500);
+  --sidebar-border: var(--qd-color-border-on-light);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    }
+  }
 }

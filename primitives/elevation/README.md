@@ -7,7 +7,7 @@ Paper elevation for the product, Qdrant Cloud, while it runs on MUI: levels 0 to
 | File | What it is |
 | --- | --- |
 | `elevation.tokens.json` | The source. W3C tokens: `paper-elevation.light` and `paper-elevation.dark`, aliases of the neutral primitives in `colors/` |
-| `elevation.css` | Generated from the JSON by [`../build.mjs`](../build.mjs): `--qd-paper-elevation-*` variables, dark on `:root` (this repo's default theme) and light on `[data-theme="light"]`. Never edit it by hand |
+| `elevation.css` | Generated from the JSON by [`../build.mjs`](../build.mjs): `--qd-paper-elevation-*` variables, dark on `:root` and `[data-theme="dark"]` (this repo's default theme) and light on `[data-theme="light"]`. Never edit it by hand |
 
 ## Levels
 

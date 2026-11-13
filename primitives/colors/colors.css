@@ -133,7 +133,13 @@
   --qd-color-brand-indigo: #6047FF; /* indigo-600 */
   --qd-color-mascotGlow: #976BFF;
 
-  /* Roles: dark theme, the default */
+  --qd-gradient-brand: linear-gradient(135deg, #DC244C, #6047FF); /* amaranth-600 → indigo-600 */
+  --qd-gradient-headshot: linear-gradient(204deg, rgb(53 43 131 / 0.7) 7.6%, rgb(131 133 255 / 0.7) 80.1%); /* indigo-900 → indigo-400 */
+}
+
+/* Roles: dark theme, the default. Also on [data-theme="dark"], so a dark section inside a light page switches back. */
+:root,
+[data-theme="dark"] {
   --qd-color-background-default: #070B11; /* neutral-950 */
   --qd-color-background-raised: #0F151D; /* neutral-925 */
   --qd-color-background-overlay: #1F2835; /* neutral-850 */
@@ -164,9 +170,6 @@
   --qd-color-dataviz-6: #932EBC; /* purple-700 */
   --qd-color-dataviz-7: #3CA042; /* green-600 */
   --qd-color-dataviz-8: #00B7CF; /* cyan-500 */
-
-  --qd-gradient-brand: linear-gradient(135deg, #DC244C, #6047FF); /* amaranth-600 → indigo-600 */
-  --qd-gradient-headshot: linear-gradient(204deg, rgb(53 43 131 / 0.7) 7.6%, rgb(131 133 255 / 0.7) 80.1%); /* indigo-900 → indigo-400 */
 }
 
 /* Light theme. Accent colors stay the same in both themes. */

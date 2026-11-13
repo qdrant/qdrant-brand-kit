@@ -5,7 +5,7 @@ The Qdrant palette as tokens. The primitives come from the Figma file **Qdrant D
 | File | What it is |
 | --- | --- |
 | `colors.tokens.json` | The source. W3C tokens: `color` and `brand` (the Figma primitives, exact), then this repo's brand layer: `asset`, `gradient`, `semantic` roles (dark theme) and `theme.light` overrides |
-| `colors.css` | Generated from the JSON by [`../build.mjs`](../build.mjs): `--qd-color-*` and `--qd-gradient-*` variables, with a `[data-theme="light"]` override. Never edit it by hand |
+| `colors.css` | Generated from the JSON by [`../build.mjs`](../build.mjs): `--qd-color-*` and `--qd-gradient-*` variables. The dark roles are on `:root` and `[data-theme="dark"]`, the light ones on `[data-theme="light"]`, so any section can switch theme. Never edit it by hand |
 
 ## Primitives
 
