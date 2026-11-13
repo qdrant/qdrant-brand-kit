@@ -1,14 +1,24 @@
 @import url("./fonts/fonts.css");
 
 :root {
-  /* Generated from typography.tokens.json. Values from the qdrant-brand skill (interim). */
-  --qd-font-family-sans: "Mona Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Same values as typography.tokens.json, kept in step by hand (this file also holds the creative classes).
+     Families, weights and scales match the Figma primitives; the text styles are this repo's own. */
+  --qd-font-family-sans: "Mona Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Figma: primary */
   --qd-font-family-mono: "Geist Mono", "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
+  --qd-font-family-display: "Mona Sans Condensed", "Mona Sans", ui-sans-serif, system-ui, sans-serif; /* Mona Sans at 75% width, from fonts.css */
+  --qd-font-weight-light: 300;
   --qd-font-weight-regular: 400;
   --qd-font-weight-medium: 500;
   --qd-font-weight-semibold: 600;
   --qd-font-weight-bold: 700;
   --qd-font-features: "ss05" on, "ss06" on;
+
+  /* Figma scales. New web UI picks from these; the text styles and creative sizes below keep their own values. */
+  --qd-font-size-10: 10px; --qd-font-size-12: 12px; --qd-font-size-13: 13px; --qd-font-size-14: 14px; --qd-font-size-15: 15px;
+  --qd-font-size-16: 16px; --qd-font-size-18: 18px; --qd-font-size-20: 20px; --qd-font-size-24: 24px; --qd-font-size-32: 32px;
+  --qd-font-size-36: 36px; --qd-font-size-40: 40px; --qd-font-size-48: 48px; --qd-font-size-56: 56px; --qd-font-size-64: 64px;
+  --qd-line-height-none: 1; --qd-line-height-tight: 1.2; --qd-line-height-snug: 1.35; --qd-line-height-normal: 1.5; --qd-line-height-relaxed: 1.7;
+  --qd-letter-spacing-tighter: -1.5px; --qd-letter-spacing-tight: -1px; --qd-letter-spacing-snug: -0.5px; --qd-letter-spacing-normal: 0px;
 
   --qd-type-display-2-size: 104px; --qd-type-display-2-weight: 600; --qd-type-display-2-line-height: 1.05; --qd-type-display-2-letter-spacing: -1.8px;
   --qd-type-display-1-size: 80px; --qd-type-display-1-weight: 600; --qd-type-display-1-line-height: 1.05; --qd-type-display-1-letter-spacing: -1.8px;

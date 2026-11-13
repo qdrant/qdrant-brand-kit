@@ -60,14 +60,14 @@ In px at the reference canvas:
 
 ## Colors
 
-Token names only. Figma colors that have no token use the nearest one.
+Token names only. Figma colors that have no token use the nearest one. Moved to the Figma primitive names on 2026-11-12: the brand red is `amaranth-600`, the same `#DC244C` as before.
 
 | Part | Token | Figma |
 | --- | --- | --- |
-| Fill, top | `primary-500` | Primary/P50 #DC244C |
-| Fill, bottom | `primary-700` | #BE003A (nearest token) |
-| Inner highlight (top edge) | `primary-400` | #FF516B |
-| Text | `neutral-white` | Neutral/N100 #FFFFFF |
+| Fill, top | `amaranth-600` | Primary/P50 #DC244C |
+| Fill, bottom | `amaranth-700` | #BE003A (nearest token, `#BA1E41`) |
+| Inner highlight (top edge) | `amaranth-500` | #FF516B (nearest token, `#F14463`) |
+| Text | `neutral-0` | Neutral/N100 #FFFFFF |
 
 ## How to use
 
@@ -89,9 +89,9 @@ From the Figma button, at web size (XS / MD / LG = 36 / 40 / 48px tall, SemiBold
 
 | Type / State | Fill | Border | Text |
 | --- | --- | --- | --- |
-| Main / Hover | `primary-500`, highlight `primary-300` | none | white |
-| Main / Focused | `primary-500` | 2px ring, `primary-500` at 40% | white |
-| Main / Disabled | `primary-300` | none | white |
+| Main / Hover | `amaranth-600`, highlight `amaranth-400` | none | white |
+| Main / Focused | `amaranth-600` | 2px ring, `amaranth-600` at 40% | white |
+| Main / Disabled | `amaranth-400` | none | white |
 | Secondary / Default | none | 1px `neutral-600` | white |
 | Secondary / Hover | none | 2px `neutral-400` | white |
 | Secondary / Focused | none | 2px `neutral-50` | white |

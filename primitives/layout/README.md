@@ -123,18 +123,18 @@ Padding, fill and border, all from tokens. Pick the style by intent:
 | Class | What it is | When |
 | --- | --- | --- |
 | `.qd-box` | Plain: padding only, no fill or border | Default. Most text sits straight on the canvas |
-| `.qd-box--card` | Fill one elevation step lighter (`background.surface`) with a thin `border.on-dark` | A stat, a quote, a speaker: something that should read as one unit |
+| `.qd-box--card` | Fill one elevation step lighter (`background.raised`) with a thin `border.on-dark` | A stat, a quote, a speaker: something that should read as one unit |
 | `.qd-box--outline` | Border only, no fill | Cells of a bento grid. Inside `.qd-grid--joined` they share their lines |
 | `.qd-box--light-card` | Light fill (`background.light-surface`), dark text (`text.on-light`, body `text.body-on-light`), divider `border.on-light` | Text over a full-bleed pattern, like the Get-the-Guide ads (Figma 18921:37171). Only on a pattern, never nested |
 
 Rules:
-- **One step lighter per level.** A card on the canvas is `surface`. A card inside a card becomes `surface-raised` on its own. Never more than two levels.
+- **One step lighter per level.** A card on the canvas is `raised`. A card inside a card becomes `overlay` on its own. Never more than two levels.
 - **Dark by default.** For a light creative, put `data-theme="light"` on the canvas: the background, text and boxes switch to the light theme. On a dark creative, the only light piece is `.qd-box--light-card`, and only on a full-bleed pattern (decided 2026-11-04).
 - **Red is never a box fill.** It's for buttons and highlights.
 - **Borders only separate things.** They're never decoration.
 - Glows, gradients and photos as backgrounds come from brand-assets/ (patterns, imagery), not Box.
 - The light card is mostly for guide downloads and documentation promotions, and never holds a big headshot ([`guidelines/`](../../guidelines/) section 4).
-- Padding is the shape's `group` gap (the light card: at least the logo's clear space). Corners are `radius.md` (8 px at the reference canvas). The light card in a creative uses the book layout below instead.
+- Padding is the shape's `group` gap (the light card: at least the logo's clear space). Corners are `radius.sm` (8 px at the reference canvas). The light card in a creative uses the book layout below instead.
 
 ### Light card layout (`.qd-book`)
 
@@ -180,7 +180,7 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 </div>
 ```
 
-These styles come from recent Qdrant web sections in Figma (customer stat cards, the cluster bento grid, the hero). Those frames use a newer neutral scale (`Neutral/N10` `#090E1A`, `N20` `#161E33`) than colors/. Box uses token names only, so the values can be swapped when Juan's design system lands.
+These styles come from recent Qdrant web sections in Figma (customer stat cards, the cluster bento grid, the hero). Box uses role names only, so it follows the Figma neutrals in [`colors/`](../colors/) (since 2026-11-12).
 
 ## Print
 

@@ -53,7 +53,7 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 
 | Part | Value |
 | --- | --- |
-| Card corners | 16 (`radius.lg`) |
+| Card corners | 16 (`radius.md`) |
 | Card fill | `gradient.headshot` |
 | Photo to name | the shape's `group` gap |
 | Head to card top | the shape's `group` gap |

@@ -34,24 +34,26 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 ## Colors
 
 - **On a pattern that isn't masked** (violet or red mid-tones, where a 400 disappears): **white**, the same color as the text beside it, with `.qd-icon--on-pattern` (decided 2026-11-11).
-- **On dark backgrounds, a 400 color. On light backgrounds, a 500 color.** The light card counts as a light background, even in a dark creative. It must keep **3:1** contrast with what's behind it, so it's easy to scan.
+- **On dark backgrounds, a 400 color. On light backgrounds, a 600 color.** The light card counts as a light background, even in a dark creative. It must keep **3:1** contrast with what's behind it, so it's easy to scan. (Steps updated 2026-11-12 for the Figma ramps, where the brand colors sit at 600; before, it was a 500 on light.)
 - Measured on the backgrounds in [`colors/`](../../primitives/colors/):
 
-  | Background | Allowed | Not allowed (under 3:1) |
+  | Background | Allowed | Not allowed |
   | --- | --- | --- |
-  | Dark | `neutral-400`, `primary-400`, `secondary-400` | Any 500 or other value |
-  | Light | `indigo-500`, `purple-500`, `secondary-500`, `primary-500`, `red-500`, `teal-500`, `neutral-500` (white and `surface` only, not `surface-raised`) | `green-500`, `cyan-500`, `orange-500`, `yellow-500` |
+  | Dark (`background.default`) | `neutral-400`, `amaranth-400`, `indigo-400` | Any other step |
+  | Light (white, `neutral-25`, the light card) | `neutral-600`, `amaranth-600`, `indigo-600`, `blue-600`, `purple-600`, `red-600`, `teal-600` | `orange`, `green`, `cyan` (about 3:1 on white and under it on `neutral-50`), `pink` (never for brand marks) |
 
 - This lets icons use the extended palette on light backgrounds, an exception to the "charts only" rule in `colors/`.
-- In code, pick the color with a modifier. The theme decides the 400 or the 500:
+- In code, pick the color with a modifier. The theme decides the 400 or the 600:
 
   | Class | Dark | Light |
   | --- | --- | --- |
-  | `.qd-icon` (default) | `neutral-400` | `neutral-500` |
-  | `.qd-icon--primary` | `primary-400` | `primary-500` |
-  | `.qd-icon--secondary` | `secondary-400` | `secondary-500` |
-| `.qd-icon--on-pattern` | white (`text.primary`), only on a pattern that isn't masked | not used |
-  | `.qd-icon--indigo`, `--purple`, `--red`, `--teal` | not allowed | the 500 |
+  | `.qd-icon` (default) | `neutral-400` | `neutral-600` |
+  | `.qd-icon--amaranth` | `amaranth-400` | `amaranth-600` |
+  | `.qd-icon--indigo` | `indigo-400` | `indigo-600` |
+  | `.qd-icon--on-pattern` | white (`text.primary`), only on a pattern that isn't masked | not used |
+  | `.qd-icon--blue`, `--purple`, `--red`, `--teal` | not allowed | the 600 |
+
+  Renamed 2026-11-12 with the Figma color names: `--primary` is now `--amaranth`, `--secondary` is now `--indigo`, and the old `--indigo` (a Material blue) is now `--blue`.
 
 ## In creatives
 
@@ -63,7 +65,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 <link rel="stylesheet" href="brand-assets/icons/icons.css">
 
 <div class="qd-stack qd-stack--row qd-stack--tight qd-icon-row">
-  <svg class="qd-icon qd-icon--secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  <svg class="qd-icon qd-icon--indigo" viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <!-- Lucide "calendar", pasted from lucide.dev -->
   </svg>

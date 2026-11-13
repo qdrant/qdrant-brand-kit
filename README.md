@@ -6,13 +6,17 @@ The building blocks for Qdrant marketing creatives (social posts, ads, banners, 
 
 ## Primitives: the rules
 
-Tokens and rules only. No finished designs.
+Tokens and rules only. No finished designs. Each folder's `.tokens.json` is the source; its `.css` is generated with `node primitives/build.mjs` (typography's CSS is kept in step by hand).
 
 | Folder | Status | What it is |
 | --- | --- | --- |
-| [`primitives/colors/`](primitives/colors/) | Interim values | The palette as tokens and CSS variables: core scales, semantic roles, dark and light themes, data viz, the brand and headshot gradients. |
-| [`primitives/typography/`](primitives/typography/) | Interim values | Mona Sans and Geist Mono (font files included), every Figma text style (incl. condensed, mono and social), sizes per channel, hierarchy, emphasis and misuse rules. |
-| [`primitives/spacing/`](primitives/spacing/) | Interim values | The 8px space scale, corner radius and web page layout constants. |
+| [`primitives/colors/`](primitives/colors/) | Figma primitives, 2026-11-12 | The palette as tokens and CSS variables: 11 color families from Figma, brand names, roles for dark and light, data viz, the brand and headshot gradients. |
+| [`primitives/typography/`](primitives/typography/) | V1, Figma scales added | Mona Sans and Geist Mono (font files included), the Figma size, line-height and letter-spacing scales, every text style (incl. condensed, mono and social), sizes per channel, hierarchy, emphasis and misuse rules. |
+| [`primitives/spacing/`](primitives/spacing/) | Figma primitives, 2026-11-12 | The 4px spacing scale and the web page layout constants. |
+| [`primitives/radius/`](primitives/radius/) | Figma primitives, 2026-11-12 | Corner radius, from none to full. |
+| [`primitives/border-width/`](primitives/border-width/) | Figma primitives, 2026-11-12 | Border widths: hairline, thin, medium, thick. |
+| [`primitives/breakpoints/`](primitives/breakpoints/) | Figma primitives, 2026-11-12 | Breakpoints for web UI, xs to xl. |
+| [`primitives/elevation/`](primitives/elevation/) | Figma primitives, 2026-11-12. Product only | Paper elevation 0 to 24 for Qdrant Cloud on MUI. Not used by creatives or marketing. |
 | [`primitives/layout/`](primitives/layout/) | V1 | Canvas, Grid, Stack and Box for social posts, ads and banners at any size: shapes, margins, safe zones, columns, gap roles, Box styles and checks. |
 
 ## Guidelines: choosing and combining
@@ -49,7 +53,7 @@ The old social post template lives in its own archived repo: [qdrant-social-temp
 
 ## Shared rules
 
-- **Tokens are placeholders.** Colors and text styles come from Juan's design system. Until it lands, keep the token names and swap only the values. `primitives/colors/`, `primitives/typography/` and `primitives/spacing/` hold the interim values, from the qdrant-brand skill, with Design Lab's token names.
+- **This repo is the source of truth for the primitives.** They match the Figma file Qdrant Design System Primitives (`UUpGTk4Ifmpr0FwNr6pXVg`, 2026-11-12); Figma is synced from here. Change the `.tokens.json`, run `node primitives/build.mjs`, and commit both.
 - **Code, not images.** Everything is drawn from tokens and small settings files, so it stays on-brand when the tokens change.
 - **Any size.** Everything works at any width and height, from a square post to a wide banner.
 - **Components use only what's here.** A component takes its values from primitives and its materials from brand assets. It never sets its own colors, sizes or gaps.

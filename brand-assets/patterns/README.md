@@ -6,7 +6,7 @@ Brand patterns written as code, ready to live in Design Lab as primitives. No im
 
 | Piece | What it is | Where |
 | --- | --- | --- |
-| **Tokens** | Brand colors in W3C format. Placeholders until Juan's design system lands. Keep the names, swap the values. | `tokens/placeholder.tokens.json` |
+| **Tokens** | Brand colors in W3C format. The names stay (`primary` = amaranth, `secondary` = indigo, `neutral`), because presets, meshes and Design Lab use them. Each value comes from a primitive in [`primitives/colors/`](../../primitives/colors/), the nearest Figma color, and is written by `node primitives/build.mjs` (2026-11-12). | `tokens/placeholder.tokens.json` |
 | **Recipe** | A set of effects, as code. One file per recipe. | `patterns/<recipe>.js` |
 | **Preset** | A pattern: a recipe plus fixed values from Figma. Named `<Source>-<Effect>-Pattern-<Letter>`. | `presets/<name>.json` |
 | **Shared settings** | Values every pattern of a kind uses. Change once, all update. | `presets/shared.json`, `presets/mesh-pattern.shared.json`, `presets/mesh-dithered-pattern.shared.json`, `presets/generative-pattern.shared.json` |

@@ -1,0 +1,40 @@
+{
+  "$description": "Qdrant breakpoints (minimum widths). Copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12. breakpoints.css is generated from this file by primitives/build.mjs.",
+  "breakpoint": {
+    "xs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 444,
+        "unit": "px"
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 600,
+        "unit": "px"
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 900,
+        "unit": "px"
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1200,
+        "unit": "px"
+      }
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1536,
+        "unit": "px"
+      }
+    }
+  }
+}

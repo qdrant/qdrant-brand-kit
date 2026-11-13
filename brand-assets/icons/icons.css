@@ -5,7 +5,7 @@
    stroke="currentColor" and stroke-width="2": the stroke then scales with the icon (slide 39).
 
    In a creative the icon is the same height as the supporting text beside it (Vanesa, 2026-11-11).
-   Colors: a 400 on dark backgrounds, a 500 on light ones, always 3:1 or more (README). */
+   Colors: a 400 on dark backgrounds, a 600 on light ones, always 3:1 or more (README). */
 
 .qd-icon {
   --qd-icon-color: var(--qd-color-neutral-400);
@@ -25,27 +25,29 @@
 /* Icon + text in one row: centered on the first line of text. */
 .qd-icon-row { align-items: center; }
 
-/* Colors. Dark is the default theme; [data-theme="light"] switches to the 500s. */
-.qd-icon--primary   { --qd-icon-color: var(--qd-color-primary-400); }
-.qd-icon--secondary { --qd-icon-color: var(--qd-color-secondary-400); }
+/* Colors. Dark is the default theme: the 400s. [data-theme="light"] and the light card switch to the 600s.
+   With the Figma ramps the brand colors sit at 600 (amaranth-600 #DC244C, indigo-600 #6047FF), and every 600 keeps
+   3:1 on white (2026-11-12, was 400 and 500 with the old ramps). */
+.qd-icon--amaranth { --qd-icon-color: var(--qd-color-amaranth-400); }
+.qd-icon--indigo   { --qd-icon-color: var(--qd-color-indigo-400); }
 /* On a pattern that isn't masked (violet or red mid-tones), the 400s disappear: use white, the text color
    beside it (Vanesa, 2026-11-11). Still 3:1 or more. */
 .qd-icon--on-pattern { --qd-icon-color: var(--qd-color-text-primary); }
 
-[data-theme="light"] .qd-icon            { --qd-icon-color: var(--qd-color-neutral-500); }
-[data-theme="light"] .qd-icon--primary   { --qd-icon-color: var(--qd-color-primary-500); }
-[data-theme="light"] .qd-icon--secondary { --qd-icon-color: var(--qd-color-secondary-500); }
-/* Extended palette: light backgrounds only (no 400 exists for these). */
-[data-theme="light"] .qd-icon--indigo { --qd-icon-color: var(--qd-color-indigo-500); }
-[data-theme="light"] .qd-icon--purple { --qd-icon-color: var(--qd-color-purple-500); }
-[data-theme="light"] .qd-icon--red    { --qd-icon-color: var(--qd-color-red-500); }
-[data-theme="light"] .qd-icon--teal   { --qd-icon-color: var(--qd-color-teal-500); }
+[data-theme="light"] .qd-icon           { --qd-icon-color: var(--qd-color-neutral-600); }
+[data-theme="light"] .qd-icon--amaranth { --qd-icon-color: var(--qd-color-amaranth-600); }
+[data-theme="light"] .qd-icon--indigo   { --qd-icon-color: var(--qd-color-indigo-600); }
+/* Extended palette: light backgrounds only (charts-only colors, the icon exception in colors/). */
+[data-theme="light"] .qd-icon--blue   { --qd-icon-color: var(--qd-color-blue-600); }
+[data-theme="light"] .qd-icon--purple { --qd-icon-color: var(--qd-color-purple-600); }
+[data-theme="light"] .qd-icon--red    { --qd-icon-color: var(--qd-color-red-600); }
+[data-theme="light"] .qd-icon--teal   { --qd-icon-color: var(--qd-color-teal-600); }
 
-/* The light card (book) is a light background, even in a dark creative: its icons use the 500s (2026-11-11). */
-.qd-box--light-card .qd-icon            { --qd-icon-color: var(--qd-color-neutral-500); }
-.qd-box--light-card .qd-icon--primary   { --qd-icon-color: var(--qd-color-primary-500); }
-.qd-box--light-card .qd-icon--secondary { --qd-icon-color: var(--qd-color-secondary-500); }
-.qd-box--light-card .qd-icon--indigo { --qd-icon-color: var(--qd-color-indigo-500); }
-.qd-box--light-card .qd-icon--purple { --qd-icon-color: var(--qd-color-purple-500); }
-.qd-box--light-card .qd-icon--red    { --qd-icon-color: var(--qd-color-red-500); }
-.qd-box--light-card .qd-icon--teal   { --qd-icon-color: var(--qd-color-teal-500); }
+/* The light card (book) is a light background, even in a dark creative: its icons use the 600s (2026-11-11). */
+.qd-box--light-card .qd-icon           { --qd-icon-color: var(--qd-color-neutral-600); }
+.qd-box--light-card .qd-icon--amaranth { --qd-icon-color: var(--qd-color-amaranth-600); }
+.qd-box--light-card .qd-icon--indigo   { --qd-icon-color: var(--qd-color-indigo-600); }
+.qd-box--light-card .qd-icon--blue   { --qd-icon-color: var(--qd-color-blue-600); }
+.qd-box--light-card .qd-icon--purple { --qd-icon-color: var(--qd-color-purple-600); }
+.qd-box--light-card .qd-icon--red    { --qd-icon-color: var(--qd-color-red-600); }
+.qd-box--light-card .qd-icon--teal   { --qd-icon-color: var(--qd-color-teal-600); }

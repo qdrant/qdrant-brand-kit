@@ -95,10 +95,10 @@
   border-radius: calc(8 * var(--qd-canvas-u)); /* radius.md at the reference canvas */
 }
 .qd-box--card {
-  background: var(--qd-color-background-surface);
+  background: var(--qd-color-background-raised);
   border: var(--qd-box-border-width) solid var(--qd-color-border-on-dark);
 }
-.qd-box--card .qd-box--card { background: var(--qd-color-background-surface-raised); } /* level 2, the deepest */
+.qd-box--card .qd-box--card { background: var(--qd-color-background-overlay); } /* level 2, the deepest */
 [data-theme="light"] .qd-box--card,
 [data-theme="light"] .qd-box--outline { border-color: var(--qd-color-border-on-light); }
 .qd-box--light-card {

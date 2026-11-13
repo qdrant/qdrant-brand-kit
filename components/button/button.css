@@ -33,14 +33,14 @@
   height: calc(var(--qd-button-height) * var(--qd-canvas-u));
   padding: 0 calc(var(--qd-button-pad) * var(--qd-canvas-u));
   border-radius: calc(var(--qd-button-radius) * var(--qd-canvas-u));
-  /* Figma: Primary/P50 to #BE003A, mapped to the nearest token. */
-  background: linear-gradient(to bottom, var(--qd-color-primary-500), var(--qd-color-primary-700));
+  /* Figma: Primary/P50 to #BE003A, mapped to the nearest primitive (amaranth-600 is the brand red). */
+  background: linear-gradient(to bottom, var(--qd-color-amaranth-600), var(--qd-color-amaranth-700));
   /* Top inner highlight. Figma: 2px at 16px text, scaled with the text. */
   box-shadow: inset 0
     calc(var(--qd-button-text) / 8 * var(--qd-canvas-u))
     calc(var(--qd-button-text) / 16 * var(--qd-canvas-u))
-    var(--qd-color-primary-400);
-  color: var(--qd-color-neutral-white);
+    var(--qd-color-amaranth-500);
+  color: var(--qd-color-neutral-0);
   font-family: var(--qd-font-family-sans);
   font-weight: var(--qd-font-weight-semibold); /* SemiBold, same as headings. Not Bold. */
   font-size: calc(var(--qd-button-text) * var(--qd-canvas-u));

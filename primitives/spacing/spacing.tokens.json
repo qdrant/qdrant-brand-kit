@@ -1,132 +1,194 @@
 {
-  "$description": "Qdrant spacing: an 8px grid. Values from the qdrant-brand skill (qdrant/skills-internal skills/design), interim until Juan's design system lands.",
-  "core": {
-    "space": {
-      "half": {
-        "$type": "dimension",
-        "$value": "4px",
-        "$description": "Micro-spacing only"
-      },
-      "1": {
-        "$type": "dimension",
-        "$value": "8px"
-      },
-      "2": {
-        "$type": "dimension",
-        "$value": "16px"
-      },
-      "3": {
-        "$type": "dimension",
-        "$value": "24px"
-      },
-      "4": {
-        "$type": "dimension",
-        "$value": "32px"
-      },
-      "5": {
-        "$type": "dimension",
-        "$value": "40px"
-      },
-      "6": {
-        "$type": "dimension",
-        "$value": "48px"
-      },
-      "7": {
-        "$type": "dimension",
-        "$value": "56px"
-      },
-      "8": {
-        "$type": "dimension",
-        "$value": "64px"
-      },
-      "9": {
-        "$type": "dimension",
-        "$value": "72px"
-      },
-      "10": {
-        "$type": "dimension",
-        "$value": "80px"
-      },
-      "11": {
-        "$type": "dimension",
-        "$value": "88px"
+  "$description": "Qdrant spacing: a 4px grid. The `spacing` group is copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12. `layout` holds this repo's web page layout constants. spacing.css is generated from this file by primitives/build.mjs.",
+  "spacing": {
+    "0": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
       }
     },
-    "radius": {
-      "sm": {
-        "$type": "dimension",
-        "$value": "4px",
-        "$description": "Badges, pills, tags, copy buttons"
-      },
-      "md": {
-        "$type": "dimension",
-        "$value": "8px",
-        "$description": "Cards, buttons, inputs, code blocks"
-      },
-      "lg": {
-        "$type": "dimension",
-        "$value": "16px",
-        "$description": "Hero and CTA containers, prominent cards"
-      },
-      "full": {
-        "$type": "dimension",
-        "$value": "9999px",
-        "$description": "Pills"
-      },
-      "card-luma": {
-        "$type": "dimension",
-        "$value": "32px",
-        "$description": "Luma cover cards. Added in Design Lab"
+    "4": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
       }
-    }
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      }
+    },
+    "16": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "24": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      }
+    },
+    "32": {
+      "$type": "dimension",
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      }
+    },
+    "40": {
+      "$type": "dimension",
+      "$value": {
+        "value": 40,
+        "unit": "px"
+      }
+    },
+    "48": {
+      "$type": "dimension",
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      }
+    },
+    "56": {
+      "$type": "dimension",
+      "$value": {
+        "value": 56,
+        "unit": "px"
+      }
+    },
+    "64": {
+      "$type": "dimension",
+      "$value": {
+        "value": 64,
+        "unit": "px"
+      }
+    },
+    "72": {
+      "$type": "dimension",
+      "$value": {
+        "value": 72,
+        "unit": "px"
+      }
+    },
+    "80": {
+      "$type": "dimension",
+      "$value": {
+        "value": 80,
+        "unit": "px"
+      }
+    },
+    "88": {
+      "$type": "dimension",
+      "$value": {
+        "value": 88,
+        "unit": "px"
+      }
+    },
+    "96": {
+      "$type": "dimension",
+      "$value": {
+        "value": 96,
+        "unit": "px"
+      }
+    },
+    "104": {
+      "$type": "dimension",
+      "$value": {
+        "value": 104,
+        "unit": "px"
+      }
+    },
+    "112": {
+      "$type": "dimension",
+      "$value": {
+        "value": 112,
+        "unit": "px"
+      }
+    },
+    "120": {
+      "$type": "dimension",
+      "$value": {
+        "value": 120,
+        "unit": "px"
+      }
+    },
+    "144": {
+      "$type": "dimension",
+      "$value": {
+        "value": 144,
+        "unit": "px"
+      }
+    },
+    "160": {
+      "$type": "dimension",
+      "$value": {
+        "value": 160,
+        "unit": "px"
+      }
+    },
+    "$description": "4 px base grid. In Tailwind, class number = value / 4 (16 px = p-4)."
   },
-  "semantic": {
-    "layout": {
-      "viewport": {
-        "$type": "dimension",
-        "$value": "1440px",
-        "$description": "Design width for web and landing pages"
-      },
-      "content-width": {
-        "$type": "dimension",
-        "$value": "1110px"
-      },
-      "side-padding": {
-        "$type": "dimension",
-        "$value": "165px",
-        "$description": "Off-grid on purpose: (1440 - 1110) / 2"
-      },
-      "column-gap": {
-        "$type": "dimension",
-        "$value": "30px",
-        "$description": "Off-grid on purpose: 3 x 350 + 2 x 30 = 1110"
-      },
-      "narrow-content": {
-        "$type": "dimension",
-        "$value": "800px",
-        "$description": "FAQ and other narrow content"
-      },
-      "nav-height": {
-        "$type": "dimension",
-        "$value": "110px"
-      },
-      "section-padding-min": {
-        "$type": "dimension",
-        "$value": "80px",
-        "$description": "No web section goes below this"
-      },
-      "section-padding-max": {
-        "$type": "dimension",
-        "$value": "120px"
-      },
-      "heading-to-content-min": {
-        "$type": "dimension",
-        "$value": "40px"
-      },
-      "heading-to-content-max": {
-        "$type": "dimension",
-        "$value": "64px"
-      }
-    }
+  "layout": {
+    "viewport": {
+      "$type": "dimension",
+      "$value": "1440px",
+      "$description": "Design width for web and landing pages"
+    },
+    "content-width": {
+      "$type": "dimension",
+      "$value": "1110px"
+    },
+    "side-padding": {
+      "$type": "dimension",
+      "$value": "165px",
+      "$description": "Off-grid on purpose: (1440 - 1110) / 2"
+    },
+    "column-gap": {
+      "$type": "dimension",
+      "$value": "30px",
+      "$description": "Off-grid on purpose: 3 x 350 + 2 x 30 = 1110"
+    },
+    "narrow-content": {
+      "$type": "dimension",
+      "$value": "800px",
+      "$description": "FAQ and other narrow content"
+    },
+    "nav-height": {
+      "$type": "dimension",
+      "$value": "110px"
+    },
+    "section-padding-min": {
+      "$type": "dimension",
+      "$value": "80px",
+      "$description": "No web section goes below this"
+    },
+    "section-padding-max": {
+      "$type": "dimension",
+      "$value": "120px"
+    },
+    "heading-to-content-min": {
+      "$type": "dimension",
+      "$value": "40px"
+    },
+    "heading-to-content-max": {
+      "$type": "dimension",
+      "$value": "64px"
+    },
+    "$description": "Web and landing page layout, designed at a 1440px viewport. Moves to web/ when that folder exists."
   }
 }

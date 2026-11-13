@@ -1,416 +1,2267 @@
 {
-  "$description": "Qdrant colors. Values from the qdrant-brand skill (qdrant/skills-internal skills/design), interim until Juan's design system lands. Keep the names; only values change.",
-  "core": {
-    "color": {
-      "primary": {
-        "50": {
-          "$type": "color",
-          "$value": "#FDECEF"
-        },
-        "100": {
-          "$type": "color",
-          "$value": "#FCD7DD"
-        },
-        "200": {
-          "$type": "color",
-          "$value": "#FAAEB3"
-        },
-        "300": {
-          "$type": "color",
-          "$value": "#FF8792"
-        },
-        "400": {
-          "$type": "color",
-          "$value": "#FF516B"
-        },
-        "500": {
-          "$type": "color",
-          "$value": "#DC244C"
-        },
-        "600": {
-          "$type": "color",
-          "$value": "#CC1845"
-        },
-        "700": {
-          "$type": "color",
-          "$value": "#BD0C3E"
-        },
-        "800": {
-          "$type": "color",
-          "$value": "#9E0D38"
-        },
-        "900": {
-          "$type": "color",
-          "$value": "#850D35"
-        }
-      },
-      "secondary": {
-        "50": {
-          "$type": "color",
-          "$value": "#E5E8FF"
-        },
-        "100": {
-          "$type": "color",
-          "$value": "#DDE0FF"
-        },
-        "200": {
-          "$type": "color",
-          "$value": "#C2C5FF"
-        },
-        "300": {
-          "$type": "color",
-          "$value": "#9494FF"
-        },
-        "400": {
-          "$type": "color",
-          "$value": "#7E75FF"
-        },
-        "500": {
-          "$type": "color",
-          "$value": "#6047FF"
-        },
-        "600": {
-          "$type": "color",
-          "$value": "#5F36F5"
-        },
-        "700": {
-          "$type": "color",
-          "$value": "#522AD8"
-        },
-        "800": {
-          "$type": "color",
-          "$value": "#4325AE"
-        },
-        "900": {
-          "$type": "color",
-          "$value": "#392689"
-        }
-      },
-      "neutral": {
-        "white": {
-          "$type": "color",
-          "$value": "#FFFFFF"
-        },
-        "50": {
-          "$type": "color",
-          "$value": "#F0F3FA"
-        },
-        "100": {
-          "$type": "color",
-          "$value": "#E2E7F5"
-        },
-        "200": {
-          "$type": "color",
-          "$value": "#D3D9EB"
-        },
-        "300": {
-          "$type": "color",
-          "$value": "#CAD0E5"
-        },
-        "400": {
-          "$type": "color",
-          "$value": "#ABB1C7"
-        },
-        "500": {
-          "$type": "color",
-          "$value": "#898EA3"
-        },
-        "600": {
-          "$type": "color",
-          "$value": "#656B7F"
-        },
-        "700": {
-          "$type": "color",
-          "$value": "#4E5366"
-        },
-        "800": {
-          "$type": "color",
-          "$value": "#303547"
-        },
-        "900": {
-          "$type": "color",
-          "$value": "#111824"
-        },
-        "950": {
-          "$type": "color",
-          "$value": "#0B0F19"
-        },
-        "black": {
-          "$type": "color",
-          "$value": "#000000"
-        }
-      },
-      "teal": {
-        "500": {
-          "$type": "color",
-          "$value": "#009688",
-          "$description": "Charts and data visualization only"
-        }
-      },
-      "lightBlue": {
-        "500": {
-          "$type": "color",
-          "$value": "#03A9F4",
-          "$description": "Charts and data visualization only"
-        }
-      },
-      "orange": {
-        "500": {
-          "$type": "color",
-          "$value": "#FF9800",
-          "$description": "Charts and data visualization only"
-        }
-      },
-      "purple": {
-        "500": {
-          "$type": "color",
-          "$value": "#9C27B0",
-          "$description": "Charts and data visualization only"
-        }
-      },
-      "green": {
-        "500": {
-          "$type": "color",
-          "$value": "#4CAF50",
-          "$description": "Charts and data visualization only"
-        }
-      },
-      "cyan": {
-        "500": {
-          "$type": "color",
-          "$value": "#00BCD4",
-          "$description": "Charts and data visualization only"
-        }
-      },
-      "indigo": {
-        "500": {
-          "$type": "color",
-          "$value": "#3F51B5",
-          "$description": "Charts and data visualization only"
-        }
-      },
-      "yellow": {
-        "500": {
-          "$type": "color",
-          "$value": "#FFEB3B",
-          "$description": "Charts and data visualization only"
-        }
-      },
-      "red": {
-        "500": {
-          "$type": "color",
-          "$value": "#F44336",
-          "$description": "Charts and data visualization only"
-        }
-      },
-      "mascotGlow": {
+  "$description": "Qdrant colors. The `color` and `brand` groups are the primitives, copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12. The other groups are this repo's brand layer: roles for creatives and web, gradients and the mascot glow, all aliases of the primitives. Source of truth: this file. colors.css is generated from it by primitives/build.mjs.",
+  "color": {
+    "$description": "Color primitives. Raw values only: no meaning. Use semantic tokens in components.",
+    "neutral": {
+      "0": {
         "$type": "color",
-        "$value": "#976BFF",
-        "$description": "Mascot glow only (Design Lab)"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hex": "#ffffff"
+        }
+      },
+      "25": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9725,
+            0.9725,
+            0.9765
+          ],
+          "hex": "#f8f8f9"
+        }
+      },
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9529,
+            0.9529,
+            0.9608
+          ],
+          "hex": "#f3f3f5"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.902,
+            0.9059,
+            0.9176
+          ],
+          "hex": "#e6e7ea"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8431,
+            0.851,
+            0.8667
+          ],
+          "hex": "#d7d9dd"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8039,
+            0.8157,
+            0.8353
+          ],
+          "hex": "#cdd0d5"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6784,
+            0.698,
+            0.7255
+          ],
+          "hex": "#adb2b9"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5333,
+            0.5647,
+            0.6
+          ],
+          "hex": "#889099"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3882,
+            0.4275,
+            0.4745
+          ],
+          "hex": "#636d79"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2902,
+            0.3333,
+            0.3882
+          ],
+          "hex": "#4a5563"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1725,
+            0.2078,
+            0.2627
+          ],
+          "hex": "#2c3543"
+        }
+      },
+      "850": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1216,
+            0.1569,
+            0.2078
+          ],
+          "hex": "#1f2835"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0784,
+            0.1059,
+            0.1451
+          ],
+          "hex": "#141b25"
+        }
+      },
+      "925": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0588,
+            0.0824,
+            0.1137
+          ],
+          "hex": "#0f151d"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0275,
+            0.0431,
+            0.0667
+          ],
+          "hex": "#070b11"
+        }
+      },
+      "1000": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "hex": "#000000"
+        }
+      },
+      "$description": "Deep Space 216 neutral (HCT hue 255, saturation-balanced). 0 = white, 1000 = black. 850 and 925 support the background roles."
+    },
+    "amaranth": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9922,
+            0.9451,
+            0.949
+          ],
+          "hex": "#fdf1f2"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9882,
+            0.898,
+            0.9059
+          ],
+          "hex": "#fce5e7"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9804,
+            0.8118,
+            0.8353
+          ],
+          "hex": "#facfd5"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9765,
+            0.651,
+            0.698
+          ],
+          "hex": "#f9a6b2"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9647,
+            0.4431,
+            0.5255
+          ],
+          "hex": "#f67186"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9451,
+            0.2667,
+            0.3882
+          ],
+          "hex": "#f14463"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8627,
+            0.1412,
+            0.298
+          ],
+          "hex": "#dc244c"
+        },
+        "$description": "Main color of this family"
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7294,
+            0.1176,
+            0.2549
+          ],
+          "hex": "#ba1e41"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6078,
+            0.1176,
+            0.2392
+          ],
+          "hex": "#9b1e3d"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5098,
+            0.1216,
+            0.2314
+          ],
+          "hex": "#821f3b"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2824,
+            0.051,
+            0.1098
+          ],
+          "hex": "#480d1c"
+        }
+      },
+      "a100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.502,
+            0.6118
+          ],
+          "hex": "#ff809c"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.3216,
+            0.4549
+          ],
+          "hex": "#ff5274"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9608,
+            0.0,
+            0.3216
+          ],
+          "hex": "#f50052"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7804,
+            0.0784,
+            0.3137
+          ],
+          "hex": "#c71450"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
       }
     },
-    "gradient": {
-      "brand": {
-        "$type": "gradient",
-        "$value": [
-          {
-            "color": "{core.color.primary.500}",
-            "position": 0
-          },
-          {
-            "color": "{core.color.secondary.500}",
-            "position": 1
-          }
-        ],
-        "$description": "Red to violet, 135deg. Hero moments only, never on text."
+    "indigo": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9373,
+            0.949,
+            1.0
+          ],
+          "hex": "#eff2ff"
+        }
       },
-      "headshot": {
-        "$type": "gradient",
-        "$value": [
-          {
-            "color": "{core.color.secondary.900}",
-            "position": 0.076,
-            "opacity": 0.7
-          },
-          {
-            "color": "{core.color.secondary.400}",
-            "position": 0.801,
-            "opacity": 0.7
-          }
-        ],
-        "$description": "Violet, 204deg, both stops at 70%. Only behind headshot cutouts (components/headshot-card, headshot-circle). From Figma Brand-Collateral, node 2183:29300."
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8824,
+            0.9059,
+            1.0
+          ],
+          "hex": "#e1e7ff"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7882,
+            0.8196,
+            1.0
+          ],
+          "hex": "#c9d1ff"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6588,
+            0.698,
+            1.0
+          ],
+          "hex": "#a8b2ff"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5137,
+            0.5216,
+            1.0
+          ],
+          "hex": "#8385ff"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4118,
+            0.3647,
+            0.9922
+          ],
+          "hex": "#695dfd"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3765,
+            0.2784,
+            1.0
+          ],
+          "hex": "#6047ff"
+        },
+        "$description": "Main color of this family"
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2902,
+            0.1725,
+            0.8275
+          ],
+          "hex": "#4a2cd3"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2392,
+            0.1608,
+            0.6627
+          ],
+          "hex": "#3d29a9"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2078,
+            0.1686,
+            0.5137
+          ],
+          "hex": "#352b83"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1255,
+            0.102,
+            0.2941
+          ],
+          "hex": "#201a4b"
+        }
+      },
+      "a100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6078,
+            0.549,
+            1.0
+          ],
+          "hex": "#9b8cff"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4157,
+            0.3255,
+            0.9961
+          ],
+          "hex": "#6a53fe"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3647,
+            0.2392,
+            0.9961
+          ],
+          "hex": "#5d3dfe"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3216,
+            0.1882,
+            0.9961
+          ],
+          "hex": "#5230fe"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      }
+    },
+    "red": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9922,
+            0.949,
+            0.949
+          ],
+          "hex": "#fdf2f2"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9922,
+            0.8902,
+            0.8824
+          ],
+          "hex": "#fde3e1"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9922,
+            0.7961,
+            0.7882
+          ],
+          "hex": "#fdcbc9"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9882,
+            0.651,
+            0.6314
+          ],
+          "hex": "#fca6a1"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9765,
+            0.4275,
+            0.3961
+          ],
+          "hex": "#f96d65"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.949,
+            0.2549,
+            0.2039
+          ],
+          "hex": "#f24134"
+        },
+        "$description": "Main color of this family"
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8745,
+            0.1294,
+            0.0275
+          ],
+          "hex": "#df2107"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7294,
+            0.1059,
+            0.0196
+          ],
+          "hex": "#ba1b05"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6,
+            0.1137,
+            0.0627
+          ],
+          "hex": "#991d10"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4902,
+            0.1294,
+            0.098
+          ],
+          "hex": "#7d2119"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2627,
+            0.051,
+            0.0314
+          ],
+          "hex": "#430d08"
+        }
+      },
+      "a100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.5412,
+            0.502
+          ],
+          "hex": "#ff8a80"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.3216,
+            0.3216
+          ],
+          "hex": "#ff5252"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.0902,
+            0.2667
+          ],
+          "hex": "#ff1744"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8353,
+            0.0,
+            0.0
+          ],
+          "hex": "#d50000"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      }
+    },
+    "orange": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.9843,
+            0.9373
+          ],
+          "hex": "#fffbef"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.949,
+            0.8118
+          ],
+          "hex": "#fff2cf"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.8941,
+            0.6078
+          ],
+          "hex": "#ffe49b"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.8157,
+            0.4
+          ],
+          "hex": "#ffd066"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.7216,
+            0.1725
+          ],
+          "hex": "#ffb82c"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9961,
+            0.5961,
+            0.0
+          ],
+          "hex": "#fe9800"
+        },
+        "$description": "Main color of this family"
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8784,
+            0.4431,
+            0.0667
+          ],
+          "hex": "#e07111"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7216,
+            0.3059,
+            0.098
+          ],
+          "hex": "#b84e19"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5804,
+            0.2392,
+            0.1059
+          ],
+          "hex": "#943d1b"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4745,
+            0.2039,
+            0.102
+          ],
+          "hex": "#79341a"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2706,
+            0.102,
+            0.0392
+          ],
+          "hex": "#451a0a"
+        }
+      },
+      "a100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.8196,
+            0.502
+          ],
+          "hex": "#ffd180"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.6706,
+            0.251
+          ],
+          "hex": "#ffab40"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.5686,
+            0.0
+          ],
+          "hex": "#ff9100"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.4275,
+            0.0
+          ],
+          "hex": "#ff6d00"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      }
+    },
+    "green": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.949,
+            0.9882,
+            0.9569
+          ],
+          "hex": "#f2fcf4"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8824,
+            0.9804,
+            0.902
+          ],
+          "hex": "#e1fae6"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7725,
+            0.9569,
+            0.8118
+          ],
+          "hex": "#c5f4cf"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5922,
+            0.9255,
+            0.6588
+          ],
+          "hex": "#97eca8"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3882,
+            0.8471,
+            0.4549
+          ],
+          "hex": "#63d874"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.298,
+            0.7608,
+            0.3333
+          ],
+          "hex": "#4cc255"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2353,
+            0.6275,
+            0.2588
+          ],
+          "hex": "#3ca042"
+        },
+        "$description": "Main color of this family"
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1922,
+            0.4941,
+            0.2196
+          ],
+          "hex": "#317e38"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1647,
+            0.3882,
+            0.1922
+          ],
+          "hex": "#2a6331"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1412,
+            0.3176,
+            0.1725
+          ],
+          "hex": "#24512c"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0627,
+            0.1765,
+            0.0863
+          ],
+          "hex": "#102d16"
+        }
+      },
+      "a100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7255,
+            0.9647,
+            0.7922
+          ],
+          "hex": "#b9f6ca"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4118,
+            0.9412,
+            0.6824
+          ],
+          "hex": "#69f0ae"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.902,
+            0.4627
+          ],
+          "hex": "#00e676"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.7843,
+            0.3255
+          ],
+          "hex": "#00c853"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      }
+    },
+    "teal": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9451,
+            0.9922,
+            0.9804
+          ],
+          "hex": "#f1fdfa"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8118,
+            0.9804,
+            0.9412
+          ],
+          "hex": "#cffaf0"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6235,
+            0.9608,
+            0.8863
+          ],
+          "hex": "#9ff5e2"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3725,
+            0.9176,
+            0.8235
+          ],
+          "hex": "#5fead2"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0745,
+            0.8275,
+            0.7333
+          ],
+          "hex": "#13d3bb"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.7255,
+            0.6431
+          ],
+          "hex": "#00b9a4"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.5804,
+            0.5294
+          ],
+          "hex": "#009487"
+        },
+        "$description": "Main color of this family"
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0471,
+            0.4627,
+            0.4275
+          ],
+          "hex": "#0c766d"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0667,
+            0.3686,
+            0.3451
+          ],
+          "hex": "#115e58"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0863,
+            0.3059,
+            0.2863
+          ],
+          "hex": "#164e49"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0314,
+            0.1843,
+            0.1765
+          ],
+          "hex": "#082f2d"
+        }
+      },
+      "a100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6549,
+            1.0,
+            0.9216
+          ],
+          "hex": "#a7ffeb"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3922,
+            1.0,
+            0.8549
+          ],
+          "hex": "#64ffda"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1137,
+            0.9137,
+            0.7137
+          ],
+          "hex": "#1de9b6"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.749,
+            0.6471
+          ],
+          "hex": "#00bfa5"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      }
+    },
+    "cyan": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9333,
+            0.9961,
+            0.9961
+          ],
+          "hex": "#eefefe"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8275,
+            0.9765,
+            0.9843
+          ],
+          "hex": "#d3f9fb"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6706,
+            0.949,
+            0.9686
+          ],
+          "hex": "#abf2f7"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4157,
+            0.9098,
+            0.9529
+          ],
+          "hex": "#6ae8f3"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.8235,
+            0.902
+          ],
+          "hex": "#00d2e6"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.7176,
+            0.8118
+          ],
+          "hex": "#00b7cf"
+        },
+        "$description": "Main color of this family"
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.5725,
+            0.6824
+          ],
+          "hex": "#0092ae"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0196,
+            0.4588,
+            0.5529
+          ],
+          "hex": "#05758d"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0784,
+            0.3725,
+            0.4471
+          ],
+          "hex": "#145f72"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.098,
+            0.3059,
+            0.3725
+          ],
+          "hex": "#194e5f"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0431,
+            0.2,
+            0.2549
+          ],
+          "hex": "#0b3341"
+        }
+      },
+      "a100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5176,
+            1.0,
+            1.0
+          ],
+          "hex": "#84ffff"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941,
+            1.0,
+            1.0
+          ],
+          "hex": "#18ffff"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.898,
+            1.0
+          ],
+          "hex": "#00e5ff"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.7216,
+            0.8314
+          ],
+          "hex": "#00b8d4"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      }
+    },
+    "blue": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9412,
+            0.9647,
+            0.9882
+          ],
+          "hex": "#f0f6fc"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8627,
+            0.9216,
+            0.9725
+          ],
+          "hex": "#dcebf8"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7569,
+            0.8627,
+            0.9529
+          ],
+          "hex": "#c1dcf3"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5804,
+            0.7804,
+            0.9373
+          ],
+          "hex": "#94c7ef"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.349,
+            0.6588,
+            0.9059
+          ],
+          "hex": "#59a8e7"
+        },
+        "$description": "Main color of this family"
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1608,
+            0.5451,
+            0.8824
+          ],
+          "hex": "#298be1"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.4392,
+            0.8118
+          ],
+          "hex": "#0070cf"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.3686,
+            0.7137
+          ],
+          "hex": "#005eb6"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.2941,
+            0.6039
+          ],
+          "hex": "#004b9a"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0784,
+            0.2549,
+            0.4745
+          ],
+          "hex": "#144179"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0745,
+            0.1608,
+            0.2902
+          ],
+          "hex": "#13294a"
+        }
+      },
+      "a100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.502,
+            0.8471,
+            1.0
+          ],
+          "hex": "#80d8ff"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.251,
+            0.7686,
+            1.0
+          ],
+          "hex": "#40c4ff"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.6902,
+            1.0
+          ],
+          "hex": "#00b0ff"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.5686,
+            0.9176
+          ],
+          "hex": "#0091ea"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      }
+    },
+    "purple": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9804,
+            0.9608,
+            1.0
+          ],
+          "hex": "#faf5ff"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9608,
+            0.9176,
+            1.0
+          ],
+          "hex": "#f5eaff"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9216,
+            0.8314,
+            1.0
+          ],
+          "hex": "#ebd4ff"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8824,
+            0.702,
+            1.0
+          ],
+          "hex": "#e1b3ff"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8235,
+            0.5137,
+            1.0
+          ],
+          "hex": "#d283ff"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7765,
+            0.3333,
+            1.0
+          ],
+          "hex": "#c655ff"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6863,
+            0.2196,
+            0.8941
+          ],
+          "hex": "#af38e4"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5765,
+            0.1804,
+            0.7373
+          ],
+          "hex": "#932ebc"
+        },
+        "$description": "Main color of this family"
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4745,
+            0.1608,
+            0.6
+          ],
+          "hex": "#792999"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3922,
+            0.1529,
+            0.4824
+          ],
+          "hex": "#64277b"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2549,
+            0.0706,
+            0.3216
+          ],
+          "hex": "#411252"
+        }
+      },
+      "a100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9176,
+            0.502,
+            0.9882
+          ],
+          "hex": "#ea80fc"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8784,
+            0.251,
+            0.9843
+          ],
+          "hex": "#e040fb"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8353,
+            0.0,
+            0.9765
+          ],
+          "hex": "#d500f9"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      },
+      "a700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6667,
+            0.0,
+            1.0
+          ],
+          "hex": "#aa00ff"
+        },
+        "$deprecated": "Material Design accent step. Kept only while Qdrant Cloud runs on MUI. Do not use in new code."
+      }
+    },
+    "pink": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9804,
+            0.9529,
+            0.9804
+          ],
+          "hex": "#faf3fa"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9686,
+            0.9098,
+            0.9686
+          ],
+          "hex": "#f7e8f7"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.949,
+            0.8235,
+            0.9451
+          ],
+          "hex": "#f2d2f1"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9255,
+            0.6745,
+            0.902
+          ],
+          "hex": "#ecace6"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8941,
+            0.4549,
+            0.8275
+          ],
+          "hex": "#e474d3"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8706,
+            0.3059,
+            0.7412
+          ],
+          "hex": "#de4ebd"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8157,
+            0.1804,
+            0.6157
+          ],
+          "hex": "#d02e9d"
+        },
+        "$description": "Main color of this family"
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7059,
+            0.1333,
+            0.498
+          ],
+          "hex": "#b4227f"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5804,
+            0.1255,
+            0.4078
+          ],
+          "hex": "#942068"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4784,
+            0.1294,
+            0.349
+          ],
+          "hex": "#7a2159"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2863,
+            0.0588,
+            0.1961
+          ],
+          "hex": "#490f32"
+        }
+      }
+    }
+  },
+  "brand": {
+    "$description": "Named brand colors for people (marketing, guidelines). Aliases of the primitives.",
+    "amaranth": {
+      "$type": "color",
+      "$value": "{color.amaranth.600}",
+      "$description": "Amaranth, Qdrant's identity color."
+    },
+    "indigo": {
+      "$type": "color",
+      "$value": "{color.indigo.600}",
+      "$description": "Indigo, Qdrant's action and accent color."
+    }
+  },
+  "asset": {
+    "$description": "Colors that belong to one brand asset, not to the palette.",
+    "mascotGlow": {
+      "$type": "color",
+      "$value": "#976BFF",
+      "$description": "Qbot's glow only (brand-assets/mascot). Same value as Design Lab."
+    }
+  },
+  "gradient": {
+    "brand": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": "{color.amaranth.600}",
+          "position": 0
+        },
+        {
+          "color": "{color.indigo.600}",
+          "position": 1
+        }
+      ],
+      "$description": "Amaranth to indigo, 135deg. Hero moments only, never on text.",
+      "$extensions": {
+        "qdrant": {
+          "angle": 135
+        }
+      }
+    },
+    "headshot": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": "{color.indigo.900}",
+          "position": 0.076,
+          "opacity": 0.7
+        },
+        {
+          "color": "{color.indigo.400}",
+          "position": 0.801,
+          "opacity": 0.7
+        }
+      ],
+      "$description": "Indigo, 204deg, both stops at 70%. Only behind headshot cutouts (headshot-card, headshot-circle). From Figma Brand-Collateral, node 2183:29300.",
+      "$extensions": {
+        "qdrant": {
+          "angle": 204
+        }
       }
     }
   },
   "semantic": {
+    "$description": "Roles, dark theme (the default). Use these in creatives and web, never a primitive step, unless a README says so. Background roles as decided with the Figma primitives (brand and marketing).",
     "color": {
       "background": {
         "default": {
           "$type": "color",
-          "$value": "{core.color.neutral.950}"
+          "$value": "{color.neutral.950}",
+          "$description": "The page or canvas"
         },
-        "surface": {
+        "raised": {
           "$type": "color",
-          "$value": "{core.color.neutral.900}"
-        },
-        "surface-raised": {
-          "$type": "color",
-          "$value": "#141A2A"
+          "$value": "{color.neutral.925}",
+          "$description": "Cards and boxes one level up"
         },
         "overlay": {
           "$type": "color",
-          "$value": "#212635"
+          "$value": "{color.neutral.850}",
+          "$description": "Overlays, and a card inside a card"
         },
-        "popover": {
+        "highlight": {
           "$type": "color",
-          "$value": "#2B303E"
+          "$value": "{color.neutral.800}",
+          "$description": "Highlighted areas"
         },
         "light": {
           "$type": "color",
-          "$value": "{core.color.neutral.white}"
+          "$value": "{color.neutral.0}",
+          "$description": "A light piece on a dark creative"
         },
         "light-surface": {
           "$type": "color",
-          "$value": "#F7F8FA"
+          "$value": "{color.neutral.25}",
+          "$description": "The light card (.qd-box--light-card)"
         }
       },
       "text": {
         "primary": {
           "$type": "color",
-          "$value": "{core.color.neutral.50}"
+          "$value": "{color.neutral.50}"
         },
         "secondary": {
           "$type": "color",
-          "$value": "{core.color.neutral.600}"
+          "$value": "{color.neutral.500}",
+          "$description": "Body and supporting text on dark. 500 or lighter keeps AA (Figma contrast rules)"
         },
         "disabled": {
           "$type": "color",
-          "$value": "{core.color.neutral.400}"
+          "$value": "{color.neutral.600}"
         },
         "on-light": {
           "$type": "color",
-          "$value": "{core.color.neutral.950}"
+          "$value": "{color.neutral.950}"
         },
         "body-on-light": {
           "$type": "color",
-          "$value": "{core.color.neutral.800}"
+          "$value": "{color.neutral.800}",
+          "$description": "Body text in documents and on the light card"
         },
         "on-accent": {
           "$type": "color",
-          "$value": "{core.color.neutral.white}"
+          "$value": "{color.neutral.0}",
+          "$description": "Text on a filled amaranth or indigo button"
         }
       },
       "accent": {
         "primary": {
           "$type": "color",
-          "$value": "{core.color.primary.500}"
+          "$value": "{color.amaranth.600}",
+          "$description": "Calls to action, highlights, the logo"
         },
         "primary-hover": {
           "$type": "color",
-          "$value": "{core.color.primary.600}"
+          "$value": "{color.amaranth.700}"
         },
         "primary-pressed": {
           "$type": "color",
-          "$value": "{core.color.primary.700}"
+          "$value": "{color.amaranth.800}"
         },
         "secondary": {
           "$type": "color",
-          "$value": "{core.color.secondary.500}"
+          "$value": "{color.indigo.600}"
         }
       },
       "border": {
         "on-dark": {
           "$type": "color",
-          "$value": "{core.color.neutral.700}"
+          "$value": "{color.neutral.700}",
+          "$description": "Decorative borders on dark. Inputs and focus rings use neutral.600 (3:1)"
         },
         "on-light": {
           "$type": "color",
-          "$value": "{core.color.neutral.200}"
+          "$value": "{color.neutral.200}"
         }
       },
       "status": {
         "success": {
           "$type": "color",
-          "$value": "#00897B"
+          "$value": "{color.teal.600}"
         },
         "error": {
           "$type": "color",
-          "$value": "#D32F2F"
+          "$value": "{color.red.500}"
         },
         "warning": {
           "$type": "color",
-          "$value": "#EF6C00"
+          "$value": "{color.orange.500}"
         },
         "info": {
           "$type": "color",
-          "$value": "#29B6F6"
+          "$value": "{color.blue.400}"
         }
       },
       "dataviz": {
         "1": {
           "$type": "color",
-          "$value": "{core.color.primary.500}"
+          "$value": "{color.amaranth.600}"
         },
         "2": {
           "$type": "color",
-          "$value": "{core.color.secondary.500}"
+          "$value": "{color.indigo.600}"
         },
         "3": {
           "$type": "color",
-          "$value": "{core.color.teal.500}"
+          "$value": "{color.teal.600}"
         },
         "4": {
           "$type": "color",
-          "$value": "{core.color.lightBlue.500}"
+          "$value": "{color.blue.400}"
         },
         "5": {
           "$type": "color",
-          "$value": "{core.color.orange.500}"
+          "$value": "{color.orange.500}"
         },
         "6": {
           "$type": "color",
-          "$value": "{core.color.purple.500}"
+          "$value": "{color.purple.700}"
         },
         "7": {
           "$type": "color",
-          "$value": "{core.color.green.500}"
+          "$value": "{color.green.600}"
         },
         "8": {
           "$type": "color",
-          "$value": "{core.color.cyan.500}"
+          "$value": "{color.cyan.500}"
         }
       }
     }
   },
   "theme": {
     "light": {
+      "$description": "Light theme overrides, used with [data-theme=\"light\"]. Accent colors stay the same in both themes.",
       "color": {
         "background": {
           "default": {
             "$type": "color",
-            "$value": "{core.color.neutral.white}"
+            "$value": "{color.neutral.25}"
           },
-          "surface": {
+          "raised": {
             "$type": "color",
-            "$value": "#F7F8FA"
+            "$value": "{color.neutral.0}"
           },
-          "surface-raised": {
+          "overlay": {
             "$type": "color",
-            "$value": "{core.color.neutral.50}"
+            "$value": "{color.neutral.0}"
+          },
+          "highlight": {
+            "$type": "color",
+            "$value": "{color.neutral.50}"
           }
         },
         "text": {
           "primary": {
             "$type": "color",
-            "$value": "{core.color.neutral.950}"
+            "$value": "{color.neutral.950}"
           },
           "secondary": {
             "$type": "color",
-            "$value": "{core.color.neutral.600}"
+            "$value": "{color.neutral.600}",
+            "$description": "600 or darker keeps AA on light (Figma contrast rules)"
           },
           "disabled": {
             "$type": "color",
-            "$value": "{core.color.neutral.500}"
+            "$value": "{color.neutral.400}"
           }
         }
       }
