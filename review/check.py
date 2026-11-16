@@ -33,7 +33,7 @@ def icon_colors():
     bg = re.search(r"--qd-color-background-default:\s*#([0-9A-Fa-f]{6})", css)
     dark_bg = tuple(int(bg.group(1)[i:i + 2], 16) for i in (0, 2, 4)) if bg else (7, 11, 17)
     dark = keep(pick("400"), dark_bg)
-    # White (text.primary) is allowed on a pattern that isn't masked: .qd-icon--on-pattern (README "Colors").
+    # White (text.primary) is allowed on a pattern, masked at 40% or not: .qd-icon--on-pattern (README "Colors").
     tp = re.search(r"--qd-color-text-primary:\s*#([0-9A-Fa-f]{6})", css)
     if tp:
         dark["text-primary (on pattern)"] = tuple(int(tp.group(1)[i:i + 2], 16) for i in (0, 2, 4))
@@ -243,7 +243,7 @@ def check_one(m, rules):
         if abs(ratio - want_ratio) > 0.02:
             biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
         Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
-        k = 1.5 if wide else 1.0
+        k = (1.5 * 1.3) if wide else 1.6  # title: 1.6x the Figma share, 1.95x on wide (Vanesa, 2026-11-16)
         btexts = [t for t in texts if t["role"] == "book"]
         if btexts:
             top = max(t["fontSize"] for t in btexts)
@@ -365,7 +365,7 @@ LOOK = ["Hierarchy: one clear title, calm supporting text, nothing competing",
         "Pattern: the right one for the tone and layout (light card: Color-Sliced-Pattern-B only; Color-Sliced-A only with headshots)",
         "Pattern mask: used when the preset's textMask says so, soft and with no visible edge",
         "Qbot rules (guidelines section 6): placement, crop, glow, never before the text",
-        "Button in a corner: beside the logo only with a full-width text block, otherwise last in the text block"]
+        "Button in a corner: beside the logo only with a full-width text block or on a red pattern, otherwise last in the text block or a bottom corner"]
 
 
 def main():

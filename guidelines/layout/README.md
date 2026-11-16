@@ -29,7 +29,7 @@ Sizes in px at the reference canvas.
 | `wide` | 1.4 to 3 | 1920×1080 | 80 / 80 / 80 | 12 × 110, gutter 40 | 24 / 40 / 64 |
 | `square` | 0.85 up to 1.4 | 1080×1080 | 64 / 64 / 64 | 6 × 132, gutter 32 | 16 / 24 / 48 |
 | `portrait` | 0.65 up to 0.85 | 1080×1350 | 64 / 64 / 64 | 6 × 132, gutter 32 | 16 / 24 / 48 |
-| `story` | below 0.65 | 1080×1920 | 64 / 256 / 344 | 4 × 214, gutter 32 | 24 / 32 / 64 |
+| `story` | below 0.65 | 1080×1920 | 64 / 192 / 256 | 4 × 214, gutter 32 | 24 / 32 / 64 |
 
 - **Blog post hero, 916×458:** the size on qdrant.tech (decided by Vanesa on 2026-11-12, replaces 2002×1122). Ratio 2, so it's `wide`, at 0.424× (margin 34, logo 34). Pattern or generated image, decided per post (guidelines section 1). With a partner lockup as the only content, see [`partner-lockup`](../../brand-components/partner-lockup/).
 - **LinkedIn profile cover, 1584×396:** ratio 4, so it's `ultrawide`, at 0.528× (decided by Vanesa on 2026-11-11). LinkedIn's profile photo covers the bottom-left, so:
@@ -40,8 +40,15 @@ Sizes in px at the reference canvas.
   - **No visual:** heading on columns 9 to 12, title-short (128).
   - **With Qbot:** Qbot sits after the heading, never before it ([`guidelines/`](../) section 6), and the title steps down one size (104). Two placements: Qbot full height at the right margin, cut at the waist with the chest logo whole, heading on columns 7 to 9; or a bigger Qbot cut at the upper chest (the Peek crop), heading on columns 6 to 8. Beside Qbot the heading may be narrower than half the grid ([`guidelines/`](../) section 11 rule 8).
   - If the pattern needs a mask, the heading is on the right, so use `.qd-pattern-mask--from-right` (below).
+- **Display ads (ultrawide: 3000×400, 728×90, 320×100)** (Vanesa, 2026-11-16):
+  - **Side by side:** logo, then title, then button in one row, left to right, with Qbot zoomed in at the right, cut by the bottom edge, face and chest logo whole.
+  - Date and place go on **one line** if they fit; if not, they're dropped (ask first, guidelines section 11 rule 11).
+  - The button stays at its own size, the logo's height. Never one title line tall.
+  - **320×100: the Qdrant logo only**, never a partner lockup (two logos don't fit). Title on up to three lines, sized so its letters match the 24 px logo, the button under it at the logo's height, Qbot zoomed in at the right.
+  - Items after the logo can't sit on the 12-column grid in a side-by-side row; that checker fail is expected.
+- **Small units (300×250, 336×280, 300×600):** offer two options: **a**, logo, title and button with a big Qbot cut by the bottom edge; **b**, the same with the date and place, one line each. The person picks (2026-11-16).
 - **Between groups:** 2 × `section` (96 on square and portrait, 128 on wide and story, 128 on ultrawide). The header, heading, body and visual are separate groups, with this one gap between each ([`guidelines/`](../) section 11, rule 9, decided 2026-11-11). No token yet: use `calc(2 * var(--qd-gap-section))`.
-- **Story safe zones:** 256 px top and 344 px bottom keep text clear of the profile bar, reply box and stickers. Only backgrounds and images go there.
+- **Story safe zones:** 192 px top and 256 px bottom keep text clear of the profile bar and reply box. Only backgrounds, images and Qbot's cut body go there. Smaller since 2026-11-16 (was 256 / 344) so the groups get bigger gaps: the freed space goes to the gaps between groups. On stories with headshot cards, the cards get smaller before the gaps do: the one exception to the fit order in [`guidelines/`](../) section 11, rule 11 (Vanesa).
 - **Other sizes:** the scale is the smaller of width ÷ reference width and height ÷ reference height. Every value is multiplied by it, so a 1200×627 post uses the Wide values at 0.58×. The 8 px grid holds exactly at the reference canvases.
 - The column counts were worked out for this folder (whole px, on the 8 px grid). They don't come from Figma or the brand skill yet.
 
@@ -59,26 +66,31 @@ Width and height are plain numbers in px. For one file rendered at many sizes, a
 
 ## Pattern mask
 
-For patterns whose small details would cross the text, mask the pattern so the text sits on a calm neutral ([`guidelines/`](../) section 4, decided 2026-11-11, replaces the Zone layout). Only when the pattern's preset has `textMask` set to `soft-1` or `soft-2`; with `none`, the text sits straight on the pattern. The pattern is 100% where the visual sits and fades softly behind the text. The canvas shows **neutral 950** behind it on a dark creative and **neutral 100** on a light one.
+For patterns whose small details would cross the text, mask the pattern so the text sits on a calm neutral ([`guidelines/`](../) section 4, decided 2026-11-11, replaces the Zone layout). When the pattern's preset has `textMask` set to `mask`, or `both` and the person picked the mask. With `none`, the text sits straight on the pattern. With no `textMask`, render it with and without the mask and ask. Never on a light-colored pattern: it turns grey. The pattern is 100% where the visual sits and fades softly to **40%** behind the text (2026-11-16). The canvas shows **neutral 950** behind it on a dark creative and **neutral 100** on a light one.
 
 ```html
 <div class="qd-canvas qd-canvas--masked" data-shape="square">
-  <canvas class="qd-pattern-mask qd-pattern-mask--soft-2" style="position:absolute; inset:0; --qd-mask-edge: 400px"></canvas>
+  <canvas class="qd-pattern-mask" style="position:absolute; inset:0"></canvas>
   …
 </div>
 ```
 
-- `--qd-mask-edge`: the text block's far edge in px, measured after the fonts load. Its bottom (from the canvas top) on square, portrait and story; its right edge (from the canvas left) on wide and ultra-wide, where the fade runs left to right.
-- The strength class sets the rest:
-
-  | Class | Behind the text | Fade starts | Pattern back to 100% |
-  | --- | --- | --- | --- |
-  | `--soft-1` | 4% | the edge (all text stays at 4%) | the edge + 4 `section` gaps |
-  | `--soft-2` | 10% | the edge (all text stays at 10%) | the edge + 6 `section` gaps |
-
+- **One strength, 40%** (Vanesa, 2026-11-16). It replaced `--soft-1` (4%) and `--soft-2` (10%), which made creatives too dark. Those two class names still work and now give 40%, so older files don't break; don't use them in new work.
+- **Text on the mask:** white text, white icons (`.qd-icon--on-pattern`), and the Dark logo on a dark creative.
 - The fade is an eased curve, so there's no visible line between the masked part and the pattern.
-- **One smooth gradient on every shape** (decided 2026-11-11). The mask is a single gradient across the whole canvas with a gentle (quadratic) start: the strength's low value on the text side, rising slowly and reaching 100% at 95% of the way across (down on square, portrait and story; to the right on wide; to the left with `--from-right`, e.g. the LinkedIn cover). There's no hold and no step, so `--qd-mask-edge` isn't needed. The CSS does it.
-- **Text on the right** (the LinkedIn profile cover): add `.qd-pattern-mask--from-right`. The fade then runs from the right edge, and `--qd-mask-edge` is the text block's left edge measured from the canvas's right edge.
+- **One smooth gradient on every shape** (decided 2026-11-11). The mask is a single gradient across the whole canvas with a gentle (quadratic) start: the strength's low value on the text side, rising slowly and reaching 100% at 95% of the way across (down on square, portrait and story; to the right on wide; to the left with `--from-right`, e.g. the LinkedIn cover). There's no hold and no step, so nothing needs measuring. The CSS does it.
+- **Text on the right** (the LinkedIn profile cover): add `.qd-pattern-mask--from-right`. The fade then runs from the right edge.
+
+## Image background
+
+For a generated image ([`guidelines/`](../) section 5). Put `.qd-canvas--masked` on the canvas and one of these on the `<img>` (Vanesa, 2026-11-16):
+
+| Class | What it does | Where |
+| --- | --- | --- |
+| `.qd-image-fade` | Full width at the image's own ratio, anchored to the bottom, fading in from the text side with an eased curve (from the top on tall shapes, from the left on wide and ultrawide) | Square, portrait, wide, ultrawide |
+| `.qd-image-fade--cover` (with `.qd-image-fade`) | Covers the whole canvas, 30% at the top and 100% from halfway down | Story |
+
+Never trim the image into a patch with soft edges, and never lay a dark block over it. Move the image down (a higher crop) if the text would land on the subject.
 
 ## Grid
 
@@ -150,16 +162,16 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 | Fill | `background.light-surface`, text `text.on-light` | |
 | Logo | Light logo, 0.0967 W tall (smaller than the canvas logo) | 57 |
 | Logo to title | 0.0604 W | 36 |
-| Title | Mona Sans SemiBold, 0.0846 W, line height 1.1 | 50 |
+| Title | Mona Sans SemiBold, 0.0846 W × 1.6 (2026-11-16: bigger, so the card doesn't look empty; the logo keeps its size), line height 1.1 | 80 |
 | Divider | `border-on-light`, 1 px, between the top block (logo + title) and the bottom block | |
 | Divider to text | 0.0846 W | 50 |
 | Supporting text | Mona Sans Regular, 0.0483 W, line height 1.3, at the card's bottom padding | 29 |
 | Button | Outside the card, centered below it, 0.0544 W gap. Height 0.157 W; text, padding and corners keep the button's proportions | gap 32, height 93 |
 
 - The top block sits at the top padding and the bottom block at the bottom padding; the space between stays empty.
-- **Wide (1920×1080): a landscape card** (decided 2026-11-11). The card is 5:4 and 72% of the canvas height (973 × 778 at 1920×1080), the largest that fits with the button inside the margins. Card and button are centered together. Every value above stays a share of W, where W is the portrait card's width at that height (631), except the title and supporting text, which are **1.5×** (80 and 46 px) so the card doesn't look empty.
+- **Wide (1920×1080): a landscape card** (decided 2026-11-11). The card is 5:4 and 72% of the canvas height (973 × 778 at 1920×1080), the largest that fits with the button inside the margins. Card and button are centered together. Every value above stays a share of W, where W is the portrait card's width at that height (631), except the title and supporting text, which are **1.5×** (46 px supporting) so the card doesn't look empty. The title is **1.95×** (104 px; 1.5 × 1.3, 2026-11-16).
 - **Slides on wide (no button): `.qd-book--slide`** (decided 2026-11-11). The card is centered on its own, both ways, and is **16:10** (1244 × 778 at 1920×1080) so speakers or an info list fit beside each other. The pattern still shows on every side.
-- **Info list on the card:** one Lucide icon per line (map-pin = place, calendar = date, clock = time), at the card's text size (the CSS sets it), `neutral-500` from `icons.css`, a `tight` gap. Speakers as `headshot-circle`, beside the list. The event type is never in this list ([`guidelines/`](../) section 11, rule 3).
+- **Info list on the card:** one Lucide icon per line (map-pin = place, calendar = date, clock = time), at the card's text size (the CSS sets it), `neutral-600` (`.qd-icon` on the light card), a `tight` gap. Speakers as `headshot-circle`, beside the list. The event type is never in this list ([`guidelines/`](../) section 11, rule 3).
 - **Ultrawide: no light card.** There's no use case for it (decided 2026-11-11).
 - The card is centered, so it isn't tied to grid columns. Text inside it aligns to the card's padding.
 - Only on **Color-Sliced-Pattern-B**, red or violet, with its letter layer (decided 2026-11-11). Never with a big headshot; use `headshot-circle` if a speaker is needed.

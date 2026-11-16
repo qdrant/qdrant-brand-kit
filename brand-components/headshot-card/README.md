@@ -39,7 +39,7 @@ Each card spans whole columns of the shape's grid. Every card in a row has the s
 
 **Wide covers with 2 speakers** (slides, decided 2026-11-11): span-3 cards on the right, at the size of a full row, level or staggered (`qd-headshot-row--stagger`). When staggered, put the logo in the left text column so the cards can use the full height. Never span-2 cards on a wide cover: too small. Circles on wide only for a quiet, text-led cover.
 
-**Story, 2 speakers** (decided 2026-11-11): circles in the text area as their own group (guidelines section 11, rule 9), never span-1 cards. Span-2 cards only when the copy is short enough to keep the names above the 344 px bottom safe zone.
+**Story, 2 speakers** (decided 2026-11-11): circles in the text area as their own group (guidelines section 11, rule 9), never span-1 cards. Span-2 cards only when the copy is short enough to keep the names above the 256 px bottom safe zone.
 
 **Story, 1 speaker:** offer both and let the person pick (decided 2026-11-04): a span-2 card beside the text (more impactful), or a [`headshot-circle`](../headshot-circle/) in the text block with the pattern below (quieter, a little empty but fine).
 
@@ -66,8 +66,8 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 
 1. **The card is always portrait 5:7.** It never stretches or squashes to fit the space (decided 2026-11-04, after the test made short, wide cards).
 2. **The photo fills the card.** The cutout scales so the top of the head is one `group` gap below the card's top edge, anchored to the bottom and centered. The shoulders run off the sides, as in the Vector Space Day banner.
-3. **Speakers sit on the bottom margin.** The cards line up at the bottom of the row. The space above them belongs to the visual area between the top and bottom blocks ([`guidelines/`](../../guidelines/) section 11, rule 7).
-4. **No room: smaller span, then circles.** If 5:7 cards at the span in the table don't fit the height left, drop every card to the next smaller span (e.g. 3 → 2 on square). If they still don't fit, use [`headshot-circle`](../headshot-circle/). Never squash the card's shape.
+3. **Speakers sit on the bottom margin.** The cards line up at the bottom of the row, and **the card's bottom lines up with the button's bottom** (on story, both on the 256 px safe-zone line; Vanesa, 2026-11-16). The space above them belongs to the visual area between the top and bottom blocks ([`guidelines/`](../../guidelines/) section 11, rule 7).
+4. **No room: tighter gaps, smaller cards, then circles** (order from [`guidelines/`](../../guidelines/) section 11, rule 11, 2026-11-16). First tighten the gaps between groups (on a story, shrink the cards first and keep the bigger gaps, 2026-11-16). Then drop every card to the next smaller span (e.g. 3 → 2 on square), or shrink the cards between spans. If they still don't fit, use [`headshot-circle`](../headshot-circle/). Never squash the card's shape, never cut a card at a margin, and never resize the button to make room.
 
 ## Rules
 
@@ -78,7 +78,7 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 - **Role color on a pattern:** add `qd-on-pattern` to the canvas or row. Roles then use `neutral-300` instead of `text.secondary`, which fails contrast on violet patterns (decided 2026-11-04).
 - **Never with Qbot.** Headshots and the mascot don't appear in the same creative.
 - **Never inside the light card.** Big headshots don't go on `.qd-box--light-card`. Use [`headshot-circle`](../headshot-circle/) there (decided 2026-11-04).
-- **Never across the pattern mask's fade.** With the pattern mask, the card sits wholly on the full-strength pattern or wholly on the masked part, never half on each (decided 2026-11-04 for the Zone layout, carried over to the mask 2026-11-11).
+- **With the pattern mask:** the mask is one smooth gradient with no edge (2026-11-11), so there's no line to avoid. The cards sit on the lower, stronger part of the pattern, on the bottom margin, and their names pass the contrast check.
 - **Opaque card.** The 70% headshot gradient sits on an opaque `background.default` base, so a pattern never shows through the card. The CSS does this (decided 2026-11-04).
 - **Suggest:** for speaker posts, full bleed with text on top is the preferred layout: logo and title at the top, supporting block and button bottom-left, card on the right on the bottom margin (Vanesa's pick from the 2026-11-04 test).
 - **Same treatment for everyone** in a post: same span, same gradient.

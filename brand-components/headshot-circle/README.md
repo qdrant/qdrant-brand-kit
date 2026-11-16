@@ -19,7 +19,7 @@ From Figma Brand-Collateral (`JQqxFCf33xbYJiOlHhtOjg`): [Agenda slot](https://ww
 - Speakers who shouldn't be the focus of the post
 - Webinar and meetup banners
 - Quote posts, to show who said it
-- Inside a card (`.qd-box--card`), like the agenda slot
+- On the light card (book), like the agenda slot
 - Inside the light card (book), when a guide or doc creative needs a speaker ([`guidelines/`](../../guidelines/) section 4)
 
 ## Kind
@@ -65,7 +65,7 @@ Use `.qd-grid`. Rows are a `section` gap apart.
 - **Opaque circle.** The 70% headshot gradient sits on an opaque `background.default` base, so a pattern never shows through the circle. The CSS does this (decided 2026-11-11).
 - **Never inside a Box card** (`.qd-box--card`) or any frame of your own: speakers sit straight on the canvas or pattern. The only container a speaker may sit in is the light card, as a circle (decided 2026-11-11).
 - **Prepared cutouts only.** Every photo is a cutout that passes [`brand-assets/imagery/headshots/`](../../brand-assets/imagery/headshots/): the slide 56 checklist and `check-headshot.py`.
-- **Background:** plain `background.default`, a `.qd-box--card`, the light card (book), or a brand pattern from [`patterns/`](../../brand-assets/patterns/). Never a generated image. On Color-Sliced (red or violet), use Color-Sliced-Pattern-A, without the letters, so they don't compete with the faces ([`guidelines/`](../../guidelines/) section 2).
+- **Background:** plain `background.default`, the light card (book), or a brand pattern from [`patterns/`](../../brand-assets/patterns/). Never a generated image. On Color-Sliced (red or violet), use Color-Sliced-Pattern-A, without the letters, so they don't compete with the faces ([`guidelines/`](../../guidelines/) section 2).
 - **Role color on a pattern:** add `qd-on-pattern` to the canvas or row. Roles then use `neutral-300` instead of `text.secondary`, which fails contrast on violet patterns (decided 2026-11-04).
 - **Never with Qbot.** Headshots and the mascot don't appear in the same creative.
 - **Don't mix** circles and cards for speakers in the same post.

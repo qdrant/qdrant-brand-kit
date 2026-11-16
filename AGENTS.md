@@ -33,6 +33,8 @@ These rules are written for creatives. [`design-system/AGENTS.md`](design-system
 - Put Qbot between text blocks or over text, the logo or the button, or cut its face ([`guidelines/`](guidelines/) section 6). Use `.qd-mascot--glow` from `brand-assets/mascot/3d/mascot.css`, never your own glow.
 - Use an icon that isn't from Lucide, or put an icon in a button ([`brand-assets/icons/`](brand-assets/icons/)).
 - Use red as a background without the person's yes.
+- Show, recommend or deliver a creative that fails contrast or puts text, the logo, the button or a headshot outside the margins or story safe zones ([`guidelines/layout/checks.md`](guidelines/layout/checks.md)).
+- Resize the button to make room, use the monochrome Black logo, put the red brandmark on a red pattern, or mask a light-colored pattern ([`guidelines/`](guidelines/) sections 3, 4 and 11).
 - Spend money (Design Lab or image generations) without asking first.
 - Save working files, renders or photos inside this repo. Work in a folder outside it, with absolute paths.
 

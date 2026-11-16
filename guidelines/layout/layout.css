@@ -31,7 +31,7 @@
 }
 .qd-canvas[data-shape="story"] { /* below 0.65, 1080×1920; top and bottom clear the app UI */
   --qd-canvas-ref-w: 1080; --qd-canvas-ref-h: 1920;
-  --qd-canvas-margin-x: 64; --qd-canvas-margin-top: 256; --qd-canvas-margin-bottom: 344;
+  --qd-canvas-margin-x: 64; --qd-canvas-margin-top: 192; --qd-canvas-margin-bottom: 256;
   --qd-canvas-columns: 4; --qd-canvas-gutter: 32;
   --qd-canvas-gap-tight: 24; --qd-canvas-gap-group: 32; --qd-canvas-gap-section: 64;
 }
@@ -128,7 +128,7 @@
 .qd-canvas[data-shape="story"]    { --qd-book-share: 0.75; }
 /* Wide: a landscape card, 5:4, 72% of the canvas height (the largest that fits with the button inside the
    margins). W stays the portrait card's width for that height, so every size below keeps its share of W;
-   only the card's width changes, and the title and text are 1.5x larger (Vanesa, 2026-11-11).
+   only the card's width changes, and the text is 1.5x larger (Vanesa, 2026-11-11), the title 1.95x (2026-11-16).
    Ultrawide: no light card. */
 .qd-canvas[data-shape="wide"]     { --qd-book-share: 0.3286; }
 .qd-canvas {
@@ -171,10 +171,11 @@
 }
 .qd-book__top { display: flex; flex-direction: column; align-items: flex-start; gap: calc(var(--qd-book-w) * 0.0604 * var(--qd-canvas-u)); }
 .qd-book__card .qd-book__title, .qd-book__card .qd-book__text { margin: 0; font-family: var(--qd-font-family-sans); font-feature-settings: var(--qd-font-features); color: var(--qd-color-text-on-light); letter-spacing: calc(-0.6 * var(--qd-canvas-u)); }
-.qd-book__title { font-weight: var(--qd-font-weight-semibold); font-size: calc(var(--qd-book-w) * 0.0846 * var(--qd-canvas-u)); line-height: 1.1; }
+/* Title 1.6x the Figma share, so the card doesn't look empty; the logo keeps its size (Vanesa, 2026-11-16). */
+.qd-book__title { font-weight: var(--qd-font-weight-semibold); font-size: calc(var(--qd-book-w) * 0.0846 * 1.6 * var(--qd-canvas-u)); line-height: 1.1; }
 .qd-book__bottom { border-top: var(--qd-box-border-width) solid var(--qd-color-border-on-light); padding-top: calc(var(--qd-book-w) * 0.0846 * var(--qd-canvas-u)); }
 .qd-book__text { font-weight: var(--qd-font-weight-regular); font-size: calc(var(--qd-book-w) * 0.0483 * var(--qd-canvas-u)); line-height: 1.3; }
-.qd-canvas[data-shape="wide"] .qd-book__title { font-size: calc(var(--qd-book-w) * 0.0846 * 1.5 * var(--qd-canvas-u)); }
+.qd-canvas[data-shape="wide"] .qd-book__title { font-size: calc(var(--qd-book-w) * 0.0846 * 1.95 * var(--qd-canvas-u)); } /* 1.5 x 1.3 (2026-11-16) */
 .qd-canvas[data-shape="wide"] .qd-book__text  { font-size: calc(var(--qd-book-w) * 0.0483 * 1.5 * var(--qd-canvas-u)); }
 /* Slide on wide (no button): add .qd-book--slide to .qd-book. The card is centered on its own and
    may be 16:10, wider than 5:4, when it holds speakers or an info list (Vanesa, 2026-11-11). */
@@ -217,11 +218,9 @@
    The pattern covers the whole canvas at 100% where the visual sits and fades softly (an eased
    curve, no visible edge) to a low opacity behind the text, over a solid neutral:
    neutral-950 on a dark creative, neutral-100 on a light one.
-   Put .qd-canvas--masked on the canvas and .qd-pattern-mask plus its strength
-   (.qd-pattern-mask--soft-1 or --soft-2) on the pattern layer, then set one value on the layer:
-     --qd-mask-edge  the text block's far edge in px: its bottom, from the canvas top, on square,
-                     portrait and story; its right edge, from the canvas left, on wide and ultrawide.
-   Measure it after the fonts load. The strength sets where the fade starts and ends from it. */
+   Put .qd-canvas--masked on the canvas and .qd-pattern-mask on the pattern layer. There's one
+   strength, 40% behind the text (2026-11-16), and the gradient further down needs no measured
+   edge. */
 .qd-canvas.qd-canvas--masked { background: var(--qd-color-neutral-950); }
 .qd-canvas.qd-canvas--masked[data-theme="light"] { background: var(--qd-color-neutral-100); }
 .qd-pattern-mask {
@@ -253,14 +252,13 @@
     rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.972)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.9),
     rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 1.0)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 1.0));
 }
-/* The low strength holds behind the WHOLE text block (hold-k 1), so no letter or dash ever crosses a line
-   of text; the fade starts at the text block's far edge (Vanesa, 2026-11-11; was 0.5 and 0.3). */
-/* Soft 1: 4% behind the text, fade from the text block's edge to 4 section gaps past it. Presets with textMask soft-1 (see brand-assets/patterns/presets). */
-.qd-pattern-mask, .qd-pattern-mask--soft-1 { --qd-mask-low: 0.04; --qd-mask-hold-k: 1; --qd-mask-full-gaps: 4; }
-/* Soft 2: 10% behind the text, fade from the text block's edge to 6 section gaps past it. Presets with textMask soft-2. */
-.qd-pattern-mask.qd-pattern-mask--soft-2 { --qd-mask-low: 0.10; --qd-mask-hold-k: 1; --qd-mask-full-gaps: 6; }
-/* Text on the right (LinkedIn profile cover): the fade runs from the right edge, and --qd-mask-edge
-   is the text block's left edge measured from the canvas's right edge (Vanesa, 2026-11-11). */
+/* One strength: 40% of the pattern behind the text (Vanesa, 2026-11-16). It replaces soft-1 (4%)
+   and soft-2 (10%), which made creatives too dark and hid the pattern. The old class names still
+   work and now give 40%, so existing files don't break. Presets with textMask "mask" or "both". */
+.qd-pattern-mask,
+.qd-pattern-mask.qd-pattern-mask--soft-1,
+.qd-pattern-mask.qd-pattern-mask--soft-2 { --qd-mask-low: 0.40; --qd-mask-hold-k: 1; --qd-mask-full-gaps: 4; }
+/* Text on the right (LinkedIn profile cover): the fade runs from the right edge (Vanesa, 2026-11-11). */
 .qd-canvas[data-shape] .qd-pattern-mask.qd-pattern-mask--from-right { --qd-mask-direction: to left; }
 .qd-canvas[data-shape="wide"] .qd-pattern-mask,
 .qd-canvas[data-shape="ultrawide"] .qd-pattern-mask { --qd-mask-direction: to right; }
@@ -315,6 +313,112 @@
     rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.8100)) 85.50%,
     rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.9025)) 90.25%,
     rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 1.0000)) 95.00%);
+}
+
+/* Generated image as the background (guidelines section 5, Vanesa 2026-11-11 and 2026-11-16).
+   Put .qd-canvas--masked on the canvas and one of these on the <img>. Both fade with an eased
+   (smoothstep) curve over neutral 950, so there's never a visible band or edge.
+   .qd-image-fade         full width at the image's own ratio, anchored to the bottom, fading in from
+                          the text side (top on tall shapes, left on wide and ultrawide). Never shrunk
+                          into a patch: if it can't cover its area, pick another image.
+   .qd-image-fade--cover  the image covers the whole canvas (story, and any tall shape where a
+                          full-width image would leave a bare top): 30% at the top, 100% from halfway. */
+.qd-canvas .qd-image-fade {
+  position: absolute; left: 0; bottom: 0; width: 100%; height: auto; pointer-events: none;
+  --qd-image-fade-direction: to bottom;
+  -webkit-mask-image: linear-gradient(var(--qd-image-fade-direction),
+    rgb(0 0 0 / 0.0000) 0.00%,
+    rgb(0 0 0 / 0.0073) 3.50%,
+    rgb(0 0 0 / 0.0280) 7.00%,
+    rgb(0 0 0 / 0.0607) 10.50%,
+    rgb(0 0 0 / 0.1040) 14.00%,
+    rgb(0 0 0 / 0.1562) 17.50%,
+    rgb(0 0 0 / 0.2160) 21.00%,
+    rgb(0 0 0 / 0.2817) 24.50%,
+    rgb(0 0 0 / 0.3520) 28.00%,
+    rgb(0 0 0 / 0.4253) 31.50%,
+    rgb(0 0 0 / 0.5000) 35.00%,
+    rgb(0 0 0 / 0.5748) 38.50%,
+    rgb(0 0 0 / 0.6480) 42.00%,
+    rgb(0 0 0 / 0.7183) 45.50%,
+    rgb(0 0 0 / 0.7840) 49.00%,
+    rgb(0 0 0 / 0.8438) 52.50%,
+    rgb(0 0 0 / 0.8960) 56.00%,
+    rgb(0 0 0 / 0.9392) 59.50%,
+    rgb(0 0 0 / 0.9720) 63.00%,
+    rgb(0 0 0 / 0.9928) 66.50%,
+    rgb(0 0 0 / 1.0000) 70.00%);
+  mask-image: linear-gradient(var(--qd-image-fade-direction),
+    rgb(0 0 0 / 0.0000) 0.00%,
+    rgb(0 0 0 / 0.0073) 3.50%,
+    rgb(0 0 0 / 0.0280) 7.00%,
+    rgb(0 0 0 / 0.0607) 10.50%,
+    rgb(0 0 0 / 0.1040) 14.00%,
+    rgb(0 0 0 / 0.1562) 17.50%,
+    rgb(0 0 0 / 0.2160) 21.00%,
+    rgb(0 0 0 / 0.2817) 24.50%,
+    rgb(0 0 0 / 0.3520) 28.00%,
+    rgb(0 0 0 / 0.4253) 31.50%,
+    rgb(0 0 0 / 0.5000) 35.00%,
+    rgb(0 0 0 / 0.5748) 38.50%,
+    rgb(0 0 0 / 0.6480) 42.00%,
+    rgb(0 0 0 / 0.7183) 45.50%,
+    rgb(0 0 0 / 0.7840) 49.00%,
+    rgb(0 0 0 / 0.8438) 52.50%,
+    rgb(0 0 0 / 0.8960) 56.00%,
+    rgb(0 0 0 / 0.9392) 59.50%,
+    rgb(0 0 0 / 0.9720) 63.00%,
+    rgb(0 0 0 / 0.9928) 66.50%,
+    rgb(0 0 0 / 1.0000) 70.00%);
+}
+.qd-canvas[data-shape="wide"] .qd-image-fade,
+.qd-canvas[data-shape="ultrawide"] .qd-image-fade { --qd-image-fade-direction: to right; }
+.qd-canvas .qd-image-fade.qd-image-fade--cover {
+  inset: 0; height: 100%; object-fit: cover; object-position: 50% 100%;
+  -webkit-mask-image: linear-gradient(to bottom,
+    rgb(0 0 0 / 0.3000) 0.00%,
+    rgb(0 0 0 / 0.3051) 2.50%,
+    rgb(0 0 0 / 0.3196) 5.00%,
+    rgb(0 0 0 / 0.3425) 7.50%,
+    rgb(0 0 0 / 0.3728) 10.00%,
+    rgb(0 0 0 / 0.4094) 12.50%,
+    rgb(0 0 0 / 0.4512) 15.00%,
+    rgb(0 0 0 / 0.4972) 17.50%,
+    rgb(0 0 0 / 0.5464) 20.00%,
+    rgb(0 0 0 / 0.5977) 22.50%,
+    rgb(0 0 0 / 0.6500) 25.00%,
+    rgb(0 0 0 / 0.7023) 27.50%,
+    rgb(0 0 0 / 0.7536) 30.00%,
+    rgb(0 0 0 / 0.8028) 32.50%,
+    rgb(0 0 0 / 0.8488) 35.00%,
+    rgb(0 0 0 / 0.8906) 37.50%,
+    rgb(0 0 0 / 0.9272) 40.00%,
+    rgb(0 0 0 / 0.9575) 42.50%,
+    rgb(0 0 0 / 0.9804) 45.00%,
+    rgb(0 0 0 / 0.9949) 47.50%,
+    rgb(0 0 0 / 1.0000) 50.00%);
+  mask-image: linear-gradient(to bottom,
+    rgb(0 0 0 / 0.3000) 0.00%,
+    rgb(0 0 0 / 0.3051) 2.50%,
+    rgb(0 0 0 / 0.3196) 5.00%,
+    rgb(0 0 0 / 0.3425) 7.50%,
+    rgb(0 0 0 / 0.3728) 10.00%,
+    rgb(0 0 0 / 0.4094) 12.50%,
+    rgb(0 0 0 / 0.4512) 15.00%,
+    rgb(0 0 0 / 0.4972) 17.50%,
+    rgb(0 0 0 / 0.5464) 20.00%,
+    rgb(0 0 0 / 0.5977) 22.50%,
+    rgb(0 0 0 / 0.6500) 25.00%,
+    rgb(0 0 0 / 0.7023) 27.50%,
+    rgb(0 0 0 / 0.7536) 30.00%,
+    rgb(0 0 0 / 0.8028) 32.50%,
+    rgb(0 0 0 / 0.8488) 35.00%,
+    rgb(0 0 0 / 0.8906) 37.50%,
+    rgb(0 0 0 / 0.9272) 40.00%,
+    rgb(0 0 0 / 0.9575) 42.50%,
+    rgb(0 0 0 / 0.9804) 45.00%,
+    rgb(0 0 0 / 0.9949) 47.50%,
+    rgb(0 0 0 / 1.0000) 50.00%);
 }
 
 /* Wide: the button sits below the landscape card (card and button centered together). */

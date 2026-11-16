@@ -137,20 +137,25 @@ python3 -m http.server 5190
 
 ## Text on a pattern: `textMask`
 
-A preset can say whether text on it needs the pattern mask from [`guidelines/layout/`](../../guidelines/layout/) (decided by Vanesa on 2026-11-11, rules in [`guidelines/`](../../guidelines/) section 4). It's only a setting for the layout: it never changes how the pattern renders.
+A preset can say whether text on it needs the pattern mask from [`guidelines/layout/`](../../guidelines/layout/) (rules in [`guidelines/`](../../guidelines/) section 4). It's only a setting for the layout: it never changes how the pattern renders. One mask strength, **40% of the pattern behind the text**, replaced `soft-1` (4%) and `soft-2` (10%) on 2026-11-16: those made creatives too dark and hid the pattern (Vanesa).
 
 | `textMask` | Meaning | Presets |
 | --- | --- | --- |
-| `"soft-1"` | Mask, 4% behind the text | Generative-Dash-Pattern-A |
-| `"soft-2"` | Mask, 10% behind the text | Color-Sliced-Pattern-B, Generative-Hexagon-Pattern-C, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet, as a dark creative) |
-| `"none"` | No mask, text sits straight on the pattern | Color-Sliced-Pattern-A, Color-Refracted-Pattern-A, Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet), Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Light violet) |
+| `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Medium violet) |
+| `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways), Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Light violet, Red), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet) |
+| `"both"` | Both work: offer the 40% mask and no mask, and let the person pick | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet), Mesh-Dithered-Pattern-A |
 | not set | Not decided yet: render it with and without the mask and ask | every other preset or colorway |
 
-When the answer differs by colorway (Burst-A, Glyph-B), `textMask` sits on the colorway instead of the preset.
+- When the answer differs by colorway (Burst-A, Glyph-B), `textMask` sits on the colorway instead of the preset.
+- **Never mask a light-colored pattern:** the mask turns its light colors grey (Vanesa, 2026-11-16).
+- **`textColor: "dark"`** on a colorway (Color-Refracted-Pattern-A, Primary 100 → Secondary 400) means the pattern is light: dark text, the Light logo, no mask. Never the monochrome Black logo.
+- The old values `"soft-1"` and `"soft-2"` mean `"mask"`, and their classes now give 40%, so older files still work.
 
 ## Patterns (V1)
 
 **Color-Sliced (red and violet): use Color-Sliced-Pattern-B, with the QDRANT letter layer, by default** (about 8 creatives in 10). Color-Sliced-Pattern-A, the slices without letters, only in creatives with headshots, where the letters would compete with the faces (decided 2026-11-11).
+
+**Mesh-Refracted and Mesh-Sliced patterns: only for creatives with little text** (a title and a button, say). For posts with a date, a place or other details, use a Color or Generative pattern. Mesh-Dithered-Pattern-A works as it is (Vanesa, 2026-11-16; a darker text side for meshes is for V2).
 
 | Pattern | Choices | Figma | Notes |
 | --- | --- | --- | --- |

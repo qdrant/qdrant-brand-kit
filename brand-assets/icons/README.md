@@ -33,7 +33,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 
 ## Colors
 
-- **On a pattern that isn't masked** (violet or red mid-tones, where a 400 disappears): **white**, the same color as the text beside it, with `.qd-icon--on-pattern` (decided 2026-11-11).
+- **On a pattern, masked at 40% or not** (violet or red mid-tones, where a 400 disappears): **white**, the same color as the text beside it, with `.qd-icon--on-pattern` (decided 2026-11-11; on the 40% mask too since 2026-11-16).
 - **On dark backgrounds, a 400 color. On light backgrounds, a 600 color.** The light card counts as a light background, even in a dark creative. It must keep **3:1** contrast with what's behind it, so it's easy to scan. (Steps updated 2026-11-12 for the Figma ramps, where the brand colors sit at 600; before, it was a 500 on light.)
 - Measured on the backgrounds in [`colors/`](../../primitives/colors/):
 
@@ -50,7 +50,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
   | `.qd-icon` (default) | `neutral-400` | `neutral-600` |
   | `.qd-icon--amaranth` | `amaranth-400` | `amaranth-600` |
   | `.qd-icon--indigo` | `indigo-400` | `indigo-600` |
-  | `.qd-icon--on-pattern` | white (`text.primary`), only on a pattern that isn't masked | not used |
+  | `.qd-icon--on-pattern` | white (`text.primary`), on a pattern, masked at 40% or not | not used |
   | `.qd-icon--blue`, `--purple`, `--red`, `--teal` | not allowed | the 600 |
 
   Renamed 2026-11-12 with the Figma color names: `--primary` is now `--amaranth`, `--secondary` is now `--indigo`, and the old `--indigo` (a Material blue) is now `--blue`.

@@ -13,7 +13,7 @@ Exported as SVG from the Qdrant Brand Design System file (`8y0svqBDPZX6caRNF6ldd
 | `qdrant-logo-dark.svg` | Qdrant-Logo `Color=Dark` (`13655:221`) | Red brandmark + white wordmark | Plain dark backgrounds and dark images |
 | `qdrant-logo-white.svg` | Qdrant-Logo `Color=White` (`13655:371`) | All white | Patterns: violet, red and busy ones (mesh and generative) |
 | `qdrant-logo-light.svg` | Qdrant-Logo `Color=Color4` (`13655:219`) | Red brandmark + dark wordmark. The Brand Guide calls it "Light"; Figma still says Color4 | The light card (`.qd-box--light-card`) and other light backgrounds |
-| `qdrant-logo-black.svg` | Qdrant-Logo `Color=Black` (`13655:267`) | All dark (`neutral.950`) | Light backgrounds when color isn't wanted |
+| `qdrant-logo-black.svg` | Qdrant-Logo `Color=Black` (`13655:267`) | All dark (`neutral.950`) | Not for creatives (never the monochrome Black logo, Vanesa 2026-11-16) |
 | `qdrant-brandmark-primary.svg` | Qdrant-Brandmark `Color=Primary` (`13655:129`) | Red brandmark, 3 tones | Not in creatives (see below) |
 | `qdrant-brandmark-black.svg` | Qdrant-Brandmark `Color=Black` (`13655:131`) | One color, dark | Not in creatives |
 | `qdrant-brandmark-white.svg` | Qdrant-Brandmark `Color=White` (`13655:169`) | One color, white | Not in creatives |
@@ -27,8 +27,8 @@ Exported as SVG from the Qdrant Brand Design System file (`8y0svqBDPZX6caRNF6ldd
 | Background | Version |
 | --- | --- |
 | Plain dark canvas, dark Box, dark image, the masked part of a dark creative | **Dark** |
-| Any pattern at full strength: violet, red, mesh, generative | **White** |
-| Light card, light background, the masked part of a light creative | **Light** (Black only when color isn't wanted) |
+| Any pattern at full strength: violet, red, mesh, generative (except a light pattern with `textColor: "dark"`: **Light**) | **White** |
+| Light card, light background, the masked part of a light creative | **Light**. Never the Black logo in a creative (2026-11-16) |
 
 - Never the Dark logo on red: the red brandmark disappears.
 - No effects, outlines or shadows. Don't distort, rotate, reposition its parts, change the typeface or use other colors (Brand Guide slide 17).
