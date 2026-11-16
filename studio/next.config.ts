@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
     // whole project. The studio is never deployed: silence that one warning for that one file.
     ignoreIssue: [{ path: "**/app/repo/**", title: /Dynamic filesystem access/ }],
   },
+  experimental: {
+    // Next.js tells coding agents when the installed version has a published security advisory (set by the
+    // 16.4.4 → 16.4.6 security upgrade).
+    agentUpgrade: "security",
+  },
 }
 
 export default nextConfig
