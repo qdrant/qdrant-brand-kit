@@ -17,6 +17,9 @@
     },
     {
       "name": "Primary 100 → Secondary 400",
+      "textMask": "none",
+      "textColor": "dark",
+      "$textColor": "Light pattern: dark text and the Light logo, no mask (Vanesa, 2026-11-16). Never the monochrome Black logo.",
       "from": "color.primary.100",
       "to": "color.secondary.400",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-23406"

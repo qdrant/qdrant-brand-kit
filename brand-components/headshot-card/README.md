@@ -39,7 +39,7 @@ Each card spans whole columns of the shape's grid. Every card in a row has the s
 
 **Wide covers with 2 speakers** (slides, decided 2026-11-11): span-3 cards on the right, at the size of a full row, level or staggered (`qd-headshot-row--stagger`). When staggered, put the logo in the left text column so the cards can use the full height. Never span-2 cards on a wide cover: too small. Circles on wide only for a quiet, text-led cover.
 
-**Story, 2 speakers** (decided 2026-11-11): circles in the text area as their own group (guidelines section 11, rule 9), never span-1 cards. Span-2 cards only when the copy is short enough to keep the names above the 344 px bottom safe zone.
+**Story, 2 speakers** (decided 2026-11-11): circles in the text area as their own group (guidelines section 11, rule 9), never span-1 cards. Span-2 cards only when the copy is short enough to keep the names above the 256 px bottom safe zone.
 
 **Story, 1 speaker:** offer both and let the person pick (decided 2026-11-04): a span-2 card beside the text (more impactful), or a [`headshot-circle`](../headshot-circle/) in the text block with the pattern below (quieter, a little empty but fine).
 
@@ -66,8 +66,8 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 
 1. **The card is always portrait 5:7.** It never stretches or squashes to fit the space (decided 2026-11-04, after the test made short, wide cards).
 2. **The photo fills the card.** The cutout scales so the top of the head is one `group` gap below the card's top edge, anchored to the bottom and centered. The shoulders run off the sides, as in the Vector Space Day banner.
-3. **Speakers sit on the bottom margin.** The cards line up at the bottom of the row. The space above them belongs to the visual area between the top and bottom blocks ([`guidelines/`](../../guidelines/) section 11, rule 7).
-4. **No room: smaller span, then circles.** If 5:7 cards at the span in the table don't fit the height left, drop every card to the next smaller span (e.g. 3 → 2 on square). If they still don't fit, use [`headshot-circle`](../headshot-circle/). Never squash the card's shape.
+3. **Speakers sit on the bottom margin.** The cards line up at the bottom of the row, and **the card's bottom lines up with the button's bottom** (on story, both on the 256 px safe-zone line; Vanesa, 2026-11-16). The space above them belongs to the visual area between the top and bottom blocks ([`guidelines/`](../../guidelines/) section 11, rule 7).
+4. **No room: tighter gaps, smaller cards, then circles** (order from [`guidelines/`](../../guidelines/) section 11, rule 11, 2026-11-16). First tighten the gaps between groups. Then drop every card to the next smaller span (e.g. 3 → 2 on square), or shrink the cards between spans. If they still don't fit, use [`headshot-circle`](../headshot-circle/). Never squash the card's shape, never cut a card at a margin, and never resize the button to make room.
 
 ## Rules
 

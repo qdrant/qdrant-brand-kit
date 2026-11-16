@@ -34,7 +34,7 @@ When a creative uses a generated image as its background ([`guidelines/`](../../
 
 | Channel | Size |
 | --- | --- |
-| Blog post hero | 2002×1122 |
+| Blog post hero | 916×458 (the size on qdrant.tech, 2026-11-12; was 2002×1122) |
 | Technical article | 898×300 |
 | Event | 1080×1080 |
 | Social, square | 1080×1080 |

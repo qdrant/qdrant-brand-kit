@@ -288,13 +288,13 @@
           },
           "top": {
             "$type": "dimension",
-            "$value": "256px",
-            "$description": "Story: clears the profile bar"
+            "$value": "192px",
+            "$description": "Story: clears the profile bar (was 256, Vanesa 2026-11-16)"
           },
           "bottom": {
             "$type": "dimension",
-            "$value": "344px",
-            "$description": "Story: clears the reply box and stickers"
+            "$value": "256px",
+            "$description": "Story: clears the reply box (was 344, Vanesa 2026-11-16)"
           }
         },
         "grid": {
