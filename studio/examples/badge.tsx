@@ -24,7 +24,7 @@ export default function BadgeExample() {
 function BadgeVariants() {
   return (
     <Example title="Variants">
-      <div className="flex flex-wrap gap-2 style-sera:gap-6">
+      <div className="flex flex-wrap gap-2">
         <Badge>Default</Badge>
         <Badge variant="secondary">Secondary</Badge>
         <Badge variant="destructive">Destructive</Badge>
@@ -39,7 +39,7 @@ function BadgeVariants() {
 function BadgeWithIconLeft() {
   return (
     <Example title="Icon Left" className="max-w-fit">
-      <div className="flex flex-wrap gap-2 style-sera:gap-6">
+      <div className="flex flex-wrap gap-2">
         <Badge>
           <IconPlaceholder
             lucide="BadgeCheck"
@@ -114,7 +114,7 @@ function BadgeWithIconLeft() {
 function BadgeWithIconRight() {
   return (
     <Example title="Icon Right" className="max-w-fit">
-      <div className="flex flex-wrap gap-2 style-sera:gap-6">
+      <div className="flex flex-wrap gap-2">
         <Badge>
           Default
           <IconPlaceholder
@@ -189,7 +189,7 @@ function BadgeWithIconRight() {
 function BadgeWithSpinner() {
   return (
     <Example title="With Spinner" className="max-w-fit">
-      <div className="flex flex-wrap gap-2 style-sera:gap-6">
+      <div className="flex flex-wrap gap-2">
         <Badge>
           <Spinner data-icon="inline-start" />
           Default
@@ -222,7 +222,7 @@ function BadgeWithSpinner() {
 function BadgeAsLink() {
   return (
     <Example title="asChild">
-      <div className="flex flex-wrap gap-2 style-sera:gap-6">
+      <div className="flex flex-wrap gap-2">
         <Badge
           render={
             <a href="#">
@@ -294,7 +294,7 @@ function BadgeAsLink() {
 function BadgeLongText() {
   return (
     <Example title="Long Text">
-      <div className="flex flex-wrap gap-2 style-sera:gap-6">
+      <div className="flex flex-wrap gap-2">
         <Badge variant="secondary">
           A badge with a lot of text to see how it wraps
         </Badge>
@@ -306,7 +306,7 @@ function BadgeLongText() {
 function BadgeCustomColors() {
   return (
     <Example title="Custom Colors" className="max-w-fit">
-      <div className="flex flex-wrap gap-2 style-sera:gap-6">
+      <div className="flex flex-wrap gap-2">
         <Badge className="bg-blue-600 text-blue-50 dark:bg-blue-600 dark:text-blue-50">
           Blue
         </Badge>

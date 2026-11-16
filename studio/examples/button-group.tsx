@@ -110,7 +110,7 @@ function ButtonGroupWithText() {
           <Input
             id="input-text"
             placeholder="Type something here..."
-            className="style-luma:border-border"
+            className=""
           />
         </ButtonGroup>
       </div>

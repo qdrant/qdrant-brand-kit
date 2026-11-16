@@ -1,13 +1,41 @@
-/* Studio-only rules for the live controls (lib/overrides.ts). Not part of the design system:
+/* Studio-only rules for the global controls (lib/overrides.ts). Not part of the design system:
    a value you keep goes into design-system/ or primitives/, with a line in design-system/DESIGN.md. */
+
+/* The right panel (DialKit) in the design system's colors, radius and type. It reads the same variables as
+   the components, so it follows the theme and whatever you try in it. [data-theme] outranks DialKit's own
+   dark and light values. */
+.dialkit-root[data-theme] {
+  --dial-glass-bg: var(--card);
+  --dial-dropdown-bg: var(--popover);
+  --dial-surface: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --dial-surface-subtle: color-mix(in oklab, var(--foreground) 6%, transparent);
+  --dial-surface-hover: color-mix(in oklab, var(--foreground) 9%, transparent);
+  --dial-surface-active: color-mix(in oklab, var(--foreground) 12%, transparent);
+  --dial-text-root: var(--foreground);
+  --dial-text-focus: var(--foreground);
+  --dial-text-primary: var(--foreground);
+  --dial-text-section: var(--muted-foreground);
+  --dial-text-label: var(--muted-foreground);
+  --dial-text-secondary: var(--muted-foreground);
+  --dial-text-tertiary: color-mix(in oklab, var(--muted-foreground) 70%, transparent);
+  --dial-border: var(--border);
+  --dial-border-hover: color-mix(in oklab, var(--foreground) 20%, transparent);
+  --dial-focus-ring: var(--ring);
+  --dial-radius: var(--radius-md);
+  font-family: var(--qd-font-family-sans);
+}
+.dialkit-root[data-theme] .dialkit-slider-fill {
+  background: color-mix(in oklab, var(--primary) 45%, transparent);
+}
+.dialkit-root[data-theme] .dialkit-toggle[data-checked="true"] .dialkit-toggle-track {
+  background: var(--primary);
+}
+/* DialKit's own copy button: the panel's "Copy CSS" gives what goes into the design system instead. */
+.dialkit-root [title="Copy parameters"] {
+  display: none;
+}
 
 /* Mona Sans width for headings and titles: 75% (condensed) to 125% (expanded). */
 .studio-canvas :where(h1, h2, h3, h4, h5, h6, [data-slot$="-title"]) {
   font-stretch: var(--studio-heading-stretch, 100%);
-}
-
-/* Glow: emitted light around the primary button, in the accent color. 0 is no glow. */
-.studio-canvas .qd-ui-button {
-  --tw-shadow: 0 0 calc(var(--studio-glow, 0) * 32px)
-    color-mix(in srgb, var(--primary) calc(var(--studio-glow, 0) * 70%), transparent);
 }
