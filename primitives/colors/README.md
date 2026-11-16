@@ -4,7 +4,7 @@ The Qdrant palette as tokens. The primitives come from the Figma file **Qdrant D
 
 | File | What it is |
 | --- | --- |
-| `colors.tokens.json` | The source. W3C tokens: `color` and `brand` (the Figma primitives, exact), then this repo's brand layer: `asset`, `gradient`, `semantic` roles (dark theme) and `theme.light` overrides |
+| `colors.tokens.json` | The source. W3C tokens: `color` and `brand` (the Figma primitives, exact, plus `neutral-975`, added here first on 2026-11-16 and still to be synced to Figma), then this repo's brand layer: `asset`, `gradient`, `semantic` roles (dark theme) and `theme.light` overrides |
 | `colors.css` | Generated from the JSON by [`../build.mjs`](../build.mjs): `--qd-color-*` and `--qd-gradient-*` variables. The dark roles are on `:root` and `[data-theme="dark"]`, the light ones on `[data-theme="light"]`, so any section can switch theme. Never edit it by hand |
 
 ## Primitives
@@ -13,7 +13,7 @@ The Qdrant palette as tokens. The primitives come from the Figma file **Qdrant D
 
 | Family | Main color | Use |
 | --- | --- | --- |
-| `neutral` | Steps 0 (white), 25, 50 to 950, 850, 925 and 1000 (black) | Backgrounds, surfaces, text, borders |
+| `neutral` | Steps 0 (white), 25, 50 to 950, 850, 925, 975 and 1000 (black) | Backgrounds, surfaces, text, borders |
 | `amaranth` | 600 `#DC244C` | Brand identity: calls to action, highlights, the logo |
 | `indigo` | 600 `#6047FF` | Brand action and accent: charts, secondary calls to action, code highlights |
 | `red` | 500 `#F24134` | Error and destructive |

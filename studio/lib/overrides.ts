@@ -81,7 +81,7 @@ const fonts = [
 ]
 
 // The neutral ramp (primitives/colors), for the depth controls.
-const neutralSteps = [0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 850, 900, 925, 950, 1000].map(String)
+const neutralSteps = [0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 850, 900, 925, 950, 975, 1000].map(String)
 const neutral = (vars: string | string[], step: string, scope: "dark" | "light") =>
   select(
     [vars].flat(),
@@ -157,11 +157,7 @@ export const controls: Group = {
   // `--qd-ui-popover` and `--qd-ui-highlight`), plus the edges and the secondary text. Per theme, like
   // styles/globals.css, which shadcn reads them through.
   depthDark: {
-    // The page offers neutral-975, the design system's dark page (styles/globals.css), besides the primitives.
-    page: select([], "975", ["975", ...neutralSteps].map((s) => ({ value: s, label: `neutral-${s}` })), {
-      scope: "dark",
-      css: (v) => ({ "--qd-ui-page": v === "975" ? "var(--qd-ui-neutral-975)" : `var(--qd-color-neutral-${v})` }),
-    }),
+    page: neutral("--qd-ui-page", "975", "dark"),
     raised: neutral("--qd-ui-card", "950", "dark"),
     overlay: neutral("--qd-ui-popover", "925", "dark"),
     highlight: neutral("--qd-ui-highlight", "900", "dark"),

@@ -122,9 +122,6 @@
 :root,
 [data-theme],
 [data-context] {
-  /* neutral-975, not a primitive yet: halfway from neutral-950 to black in sRGB, which keeps 950's hue and
-     saturation at half its brightness (H 216°, S 59%, B 3.3%; Juan, 2026-11-16). The dark page. */
-  --qd-ui-neutral-975: color-mix(in srgb, var(--qd-color-neutral-950), var(--qd-color-neutral-1000));
   --background: var(--qd-ui-page);
   --foreground: var(--qd-color-text-primary);
   --card: var(--qd-ui-card);
@@ -173,7 +170,7 @@
      rules (about 1.5:1 on dark cards and on white). */
 :root,
 [data-theme="dark"] {
-  --qd-ui-page: var(--qd-ui-neutral-975);
+  --qd-ui-page: var(--qd-color-neutral-975);
   --qd-ui-card: var(--qd-color-neutral-950);
   --qd-ui-popover: var(--qd-color-neutral-925);
   --qd-ui-highlight: var(--qd-color-neutral-900);

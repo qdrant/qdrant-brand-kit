@@ -27,8 +27,6 @@ export type Variation = {
 }
 
 const n = (step: number) => `var(--qd-color-neutral-${step})`
-// neutral-975, not a primitive yet: the design system's dark page (styles/globals.css, Juan, 2026-11-16).
-const n975 = "var(--qd-ui-neutral-975)"
 const mix = (color: string, share: number) => `color-mix(in oklab, ${color} ${share}%, transparent)`
 const fg = (share: number) => mix("var(--foreground)", share)
 const black = (share: number) => mix("var(--qd-color-neutral-1000)", share)
@@ -45,7 +43,7 @@ const r = { none: "0px", xs: "var(--qd-radius-xs)", sm: "var(--qd-radius-sm)", m
 // muted and hovered things; then the borders (outline buttons, separators, table rows).
 function surfaces(page: number, card: number, popover: number, highlight: number, border: number): Vars {
   return {
-    "--qd-ui-page": page === 975 ? n975 : n(page),
+    "--qd-ui-page": n(page),
     "--qd-ui-card": n(card),
     "--qd-ui-popover": n(popover),
     "--qd-ui-highlight": n(highlight),
@@ -168,7 +166,7 @@ export const variations: Variation[] = [
     },
     // Its lines are the default's soft border, like Deep's (Juan, 2026-11-16): they were the text color at 12% on
     // cards, menus and buttons (8% on light cards) and neutral-850 (100 on light) on dividers and the sidebar.
-    dark: { ...withoutBorders(hairlineNeutrals.dark), "--qd-ui-page": n975, "--qd-ui-menu-shadow": floating(30) },
+    dark: { ...withoutBorders(hairlineNeutrals.dark), "--qd-ui-page": n(975), "--qd-ui-menu-shadow": floating(30) },
     light: { ...withoutBorders(hairlineNeutrals.light), "--qd-ui-menu-shadow": floating(4) },
   },
   {
@@ -416,7 +414,7 @@ ${lineGrid(32, 5)}`,
     from: "Hairline's depth (Vercel, Linear) on the default look",
     vars: {},
     dark: {
-      "--qd-ui-page": n975,
+      "--qd-ui-page": n(975),
       "--qd-ui-card": n(950),
     },
   },
