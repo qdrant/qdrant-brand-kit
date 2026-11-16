@@ -1,5 +1,5 @@
 {
-  "$description": "Qdrant colors. The `color` and `brand` groups are the primitives, copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12, plus `neutral-975`, added here first on 2026-11-16 and still to be added to the Figma file. The other groups are this repo's brand layer: roles for creatives and web, gradients and the mascot glow, all aliases of the primitives. Source of truth: this file. colors.css is generated from it by primitives/build.mjs.",
+  "$description": "Qdrant colors. The `color` and `brand` groups are the primitives, copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12; `neutral-975` was added here first and then to the Figma file, on 2026-11-16. The other groups are this repo's brand layer: roles for creatives and web, gradients and the mascot glow, all aliases of the primitives. Source of truth: this file. colors.css is generated from it by primitives/build.mjs.",
   "color": {
     "$description": "Color primitives. Raw values only: no meaning. Use semantic tokens in components.",
     "neutral": {
@@ -194,7 +194,7 @@
           ],
           "hex": "#040609"
         },
-        "$description": "The design system's dark page (Juan, 2026-11-16): halfway from 950 to black in sRGB, rounded so it keeps 950's hue (H 216°, S 56%, B 3.5%). Added in this repo first; not in the Figma file yet."
+        "$description": "The design system's dark page (Juan, 2026-11-16): halfway from 950 to black in sRGB, rounded so it keeps 950's hue (H 216°, S 56%, B 3.5%). Added in this repo first, then to the Figma file the same day."
       },
       "1000": {
         "$type": "color",
