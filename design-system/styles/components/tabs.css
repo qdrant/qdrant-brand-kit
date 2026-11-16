@@ -1,0 +1,24 @@
+/* Tabs (components/ui/tabs.tsx), the default variant. Defaults follow the shared control height (ui.css)
+   and the stock base-mira values. */
+:root,
+[data-theme],
+[data-context] {
+  --qd-ui-tabs-height: calc(var(--qd-ui-control-height) + var(--spacing));
+  --qd-ui-tabs-padding: 3px;
+  --qd-ui-tabs-radius: var(--radius-lg);
+  --qd-ui-tabs-trigger-radius: var(--radius-md);
+  /* The track is the highlight, the secondary button's fill (globals.css), one step off the card. */
+  --qd-ui-tabs-list-bg: var(--muted);
+}
+/* The active tab is one more step up from the track, so the two read apart, with the same contrast in both
+   themes (DESIGN.md, 2026-11-16). On dark: neutral-850. On light: white, with the soft border to lift it. By
+   theme, never in the block above. */
+:root,
+[data-theme="dark"] {
+  --qd-ui-tabs-active-bg: var(--qd-color-neutral-850);
+  --qd-ui-tabs-active-border: transparent;
+}
+[data-theme="light"] {
+  --qd-ui-tabs-active-bg: var(--qd-color-neutral-0);
+  --qd-ui-tabs-active-border: var(--border);
+}

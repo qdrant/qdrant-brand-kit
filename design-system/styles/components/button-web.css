@@ -1,0 +1,66 @@
+/* The web Button's size, shape and structure (components/ui/button.tsx). Its colors and type
+   are in button.css, shared with the creative button; creatives size their button from the canvas and don't
+   read this file.
+
+   The structure follows Supabase's buttons (supabase.com, 2026-11-14), in Qdrant's colors: no CSS border on
+   the primary and secondary buttons, which are raised surfaces with a 1px edge and a faint top light drawn
+   inside them and a short drop shadow under them; 14px medium text, 16px side padding and an 8px gap; a
+   0.97 press over 200ms with a soft ease-out; a 2px focus ring with a 2px gap. Fills are flat: no gradient
+   (2026-11-14) and no inner highlight on the primary (2026-11-15); the creative button keeps both from
+   button.css. */
+:root,
+[data-theme],
+[data-context] {
+  /* The default size. xs, sm and lg are one and two spacing steps around it. */
+  --qd-ui-button-height: var(--qd-ui-control-height);
+  --qd-ui-button-padding-x: calc(var(--spacing) * 4);
+  --qd-ui-button-gap: calc(var(--spacing) * 2);
+  --qd-ui-button-radius: var(--qd-ui-control-radius);
+  /* Default and lg; sm and xs use the UI text size (12px). */
+  --qd-ui-button-font-size: var(--text-sm);
+  /* Outline, secondary, ghost and the rest. The primary's weight is --qd-ui-button-weight (button.css). */
+  --qd-ui-button-font-weight: var(--font-weight-medium);
+  --qd-ui-button-tracking: 0em;
+  --qd-ui-button-case: none;
+
+  /* While pressed: how far the button moves down, and how much it shrinks (1 is not at all). */
+  --qd-ui-button-press: 0px;
+  --qd-ui-button-press-scale: 0.97;
+  /* Hover, press and focus changes. */
+  --qd-ui-button-duration: 200ms;
+  --qd-ui-button-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* The gap between a focused button and its focus ring. */
+  --qd-ui-button-focus-offset: 2px;
+  /* The outline button's edge: the field edge, shared with fields, checkboxes and radios (globals.css,
+     2026-11-16). */
+  --qd-ui-button-outline-border: var(--input);
+
+  /* The primary's flat fill: the context's accent (globals.css), amaranth for marketing and indigo for product.
+     It has no inner highlight on the web (2026-11-15), so hover changes the fill to the accent's 700. Disabled
+     is the accent's 400, and focus a 2px ring in the accent at 40%, as in the approved button (button.css). */
+  --qd-ui-button-web-fill: var(--primary);
+  --qd-ui-button-web-fill-hover: var(--qd-ui-accent-hover);
+  --qd-ui-button-web-fill-disabled: var(--qd-ui-accent-muted);
+  --qd-ui-button-web-focus-ring: color-mix(in srgb, var(--qd-ui-accent) 40%, transparent);
+
+  /* Raised surface (primary and secondary): a drop shadow and edges, from the theme blocks below. */
+  --qd-ui-button-raised:
+    var(--qd-ui-button-drop),
+    inset 0 1px 0 0 color-mix(in oklab, var(--qd-ui-button-edge-color) calc(4% * var(--qd-ui-button-edge-strength)), transparent),
+    inset 0 0 0 1px color-mix(in oklab, var(--qd-ui-button-edge-color) calc(6% * var(--qd-ui-button-edge-strength)), transparent),
+    inset 0 0 0 1px color-mix(in oklab, var(--qd-ui-button-edge-color) calc(10% * var(--qd-ui-button-edge-strength)), transparent);
+}
+/* The edge color and its strength, and the shadow under, by theme (never in the block above, or a
+   [data-context] inside a light section would reset them to dark). In light, the edge is dark and softer,
+   and the drop shadow lighter. */
+:root,
+[data-theme="dark"] {
+  --qd-ui-button-edge-color: var(--qd-color-neutral-0);
+  --qd-ui-button-edge-strength: 1;
+  --qd-ui-button-drop: 0 1px 3px 0 color-mix(in oklab, var(--qd-color-neutral-1000) 20%, transparent);
+}
+[data-theme="light"] {
+  --qd-ui-button-edge-color: var(--qd-color-neutral-1000);
+  --qd-ui-button-edge-strength: 0.6;
+  --qd-ui-button-drop: 0 1px 3px 0 color-mix(in oklab, var(--qd-color-neutral-1000) 4%, transparent);
+}

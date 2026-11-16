@@ -14,6 +14,17 @@
 @import "./tokens.css";
 /* Component looks shared with the brand components (plain CSS variables). */
 @import "./components/button.css";
+/* Component tokens: the size, shape, type and edges of each component, read by its classes. Defaults are
+   the stock base-mira values; ui.css explains the tiers. In the base layer, so any unlayered rule wins. */
+@import "./components/ui.css" layer(base);
+@import "./components/button-web.css" layer(base);
+@import "./components/input.css" layer(base);
+@import "./components/card.css" layer(base);
+@import "./components/badge.css" layer(base);
+@import "./components/menu.css" layer(base);
+@import "./components/tabs.css" layer(base);
+@import "./components/selection.css" layer(base);
+@import "./components/overlay.css" layer(base);
 
 /* Themes: data-theme="dark" (the default) or "light", on <html> for the whole page and on any element
    for one section. `dark:` and `light:` follow the closest scope: a dark section inside a light page
@@ -27,6 +38,13 @@
 
 /* shadcn's radius names, snapped to the nearest Qdrant radius (primitives/radius). Not inline, so the
    classes read these variables at runtime and the studio can try other radii live. */
+/* Weightless motion (DESIGN.md, 2026-11-14): every transition decelerates and settles on an expo ease-out,
+   never a bounce. Menus, popovers and dialogs use it too (components/ui.css); buttons keep their own softer
+   curve (components/button-web.css). */
+@theme {
+  --default-transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
 @theme {
   --radius-xs: var(--qd-radius-xs);
   --radius-sm: var(--qd-radius-xs);
@@ -77,75 +95,129 @@
   --color-background: var(--background);
 }
 
-/* shadcn's tokens, mapped by meaning onto the Qdrant roles (primitives/colors/README.md "Roles").
-   Declared on :root and on every [data-theme] element, so a section switched to light recomputes them.
-   shadcn's `secondary`, `muted` and `accent` are neutral surfaces, not Qdrant's violet or red. */
+/* The accent, by context (Juan, 2026-11-15): amaranth for brand and marketing, indigo for product.
+   Marketing is the default (creatives, web pages, the studio's Design system and Web pages). Product UI puts
+   data-context="product" on its root; data-context="marketing" switches a piece back inside it. Declared only
+   on :root and the contexts, so a [data-theme] section inside a context keeps that context's accent. */
 :root,
-[data-theme] {
-  --background: var(--qd-color-background-default);
-  --foreground: var(--qd-color-text-primary);
-  --card: var(--qd-color-background-raised);
-  --card-foreground: var(--qd-color-text-primary);
-  --popover: var(--qd-color-background-overlay);
-  --popover-foreground: var(--qd-color-text-primary);
-  --primary: var(--qd-color-accent-primary);
-  --primary-foreground: var(--qd-color-text-on-accent);
-  --secondary: var(--qd-color-background-highlight);
-  --secondary-foreground: var(--qd-color-text-primary);
-  --muted: var(--qd-color-background-highlight);
-  --muted-foreground: var(--qd-color-text-secondary);
-  --accent: var(--qd-color-background-highlight);
-  --accent-foreground: var(--qd-color-text-primary);
-  --destructive: var(--qd-color-status-error);
-  --border: var(--qd-color-border-on-dark);
-  /* Inputs, checkboxes and focus rings need 3:1 against the background (Figma contrast rules). */
-  --input: var(--qd-color-neutral-600);
-  --ring: var(--qd-color-accent-primary);
-  --chart-1: var(--qd-color-dataviz-1);
-  --chart-2: var(--qd-color-dataviz-2);
-  --chart-3: var(--qd-color-dataviz-3);
-  --chart-4: var(--qd-color-dataviz-4);
-  --chart-5: var(--qd-color-dataviz-5);
-  --radius: var(--qd-radius-sm);
-  --sidebar: var(--qd-color-background-raised);
-  --sidebar-foreground: var(--qd-color-text-primary);
-  --sidebar-primary: var(--qd-color-accent-primary);
-  --sidebar-primary-foreground: var(--qd-color-text-on-accent);
-  --sidebar-accent: var(--qd-color-background-highlight);
-  --sidebar-accent-foreground: var(--qd-color-text-primary);
-  --sidebar-border: var(--qd-color-border-on-dark);
-  --sidebar-ring: var(--qd-color-accent-primary);
+[data-context="marketing"] {
+  --qd-ui-accent: var(--qd-color-accent-primary);
+  --qd-ui-accent-hover: var(--qd-color-accent-primary-hover);
+  --qd-ui-accent-muted: var(--qd-color-amaranth-400);
+}
+[data-context="product"] {
+  --qd-ui-accent: var(--qd-color-accent-secondary);
+  --qd-ui-accent-hover: var(--qd-color-indigo-700);
+  --qd-ui-accent-muted: var(--qd-color-indigo-400);
 }
 
-/* Light: the background and text roles switch in primitives/colors. Borders have their own light role,
-   and inputs keep 3:1 on white with neutral-500. */
+/* shadcn's tokens, mapped by meaning onto the Qdrant roles (primitives/colors/README.md "Roles").
+   Declared on :root and on every [data-theme] and [data-context] element, so a section switched to light,
+   or to the product accent, recomputes them. shadcn's `secondary`, `muted` and `accent` are neutral
+   surfaces: `secondary` and `muted` are the highlight (`--qd-ui-highlight`) and `accent` the hover
+   (`--qd-ui-hover`). The page, cards (and the sidebar) and popovers are `--qd-ui-page`, `--qd-ui-card` and
+   `--qd-ui-popover`: Hairline's neutrals, not the primitives' background roles, which creatives keep. All of
+   them by theme below; `primary` and `ring` are the context's accent. Values that differ by theme (the highlight and the edges) go in the theme blocks below,
+   never here: a [data-context] inside a light section would reset them to dark. */
+:root,
+[data-theme],
+[data-context] {
+  /* neutral-975, not a primitive yet: halfway from neutral-950 to black in sRGB, which keeps 950's hue and
+     saturation at half its brightness (H 216°, S 59%, B 3.3%; Juan, 2026-11-16). The dark page. */
+  --qd-ui-neutral-975: color-mix(in srgb, var(--qd-color-neutral-950), var(--qd-color-neutral-1000));
+  --background: var(--qd-ui-page);
+  --foreground: var(--qd-color-text-primary);
+  --card: var(--qd-ui-card);
+  --card-foreground: var(--qd-color-text-primary);
+  --popover: var(--qd-ui-popover);
+  --popover-foreground: var(--qd-color-text-primary);
+  --primary: var(--qd-ui-accent);
+  --primary-foreground: var(--qd-color-text-on-accent);
+  --secondary: var(--qd-ui-highlight);
+  --secondary-foreground: var(--qd-color-text-primary);
+  --muted: var(--qd-ui-highlight);
+  --muted-foreground: var(--qd-color-text-secondary);
+  --accent: var(--qd-ui-hover);
+  --accent-foreground: var(--qd-color-text-primary);
+  --destructive: var(--qd-color-status-error);
+  --ring: var(--qd-ui-accent);
+  /* Charts never use the brand colors, so they stand apart from the accent and the brand (DESIGN.md,
+     2026-11-16): the dataviz roles after amaranth and indigo, in their order. */
+  --chart-1: var(--qd-color-dataviz-3);
+  --chart-2: var(--qd-color-dataviz-4);
+  --chart-3: var(--qd-color-dataviz-5);
+  --chart-4: var(--qd-color-dataviz-6);
+  --chart-5: var(--qd-color-dataviz-7);
+  --radius: var(--qd-radius-sm);
+  --sidebar: var(--qd-ui-card);
+  --sidebar-foreground: var(--qd-color-text-primary);
+  --sidebar-primary: var(--qd-ui-accent);
+  --sidebar-primary-foreground: var(--qd-color-text-on-accent);
+  --sidebar-accent-foreground: var(--qd-color-text-primary);
+  --sidebar-ring: var(--qd-ui-accent);
+}
+
+/* Surfaces and edges, by theme (DESIGN.md, 2026-11-16).
+   - The surfaces are Hairline's (Juan, 2026-11-16). Dark: the page neutral-975, cards and the sidebar
+     neutral-950, popovers neutral-925. Light: all white, apart by their soft borders and shadows.
+   - The highlight, shadcn's `secondary` and `muted` (the secondary button, muted items, progress tracks,
+     skeletons, calendar ranges, the tabs track): solid, since some of them overlap. Hairline's neutral-900 on
+     dark; on light, neutral-50, the background-highlight role.
+   - The hover, shadcn's `accent` (hovered and focused items, ghost and outline buttons): on dark, the text
+     color at 4%, see-through, so it's one equal step on the page, a card or a menu; on light, neutral-50.
+   - The soft border, `border` and `sidebar-border`: every edge that isn't a control (cards, menus, the
+     sidebar and top bars, dividers, toggles, items). The text color at 9% on dark and 10% on light, so it
+     stays quiet on any surface.
+   - The control edge, `input`: fields, checkboxes, radios and outline buttons, which need more attention.
+     neutral-800 on dark and neutral-300 on light, two levels softer than the 3:1 of the Figma contrast
+     rules (about 1.5:1 on dark cards and on white). */
+:root,
+[data-theme="dark"] {
+  --qd-ui-page: var(--qd-ui-neutral-975);
+  --qd-ui-card: var(--qd-color-neutral-950);
+  --qd-ui-popover: var(--qd-color-neutral-925);
+  --qd-ui-highlight: var(--qd-color-neutral-900);
+  --qd-ui-hover: color-mix(in oklab, var(--foreground) 4%, transparent);
+  --border: color-mix(in oklab, var(--foreground) 9%, transparent);
+  --input: var(--qd-color-neutral-800);
+  --sidebar-border: var(--border);
+  /* The sidebar's hovered and active item: neutral-900 on the neutral-950 sidebar (dark), neutral-25 on
+     white (light), so it's subtle (DESIGN.md, 2026-11-16). */
+  --sidebar-accent: var(--qd-color-neutral-900);
+}
+
+/* Light: the background and text roles switch in primitives/colors. */
 [data-theme="light"] {
-  --border: var(--qd-color-border-on-light);
-  --input: var(--qd-color-neutral-500);
-  --sidebar-border: var(--qd-color-border-on-light);
+  --qd-ui-page: var(--qd-color-neutral-0);
+  --qd-ui-card: var(--qd-color-neutral-0);
+  --qd-ui-popover: var(--qd-color-neutral-0);
+  --qd-ui-highlight: var(--qd-color-background-highlight);
+  --qd-ui-hover: var(--qd-color-background-highlight);
+  --border: color-mix(in oklab, var(--foreground) 10%, transparent);
+  --input: var(--qd-color-neutral-300);
+  --sidebar-border: var(--border);
+  --sidebar-accent: var(--qd-color-neutral-25);
 }
 
 /* The Qdrant button look (components/button.css) on the Button's default variant (class qd-ui-button).
-   Unlayered, so it wins over the variant's Tailwind classes. The box-shadow keeps Tailwind's ring
-   variables, so the focus ring still shows over the inner highlight. */
+   Unlayered, so it wins over the variant's Tailwind classes. Flat on the web (components/button-web.css):
+   no gradient and no inner highlight; the creative button keeps both. */
 .qd-ui-button {
-  background-image: var(--qd-ui-button-fill);
+  background-image: none;
+  background-color: var(--qd-ui-button-web-fill);
   color: var(--qd-ui-button-text-color);
   font-family: var(--qd-ui-button-font);
   font-weight: var(--qd-ui-button-weight);
-  --tw-inset-shadow: inset 0 calc(1em * var(--qd-ui-button-highlight-y)) calc(1em * var(--qd-ui-button-highlight-blur)) var(--qd-ui-button-highlight);
-  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow, 0 0 transparent), var(--tw-ring-offset-shadow, 0 0 transparent), var(--tw-ring-shadow, 0 0 transparent), var(--tw-shadow, 0 0 transparent);
 }
 .qd-ui-button:hover {
-  background-image: var(--qd-ui-button-fill-hover);
-  --qd-ui-button-highlight: var(--qd-ui-button-highlight-hover);
+  background-color: var(--qd-ui-button-web-fill-hover);
 }
 .qd-ui-button:focus-visible {
-  --tw-ring-color: var(--qd-ui-button-focus-ring);
+  --tw-ring-color: var(--qd-ui-button-web-focus-ring);
 }
 .qd-ui-button:disabled,
 .qd-ui-button[aria-disabled="true"] {
-  background-image: var(--qd-ui-button-fill-disabled);
+  background-color: var(--qd-ui-button-web-fill-disabled);
   opacity: 1;
 }
 

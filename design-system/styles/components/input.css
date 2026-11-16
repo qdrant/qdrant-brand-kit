@@ -1,0 +1,21 @@
+/* Fields: Input, Textarea, Select and NativeSelect triggers, InputGroup and Combobox chips. Defaults point to
+   the shared control tokens (ui.css) and the stock base-mira values. */
+:root,
+[data-theme],
+[data-context] {
+  /* The default size; sm is one spacing step smaller. Textarea keeps its own height. */
+  --qd-ui-input-height: var(--qd-ui-control-height);
+  --qd-ui-input-padding-x: var(--qd-ui-control-padding-x);
+  --qd-ui-input-radius: var(--qd-ui-control-radius);
+  --qd-ui-input-font-size: var(--qd-ui-control-font-size);
+  --qd-ui-input-border: var(--input);
+}
+/* The fill, by theme: one neutral step from the cards fields sit on, so it's barely there (DESIGN.md,
+   2026-11-16). Cards are neutral-925 on dark and white on light. */
+:root,
+[data-theme="dark"] {
+  --qd-ui-input-bg: var(--qd-color-neutral-900);
+}
+[data-theme="light"] {
+  --qd-ui-input-bg: var(--qd-color-neutral-25);
+}

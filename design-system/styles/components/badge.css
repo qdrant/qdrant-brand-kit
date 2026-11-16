@@ -1,0 +1,14 @@
+/* Badge (components/ui/badge.tsx). Defaults are the stock base-mira values. See ui.css for how component
+   tokens work. */
+:root,
+[data-theme],
+[data-context] {
+  --qd-ui-badge-height: calc(var(--spacing) * 5);
+  --qd-ui-badge-padding-x: calc(var(--spacing) * 2);
+  --qd-ui-badge-radius: calc(infinity * 1px);
+  --qd-ui-badge-font: var(--font-sans);
+  --qd-ui-badge-font-size: 0.625rem;
+  --qd-ui-badge-font-weight: var(--font-weight-medium);
+  --qd-ui-badge-tracking: 0em;
+  --qd-ui-badge-case: none;
+}

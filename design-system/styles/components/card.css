@@ -1,0 +1,16 @@
+/* Card (components/ui/card.tsx). Its background is the raised role (styles/globals.css). Defaults are the
+   stock base-mira values. See ui.css for how component tokens work. */
+:root,
+[data-theme],
+[data-context] {
+  --qd-ui-card-radius: var(--radius-lg);
+  /* Padding and the gap between header, content and footer. Small cards are one spacing step tighter. */
+  --qd-ui-card-padding: calc(var(--spacing) * 4);
+  /* The edge: the soft border (globals.css). */
+  --qd-ui-card-border-width: 1px;
+  --qd-ui-card-border-color: var(--border);
+  /* Elevation: a drop shadow (none), and a line of light along the top edge (none: cards are flat,
+     DESIGN.md 2026-11-16; menus and dialogs keep the light from above, ui.css). */
+  --qd-ui-card-shadow: 0 0 transparent;
+  --qd-ui-card-highlight: 0 0 transparent;
+}
