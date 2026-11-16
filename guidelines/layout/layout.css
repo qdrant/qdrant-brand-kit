@@ -128,7 +128,7 @@
 .qd-canvas[data-shape="story"]    { --qd-book-share: 0.75; }
 /* Wide: a landscape card, 5:4, 72% of the canvas height (the largest that fits with the button inside the
    margins). W stays the portrait card's width for that height, so every size below keeps its share of W;
-   only the card's width changes, and the title and text are 1.5x larger (Vanesa, 2026-11-11).
+   only the card's width changes, and the text is 1.5x larger (Vanesa, 2026-11-11), the title 1.95x (2026-11-16).
    Ultrawide: no light card. */
 .qd-canvas[data-shape="wide"]     { --qd-book-share: 0.3286; }
 .qd-canvas {
@@ -258,8 +258,7 @@
 .qd-pattern-mask,
 .qd-pattern-mask.qd-pattern-mask--soft-1,
 .qd-pattern-mask.qd-pattern-mask--soft-2 { --qd-mask-low: 0.40; --qd-mask-hold-k: 1; --qd-mask-full-gaps: 4; }
-/* Text on the right (LinkedIn profile cover): the fade runs from the right edge, and --qd-mask-edge
-   is the text block's left edge measured from the canvas's right edge (Vanesa, 2026-11-11). */
+/* Text on the right (LinkedIn profile cover): the fade runs from the right edge (Vanesa, 2026-11-11). */
 .qd-canvas[data-shape] .qd-pattern-mask.qd-pattern-mask--from-right { --qd-mask-direction: to left; }
 .qd-canvas[data-shape="wide"] .qd-pattern-mask,
 .qd-canvas[data-shape="ultrawide"] .qd-pattern-mask { --qd-mask-direction: to right; }

@@ -33,7 +33,7 @@ def icon_colors():
     bg = re.search(r"--qd-color-background-default:\s*#([0-9A-Fa-f]{6})", css)
     dark_bg = tuple(int(bg.group(1)[i:i + 2], 16) for i in (0, 2, 4)) if bg else (7, 11, 17)
     dark = keep(pick("400"), dark_bg)
-    # White (text.primary) is allowed on a pattern that isn't masked: .qd-icon--on-pattern (README "Colors").
+    # White (text.primary) is allowed on a pattern, masked at 40% or not: .qd-icon--on-pattern (README "Colors").
     tp = re.search(r"--qd-color-text-primary:\s*#([0-9A-Fa-f]{6})", css)
     if tp:
         dark["text-primary (on pattern)"] = tuple(int(tp.group(1)[i:i + 2], 16) for i in (0, 2, 4))
@@ -365,7 +365,7 @@ LOOK = ["Hierarchy: one clear title, calm supporting text, nothing competing",
         "Pattern: the right one for the tone and layout (light card: Color-Sliced-Pattern-B only; Color-Sliced-A only with headshots)",
         "Pattern mask: used when the preset's textMask says so, soft and with no visible edge",
         "Qbot rules (guidelines section 6): placement, crop, glow, never before the text",
-        "Button in a corner: beside the logo only with a full-width text block, otherwise last in the text block"]
+        "Button in a corner: beside the logo only with a full-width text block or on a red pattern, otherwise last in the text block or a bottom corner"]
 
 
 def main():
