@@ -1,5 +1,5 @@
 {
-  "$description": "Qdrant colors. The `color` and `brand` groups are the primitives, copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12. The other groups are this repo's brand layer: roles for creatives and web, gradients and the mascot glow, all aliases of the primitives. Source of truth: this file. colors.css is generated from it by primitives/build.mjs.",
+  "$description": "Qdrant colors. The `color` group is the primitives, copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12; `neutral-975` was added here first and then to the Figma file, on 2026-11-16. The other groups are this repo's brand layer: semantic tokens, so they stay out of the Figma file, which holds primitives only. They are the brand color names, roles for creatives and web, gradients and the mascot glow, all aliases of the primitives. Source of truth: this file. colors.css is generated from it by primitives/build.mjs.",
   "color": {
     "$description": "Color primitives. Raw values only: no meaning. Use semantic tokens in components.",
     "neutral": {
@@ -183,6 +183,19 @@
           "hex": "#070b11"
         }
       },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0157,
+            0.0235,
+            0.0353
+          ],
+          "hex": "#040609"
+        },
+        "$description": "The design system's dark page (Juan, 2026-11-16): halfway from 950 to black in sRGB, rounded so it keeps 950's hue (H 216°, S 56%, B 3.5%). Added in this repo first, then to the Figma file the same day."
+      },
       "1000": {
         "$type": "color",
         "$value": {
@@ -195,7 +208,7 @@
           "hex": "#000000"
         }
       },
-      "$description": "Deep Space 216 neutral (HCT hue 255, saturation-balanced). 0 = white, 1000 = black. 850 and 925 support the background roles."
+      "$description": "Deep Space 216 neutral (HCT hue 255, saturation-balanced). 0 = white, 1000 = black. 850 and 925 support the background roles, and 975 is the design system's dark page."
     },
     "amaranth": {
       "50": {

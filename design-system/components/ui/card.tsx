@@ -11,7 +11,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-lg bg-card py-(--card-spacing) text-xs/relaxed text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] *:[img:first-child]:rounded-t-lg *:[img:last-child]:rounded-b-lg",
+        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-(--qd-ui-card-radius) bg-card py-(--card-spacing) text-xs/relaxed text-card-foreground ring-(length:--qd-ui-card-border-width) ring-(--qd-ui-card-border-color) shadow-(--qd-ui-card-shadow) inset-shadow-(--qd-ui-card-highlight) [--card-spacing:var(--qd-ui-card-padding)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:calc(var(--qd-ui-card-padding)-var(--spacing))] *:[img:first-child]:rounded-t-(--qd-ui-card-radius) *:[img:last-child]:rounded-b-(--qd-ui-card-radius)",
         className
       )}
       {...props}
@@ -24,7 +24,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-lg px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)",
+        "group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-(--qd-ui-card-radius) px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)",
         className
       )}
       {...props}
@@ -36,7 +36,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("font-heading text-sm font-medium", className)}
+      className={cn("font-heading text-(length:--qd-ui-title-size) leading-(--qd-ui-title-leading) font-(--qd-ui-title-weight) tracking-(--qd-ui-title-tracking)", className)}
       {...props}
     />
   )
@@ -80,7 +80,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-footer"
       className={cn(
-        "flex items-center rounded-b-lg px-(--card-spacing) [.border-t]:pt-(--card-spacing)",
+        "flex items-center rounded-b-(--qd-ui-card-radius) px-(--card-spacing) [.border-t]:pt-(--card-spacing)",
         className
       )}
       {...props}

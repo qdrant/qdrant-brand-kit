@@ -10,7 +10,7 @@ Agents: read [`AGENTS.md`](AGENTS.md). The look and its decisions are in [`DESIG
 | `components/qdrant/` | Qdrant's own components, built from the ones in `ui/`. Empty for now |
 | `styles/globals.css` | The stylesheet: Tailwind, the primitives, and shadcn's tokens mapped onto the Qdrant roles |
 | `styles/tokens.css` | Generated: the Qdrant palette as Tailwind colors. Tailwind's default palette is switched off |
-| `styles/components/` | Looks shared with the brand components, as plain CSS variables. `button.css` is the button's look |
+| `styles/components/` | Component tokens (`--qd-ui-*`): each component's size, shape, type and edges, read by its classes (`ui.css` explains the tiers). `button.css` is the button's look, shared with the creative button |
 | `lib/`, `hooks/` | Helpers the components use |
 | `components.json` | shadcn's settings for this package |
 
@@ -41,6 +41,7 @@ Add `"@qdrant/design-system": "workspace:*"` to the app's dependencies, list it 
 
 - **A shadcn component:** from `studio/`, `pnpm dlx shadcn@latest add <name>`. Then move any helper it wrote into `studio/hooks` or `studio/lib` over to `hooks/` or `lib/` here ([`AGENTS.md`](AGENTS.md) says how).
 - **A Qdrant component:** a file in `components/qdrant/`, built from `components/ui/`, using tokens only.
+- **A component's size, shape or type:** its token in `styles/components/`, never a value in its classes. Try values in the studio first.
 - **A look shared with a brand component:** variables in `styles/components/`, imported by both sides, like `button.css`.
 
 Check every change in the studio, in dark and in light, before committing.

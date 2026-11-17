@@ -3,11 +3,14 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
     "@qdrant/design-system": "workspace:*",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "lucide-react": "^1.72.0"
   },
   "devDependencies": {
     "@types/react": "^19",
@@ -15,6 +18,8 @@
     "typescript": "^5"
   },
   "exports": {
-    "./sections/*": "./sections/*.tsx"
+    "./sections/*": "./sections/*.tsx",
+    "./pages/*": "./pages/*.tsx",
+    "./lib/*": "./lib/*.tsx"
   }
 }

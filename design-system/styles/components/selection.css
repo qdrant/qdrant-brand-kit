@@ -1,0 +1,16 @@
+/* Checkbox, RadioGroup and Switch. Defaults are the stock base-mira values. See ui.css for how component
+   tokens work. */
+:root,
+[data-theme],
+[data-context] {
+  --qd-ui-checkbox-size: calc(var(--spacing) * 4);
+  --qd-ui-checkbox-radius: 4px;
+  --qd-ui-radio-size: calc(var(--spacing) * 4);
+  /* Checked checkboxes and radios: the accent by default. The text color makes them monochrome. */
+  --qd-ui-check-color: var(--primary);
+  --qd-ui-check-foreground: var(--primary-foreground);
+  /* The default switch (sm keeps its own size). The thumb follows the track. */
+  --qd-ui-switch-width: 28px;
+  --qd-ui-switch-height: 16.6px;
+  --qd-ui-switch-color: var(--primary);
+}

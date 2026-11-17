@@ -178,7 +178,7 @@ function DrawerCustomWidthAndHeight() {
               {Array.from({ length: 10 }).map((_, index) => (
                 <p
                   key={index}
-                  className="mb-4 leading-normal style-lyra:mb-2 style-lyra:leading-relaxed"
+                  className="mb-4 leading-normal"
                 >
                   {PARAGRAPHS[index % PARAGRAPHS.length]}
                 </p>
@@ -206,7 +206,7 @@ function DrawerCustomWidthAndHeight() {
               {Array.from({ length: 10 }).map((_, index) => (
                 <p
                   key={index}
-                  className="mb-4 leading-normal style-lyra:mb-2 style-lyra:leading-relaxed"
+                  className="mb-4 leading-normal"
                 >
                   {PARAGRAPHS[index % PARAGRAPHS.length]}
                 </p>
@@ -232,7 +232,7 @@ function DrawerCustomWidthAndHeight() {
               {Array.from({ length: 10 }).map((_, index) => (
                 <p
                   key={index}
-                  className="mb-4 leading-normal style-lyra:mb-2 style-lyra:leading-relaxed"
+                  className="mb-4 leading-normal"
                 >
                   {PARAGRAPHS[index % PARAGRAPHS.length]}
                 </p>
@@ -258,7 +258,7 @@ function DrawerCustomWidthAndHeight() {
               {Array.from({ length: 10 }).map((_, index) => (
                 <p
                   key={index}
-                  className="mb-4 leading-normal style-lyra:mb-2 style-lyra:leading-relaxed"
+                  className="mb-4 leading-normal"
                 >
                   {PARAGRAPHS[index % PARAGRAPHS.length]}
                 </p>
@@ -335,7 +335,7 @@ function DrawerScrollable() {
                 {Array.from({ length: 20 }).map((_, index) => (
                   <p
                     key={index}
-                    className="mb-4 leading-normal style-lyra:mb-2 style-lyra:leading-relaxed"
+                    className="mb-4 leading-normal"
                   >
                     {PARAGRAPHS[index % PARAGRAPHS.length]}
                   </p>

@@ -1,0 +1,27 @@
+/* Menus and popovers: DropdownMenu, ContextMenu, Menubar, Select and Combobox lists, HoverCard and Popover.
+   Their background is the overlay role (styles/globals.css). Defaults are the stock base-mira values. See
+   ui.css for how component tokens work. */
+:root,
+[data-theme],
+[data-context] {
+  --qd-ui-menu-radius: var(--radius-lg);
+  --qd-ui-menu-padding: var(--spacing);
+  /* The edge: the soft border (globals.css). */
+  --qd-ui-menu-border-color: var(--border);
+  --qd-ui-menu-shadow:
+    0 4px 6px -1px color-mix(in oklab, var(--qd-color-neutral-1000) 10%, transparent),
+    0 2px 4px -2px color-mix(in oklab, var(--qd-color-neutral-1000) 10%, transparent);
+  /* The light from above along the top edge (ui.css). */
+  --qd-ui-menu-highlight: 0 1px 0 var(--qd-ui-top-light);
+  /* Menus are translucent: the overlay color at a share, with a blur behind (Popover and HoverCard stay
+     solid). 100% and 0px make them solid. */
+  --qd-ui-menu-opacity: 70%;
+  --qd-ui-menu-bg: color-mix(in oklab, var(--popover) var(--qd-ui-menu-opacity), transparent);
+  --qd-ui-menu-blur: 40px;
+  /* Items in the list. */
+  --qd-ui-menu-item-height: calc(var(--spacing) * 7);
+  --qd-ui-menu-item-padding-x: calc(var(--spacing) * 2);
+  --qd-ui-menu-item-radius: var(--radius-md);
+  /* Popover only: its padding. */
+  --qd-ui-popover-padding: calc(var(--spacing) * 2.5);
+}

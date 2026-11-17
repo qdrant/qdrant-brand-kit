@@ -1,0 +1,17 @@
+/* Tooltip, Dialog, AlertDialog and Table. Defaults are the stock base-mira values. See ui.css for how
+   component tokens work (and for the overlay behind dialogs, and the caption style of table headers). */
+:root,
+[data-theme],
+[data-context] {
+  --qd-ui-tooltip-radius: var(--radius-md);
+  --qd-ui-tooltip-padding-x: calc(var(--spacing) * 3);
+  --qd-ui-tooltip-padding-y: calc(var(--spacing) * 1.5);
+
+  --qd-ui-dialog-radius: var(--radius-xl);
+  --qd-ui-dialog-padding: calc(var(--spacing) * 4);
+  /* The light from above along the top edge (ui.css). */
+  --qd-ui-dialog-highlight: 0 1px 0 var(--qd-ui-top-light);
+
+  --qd-ui-table-head-height: calc(var(--spacing) * 10);
+  --qd-ui-table-cell-padding: calc(var(--spacing) * 2);
+}

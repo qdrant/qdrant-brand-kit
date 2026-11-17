@@ -1,0 +1,83 @@
+/* Tokens every component shares. Three tiers: the primitives (primitives/), the semantic roles
+   (styles/globals.css), and component tokens (this folder). Shared tokens here, like the control size, are
+   what each component's own tokens point to by default: change the shared one and every component follows,
+   change a component's own and only it moves.
+
+   The components read these through their classes (for example `h-(--qd-ui-button-height)`), so a className
+   on one instance still wins. The defaults are the stock base-mira values, except where DESIGN.md records a
+   decision (the control size, the button structure, the space theme's first layer). A new value is tried in
+   the studio first, then gets a dated line in DESIGN.md. On :root and every [data-theme] and [data-context]
+   section, so values that mix theme colors follow the closest theme, and the accent the closest context
+   (globals.css). A value that differs by theme goes in a theme block (:root, [data-theme="dark"] and
+   [data-theme="light"]), never in a block with [data-context], or a context inside a light section resets it
+   to dark. Imported into the base layer (globals.css). */
+:root,
+[data-theme],
+[data-context] {
+  /* Controls in a row share these: buttons, fields, select triggers, toggles and the tabs list.
+     36px by default (DESIGN.md, 2026-11-14); smaller and larger sizes are spacing steps around it. */
+  --qd-ui-control-height: calc(var(--spacing) * 9);
+  --qd-ui-control-padding-x: calc(var(--spacing) * 2);
+  --qd-ui-control-radius: var(--radius-md);
+  --qd-ui-control-font-size: var(--text-xs);
+
+  /* Focus ring on buttons, fields, checkboxes, switches, toggles, badges and items: width, the ring color
+     at a share, and a gap between the control and the ring. */
+  --qd-ui-focus-width: 2px;
+  --qd-ui-focus-color: color-mix(in oklab, var(--ring) 30%, transparent);
+  --qd-ui-focus-offset: 0px;
+
+  /* Dividers: the lines between table rows and accordion items, and separators, in menus too. The soft
+     border by default (globals.css, 2026-11-16); a look can set them apart. */
+  --qd-ui-divider-color: var(--border);
+
+  /* Letter-spacing of all UI text. */
+  --qd-ui-tracking: 0em;
+
+  /* Titles of cards, dialogs, sheets and popovers. */
+  --qd-ui-title-size: var(--text-sm);
+  --qd-ui-title-leading: var(--text-sm--line-height);
+  --qd-ui-title-weight: var(--font-weight-medium);
+  --qd-ui-title-tracking: 0em;
+
+  /* Labels of fields, checkboxes and switches. */
+  --qd-ui-label-weight: var(--font-weight-medium);
+
+  /* The space theme, first layer (DESIGN.md, 2026-11-14): telemetry captions, numbers that line up,
+     weightless motion, glass behind dialogs, and light from above (per theme, below). */
+
+  /* Captions, like instrument readouts: table headers and the group labels in menus, in uppercase
+     Geist Mono with wide tracking. */
+  --qd-ui-caption-font: var(--font-mono);
+  --qd-ui-caption-case: uppercase;
+  --qd-ui-caption-tracking: 0.08em;
+  /* Every number uses fixed-width digits, so amounts and counts line up like readouts. */
+  --qd-ui-numerals: tabular-nums;
+
+  /* Motion: menus, popovers and dialogs glide in and settle, on the same expo ease-out as every hover and
+     state change (Tailwind's --default-transition-timing-function, styles/globals.css). Never a bounce. */
+  --qd-ui-popup-duration: 150ms;
+  --qd-ui-popup-ease: var(--default-transition-timing-function);
+
+  /* Glass behind dialogs, sheets and drawers: the page color at 70% with a blur, so the page dissolves
+     instead of going black. */
+  --qd-ui-overlay: color-mix(in oklab, var(--background) 70%, transparent);
+  --qd-ui-overlay-blur: 12px;
+}
+
+/* Light from above: a 1px line of light along the top edge of menus, popovers and dialogs (cards are flat
+   since 2026-11-16), like the
+   buttons' top light (components/card.css, menu.css, overlay.css). White at 6% on dark; none on light, where
+   the surfaces are white. */
+:root,
+[data-theme="dark"] {
+  --qd-ui-top-light: color-mix(in oklab, var(--qd-color-neutral-0) 6%, transparent);
+}
+[data-theme="light"] {
+  --qd-ui-top-light: transparent;
+}
+
+body {
+  letter-spacing: var(--qd-ui-tracking);
+  font-variant-numeric: var(--qd-ui-numerals);
+}

@@ -18,25 +18,44 @@ Then:
 pnpm dev
 ```
 
-Open `http://localhost:3000`. Press `d` to switch the page between dark and light.
+Open `http://localhost:3000`. The top menu has the pages, and the moon and sun on the right switch between dark and light (or press `d`).
 
 ## What's in it
 
 | Page | What it shows |
 | --- | --- |
-| Overview (`/`) | A set of components in a dark and a light section side by side |
+| Overview (`/`) | shadcn's [Create page](https://ui.shadcn.com/create) preview: about 30 cards that use almost every component together, to judge the look as a whole, with the product's indigo accent. It opens at 100%; **Fit** scales it to the window to see almost everything at once. Beside the heading, toggles for the space-theme prototypes |
+| Variations (`/variations`) | Variations of the design system's structure (buttons, borders, surfaces, radius, type, density, motion), with the colors kept and the product's indigo accent. The links at the top switch between them; the switch on the right shows them on the Overview's components or on the App's serverless space. While the page is open, the variation applies to the whole studio. Nothing there is decided |
 | Design system (`/design-system`) | Every component in the design system, grouped, each with shadcn's demo of its variants and states |
-| Web (`/web`) | The sections in `web/sections` (none yet) |
+| Web (`/web`) | Marketing pages built from the sections in `web/sections`, to see the design system on a real page. The Web link opens the first one straight away: the Resilience page, rebuilt from the Figma (Qdrant Web Design) with the design system's components and colors |
+| App (`/app`) | Qdrant Cloud pages rebuilt with the design system, to see how it looks in the product. Each one takes its layout and copy from the product's Figma, and its components, colors and icons from the design system. The App link opens the first one straight away: a serverless space's overview |
 
-**The panel on the left** switches the theme and lets you try values live: the accent color, the corner radius, the Mona Sans width of headings, and a glow on the primary button. Nothing changes in the code. **Copy CSS** gives you the overrides worth keeping, to move into `design-system/` with a line in `design-system/DESIGN.md`; **Reset** clears them.
+**Changing the design system:** for now, prompt Claude Code with the studio open next to the chat (in the Claude desktop app, the browser pane). The canvas gets the whole width.
+
+**The controls panel is hidden for now.** It's [DialKit](https://www.dialkit.dev/), in the design system's colors, and it changes the design system's tokens so every instance of a component follows, on every page. To bring it back, see the note in `app/layout.tsx`. It has:
+- **Foundations:** the accent, the radius scale, the size shared by buttons, fields, toggles and tabs, type (heading width, tracking, titles, labels, captions), the focus ring, motion and the overlay behind dialogs.
+- **Depth Dark and Depth Light:** which neutral each background role, the borders, the field edge and the secondary text use.
+- **Components:** Button, Field, Card, Badge, Menu, Tabs, Checkbox and radio, Switch, Tooltip, Dialog and Table, each with its own size, shape, type and edges. A component's own value wins over the shared one.
+
+Nothing changes in the code:
+- The values are saved in your browser until you press **Reset**.
+- **Save version** keeps a look so you can compare it with others.
+- **Copy CSS** gives you the overrides worth keeping, to move into `design-system/` or `primitives/` with a line in `design-system/DESIGN.md`.
 
 | Path | What it is |
 | --- | --- |
-| `app/` | The pages, and `app/repo/`, a read-only route that serves `brand-assets/` and `primitives/` at `/repo/...` (the same paths as `review/render.py`), so pages can use the real logo, patterns and Qbot |
-| `components/studio-panel.tsx` | The panel: navigation, theme and the live controls |
-| `lib/overrides.ts` | What each control changes, as CSS variables |
+| `app/` | The pages, and `app/repo/`, a read-only route that serves `brand-assets/`, `primitives/` and `web/assets/` at `/repo/...` (the same paths as `review/render.py`), so pages can use the real logo, patterns, Qbot and the web sections' images |
+| `components/studio-nav.tsx` | The top menu: the pages, and the theme on the right |
+| `components/studio-controls.tsx` | The controls panel (DialKit), hidden for now |
+| `lib/overrides.ts` | The controls, and the token each one changes |
+| `lib/dials.ts` | Turns the controls into DialKit's config and into the CSS overrides |
+| `components/overview-canvas.tsx` | The Overview page, with its zoom |
+| `components/product-context.tsx` | Puts a page in the product context (the indigo accent), with its menus and dialogs: used by Overview and Variations |
+| `lib/prototypes.ts` | The space-theme prototypes: studio-only overrides of design-system tokens, switched on from the Overview heading. They stay on across pages and are saved in your browser. Not decisions |
+| `lib/variations.ts` | The variations: each one is design-system tokens overridden while its page is open, plus a little CSS for looks no token covers yet |
+| `product/` | The App pages: `cloud-shell.tsx` (the Qdrant Cloud sidebar, top bar and footer) and one file per page, shown by `app/app/` |
 | `lib/catalog.ts` | Every component, grouped. Add new ones here; the design system page warns about any it's missing |
-| `examples/` | shadcn's demos, fetched by `scripts/fetch-examples.mjs` ([its README](examples/README.md)) |
+| `examples/` | shadcn's demos and the Create page preview, fetched by `scripts/fetch-examples.mjs` ([its README](examples/README.md)) |
 | `components/theme-provider.tsx` | Dark and light themes with `data-theme`, dark by default |
 | `components.json` | shadcn's settings: components install into the design system |
 | `next.config.ts` | Loads the design system and web packages from the workspace |
