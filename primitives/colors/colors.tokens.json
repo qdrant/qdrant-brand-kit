@@ -1,5 +1,5 @@
 {
-  "$description": "Qdrant colors. The `color` and `brand` groups are the primitives, copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12; `neutral-975` was added here first and then to the Figma file, on 2026-11-16. The other groups are this repo's brand layer: roles for creatives and web, gradients and the mascot glow, all aliases of the primitives. Source of truth: this file. colors.css is generated from it by primitives/build.mjs.",
+  "$description": "Qdrant colors. The `color` group is the primitives, copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12; `neutral-975` was added here first and then to the Figma file, on 2026-11-16. The other groups are this repo's brand layer: semantic tokens, so they stay out of the Figma file, which holds primitives only. They are the brand color names, roles for creatives and web, gradients and the mascot glow, all aliases of the primitives. Source of truth: this file. colors.css is generated from it by primitives/build.mjs.",
   "color": {
     "$description": "Color primitives. Raw values only: no meaning. Use semantic tokens in components.",
     "neutral": {
