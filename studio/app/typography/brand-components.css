@@ -1,0 +1,7 @@
+/* The brand components' type, for the Typography page's Creatives group. These files size their text per
+   canvas shape (.qd-canvas[data-shape]); their rules are all on their own classes, so they change nothing
+   else in the studio. The creative title and supporting classes come with the primitives' typography.css,
+   which the design system already loads. */
+@import "../../../brand-components/button/button.css";
+@import "../../../brand-components/headshot-card/headshot-card.css";
+@import "../../../brand-components/headshot-circle/headshot-circle.css";

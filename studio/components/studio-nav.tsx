@@ -12,6 +12,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 const nav = [
   { href: "/", label: "Overview" },
   { href: "/variations", label: "Variations" },
+  { href: "/typography", label: "Typography" },
   { href: "/design-system", label: "Design system" },
   { href: "/web", label: "Web" },
   { href: "/app", label: "App" },
