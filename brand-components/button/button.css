@@ -11,8 +11,8 @@
    Every number below is px at the shape's reference canvas. The canvas scales it with
    --qd-canvas-u, so the button works at any size.
 
-   Interim: based on the Qdrant Web Design button (Figma ubPe8s8pViytom0Mapcno8, node 793-2956)
-   until the Brand Design System button replaces it. */
+   Based on the Qdrant Web Design button (Figma ubPe8s8pViytom0Mapcno8, node 793-2956). The Brand Design
+   System's Figma button isn't used: Figma's buttons follow this repo (Juan, 2026-11-18). */
 
 /* Text size per shape. Height, padding and radius follow the text size
    (2.25×, 1.25× and 0.5×, rounded to the 8px grid). */

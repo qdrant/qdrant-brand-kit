@@ -7,8 +7,9 @@
    creative button's own per-shape numbers (--qd-button-text, --qd-button-height...).
 
    Values: the approved button (Qdrant Web Design, Figma ubPe8s8pViytom0Mapcno8, node 793-2956), with the
-   web states from brand-components/button/README.md. The Brand Design System button (Figma
-   8y0svqBDPZX6caRNF6lddG, node 13872:1092) will replace them here, in this one file. */
+   web states from brand-components/button/README.md. This file is the source for the button: the Brand Design
+   System's Figma button (8y0svqBDPZX6caRNF6lddG, node 13872:1092) isn't used, and Figma's buttons follow this
+   repo (Juan, 2026-11-18). */
 :root {
   /* Fill: brand red to a darker red, top to bottom. Hover is flat; disabled is a lighter red. */
   --qd-ui-button-fill: linear-gradient(to bottom, var(--qd-color-amaranth-600), var(--qd-color-amaranth-700));
