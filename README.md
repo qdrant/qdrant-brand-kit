@@ -15,7 +15,7 @@ Tokens and rules only. No finished designs. Each folder's `.tokens.json` is the 
 | [`primitives/spacing/`](primitives/spacing/) | Figma primitives, 2026-11-12 | The 4px spacing scale and the web page layout constants. |
 | [`primitives/radius/`](primitives/radius/) | Figma primitives, 2026-11-12 | Corner radius, from none to full. |
 | [`primitives/border-width/`](primitives/border-width/) | Figma primitives, 2026-11-12 | Border widths: hairline, thin, medium, thick. |
-| [`primitives/breakpoints/`](primitives/breakpoints/) | Figma primitives, 2026-11-12 | Breakpoints for web UI, xs to xl. |
+| [`primitives/breakpoints/`](primitives/breakpoints/) | Tailwind's defaults, 2026-11-18 | Breakpoints for web UI, sm to 2xl, the same as the design system's Tailwind and Figma. |
 | [`primitives/elevation/`](primitives/elevation/) | Figma primitives, 2026-11-12. Product only | Paper elevation 0 to 24 for Qdrant Cloud on MUI. Not used by creatives or marketing. |
 
 ## Guidelines: choosing and combining
