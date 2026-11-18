@@ -58,7 +58,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 ## In creatives
 
 - **Where:** next to supporting text, mostly the date / time / place row ([`guidelines/`](../../guidelines/) section 11, rule 12). One icon per line, before the text.
-- **Never in buttons,** under any circumstance. Buttons are text only ([`brand-components/button/`](../../brand-components/button/)).
+- **Never in a creative's button.** It's text only ([`brand-components/button/`](../../brand-components/button/)). Web and product buttons, from the design system, may have one Lucide icon ([`design-system/AGENTS.md`](../../design-system/AGENTS.md), 2026-11-18).
 - **Icons aren't a text size.** They don't count toward the two text sizes.
 
 ```html

@@ -26,6 +26,7 @@ The values themselves live in [`primitives/`](../primitives/). This file says ho
 | Control text | Fields (inputs, textareas, select and native select triggers, and comboboxes) have 14px text, like buttons: the shared `--qd-ui-control-font-size` is `text-sm` (it was base-mira's 12px). Their side padding stays 8px (Juan) | 2026-11-18 |
 | Button text | 14px on default and large buttons, 12px on small and extra small, in marketing and product alike, so a button and a field in one row match. The Figma web button's 16px (36 and 40px tall) and 18px (48px) aren't used (Juan) | 2026-11-18 |
 | Button source | This design system's buttons are Qdrant's buttons: the shadcn Button with `styles/components/button-web.css` on the web, and the creative button with `styles/components/button.css`. The Brand Design System's Figma button (`8y0svqBDPZX6caRNF6lddG`, node `13872:1092`) isn't used in designs and won't replace them; the buttons in the Figma files will be updated from this repo (Juan) | 2026-11-18 |
+| Icons in buttons | Web and product buttons may have one Lucide icon, before or after their text, or be icon-only (close, copy, more). Creative buttons stay text only. Until then, web calls to action had no icon (Juan) | 2026-11-18 |
 | Button structure | Like Supabase's buttons, in Qdrant's colors (`styles/components/button-web.css`). Primary and secondary are raised surfaces with no CSS border: a 1px edge and a faint top light drawn inside (white in dark, a softer black in light) and a short drop shadow under. 14px text at 36px (12px at 32 and 28), 16px side padding, an 8px gap, a 0.97 press over 200ms with a soft ease-out, a 2px focus ring with a 2px gap. The primary keeps the approved SemiBold label (Juan) | 2026-11-14 |
 | Flat buttons | Web button fills are flat, with no gradient: the primary is `primary` (amaranth 600) at rest and on hover, where the approved lighter inner highlight is the change; disabled is the approved amaranth 400. The creative button keeps its gradient (`button.css`) (Juan) | 2026-11-14 |
 | Accent by context | Amaranth for brand and marketing, indigo for product. Marketing is the default (web pages, creatives, the studio's Design system and Web pages); product UI sets `data-context="product"` on its root and its accent turns indigo: `primary`, `ring`, the primary button (indigo 600, hover 700, disabled 400, focus ring at 40%), checks, switches and focus rings. One token, `--qd-ui-accent` (`styles/globals.css`). Brand patterns keep their violet, and red stays a marketing accent (Juan) | 2026-11-15 |
@@ -46,7 +47,7 @@ The values themselves live in [`primitives/`](../primitives/). This file says ho
 
 ## Open
 
-- **Icons in buttons.** See [`AGENTS.md`](AGENTS.md), "Which root Never rules apply to web UI". For Vanesa.
+Nothing is open (2026-11-18).
 
 ## References
 

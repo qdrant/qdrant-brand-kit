@@ -49,7 +49,7 @@ Part.
 7. **Beside the logo, the same height as the logo.** Add `qd-button--beside-logo`: the height becomes the logo's height for the shape (72 or 80 px) and the text, padding and corners follow it in the same proportions. The button is never taller than the logo next to it (decided 2026-11-04).
 8. **Never resized to make room** (Vanesa, 2026-11-16). When a creative is tight, tighten the gaps, shrink the headshots or cut copy ([`guidelines/`](../../guidelines/) section 11, rule 11). The button keeps its size for the shape.
 9. **On a red pattern: top-right beside the logo,** on the dark part of the pattern, with **3:1 or more** against what's around it. This 3:1 rule is only for red patterns ([`guidelines/`](../../guidelines/) section 3, 2026-11-16).
-10. **Never an icon.** The button is text only, in every use and every type, Main and Secondary (decided 2026-11-11).
+10. **Never an icon.** The creative button is text only, Main and Secondary (decided 2026-11-11). Web and product buttons, from the design system, may have one ([`design-system/AGENTS.md`](../../design-system/AGENTS.md), 2026-11-18).
 9. **One button per post.**
 
 ## Size and inner gaps

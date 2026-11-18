@@ -32,7 +32,7 @@ Read the [root `AGENTS.md`](../AGENTS.md) first. This file adds the rules for UI
 | Never right-align text, mix alignments, or use more than two text sizes | Creatives only. Web pages need more sizes, and tables can right-align numbers |
 | Qbot rules (no Qbot with headshots, over text, cut at the face; only its own glow) | Applies wherever Qbot appears |
 | Lucide icons only | Applies |
-| Never put an icon in a button | **Open, for Vanesa.** The button README says "in every use", but web UI needs icon buttons (dialog close, menus). Until decided: no icon in a call-to-action button; icon-only controls are allowed |
+| Never put an icon in a button | Creatives only (Juan, 2026-11-18). Web and product buttons may have one Lucide icon before or after their text, or be icon-only (close, copy, more). The creative button stays text only |
 | Never use red as a background without a yes | Applies: amaranth is an accent, never a flat fill behind text. In product UI the accent is indigo |
 | Never spend money without asking | Applies |
 | Never save working files, renders or screenshots in the repo | Applies |
