@@ -89,7 +89,7 @@ Set in [`design-system/styles/components/button.css`](../../design-system/styles
 
 ## Web states (reference, not for creatives)
 
-The design system's Button uses these states from the shared look file (hover, focus, disabled for Main). Secondary isn't wired to a web variant yet.
+The design system's Button uses these states from the shared look file (hover, focus, disabled for Main). Secondary isn't used: the design system's outline button has its own look, with the shared focus ring ([`DESIGN.md`](../../design-system/DESIGN.md), Outline button, 2026-11-18).
 
 From the Figma button, at web size (XS / MD / LG = 36 / 40 / 48px tall, SemiBold 16 / 16 / 18px, side padding 20 / 22 / 28px, radius 8px). Colors mapped to the nearest tokens.
 

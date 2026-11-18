@@ -13,7 +13,7 @@ function Trace({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="trace"
       className={cn(
-        "flex w-full min-w-0 flex-col gap-1.5 *:has-[>[data-slot=trace-line]]:flex *:has-[>[data-slot=trace-line]]:w-fit *:has-[>[data-slot=trace-line]]:max-w-full *:has-[>[data-slot=trace-line]]:min-w-0 *:has-[>[data-slot=trace-line]]:rounded-sm *:has-[>[data-slot=trace-line]]:text-left *:has-[>[data-slot=trace-line]]:outline-none *:has-[>[data-slot=trace-line]]:focus-visible:ring-2 *:has-[>[data-slot=trace-line]]:focus-visible:ring-ring/30",
+        "flex w-full min-w-0 flex-col gap-2 *:has-[>[data-slot=trace-line]]:flex *:has-[>[data-slot=trace-line]]:w-fit *:has-[>[data-slot=trace-line]]:max-w-full *:has-[>[data-slot=trace-line]]:min-w-0 *:has-[>[data-slot=trace-line]]:rounded-sm *:has-[>[data-slot=trace-line]]:text-left *:has-[>[data-slot=trace-line]]:outline-none *:has-[>[data-slot=trace-line]]:focus-visible:ring-2 *:has-[>[data-slot=trace-line]]:focus-visible:ring-ring/30",
         className
       )}
       {...props}
@@ -140,7 +140,7 @@ function TraceCollapsibleContent({
       <div
         data-slot="trace-collapsible-content-inner"
         className={cn(
-          "mt-1.5 mb-1 ml-[calc(--spacing(1.75)-1px)] min-w-0 border-l pr-1 pl-3.75 wrap-break-word text-muted-foreground",
+          "mt-2 mb-1 ml-[calc(--spacing(1.75)-1px)] min-w-0 border-l pr-1 pl-3.75 wrap-break-word text-muted-foreground",
           className
         )}
       >
