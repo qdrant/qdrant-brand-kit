@@ -67,7 +67,7 @@ function DropdownMenuLabel({
       data-slot="dropdown-menu-label"
       data-inset={inset}
       className={cn(
-        "px-(--qd-ui-menu-item-padding-x) py-2 text-xs text-muted-foreground font-(family-name:--qd-ui-caption-font) [text-transform:var(--qd-ui-caption-case)] tracking-(--qd-ui-caption-tracking) data-inset:pl-7.5",
+        "flex min-h-(--qd-ui-menu-item-height) items-center px-(--qd-ui-menu-item-padding-x) py-1 text-xs text-muted-foreground font-(family-name:--qd-ui-caption-font) [text-transform:var(--qd-ui-caption-case)] tracking-(--qd-ui-caption-tracking) data-inset:pl-7.5",
         className
       )}
       {...props}
@@ -164,7 +164,7 @@ function DropdownMenuCheckboxItem({
       data-slot="dropdown-menu-checkbox-item"
       data-inset={inset}
       className={cn(
-        "relative flex min-h-(--qd-ui-menu-item-height) cursor-default items-center gap-2 rounded-(--qd-ui-menu-item-radius) py-2 pr-8 pl-(--qd-ui-menu-item-padding-x) text-xs outline-hidden select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-7.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
+        "relative flex min-h-(--qd-ui-menu-item-height) cursor-default items-center gap-2 rounded-(--qd-ui-menu-item-radius) py-1 pr-8 pl-(--qd-ui-menu-item-padding-x) text-xs outline-hidden select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-7.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
         className
       )}
       checked={checked}
@@ -206,7 +206,7 @@ function DropdownMenuRadioItem({
       data-slot="dropdown-menu-radio-item"
       data-inset={inset}
       className={cn(
-        "relative flex min-h-(--qd-ui-menu-item-height) cursor-default items-center gap-2 rounded-(--qd-ui-menu-item-radius) py-2 pr-8 pl-(--qd-ui-menu-item-padding-x) text-xs outline-hidden select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-7.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
+        "relative flex min-h-(--qd-ui-menu-item-height) cursor-default items-center gap-2 rounded-(--qd-ui-menu-item-radius) py-1 pr-8 pl-(--qd-ui-menu-item-padding-x) text-xs outline-hidden select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-7.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
         className
       )}
       {...props}
