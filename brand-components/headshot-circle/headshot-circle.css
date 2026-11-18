@@ -27,13 +27,14 @@
 
 .qd-headshot-circle__text { display: flex; flex-direction: column; min-width: 0; }
 .qd-headshot-circle__name,
-.qd-headshot-circle__role {
+.qd-headshot-circle__role { /* H5 (32), in Mona Sans Display, with the type set's line height (2026-11-18) */
   margin: 0;
+  font-family: var(--qd-font-family-display);
   font-size: calc(32 * var(--qd-canvas-u));
-  line-height: 1.3;
-  letter-spacing: calc(-0.5 * var(--qd-canvas-u));
+  line-height: var(--qd-type-h5-line-height);
+  letter-spacing: 0;
 }
-.qd-headshot-circle__name { font-family: var(--qd-font-family-display); font-weight: var(--qd-font-weight-medium); color: var(--qd-color-text-primary); }  /* H5 Medium, Mona Sans Display (2026-11-17) */
+.qd-headshot-circle__name { font-weight: var(--qd-font-weight-medium); color: var(--qd-color-text-primary); }  /* H5 Medium */
 .qd-headshot-circle__role { font-weight: var(--qd-font-weight-regular); color: var(--qd-color-text-secondary); } /* H5 Regular */
 
 /* A list of circles: one per row on story, two per row on square and portrait, one row on ultrawide.

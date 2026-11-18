@@ -1,5 +1,5 @@
 {
-  "$description": "Qdrant typography. Weights and the size, line-height and letter-spacing scales match the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg, 2026-11-12). The families are the Mona Sans family (2026-11-17): Mona Sans Display for headings and display styles, Mona Sans for text styles and Mona Sans Mono for mono styles. The text styles and creative sizes are this repo's own and unchanged. Mona Sans always renders with ss05 and ss06 on.",
+  "$description": "Qdrant typography. Weights and the size, line-height and letter-spacing scales match the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg, 2026-11-12). The families are the Mona Sans family (2026-11-17): Mona Sans Display for headings and display styles, Mona Sans for text styles and Mona Sans Mono for mono styles. The text styles (semantic.type) and the creative sizes are this repo's own: the type set adopted on 2026-11-18. Mona Sans always renders with ss05 and ss06 on.",
   "core": {
     "font": {
       "family": {
@@ -159,7 +159,7 @@
         }
       },
       "lineHeight": {
-        "$description": "Line-height scale (unitless), named by percent: 150 is 1.5 (2026-11-17; it used to have word names: tight 120, normal 150, and none 100, snug 135 and relaxed 170, removed on 2026-11-18 because nothing used them). Headings and Display take theirs from one curve through H6 (130) and H1 (110): H5 122, H4 117, H3 114, H2 112, Display 108, 106, 105, 104, 103. Text uses 150. 120 is used only by today's styles, until they move to the new set.",
+        "$description": "Line-height scale (unitless), named by percent: 150 is 1.5 (2026-11-17; it used to have word names: normal 150, and none 100, tight 120, snug 135 and relaxed 170, removed on 2026-11-18 because nothing used them). Headings and Display take theirs from one curve through H6 (130) and H1 (110): H5 122, H4 117, H3 114, H2 112, Display 108, 106, 105, 104, 103. Text uses 150.",
         "103": {
           "$type": "number",
           "$value": 1.03
@@ -195,10 +195,6 @@
         "117": {
           "$type": "number",
           "$value": 1.17
-        },
-        "120": {
-          "$type": "number",
-          "$value": 1.2
         },
         "122": {
           "$type": "number",
@@ -236,21 +232,64 @@
   },
   "semantic": {
     "type": {
+      "$description": "The type set, adopted on 2026-11-18 (Juan; proposed 2026-11-17). Display 1 to 5 (80 to 200px) in Mona Sans Display SemiBold, each also Condensed (display-condensed-*: 75% width, uppercase). Headings H1 to H6 (64 to 24px) in Mona Sans Display, Regular, Medium or SemiBold, each also in Mono (mono-h1 to mono-h6). Text XL to XS (20 to 12px) in Mona Sans, also in Mono (mono-xl to mono-xs). Headings and Display take their line height from one curve, 1 + k / size^p through H6 (1.3) and H1 (1.1); text uses 1.5. Letter spacing is 0 everywhere. qdrant.weights lists the weights a style comes in, and $value holds its default; Bold is retired. The social and Luma styles became steps of this set (typography README, Text styles).",
+      "display-5": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.display}",
+          "fontSize": "200px",
+          "fontWeight": 600,
+          "lineHeight": 1.03,
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ]
+        }
+      },
+      "display-4": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.display}",
+          "fontSize": "160px",
+          "fontWeight": 600,
+          "lineHeight": 1.04,
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ]
+        }
+      },
+      "display-3": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.display}",
+          "fontSize": "128px",
+          "fontWeight": 600,
+          "lineHeight": 1.05,
+          "letterSpacing": "0px"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ]
+        }
+      },
       "display-2": {
         "$type": "typography",
         "$value": {
           "fontFamily": "{core.font.family.display}",
           "fontSize": "104px",
           "fontWeight": 600,
-          "lineHeight": 1.05,
-          "letterSpacing": "-1.8px"
+          "lineHeight": 1.06,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -260,16 +299,64 @@
           "fontFamily": "{core.font.family.display}",
           "fontSize": "80px",
           "fontWeight": 600,
-          "lineHeight": 1.05,
-          "letterSpacing": "-1.8px"
+          "lineHeight": 1.08,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            600
           ]
+        }
+      },
+      "display-condensed-5": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.condensed}",
+          "fontSize": "200px",
+          "fontWeight": 600,
+          "lineHeight": 1.03,
+          "letterSpacing": "0px",
+          "fontStretch": "75%"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ],
+          "qdrant.textTransform": "uppercase"
+        }
+      },
+      "display-condensed-4": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.condensed}",
+          "fontSize": "160px",
+          "fontWeight": 600,
+          "lineHeight": 1.04,
+          "letterSpacing": "0px",
+          "fontStretch": "75%"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ],
+          "qdrant.textTransform": "uppercase"
+        }
+      },
+      "display-condensed-3": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{core.font.family.condensed}",
+          "fontSize": "128px",
+          "fontWeight": 600,
+          "lineHeight": 1.05,
+          "letterSpacing": "0px",
+          "fontStretch": "75%"
+        },
+        "$extensions": {
+          "qdrant.weights": [
+            600
+          ],
+          "qdrant.textTransform": "uppercase"
         }
       },
       "display-condensed-2": {
@@ -278,15 +365,13 @@
           "fontFamily": "{core.font.family.condensed}",
           "fontSize": "104px",
           "fontWeight": 600,
-          "lineHeight": 1.05,
-          "letterSpacing": "-1.8px",
+          "lineHeight": 1.06,
+          "letterSpacing": "0px",
           "fontStretch": "75%"
         },
         "$extensions": {
           "qdrant.weights": [
-            500,
-            600,
-            700
+            600
           ],
           "qdrant.textTransform": "uppercase"
         }
@@ -297,15 +382,13 @@
           "fontFamily": "{core.font.family.condensed}",
           "fontSize": "80px",
           "fontWeight": 600,
-          "lineHeight": 1.05,
-          "letterSpacing": "-1.8px",
+          "lineHeight": 1.08,
+          "letterSpacing": "0px",
           "fontStretch": "75%"
         },
         "$extensions": {
           "qdrant.weights": [
-            500,
-            600,
-            700
+            600
           ],
           "qdrant.textTransform": "uppercase"
         }
@@ -317,14 +400,13 @@
           "fontSize": "64px",
           "fontWeight": 600,
           "lineHeight": 1.1,
-          "letterSpacing": "-1.5px"
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -334,15 +416,14 @@
           "fontFamily": "{core.font.family.display}",
           "fontSize": "56px",
           "fontWeight": 600,
-          "lineHeight": 1.1,
-          "letterSpacing": "-0.5px"
+          "lineHeight": 1.12,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -352,15 +433,14 @@
           "fontFamily": "{core.font.family.display}",
           "fontSize": "48px",
           "fontWeight": 600,
-          "lineHeight": 1.1,
-          "letterSpacing": "-0.5px"
+          "lineHeight": 1.14,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -370,15 +450,14 @@
           "fontFamily": "{core.font.family.display}",
           "fontSize": "40px",
           "fontWeight": 600,
-          "lineHeight": 1.2,
-          "letterSpacing": "-0.5px"
+          "lineHeight": 1.17,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -388,15 +467,14 @@
           "fontFamily": "{core.font.family.display}",
           "fontSize": "32px",
           "fontWeight": 600,
-          "lineHeight": 1.3,
-          "letterSpacing": "-0.5px"
+          "lineHeight": 1.22,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -407,14 +485,13 @@
           "fontSize": "24px",
           "fontWeight": 600,
           "lineHeight": 1.3,
-          "letterSpacing": "-0.5px"
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -425,14 +502,13 @@
           "fontSize": "20px",
           "fontWeight": 400,
           "lineHeight": 1.5,
-          "letterSpacing": "-0.2px"
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -449,8 +525,7 @@
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -467,8 +542,7 @@
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -485,8 +559,7 @@
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -503,8 +576,7 @@
           "qdrant.weights": [
             400,
             500,
-            600,
-            700
+            600
           ]
         }
       },
@@ -515,14 +587,11 @@
           "fontSize": "64px",
           "fontWeight": 400,
           "lineHeight": 1.1,
-          "letterSpacing": "-1.5px"
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
         }
       },
@@ -532,15 +601,12 @@
           "fontFamily": "{core.font.family.mono}",
           "fontSize": "56px",
           "fontWeight": 400,
-          "lineHeight": 1.1,
-          "letterSpacing": "-0.5px"
+          "lineHeight": 1.12,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
         }
       },
@@ -550,18 +616,14 @@
           "fontFamily": "{core.font.family.mono}",
           "fontSize": "48px",
           "fontWeight": 400,
-          "lineHeight": 1.2,
-          "letterSpacing": "-0.5px"
+          "lineHeight": 1.14,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
-        },
-        "$description": "120% line height in Figma (H3 in Mona Sans is 110%)"
+        }
       },
       "mono-h4": {
         "$type": "typography",
@@ -569,15 +631,12 @@
           "fontFamily": "{core.font.family.mono}",
           "fontSize": "40px",
           "fontWeight": 400,
-          "lineHeight": 1.2,
-          "letterSpacing": "-0.5px"
+          "lineHeight": 1.17,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
         }
       },
@@ -587,15 +646,12 @@
           "fontFamily": "{core.font.family.mono}",
           "fontSize": "32px",
           "fontWeight": 400,
-          "lineHeight": 1.3,
-          "letterSpacing": "-0.5px"
+          "lineHeight": 1.22,
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
         }
       },
@@ -606,14 +662,11 @@
           "fontSize": "24px",
           "fontWeight": 400,
           "lineHeight": 1.3,
-          "letterSpacing": "-0.5px"
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
         }
       },
@@ -624,14 +677,11 @@
           "fontSize": "20px",
           "fontWeight": 400,
           "lineHeight": 1.5,
-          "letterSpacing": "-0.2px"
+          "letterSpacing": "0px"
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
         }
       },
@@ -646,10 +696,7 @@
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
         }
       },
@@ -664,10 +711,7 @@
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
         }
       },
@@ -682,10 +726,7 @@
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
+            400
           ]
         }
       },
@@ -700,165 +741,9 @@
         },
         "$extensions": {
           "qdrant.weights": [
-            400,
-            500,
-            600,
-            700
-          ]
-        }
-      },
-      "social-event-title": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.condensed}",
-          "fontSize": "104px",
-          "fontWeight": 600,
-          "lineHeight": 1.05,
-          "letterSpacing": "-1.8px",
-          "fontStretch": "75%"
-        },
-        "$extensions": {
-          "qdrant.weights": [
-            600
-          ],
-          "qdrant.textTransform": "uppercase"
-        }
-      },
-      "social-event-detail": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.mono}",
-          "fontSize": "40px",
-          "fontWeight": 400,
-          "lineHeight": 1.2,
-          "letterSpacing": "-0.5px"
-        },
-        "$extensions": {
-          "qdrant.weights": [
             400
           ]
         }
-      },
-      "social-event-speaker-name": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.display}",
-          "fontSize": "40px",
-          "fontWeight": 600,
-          "lineHeight": 1.1,
-          "letterSpacing": "-0.5px"
-        },
-        "$extensions": {
-          "qdrant.weights": [
-            600
-          ]
-        }
-      },
-      "social-event-speaker-role": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.sans}",
-          "fontSize": "32px",
-          "fontWeight": 400,
-          "lineHeight": 1.3,
-          "letterSpacing": "0px"
-        },
-        "$extensions": {
-          "qdrant.weights": [
-            400
-          ]
-        }
-      },
-      "social-event-series": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.display}",
-          "fontSize": "32px",
-          "fontWeight": 600,
-          "lineHeight": 1.2,
-          "letterSpacing": "-0.5px"
-        },
-        "$extensions": {
-          "qdrant.weights": [
-            600
-          ]
-        }
-      },
-      "social-post-hero": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.display}",
-          "fontSize": "144px",
-          "fontWeight": 600,
-          "lineHeight": 1.05,
-          "letterSpacing": "-1.8px"
-        },
-        "$extensions": {
-          "qdrant.weights": [
-            600
-          ]
-        }
-      },
-      "social-post-title": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.display}",
-          "fontSize": "104px",
-          "fontWeight": 600,
-          "lineHeight": 1.05,
-          "letterSpacing": "-1.8px"
-        },
-        "$extensions": {
-          "qdrant.weights": [
-            600
-          ]
-        }
-      },
-      "social-post-eyebrow": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.display}",
-          "fontSize": "56px",
-          "fontWeight": 600,
-          "lineHeight": 1.2,
-          "letterSpacing": "-0.5px"
-        },
-        "$extensions": {
-          "qdrant.weights": [
-            600
-          ]
-        }
-      },
-      "social-post-body": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.sans}",
-          "fontSize": "32px",
-          "fontWeight": 400,
-          "lineHeight": 1.3,
-          "letterSpacing": "0px"
-        },
-        "$extensions": {
-          "qdrant.weights": [
-            400
-          ]
-        }
-      },
-      "luma-title": {
-        "$type": "typography",
-        "$value": {
-          "fontFamily": "{core.font.family.display}",
-          "fontSize": "104px",
-          "fontWeight": 600,
-          "lineHeight": 1.05,
-          "letterSpacing": "-1.8px"
-        },
-        "$extensions": {
-          "qdrant.weights": [
-            600
-          ]
-        },
-        "$description": "Luma cover titles. Added in Design Lab"
       }
     },
     "slides": {
@@ -960,11 +845,11 @@
       }
     },
     "creative": {
-      "$description": "Text in creatives (social posts, ads, banners). Two sizes only: one title, one supporting size. px at the shape's reference canvas, scaled with the canvas. $value is square and portrait; $extensions.qdrant.story and .wide are those shapes. $extensions.qdrant.ultrawide is ultrawide (same as wide, decided 2026-11-11 from the LinkedIn cover). Decided by Vanesa 2026-11-04.",
+      "$description": "Text in creatives (social posts, ads, banners). Two sizes only: one title, one supporting size. px at the shape's reference canvas, scaled with the canvas. $value is square and portrait; $extensions.qdrant.story, .wide and .ultrawide are those shapes. Every size is a step of the type set (semantic.type), with that step's line height and letter spacing 0 (Juan, 2026-11-18). Decided by Vanesa 2026-11-04; ultrawide like wide since 2026-11-11.",
       "title-short": {
         "$type": "dimension",
-        "$value": "96px",
-        "$description": "Title up to 6 words. Mona Sans SemiBold, Title Case, line height 1.05, letter spacing -1.8px",
+        "$value": "104px",
+        "$description": "Title up to 6 words. Mona Sans Display SemiBold, Title Case. Display 2 (104px, line height 1.06); Display 3 (128px, 1.05) on wide and ultrawide",
         "$extensions": {
           "qdrant": {
             "story": "104px",
@@ -977,10 +862,10 @@
       "title-medium": {
         "$type": "dimension",
         "$value": "80px",
-        "$description": "Title of 7 to 10 words",
+        "$description": "Title of 7 to 10 words. Display 1 (80px, line height 1.08); Display 2 (104px, 1.06) on wide and ultrawide",
         "$extensions": {
           "qdrant": {
-            "story": "88px",
+            "story": "80px",
             "maxWords": 10,
             "wide": "104px",
             "ultrawide": "104px"
@@ -990,20 +875,20 @@
       "title-long": {
         "$type": "dimension",
         "$value": "64px",
-        "$description": "Title of 11 words or more",
+        "$description": "Title of 11 words or more. H1 (64px, line height 1.1); Display 1 (80px, 1.08) on wide and ultrawide",
         "$extensions": {
           "qdrant": {
-            "story": "72px",
+            "story": "64px",
             "maxWords": null,
-            "wide": "88px",
-            "ultrawide": "88px"
+            "wide": "80px",
+            "ultrawide": "80px"
           }
         }
       },
       "supporting": {
         "$type": "dimension",
-        "$value": "36px",
-        "$description": "Everything else: body, date, time, place. Mona Sans Regular, line height 1.2, letter spacing -0.5px",
+        "$value": "40px",
+        "$description": "Everything else: body, date, time, place. H4 Regular: Mona Sans Display Regular, 40px on every shape, line height 1.17",
         "$extensions": {
           "qdrant": {
             "story": "40px",

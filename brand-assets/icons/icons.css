@@ -17,7 +17,7 @@
   fill: none;
   stroke: currentColor;
 }
-/* Inside a canvas: the supporting size, scaled with the canvas (36 at 1080, 40 on story and wide). */
+/* Inside a canvas: the supporting size, scaled with the canvas (40 on every shape since 2026-11-18). */
 .qd-canvas .qd-icon {
   width: calc(var(--qd-creative-supporting) * var(--qd-canvas-u));
   height: calc(var(--qd-creative-supporting) * var(--qd-canvas-u));

@@ -27,7 +27,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 
 **In creatives** (posts, ads, banners):
 
-- **The icon is the same height as the text beside it:** the supporting size, 36px at 1080 (40px on story and wide), scaled with the canvas. `.qd-icon` does this.
+- **The icon is the same height as the text beside it:** the supporting size, 40px at the reference canvas on every shape (36px on square and portrait until 2026-11-18), scaled with the canvas. `.qd-icon` does this.
 - **The stroke scales with the icon.** Keep Lucide's `stroke-width="2"` on the 24 grid and let the SVG scale: 2px at 24 becomes 3px at 36. Never fix the stroke in px (no `vector-effect: non-scaling-stroke`). This is slide 39's "scale the stroke as well".
 - **Gap to its text:** the shape's `tight` gap, in a `.qd-stack--row.qd-stack--tight`.
 
