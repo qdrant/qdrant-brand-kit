@@ -11,8 +11,8 @@ Qdrant's spacing scale as tokens, plus the web page layout constants. The scale 
 
 A 4 px grid. A token is named by its value in px, so `spacing.16` is 16 px (`--qd-spacing-16`). Use only these values:
 
-| Token | 0 | 4 | 8 | 12 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 | 80 | 88 | 96 | 104 | 112 | 120 | 144 | 160 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Token | 0 | 4 | 8 | 12 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 | 80 | 88 | 96 | 104 | 112 | 120 | 128 | 144 | 160 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 In Tailwind (the shadcn design system, when it lands) the class number is the value ÷ 4: `p-4` is 16 px.
 

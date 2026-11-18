@@ -1,5 +1,5 @@
 {
-  "$description": "Qdrant spacing: a 4px grid. The `spacing` group is copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12. `layout` holds this repo's web page layout constants. spacing.css is generated from this file by primitives/build.mjs.",
+  "$description": "Qdrant spacing: a 4px grid. The `spacing` group is copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12; 128 was added there on 2026-11-17. `layout` holds this repo's web page layout constants. spacing.css is generated from this file by primitives/build.mjs.",
   "spacing": {
     "0": {
       "$type": "dimension",
@@ -124,6 +124,13 @@
       "$type": "dimension",
       "$value": {
         "value": 120,
+        "unit": "px"
+      }
+    },
+    "128": {
+      "$type": "dimension",
+      "$value": {
+        "value": 128,
         "unit": "px"
       }
     },

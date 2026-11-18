@@ -67,7 +67,8 @@
   text-align: center;
   letter-spacing: calc(-0.5 * var(--qd-canvas-u));
 }
-.qd-headshot-card__name { /* H3 SemiBold */
+.qd-headshot-card__name { /* H3 SemiBold, in Mona Sans Display like every heading (2026-11-17) */
+  font-family: var(--qd-font-family-display);
   font-size: calc(48 * var(--qd-canvas-u));
   font-weight: var(--qd-font-weight-semibold);
   line-height: 1.1;

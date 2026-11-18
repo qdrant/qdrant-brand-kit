@@ -47,7 +47,7 @@
      weightless motion, glass behind dialogs, and light from above (per theme, below). */
 
   /* Captions, like instrument readouts: table headers and the group labels in menus, in uppercase
-     Geist Mono with wide tracking. */
+     Mona Sans Mono with wide tracking. */
   --qd-ui-caption-font: var(--font-mono);
   --qd-ui-caption-case: uppercase;
   --qd-ui-caption-tracking: 0.08em;

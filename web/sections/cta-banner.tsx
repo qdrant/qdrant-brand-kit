@@ -97,7 +97,7 @@ export function CtaBanner() {
           <div className="flex flex-col items-start gap-8">
             <div className="flex flex-col gap-4">
               <h2 className={type.h4}>Build on Qdrant Cloud</h2>
-              <p className="text-(length:--qd-font-size-20) leading-(--qd-line-height-normal) text-muted-foreground">
+              <p className="text-(length:--qd-font-size-20) leading-(--qd-line-height-150) text-muted-foreground">
                 Replication, failover, and scheduled backups on every replicated
                 cluster.
               </p>

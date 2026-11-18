@@ -33,7 +33,7 @@
   line-height: 1.3;
   letter-spacing: calc(-0.5 * var(--qd-canvas-u));
 }
-.qd-headshot-circle__name { font-weight: var(--qd-font-weight-medium); color: var(--qd-color-text-primary); }  /* H5 Medium */
+.qd-headshot-circle__name { font-family: var(--qd-font-family-display); font-weight: var(--qd-font-weight-medium); color: var(--qd-color-text-primary); }  /* H5 Medium, Mona Sans Display (2026-11-17) */
 .qd-headshot-circle__role { font-weight: var(--qd-font-weight-regular); color: var(--qd-color-text-secondary); } /* H5 Regular */
 
 /* A list of circles: one per row on story, two per row on square and portrait, one row on ultrawide.

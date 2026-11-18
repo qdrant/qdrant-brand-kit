@@ -207,8 +207,8 @@ def check_one(m, rules):
         ("right-aligned: " + ", ".join(right[:3]) if right else "") + (" mixed left and centered" if mixed else "") or
         f"{', '.join(sorted(aligns))}", "guidelines §11 rule 5")
 
-    mono = [t["text"] for t in texts if "Geist Mono" in t["family"] and len(t["text"].split()) > 2]
-    add("Geist Mono only for 1–2 words", not mono, "OK" if not mono else "; ".join(mono[:3]),
+    mono = [t["text"] for t in texts if "Mona Sans Mono" in t["family"] and len(t["text"].split()) > 2]
+    add("Mona Sans Mono only for 1–2 words", not mono, "OK" if not mono else "; ".join(mono[:3]),
         "typography README, Text in creatives")
 
     if bg is None:
