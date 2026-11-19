@@ -37,7 +37,11 @@ def icon_colors():
     tp = re.search(r"--qd-color-text-primary:\s*#([0-9A-Fa-f]{6})", css)
     if tp:
         dark["text-primary (on pattern)"] = tuple(int(tp.group(1)[i:i + 2], 16) for i in (0, 2, 4))
-    return {"dark": dark, "light": keep(pick("600"), (255, 255, 255))}
+    # Only the families brand-assets/icons/README.md lists for each background.
+    dark = {k: v for k, v in dark.items() if k.split("-")[0] in ("neutral", "amaranth", "indigo") or k.startswith("text-primary")}
+    light = {k: v for k, v in keep(pick("600"), (255, 255, 255)).items()
+             if k.rsplit("-", 1)[0] in ("neutral", "amaranth", "indigo", "blue", "purple", "red", "teal")}
+    return {"dark": dark, "light": light}
 
 
 def load_rules():
@@ -184,7 +188,7 @@ def check_one(m, rules):
                 f"wanted {sup:.1f} px; used {others or 'none'}", "typography README, Text in creatives")
             bad_case = []
             for t in titles:
-                condensed = t["stretch"] not in ("100%", "normal")
+                condensed = "Condensed" in t.get("family", "") or t["stretch"] not in ("100%", "normal")
                 upper = t["transform"] == "uppercase" or t["text"] == t["text"].upper()
                 if condensed and not upper:
                     bad_case.append("Mona Sans Display Condensed not in all caps")
@@ -243,7 +247,7 @@ def check_one(m, rules):
         if abs(ratio - want_ratio) > 0.02:
             biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
         Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
-        k = (1.5 * 1.3) if wide else 1.6  # title: 1.6x the Figma share, 1.95x on wide (Vanesa, 2026-11-16)
+        k = 1.6  # title: 1.6x the Figma share on every shape, in Mona Sans Display (Vanesa, 2026-11-19; wide was 1.95x)
         btexts = [t for t in texts if t["role"] == "book"]
         if btexts:
             top = max(t["fontSize"] for t in btexts)

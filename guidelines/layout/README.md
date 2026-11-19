@@ -130,7 +130,7 @@ The gap is a role, never a px value:
 
 ## Box
 
-Padding, fill and border, all from tokens. Pick the style by intent:
+Padding, fill and border, all from tokens. Pick the style by intent. The design system's web Card (`design-system/components/ui/card.tsx`) isn't used in creatives: its fill is the same dark as the creative background (Vanesa, 2026-11-19).
 
 | Class | What it is | When |
 | --- | --- | --- |
@@ -162,14 +162,14 @@ From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/
 | Fill | `background.light-surface`, text `text.on-light` | |
 | Logo | Light logo, 0.0967 W tall (smaller than the canvas logo) | 57 |
 | Logo to title | 0.0604 W | 36 |
-| Title | Mona Sans SemiBold, 0.0846 W × 1.6 (2026-11-16: bigger, so the card doesn't look empty; the logo keeps its size), line height 1.1 | 80 |
+| Title | Mona Sans Display SemiBold, 0.0846 W × 1.6 (2026-11-16: bigger, so the card doesn't look empty; the logo keeps its size), Display 1 line height, letter spacing 0 (Juan's type set, 2026-11-19) | 80 |
 | Divider | `border-on-light`, 1 px, between the top block (logo + title) and the bottom block | |
 | Divider to text | 0.0846 W | 50 |
-| Supporting text | Mona Sans Regular, 0.0483 W, line height 1.3, at the card's bottom padding | 29 |
+| Supporting text | Mona Sans Display Regular, 0.0483 W, H4 line height, letter spacing 0 (Juan's type set, 2026-11-19), at the card's bottom padding | 29 |
 | Button | Outside the card, centered below it, 0.0544 W gap. Height 0.157 W; text, padding and corners keep the button's proportions | gap 32, height 93 |
 
 - The top block sits at the top padding and the bottom block at the bottom padding; the space between stays empty.
-- **Wide (1920×1080): a landscape card** (decided 2026-11-11). The card is 5:4 and 72% of the canvas height (973 × 778 at 1920×1080), the largest that fits with the button inside the margins. Card and button are centered together. Every value above stays a share of W, where W is the portrait card's width at that height (631), except the title and supporting text, which are **1.5×** (46 px supporting) so the card doesn't look empty. The title is **1.95×** (104 px; 1.5 × 1.3, 2026-11-16).
+- **Wide (1920×1080): a landscape card** (decided 2026-11-11). The card is 5:4 and 72% of the canvas height (973 × 778 at 1920×1080), the largest that fits with the button inside the margins. Card and button are centered together. Every value above stays a share of W, where W is the portrait card's width at that height (631), except the title and supporting text, which are **1.5×** (46 px supporting) so the card doesn't look empty. The title is **1.6×** (104 px; 1.5 × 1.3, 2026-11-16).
 - **Slides on wide (no button): `.qd-book--slide`** (decided 2026-11-11). The card is centered on its own, both ways, and is **16:10** (1244 × 778 at 1920×1080) so speakers or an info list fit beside each other. The pattern still shows on every side.
 - **Info list on the card:** one Lucide icon per line (map-pin = place, calendar = date, clock = time), at the card's text size (the CSS sets it), `neutral-600` (`.qd-icon` on the light card), a `tight` gap. Speakers as `headshot-circle`, beside the list. The event type is never in this list ([`guidelines/`](../) section 11, rule 3).
 - **Ultrawide: no light card.** There's no use case for it (decided 2026-11-11).
