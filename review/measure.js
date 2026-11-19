@@ -105,6 +105,7 @@
     out.fonts = {
       "Mona Sans": document.fonts.check('600 40px "Mona Sans"'),
       "Mona Sans Display": document.fonts.check('600 40px "Mona Sans Display"'),
+      "Mona Sans Display Condensed": document.fonts.check('600 40px "Mona Sans Display Condensed"'),
       "Mona Sans Mono": document.fonts.check('400 40px "Mona Sans Mono"')
     };
     out.fontsUsed = Array.from(new Set(out.texts.map(function (t) { return t.family; })));

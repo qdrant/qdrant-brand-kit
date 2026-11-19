@@ -24,11 +24,11 @@
   font-feature-settings: "ss05" on, "ss06" on;
   font-variation-settings: "opsz" 72;
 }
-/* Mona Sans Condensed: the condensed display styles. The font's Display Condensed: 75% width
+/* Mona Sans Display Condensed: the condensed display styles. The font's Display Condensed: 75% width
    at the Display optical size. The single font-stretch value pins the width, so text in this
    family is always condensed. */
 @font-face {
-  font-family: "Mona Sans Condensed";
+  font-family: "Mona Sans Display Condensed";
   src: url("./MonaSansVF[wdth,wght,opsz,ital].ttf") format("truetype");
   font-weight: 200 900;
   font-stretch: 75%;

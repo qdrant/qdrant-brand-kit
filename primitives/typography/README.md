@@ -17,9 +17,9 @@ One family for the whole brand: Mona Sans, its Display cut and its Mono, from th
 | Mona Sans Display | `--qd-font-family-display` | Headings and display styles: `display-*` and `h1` to `h6`, and in creatives the titles, the supporting text and the headshot names and roles. The variable Mona Sans at its Display optical size (opsz 72), the cut the font names Display: `fonts/fonts.css` defines it as its own family from the same file. |
 | Mona Sans | `--qd-font-family-sans` | Text styles (`text-*`): body text on the web, UI and buttons. The variable font picks its optical size from the font size. |
 | Mona Sans Mono | `--qd-font-family-mono` | Mono styles, short labels, code, charts and data |
-| Mona Sans Condensed | `--qd-font-family-condensed` | The condensed display styles (`display-condensed-*`, for event titles), always uppercase. The font's Display Condensed: 75% width at the Display optical size. |
+| Mona Sans Display Condensed | `--qd-font-family-condensed` | The condensed display styles (`display-condensed-*`, for event titles), always uppercase. The font's Display Condensed: 75% width at the Display optical size. |
 
-Figma names Mona Sans `primary`; here it's `--qd-font-family-sans`, the name every creative already uses. The Figma primitives have the same families since 2026-11-17 (`primary`, `display`, `condensed`, `mono`). Figma shows Mona Sans Display and Mona Sans Mono only when their static fonts from the release are installed. Before 2026-11-17, `--qd-font-family-display` was the condensed family.
+Figma names Mona Sans `primary`; here it's `--qd-font-family-sans`, the name every creative already uses. The Figma primitives have the same families since 2026-11-17 (`primary`, `display`, `condensed`, `mono`), with the same names since 2026-11-18. The Qdrant Figma organization has Mona Sans v2.0.27 as static fonts since 2026-11-18: Mona Sans and its four widths in every weight, and Mona Sans Display, Display Condensed and Mono in Regular, Medium, SemiBold and Bold. Figma's "Mona Sans Condensed" is the text cut at 75% width, from the older files; the condensed styles here are Mona Sans Display Condensed. Before 2026-11-17, `--qd-font-family-display` was the condensed family.
 
 Mona Sans Display needs a browser that applies `font-variation-settings` inside `@font-face` (Chromium does, checked 2026-11-17). Elsewhere it renders like Mona Sans, whose automatic optical size is close to Display at large sizes.
 
@@ -30,7 +30,7 @@ Mona Sans Display needs a browser that applies `font-variation-settings` inside 
 The brand uses three weights: Regular (400), Medium (500) and SemiBold (600). **Bold (700) is retired** (Juan, 2026-11-17): no title, heading or body text uses it, and its uses move to SemiBold. The Figma file still has Bold styles until they're removed. The primitives also have Bold (`--qd-font-weight-bold`). Light (300) was removed on 2026-11-17: nothing used it. Use:
 
 - **Titles and headings: SemiBold.** Never Bold.
-- **Display styles: SemiBold only**, in Mona Sans Display and in Mona Sans Condensed (Juan, 2026-11-17). The Figma file still has Regular, Medium and Bold Display styles until they're removed.
+- **Display styles: SemiBold only**, in Mona Sans Display and in Mona Sans Display Condensed (Juan, 2026-11-17). The Figma file still has Regular, Medium and Bold Display styles until they're removed.
 - **Body text: Regular,** with SemiBold for key terms.
 - Medium exists in the styles but isn't part of the brand rules yet. One exception: speaker names in [`headshot-circle`](../../brand-components/headshot-circle/) use **Medium**, as in the Figma agenda slot (decided 2026-11-11).
 
@@ -53,7 +53,7 @@ The building blocks of the type set, updated on 2026-11-17 (Juan). The text styl
 
 The type set, adopted on 2026-11-18 (Juan), after comparing it with the old styles in the studio's Typography page. One set for brand, web and marketing, named as in Figma (`Display/2/SemiBold`, `Heading/H4/Mono`, `Text/md/Regular`):
 
-- **Display** 1 to 5 in Mona Sans Display SemiBold, each also **Condensed** (`display-condensed-*`: Mona Sans Condensed SemiBold, uppercase). Numbered from the smallest, so larger steps can be added as 6, 7 and on.
+- **Display** 1 to 5 in Mona Sans Display SemiBold, each also **Condensed** (`display-condensed-*`: Mona Sans Display Condensed SemiBold, uppercase). Numbered from the smallest, so larger steps can be added as 6, 7 and on.
 - **Headings** H1 to H6 in Mona Sans Display, Regular, Medium or SemiBold (SemiBold by default), each also in **Mono** (`mono-h1` to `mono-h6`: Mona Sans Mono Regular).
 - **Text** XL to XS in Mona Sans, Regular, Medium or SemiBold, each also in Mono (`mono-xl` to `mono-xs`).
 
@@ -89,7 +89,7 @@ Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabN
 | Title, 11 words or more | same | 64 (H1) | 80 (Display 1) | 80 | 64 |
 | Supporting (body, date, time, place) | Mona Sans Display Regular (H4 Regular) | 40 | 40 | 40 | 40 |
 
-- **Mona Sans titles are always Title Case, never all caps.** Supporting text (date, place, body sentences) stays in normal sentence case (decided 2026-11-11). **Mona Sans Condensed is always all caps**, and only for special occasions, when the person asks for it (`display-condensed-*`).
+- **Mona Sans titles are always Title Case, never all caps.** Supporting text (date, place, body sentences) stays in normal sentence case (decided 2026-11-11). **Mona Sans Display Condensed is always all caps**, and only for special occasions, when the person asks for it (`display-condensed-*`).
 - **Mona Sans Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans.
 - **Longer titles step down** to the next size by word count, never in between and never below the 11+ size. If it still doesn't fit, ask the person to shorten it.
 - **Wide** follows the Vector Space Day banner (128 on 1920, decided 2026-11-04).

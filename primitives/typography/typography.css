@@ -6,7 +6,7 @@
      Mona Sans family (2026-11-17): Display for headings and display styles, Mona Sans for text, Mono for mono. */
   --qd-font-family-sans: "Mona Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Figma: primary */
   --qd-font-family-display: "Mona Sans Display", "Mona Sans", ui-sans-serif, system-ui, sans-serif; /* Mona Sans at its Display optical size, from fonts.css */
-  --qd-font-family-condensed: "Mona Sans Condensed", "Mona Sans Display", "Mona Sans", ui-sans-serif, system-ui, sans-serif; /* Display at 75% width, from fonts.css */
+  --qd-font-family-condensed: "Mona Sans Display Condensed", "Mona Sans Display", "Mona Sans", ui-sans-serif, system-ui, sans-serif; /* Display at 75% width, from fonts.css */
   --qd-font-family-mono: "Mona Sans Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --qd-font-weight-regular: 400;
   --qd-font-weight-medium: 500;

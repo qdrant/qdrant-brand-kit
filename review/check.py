@@ -187,7 +187,7 @@ def check_one(m, rules):
                 condensed = t["stretch"] not in ("100%", "normal")
                 upper = t["transform"] == "uppercase" or t["text"] == t["text"].upper()
                 if condensed and not upper:
-                    bad_case.append("Mona Sans Condensed not in all caps")
+                    bad_case.append("Mona Sans Display Condensed not in all caps")
                 if not condensed:
                     ok, bad = title_case_ok(t["text"])
                     if upper:

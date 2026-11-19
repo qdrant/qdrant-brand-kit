@@ -11,7 +11,7 @@ export const typefaces = [
   { id: "mona-sans-display", label: "Mona Sans Display" },
   { id: "mona-sans", label: "Mona Sans" },
   { id: "mona-sans-mono", label: "Mona Sans Mono" },
-  { id: "mona-sans-condensed", label: "Mona Sans Condensed" },
+  { id: "mona-sans-display-condensed", label: "Mona Sans Display Condensed" },
 ] as const
 
 export type TypefaceId = (typeof typefaces)[number]["id"]
@@ -55,7 +55,7 @@ function groupOf(name: string): TextStyle["group"] {
 
 function typefaceOf(v: Record<string, string>): TypefaceId {
   if (v.stretch === "75%" || v.family?.includes("condensed"))
-    return "mona-sans-condensed"
+    return "mona-sans-display-condensed"
   if (v.family?.includes("mono")) return "mona-sans-mono"
   if (v.family?.includes("display")) return "mona-sans-display"
   return "mona-sans"

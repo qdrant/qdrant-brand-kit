@@ -30,14 +30,14 @@
         "condensed": {
           "$type": "fontFamily",
           "$value": [
-            "Mona Sans Condensed",
+            "Mona Sans Display Condensed",
             "Mona Sans Display",
             "Mona Sans",
             "ui-sans-serif",
             "system-ui",
             "sans-serif"
           ],
-          "$description": "The condensed display styles. The font's Display Condensed, 75% width at the Display optical size: fonts/fonts.css defines \"Mona Sans Condensed\" from the same variable font."
+          "$description": "The condensed display styles. The font's Display Condensed, 75% width at the Display optical size: fonts/fonts.css defines \"Mona Sans Display Condensed\" from the same variable font."
         },
         "mono": {
           "$type": "fontFamily",
