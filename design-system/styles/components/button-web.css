@@ -6,8 +6,8 @@
    the primary and secondary buttons, which are raised surfaces with a 1px edge and a faint top light drawn
    inside them and a short drop shadow under them; 14px medium text, 16px side padding and an 8px gap; a
    0.97 press over 200ms with a soft ease-out; a 2px focus ring with a 2px gap. Fills are flat: no gradient
-   (2026-11-14) and no inner highlight on the primary (2026-11-15); the creative button keeps both from
-   button.css. */
+   (2026-11-14) and no inner highlight on the primary (2026-11-15). Since 2026-11-19 the creative button is flat
+   and raised too: the raised edge and drop colors live in button.css, shared by both. */
 :root,
 [data-theme],
 [data-context] {
@@ -50,17 +50,11 @@
     inset 0 0 0 1px color-mix(in oklab, var(--qd-ui-button-edge-color) calc(6% * var(--qd-ui-button-edge-strength)), transparent),
     inset 0 0 0 1px color-mix(in oklab, var(--qd-ui-button-edge-color) calc(10% * var(--qd-ui-button-edge-strength)), transparent);
 }
-/* The edge color and its strength, and the shadow under, by theme (never in the block above, or a
-   [data-context] inside a light section would reset them to dark). In light, the edge is dark and softer,
-   and the drop shadow lighter. */
+/* The shadow under, by theme (never in the block above, or a [data-context] inside a light section would
+   reset it to dark). Its color, and the edge color and strength, are in button.css, shared with the
+   creative button. */
 :root,
-[data-theme="dark"] {
-  --qd-ui-button-edge-color: var(--qd-color-neutral-0);
-  --qd-ui-button-edge-strength: 1;
-  --qd-ui-button-drop: 0 1px 3px 0 color-mix(in oklab, var(--qd-color-neutral-1000) 20%, transparent);
-}
+[data-theme="dark"],
 [data-theme="light"] {
-  --qd-ui-button-edge-color: var(--qd-color-neutral-1000);
-  --qd-ui-button-edge-strength: 0.6;
-  --qd-ui-button-drop: 0 1px 3px 0 color-mix(in oklab, var(--qd-color-neutral-1000) 4%, transparent);
+  --qd-ui-button-drop: 0 1px 3px 0 var(--qd-ui-button-drop-color);
 }
