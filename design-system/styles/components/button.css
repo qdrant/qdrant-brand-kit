@@ -11,17 +11,16 @@
    System's Figma button (8y0svqBDPZX6caRNF6lddG, node 13872:1092) isn't used, and Figma's buttons follow this
    repo (Juan, 2026-11-18). */
 :root {
-  /* Fill: brand red to a darker red, top to bottom. Hover is flat; disabled is a lighter red. */
-  --qd-ui-button-fill: linear-gradient(to bottom, var(--qd-color-amaranth-600), var(--qd-color-amaranth-700));
-  --qd-ui-button-fill-hover: linear-gradient(to bottom, var(--qd-color-amaranth-600), var(--qd-color-amaranth-600));
-  --qd-ui-button-fill-disabled: linear-gradient(to bottom, var(--qd-color-amaranth-400), var(--qd-color-amaranth-400));
+  /* Fill: flat brand red, no gradient and no inner highlight, like the web button (button-web.css).
+     The creative button took this look on 2026-11-19 (Vanesa); before, it kept a gradient and highlight. */
+  --qd-ui-button-fill: var(--qd-color-amaranth-600);
 
-  /* Top inner highlight, a lighter red line along the top edge. Offset and blur are shares of the
-     button's text size (Figma: 2px and 1px at 16px text), so it scales with any button size. */
-  --qd-ui-button-highlight: var(--qd-color-amaranth-500);
-  --qd-ui-button-highlight-hover: var(--qd-color-amaranth-400);
-  --qd-ui-button-highlight-y: 0.125;
-  --qd-ui-button-highlight-blur: 0.0625;
+  /* Raised surface, shared by the web and creative buttons: a 1px edge, a faint top light and a short drop
+     shadow (button-web.css). Sizes are shares of the button's height, from the 36px web button (1px edges,
+     a 1px / 3px drop), so the creative button scales them with the canvas. Colors are by theme, below. */
+  --qd-ui-button-raised-edge: calc(1 / 36);
+  --qd-ui-button-raised-drop-y: calc(1 / 36);
+  --qd-ui-button-raised-drop-blur: calc(3 / 36);
 
   /* Label: white, Mona Sans SemiBold (never Bold). */
   --qd-ui-button-text-color: var(--qd-color-neutral-0);
@@ -30,4 +29,19 @@
 
   /* Focus (web only): a 2px ring in the brand red at 40%. */
   --qd-ui-button-focus-ring: color-mix(in srgb, var(--qd-color-amaranth-600) 40%, transparent);
+}
+
+/* The raised edge's color and strength, and the drop shadow's color, by theme (never in :root alone, or a
+   [data-theme] inside a light section would keep the dark values). In light, the edge is dark and softer,
+   and the drop shadow lighter. Moved here from button-web.css on 2026-11-19 so the creative button reads them. */
+:root,
+[data-theme="dark"] {
+  --qd-ui-button-edge-color: var(--qd-color-neutral-0);
+  --qd-ui-button-edge-strength: 1;
+  --qd-ui-button-drop-color: color-mix(in oklab, var(--qd-color-neutral-1000) 20%, transparent);
+}
+[data-theme="light"] {
+  --qd-ui-button-edge-color: var(--qd-color-neutral-1000);
+  --qd-ui-button-edge-strength: 0.6;
+  --qd-ui-button-drop-color: color-mix(in oklab, var(--qd-color-neutral-1000) 4%, transparent);
 }

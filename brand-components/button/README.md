@@ -4,7 +4,7 @@ The call to action in a post ("Start Free", "Register", "Read more"). Written as
 
 Based on the Qdrant Web Design button (Figma [Qdrant Web Design, node 793-2956](https://www.figma.com/design/ubPe8s8pViytom0Mapcno8/Qdrant-Web-Design?node-id=793-2956)). It's no longer interim: the Qdrant Brand Design System's Figma button (file `8y0svqBDPZX6caRNF6lddG`, node `13872:1092`) isn't used, and the buttons in the Figma files will be updated from this repo (Juan, 2026-11-18).
 
-**The look comes from the design system** (since 2026-11-12): [`design-system/styles/components/button.css`](../../design-system/styles/components/button.css) holds the fill, the inner highlight, the label color and weight, and the web states, as `--qd-ui-button-*` variables. The web Button in the design system reads the same file, so the two always match. This folder only sizes the button for the canvas. To change the look, change that file, never `button.css` here.
+**The look comes from the design system** (since 2026-11-12): [`design-system/styles/components/button.css`](../../design-system/styles/components/button.css) holds the fill, the raised edge and shadow, the label color and weight, and the web states, as `--qd-ui-button-*` variables. The web Button in the design system reads the same file, so the two always match. This folder only sizes the button for the canvas. To change the look, change that file, never `button.css` here.
 
 | File | What it is |
 | --- | --- |
@@ -56,21 +56,23 @@ Part.
 
 In px at the reference canvas:
 
-| Shape | Height | Text | Side padding | Radius | Inner highlight |
+| Shape | Height | Text | Side padding | Radius | Raised edge |
 | --- | --- | --- | --- | --- | --- |
-| `ultrawide` | 72 | 32 | 40 | 16 | 4 |
-| `wide`, `square`, `portrait` | 80 | 36 | 48 | 16 | 4.5 |
-| `story` | 112 | 48 | 64 | 24 | 6 |
+| `ultrawide` | 72 | 32 | 40 | 16 | 2 |
+| `wide`, `square`, `portrait` | 80 | 36 | 48 | 16 | 2.2 |
+| `story` | 112 | 48 | 64 | 24 | 3.1 |
 
 ## Colors
+
+**Flat and raised since 2026-11-19 (Vanesa):** the creative button matches the web button (`design-system/components/ui/button.tsx`): one flat amaranth fill, no gradient and no inner highlight, on a raised surface (a faint 1 px edge, a top light and a short drop shadow). The edge and shadow are shares of the button's height (1/36 and 3/36, from the 36 px web button), so they scale with every canvas. It replaces the gradient and top highlight from the Qdrant Web Design button.
 
 Set in [`design-system/styles/components/button.css`](../../design-system/styles/components/button.css), token names only. Figma colors that have no token use the nearest one. Moved to the Figma primitive names on 2026-11-12: the brand red is `amaranth-600`, the same `#DC244C` as before.
 
 | Part | Token | Figma |
 | --- | --- | --- |
-| Fill, top | `amaranth-600` | Primary/P50 #DC244C |
-| Fill, bottom | `amaranth-700` | #BE003A (nearest token, `#BA1E41`) |
-| Inner highlight (top edge) | `amaranth-500` | #FF516B (nearest token, `#F14463`) |
+| Fill (flat) | `amaranth-600` | Primary/P50 #DC244C |
+| Raised edge and top light | `neutral-0` at 4 / 6 / 10% (dark), `neutral-1000` at 60% of that (light) | From the web button (Supabase-style) |
+| Drop shadow | `neutral-1000` at 20% (dark), 4% (light) | From the web button |
 | Text | `neutral-0` | Neutral/N100 #FFFFFF |
 
 ## How to use

@@ -198,7 +198,7 @@
 
 /* The Qdrant button look (components/button.css) on the Button's default variant (class qd-ui-button).
    Unlayered, so it wins over the variant's Tailwind classes. Flat on the web (components/button-web.css):
-   no gradient and no inner highlight; the creative button keeps both. */
+   no gradient and no inner highlight. The creative button is flat and raised too since 2026-11-19. */
 .qd-ui-button {
   background-image: none;
   background-color: var(--qd-ui-button-web-fill);
