@@ -1,5 +1,5 @@
 {
-  "$description": "Qdrant typography. Weights and the size, line-height and letter-spacing scales match the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg, 2026-11-12). The families are the Mona Sans family (2026-11-17): Mona Sans Display for headings and display styles, Mona Sans for text styles and Mona Sans Mono for mono styles. The text styles (semantic.type) and the creative sizes are this repo's own: the type set adopted on 2026-11-18. Mona Sans always renders with ss05 and ss06 on.",
+  "$description": "Qdrant typography. Weights and the size and line-height scales match the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg, 2026-11-12). The families are the Mona Sans family (2026-11-17): Mona Sans Display for headings and display styles, Mona Sans for text styles and Mona Sans Mono for mono styles. The text styles (semantic.type) and the creative sizes are this repo's own: the type set adopted on 2026-11-18. Mona Sans always renders with ss05 and ss06 on. There are no letter-spacing primitives since 2026-11-18: every text style uses 0, the font's default.",
   "core": {
     "font": {
       "family": {
@@ -207,25 +207,6 @@
         "150": {
           "$type": "number",
           "$value": 1.5
-        }
-      },
-      "letterSpacing": {
-        "$description": "Letter-spacing scale, fixed px as in Figma, so the same value gives the same spacing at any size. Every text style uses normal (0) since 2026-11-17: Mona Sans Display is already tighter than the text cut. The negative steps are for UI.",
-        "tighter": {
-          "$type": "dimension",
-          "$value": "-1.5px"
-        },
-        "tight": {
-          "$type": "dimension",
-          "$value": "-1px"
-        },
-        "snug": {
-          "$type": "dimension",
-          "$value": "-0.5px"
-        },
-        "normal": {
-          "$type": "dimension",
-          "$value": "0px"
         }
       }
     }

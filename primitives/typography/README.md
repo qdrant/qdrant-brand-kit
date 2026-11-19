@@ -5,7 +5,7 @@ Qdrant's typefaces, text styles and type rules as tokens. The text styles are th
 | File | What it is |
 | --- | --- |
 | `typography.tokens.json` | The source. W3C tokens: families, weights, the Figma scales, every text style, sizes per channel, slide and document sizes |
-| `typography.css` | `--qd-font-*`, `--qd-font-size-*`, `--qd-line-height-*`, `--qd-letter-spacing-*` and `--qd-type-*` variables, plus the creative classes; loads the fonts and turns on ss05 and ss06. Kept in step with the JSON by hand (it isn't generated, because of the classes) |
+| `typography.css` | `--qd-font-*`, `--qd-font-size-*`, `--qd-line-height-*` and `--qd-type-*` variables, plus the creative classes; loads the fonts and turns on ss05 and ss06. Kept in step with the JSON by hand (it isn't generated, because of the classes) |
 | `fonts/` | Mona Sans v2.0.27 from its [official release](https://github.com/github/mona-sans/releases), with its licence (SIL Open Font License): the variable Mona Sans, which includes the Display optical size and the condensed width, and Mona Sans Mono. |
 
 ## Families
@@ -44,11 +44,10 @@ The building blocks of the type set, updated on 2026-11-17 (Juan). The text styl
 | --- | --- | --- |
 | Font size (px) | 10, 12, 13, 14, 15, 16, 18, 20, 24, 32, 36, 40, 48, 56, 64, 80, 104, 128, 160, 200 | `--qd-font-size-10` to `--qd-font-size-200` |
 | Line height | 103, 104, 105, 106, 108, 110, 112, 114, 117, 122, 130, 150 (named by percent: 150 is 1.5) | `--qd-line-height-103` to `--qd-line-height-150` |
-| Letter spacing (px) | tighter -1.5, tight -1, snug -0.5, normal 0 | `--qd-letter-spacing-*` |
 
 - **Font size:** the type set uses Text 12 to 20, headings 24 to 64 and Display 80, 104, 128, 160 and 200 (Display grows about ×1.25 per step, on the 8px grid). 10, 13, 15 and 36 are for UI and the creative button.
 - **Line height:** named by percent since 2026-11-17, so the scale can hold every step. The old names were none (100), tight (120), snug (135), normal (150) and relaxed (170); all but normal were removed on 2026-11-18 because nothing used them once the type set was in. Headings and Display take theirs from one curve through H6 (130) and H1 (110): H5 122, H4 117, H3 114, H2 112, then Display 108, 106, 105, 104 and 103. That keeps about 6.4px of leading above the size at every step. Text uses 150.
-- **Letter spacing:** every text style uses normal (0), Text XL and the creative text included (decided 2026-11-17, in use since 2026-11-18), because Mona Sans Display is already 2.5% tighter than the text cut. The negative steps are for UI. Letter spacing is in px, as in Figma, so the same value gives the same spacing at any font size.
+- **Letter spacing:** there's no scale. Every text style uses 0, the font's default, Text XL and the creative text included (decided 2026-11-17, in use since 2026-11-18), because Mona Sans Display is already 2.5% tighter than the text cut. The scale (tighter -1.5px, tight -1px, snug -0.5px and normal 0) was removed on 2026-11-18 because nothing used it.
 
 ## Text styles
 

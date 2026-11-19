@@ -15,7 +15,7 @@
   --qd-font-features: "ss05" on, "ss06" on;
 
   /* Figma scales (2026-11-17). The type set picks from these: Text 12-20, headings 24-64, Display 80-200; line
-     heights are named by percent (150 is 1.5); every text style uses letter spacing normal (0). */
+     heights are named by percent (150 is 1.5). No letter-spacing scale: every text style uses 0, the font's default. */
   --qd-font-size-10: 10px; --qd-font-size-12: 12px; --qd-font-size-13: 13px; --qd-font-size-14: 14px; --qd-font-size-15: 15px;
   --qd-font-size-16: 16px; --qd-font-size-18: 18px; --qd-font-size-20: 20px; --qd-font-size-24: 24px; --qd-font-size-32: 32px;
   --qd-font-size-36: 36px; --qd-font-size-40: 40px; --qd-font-size-48: 48px; --qd-font-size-56: 56px; --qd-font-size-64: 64px;
@@ -23,7 +23,6 @@
   --qd-line-height-103: 1.03; --qd-line-height-104: 1.04; --qd-line-height-105: 1.05; --qd-line-height-106: 1.06; --qd-line-height-108: 1.08;
   --qd-line-height-110: 1.1; --qd-line-height-112: 1.12; --qd-line-height-114: 1.14; --qd-line-height-117: 1.17;
   --qd-line-height-122: 1.22; --qd-line-height-130: 1.3; --qd-line-height-150: 1.5;
-  --qd-letter-spacing-tighter: -1.5px; --qd-letter-spacing-tight: -1px; --qd-letter-spacing-snug: -0.5px; --qd-letter-spacing-normal: 0px;
 
   /* The type set (2026-11-18, typography.tokens.json semantic.type): Display 5 to 1, Display Condensed, H1 to H6,
      Text XL to XS, and Mono for each heading and text step. The weight here is each style's default. */
