@@ -47,7 +47,7 @@
   --qd-gap-group: calc(var(--qd-canvas-gap-group) * var(--qd-canvas-u));
   --qd-gap-section: calc(var(--qd-canvas-gap-section) * var(--qd-canvas-u));
   --qd-gutter: calc(var(--qd-canvas-gutter) * var(--qd-canvas-u));
-  --qd-box-border-width: max(1px, var(--qd-canvas-u));
+  --qd-box-border-width: max(var(--qd-border-width-thin, 1px), var(--qd-canvas-u)); /* border-width.thin */
 
   position: relative;
   box-sizing: border-box;
@@ -92,7 +92,7 @@
 /* Box: padding, fill and border from tokens. Plain by default. The light card and the light theme rules are below. */
 .qd-box {
   padding: var(--qd-gap-group);
-  border-radius: calc(8 * var(--qd-canvas-u)); /* radius.md at the reference canvas */
+  border-radius: calc(8 * var(--qd-canvas-u)); /* radius.sm at the reference canvas */
 }
 .qd-box--card {
   background: var(--qd-color-background-raised);
@@ -128,7 +128,7 @@
 .qd-canvas[data-shape="story"]    { --qd-book-share: 0.75; }
 /* Wide: a landscape card, 5:4, 72% of the canvas height (the largest that fits with the button inside the
    margins). W stays the portrait card's width for that height, so every size below keeps its share of W;
-   only the card's width changes, and the text is 1.5x larger (Vanesa, 2026-11-11), the title 1.95x (2026-11-16).
+   only the card's width changes, and the text is 1.5x larger (Vanesa, 2026-11-11). The title is 1.6x, as on square (2026-11-19: 1.95x no longer fit in Mona Sans Display).
    Ultrawide: no light card. */
 .qd-canvas[data-shape="wide"]     { --qd-book-share: 0.3286; }
 .qd-canvas {
@@ -170,12 +170,12 @@
        - (var(--qd-book-h) + var(--qd-book-gap) + var(--qd-book-cta)) * var(--qd-canvas-u)) / 2);
 }
 .qd-book__top { display: flex; flex-direction: column; align-items: flex-start; gap: calc(var(--qd-book-w) * 0.0604 * var(--qd-canvas-u)); }
-.qd-book__card .qd-book__title, .qd-book__card .qd-book__text { margin: 0; font-family: var(--qd-font-family-sans); font-feature-settings: var(--qd-font-features); color: var(--qd-color-text-on-light); letter-spacing: calc(-0.6 * var(--qd-canvas-u)); }
+.qd-book__card .qd-book__title, .qd-book__card .qd-book__text { margin: 0; font-family: var(--qd-font-family-display); font-feature-settings: var(--qd-font-features); color: var(--qd-color-text-on-light); letter-spacing: 0; }
 /* Title 1.6x the Figma share, so the card doesn't look empty; the logo keeps its size (Vanesa, 2026-11-16). */
-.qd-book__title { font-weight: var(--qd-font-weight-semibold); font-size: calc(var(--qd-book-w) * 0.0846 * 1.6 * var(--qd-canvas-u)); line-height: 1.1; }
+.qd-book__title { font-weight: var(--qd-font-weight-semibold); font-size: calc(var(--qd-book-w) * 0.0846 * 1.6 * var(--qd-canvas-u)); line-height: var(--qd-type-display-1-line-height); }
 .qd-book__bottom { border-top: var(--qd-box-border-width) solid var(--qd-color-border-on-light); padding-top: calc(var(--qd-book-w) * 0.0846 * var(--qd-canvas-u)); }
-.qd-book__text { font-weight: var(--qd-font-weight-regular); font-size: calc(var(--qd-book-w) * 0.0483 * var(--qd-canvas-u)); line-height: 1.3; }
-.qd-canvas[data-shape="wide"] .qd-book__title { font-size: calc(var(--qd-book-w) * 0.0846 * 1.95 * var(--qd-canvas-u)); } /* 1.5 x 1.3 (2026-11-16) */
+.qd-book__text { font-weight: var(--qd-font-weight-regular); font-size: calc(var(--qd-book-w) * 0.0483 * var(--qd-canvas-u)); line-height: var(--qd-type-h4-line-height); }
+.qd-canvas[data-shape="wide"] .qd-book__title { font-size: calc(var(--qd-book-w) * 0.0846 * 1.6 * var(--qd-canvas-u)); } /* 1.6x, as square, so Mona Sans Display fits (2026-11-19) */
 .qd-canvas[data-shape="wide"] .qd-book__text  { font-size: calc(var(--qd-book-w) * 0.0483 * 1.5 * var(--qd-canvas-u)); }
 /* Slide on wide (no button): add .qd-book--slide to .qd-book. The card is centered on its own and
    may be 16:10, wider than 5:4, when it holds speakers or an info list (Vanesa, 2026-11-11). */
