@@ -57,8 +57,8 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 | Card fill | `gradient.headshot` |
 | Photo to name | the shape's `group` gap |
 | Head to card top | the shape's `group` gap |
-| Name | H3 SemiBold, 48, line height 1.1, `text.primary`, centered |
-| Role | H5 Regular, 32, line height 1.3, `text.secondary`, centered |
+| Name | H3 SemiBold, 48, line height 1.14, Mona Sans Display, `text.primary`, centered |
+| Role | H5 Regular, 32, line height 1.22, Mona Sans Display, `text.secondary`, centered |
 | Photo shape | Portrait **5:7** (width : height), always. From the Vector Space Day banner (392×544, Brand-Collateral `2183:41590`) |
 | Stagger (optional) | 2 speakers: 2 × `section` gap, the first card raised. 3 and 4: 1 × `section` gap, the middle card(s) raised. Off by default: add `qd-headshot-row--stagger` |
 

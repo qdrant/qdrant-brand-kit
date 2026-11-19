@@ -11,11 +11,11 @@ Tokens and rules only. No finished designs. Each folder's `.tokens.json` is the 
 | Folder | Status | What it is |
 | --- | --- | --- |
 | [`primitives/colors/`](primitives/colors/) | Figma primitives, 2026-11-12 | The palette as tokens and CSS variables: 11 color families from Figma, brand names, roles for dark and light, data viz, the brand and headshot gradients. |
-| [`primitives/typography/`](primitives/typography/) | V1, Figma scales added | Mona Sans and Geist Mono (font files included), the Figma size, line-height and letter-spacing scales, every text style (incl. condensed, mono and social), sizes per channel, hierarchy, emphasis and misuse rules. |
+| [`primitives/typography/`](primitives/typography/) | V1, Figma scales added | The Mona Sans family: Mona Sans, Mona Sans Display and Mona Sans Mono (font files included), the Figma size and line-height scales, the type set (Display, headings and text, with condensed and mono), sizes per channel, hierarchy, emphasis and misuse rules. |
 | [`primitives/spacing/`](primitives/spacing/) | Figma primitives, 2026-11-12 | The 4px spacing scale and the web page layout constants. |
 | [`primitives/radius/`](primitives/radius/) | Figma primitives, 2026-11-12 | Corner radius, from none to full. |
 | [`primitives/border-width/`](primitives/border-width/) | Figma primitives, 2026-11-12 | Border widths: hairline, thin, medium, thick. |
-| [`primitives/breakpoints/`](primitives/breakpoints/) | Figma primitives, 2026-11-12 | Breakpoints for web UI, xs to xl. |
+| [`primitives/breakpoints/`](primitives/breakpoints/) | Tailwind's defaults, 2026-11-18 | Breakpoints for web UI, sm to 2xl, the same as the design system's Tailwind and Figma. |
 | [`primitives/elevation/`](primitives/elevation/) | Figma primitives, 2026-11-12. Product only | Paper elevation 0 to 24 for Qdrant Cloud on MUI. Not used by creatives or marketing. |
 
 ## Guidelines: choosing and combining

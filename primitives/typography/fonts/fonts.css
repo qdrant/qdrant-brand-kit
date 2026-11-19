@@ -1,6 +1,8 @@
-/* Brand fonts. Paths are relative to this file.
+/* Brand fonts: the Mona Sans family, v2.0.27 (2026-11-17). Paths are relative to this file.
    Mona Sans must render with ss05 and ss06 on. Chromium ignores font-feature-settings
    inside @font-face, so ../typography.css also sets it on html, body. */
+
+/* Mona Sans: text styles. The variable font picks its optical size from the font size. */
 @font-face {
   font-family: "Mona Sans";
   src: url("./MonaSansVF[wdth,wght,opsz,ital].ttf") format("truetype");
@@ -10,21 +12,36 @@
   font-display: block;
   font-feature-settings: "ss05" on, "ss06" on;
 }
-/* Figma's display family: Mona Sans at 75% width, from the same variable font. The single
-   font-stretch value pins the width axis, so text in this family is always condensed. */
+/* Mona Sans Display: headings and display styles. The same variable font at its Display
+   optical size (opsz 72), the cut the font names "Display". */
 @font-face {
-  font-family: "Mona Sans Condensed";
+  font-family: "Mona Sans Display";
+  src: url("./MonaSansVF[wdth,wght,opsz,ital].ttf") format("truetype");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: block;
+  font-feature-settings: "ss05" on, "ss06" on;
+  font-variation-settings: "opsz" 72;
+}
+/* Mona Sans Display Condensed: the condensed display styles. The font's Display Condensed: 75% width
+   at the Display optical size. The single font-stretch value pins the width, so text in this
+   family is always condensed. */
+@font-face {
+  font-family: "Mona Sans Display Condensed";
   src: url("./MonaSansVF[wdth,wght,opsz,ital].ttf") format("truetype");
   font-weight: 200 900;
   font-stretch: 75%;
   font-style: normal;
   font-display: block;
   font-feature-settings: "ss05" on, "ss06" on;
+  font-variation-settings: "opsz" 72;
 }
+/* Mona Sans Mono: mono styles, labels and code. It has no ss05 or ss06; its a and g are its own. */
 @font-face {
-  font-family: "Geist Mono";
-  src: url("./GeistMono[wght].ttf") format("truetype");
-  font-weight: 100 900;
+  font-family: "Mona Sans Mono";
+  src: url("./MonaSansMonoVF[wght].ttf") format("truetype");
+  font-weight: 200 900;
   font-style: normal;
   font-display: block;
 }

@@ -20,7 +20,7 @@ Add a row here when it's approved:
 
 | Component | Kind | Use it for | Shapes | Approved |
 | --- | --- | --- | --- | --- |
-| [`button`](button/) | Part | The call to action: Register, Start Free, Read more. Interim, until the Brand DS button | All | Vanesa, 2026-11-04 |
+| [`button`](button/) | Part | The call to action: Register, Start Free, Read more | All | Vanesa, 2026-11-04 |
 | [`headshot-card`](headshot-card/) | Part | Featured speakers: cutout on the headshot gradient, name and role below | Wide, square, portrait, story | Vanesa, 2026-11-04 |
 | [`headshot-circle`](headshot-circle/) | Part | Small or many speakers, agenda slots, quieter posts | All | Vanesa, 2026-11-04 |
 | [`partner-lockup`](partner-lockup/) | Part | Qdrant logo + partner logo: plus for collaborations and case studies, divider for regular co-branding | All | Vanesa, 2026-11-04 |

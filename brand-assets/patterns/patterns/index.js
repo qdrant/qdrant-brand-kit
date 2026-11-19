@@ -104,12 +104,13 @@ function renderBase(canvas, tokens, preset, options) {
 
 // Generative patterns that draw letters need their fonts loaded first, or the browser
 // draws them in a fallback font. Call once before rendering; it loads the repo's own
-// Mona Sans and Geist Mono (primitives/typography/fonts), no network (2026-11-11; it used
-// to fetch them from Google Fonts, as Pattern Studio's export does).
+// Mona Sans and Mona Sans Mono (primitives/typography/fonts), no network (2026-11-11; it used
+// to fetch them from Google Fonts, as Pattern Studio's export does). The letters were Geist
+// Mono until 2026-11-17, when the brand moved to the Mona Sans family.
 const FONT_DIR = new URL("../../../primitives/typography/fonts/", import.meta.url);
 const LOCAL_FONTS = [
   ["Mona Sans", "MonaSansVF[wdth,wght,opsz,ital].ttf", "200 900"],
-  ["Geist Mono", "GeistMono[wght].ttf", "100 900"],
+  ["Mona Sans Mono", "MonaSansMonoVF[wght].ttf", "200 900"],
 ];
 export async function loadPatternFonts(patterns) {
   const needed = patterns.flatMap((p) => [p, ...(p.layers ?? [])]).filter((p) => isGenerativePattern(p) && (p.settings.engine.element === "ascii" || p.settings.engine.shape === "text"));

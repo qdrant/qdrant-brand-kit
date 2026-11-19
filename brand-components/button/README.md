@@ -2,7 +2,7 @@
 
 The call to action in a post ("Start Free", "Register", "Read more"). Written as rules, not fixed sizes: an agent reads them and builds the button for the creative it's making.
 
-**Interim.** Based on the Qdrant Web Design button that the current system still uses (Figma [Qdrant Web Design, node 793-2956](https://www.figma.com/design/ubPe8s8pViytom0Mapcno8/Qdrant-Web-Design?node-id=793-2956)). The Qdrant Brand Design System button (file `8y0svqBDPZX6caRNF6lddG`, node `13872:1092`) replaces it later.
+Based on the Qdrant Web Design button (Figma [Qdrant Web Design, node 793-2956](https://www.figma.com/design/ubPe8s8pViytom0Mapcno8/Qdrant-Web-Design?node-id=793-2956)). It's no longer interim: the Qdrant Brand Design System's Figma button (file `8y0svqBDPZX6caRNF6lddG`, node `13872:1092`) isn't used, and the buttons in the Figma files will be updated from this repo (Juan, 2026-11-18).
 
 **The look comes from the design system** (since 2026-11-12): [`design-system/styles/components/button.css`](../../design-system/styles/components/button.css) holds the fill, the inner highlight, the label color and weight, and the web states, as `--qd-ui-button-*` variables. The web Button in the design system reads the same file, so the two always match. This folder only sizes the button for the canvas. To change the look, change that file, never `button.css` here.
 
@@ -49,7 +49,7 @@ Part.
 7. **Beside the logo, the same height as the logo.** Add `qd-button--beside-logo`: the height becomes the logo's height for the shape (72 or 80 px) and the text, padding and corners follow it in the same proportions. The button is never taller than the logo next to it (decided 2026-11-04).
 8. **Never resized to make room** (Vanesa, 2026-11-16). When a creative is tight, tighten the gaps, shrink the headshots or cut copy ([`guidelines/`](../../guidelines/) section 11, rule 11). The button keeps its size for the shape.
 9. **On a red pattern: top-right beside the logo,** on the dark part of the pattern, with **3:1 or more** against what's around it. This 3:1 rule is only for red patterns ([`guidelines/`](../../guidelines/) section 3, 2026-11-16).
-10. **Never an icon.** The button is text only, in every use and every type, Main and Secondary (decided 2026-11-11).
+10. **Never an icon.** The creative button is text only, Main and Secondary (decided 2026-11-11). Web and product buttons, from the design system, may have one ([`design-system/AGENTS.md`](../../design-system/AGENTS.md), 2026-11-18).
 9. **One button per post.**
 
 ## Size and inner gaps
@@ -89,9 +89,9 @@ Set in [`design-system/styles/components/button.css`](../../design-system/styles
 
 ## Web states (reference, not for creatives)
 
-The design system's Button uses these states from the shared look file (hover, focus, disabled for Main). Secondary isn't wired to a web variant yet.
+The design system's Button uses these states from the shared look file (hover, focus, disabled for Main). Secondary isn't used: the design system's outline button has its own look, with the shared focus ring ([`DESIGN.md`](../../design-system/DESIGN.md), Outline button, 2026-11-18).
 
-From the Figma button, at web size (XS / MD / LG = 36 / 40 / 48px tall, SemiBold 16 / 16 / 18px, side padding 20 / 22 / 28px, radius 8px). Colors mapped to the nearest tokens.
+From the Figma button, at web size (XS / MD / LG = 36 / 40 / 48px tall, SemiBold 16 / 16 / 18px, side padding 20 / 22 / 28px, radius 8px). Colors mapped to the nearest tokens. The design system's web button keeps 14px text at every size instead, like its fields ([`DESIGN.md`](../../design-system/DESIGN.md), Button text, 2026-11-18).
 
 | Type / State | Fill | Border | Text |
 | --- | --- | --- | --- |

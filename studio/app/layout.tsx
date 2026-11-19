@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata = { title: "Qdrant Studio" }
 
-// Mona Sans and Geist Mono come from primitives/typography/fonts through the design system's
+// The Mona Sans family (Mona Sans, Display and Mono) comes from primitives/typography/fonts through the design system's
 // stylesheet, so no web font is loaded here.
 //
 // The DialKit controls panel (components/studio-controls.tsx) is hidden for now: the design system is

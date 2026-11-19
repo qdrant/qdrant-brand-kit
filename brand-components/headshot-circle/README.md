@@ -45,8 +45,8 @@ In px at the reference canvas. Every value scales with the canvas (see [`layout/
 | --- | --- |
 | Circle | 80 × 80, `gradient.headshot` behind the cutout |
 | Circle to text | the shape's `group` gap |
-| Name | H5 Medium, 32, line height 1.3, `text.primary` |
-| Role | H5 Regular, 32, line height 1.3, `text.secondary` |
+| Name | H5 Medium, 32, line height 1.22, Mona Sans Display, `text.primary` |
+| Role | H5 Regular, 32, line height 1.22, Mona Sans Display, `text.secondary` |
 
 ## Placing several
 

@@ -14,9 +14,9 @@ const toggleVariants = cva(
       },
       size: {
         default:
-          "h-(--qd-ui-control-height) min-w-(--qd-ui-control-height) px-(--qd-ui-control-padding-x) has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
-        sm: "h-[calc(var(--qd-ui-control-height)-var(--spacing))] min-w-[calc(var(--qd-ui-control-height)-var(--spacing))] rounded-[min(var(--radius-md),8px)] px-2 text-[0.625rem] has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        lg: "h-[calc(var(--qd-ui-control-height)+var(--spacing))] min-w-[calc(var(--qd-ui-control-height)+var(--spacing))] px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "h-(--qd-ui-control-height) min-w-(--qd-ui-control-height) px-(--qd-ui-control-padding-x) has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        sm: "h-[calc(var(--qd-ui-control-height)-var(--spacing))] min-w-[calc(var(--qd-ui-control-height)-var(--spacing))] rounded-[min(var(--radius-md),8px)] px-2 text-[0.625rem] has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [&_svg:not([class*='size-'])]:size-3",
+        lg: "h-[calc(var(--qd-ui-control-height)+var(--spacing))] min-w-[calc(var(--qd-ui-control-height)+var(--spacing))] px-3 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
       },
     },
     defaultVariants: {

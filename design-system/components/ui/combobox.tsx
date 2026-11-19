@@ -177,7 +177,7 @@ function ComboboxLabel({
   return (
     <ComboboxPrimitive.GroupLabel
       data-slot="combobox-label"
-      className={cn("px-(--qd-ui-menu-item-padding-x) py-1.5 text-xs text-muted-foreground font-(family-name:--qd-ui-caption-font) [text-transform:var(--qd-ui-caption-case)] tracking-(--qd-ui-caption-tracking)", className)}
+      className={cn("px-(--qd-ui-menu-item-padding-x) py-2 text-xs text-muted-foreground font-(family-name:--qd-ui-caption-font) [text-transform:var(--qd-ui-caption-case)] tracking-(--qd-ui-caption-tracking)", className)}
       {...props}
     />
   )
@@ -244,7 +244,7 @@ function ComboboxChip({
     <ComboboxPrimitive.Chip
       data-slot="combobox-chip"
       className={cn(
-        "flex h-[calc(--spacing(4.75))] w-fit items-center justify-center gap-1 rounded-[calc(var(--radius-sm)-2px)] bg-muted-foreground/10 px-1.5 text-xs/relaxed font-medium whitespace-nowrap text-foreground has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50 has-data-[slot=combobox-chip-remove]:pr-0",
+        "flex h-[calc(--spacing(4.75))] w-fit items-center justify-center gap-1 rounded-[calc(var(--radius-sm)-2px)] bg-muted-foreground/10 px-2 text-xs/relaxed font-medium whitespace-nowrap text-foreground has-disabled:pointer-events-none has-disabled:cursor-not-allowed has-disabled:opacity-50 has-data-[slot=combobox-chip-remove]:pr-0",
         className
       )}
       {...props}

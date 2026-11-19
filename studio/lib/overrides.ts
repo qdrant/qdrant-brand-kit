@@ -109,7 +109,7 @@ export const controls: Group = {
       height: slider("--qd-ui-control-height", 36, 20, 48, 2),
       paddingX: slider("--qd-ui-control-padding-x", 8, 4, 24, 2),
       radius: slider("--qd-ui-control-radius", 8, 0, 24, 1),
-      fontSize: slider("--qd-ui-control-font-size", 12, 10, 16, 0.5),
+      fontSize: slider("--qd-ui-control-font-size", 14, 10, 16, 0.5),
     },
     type: {
       _collapsed: true,
@@ -204,7 +204,7 @@ export const controls: Group = {
       height: slider("--qd-ui-input-height", 36, 20, 48, 2),
       paddingX: slider("--qd-ui-input-padding-x", 8, 4, 20, 1),
       radius: slider("--qd-ui-input-radius", 8, 0, 24, 1),
-      fontSize: slider("--qd-ui-input-font-size", 12, 10, 16, 0.5),
+      fontSize: slider("--qd-ui-input-font-size", 14, 10, 16, 0.5),
       edge: select("--qd-ui-input-border", "var(--input)", [
         { value: "var(--input)", label: "Field edge" },
         { value: "var(--border)", label: "Border" },

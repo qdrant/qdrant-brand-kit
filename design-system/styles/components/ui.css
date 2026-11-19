@@ -15,11 +15,12 @@
 [data-theme],
 [data-context] {
   /* Controls in a row share these: buttons, fields, select triggers, toggles and the tabs list.
-     36px by default (DESIGN.md, 2026-11-14); smaller and larger sizes are spacing steps around it. */
+     36px by default (DESIGN.md, 2026-11-14); smaller and larger sizes are spacing steps around it.
+     Text is 14px, like the buttons' (DESIGN.md, 2026-11-18; it was base-mira's 12px). */
   --qd-ui-control-height: calc(var(--spacing) * 9);
   --qd-ui-control-padding-x: calc(var(--spacing) * 2);
   --qd-ui-control-radius: var(--radius-md);
-  --qd-ui-control-font-size: var(--text-xs);
+  --qd-ui-control-font-size: var(--text-sm);
 
   /* Focus ring on buttons, fields, checkboxes, switches, toggles, badges and items: width, the ring color
      at a share, and a gap between the control and the ring. */
@@ -47,7 +48,7 @@
      weightless motion, glass behind dialogs, and light from above (per theme, below). */
 
   /* Captions, like instrument readouts: table headers and the group labels in menus, in uppercase
-     Geist Mono with wide tracking. */
+     Mona Sans Mono with wide tracking. */
   --qd-ui-caption-font: var(--font-mono);
   --qd-ui-caption-case: uppercase;
   --qd-ui-caption-tracking: 0.08em;

@@ -40,7 +40,7 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "flex w-fit items-center justify-between gap-1.5 rounded-(--qd-ui-input-radius) border border-(--qd-ui-input-border) bg-(--qd-ui-input-bg) px-(--qd-ui-input-padding-x) py-1.5 text-(length:--qd-ui-input-font-size) leading-relaxed whitespace-nowrap transition-colors outline-none focus-visible:border-ring focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color) focus-visible:ring-offset-(length:--qd-ui-focus-offset) focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground data-[size=default]:h-(--qd-ui-input-height) data-[size=sm]:h-[calc(var(--qd-ui-input-height)-var(--spacing))] *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
+        "flex w-fit items-center justify-between gap-2 rounded-(--qd-ui-input-radius) border border-(--qd-ui-input-border) bg-(--qd-ui-input-bg) px-(--qd-ui-input-padding-x) py-2 text-(length:--qd-ui-input-font-size) leading-relaxed whitespace-nowrap transition-colors outline-none focus-visible:border-ring focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color) focus-visible:ring-offset-(length:--qd-ui-focus-offset) focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground data-[size=default]:h-(--qd-ui-input-height) data-[size=sm]:h-[calc(var(--qd-ui-input-height)-var(--spacing))] *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
         className
       )}
       {...props}
@@ -104,7 +104,7 @@ function SelectLabel({
   return (
     <SelectPrimitive.GroupLabel
       data-slot="select-label"
-      className={cn("px-(--qd-ui-menu-item-padding-x) py-1.5 text-xs text-muted-foreground font-(family-name:--qd-ui-caption-font) [text-transform:var(--qd-ui-caption-case)] tracking-(--qd-ui-caption-tracking)", className)}
+      className={cn("px-(--qd-ui-menu-item-padding-x) py-2 text-xs text-muted-foreground font-(family-name:--qd-ui-caption-font) [text-transform:var(--qd-ui-caption-case)] tracking-(--qd-ui-caption-tracking)", className)}
       {...props}
     />
   )

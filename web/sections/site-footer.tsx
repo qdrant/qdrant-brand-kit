@@ -172,7 +172,7 @@ export function SiteFooter() {
 
       <Band className="grid items-center gap-8 py-10 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
         <div className="flex flex-col gap-2 lg:w-11/16">
-          <h2 className="text-(length:--qd-font-size-20) leading-(--qd-line-height-normal) font-medium text-foreground">
+          <h2 className="text-(length:--qd-font-size-20) leading-(--qd-line-height-150) font-medium text-foreground">
             Sign up for Qdrant updates
           </h2>
           <p className={type.small}>

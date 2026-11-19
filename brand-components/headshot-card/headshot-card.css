@@ -65,18 +65,20 @@
 .qd-headshot-card__role {
   margin: 0;
   text-align: center;
-  letter-spacing: calc(-0.5 * var(--qd-canvas-u));
+  font-family: var(--qd-font-family-display);
+  letter-spacing: 0;
 }
+/* Steps of the type set, in Mona Sans Display, with their line heights (2026-11-18). */
 .qd-headshot-card__name { /* H3 SemiBold */
   font-size: calc(48 * var(--qd-canvas-u));
   font-weight: var(--qd-font-weight-semibold);
-  line-height: 1.1;
+  line-height: var(--qd-type-h3-line-height);
   color: var(--qd-color-text-primary);
 }
 .qd-headshot-card__role { /* H5 Regular */
   font-size: calc(32 * var(--qd-canvas-u));
   font-weight: var(--qd-font-weight-regular);
-  line-height: 1.3;
+  line-height: var(--qd-type-h5-line-height);
   color: var(--qd-color-text-secondary);
 }
 .qd-headshot-card__text { display: flex; flex-direction: column; }

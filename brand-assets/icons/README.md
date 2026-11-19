@@ -27,7 +27,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 
 **In creatives** (posts, ads, banners):
 
-- **The icon is the same height as the text beside it:** the supporting size, 36px at 1080 (40px on story and wide), scaled with the canvas. `.qd-icon` does this.
+- **The icon is the same height as the text beside it:** the supporting size, 40px at the reference canvas on every shape (36px on square and portrait until 2026-11-18), scaled with the canvas. `.qd-icon` does this.
 - **The stroke scales with the icon.** Keep Lucide's `stroke-width="2"` on the 24 grid and let the SVG scale: 2px at 24 becomes 3px at 36. Never fix the stroke in px (no `vector-effect: non-scaling-stroke`). This is slide 39's "scale the stroke as well".
 - **Gap to its text:** the shape's `tight` gap, in a `.qd-stack--row.qd-stack--tight`.
 
@@ -58,7 +58,7 @@ Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, 
 ## In creatives
 
 - **Where:** next to supporting text, mostly the date / time / place row ([`guidelines/`](../../guidelines/) section 11, rule 12). One icon per line, before the text.
-- **Never in buttons,** under any circumstance. Buttons are text only ([`brand-components/button/`](../../brand-components/button/)).
+- **Never in a creative's button.** It's text only ([`brand-components/button/`](../../brand-components/button/)). Web and product buttons, from the design system, may have one Lucide icon ([`design-system/AGENTS.md`](../../design-system/AGENTS.md), 2026-11-18).
 - **Icons aren't a text size.** They don't count toward the two text sizes.
 
 ```html

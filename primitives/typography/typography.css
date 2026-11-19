@@ -2,90 +2,103 @@
 
 :root {
   /* Same values as typography.tokens.json, kept in step by hand (this file also holds the creative classes).
-     Families, weights and scales match the Figma primitives; the text styles are this repo's own. */
+     Weights and scales match the Figma primitives; the text styles are this repo's own. The families are the
+     Mona Sans family (2026-11-17): Display for headings and display styles, Mona Sans for text, Mono for mono. */
   --qd-font-family-sans: "Mona Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Figma: primary */
-  --qd-font-family-mono: "Geist Mono", "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
-  --qd-font-family-display: "Mona Sans Condensed", "Mona Sans", ui-sans-serif, system-ui, sans-serif; /* Mona Sans at 75% width, from fonts.css */
-  --qd-font-weight-light: 300;
+  --qd-font-family-display: "Mona Sans Display", "Mona Sans", ui-sans-serif, system-ui, sans-serif; /* Mona Sans at its Display optical size, from fonts.css */
+  --qd-font-family-condensed: "Mona Sans Display Condensed", "Mona Sans Display", "Mona Sans", ui-sans-serif, system-ui, sans-serif; /* Display at 75% width, from fonts.css */
+  --qd-font-family-mono: "Mona Sans Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --qd-font-weight-regular: 400;
   --qd-font-weight-medium: 500;
   --qd-font-weight-semibold: 600;
   --qd-font-weight-bold: 700;
   --qd-font-features: "ss05" on, "ss06" on;
 
-  /* Figma scales. New web UI picks from these; the text styles and creative sizes below keep their own values. */
+  /* Figma scales (2026-11-17). The type set picks from these: Text 12-20, headings 24-64, Display 80-200; line
+     heights are named by percent (150 is 1.5). No letter-spacing scale: every text style uses 0, the font's default. */
   --qd-font-size-10: 10px; --qd-font-size-12: 12px; --qd-font-size-13: 13px; --qd-font-size-14: 14px; --qd-font-size-15: 15px;
   --qd-font-size-16: 16px; --qd-font-size-18: 18px; --qd-font-size-20: 20px; --qd-font-size-24: 24px; --qd-font-size-32: 32px;
   --qd-font-size-36: 36px; --qd-font-size-40: 40px; --qd-font-size-48: 48px; --qd-font-size-56: 56px; --qd-font-size-64: 64px;
-  --qd-line-height-none: 1; --qd-line-height-tight: 1.2; --qd-line-height-snug: 1.35; --qd-line-height-normal: 1.5; --qd-line-height-relaxed: 1.7;
-  --qd-letter-spacing-tighter: -1.5px; --qd-letter-spacing-tight: -1px; --qd-letter-spacing-snug: -0.5px; --qd-letter-spacing-normal: 0px;
+  --qd-font-size-80: 80px; --qd-font-size-104: 104px; --qd-font-size-128: 128px; --qd-font-size-160: 160px; --qd-font-size-200: 200px;
+  --qd-line-height-103: 1.03; --qd-line-height-104: 1.04; --qd-line-height-105: 1.05; --qd-line-height-106: 1.06; --qd-line-height-108: 1.08;
+  --qd-line-height-110: 1.1; --qd-line-height-112: 1.12; --qd-line-height-114: 1.14; --qd-line-height-117: 1.17;
+  --qd-line-height-122: 1.22; --qd-line-height-130: 1.3; --qd-line-height-150: 1.5;
 
-  --qd-type-display-2-size: 104px; --qd-type-display-2-weight: 600; --qd-type-display-2-line-height: 1.05; --qd-type-display-2-letter-spacing: -1.8px;
-  --qd-type-display-1-size: 80px; --qd-type-display-1-weight: 600; --qd-type-display-1-line-height: 1.05; --qd-type-display-1-letter-spacing: -1.8px;
-  --qd-type-display-condensed-2-size: 104px; --qd-type-display-condensed-2-weight: 600; --qd-type-display-condensed-2-line-height: 1.05; --qd-type-display-condensed-2-letter-spacing: -1.8px; --qd-type-display-condensed-2-stretch: 75%; --qd-type-display-condensed-2-transform: uppercase;
-  --qd-type-display-condensed-1-size: 80px; --qd-type-display-condensed-1-weight: 600; --qd-type-display-condensed-1-line-height: 1.05; --qd-type-display-condensed-1-letter-spacing: -1.8px; --qd-type-display-condensed-1-stretch: 75%; --qd-type-display-condensed-1-transform: uppercase;
-  --qd-type-h1-size: 64px; --qd-type-h1-weight: 600; --qd-type-h1-line-height: 1.1; --qd-type-h1-letter-spacing: -1.5px;
-  --qd-type-h2-size: 56px; --qd-type-h2-weight: 600; --qd-type-h2-line-height: 1.1; --qd-type-h2-letter-spacing: -0.5px;
-  --qd-type-h3-size: 48px; --qd-type-h3-weight: 600; --qd-type-h3-line-height: 1.1; --qd-type-h3-letter-spacing: -0.5px;
-  --qd-type-h4-size: 40px; --qd-type-h4-weight: 600; --qd-type-h4-line-height: 1.2; --qd-type-h4-letter-spacing: -0.5px;
-  --qd-type-h5-size: 32px; --qd-type-h5-weight: 600; --qd-type-h5-line-height: 1.3; --qd-type-h5-letter-spacing: -0.5px;
-  --qd-type-h6-size: 24px; --qd-type-h6-weight: 600; --qd-type-h6-line-height: 1.3; --qd-type-h6-letter-spacing: -0.5px;
-  --qd-type-text-xl-size: 20px; --qd-type-text-xl-weight: 400; --qd-type-text-xl-line-height: 1.5; --qd-type-text-xl-letter-spacing: -0.2px;
+  /* The type set (2026-11-18, typography.tokens.json semantic.type): Display 5 to 1, Display Condensed, H1 to H6,
+     Text XL to XS, and Mono for each heading and text step. The weight here is each style's default. */
+  --qd-type-display-5-size: 200px; --qd-type-display-5-weight: 600; --qd-type-display-5-line-height: 1.03; --qd-type-display-5-letter-spacing: 0px; --qd-type-display-5-family: var(--qd-font-family-display);
+  --qd-type-display-4-size: 160px; --qd-type-display-4-weight: 600; --qd-type-display-4-line-height: 1.04; --qd-type-display-4-letter-spacing: 0px; --qd-type-display-4-family: var(--qd-font-family-display);
+  --qd-type-display-3-size: 128px; --qd-type-display-3-weight: 600; --qd-type-display-3-line-height: 1.05; --qd-type-display-3-letter-spacing: 0px; --qd-type-display-3-family: var(--qd-font-family-display);
+  --qd-type-display-2-size: 104px; --qd-type-display-2-weight: 600; --qd-type-display-2-line-height: 1.06; --qd-type-display-2-letter-spacing: 0px; --qd-type-display-2-family: var(--qd-font-family-display);
+  --qd-type-display-1-size: 80px; --qd-type-display-1-weight: 600; --qd-type-display-1-line-height: 1.08; --qd-type-display-1-letter-spacing: 0px; --qd-type-display-1-family: var(--qd-font-family-display);
+  --qd-type-display-condensed-5-size: 200px; --qd-type-display-condensed-5-weight: 600; --qd-type-display-condensed-5-line-height: 1.03; --qd-type-display-condensed-5-letter-spacing: 0px; --qd-type-display-condensed-5-stretch: 75%; --qd-type-display-condensed-5-transform: uppercase; --qd-type-display-condensed-5-family: var(--qd-font-family-condensed);
+  --qd-type-display-condensed-4-size: 160px; --qd-type-display-condensed-4-weight: 600; --qd-type-display-condensed-4-line-height: 1.04; --qd-type-display-condensed-4-letter-spacing: 0px; --qd-type-display-condensed-4-stretch: 75%; --qd-type-display-condensed-4-transform: uppercase; --qd-type-display-condensed-4-family: var(--qd-font-family-condensed);
+  --qd-type-display-condensed-3-size: 128px; --qd-type-display-condensed-3-weight: 600; --qd-type-display-condensed-3-line-height: 1.05; --qd-type-display-condensed-3-letter-spacing: 0px; --qd-type-display-condensed-3-stretch: 75%; --qd-type-display-condensed-3-transform: uppercase; --qd-type-display-condensed-3-family: var(--qd-font-family-condensed);
+  --qd-type-display-condensed-2-size: 104px; --qd-type-display-condensed-2-weight: 600; --qd-type-display-condensed-2-line-height: 1.06; --qd-type-display-condensed-2-letter-spacing: 0px; --qd-type-display-condensed-2-stretch: 75%; --qd-type-display-condensed-2-transform: uppercase; --qd-type-display-condensed-2-family: var(--qd-font-family-condensed);
+  --qd-type-display-condensed-1-size: 80px; --qd-type-display-condensed-1-weight: 600; --qd-type-display-condensed-1-line-height: 1.08; --qd-type-display-condensed-1-letter-spacing: 0px; --qd-type-display-condensed-1-stretch: 75%; --qd-type-display-condensed-1-transform: uppercase; --qd-type-display-condensed-1-family: var(--qd-font-family-condensed);
+  --qd-type-h1-size: 64px; --qd-type-h1-weight: 600; --qd-type-h1-line-height: 1.1; --qd-type-h1-letter-spacing: 0px; --qd-type-h1-family: var(--qd-font-family-display);
+  --qd-type-h2-size: 56px; --qd-type-h2-weight: 600; --qd-type-h2-line-height: 1.12; --qd-type-h2-letter-spacing: 0px; --qd-type-h2-family: var(--qd-font-family-display);
+  --qd-type-h3-size: 48px; --qd-type-h3-weight: 600; --qd-type-h3-line-height: 1.14; --qd-type-h3-letter-spacing: 0px; --qd-type-h3-family: var(--qd-font-family-display);
+  --qd-type-h4-size: 40px; --qd-type-h4-weight: 600; --qd-type-h4-line-height: 1.17; --qd-type-h4-letter-spacing: 0px; --qd-type-h4-family: var(--qd-font-family-display);
+  --qd-type-h5-size: 32px; --qd-type-h5-weight: 600; --qd-type-h5-line-height: 1.22; --qd-type-h5-letter-spacing: 0px; --qd-type-h5-family: var(--qd-font-family-display);
+  --qd-type-h6-size: 24px; --qd-type-h6-weight: 600; --qd-type-h6-line-height: 1.3; --qd-type-h6-letter-spacing: 0px; --qd-type-h6-family: var(--qd-font-family-display);
+  --qd-type-text-xl-size: 20px; --qd-type-text-xl-weight: 400; --qd-type-text-xl-line-height: 1.5; --qd-type-text-xl-letter-spacing: 0px;
   --qd-type-text-lg-size: 18px; --qd-type-text-lg-weight: 400; --qd-type-text-lg-line-height: 1.5; --qd-type-text-lg-letter-spacing: 0px;
   --qd-type-text-md-size: 16px; --qd-type-text-md-weight: 400; --qd-type-text-md-line-height: 1.5; --qd-type-text-md-letter-spacing: 0px;
   --qd-type-text-sm-size: 14px; --qd-type-text-sm-weight: 400; --qd-type-text-sm-line-height: 1.5; --qd-type-text-sm-letter-spacing: 0px;
   --qd-type-text-xs-size: 12px; --qd-type-text-xs-weight: 400; --qd-type-text-xs-line-height: 1.5; --qd-type-text-xs-letter-spacing: 0px;
-  --qd-type-mono-h1-size: 64px; --qd-type-mono-h1-weight: 400; --qd-type-mono-h1-line-height: 1.1; --qd-type-mono-h1-letter-spacing: -1.5px; --qd-type-mono-h1-family: var(--qd-font-family-mono);
-  --qd-type-mono-h2-size: 56px; --qd-type-mono-h2-weight: 400; --qd-type-mono-h2-line-height: 1.1; --qd-type-mono-h2-letter-spacing: -0.5px; --qd-type-mono-h2-family: var(--qd-font-family-mono);
-  --qd-type-mono-h3-size: 48px; --qd-type-mono-h3-weight: 400; --qd-type-mono-h3-line-height: 1.2; --qd-type-mono-h3-letter-spacing: -0.5px; --qd-type-mono-h3-family: var(--qd-font-family-mono);
-  --qd-type-mono-h4-size: 40px; --qd-type-mono-h4-weight: 400; --qd-type-mono-h4-line-height: 1.2; --qd-type-mono-h4-letter-spacing: -0.5px; --qd-type-mono-h4-family: var(--qd-font-family-mono);
-  --qd-type-mono-h5-size: 32px; --qd-type-mono-h5-weight: 400; --qd-type-mono-h5-line-height: 1.3; --qd-type-mono-h5-letter-spacing: -0.5px; --qd-type-mono-h5-family: var(--qd-font-family-mono);
-  --qd-type-mono-h6-size: 24px; --qd-type-mono-h6-weight: 400; --qd-type-mono-h6-line-height: 1.3; --qd-type-mono-h6-letter-spacing: -0.5px; --qd-type-mono-h6-family: var(--qd-font-family-mono);
-  --qd-type-mono-xl-size: 20px; --qd-type-mono-xl-weight: 400; --qd-type-mono-xl-line-height: 1.5; --qd-type-mono-xl-letter-spacing: -0.2px; --qd-type-mono-xl-family: var(--qd-font-family-mono);
+  --qd-type-mono-h1-size: 64px; --qd-type-mono-h1-weight: 400; --qd-type-mono-h1-line-height: 1.1; --qd-type-mono-h1-letter-spacing: 0px; --qd-type-mono-h1-family: var(--qd-font-family-mono);
+  --qd-type-mono-h2-size: 56px; --qd-type-mono-h2-weight: 400; --qd-type-mono-h2-line-height: 1.12; --qd-type-mono-h2-letter-spacing: 0px; --qd-type-mono-h2-family: var(--qd-font-family-mono);
+  --qd-type-mono-h3-size: 48px; --qd-type-mono-h3-weight: 400; --qd-type-mono-h3-line-height: 1.14; --qd-type-mono-h3-letter-spacing: 0px; --qd-type-mono-h3-family: var(--qd-font-family-mono);
+  --qd-type-mono-h4-size: 40px; --qd-type-mono-h4-weight: 400; --qd-type-mono-h4-line-height: 1.17; --qd-type-mono-h4-letter-spacing: 0px; --qd-type-mono-h4-family: var(--qd-font-family-mono);
+  --qd-type-mono-h5-size: 32px; --qd-type-mono-h5-weight: 400; --qd-type-mono-h5-line-height: 1.22; --qd-type-mono-h5-letter-spacing: 0px; --qd-type-mono-h5-family: var(--qd-font-family-mono);
+  --qd-type-mono-h6-size: 24px; --qd-type-mono-h6-weight: 400; --qd-type-mono-h6-line-height: 1.3; --qd-type-mono-h6-letter-spacing: 0px; --qd-type-mono-h6-family: var(--qd-font-family-mono);
+  --qd-type-mono-xl-size: 20px; --qd-type-mono-xl-weight: 400; --qd-type-mono-xl-line-height: 1.5; --qd-type-mono-xl-letter-spacing: 0px; --qd-type-mono-xl-family: var(--qd-font-family-mono);
   --qd-type-mono-lg-size: 18px; --qd-type-mono-lg-weight: 400; --qd-type-mono-lg-line-height: 1.5; --qd-type-mono-lg-letter-spacing: 0px; --qd-type-mono-lg-family: var(--qd-font-family-mono);
   --qd-type-mono-md-size: 16px; --qd-type-mono-md-weight: 400; --qd-type-mono-md-line-height: 1.5; --qd-type-mono-md-letter-spacing: 0px; --qd-type-mono-md-family: var(--qd-font-family-mono);
   --qd-type-mono-sm-size: 14px; --qd-type-mono-sm-weight: 400; --qd-type-mono-sm-line-height: 1.5; --qd-type-mono-sm-letter-spacing: 0px; --qd-type-mono-sm-family: var(--qd-font-family-mono);
   --qd-type-mono-xs-size: 12px; --qd-type-mono-xs-weight: 400; --qd-type-mono-xs-line-height: 1.5; --qd-type-mono-xs-letter-spacing: 0px; --qd-type-mono-xs-family: var(--qd-font-family-mono);
-  --qd-type-social-event-title-size: 104px; --qd-type-social-event-title-weight: 600; --qd-type-social-event-title-line-height: 1.05; --qd-type-social-event-title-letter-spacing: -1.8px; --qd-type-social-event-title-stretch: 75%; --qd-type-social-event-title-transform: uppercase;
-  --qd-type-social-event-detail-size: 40px; --qd-type-social-event-detail-weight: 400; --qd-type-social-event-detail-line-height: 1.2; --qd-type-social-event-detail-letter-spacing: -0.5px; --qd-type-social-event-detail-family: var(--qd-font-family-mono);
-  --qd-type-social-event-speaker-name-size: 40px; --qd-type-social-event-speaker-name-weight: 600; --qd-type-social-event-speaker-name-line-height: 1.1; --qd-type-social-event-speaker-name-letter-spacing: -0.5px;
-  --qd-type-social-event-speaker-role-size: 32px; --qd-type-social-event-speaker-role-weight: 400; --qd-type-social-event-speaker-role-line-height: 1.3; --qd-type-social-event-speaker-role-letter-spacing: 0px;
-  --qd-type-social-event-series-size: 32px; --qd-type-social-event-series-weight: 600; --qd-type-social-event-series-line-height: 1.2; --qd-type-social-event-series-letter-spacing: -0.5px;
-  --qd-type-social-post-hero-size: 144px; --qd-type-social-post-hero-weight: 600; --qd-type-social-post-hero-line-height: 1.05; --qd-type-social-post-hero-letter-spacing: -1.8px;
-  --qd-type-social-post-title-size: 104px; --qd-type-social-post-title-weight: 600; --qd-type-social-post-title-line-height: 1.05; --qd-type-social-post-title-letter-spacing: -1.8px;
-  --qd-type-social-post-eyebrow-size: 56px; --qd-type-social-post-eyebrow-weight: 600; --qd-type-social-post-eyebrow-line-height: 1.2; --qd-type-social-post-eyebrow-letter-spacing: -0.5px;
-  --qd-type-social-post-body-size: 32px; --qd-type-social-post-body-weight: 400; --qd-type-social-post-body-line-height: 1.3; --qd-type-social-post-body-letter-spacing: 0px;
-  --qd-type-luma-title-size: 104px; --qd-type-luma-title-weight: 600; --qd-type-luma-title-line-height: 1.05; --qd-type-luma-title-letter-spacing: -1.8px;
 }
 
 /* Required: double-storey a and g. Never override font-feature-settings. */
 html, body { font-family: var(--qd-font-family-sans); font-feature-settings: var(--qd-font-features); }
 
 /* Text in creatives (README, "Text in creatives"). Use inside a .qd-canvas: sizes scale with the
-   canvas. Pick the title class by word count: short up to 6 words, medium 7-10, long 11+. */
-.qd-canvas { --qd-creative-title-short: 96; --qd-creative-title-medium: 80; --qd-creative-title-long: 64; --qd-creative-supporting: 36; }
+   canvas. Pick the title class by word count: short up to 6 words, medium 7-10, long 11+. Every size is a step of
+   the type set, with its line height and letter spacing 0 (2026-11-18): square, portrait and story use Display 2,
+   Display 1 and H1; wide and ultrawide Display 3, 2 and 1. Supporting text is H4 Regular on every shape. */
+.qd-canvas {
+  --qd-creative-title-short: 104; --qd-creative-title-short-leading: var(--qd-type-display-2-line-height);
+  --qd-creative-title-medium: 80; --qd-creative-title-medium-leading: var(--qd-type-display-1-line-height);
+  --qd-creative-title-long: 64; --qd-creative-title-long-leading: var(--qd-type-h1-line-height);
+  --qd-creative-supporting: 40;
+}
 .qd-canvas[data-shape="wide"],
-.qd-canvas[data-shape="ultrawide"] { --qd-creative-title-short: 128; --qd-creative-title-medium: 104; --qd-creative-title-long: 88; --qd-creative-supporting: 40; }
-.qd-canvas[data-shape="story"] { --qd-creative-title-short: 104; --qd-creative-title-medium: 88; --qd-creative-title-long: 72; --qd-creative-supporting: 40; }
+.qd-canvas[data-shape="ultrawide"] {
+  --qd-creative-title-short: 128; --qd-creative-title-short-leading: var(--qd-type-display-3-line-height);
+  --qd-creative-title-medium: 104; --qd-creative-title-medium-leading: var(--qd-type-display-2-line-height);
+  --qd-creative-title-long: 80; --qd-creative-title-long-leading: var(--qd-type-display-1-line-height);
+}
+/* Titles are Display or heading steps and supporting text is H4 Regular, all in Mona Sans Display. */
 .qd-title, .qd-supporting {
   margin: 0;
-  font-family: var(--qd-font-family-sans);
+  font-family: var(--qd-font-family-display);
   font-feature-settings: var(--qd-font-features);
   color: var(--qd-color-text-primary);
+  letter-spacing: 0;
 }
 .qd-title {
   --qd-title-size: var(--qd-creative-title-short);
+  --qd-title-leading: var(--qd-creative-title-short-leading);
   font-size: calc(var(--qd-title-size) * var(--qd-canvas-u));
   font-weight: var(--qd-font-weight-semibold);
-  line-height: 1.05;
-  letter-spacing: calc(-1.8 * var(--qd-canvas-u));
+  line-height: var(--qd-title-leading);
   text-wrap: balance;
 }
-.qd-title--medium { --qd-title-size: var(--qd-creative-title-medium); }
-.qd-title--long { --qd-title-size: var(--qd-creative-title-long); }
+.qd-title--medium { --qd-title-size: var(--qd-creative-title-medium); --qd-title-leading: var(--qd-creative-title-medium-leading); }
+.qd-title--long { --qd-title-size: var(--qd-creative-title-long); --qd-title-leading: var(--qd-creative-title-long-leading); }
 .qd-supporting {
   font-size: calc(var(--qd-creative-supporting) * var(--qd-canvas-u));
   font-weight: var(--qd-font-weight-regular);
-  line-height: 1.2;
-  letter-spacing: calc(-0.5 * var(--qd-canvas-u));
+  line-height: var(--qd-type-h4-line-height);
 }

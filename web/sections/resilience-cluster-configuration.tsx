@@ -102,7 +102,7 @@ function Tag({
   return (
     <span
       className={cn(
-        "rounded-xs py-1 text-center font-mono text-(length:--qd-font-size-14) leading-(--qd-line-height-normal) text-background",
+        "rounded-xs py-1 text-center font-mono text-(length:--qd-font-size-14) leading-(--qd-line-height-150) text-background",
         down
           ? "bg-(--qd-color-neutral-700) light:bg-(--qd-color-neutral-400)"
           : "bg-(--qd-color-indigo-400) light:bg-(--qd-color-indigo-600)",
@@ -123,7 +123,7 @@ function Shard({
   return (
     <span
       className={cn(
-        "flex h-6 w-full max-w-20 items-center justify-center border font-mono text-(length:--qd-font-size-12) leading-(--qd-line-height-normal)",
+        "flex h-6 w-full max-w-20 items-center justify-center border font-mono text-(length:--qd-font-size-12) leading-(--qd-line-height-150)",
         down
           ? cn(
               downBorder,

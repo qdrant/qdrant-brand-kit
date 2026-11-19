@@ -1,35 +1,35 @@
 {
-  "$description": "Qdrant breakpoints (minimum widths). Copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12. breakpoints.css is generated from this file by primitives/build.mjs.",
+  "$description": "Qdrant breakpoints (minimum widths): Tailwind's defaults, which shadcn uses (Juan, 2026-11-18), so the design system, the product and Figma share one set. Until then they were xs 444, sm 600, md 900, lg 1200 and xl 1536, from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), which now has these values too. breakpoints.css is generated from this file by primitives/build.mjs.",
   "breakpoint": {
-    "xs": {
-      "$type": "dimension",
-      "$value": {
-        "value": 444,
-        "unit": "px"
-      }
-    },
     "sm": {
       "$type": "dimension",
       "$value": {
-        "value": 600,
+        "value": 640,
         "unit": "px"
       }
     },
     "md": {
       "$type": "dimension",
       "$value": {
-        "value": 900,
+        "value": 768,
         "unit": "px"
       }
     },
     "lg": {
       "$type": "dimension",
       "$value": {
-        "value": 1200,
+        "value": 1024,
         "unit": "px"
       }
     },
     "xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1280,
+        "unit": "px"
+      }
+    },
+    "2xl": {
       "$type": "dimension",
       "$value": {
         "value": 1536,

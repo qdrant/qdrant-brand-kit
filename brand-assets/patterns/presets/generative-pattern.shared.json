@@ -544,7 +544,7 @@
       "elementRotation": 0,
       "elementTurns": 0,
       "fieldTurns": 0,
-      "glyphFont": "\"Geist Mono\", ui-monospace, monospace",
+      "glyphFont": "\"Mona Sans Mono\", ui-monospace, monospace",
       "glyphs": "ramp",
       "graph": false,
       "graphDensity": 0.35,
