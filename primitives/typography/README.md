@@ -90,7 +90,7 @@ Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabN
 | Supporting (body, date, time, place) | Mona Sans Display Regular (H4 Regular) | 40 | 40 | 40 | 40 |
 
 - **Mona Sans titles are always Title Case, never all caps.** Supporting text (date, place, body sentences) stays in normal sentence case (decided 2026-11-11). **Mona Sans Display Condensed is always all caps**, and only for special occasions, when the person asks for it (`display-condensed-*`).
-- **Mona Sans Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans.
+- **Mona Sans Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans. The creative event label (all caps, guidelines section 11 rule 3) takes **+0.08em**, as the design system's captions (Vanesa, 2026-11-19); every other style keeps 0.
 - **Longer titles step down** to the next size by word count, never in between and never below the 11+ size. If it still doesn't fit, ask the person to shorten it.
 - **Wide** follows the Vector Space Day banner (128 on 1920, decided 2026-11-04).
 - **Ultrawide** uses the wide sizes (decided 2026-11-11 from the LinkedIn profile cover, 1584×396: a 128 title reads at LinkedIn's small display size). **Beside Qbot** on the LinkedIn cover, the title steps down one size (128 → 104), so Qbot stays the bigger shape ([`layout/`](../../guidelines/layout/) "LinkedIn profile cover"). Not yet tried on a full 3000×400 banner.
@@ -136,7 +136,7 @@ Body text scales with its heading: keep body copy between **20% and 40%** of the
 
 - Use gradients, strokes, drop shadows or underlines on text.
 - Use unapproved fonts or weights, or Bold for titles.
-- Change letter spacing outside the styles above.
+- Change letter spacing outside the styles above (the one exception is the creative event label, +0.08em).
 - Stretch, compress or distort type to fit a layout.
 - Use colors outside the palette.
 - Right-align text.

@@ -130,7 +130,7 @@ The gap is a role, never a px value:
 
 ## Box
 
-Padding, fill and border, all from tokens. Pick the style by intent:
+Padding, fill and border, all from tokens. Pick the style by intent. The design system's web Card (`design-system/components/ui/card.tsx`) isn't used in creatives: its fill is the same dark as the creative background (Vanesa, 2026-11-19).
 
 | Class | What it is | When |
 | --- | --- | --- |
