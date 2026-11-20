@@ -13,7 +13,7 @@ For generated images, also use the image checklist in [`brand-assets/imagery/gui
 | `check.py` | Runs the checks from [`guidelines/layout/checks.md`](../guidelines/layout/checks.md) and the type, logo, button and headshot rules on the measurements. Writes a table and lists what to look at by eye |
 | `sheet.py` | Puts every render in one labelled `contact-sheet.png`: rows are names, columns are shapes. An option of a shape (`<name>-<shape>-b.png`) gets its own column; `--label name="text"` replaces a row's name |
 
-Needs Google Chrome and Python 3 with Pillow (`pip install pillow`). Nothing else is installed.
+Needs Google Chrome (or Chromium) and Python 3 with Pillow (`pip install pillow`). Nothing else is installed. `render.py` finds Chrome on a Mac or on Linux (the cloud) by itself; set `QD_CHROME` to its path if it's somewhere else.
 
 ## Use
 
