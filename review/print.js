@@ -5,7 +5,8 @@
 // - Margins: the canvas margins become bleed + 2 × the safe area (guidelines/print/, Vanesa 2026-11-20).
 //   Folds and a hidden bottom (roll-ups) are passed along for the checks.
 // - Shape and scale come from the finished size (the trim), not trim + bleed: print.py passes them.
-// - Records what the print checks need (patterns, QR codes) in <script id="qd-print-measure">.
+// - Sets the print text sizes from print.tokens.json (through print.py), so pages never set them.
+// - Records what the print checks need (patterns, QR codes, image fades) in <script id="qd-print-measure">.
 // - &qd-layer=backdrop: shows only the backdrop (canvas color, patterns, faded images), for print.py.
 // - With &qd-pdf=1: sets the PDF page to the full size (trim + bleed + room for crop marks), scales the
 //   300 dpi layout down to real size (CSS zoom, so text stays vector and images keep 300 dpi), and
@@ -25,11 +26,25 @@
       c.dataset.print = p.format || "print";
       if (p.shape) { c.dataset.shape = p.shape; c.setAttribute("data-shape-fixed", ""); }
       if (p.u) c.style.setProperty("--qd-canvas-u", p.u + "px");
+      // Text in print: the sizes come from print.tokens.json through print.py (px at 300 dpi).
+      if (p.type) {
+        c.style.setProperty("--qd-print-title", p.type.titlePx + "px");
+        c.style.setProperty("--qd-print-supporting", p.type.supportingPx + "px");
+        c.setAttribute("data-print-type", "");
+      }
     });
   }
   apply();
   document.addEventListener("DOMContentLoaded", apply);
   window.__qdPrint = p;
+
+  // Print text sizes: pages never set them (guidelines/print/ section 4).
+  var ps = document.createElement("style");
+  ps.textContent =
+    ".qd-canvas[data-print-type] .qd-title{font-size:var(--qd-print-title)}" +
+    ".qd-canvas[data-print-type] .qd-supporting{font-size:var(--qd-print-supporting)}" +
+    ".qd-canvas[data-print-type] .qd-icon{width:var(--qd-print-supporting);height:var(--qd-print-supporting)}";
+  document.head.appendChild(ps);
 
   // What the print checks need. Patterns: any pattern mask, any canvas in the creative, or anything
   // loaded from brand-assets/patterns/. QR codes: elements marked .qd-qr.
@@ -42,8 +57,12 @@
       var r = el.getBoundingClientRect();
       return { x: r.left, y: r.top, w: r.width, h: r.height };
     });
+    var fades = [].map.call(cv.querySelectorAll(".qd-image-fade"), function (el) {
+      var r = el.getBoundingClientRect();
+      return { x: r.left, y: r.top, w: r.width, h: r.height };
+    });
     var info = { masks: cv.querySelectorAll(".qd-pattern-mask").length, canvases: cv.querySelectorAll("canvas").length,
-                 patternFiles: loaded.slice(0, 5), qr: qr };
+                 patternFiles: loaded.slice(0, 5), qr: qr, fades: fades };
     var tag = document.getElementById("qd-print-measure");
     if (!tag) { tag = document.createElement("script"); tag.type = "application/json"; tag.id = "qd-print-measure"; document.body.appendChild(tag); }
     tag.textContent = JSON.stringify(info);

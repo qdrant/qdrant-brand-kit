@@ -204,14 +204,28 @@ def check_one(m, rules):
             step = {"title-short": "title-medium", "title-medium": "title-long"}.get(want)
             qbot = shape == "ultrawide" and any("/mascot/" in i.get("src", "") for i in m["images"])
             ok_size = abs(top - exp) <= 1.5 or (qbot and step and abs(top - val(step) * u) <= 1.5)
-            add("Title size by length", ok_size,
-                f"{words} words → {want} {val(want):g} at reference = {exp:.1f} px; used {top:.1f} px"
-                + (f" (one step down to {step} {val(step):g} allowed beside Qbot)" if qbot and step else ""),
-                "typography README, Text in creatives")
-            sup = val("supporting") * u
-            others = sorted({round(t["fontSize"], 1) for t in main if abs(t["fontSize"] - top) >= 0.5})
-            add("Supporting size", all(abs(s - sup) <= 1.5 for s in others),
-                f"wanted {sup:.1f} px; used {others or 'none'}", "typography README, Text in creatives")
+            ptype = (m.get("print") or {}).get("type")
+            if ptype:  # print: the format's sizes in pt (print.tokens.json), not the social creative scale
+                px_pt = lambda v: v * m["print"]["dpi"] / 72
+                lo_t, hi_t = px_pt(ptype["titleMin"]), px_pt(ptype["title"])
+                ok_size = lo_t - 1.5 <= top <= hi_t + 1.5
+                add("Title size by length", ok_size,
+                    f"print: {ptype['titleMin']:g}–{ptype['title']:g} pt = {lo_t:.1f}–{hi_t:.1f} px; used {top:.1f} px",
+                    "guidelines/print/ section 4, Text in print")
+                lo_s, hi_s = px_pt(ptype["supportingMin"]), px_pt(ptype["supporting"])
+                others = sorted({round(t["fontSize"], 1) for t in main if abs(t["fontSize"] - top) >= 0.5})
+                add("Supporting size", all(lo_s - 1.5 <= x <= hi_s + 1.5 for x in others),
+                    f"print: {ptype['supportingMin']:g}–{ptype['supporting']:g} pt = {lo_s:.1f}–{hi_s:.1f} px; used {others or 'none'}",
+                    "guidelines/print/ section 4, Text in print")
+            else:
+                add("Title size by length", ok_size,
+                    f"{words} words → {want} {val(want):g} at reference = {exp:.1f} px; used {top:.1f} px"
+                    + (f" (one step down to {step} {val(step):g} allowed beside Qbot)" if qbot and step else ""),
+                    "typography README, Text in creatives")
+                sup = val("supporting") * u
+                others = sorted({round(t["fontSize"], 1) for t in main if abs(t["fontSize"] - top) >= 0.5})
+                add("Supporting size", all(abs(s - sup) <= 1.5 for s in others),
+                    f"wanted {sup:.1f} px; used {others or 'none'}", "typography README, Text in creatives")
             bad_case = []
             for t in titles:
                 condensed = t["stretch"] not in ("100%", "normal")
