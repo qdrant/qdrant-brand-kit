@@ -64,13 +64,13 @@ Sizes are in pt. Two kinds of printed piece, two type systems (Vanesa, 2026-11-2
 
 **One-page promos (flyers, posters, roll-ups):** the creative rules, with one title size and one supporting size ([`guidelines/`](../) section 11). Keep the title 2 to 3 times the supporting size.
 
-**Text in print (proposed, to confirm: Vanesa, 2026-11-20).** Every size is a step of the type set in [`primitives/typography/`](../../primitives/typography/), read as pt (a 40 px step is 40 pt): 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64, 80, 104, 128, 160, 200. Never a size in between (Vanesa, 2026-11-20). The values live in `print.tokens.json` (`title`, `supporting` and the smaller `titleMin`, `supportingMin` per format, in pt), and `review/print.py` applies them, so pages never set print sizes themselves:
+**Text in print (proposed, to confirm: Vanesa, 2026-11-20).** Every size is a step of the type set in [`primitives/typography/`](../../primitives/typography/), read as pt (a 40 px step is 40 pt): 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64, 80, 104, 128, 160, 200. Print adds two steps below them: **10 pt** for body copy on small formats and **8 pt** for legal text, footers and small print only. Never a size in between (Vanesa, 2026-11-20). The values live in `print.tokens.json` (`title`, `supporting` and the smaller `titleMin`, `supportingMin` per format, in pt), and `review/print.py` applies them, so pages never set print sizes themselves:
 
 | Format | Solid | Space imagery, smallest |
 | --- | --- | --- |
 | Flyer A4, US Letter | Title 40 pt, supporting 18 pt | Title 32 pt, supporting 12 pt |
-| Flyer A5 | Title 32 pt, supporting 14 pt | Title 24 pt, supporting 12 pt |
-| Flyer A6 (proposed) | Title 24 pt, supporting 12 pt | the same (no step under 12) |
+| Flyer A5 | Title 32 pt, supporting 14 pt | Title 24 pt, supporting 10 pt |
+| Flyer A6 | Title 24 pt, supporting 10 pt | the same |
 | Poster A2 | Title 128 pt, supporting 48 pt | the same |
 | Poster A1 | Title 160 pt, supporting 64 pt | the same |
 | Roll-up 850 × 2000 | Title 160 pt, supporting 64 pt | the same |
@@ -78,12 +78,11 @@ Sizes are in pt. Two kinds of printed piece, two type systems (Vanesa, 2026-11-2
 - **Front covers** (Vanesa, 2026-11-20): when a front holds only the logo, the title and the image (a two-sided piece, see section 3), the title is about **1.45 × the title size** (`titleCover`, snapped to the nearest step; A6: 32 pt, H5) and takes the calm sky's width. Use `.qd-title--cover`.
 - **Solid pieces** use the solid sizes. From testing: A4 at 12 pt looked empty and 22 pt slightly big in cards; A5 worked anywhere from 10.5 to 15.5 pt.
 - **Space-imagery pieces** use the same sizes, or smaller down to the smallest ones when that's what keeps all text in the calm sky (section 3). `review/print.py --print-scale small` uses them.
-- **To decide (Vanesa, 2026-11-20):** 12 pt is the type set's smallest step. Content-heavy A6 pieces only fitted at 9 to 10 pt in testing: either print gets steps under 12 (the document scale uses 11 and 9 pt), or A6 carries less copy.
 
 **Documents (white papers, brochure inside pages, multi-page handouts):** the Brand Guide document scale in [`primitives/typography/`](../../primitives/typography/), "Sizes per channel": title / H1 / H2 / H3 / body / caption = 28 / 22 / 18 / 14 / 11 / 9 pt. Body text at least 9 pt and in full `text.on-light` (never mid-grey), aiming for 7:1 contrast on paper.
 
-- **Minimum:** never under 8 pt, and 6 pt only for legal text.
-- **Reversed text** (Vanesa, 2026-11-20): white (light) text on a dark background is at least 9 pt and Regular weight or heavier.
+- **Must: easily legible when printed** (Vanesa, 2026-11-20). Body copy is **10 to 12 pt**. **8 pt is the minimum**, and only for legal text, footers and small print. Nothing under 8 pt, legal text included.
+- **Reversed text** (Vanesa, 2026-11-20): white (light) text on a dark background is at least 9 pt and Regular weight or heavier. With the print steps that means 10 pt or more on dark, so 8 pt small print only goes on light backgrounds.
 - **Event backdrops and booths:** 240–560 pt, logos big enough for camera shots (Brand Guide 2.0).
 - **Logo:** at least 0.84 cm tall (3.1 × 0.84 cm), as [`brand-assets/logo/`](../../brand-assets/logo/) says.
 
