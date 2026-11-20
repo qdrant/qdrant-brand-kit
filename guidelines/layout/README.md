@@ -13,7 +13,7 @@ Covers image canvases only. Web page layout stays in [`spacing/`](../../primitiv
 
 ## Steps for an agent
 
-1. **Read [`guidelines/`](../) and ask its questions first** (tone, pattern or image, hero, red, other sizes). It decides which pattern, hero and canvas layout to use.
+1. **Read [`guidelines/`](../) and ask its one question** (the main visual). Take the pattern, hero and canvas layout from its rules (section 1, 2026-11-20).
 2. **Pick the shape** from width ÷ height (table below). It sets the reference canvas, margins, columns and gaps.
 3. **Compose it** from the content you're given, following [`guidelines/`](../) section 11 (Composition) and using only the approved parts in [`brand-components/`](../../brand-components/). There are no fixed post templates.
 4. **Build it** with the four pieces below. Load `primitives/colors/colors.css`, `primitives/typography/typography.css` and `guidelines/layout/layout.css`. Colors come from [`colors/`](../../primitives/colors/), type from [`typography/`](../../primitives/typography/), images from [`imagery/`](../../brand-assets/imagery/), backgrounds from [`patterns/`](../../brand-assets/patterns/), the mascot from [`mascot/`](../../brand-assets/mascot/).
@@ -45,8 +45,8 @@ Sizes in px at the reference canvas.
   - Date and place go on **one line** if they fit; if not, they're dropped (ask first, guidelines section 11 rule 11).
   - The button stays at its own size, the logo's height. Never one title line tall.
   - **320×100: the Qdrant logo only**, never a partner lockup (two logos don't fit). Title on up to three lines, sized so its letters match the 24 px logo, the button under it at the logo's height, Qbot zoomed in at the right.
-  - Items after the logo can't sit on the 12-column grid in a side-by-side row; that checker fail is expected.
-- **Small units (300×250, 336×280, 300×600):** offer two options: **a**, logo, title and button with a big Qbot cut by the bottom edge; **b**, the same with the date and place, one line each. The person picks (2026-11-16).
+  - Items after the logo can't sit on the 12-column grid in a side-by-side row, so `review/check.py` doesn't check them for the grid there.
+- **Small units (300×250, 336×280, 300×600):** offer two options: **a**, logo, title and button with a big Qbot cut by the bottom edge; **b**, the same with the date and place, one line each. Make both and show them together, the recommended one marked; the person picks (2026-11-16, shown together since 2026-11-20). With no date or place, only **a**.
 - **Between groups:** 2 × `section` (96 on square and portrait, 128 on wide and story, 128 on ultrawide). The header, heading, body and visual are separate groups, with this one gap between each ([`guidelines/`](../) section 11, rule 9, decided 2026-11-11). No token yet: use `calc(2 * var(--qd-gap-section))`.
 - **Story safe zones:** 192 px top and 256 px bottom keep text clear of the profile bar and reply box. Only backgrounds, images and Qbot's cut body go there. Smaller since 2026-11-16 (was 256 / 344) so the groups get bigger gaps: the freed space goes to the gaps between groups. On stories with headshot cards, the cards get smaller before the gaps do: the one exception to the fit order in [`guidelines/`](../) section 11, rule 11 (Vanesa).
 - **Other sizes:** the scale is the smaller of width ÷ reference width and height ÷ reference height. Every value is multiplied by it, so a 1200×627 post uses the Wide values at 0.58×. The 8 px grid holds exactly at the reference canvases.
@@ -66,7 +66,7 @@ Width and height are plain numbers in px. For one file rendered at many sizes, a
 
 ## Pattern mask
 
-For patterns whose small details would cross the text, mask the pattern so the text sits on a calm neutral ([`guidelines/`](../) section 4, decided 2026-11-11, replaces the Zone layout). When the pattern's preset has `textMask` set to `mask`, or `both` and the person picked the mask. With `none`, the text sits straight on the pattern. With no `textMask`, render it with and without the mask and ask. Never on a light-colored pattern: it turns grey. The pattern is 100% where the visual sits and fades softly to **40%** behind the text (2026-11-16). The canvas shows **neutral 950** behind it on a dark creative and **neutral 100** on a light one.
+For patterns whose small details would cross the text, mask the pattern so the text sits on a calm neutral ([`guidelines/`](../) section 4, decided 2026-11-11, replaces the Zone layout). When the pattern's preset has `textMask` set to `mask`, or `both` and the person picked the mask. With `none`, the text sits straight on the pattern. With `both` or no `textMask`, render it with and without the mask and show both, the recommended one marked; the person picks. Never on a light-colored pattern: it turns grey. The pattern is 100% where the visual sits and fades softly to **40%** behind the text (2026-11-16). The canvas shows **neutral 950** behind it on a dark creative and **neutral 100** on a light one.
 
 ```html
 <div class="qd-canvas qd-canvas--masked" data-shape="square">

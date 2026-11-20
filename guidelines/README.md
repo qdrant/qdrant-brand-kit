@@ -12,17 +12,28 @@ Three kinds of rule:
 
 Decided by Vanesa on 2026-11-04.
 
-## 1. Ask first
+## 1. Ask about the main visual, take the design from the rules
 
-Before making a creative, settle these with the person. Skip a question only when the request already answers it.
+**Ask:** unless the request already says, ask one question: which **main visual**? Put the recommended one first and mark it (Vanesa, 2026-11-20).
 
-| Ask | Why |
+| Main visual | Recommend it for |
 | --- | --- |
-| Is the tone **community / playful** or **serious / technical**? | It suggests the pattern family (section 2). |
-| **Pattern or generated image** as the background? Suggest an image for storytelling and blog heroes, a pattern for everything else. | The person decides. |
-| Should it have a **hero**: Qbot, a product screen, or nothing? | Only one hero per creative (section 5). |
-| Does it need to **grab a lot of attention**? | Only then can the background be red (section 3). |
-| Is this the **same creative in other sizes or channels**? | Then reuse the same pattern and colorway (section 10). |
+| **Space imagery** (a generated astronaut image) | DevRel and community, and Sales (whichever fits the content better) |
+| **Qbot** | DevRel and community (with space imagery, whichever fits better) |
+| **Pattern only** | Sales, and guide or docs downloads (with the light card) |
+| **Headshots** | Speaker announcements (webinar, talk, panel) |
+
+**Don't ask design questions.** Take these from the rules (Vanesa, 2026-11-20):
+
+| Design choice | Where it comes from |
+| --- | --- |
+| Tone: community / playful or serious / technical | The content. It suggests the pattern family (section 2). |
+| Pattern, colorway and mask | Sections 2 and 4. |
+| Hero | The main visual. Only one hero per creative (section 5). |
+| Red background | Never on your own: only when the person asks for it (section 3). |
+| Same creative in other sizes or channels | The same pattern and colorway (section 10). |
+
+**Where a rule offers options** (a `both` or unset `textMask`, the small display units), make every option and show them together on the contact sheet, the recommended one marked in its label. The person picks.
 
 ## 2. Pick the pattern by tone
 
@@ -71,8 +82,8 @@ Rules:
   | --- | --- | --- |
   | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Medium violet) | Mask, 40% behind the text |
   | `none` | Color-Refracted-Pattern-A, Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Light violet, Red), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet) | No mask: text sits straight on the pattern |
-  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet), Mesh-Dithered-Pattern-A | Both work: offer the 40% mask and no mask, and let the person pick |
-  | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask and ask |
+  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet), Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
+  | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
 

@@ -143,8 +143,27 @@ def check_one(m, rules):
     def after_icon(r):
         return any(0 <= r["x"] - ex <= S["gut"] * u + 2 and abs((r["y"] + r["h"] / 2) - (iy + ih / 2)) <= ih
                    for ex, iy, ih in icon_ends)
+    # Display ads (ultrawide 3000x400, 728x90, 320x100) put the title and button in one row beside the logo,
+    # where they can't sit on the 12 columns: the layout README expects that, so those items aren't checked.
+    # The LinkedIn profile cover (also ultrawide) keeps its heading lower down, on the grid, so it's still checked.
+    # An item is in the row when it starts right after the logo or after another item in the row (within
+    # two gutters), or shares a row item's left edge (320x100: the button under the title).
+    in_row = []
+    if shape == "ultrawide":
+        logo = next((l["rect"] for l in m["logos"] if not l.get("inBook")), None)
+        if logo:
+            row = [logo]
+            cands = sorted([t["box"] for t in main] + [b["rect"] for b in m["buttons"]], key=lambda r: r["x"])
+            for r in cands:
+                if any(0 <= r["x"] - (q["x"] + q["w"]) <= 2 * S["gut"] * u + 2 or (q is not logo and abs(r["x"] - q["x"]) <= 2)
+                       for q in row):
+                    row.append(r); in_row.append(r)
+    def beside_logo(r):
+        return any(r is q for q in in_row)
     for kind, r in lefts:
         if kind == "text" and after_icon(r):
+            continue
+        if kind in ("text", "card") and beside_logo(r):
             continue
         if min(abs(r["x"] - s) for s in starts) > 2:
             off.append(f"{kind} left edge {round(r['x'])}")
@@ -152,6 +171,8 @@ def check_one(m, rules):
         r = b["rect"]
         if b.get("inBook"):
             continue  # the light card's button is centered below the card, not on the grid
+        if beside_logo(r):
+            continue  # a display ad's button sits in the row beside the logo
         if min(abs(r["x"] - s) for s in starts) > 2 and min(abs(r["x"] + r["w"] - e) for e in ends) > 2:
             off.append(f"button at {round(r['x'])}")
     add("On the grid", not off, "edges on column lines" if not off else "; ".join(off[:4]), "checks.md, On the grid")

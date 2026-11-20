@@ -19,9 +19,20 @@ whatever size Chrome gives the window. Mechanics only: no brand values live in t
 Needs Google Chrome and Pillow (pip install pillow).
 """
 import urllib.parse
-import argparse, functools, http.server, json, os, re, socketserver, subprocess, sys, tempfile, threading
+import argparse, functools, http.server, json, os, re, shutil, socketserver, subprocess, sys, tempfile, threading
 
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+
+def find_chrome():
+    """Chrome or Chromium: $QD_CHROME if set, then the Mac app, then whatever is on PATH (Linux, cloud)."""
+    candidates = [os.environ.get("QD_CHROME"), "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]
+    candidates += [shutil.which(n) for n in ("google-chrome", "google-chrome-stable", "chromium", "chromium-browser")]
+    for c in candidates:
+        if c and os.path.exists(c):
+            return c
+    return candidates[1]  # not found: main() reports it
+
+
+CHROME = find_chrome()
 TOOLS = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(TOOLS)
 SHAPES = [(3, "ultrawide"), (1.4, "wide"), (0.85, "square"), (0.65, "portrait"), (0, "story")]  # same as canvas.js
@@ -74,7 +85,9 @@ def serve(page_root):
 
 
 def chrome(args):
-    return subprocess.run([CHROME, "--headless=new", "--hide-scrollbars", "--disable-gpu",
+    # Chrome refuses to start as root without --no-sandbox (cloud containers run as root).
+    sandbox = ["--no-sandbox"] if hasattr(os, "geteuid") and os.geteuid() == 0 else []
+    return subprocess.run([CHROME, "--headless=new", *sandbox, "--hide-scrollbars", "--disable-gpu",
                            "--virtual-time-budget=6000", *args],
                           capture_output=True, text=True, timeout=120)
 
@@ -94,7 +107,7 @@ def main():
     except ImportError:
         sys.exit("Needs Pillow: pip install pillow")
     if not os.path.exists(CHROME):
-        sys.exit("Google Chrome not found at " + CHROME)
+        sys.exit("Chrome not found. Install Google Chrome or Chromium, or set QD_CHROME to its path.")
     page = os.path.abspath(a.page)
     if not os.path.isfile(page):
         sys.exit("Page not found: " + page)
