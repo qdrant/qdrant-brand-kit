@@ -2,7 +2,7 @@
 // has ?qd-print=... (set by print.py). Mechanics only: the sizes come from print.py, which reads them
 // from guidelines/print/print.tokens.json and the printer's spec.
 //
-// - Margins: the canvas margins become bleed + 2 × the safe area (guidelines/print/, Vanesa 2026-11-20).
+// - Margins: the canvas margins become bleed + the format's margin, 8% of the short side (guidelines/print/).
 //   Folds and a hidden bottom (roll-ups) are passed along for the checks.
 // - Shape and scale come from the finished size (the trim), not trim + bleed: print.py passes them.
 // - Sets the print text sizes from print.tokens.json (through print.py), so pages never set them.
@@ -30,6 +30,7 @@
       if (p.type) {
         c.style.setProperty("--qd-print-title", p.type.titlePx + "px");
         c.style.setProperty("--qd-print-supporting", p.type.supportingPx + "px");
+        if (p.type.titleCoverPx) c.style.setProperty("--qd-print-title-cover", p.type.titleCoverPx + "px");
         c.setAttribute("data-print-type", "");
       }
     });
@@ -42,6 +43,7 @@
   var ps = document.createElement("style");
   ps.textContent =
     ".qd-canvas[data-print-type] .qd-title{font-size:var(--qd-print-title)}" +
+    ".qd-canvas[data-print-type] .qd-title.qd-title--cover{font-size:var(--qd-print-title-cover, var(--qd-print-title))}" +
     ".qd-canvas[data-print-type] .qd-supporting{font-size:var(--qd-print-supporting)}" +
     ".qd-canvas[data-print-type] .qd-icon{width:var(--qd-print-supporting);height:var(--qd-print-supporting)}";
   document.head.appendChild(ps);
@@ -61,7 +63,11 @@
       var r = el.getBoundingClientRect();
       return { x: r.left, y: r.top, w: r.width, h: r.height };
     });
-    var info = { masks: cv.querySelectorAll(".qd-pattern-mask").length, canvases: cv.querySelectorAll("canvas").length,
+    var boxes = [].map.call(cv.querySelectorAll(".qd-box--card, .qd-box--outline, .qd-box--light-card"), function (el) {
+      var r = el.getBoundingClientRect();
+      return { x: r.left, y: r.top, w: r.width, h: r.height };
+    });
+    var info = { masks: cv.querySelectorAll(".qd-pattern-mask").length, canvases: cv.querySelectorAll("canvas").length, boxes: boxes,
                  patternFiles: loaded.slice(0, 5), qr: qr, fades: fades };
     var tag = document.getElementById("qd-print-measure");
     if (!tag) { tag = document.createElement("script"); tag.type = "application/json"; tag.id = "qd-print-measure"; document.body.appendChild(tag); }

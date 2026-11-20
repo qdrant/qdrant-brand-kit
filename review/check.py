@@ -126,7 +126,7 @@ def check_one(m, rules):
     main = [t for t in texts if t["role"] == "text"]
     L, T, R, B = S["mx"] * u, S["mt"] * u, W - S["mx"] * u, H - S["mb"] * u
     pr = m.get("print")
-    if pr:  # print (review/print.py): the margins are the bleed plus 2 × the printer's safe area
+    if pr:  # print (review/print.py): the margins are the bleed plus the format's margin
         L, T, R, B = pr["marginPx"]["x"], pr["marginPx"]["top"], W - pr["marginPx"]["x"], H - pr["marginPx"]["bottom"]
     out = []
     for kind, items in (("text", [t["box"] for t in texts]), ("logo", [l["rect"] for l in m["logos"]]),
@@ -207,7 +207,7 @@ def check_one(m, rules):
             ptype = (m.get("print") or {}).get("type")
             if ptype:  # print: the format's sizes in pt (print.tokens.json), not the social creative scale
                 px_pt = lambda v: v * m["print"]["dpi"] / 72
-                lo_t, hi_t = px_pt(ptype["titleMin"]), px_pt(ptype["title"])
+                lo_t, hi_t = px_pt(ptype["titleMin"]), px_pt(max(ptype["title"], ptype.get("titleCover") or 0))
                 ok_size = lo_t - 1.5 <= top <= hi_t + 1.5
                 add("Title size by length", ok_size,
                     f"print: {ptype['titleMin']:g}–{ptype['title']:g} pt = {lo_t:.1f}–{hi_t:.1f} px; used {top:.1f} px",

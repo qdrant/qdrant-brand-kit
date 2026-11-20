@@ -18,7 +18,7 @@ It writes, in OUT_DIR:
   <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, no patterns,
                       QR codes, image resolution, fonts, color
 
-Margins are the format's margin (about 12% of the short side, never under 2 × the safe area), from the
+Margins are the format's margin (8% of the short side, never under 1.5 × the safe area), from the
 trim; the shape and scale come from the finished size, not trim + bleed. Text sizes come from the
 format's title / supporting values in pt (--print-scale small: titleMin / supportingMin, for space
 imagery). All from guidelines/print/ (Vanesa, 2026-11-20).
@@ -111,14 +111,14 @@ def main():
     shape = render.shape_for(TW, TH)  # from the finished size, not trim + bleed
     ref_w, ref_h = layout_shapes()[shape]
     u = min(TW / ref_w, TH / ref_h)
-    # The content margin, from the trim: about 12% of the short side (the folded panel for brochures),
-    # never under 2 × the safe area (Vanesa, 2026-11-20). The preset's value unless the spec changes the size.
+    # The content margin, from the trim: 8% of the short side (the folded panel for brochures),
+    # never under 1.5 × the safe area (Vanesa, 2026-11-20). The preset's value unless the spec changes the size.
     if a.trim or a.panels or fmt.get("margin") is None:
         short = min(min(panels) if panels else trim[0], trim[1])
-        margin = round(0.12 * short)
+        margin = round(0.08 * short, 1)
     else:
         margin = fmt["margin"]
-    margin = max(margin, 2 * safe)
+    margin = max(margin, 1.5 * safe)
     # Text in print, pt -> px at 300 dpi (guidelines/print/ section 4).
     type_pt = None
     if fmt.get("title") and fmt.get("supporting"):
@@ -127,7 +127,8 @@ def main():
                    "titleMin": fmt.get("titleMin", fmt["title"]), "supportingMin": fmt.get("supportingMin", fmt["supporting"]),
                    "scale": a.print_scale,
                    "titleUsed": fmt.get("titleMin", fmt["title"]) if small else fmt["title"],
-                   "supportingUsed": fmt.get("supportingMin", fmt["supporting"]) if small else fmt["supporting"]}
+                   "supportingUsed": fmt.get("supportingMin", fmt["supporting"]) if small else fmt["supporting"],
+                   "titleCover": fmt.get("titleCover", round(1.45 * fmt["title"]))}
     m_px = {"x": (bleed + margin) * PX_PER_MM, "top": (bleed + margin) * PX_PER_MM,
             "bottom": (bleed + margin + hidden) * PX_PER_MM}
     folds_px = []
@@ -144,7 +145,8 @@ def main():
         "shape": shape, "u": u,
     }
     if type_pt:
-        params["type"] = {"titlePx": type_pt["titleUsed"] / PT_PER_PX, "supportingPx": type_pt["supportingUsed"] / PT_PER_PX}
+        params["type"] = {"titlePx": type_pt["titleUsed"] / PT_PER_PX, "supportingPx": type_pt["supportingUsed"] / PT_PER_PX,
+                          "titleCoverPx": type_pt["titleCover"] / PT_PER_PX}
 
     page = os.path.abspath(a.page)
     root = os.path.abspath(a.root) if a.root else os.path.dirname(page)
@@ -247,19 +249,20 @@ def main():
     bg_img = Image.open(full_png[:-4] + ".bg.png").convert("RGB")
     lum = lambda c: (0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]) / 255
 
-    # Margin: nothing closer to the trim than 2 × safe.
+    # Margin: nothing closer to the trim than the format's margin.
     L, T = m_px["x"], m_px["top"]
     R, B = W - m_px["x"], H - m_px["bottom"]
     near = []
     boxes = [(f"\"{t['text'][:24]}\"", t["box"]) for t in texts if not t.get("nested")]
     boxes += [("the logo", l["rect"]) for l in meas["logos"]] + [("the button", b["rect"]) for b in meas["buttons"]]
     boxes += [("a QR code", q) for q in pinfo["qr"]]
+    boxes += [("a card", b) for b in pinfo.get("boxes", [])]  # a card's edge stays inside the margins too
     for label, r in boxes:
         if r["x"] < L - 1 or r["y"] < T - 1 or r["x"] + r["w"] > R + 1 or r["y"] + r["h"] > B + 1:
             gap = min(r["x"] - bleed * PX_PER_MM, r["y"] - bleed * PX_PER_MM,
                       W - bleed * PX_PER_MM - r["x"] - r["w"], H - bleed * PX_PER_MM - r["y"] - r["h"]) / PX_PER_MM
             near.append(f"{label} {gap:.1f} mm from the trim")
-    row("Margin", not near, f"{margin:g} mm from the trim (at least 2 × the {safe:g} mm safe area)" if not near else
+    row("Margin", not near, f"{margin:g} mm from the trim (at least 1.5 × the {safe:g} mm safe area)" if not near else
         "; ".join(near[:4]) + f" (needs {margin:g} mm)")
 
     small = [f"\"{t['text'][:20]}\" {t['fontSize'] * PT_PER_PX:.1f} pt" for t in texts if t["fontSize"] * PT_PER_PX < 8]
@@ -306,7 +309,7 @@ def main():
         density = sum(1 for v in vals if v > 24) / len(vals)
         if density > BUSY or spread > BUSY_STD:
             busy.append(f"\"{t['text'][:24]}\"")
-    row("Text on a busy background", True if not busy else "look", "text sits on calm areas" if not busy else
+    row("Text on a busy background", not busy, "text sits on calm areas" if not busy else
         "; ".join(busy[:4]) + ". Move it to calm sky: tighten gaps, then --print-scale small, then cut copy")
     row("Reversed text", not rev, "light text on dark is 9 pt or more and Regular or heavier" if not rev else
         "; ".join(rev[:4]) + " (needs 9 pt, Regular or heavier)")
@@ -348,7 +351,8 @@ def main():
         if img in meas["logos"] or img.get("src", "").endswith(".svg") or not img.get("naturalWidth"):
             continue
         shown = img.get("shown") or img["rect"]
-        dpi = img["naturalWidth"] / (shown["w"] / PX_PER_MM / 25.4) if shown["w"] else 0
+        src_w = img.get("sourceWidth") or img["naturalWidth"]  # the cropped part of the file, not the whole file
+        dpi = src_w / (shown["w"] / PX_PER_MM / 25.4) if shown["w"] else 0
         if dpi < min_dpi:
             low.append(f"the image is {dpi:.0f} dpi ({os.path.basename(img['src'])})")
     row("Image resolution", not low, f"every image {min_dpi} dpi or more" if not low else
@@ -366,7 +370,8 @@ def main():
     row("Fonts", True if not t3 else "look", "no Type 3 fonts" if not t3 else
         f"{t3} Type 3 fonts: some printers reject them; check with the printer or outline text")
     no_profile = not rgb_only and not a.icc
-    row("Color", True if (rgb_only or "Converted" in color_note) else ("look" if no_profile else False),
+    # Color is always checked (Vanesa, 2026-11-20): without the printer's profile the piece isn't deliverable.
+    row("Color", True if (rgb_only or "Converted" in color_note) else False,
         color_note.split(". ")[0] if no_profile else color_note.split("\n")[0])
     md = [f"# Print checks: {name}", "", f"{fmt['name']}: {trim[0]} × {trim[1]} mm, bleed {bleed} mm, "
           f"safe area {safe} mm, margin {margin:g} mm"

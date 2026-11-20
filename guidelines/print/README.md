@@ -35,14 +35,14 @@ Every print job starts from the **spec sheet the printer sends**. It decides the
    - the printer may reject the file.
 3. Suggest checking with a designer.
 
-**No printer's profile** (Vanesa, 2026-11-20): if the person goes on without the printer's spec, the job ends at the **proof and an RGB PDF for review**, clearly marked "not for the printer". Never guess a CMYK profile.
+**No printer's profile** (Vanesa, 2026-11-20): if the person goes on without the printer's spec, the job ends at the **proof and an RGB PDF for review**, clearly marked "not for the printer". Never guess a CMYK profile. **Color is always checked:** without the CMYK conversion to the printer's profile, the color check fails and nothing is delivered for print.
 
 **Pantone:** the brand has no fixed Pantone match for its colors. If a printer asks for Pantone colors, ask the person to choose them, and suggest a designer for it. Don't refuse and don't guess.
 
 ## 2. The canvas in print
 
 - **Finished size:** the trim size from the spec. Build at that size in mm, with the **bleed outside the trim** on every side. Backgrounds and images run to the bleed edge; nothing else does.
-- **Margins: about 12% of the short side** (Vanesa, 2026-11-20). The content margin (text, logo, button, QR code, headshots) is about **12% of the finished piece's short side**, measured from the trim, and **never less than 2 × the safe area**. A4: 25 mm. A5: 18 mm (**to confirm, Vanesa**: held at 18 mm so two card columns still fit; Vanesa asked for 20–30 mm). Brochures use the short side of the folded panel. Each format's `margin` in `print.tokens.json` is computed this way; the safe area is the printer's cutting tolerance, and a bigger safe area from the printer's spec pushes the margin up to 2 × that. This replaces the fixed "2 × safe" margin.
+- **Margins: 8% of the short side** (Vanesa, 2026-11-20). One rule for every format, so the margin shrinks with the piece: the content margin (text, logo, button, QR code, headshots) is **8% of the finished piece's short side**, measured from the trim, and **never less than 1.5 × the printer's safe area**. A4: 17 mm, A5: 12 mm, A6: 8.4 mm, A2: 34 mm, roll-up: 68 mm. Brochures use the short side of the folded panel. Why 8%: Vanesa wants 1.5 to 2 cm on A4 (7 to 9.5% of 210 mm), and 8% lands in the middle. The safe area is the printer's cutting tolerance; a bigger safe area in the printer's spec pushes the margin up to 1.5 × that. Each format's `margin` in `print.tokens.json` is computed this way. Replaces "about 12%, at least 2 × safe" (25 mm on A4).
 - **Folds:** each panel is laid out as its own area, with the margin on both sides of every fold. Nothing important crosses a fold.
 - **Shape and grid:** the shape comes from the **finished size** (trim width ÷ height, not including the bleed; [`layout/`](../layout/), Shapes), so the grid and gap roles are the same as on social, scaled to the finished size (Vanesa, 2026-11-20).
 
@@ -54,7 +54,7 @@ Every print job starts from the **spec sheet the printer sends**. It decides the
   - **Plain and serious:** a solid brand color, light (paper white or `neutral-25`) or dark (`neutral-950`). Recommended light for documents (white papers, brochure inside pages).
   - Qbot may be added in some cases, following [`guidelines/`](../) section 6: one hero, never with a generated image.
 - **Must: space imagery is always dark** (Vanesa, 2026-11-20). Image fades are dark-only ([`guidelines/`](../) section 5), so a space-imagery print piece is dark.
-- **Must: text never sits on the image's subject or on busy ground** (Vanesa, 2026-11-20): not on the astronaut, rocks, the Milky Way or bright stars, the same rule as [`guidelines/`](../) section 5. If the text reaches the subject, first tighten the gaps between groups ([`guidelines/`](../) section 11, rule 11), then use the smaller print sizes (section 4), then ask to cut copy. The print checks flag text on a busy background.
+- **Must: text never sits on the image's subject or on busy ground** (Vanesa, 2026-11-20): not on the astronaut, rocks, the Milky Way or bright stars, the same rule as [`guidelines/`](../) section 5. If the text reaches the subject, first tighten the gaps between groups ([`guidelines/`](../) section 11, rule 11), then use the smaller print sizes (section 4), then ask to cut copy. **Text on a busy background is a hard stop** (Vanesa, 2026-11-20): `review/print.py` fails it, and the piece is never shown or delivered until every line sits on calm, legible ground. If no layout keeps the text calm, split the piece over two sides (image and title on the front, details on a plain back), use the plain look, or ask to cut copy.
 - **Rich black** (Vanesa, 2026-11-20): large dark areas use the printer's rich black, never black ink alone.
 - **Gradients and image fades** (Vanesa, 2026-11-20): slight grain (noise) on large gradients and image fades so they don't band in CMYK. `review/print.js` adds it to `.qd-image-fade` in print renders, so pages don't add it themselves. No tints under 5%: they drop out on paper.
 
@@ -64,18 +64,21 @@ Sizes are in pt. Two kinds of printed piece, two type systems (Vanesa, 2026-11-2
 
 **One-page promos (flyers, posters, roll-ups):** the creative rules, with one title size and one supporting size ([`guidelines/`](../) section 11). Keep the title 2 to 3 times the supporting size.
 
-**Text in print (proposed, to confirm: Vanesa, 2026-11-20).** The values live in `print.tokens.json` (`title`, `supporting` and the smaller `titleMin`, `supportingMin` per format, in pt), and `review/print.py` applies them, so pages never set print sizes themselves:
+**Text in print (proposed, to confirm: Vanesa, 2026-11-20).** Every size is a step of the type set in [`primitives/typography/`](../../primitives/typography/), read as pt (a 40 px step is 40 pt): 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64, 80, 104, 128, 160, 200. Never a size in between (Vanesa, 2026-11-20). The values live in `print.tokens.json` (`title`, `supporting` and the smaller `titleMin`, `supportingMin` per format, in pt), and `review/print.py` applies them, so pages never set print sizes themselves:
 
 | Format | Solid | Space imagery, smallest |
 | --- | --- | --- |
-| Flyer A4, US Letter | Title 40 pt, supporting 17 pt | Title 32 pt, supporting 12 pt |
-| Flyer A5 | Title 31 pt, supporting 14 pt | Title 28 pt, supporting 10.5 pt |
-| Poster A2 | Title 120 pt, supporting 48 pt | the same |
-| Poster A1 | Title 148 pt, supporting 64 pt | the same |
+| Flyer A4, US Letter | Title 40 pt, supporting 18 pt | Title 32 pt, supporting 12 pt |
+| Flyer A5 | Title 32 pt, supporting 14 pt | Title 24 pt, supporting 12 pt |
+| Flyer A6 (proposed) | Title 24 pt, supporting 12 pt | the same (no step under 12) |
+| Poster A2 | Title 128 pt, supporting 48 pt | the same |
+| Poster A1 | Title 160 pt, supporting 64 pt | the same |
 | Roll-up 850 × 2000 | Title 160 pt, supporting 64 pt | the same |
 
+- **Front covers** (Vanesa, 2026-11-20): when a front holds only the logo, the title and the image (a two-sided piece, see section 3), the title is about **1.45 × the title size** (`titleCover`, snapped to the nearest step; A6: 32 pt, H5) and takes the calm sky's width. Use `.qd-title--cover`.
 - **Solid pieces** use the solid sizes. From testing: A4 at 12 pt looked empty and 22 pt slightly big in cards; A5 worked anywhere from 10.5 to 15.5 pt.
 - **Space-imagery pieces** use the same sizes, or smaller down to the smallest ones when that's what keeps all text in the calm sky (section 3). `review/print.py --print-scale small` uses them.
+- **To decide (Vanesa, 2026-11-20):** 12 pt is the type set's smallest step. Content-heavy A6 pieces only fitted at 9 to 10 pt in testing: either print gets steps under 12 (the document scale uses 11 and 9 pt), or A6 carries less copy.
 
 **Documents (white papers, brochure inside pages, multi-page handouts):** the Brand Guide document scale in [`primitives/typography/`](../../primitives/typography/), "Sizes per channel": title / H1 / H2 / H3 / body / caption = 28 / 22 / 18 / 14 / 11 / 9 pt. Body text at least 9 pt and in full `text.on-light` (never mid-grey), aiming for 7:1 contrast on paper.
 
@@ -86,7 +89,7 @@ Sizes are in pt. Two kinds of printed piece, two type systems (Vanesa, 2026-11-2
 
 ## 5. Images and QR codes
 
-- **Must: image resolution is a hard stop** (Vanesa, 2026-11-20). Every image is at least 300 dpi at final size for anything read up close (A4 is about 2480 × 3508 px), or the format's `minDpi` for large formats. An image under it is **never delivered, and never plain-resized** to pass the check. Until an upscaler is approved, the answer is "This is not doable for now", with the plain, solid version offered instead.
+- **Must: image resolution is a hard stop** (Vanesa, 2026-11-20). Every image is at least 300 dpi at final size for anything read up close (A4 is about 2480 × 3508 px), or the format's `minDpi` for pieces seen from far away (posters 150, roll-ups, booths and banners 100). An image under it is **never delivered, and never enlarged** to pass the check, astronaut imagery included. Resolution counts the part of the file that shows: a cropped image (a Qbot crop, `object-fit: cover`) counts only its crop. Until an upscaler is approved, the answer is "This is not doable for now", with the plain, solid version offered instead.
   - Design Lab's largest image is 1024 × 1536 px: sharp enough at 300 dpi only up to about 87 mm wide (business cards). So A5 and A4 space imagery is refused for now.
   - **To decide (Vanesa):** the Topaz Labs upscale API is proposed for the workflow (needs approval). A 4× upscale (4096 × 6144 px) would cover A4 and A3 at 300 dpi, and A2, A1 and the roll-up at their `minDpi`.
 - The subject stays clear of the trim and any fold. **One image per piece.**
@@ -109,7 +112,7 @@ The presets are in `print.tokens.json`: finished size, bleed, safe area, margin,
 
 | Preset | Status |
 | --- | --- |
-| Flyers: A4, A5, US Letter | Ready to test |
+| Flyers: A4, A5, A6, US Letter | Ready to test (A6 proposed 2026-11-20) |
 | Brochures: A4 bi-fold, A4 tri-fold, US Letter tri-fold | Ready to test |
 | Posters: A2, A1 | Ready to test |
 | Roll-up 850 × 2000 | Ready to test |
