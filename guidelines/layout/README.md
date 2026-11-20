@@ -2,7 +2,7 @@
 
 How to lay out a Qdrant social post, ad or banner at any size. Modelled on [Primer Brand's layout](https://primer.style/brand/layout/), with four pieces: **Canvas**, **Grid**, **Stack** and **Box**.
 
-Covers image canvases only. Web page layout stays in [`spacing/`](../../primitives/spacing/) (`--qd-layout-*`). Print comes later (see [Print](#print)).
+Covers image canvases only. Web page layout stays in [`spacing/`](../../primitives/spacing/) (`--qd-layout-*`). Print is in [`guidelines/print/`](../print/).
 
 | File | What it is |
 | --- | --- |
@@ -196,7 +196,7 @@ These styles come from recent Qdrant web sections in Figma (customer stat cards,
 
 ## Print
 
-Not defined yet. Print sizes, bleed and safe area go here once the social side is approved. Until then, use the vendor spec.
+In [`guidelines/print/`](../print/) (2026-11-20): the printer's spec, format presets, bleed, safe area, folds, text in pt, color conversion and export. Print uses the same Canvas, Grid, Stack and Box as above, at the finished size.
 
 ## To decide later
 

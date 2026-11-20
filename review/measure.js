@@ -59,6 +59,8 @@
           if (tr) out.texts.push({
             text: el.textContent.trim().replace(/\s+/g, " "), tag: el.tagName.toLowerCase(), cls: el.className || "",
             role: role(el), rect: tr, box: rect(el),
+            nested: !!(el.parentElement && el.parentElement.closest("p, h1, h2, h3, h4, h5, h6, li, span, a, strong, em") && el.parentElement.closest(".qd-canvas")),
+            inBox: !!el.closest(".qd-box--card, .qd-box--outline"),
             fontSize: parseFloat(s.fontSize), family: s.fontFamily.split(",")[0].replace(/["']/g, "").trim(),
             weight: +s.fontWeight, stretch: s.fontStretch, transform: s.textTransform, align: s.textAlign,
             color: s.color, letterSpacing: s.letterSpacing, lineHeight: s.lineHeight
@@ -68,7 +70,23 @@
           var holder = el.closest(".qd-headshot-card__photo, .qd-headshot-circle__photo");
           // A headshot is cropped by its card or circle: measure what's visible, not the whole photo.
           var info = { src: src(el), rect: rect(holder || el), loaded: el.complete && el.naturalWidth > 0,
+                       naturalWidth: el.naturalWidth, naturalHeight: el.naturalHeight, shown: rect(el),
                        cls: holder ? "headshot" : (el.className || ""), inBook: !!el.closest(".qd-book") };
+          // Source pixels across the shown width, for the print resolution check: an object-view-box crop
+          // (Qbot) or object-fit: cover shows only part of the file (Vanesa, 2026-11-20).
+          var st = getComputedStyle(el), srcW = el.naturalWidth, srcH = el.naturalHeight;
+          var vb = /inset\(([^)]*)\)/.exec(st.objectViewBox || "");
+          if (vb) {
+            var v = vb[1].trim().split(/\s+/).map(parseFloat);
+            if (v.length === 1) v = [v[0], v[0], v[0], v[0]]; else if (v.length === 2) v = [v[0], v[1], v[0], v[1]]; else if (v.length === 3) v = [v[0], v[1], v[2], v[1]];
+            srcW -= (v[1] || 0) + (v[3] || 0); srcH -= (v[0] || 0) + (v[2] || 0);
+          }
+          var r0 = el.getBoundingClientRect();
+          if (st.objectFit === "cover" && r0.width && r0.height && srcW && srcH) {
+            var k = Math.max(r0.width / srcW, r0.height / srcH);
+            srcW = Math.min(srcW, r0.width / k);
+          }
+          info.sourceWidth = srcW;
           out.images.push(info);
           if (el.classList.contains("qd-logo") || /brand-assets\/logo\//.test(info.src)) out.logos.push(info);
         }
