@@ -4,6 +4,8 @@ This repo is the Qdrant brand system: the rules and materials for **creatives** 
 
 ## Making a creative
 
+**Printed?** If the person asks for something printed (flyer, brochure, poster, roll-up, business card, booth, print PDF), also read [`guidelines/print/`](guidelines/print/) first: it starts with the printer's spec and adds the print rules on top of everything below (2026-11-20).
+
 1. **Ask only for the main visual.** Unless the request says, ask whether the creative has space imagery (astronaut), Qbot, a pattern only, or headshots (speaker announcements), with the recommended one marked ([`guidelines/`](guidelines/) section 1). Don't ask design questions (tone, pattern, layout, mask, other sizes): take them from the rules. Where a rule offers options, make each one and show them together, with the recommended one marked; the person picks (Vanesa, 2026-11-20).
 2. **Read, in this order:**
    - [`guidelines/README.md`](guidelines/README.md): all of it. Section 11 (Composition) is how to lay a creative out. There are no fixed post templates.

@@ -1,0 +1,51 @@
+{
+  "$description": "Print format presets (guidelines/print/README.md, Vanesa 2026-11-20). Starting points only: the printer's spec sheet always overrides them. Sizes in mm. trim = finished size (width, height); bleed and safe are per side; panels are the widths of each panel left to right, laid out flat; minDpi is the lowest image resolution at final size. Default bleed and safe values are common print practice, not from the Brand Guide.",
+  "defaults": {
+    "bleed": { "$value": 3, "$description": "mm per side (3.175 for US formats, 1/8 in)" },
+    "safe": { "$value": 5, "$description": "mm inside the trim, per side" },
+    "minDpi": { "$value": 300, "$description": "Read up close: flyers, brochures, cards" },
+    "fileType": { "$value": "PDF/X-4", "$description": "Unless the printer asks for another" },
+    "color": { "$value": "printer", "$description": "Always the printer's CMYK profile, from the spec. Ask for it" }
+  },
+  "formats": {
+    "flyer-a4": { "name": "Flyer A4", "status": "ready-to-test", "trim": [210, 297], "bleed": 3, "safe": 5, "minDpi": 300 },
+    "flyer-a5": { "name": "Flyer A5", "status": "ready-to-test", "trim": [148, 210], "bleed": 3, "safe": 5, "minDpi": 300 },
+    "flyer-letter": { "name": "Flyer US Letter", "status": "ready-to-test", "trim": [215.9, 279.4], "bleed": 3.175, "safe": 6.35, "minDpi": 300 },
+    "brochure-a4-bifold": {
+      "name": "Brochure A4 bi-fold", "status": "ready-to-test",
+      "trim": [420, 297], "folded": [210, 297], "panels": [210, 210], "fold": "vertical",
+      "bleed": 3, "safe": 5, "minDpi": 300,
+      "$description": "Laid out flat: two pages per side (outside and inside). Safe area on both sides of the fold."
+    },
+    "brochure-a4-trifold": {
+      "name": "Brochure A4 tri-fold (roll fold)", "status": "ready-to-test",
+      "trim": [297, 210], "folded": [100, 210], "panels": [100, 100, 97], "fold": "vertical",
+      "bleed": 3, "safe": 5, "minDpi": 300,
+      "$description": "Laid out flat, landscape. The panel that folds in is 3 mm narrower so it closes cleanly; the printer's panel sizes win."
+    },
+    "brochure-letter-trifold": {
+      "name": "Brochure US Letter tri-fold (roll fold)", "status": "ready-to-test",
+      "trim": [279.4, 215.9], "folded": [93.7, 215.9], "panels": [93.7, 93.7, 92.0], "fold": "vertical",
+      "bleed": 3.175, "safe": 6.35, "minDpi": 300
+    },
+    "poster-a2": { "name": "Poster A2", "status": "ready-to-test", "trim": [420, 594], "bleed": 3, "safe": 10, "minDpi": 150 },
+    "poster-a1": { "name": "Poster A1", "status": "ready-to-test", "trim": [594, 841], "bleed": 3, "safe": 15, "minDpi": 150 },
+    "rollup-850x2000": {
+      "name": "Roll-up 850 × 2000", "status": "ready-to-test",
+      "trim": [850, 2000], "bleed": 5, "safe": 25, "minDpi": 100, "hiddenBottom": 100,
+      "$description": "hiddenBottom: the part that rolls into the base (vendors use 100 to 200 mm). Nothing important in it; the vendor's spec wins."
+    },
+    "business-card-eu": { "name": "Business card EU", "status": "ready-to-test", "trim": [85, 55], "bleed": 3, "safe": 4, "minDpi": 300 },
+    "business-card-us": { "name": "Business card US", "status": "ready-to-test", "trim": [88.9, 50.8], "bleed": 3.175, "safe": 3.175, "minDpi": 300 },
+    "booth": {
+      "name": "Booth graphics", "status": "in-progress",
+      "trim": null, "bleed": null, "safe": null, "minDpi": 100, "specRequired": true,
+      "$description": "In progress, being tested (Vanesa, 2026-11-20). No default size: every booth part (backwall, counter, header, banner) comes from the vendor's spec."
+    },
+    "print-pdf": {
+      "name": "Print PDF (for screen)", "status": "ready-to-test",
+      "trim": [210, 297], "bleed": 0, "safe": 15, "minDpi": 150, "color": "rgb", "fileType": "PDF",
+      "$description": "A PDF that is read on screen or printed at the office (one-pagers, guides): no bleed, no crop marks, no CMYK. US Letter (215.9 × 279.4) when asked."
+    }
+  }
+}
