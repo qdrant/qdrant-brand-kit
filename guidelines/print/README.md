@@ -71,6 +71,7 @@ The same two text sizes and composition rules as social ([`guidelines/`](../) se
 - **One PDF** at trim size plus bleed, with crop marks outside the bleed, fonts embedded, converted to the printer's CMYK profile and in the file type the spec asks for (PDF/X-4 by default).
 - **One proof image** (PNG) of every page, to review before printing.
 - **Needs Ghostscript** on the computer of whoever makes print creatives, for the CMYK conversion. The export says how to install it if it's missing.
+- **How:** [`review/print.py`](../../review/README.md#print) makes the PDF, the proof and the print checks from the page, this file's format presets and the printer's spec.
 - **Suggest:** have a designer check the proof before it goes to the printer (to be reviewed after testing, 2026-11-20).
 
 ## 6. Formats

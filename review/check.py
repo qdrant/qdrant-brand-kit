@@ -123,6 +123,9 @@ def check_one(m, rules):
     texts = [t for t in m["texts"]]
     main = [t for t in texts if t["role"] == "text"]
     L, T, R, B = S["mx"] * u, S["mt"] * u, W - S["mx"] * u, H - S["mb"] * u
+    pr = m.get("print")
+    if pr:  # print (review/print.py): the margins are the bleed plus the printer's safe area
+        L, T, R, B = pr["marginPx"]["x"], pr["marginPx"]["top"], W - pr["marginPx"]["x"], H - pr["marginPx"]["bottom"]
     out = []
     for kind, items in (("text", [t["box"] for t in texts]), ("logo", [l["rect"] for l in m["logos"]]),
                         ("button", [b["rect"] for b in m["buttons"]])):
@@ -133,10 +136,14 @@ def check_one(m, rules):
         "all inside" if not out else "; ".join(out[:4]) + f" (margins {round(L)}/{round(T)}/{round(W-R)}/{round(H-B)})",
         "checks.md, Inside margins")
 
-    starts = [L + k * (S["col"] + S["gut"]) * u for k in range(S["cols"])]
-    ends = [L + (k * (S["col"] + S["gut"]) + S["col"]) * u for k in range(S["cols"])]
+    col = S["col"] * u
+    if pr:  # the columns share the width inside the print margins
+        col = (R - L - (S["cols"] - 1) * S["gut"] * u) / S["cols"]
+    starts = [L + k * (col + S["gut"] * u) for k in range(S["cols"])]
+    ends = [L + k * (col + S["gut"] * u) + col for k in range(S["cols"])]
     off = []
-    lefts = [("text", t["box"]) for t in main] + [("logo", l["rect"]) for l in m["logos"] if not l.get("inBook")] + \
+    # Text inside a card sits on the card's padding, not on a column line: check the card, not its text.
+    lefts = [("text", t["box"]) for t in main if not t.get("inBox")] + [("logo", l["rect"]) for l in m["logos"] if not l.get("inBook")] + \
             [("card", c["rect"]) for c in m["cards"]]
     # Text after an icon on the same row starts after the icon and a tight gap; the icon is what sits on the grid.
     icon_ends = [(i["rect"]["x"] + i["rect"]["w"], i["rect"]["y"], i["rect"]["h"]) for i in m.get("icons", [])]
@@ -322,6 +329,8 @@ def check_one(m, rules):
     ov = []
     for i, a in enumerate(texts):
         for b in texts[i + 1:]:
+            if a.get("nested") or b.get("nested"):
+                continue  # a bold word inside a sentence is part of that sentence, not a second text
             if overlap(a["box"], b["box"]) > 0.2:
                 ov.append(f"\"{a['text'][:12]}\" × \"{b['text'][:12]}\"")
     big = W * H * 0.6

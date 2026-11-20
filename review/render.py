@@ -55,7 +55,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def translate_path(self, path):
         p = urllib.parse.unquote(path.split("?", 1)[0].split("#", 1)[0])  # e.g. MonaSansVF%5Bwdth...%5D.ttf
-        for prefix, root in (("/repo/", REPO), ("/review/", TOOLS)):
+        for prefix, root in (("/repo/", REPO), ("/review/", TOOLS), *getattr(self.server, "extra", {}).items()):
             if p.startswith(prefix):
                 return os.path.join(root, p[len(prefix):])
         return os.path.join(self.server.page_root, p.lstrip("/"))
@@ -64,7 +64,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         path = self.translate_path(self.path)
         if path.endswith(".html") and os.path.isfile(path):
             html = open(path, encoding="utf-8").read()
-            tag = '<script src="/review/measure.js"></script>'
+            # print.js does nothing unless print.py asked for a print layout (?qd-print=...).
+            tag = '<script src="/review/print.js"></script><script src="/review/measure.js"></script>'
             html = html.replace("</body>", tag + "</body>") if "</body>" in html else html + tag
             data = html.encode("utf-8")
             self.send_response(200)

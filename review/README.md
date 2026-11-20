@@ -11,6 +11,8 @@ For generated images, also use the image checklist in [`brand-assets/imagery/gui
 | `render.py` | Opens a page in headless Chrome at each size, saves `<name>-<shape>.png` (exactly W×H), a `.bg.png` with the text hidden (for contrast), and `<name>-<shape>.json` with the measurements |
 | `measure.js` | Added to the page by `render.py`. Records positions, sizes, fonts, colors and files. No rules |
 | `check.py` | Runs the checks from [`guidelines/layout/checks.md`](../guidelines/layout/checks.md) and the type, logo, button and headshot rules on the measurements. Writes a table and lists what to look at by eye |
+| `print.py` | Print export for one page: lays it out at 300 dpi with the format's bleed and safe area (from [`guidelines/print/print.tokens.json`](../guidelines/print/print.tokens.json) and the printer's spec), then writes the PDF with crop marks, converts it to the printer's CMYK profile with Ghostscript, makes a proof image and runs the print checks. See [Print](#print) |
+| `print.js` | Added to the page by `render.py`. Does nothing unless `print.py` asks for a print layout |
 | `sheet.py` | Puts every render in one labelled `contact-sheet.png`: rows are names, columns are shapes. An option of a shape (`<name>-<shape>-b.png`) gets its own column; `--label name="text"` replaces a row's name |
 
 Needs Google Chrome (or Chromium) and Python 3 with Pillow (`pip install pillow`). Nothing else is installed. `render.py` finds Chrome on a Mac or on Linux (the cloud) by itself; set `QD_CHROME` to its path if it's somewhere else.
@@ -30,6 +32,21 @@ Write the page like this:
 - Put one `.qd-canvas` in the page and add `<script src="/repo/guidelines/layout/canvas.js"></script>`. `render.py` passes `?w=&h=`, and `canvas.js` sets the shape and size from them.
 - If the page loads files from a parent folder (e.g. `../inputs/photo.png`), pass `--root` with that parent folder.
 - Never save pages, photos or renders inside the repo. Use a folder outside it, with absolute paths.
+
+## Print
+
+For anything printed, read [`guidelines/print/`](../guidelines/print/) first. Build the page as usual (one `.qd-canvas`), then:
+
+```bash
+python3 review/print.py my-flyer.html --format flyer-a4 --out out/ --name spring-flyer --icc printer-profile.icc
+```
+
+- `--format` is a preset from `print.tokens.json`. The printer's spec overrides it: `--trim 210x297`, `--bleed 3`, `--safe 5`, `--panels 100,100,97`, `--hidden-bottom 100`, `--pdfx 4`. The checks show which values still come from the preset.
+- `--icc` is the printer's color profile. Without it, or without Ghostscript, the PDF stays in screen colors and the color check fails, with what to do.
+- It writes `<name>.pdf` (for the printer), `<name>-rgb.pdf` (before CMYK, not for the printer), `<name>-proof.png` (the piece after cutting, folds dashed), `<name>-full.png` and `.json` (the 300 dpi render and measurements, for `check.py`) and `<name>-print.md` (the print checks).
+- Print checks: printer's spec, text size, folds, logo size, image resolution, color. Then run `check.py` on the `.json` for the brand checks.
+- Text, logo and button stay vector in the PDF. The backdrop (canvas color, patterns, faded images) goes in as one 300 dpi image, because Chrome's PDF export loses CSS masks.
+- Needs Ghostscript (`brew install ghostscript` on a Mac, `apt install ghostscript` on Linux) on top of what's listed above.
 
 ## What the checks can't judge
 
