@@ -4,6 +4,8 @@ How to make a printed creative: a flyer, a brochure, a poster, a roll-up, a busi
 
 **Everything that isn't physical comes from the same places as social creatives:** the primitives (colors, type, radius), the brand assets (logo, Qbot, imagery, icons), the parts in [`brand-components/`](../../brand-components/) and the composition rules in [`guidelines/`](../) (one hero, two text sizes, button placement). This folder adds what's physical (size, bleed, safe area, margins, folds, resolution, color conversion and export) and the few places where print differs: **no patterns**, a choice between space imagery and a plain look instead of the main-visual question, wider margins, and text sizes in pt (Vanesa, 2026-11-20).
 
+> **Large-format print is in progress** (Vanesa, 2026-11-20). Booths, roll-ups and retractable banners, event backdrops, large banners and posters (A2 and bigger) aren't settled yet: margins, text sizes, image resolution, layout and export still need rules and testing. These rules are written and tested for pieces read up close (flyers, brochures, business cards, print PDFs). For a large-format piece, work from the vendor's spec, treat the result as a test, and have a designer check it. Booths go through the booth workflow in Figma for now.
+
 | File | What it is |
 | --- | --- |
 | `README.md` | The print rules (this page) |
@@ -113,10 +115,10 @@ The presets are in `print.tokens.json`: finished size, bleed, safe area, margin,
 | --- | --- |
 | Flyers: A4, A5, A6, US Letter | Ready to test (A6 proposed 2026-11-20) |
 | Brochures: A4 bi-fold, A4 tri-fold, US Letter tri-fold | Ready to test |
-| Posters: A2, A1 | Ready to test |
-| Roll-up 850 × 2000 | Ready to test |
+| Posters: A2, A1 | In progress (large format, 2026-11-20) |
+| Roll-up 850 × 2000 | In progress (large format, 2026-11-20) |
 | Business cards: EU, US | Ready to test |
-| Booth graphics | In progress (being tested). Always from the vendor's spec: no default size |
+| Booth graphics | In progress (large format). Always from the vendor's spec: no default size |
 | Print PDF (screen PDF, no bleed, no CMYK) | Ready to test |
 
 ## Changing these rules

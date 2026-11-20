@@ -30,10 +30,10 @@
       "trim": [279.4, 215.9], "folded": [93.7, 215.9], "panels": [93.7, 93.7, 92.0], "fold": "vertical",
       "bleed": 3.175, "safe": 6.35, "margin": 9.5, "minDpi": 300
     },
-    "poster-a2": { "name": "Poster A2", "status": "ready-to-test", "trim": [420, 594], "bleed": 3, "safe": 10, "margin": 33.6, "title": 128, "supporting": 48, "titleMin": 128, "supportingMin": 48, "minDpi": 150 },
-    "poster-a1": { "name": "Poster A1", "status": "ready-to-test", "trim": [594, 841], "bleed": 3, "safe": 15, "margin": 47.5, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 150 },
+    "poster-a2": { "name": "Poster A2", "status": "in-progress", "trim": [420, 594], "bleed": 3, "safe": 10, "margin": 33.6, "title": 128, "supporting": 48, "titleMin": 128, "supportingMin": 48, "minDpi": 150 },
+    "poster-a1": { "name": "Poster A1", "status": "in-progress", "trim": [594, 841], "bleed": 3, "safe": 15, "margin": 47.5, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 150 },
     "rollup-850x2000": {
-      "name": "Roll-up 850 × 2000", "status": "ready-to-test",
+      "name": "Roll-up 850 × 2000", "status": "in-progress",
       "trim": [850, 2000], "bleed": 5, "safe": 25, "margin": 68, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 100, "hiddenBottom": 100,
       "$description": "hiddenBottom: the part that rolls into the base (vendors use 100 to 200 mm). Nothing important in it; the vendor's spec wins."
     },

@@ -241,6 +241,8 @@ def main():
     def row(check, ok, detail):
         rows.append((check, "pass" if ok is True else ("fail" if ok is False else ok), detail))
     defaults_used = [x for x in ("finished size", "bleed", "safe area") if x not in from_spec]
+    if fmt.get("status") == "in-progress":  # large format (guidelines/print/, Vanesa 2026-11-20)
+        row("Format", "look", f"{fmt['name']} is in progress: large-format rules aren't settled. Treat this as a test and have a designer check it")
     row("Printer's spec", True if not defaults_used else "look",
         "all from the spec" if not defaults_used else
         "from the preset, not the printer: " + ", ".join(defaults_used) + ". Confirm with the printer")
