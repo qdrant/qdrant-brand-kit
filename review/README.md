@@ -11,7 +11,7 @@ For generated images, also use the image checklist in [`brand-assets/imagery/gui
 | `render.py` | Opens a page in headless Chrome at each size, saves `<name>-<shape>.png` (exactly W×H), a `.bg.png` with the text hidden (for contrast), and `<name>-<shape>.json` with the measurements |
 | `measure.js` | Added to the page by `render.py`. Records positions, sizes, fonts, colors and files. No rules |
 | `check.py` | Runs the checks from [`guidelines/layout/checks.md`](../guidelines/layout/checks.md) and the type, logo, button and headshot rules on the measurements. Writes a table and lists what to look at by eye |
-| `print.py` | Print export for one page: lays it out at 300 dpi with the format's bleed and safe area (from [`guidelines/print/print.tokens.json`](../guidelines/print/print.tokens.json) and the printer's spec), then writes the PDF with crop marks, converts it to the printer's CMYK profile with Ghostscript, makes a proof image and runs the print checks. See [Print](#print) |
+| `print.py` | Print export for one page: lays it out at 300 dpi with the format's bleed and margins (2 × the safe area) (from [`guidelines/print/print.tokens.json`](../guidelines/print/print.tokens.json) and the printer's spec), then writes the PDF with crop marks, converts it to the printer's CMYK profile with Ghostscript, makes a proof image and runs the print checks. See [Print](#print) |
 | `print.js` | Added to the page by `render.py`. Does nothing unless `print.py` asks for a print layout |
 | `sheet.py` | Puts every render in one labelled `contact-sheet.png`: rows are names, columns are shapes. An option of a shape (`<name>-<shape>-b.png`) gets its own column; `--label name="text"` replaces a row's name |
 
@@ -42,9 +42,11 @@ python3 review/print.py my-flyer.html --format flyer-a4 --out out/ --name spring
 ```
 
 - `--format` is a preset from `print.tokens.json`. The printer's spec overrides it: `--trim 210x297`, `--bleed 3`, `--safe 5`, `--panels 100,100,97`, `--hidden-bottom 100`, `--pdfx 4`. The checks show which values still come from the preset.
-- `--icc` is the printer's color profile. Without it, or without Ghostscript, the PDF stays in screen colors and the color check fails, with what to do.
-- It writes `<name>.pdf` (for the printer), `<name>-rgb.pdf` (before CMYK, not for the printer), `<name>-proof.png` (the piece after cutting, folds dashed), `<name>-full.png` and `.json` (the 300 dpi render and measurements, for `check.py`) and `<name>-print.md` (the print checks).
-- Print checks: printer's spec, text size, folds, logo size, image resolution, color. Then run `check.py` on the `.json` for the brand checks.
+- Margins are the bleed plus **2 × the safe area**, from the trim (10 mm with the default 5 mm safe area). The shape and scale come from the finished size, not trim + bleed (Vanesa, 2026-11-20).
+- `--icc` is the printer's color profile. **Without it** the run ends at the proof and `<name>-rgb.pdf` for review, not for the printer, and the color check is 👀. With `--icc` but no Ghostscript, the color check fails, with how to install it.
+- It writes `<name>.pdf` (for the printer, only with `--icc`), `<name>-rgb.pdf` (before CMYK, not for the printer), `<name>-proof.png` (the piece after cutting, folds dashed), `<name>-full.png` and `.json` (the 300 dpi render and measurements, for `check.py`) and `<name>-print.md` (the print checks).
+- Print checks: printer's spec, margin, text size, reversed text (light on dark: 9 pt or more, Regular or heavier), folds, logo size, **no patterns** (any pattern mask, canvas or pattern file fails), QR codes, image resolution, fonts (👀 on Type 3 fonts, which some printers reject; uses `pdffonts` when installed), color. Then run `check.py` on the `.json` for the brand checks.
+- **QR codes:** mark the QR code's element with the class `.qd-qr` (the code plus its quiet zone). The check fails under 20 mm or when it isn't dark on light. Test-scan it from the proof.
 - Text, logo and button stay vector in the PDF. The backdrop (canvas color, patterns, faded images) goes in as one 300 dpi image, because Chrome's PDF export loses CSS masks.
 - Needs Ghostscript (`brew install ghostscript` on a Mac, `apt install ghostscript` on Linux) on top of what's listed above.
 

@@ -2,8 +2,10 @@
 // has ?qd-print=... (set by print.py). Mechanics only: the sizes come from print.py, which reads them
 // from guidelines/print/print.tokens.json and the printer's spec.
 //
-// - Margins: the canvas margins become bleed + safe area, so text, the logo and the button stay
-//   inside the printer's safe area. Folds and a hidden bottom (roll-ups) are passed along for the checks.
+// - Margins: the canvas margins become bleed + 2 × the safe area (guidelines/print/, Vanesa 2026-11-20).
+//   Folds and a hidden bottom (roll-ups) are passed along for the checks.
+// - Shape and scale come from the finished size (the trim), not trim + bleed: print.py passes them.
+// - Records what the print checks need (patterns, QR codes) in <script id="qd-print-measure">.
 // - &qd-layer=backdrop: shows only the backdrop (canvas color, patterns, faded images), for print.py.
 // - With &qd-pdf=1: sets the PDF page to the full size (trim + bleed + room for crop marks), scales the
 //   300 dpi layout down to real size (CSS zoom, so text stays vector and images keep 300 dpi), and
@@ -21,11 +23,32 @@
       c.style.setProperty("--qd-canvas-margin-top", p.margin.top);
       c.style.setProperty("--qd-canvas-margin-bottom", p.margin.bottom);
       c.dataset.print = p.format || "print";
+      if (p.shape) { c.dataset.shape = p.shape; c.setAttribute("data-shape-fixed", ""); }
+      if (p.u) c.style.setProperty("--qd-canvas-u", p.u + "px");
     });
   }
   apply();
   document.addEventListener("DOMContentLoaded", apply);
   window.__qdPrint = p;
+
+  // What the print checks need. Patterns: any pattern mask, any canvas in the creative, or anything
+  // loaded from brand-assets/patterns/. QR codes: elements marked .qd-qr.
+  function record() {
+    var cv = document.querySelector(".qd-canvas");
+    if (!cv) return;
+    var loaded = (performance.getEntriesByType ? performance.getEntriesByType("resource") : [])
+      .map(function (e) { return e.name; }).filter(function (n) { return n.indexOf("/brand-assets/patterns/") >= 0; });
+    var qr = [].map.call(cv.querySelectorAll(".qd-qr"), function (el) {
+      var r = el.getBoundingClientRect();
+      return { x: r.left, y: r.top, w: r.width, h: r.height };
+    });
+    var info = { masks: cv.querySelectorAll(".qd-pattern-mask").length, canvases: cv.querySelectorAll("canvas").length,
+                 patternFiles: loaded.slice(0, 5), qr: qr };
+    var tag = document.getElementById("qd-print-measure");
+    if (!tag) { tag = document.createElement("script"); tag.type = "application/json"; tag.id = "qd-print-measure"; document.body.appendChild(tag); }
+    tag.textContent = JSON.stringify(info);
+  }
+  window.addEventListener("load", function () { record(); setTimeout(record, 1500); });
 
   // The backdrop: the canvas color, patterns and faded images. Chrome's PDF export drops or weakens CSS
   // masks (the pattern mask, the image fade), so print.py photographs the backdrop on its own at 300 dpi

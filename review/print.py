@@ -11,11 +11,15 @@ The format preset comes from guidelines/print/print.tokens.json. Everything the 
 
 It writes, in OUT_DIR:
   <name>.pdf          the print file: trim + bleed + crop marks, fonts embedded, converted to the printer's
-                      CMYK profile when --icc is given and Ghostscript is installed (PDF/X-4 by default)
-  <name>-rgb.pdf      the same before CMYK conversion (screen colors). Not for the printer
+                      CMYK profile (PDF/X-4 by default). Only with --icc and Ghostscript
+  <name>-rgb.pdf      the same before CMYK conversion (screen colors), for review. Not for the printer
   <name>-proof.png    what the printed piece looks like after cutting, folds dashed, for review
   <name>-full.png     the full render with bleed, and <name>-full.json, its measurements for review/check.py
-  <name>-print.md     the print checks: spec, safe area, folds, text size, logo size, image resolution
+  <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, no patterns,
+                      QR codes, image resolution, fonts, color
+
+Margins are bleed + 2 × the safe area (guidelines/print/, Vanesa 2026-11-20). The shape and scale come
+from the finished size (the trim), not trim + bleed.
 
 The page is built like any creative (one .qd-canvas, canvas.js, repo CSS). It's laid out at 300 dpi
 (about 11.8 px per mm), so patterns and images come out at print resolution.
@@ -95,11 +99,13 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     W = round((trim[0] + 2 * bleed) * PX_PER_MM)
     H = round((trim[1] + 2 * bleed) * PX_PER_MM)
-    shape = render.shape_for(W, H)
+    TW, TH = trim[0] * PX_PER_MM, trim[1] * PX_PER_MM
+    shape = render.shape_for(TW, TH)  # from the finished size, not trim + bleed
     ref_w, ref_h = layout_shapes()[shape]
-    u = min(W / ref_w, H / ref_h)
-    m_px = {"x": (bleed + safe) * PX_PER_MM, "top": (bleed + safe) * PX_PER_MM,
-            "bottom": (bleed + safe + hidden) * PX_PER_MM}
+    u = min(TW / ref_w, TH / ref_h)
+    margin = 2 * safe  # the content margin, from the trim (Vanesa, 2026-11-20)
+    m_px = {"x": (bleed + margin) * PX_PER_MM, "top": (bleed + margin) * PX_PER_MM,
+            "bottom": (bleed + margin + hidden) * PX_PER_MM}
     folds_px = []
     if panels:
         x = bleed * PX_PER_MM
@@ -111,6 +117,7 @@ def main():
         "format": a.format, "w": W, "h": H, "dpi": DPI, "pxPerMm": PX_PER_MM, "bleedPx": bleed * PX_PER_MM,
         "slugPx": slug, "markLenPx": 5 * PX_PER_MM, "markGapPx": 1 * PX_PER_MM, "markWeightPx": 0.25 / PT_PER_PX,
         "margin": {k: v / u for k, v in m_px.items()},  # in the layout's reference px, like the shape margins
+        "shape": shape, "u": u,
     }
 
     page = os.path.abspath(a.page)
@@ -135,10 +142,13 @@ def main():
     mm = re.search(r'<script type="application/json" id="qd-measure">(.*?)</script>', dom, re.S)
     if not mm:
         sys.exit("No measurements: did the page load? (one .qd-canvas, canvas.js)")
-    meas = json.loads(mm.group(1).replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&"))
+    unesc = lambda t: t.replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&")
+    meas = json.loads(unesc(mm.group(1)))
+    pm = re.search(r'<script type="application/json" id="qd-print-measure">(.*?)</script>', dom, re.S)
+    pinfo = json.loads(unesc(pm.group(1))) if pm else {"masks": 0, "canvases": 0, "patternFiles": [], "qr": []}
     meas.update(file=os.path.abspath(full_png), page=page, target={"w": W, "h": H, "shape": shape},
                 print={"format": a.format, "trimMm": trim, "bleedMm": bleed, "safeMm": safe, "foldsPx": folds_px,
-                       "hiddenBottomMm": hidden, "marginPx": m_px, "dpi": DPI})
+                       "hiddenBottomMm": hidden, "marginMm": margin, "marginPx": m_px, "uPx": u, "dpi": DPI})
     json.dump(meas, open(os.path.join(a.out, f"{name}-full.json"), "w"), indent=1)
 
     # 2. The PDF: trim + bleed + crop marks, at real size, text vector. The backdrop (canvas color,
@@ -161,12 +171,12 @@ def main():
     if rgb_only:
         shutil.copy(rgb_pdf, final_pdf)
         color_note = "Screen PDF: kept in RGB, as the preset says."
+    elif not a.icc:
+        color_note = ("Not for the printer: no printer's profile. This run made only the proof and an RGB PDF "
+                      f"for review ({name}-rgb.pdf). Ask the printer for their profile (it's in their spec, e.g. "
+                      "FOGRA39 in Europe, GRACoL in the US) and run this again with --icc. Never guess it.")
     elif not gs:
         color_note = GS_INSTALL
-    elif not a.icc:
-        color_note = ("No printer profile (--icc): the PDF wasn't converted to CMYK. Ask the printer for their "
-                      "profile (it's in their spec, e.g. FOGRA39 in Europe, GRACoL in the US). Converting without "
-                      "it risks color shifts, the brand red most of all.")
     else:
         cmd = [gs, "-dSAFER", "-dBATCH", "-dNOPAUSE", "-sDEVICE=pdfwrite", "-dPDFSETTINGS=/prepress",
                "-sColorConversionStrategy=CMYK", "-sProcessColorModel=DeviceCMYK",
@@ -201,11 +211,52 @@ def main():
         "all from the spec" if not defaults_used else
         "from the preset, not the printer: " + ", ".join(defaults_used) + ". Confirm with the printer")
     texts = meas["texts"]
+    full_rgb = Image.open(full_png).convert("RGB")
+    bg_img = Image.open(full_png[:-4] + ".bg.png").convert("RGB")
+    lum = lambda c: (0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]) / 255
+
+    # Margin: nothing closer to the trim than 2 × safe.
+    L, T = m_px["x"], m_px["top"]
+    R, B = W - m_px["x"], H - m_px["bottom"]
+    near = []
+    boxes = [(f"\"{t['text'][:24]}\"", t["box"]) for t in texts if not t.get("nested")]
+    boxes += [("the logo", l["rect"]) for l in meas["logos"]] + [("the button", b["rect"]) for b in meas["buttons"]]
+    boxes += [("a QR code", q) for q in pinfo["qr"]]
+    for label, r in boxes:
+        if r["x"] < L - 1 or r["y"] < T - 1 or r["x"] + r["w"] > R + 1 or r["y"] + r["h"] > B + 1:
+            gap = min(r["x"] - bleed * PX_PER_MM, r["y"] - bleed * PX_PER_MM,
+                      W - bleed * PX_PER_MM - r["x"] - r["w"], H - bleed * PX_PER_MM - r["y"] - r["h"]) / PX_PER_MM
+            near.append(f"{label} {gap:.1f} mm from the trim")
+    row("Margin", not near, f"{margin:g} mm from the trim (2 × the {safe:g} mm safe area)" if not near else
+        "; ".join(near[:4]) + f" (needs {margin:g} mm)")
+
     small = [f"\"{t['text'][:20]}\" {t['fontSize'] * PT_PER_PX:.1f} pt" for t in texts if t["fontSize"] * PT_PER_PX < 8]
     row("Text size", not small, "every text 8 pt or more" if not small else "; ".join(small[:4]))
+
+    # Reversed text: light text on a dark background is at least 9 pt and Regular (400) or heavier.
+    def rgb_of(css):
+        n = re.findall(r"[\d.]+", css or "")
+        return tuple(float(x) for x in n[:3]) if len(n) >= 3 else (0, 0, 0)
+    rev = []
+    for t in texts:
+        if t.get("nested") or lum(rgb_of(t.get("color"))) < 0.5:
+            continue
+        b = t["box"]
+        box = (max(0, int(b["x"])), max(0, int(b["y"])), min(W, int(b["x"] + b["w"])), min(H, int(b["y"] + b["h"])))
+        if box[2] <= box[0] or box[3] <= box[1]:
+            continue
+        crop = bg_img.crop(box).resize((16, 16))
+        behind = sorted(lum(px) for px in crop.getdata())[len(crop.getdata()) // 2]
+        if behind >= 0.5:
+            continue
+        pt = t["fontSize"] * PT_PER_PX
+        if pt < 9 or (t.get("weight") or 400) < 400:
+            rev.append(f"\"{t['text'][:20]}\" {pt:.1f} pt, weight {t.get('weight')}")
+    row("Reversed text", not rev, "light text on dark is 9 pt or more and Regular or heavier" if not rev else
+        "; ".join(rev[:4]) + " (needs 9 pt, Regular or heavier)")
     cross = []
     for fx in folds_px:
-        lo, hi = fx - safe * PX_PER_MM, fx + safe * PX_PER_MM
+        lo, hi = fx - margin * PX_PER_MM, fx + margin * PX_PER_MM
         at = f"the fold {(fx / PX_PER_MM - bleed):.0f} mm from the left edge"
         items = [(f"\"{t['text'][:24]}\"", t["box"]) for t in texts if not t.get("nested")]
         items += [("the logo", l["rect"]) for l in meas["logos"]] + [("the button", b["rect"]) for b in meas["buttons"]]
@@ -219,6 +270,23 @@ def main():
         row("Logo size", lh >= 8.4, f"{lh:.1f} mm tall (at least 8.4 mm)")
     else:
         row("Logo size", False, "no logo")
+    pat = []
+    if pinfo["masks"]: pat.append(f"{pinfo['masks']} pattern mask")
+    if pinfo["canvases"]: pat.append(f"{pinfo['canvases']} pattern canvas")
+    if pinfo["patternFiles"] and not pat: pat.append("files from brand-assets/patterns/")
+    row("No patterns", not pat, "no pattern, no pattern mask" if not pat else
+        ", ".join(pat) + ": no patterns in print (guidelines/print/ section 3)")
+    if pinfo["qr"]:
+        bad = []
+        for q in pinfo["qr"]:
+            side = min(q["w"], q["h"]) / PX_PER_MM
+            box = (int(q["x"]), int(q["y"]), int(q["x"] + q["w"]), int(q["y"] + q["h"]))
+            px = sorted(lum(p) for p in full_rgb.crop(box).resize((64, 64)).getdata())
+            edge = [lum(p) for p in full_rgb.crop((box[0], box[1], box[2], box[1] + 3)).resize((32, 1)).getdata()]
+            dark_on_light = px[len(px) // 20] < 0.35 and min(edge) > 0.7
+            if side < 20: bad.append(f"{side:.1f} mm (needs 20 mm)")
+            if not dark_on_light: bad.append("not dark on light")
+        row("QR codes", not bad, "20 mm or more, dark on light. Test-scan it from the proof" if not bad else "; ".join(bad))
     low = []
     for img in meas["images"]:
         if img in meas["logos"] or img.get("src", "").endswith(".svg") or not img.get("naturalWidth"):
@@ -229,9 +297,23 @@ def main():
             low.append(f"{os.path.basename(img['src'])} {dpi:.0f} dpi")
     row("Image resolution", not low, f"every image {min_dpi} dpi or more" if not low else
         "; ".join(low[:4]) + f" (needs {min_dpi})")
-    row("Color", True if (rgb_only or "Converted" in color_note) else False, color_note.split("\n")[0])
+    # Fonts: Chrome can export variable fonts as Type 3, which some prepress workflows reject.
+    pdf_for_fonts = final_pdf if os.path.exists(final_pdf) else rgb_pdf
+    kinds = []
+    if shutil.which("pdffonts"):
+        out = subprocess.run(["pdffonts", pdf_for_fonts], capture_output=True, text=True).stdout.splitlines()[2:]
+        kinds = ["Type 3" if "Type 3" in ln else "other" for ln in out]
+    else:
+        raw_pdf = open(pdf_for_fonts, "rb").read()
+        kinds = ["Type 3" if k == b"Type3" else "other" for k in re.findall(rb"/Subtype\s*/(Type3|Type1C?|TrueType|Type0|CIDFontType[02]|OpenType)", raw_pdf)]
+    t3 = kinds.count("Type 3")
+    row("Fonts", True if not t3 else "look", "no Type 3 fonts" if not t3 else
+        f"{t3} Type 3 fonts: some printers reject them; check with the printer or outline text")
+    no_profile = not rgb_only and not a.icc
+    row("Color", True if (rgb_only or "Converted" in color_note) else ("look" if no_profile else False),
+        color_note.split(". ")[0] if no_profile else color_note.split("\n")[0])
     md = [f"# Print checks: {name}", "", f"{fmt['name']}: {trim[0]} × {trim[1]} mm, bleed {bleed} mm, "
-          f"safe area {safe} mm" + (f", hidden bottom {hidden} mm" if hidden else "") +
+          f"safe area {safe} mm, margin {margin:g} mm" + (f", hidden bottom {hidden} mm" if hidden else "") +
           (f", panels {' / '.join(f'{p:g}' for p in panels)} mm" if panels else ""), "",
           "| Check | Result | Detail |", "| --- | --- | --- |"]
     md += [f"| {c} | {'✅' if r == 'pass' else ('❌' if r == 'fail' else '👀')} | {d} |" for c, r, d in rows]

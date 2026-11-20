@@ -112,6 +112,8 @@ def check_one(m, rules):
     W, H, shape = m["target"]["w"], m["target"]["h"], m["target"]["shape"]
     S = shapes[shape]
     u = min(W / S["ref"][0], H / S["ref"][1])
+    if (m.get("print") or {}).get("uPx"):  # print: the scale comes from the finished size, not trim + bleed
+        u = m["print"]["uPx"]
     from PIL import Image
     im = Image.open(m["file"]).convert("RGB")
     bg = Image.open(m["file"].replace(".png", ".bg.png")).convert("RGB") if os.path.exists(m["file"].replace(".png", ".bg.png")) else None
@@ -124,7 +126,7 @@ def check_one(m, rules):
     main = [t for t in texts if t["role"] == "text"]
     L, T, R, B = S["mx"] * u, S["mt"] * u, W - S["mx"] * u, H - S["mb"] * u
     pr = m.get("print")
-    if pr:  # print (review/print.py): the margins are the bleed plus the printer's safe area
+    if pr:  # print (review/print.py): the margins are the bleed plus 2 × the printer's safe area
         L, T, R, B = pr["marginPx"]["x"], pr["marginPx"]["top"], W - pr["marginPx"]["x"], H - pr["marginPx"]["bottom"]
     out = []
     for kind, items in (("text", [t["box"] for t in texts]), ("logo", [l["rect"] for l in m["logos"]]),
