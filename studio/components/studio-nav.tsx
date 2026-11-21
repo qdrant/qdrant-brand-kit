@@ -13,6 +13,7 @@ const nav = [
   { href: "/", label: "Overview" },
   { href: "/variations", label: "Variations" },
   { href: "/typography", label: "Typography" },
+  { href: "/color", label: "Color" },
   { href: "/design-system", label: "Design system" },
   { href: "/web", label: "Web" },
   { href: "/app", label: "App" },
