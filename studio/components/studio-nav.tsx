@@ -16,6 +16,7 @@ const nav = [
   { href: "/color", label: "Color" },
   { href: "/design-system", label: "Design system" },
   { href: "/web", label: "Web" },
+  { href: "/space", label: "Space" },
   { href: "/app", label: "App" },
 ]
 

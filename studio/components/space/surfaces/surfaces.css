@@ -1,0 +1,909 @@
+/* Space page, surfaces (Step 9). Class names start with .spsurf-. Palette variables only (the --sp-* scene colors and
+   --qd-color-*), never a hex. */
+
+/* Lit faces and spheres. Dark first: lit faces climb toward the bright violets. In light, the light side is
+   white and the shade is violet, so these swap with the same selector as the --sp-* colors in space.css. */
+.spsurf {
+  --spsurf-face-hi: color-mix(in oklab, var(--sp-glow) 45%, var(--sp-violet));
+  --spsurf-face-lo: var(--sp-violet);
+  --spsurf-face-l: color-mix(in oklab, var(--sp-violet) 55%, var(--sp-bg));
+  --spsurf-face-r: var(--sp-haze);
+  --spsurf-edge-hi: var(--sp-bright);
+  --spsurf-orb-hi: var(--qd-color-indigo-300);
+  --spsurf-orb-mid: var(--qd-color-indigo-700);
+  --spsurf-orb-lo: var(--qd-color-indigo-950);
+}
+.spsurf:where([data-theme="light"], [data-theme="light"] *):not(:where([data-theme="light"] [data-theme="dark"], [data-theme="light"] [data-theme="dark"] *)) {
+  --spsurf-face-hi: var(--qd-color-neutral-0);
+  --spsurf-face-lo: var(--qd-color-indigo-50);
+  --spsurf-face-l: var(--qd-color-indigo-200);
+  --spsurf-face-r: var(--qd-color-indigo-300);
+  --spsurf-edge-hi: var(--sp-glow);
+  --spsurf-orb-hi: var(--qd-color-indigo-100);
+  --spsurf-orb-mid: var(--qd-color-indigo-400);
+  --spsurf-orb-lo: var(--qd-color-indigo-700);
+}
+
+/* The plain card most surfaces start from, and its padding. */
+.spsurf-card {
+  position: relative;
+  width: min(100%, 340px);
+  overflow: hidden;
+  border: 1px solid var(--sp-line);
+  border-radius: var(--radius-2xl);
+  background: var(--sp-surface);
+}
+.spsurf-body {
+  position: relative;
+  padding: 24px;
+}
+
+/* Halftone corner */
+@property --spsurf-reach {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+.spsurf-halftone {
+  transition: --spsurf-reach 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.spsurf-halftone:hover {
+  --spsurf-reach: 48px;
+}
+/* The band the dots live in, above the copy: it fades out over its lower half, so the dots stop before the
+   kicker, even on hover. */
+.spsurf-halftone__field {
+  position: relative;
+  height: 136px;
+  mask-image: linear-gradient(to bottom, black 40%, transparent);
+}
+/* Each layer: one dot size on the shared 8px grid (anchored to the corner), masked to a reach from the
+   corner with a 40px fade, so smaller dots take over as the bigger ones fade. */
+.spsurf-halftone__dots {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 4px 4px, var(--sp-glow) var(--spsurf-r), transparent calc(var(--spsurf-r) + 0.6px)) 100% 0 / 8px 8px;
+  mask-image: radial-gradient(
+    circle at 100% 0,
+    black calc(var(--spsurf-reach) + var(--spsurf-at) - 40px),
+    transparent calc(var(--spsurf-reach) + var(--spsurf-at))
+  );
+}
+.spsurf-halftone__dots--1 {
+  --spsurf-r: 3.2px;
+  --spsurf-at: 80px;
+}
+.spsurf-halftone__dots--2 {
+  --spsurf-r: 2.5px;
+  --spsurf-at: 128px;
+}
+.spsurf-halftone__dots--3 {
+  --spsurf-r: 1.8px;
+  --spsurf-at: 176px;
+}
+.spsurf-halftone__dots--4 {
+  --spsurf-r: 1.2px;
+  --spsurf-at: 224px;
+}
+.spsurf-halftone__dots--5 {
+  --spsurf-r: 0.7px;
+  --spsurf-at: 272px;
+}
+
+/* Hex mesh */
+@property --spsurf-mx {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 72%;
+}
+@property --spsurf-my {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 24%;
+}
+.spsurf-hexmesh {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 304px;
+  transition:
+    --spsurf-mx 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    --spsurf-my 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.spsurf-hexmesh:hover {
+  transition-duration: 0.1s;
+}
+/* The lattice tile: flat-top hexagons with 15px sides, rows 26px apart. It's drawn shifted down a quarter row,
+   so no horizontal edge falls on the tile's seam. Used as a mask, so the color comes from the palette. */
+.spsurf-hexmesh__field {
+  --spsurf-hex: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='45' height='26'><path d='M7.5 6.5H22.5L30 19.5H45M7.5 6.5L0 19.5L3.75 26M3.75 0L7.5 6.5M30 19.5L26.25 26M26.25 0L22.5 6.5' fill='none' stroke='black'/></svg>");
+  position: absolute;
+  inset: 0;
+  mask-image: linear-gradient(to bottom, black 30%, transparent 78%);
+}
+.spsurf-hexmesh__lattice,
+.spsurf-hexmesh__lit {
+  position: absolute;
+  inset: 0;
+}
+.spsurf-hexmesh__lattice {
+  background: color-mix(in oklab, var(--sp-line) 60%, transparent);
+  mask: var(--spsurf-hex) 0 0 / 45px 26px;
+}
+.spsurf-hexmesh__lit {
+  background: var(--sp-bright);
+  mask:
+    var(--spsurf-hex) 0 0 / 45px 26px,
+    radial-gradient(circle 88px at var(--spsurf-mx) var(--spsurf-my), black, transparent);
+  mask-composite: intersect;
+}
+.spsurf-hexmesh__cell {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+}
+.spsurf-hexmesh__cell polygon {
+  fill: none;
+  stroke: var(--sp-accent);
+  stroke-width: 1;
+}
+.spsurf-hexmesh__readout {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 4px;
+  background: var(--sp-surface);
+}
+
+/* Dot-matrix metric */
+.spsurf-dm {
+  display: flex;
+  flex-direction: column;
+}
+.spsurf-dm__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.spsurf-dm__live {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sp-accent);
+  animation: spsurf-blink 2s step-end infinite;
+}
+@keyframes spsurf-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+.spsurf-dm__chart {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 32px);
+}
+/* 72 columns (the data twice), stepping left one 8px column at a time. */
+.spsurf-dm__strip {
+  display: flex;
+  width: max-content;
+  animation: spsurf-dm-step 21.6s steps(36) infinite;
+}
+@keyframes spsurf-dm-step {
+  to {
+    translate: -288px 0;
+  }
+}
+.spsurf-dm__col {
+  position: relative;
+  width: 8px;
+  height: 80px;
+  background: radial-gradient(circle at 4px 4px, color-mix(in oklab, var(--sp-line) 45%, transparent) 1.75px, transparent 2.25px) 0 0 / 8px 8px;
+}
+/* The lit dots, counted from the bottom; the top one is brighter, like a peak hold. */
+.spsurf-dm__col::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: calc(var(--spsurf-v) * 8px);
+  background:
+    radial-gradient(circle at 4px 4px, var(--sp-bright) 1.75px, transparent 2.25px) 0 0 / 8px 8px no-repeat,
+    radial-gradient(circle at 4px 4px, var(--sp-glow) 1.75px, transparent 2.25px) 0 100% / 8px 8px;
+}
+.spsurf-dm__axis {
+  height: 4px;
+  margin-bottom: 16px;
+  border-top: 1px solid var(--sp-line);
+  background: linear-gradient(to right, var(--sp-line) 1px, transparent 1px) 0 0 / 32px 100% repeat-x;
+}
+
+/* Orbit border */
+.spsurf-orbit {
+  overflow: visible;
+}
+.spsurf-orbit__path {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  overflow: visible;
+  pointer-events: none;
+}
+/* Each dash is as long as its layer and repeats every lap, so it crosses the path's start without a gap. Its
+   head sits at the orbit's position; the animation moves that position once round the border. */
+.spsurf-orbit__path path {
+  fill: none;
+  stroke: var(--sp-bright);
+  stroke-width: 1;
+  stroke-dashoffset: var(--spsurf-dash);
+  animation: spsurf-orbit 10s linear infinite;
+}
+@keyframes spsurf-orbit {
+  to {
+    stroke-dashoffset: calc(var(--spsurf-dash) - var(--spsurf-len));
+  }
+}
+/* The trail, about 40px, brightening in three steps toward the head. */
+.spsurf-orbit__path .spsurf-orbit__trail--3 {
+  opacity: 0.3;
+}
+.spsurf-orbit__path .spsurf-orbit__trail--2 {
+  opacity: 0.4;
+}
+.spsurf-orbit__path .spsurf-orbit__trail--1 {
+  opacity: 0.6;
+}
+/* The head: a 3px dot with a soft glow about 8px across. */
+.spsurf-orbit__path--lit {
+  filter: drop-shadow(0 0 3px var(--sp-bright)) drop-shadow(0 0 1px var(--sp-bright));
+}
+.spsurf-orbit__path .spsurf-orbit__head {
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.spsurf-orbit__etch {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+/* Blueprint */
+.spsurf-blueprint {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 304px;
+  background: color-mix(in oklab, var(--sp-haze) 55%, var(--sp-surface));
+}
+.spsurf-blueprint__grid {
+  position: absolute;
+  inset: 20px 0 0 20px;
+}
+.spsurf-blueprint__grid::before,
+.spsurf-blueprint__grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+/* Vertical lines every 8px, stronger every 32px, dashed down their length. */
+.spsurf-blueprint__grid::before {
+  background:
+    linear-gradient(to right, color-mix(in oklab, var(--sp-line) 80%, transparent) 1px, transparent 1px) 0 0 / 32px 100%,
+    linear-gradient(to right, color-mix(in oklab, var(--sp-line) 40%, transparent) 1px, transparent 1px) 0 0 / 8px 100%;
+  mask-image: repeating-linear-gradient(to bottom, black 0 2px, transparent 2px 4px);
+}
+/* Horizontal lines, dashed along their length. */
+.spsurf-blueprint__grid::after {
+  background:
+    linear-gradient(to bottom, color-mix(in oklab, var(--sp-line) 80%, transparent) 1px, transparent 1px) 0 0 / 100% 32px,
+    linear-gradient(to bottom, color-mix(in oklab, var(--sp-line) 40%, transparent) 1px, transparent 1px) 0 0 / 100% 8px;
+  mask-image: repeating-linear-gradient(to right, black 0 2px, transparent 2px 4px);
+}
+.spsurf-blueprint__ruler {
+  position: absolute;
+  background-color: var(--sp-surface);
+}
+/* Ticks every 8px, longer every 32px, on the ruler's inner edge. */
+.spsurf-blueprint__ruler--x {
+  top: 0;
+  left: 20px;
+  right: 0;
+  height: 20px;
+  border-bottom: 1px solid var(--sp-line);
+  background-image:
+    linear-gradient(to right, var(--sp-label) 1px, transparent 1px),
+    linear-gradient(to right, var(--sp-line) 1px, transparent 1px);
+  background-size: 32px 8px, 8px 4px;
+  background-position: 0 100%, 0 100%;
+  background-repeat: repeat-x;
+}
+.spsurf-blueprint__ruler--x .sp-readout {
+  position: absolute;
+  top: 4px;
+  translate: 4px 0;
+}
+.spsurf-blueprint__ruler--y {
+  top: 20px;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  border-right: 1px solid var(--sp-line);
+  background-image:
+    linear-gradient(to bottom, var(--sp-label) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--sp-line) 1px, transparent 1px);
+  background-size: 8px 32px, 4px 8px;
+  background-position: 100% 0, 100% 0;
+  background-repeat: repeat-y;
+}
+/* The origin, where the rulers meet: a crosshair in the accent. */
+.spsurf-blueprint__origin {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  background:
+    linear-gradient(var(--sp-accent) 0 0) 7px 0 / 1px 100% no-repeat,
+    linear-gradient(var(--sp-accent) 0 0) 0 7px / 100% 1px no-repeat;
+}
+.spsurf-blueprint__coord {
+  position: absolute;
+}
+.spsurf-blueprint__coord--near {
+  top: 28px;
+  left: 28px;
+}
+.spsurf-blueprint__coord--far {
+  right: 8px;
+  bottom: 8px;
+}
+.spsurf-blueprint__body {
+  position: relative;
+  padding: 24px 24px 40px 44px;
+}
+
+/* Ticket */
+.spsurf-ticket {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 340px);
+}
+/* A part is a hairline shell (the line color) around a fill. Both are cut by the same notches: 12px from the
+   shell's corner, 11px from the fill's, so a 1px hairline follows the cut. */
+.spsurf-ticket__part {
+  position: relative;
+  background: var(--sp-line);
+  mask-composite: intersect;
+}
+.spsurf-ticket__fill {
+  position: relative;
+  background: var(--sp-surface);
+  mask-composite: intersect;
+}
+.spsurf-ticket__part--body {
+  padding: 1px 1px 0;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  mask-image:
+    radial-gradient(circle at 0 100%, transparent 12px, black 12.5px),
+    radial-gradient(circle at 100% 100%, transparent 12px, black 12.5px);
+}
+.spsurf-ticket__part--body > .spsurf-ticket__fill {
+  padding: 24px 24px 28px;
+  border-radius: calc(var(--radius-2xl) - 1px) calc(var(--radius-2xl) - 1px) 0 0;
+  mask-image:
+    radial-gradient(circle at -1px 100%, transparent 11px, black 11.5px),
+    radial-gradient(circle at calc(100% + 1px) 100%, transparent 11px, black 11.5px);
+}
+.spsurf-ticket__part--stub {
+  padding: 0 1px 1px;
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+  mask-image:
+    radial-gradient(circle at 0 0, transparent 12px, black 12.5px),
+    radial-gradient(circle at 100% 0, transparent 12px, black 12.5px);
+  transform-origin: 0 0;
+  transition:
+    translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    rotate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.spsurf-ticket:hover .spsurf-ticket__part--stub {
+  translate: 0 4px;
+  rotate: 1.5deg;
+}
+.spsurf-ticket__part--stub > .spsurf-ticket__fill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  border-radius: 0 0 calc(var(--radius-2xl) - 1px) calc(var(--radius-2xl) - 1px);
+  mask-image:
+    radial-gradient(circle at -1px 0, transparent 11px, black 11.5px),
+    radial-gradient(circle at calc(100% + 1px) 0, transparent 11px, black 11.5px);
+}
+.spsurf-ticket__perf {
+  position: absolute;
+  top: 0;
+  inset-inline: 16px;
+  height: 1px;
+  background: repeating-linear-gradient(to right, var(--sp-line) 0 4px, transparent 4px 8px);
+}
+.spsurf-ticket__code {
+  color: var(--sp-star);
+}
+.spsurf-ticket__bars {
+  flex: none;
+  width: 96px;
+  height: 24px;
+}
+
+/* Orb behind glass */
+.spsurf-orb {
+  position: relative;
+  width: min(100%, 340px);
+  padding-top: 72px;
+}
+/* Lit from above: the highlight near the top, the shade falling into deep violet, and a hairline rim. */
+.spsurf-orb__sphere {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  width: 176px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 12%, var(--spsurf-orb-hi), var(--spsurf-orb-mid) 42%, var(--spsurf-orb-lo) 80%);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--sp-bright) 50%, transparent),
+    0 -4px 24px color-mix(in oklab, var(--sp-glow) 20%, transparent);
+  transition: translate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.spsurf-orb:hover .spsurf-orb__sphere {
+  translate: 0 -8px;
+}
+.spsurf-orb__glass {
+  position: relative;
+  padding: 24px 24px 48px;
+  border-radius: var(--radius-2xl);
+  background: color-mix(in oklab, var(--sp-surface) 55%, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--sp-star) 12%, transparent);
+}
+/* The glass edge: a 1px gradient border, brighter at the top. */
+.spsurf-orb__glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    170deg,
+    color-mix(in oklab, var(--sp-bright) 55%, transparent),
+    color-mix(in oklab, var(--sp-line) 30%, transparent) 40%,
+    color-mix(in oklab, var(--sp-line) 15%, transparent)
+  );
+  mask:
+    linear-gradient(black 0 0) content-box,
+    linear-gradient(black 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.spsurf-orb__etch {
+  position: absolute;
+  right: 24px;
+  bottom: 20px;
+}
+
+/* Horizon header */
+.spsurf-horizon {
+  position: relative;
+  height: 152px;
+  overflow: hidden;
+  background: var(--sp-bg);
+  border-bottom: 1px solid var(--sp-grid);
+}
+.spsurf-horizon__stars {
+  mask-image: linear-gradient(to bottom, black 20%, transparent 72%);
+}
+.spsurf-horizon__haze {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(70% 55% at 50% 100%, color-mix(in oklab, var(--sp-violet) 85%, transparent), transparent 75%);
+}
+/* A planet 720px across, its top 104px down the header: an arc that drops about 40px to the card's sides. */
+.spsurf-horizon__planet {
+  position: absolute;
+  top: 104px;
+  left: 50%;
+  width: 720px;
+  aspect-ratio: 1;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 0%, var(--sp-surface), var(--sp-bg) 10%);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--sp-bright) 70%, transparent),
+    0 -1px 8px color-mix(in oklab, var(--sp-glow) 55%, transparent),
+    0 -16px 56px color-mix(in oklab, var(--sp-glow) 26%, transparent);
+}
+.spsurf-horizon__planet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(22% 1% at 50% 0%, color-mix(in oklab, var(--sp-bright) 60%, transparent), transparent);
+}
+.spsurf-horizon__hit {
+  position: absolute;
+  top: 36px;
+  left: 228px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--sp-accent);
+  outline: 1px solid color-mix(in oklab, var(--sp-accent) 50%, transparent);
+  outline-offset: 3px;
+}
+.spsurf-horizon__score {
+  position: absolute;
+  top: 33px;
+  left: 244px;
+  color: var(--sp-star);
+}
+
+/* Stacked deck */
+.spsurf-stack {
+  --spsurf-fan: 3deg;
+  position: relative;
+  width: min(100% - 64px, 320px);
+}
+.spsurf-stack:hover {
+  --spsurf-fan: 5deg;
+}
+/* The sheets turn about a point below the deck, so their tops fan out further than their bottoms. */
+.spsurf-stack__sheet {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--sp-line);
+  border-radius: var(--radius-2xl);
+  background: var(--sp-surface);
+  transform-origin: 50% 160%;
+  rotate: calc(var(--spsurf-k) * var(--spsurf-fan));
+  transition: rotate 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.spsurf-stack__sheet--1 {
+  --spsurf-k: 1;
+  background: color-mix(in oklab, var(--sp-surface) 75%, var(--sp-bg));
+}
+.spsurf-stack__sheet--2 {
+  --spsurf-k: 2;
+  border-color: color-mix(in oklab, var(--sp-line) 75%, transparent);
+  background: color-mix(in oklab, var(--sp-surface) 50%, var(--sp-bg));
+}
+.spsurf-stack__sheet--3 {
+  --spsurf-k: 3;
+  border-color: color-mix(in oklab, var(--sp-line) 50%, transparent);
+  background: color-mix(in oklab, var(--sp-surface) 25%, var(--sp-bg));
+}
+.spsurf-stack__card {
+  position: relative;
+  padding: 24px;
+  border: 1px solid var(--sp-line);
+  border-radius: var(--radius-2xl);
+  background: var(--sp-surface);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--sp-star) 10%, transparent);
+  transition: translate 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.spsurf-stack:hover .spsurf-stack__card {
+  translate: 0 -4px;
+}
+.spsurf-stack__index {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+/* Spotlight */
+@property --spsurf-sx {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+@property --spsurf-sy {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+@property --spsurf-on {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.5;
+}
+/* No clipping, so the lit rim can sit on the border. At rest the light falls from the top center. */
+.spsurf-spot {
+  --spsurf-sx: 50%;
+  --spsurf-sy: 0%;
+  --spsurf-on: 0.5;
+  overflow: visible;
+  transition:
+    --spsurf-sx 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    --spsurf-sy 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    --spsurf-on 0.3s;
+}
+.spsurf-spot:hover {
+  --spsurf-on: 1;
+  transition-duration: 0.12s, 0.12s, 0.3s;
+}
+.spsurf-spot__light,
+.spsurf-spot__rim {
+  position: absolute;
+  opacity: var(--spsurf-on);
+  pointer-events: none;
+}
+.spsurf-spot__light {
+  inset: 0;
+  border-radius: calc(var(--radius-2xl) - 1px);
+  background: radial-gradient(circle 200px at var(--spsurf-sx) var(--spsurf-sy), color-mix(in oklab, var(--sp-glow) 16%, transparent), transparent);
+}
+.spsurf-spot__rim {
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: radial-gradient(circle 120px at var(--spsurf-sx) var(--spsurf-sy), var(--sp-bright), transparent);
+  mask:
+    linear-gradient(black 0 0) content-box,
+    linear-gradient(black 0 0);
+  mask-composite: exclude;
+}
+
+/* Chamfer */
+/* The shell is the hairline: lit along the top edge, the line color below. Its corners: 8px rounded top left
+   and bottom right, 24px chamfers top right and bottom left. */
+.spsurf-chamfer {
+  --spsurf-c: 24px;
+  position: relative;
+  width: min(100%, 340px);
+  padding: 1px;
+  border-radius: var(--radius-lg) 0;
+  background: linear-gradient(to bottom, color-mix(in oklab, var(--spsurf-edge-hi) 70%, var(--sp-line)), var(--sp-line) 40%);
+  clip-path: polygon(0 0, calc(100% - var(--spsurf-c)) 0, 100% var(--spsurf-c), 100% 100%, var(--spsurf-c) 100%, 0 calc(100% - var(--spsurf-c)));
+}
+/* The fill, 1px in. Its chamfer is shorter by 2 - sqrt 2 (0.59px), so the hairline on the diagonal is 1px too. */
+.spsurf-chamfer__face {
+  --spsurf-c: 23.41px;
+  position: relative;
+  padding: 32px;
+  border-radius: calc(var(--radius-lg) - 1px) 0;
+  background: var(--sp-surface);
+  clip-path: polygon(0 0, calc(100% - var(--spsurf-c)) 0, 100% var(--spsurf-c), 100% 100%, var(--spsurf-c) 100%, 0 calc(100% - var(--spsurf-c)));
+}
+.spsurf-chamfer__rivet {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--sp-line);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sp-dim) 1px, transparent 1.5px);
+}
+.spsurf-chamfer__rivet--tl {
+  top: 12px;
+  left: 12px;
+}
+.spsurf-chamfer__rivet--br {
+  right: 12px;
+  bottom: 12px;
+}
+/* An alignment tick parallel to the top chamfer, 8px in from it. */
+.spsurf-chamfer__tick {
+  position: absolute;
+  top: 17px;
+  right: 17px;
+  width: 12px;
+  height: 1px;
+  background: var(--sp-accent);
+  translate: 50% -50%;
+  rotate: 45deg;
+}
+.spsurf-chamfer__part {
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* Scanline */
+.spsurf-scan {
+  position: relative;
+  height: 144px;
+  overflow: hidden;
+  background: var(--sp-bg);
+  border-bottom: 1px solid var(--sp-grid);
+}
+.spsurf-scan__dots,
+.spsurf-scan__lit {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 4px 4px, var(--spsurf-dot) 1px, transparent 1.6px) 0 0 / 8px 8px;
+}
+.spsurf-scan__dots {
+  --spsurf-dot: var(--sp-line);
+}
+/* The lit dots: a 48px band that ends at the line, brightest at the line and fading above it. The line runs
+   from 8px above the header to 8px below it (y -8 to 152) in 4.8s. */
+.spsurf-scan__lit {
+  --spsurf-dot: var(--sp-bright);
+  mask: linear-gradient(to bottom, transparent, black) 0 -56px / 100% 48px no-repeat;
+  animation: spsurf-scan-lit 4.8s linear infinite;
+}
+@keyframes spsurf-scan-lit {
+  to {
+    mask-position: 0 104px;
+  }
+}
+.spsurf-scan__beam {
+  position: absolute;
+  top: -32px;
+  inset-inline: 0;
+  height: 33px;
+  border-bottom: 1px solid var(--sp-bright);
+  background: linear-gradient(to bottom, transparent, color-mix(in oklab, var(--sp-glow) 18%, transparent));
+  translate: 0 -8px;
+  animation: spsurf-scan-beam 4.8s linear infinite;
+}
+@keyframes spsurf-scan-beam {
+  to {
+    translate: 0 152px;
+  }
+}
+/* The result: a dot at y 84, which the line reaches 57.5% of the way through its run. */
+.spsurf-scan__hit,
+.spsurf-scan__score {
+  position: absolute;
+  opacity: 0;
+  animation: spsurf-scan-hit 4.8s linear infinite;
+}
+.spsurf-scan__hit {
+  top: 81px;
+  left: 209px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sp-accent);
+}
+.spsurf-scan__score {
+  top: 79px;
+  left: 224px;
+  color: var(--sp-star);
+}
+@keyframes spsurf-scan-hit {
+  0%,
+  57% {
+    opacity: 0;
+  }
+  58%,
+  86% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.spsurf-scan__label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px;
+  background: var(--sp-bg);
+}
+
+/* Dot ribbon: the canvas lies on the card's surface (scene.tsx paints --sp-bg, so it's cleared here). */
+.spsurf-ribbon {
+  --sp-bg: transparent;
+  position: relative;
+  height: 136px;
+}
+.spsurf-ribbon + .spsurf-body {
+  padding-top: 0;
+}
+
+/* Hex badge */
+.spsurf-hexb__emblem {
+  position: relative;
+  margin-bottom: 24px;
+}
+.spsurf-hexb__emblem > span {
+  position: absolute;
+  inset: 0;
+}
+.spsurf-hexb__edge {
+  background: linear-gradient(to bottom, var(--spsurf-edge-hi), var(--sp-line) 45%);
+}
+.spsurf-hexb__left {
+  background: var(--spsurf-face-l);
+}
+.spsurf-hexb__right {
+  background: var(--spsurf-face-r);
+}
+.spsurf-hexb__top {
+  background: linear-gradient(to bottom, var(--spsurf-face-hi), var(--spsurf-face-lo) 88%);
+}
+.spsurf-hexb__etch {
+  background: color-mix(in oklab, var(--spsurf-edge-hi) 40%, transparent);
+}
+.spsurf-hexb__core {
+  background: var(--sp-accent);
+}
+
+/* Telemetry footer */
+.spsurf-telemetry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 24px;
+  border-top: 1px solid var(--sp-grid);
+  background: color-mix(in oklab, var(--sp-bg) 60%, var(--sp-surface));
+}
+.spsurf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid var(--sp-line);
+  border-radius: var(--radius-sm);
+}
+.spsurf-chip__value {
+  color: var(--sp-star);
+}
+.spsurf-chip__mark {
+  width: 4px;
+  height: 4px;
+}
+.spsurf-chip__mark--ok {
+  background: var(--sp-bright);
+}
+.spsurf-chip__mark--idle {
+  background: var(--sp-dim);
+}
+.spsurf-chip__mark--live {
+  background: var(--sp-accent);
+  animation: spsurf-blink 2s step-end infinite;
+}
+
+/* Dither fill: the canvas is the fill; the copy sits on the ramp's quiet end, at the bottom. */
+.spsurf-dither {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 320px;
+}
+
+/* Reduced motion: no animations or transitions; the moving parts rest where they read best. */
+@media (prefers-reduced-motion: reduce) {
+  .spsurf-halftone,
+  .spsurf-hexmesh,
+  .spsurf-ticket__part--stub,
+  .spsurf-orb__sphere,
+  .spsurf-stack__sheet,
+  .spsurf-stack__card,
+  .spsurf-spot {
+    transition: none;
+  }
+  .spsurf-dm__live,
+  .spsurf-dm__strip,
+  .spsurf-chip__mark--live {
+    animation: none;
+  }
+  .spsurf-orbit__path path {
+    animation: none;
+    stroke-dashoffset: calc(var(--spsurf-dash) - 0.2 * var(--spsurf-len));
+  }
+  .spsurf-scan__lit {
+    animation: none;
+    mask-position: 0 48px;
+  }
+  .spsurf-scan__beam {
+    animation: none;
+    translate: 0 96px;
+  }
+  .spsurf-scan__hit,
+  .spsurf-scan__score {
+    animation: none;
+    opacity: 1;
+  }
+}
