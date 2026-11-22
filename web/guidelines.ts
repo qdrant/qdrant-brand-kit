@@ -119,7 +119,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Icon lines are pixel perfect",
-        text: "An icon's line is always 1px, 1.5px or 2px, never a fraction from scaling. Take Lucide's default width for the icon's size (2px at 24px, so 1.67px at 20px) and round it up: 2px from 19px, 1.5px from 13 to 18px, 1px up to 12px. So the icon tiles get 1.5px (16px icon, small tile) and 2px (20px and 24px icons).",
+        text: "An icon's line is always 1px, 1.5px or 2px, by its size, never a fraction from scaling: 1px for 12, 14, 16 and 18px icons, 1.5px for 20, 24 and 32px, 2px for 40px and above.",
         decided: "Juan, 2026-11-22",
         source: "web/styles/web.css",
       },

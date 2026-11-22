@@ -294,10 +294,10 @@
   --tone-edge: var(--web-tone-orange-edge);
   --tone-fg: var(--web-tone-orange-fg);
 }
-/* Icon lines are pixel perfect (Juan, 2026-11-22): a Lucide icon's line is always 1px, 1.5px or 2px, never the
-   fraction Lucide's scaling gives (2 units on a 24 grid, so 1.67px at 20px). Its default width for its size, rounded
-   up: 2px from 19px, 1.5px from 13 to 18px, 1px up to 12px. The icon is a size container, so the width follows
-   whatever size a section gives it, and the stroke doesn't scale with the drawing. */
+/* Icon lines are pixel perfect (Juan, 2026-11-22): a Lucide icon's line is always 1px, 1.5px or 2px, by the icon's
+   size: 1px up to 18px (12, 14, 16, 18), 1.5px from 20 to 32px (20, 24, 32), 2px from 40px. The icon is a size
+   container, so the width follows whatever size a section gives it, and the stroke doesn't scale with the
+   drawing. */
 [data-web] svg.lucide {
   container-type: size;
 }
@@ -305,12 +305,12 @@
   vector-effect: non-scaling-stroke;
   stroke-width: 2px;
 }
-@container (max-width: 18.5px) {
+@container (max-width: 36px) {
   [data-web] svg.lucide * {
     stroke-width: 1.5px;
   }
 }
-@container (max-width: 12.5px) {
+@container (max-width: 19px) {
   [data-web] svg.lucide * {
     stroke-width: 1px;
   }
