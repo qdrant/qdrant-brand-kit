@@ -4,7 +4,7 @@
    - default: the page is background/default, cards background/raised, menus background/overlay.
    - raised: a raised band. The page is background/raised and cards step up one.
    On dark the website is quieter than the roles (Juan, 2026-11-21): menus sit on neutral-925, cards a touch darker
-   (a trial, 2026-11-22), the
+   (2026-11-22), the
    highlight and hovers on neutral-900, and a raised band's cards on neutral-900, so nothing floats too bright.
    Light: default neutral-25, raised and overlay white, highlight neutral-50, as the roles. The --web-surface-*
    values are set per theme below (the last dark selector covers menus that open on <body> under a dark <html>); the roles flip with data-theme by themselves (primitives/colors). Load this
@@ -22,8 +22,8 @@
 [data-web][data-theme="dark"],
 [data-web] [data-theme="dark"],
 [data-theme="dark"] [data-web] {
-  /* A trial (Juan, 2026-11-22): cards a touch darker than neutral-925, 40% of the way to the page's neutral-950,
-     for a quieter, more modern site. The palette has no step between them; if it's kept, it may become one. */
+  /* Cards a touch darker than neutral-925, 40% of the way to the page's neutral-950, for a quieter, more modern
+     site (Juan, 2026-11-22). The palette has no step between them, so it's a mix of the two. */
   --web-surface-card: color-mix(in oklab, var(--qd-color-neutral-925) 60%, var(--qd-color-neutral-950));
   --web-surface-popover: var(--qd-color-neutral-925);
   --web-surface-highlight: var(--qd-color-neutral-900);
