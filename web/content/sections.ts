@@ -20,8 +20,11 @@ export type Feature = {
   points?: { label?: string; text: string }[]
   // In a grid, take the whole row (a closing card under the others).
   wide?: boolean
-  // A real image, product screen or diagram for the feature's media (web/visuals), instead of a placeholder.
+  // A real image, product screen or diagram for the feature's media (web/visuals), instead of a placeholder. It sits
+  // in a frame (a plate in a tray) that hugs it, on the outer side of the row when there's room; "none" shows it
+  // bare, for a visual with its own look (the globe).
   visual?: ReactNode
+  visualFrame?: "plate" | "none"
 }
 
 // Home: the case-study carousel's companies (from its links) and the button under it.

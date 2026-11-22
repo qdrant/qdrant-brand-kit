@@ -101,7 +101,8 @@ import { CloudLogo } from "../lib/cloud-logo"
 
 // Console mockups. Each is a picture of the product: one image for assistive tech, inert inside.
 
-// Anchored at the Figma's offset (98, 92) inside the visual and cropped by its right and bottom edges.
+// The screen set in from the frame's top-left corner and cropped by its right and bottom edges, as in the Figma, so
+// the frame's surface (a card pattern like the depth haze) shows around it.
 function ConsoleFrame({
   label,
   className,
@@ -116,7 +117,7 @@ function ConsoleFrame({
       role="img"
       aria-label={label}
       data-context="product"
-      className="absolute top-8 right-0 bottom-0 left-6 overflow-hidden rounded-tl-xl border-t border-l bg-background sm:top-22 sm:left-24"
+      className="absolute top-8 right-0 bottom-0 left-6 overflow-hidden rounded-tl-xl border-t border-l bg-background sm:top-12 sm:left-14"
     >
       <div inert className={className}>
         {children}
@@ -617,7 +618,7 @@ function ClusterOverviewMockup() {
 function BackupScheduleMockup() {
   return (
     <>
-      <div className="absolute inset-x-0 top-10 flex justify-center">
+      <div className="absolute inset-x-0 top-6 flex justify-center">
         <div
           role="img"
           aria-label="Qdrant Cloud console: Set up Backup Schedule dialog"
@@ -716,9 +717,10 @@ function BackupScheduleMockup() {
   )
 }
 
-// A frame for a console screen, 504px tall (the Figma's 557 by 504), the screen anchored inside it.
-function Frame({ children }: { children: React.ReactNode }) {
-  return <div className="relative isolate h-[504px] w-full overflow-hidden">{children}</div>
+// A console visual's own size, 516 by 460 (narrower on a phone): the screen inside it, set in and cropped. The
+// section's frame hugs it.
+function Frame({ className, children }: { className?: string; children: React.ReactNode }) {
+  return <div className={cn("relative isolate h-[460px] w-[516px] max-w-full overflow-hidden", className)}>{children}</div>
 }
 
 // "Create a Cluster": cloud provider and region.
@@ -742,7 +744,7 @@ export function ConsoleClusterOverview() {
 // "Set up Backup Schedule": a dialog.
 export function ConsoleBackupSchedule() {
   return (
-    <Frame>
+    <Frame className="h-[500px]">
       <BackupScheduleMockup />
     </Frame>
   )

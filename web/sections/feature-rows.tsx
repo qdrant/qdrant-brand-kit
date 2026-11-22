@@ -5,6 +5,7 @@ import { ArrowLink } from "../lib/arrow-link"
 import { FeaturePoints, FeatureTag } from "../lib/feature-parts"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
+import { Plate } from "../lib/plate"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
 import type { HeaderProps } from "../lib/section-props"
@@ -58,13 +59,24 @@ export function FeatureRows({ header, rows, start = "media-right", theme, surfac
                   </ArrowLink>
                 )}
               </div>
-              <div className={cn("web-tray rounded-[calc(var(--radius-xl)+6px)]", mediaLeft && "lg:order-1")}>
-                {row.visual ? (
-                  <div className="web-plate overflow-hidden rounded-xl">{row.visual}</div>
-                ) : (
+              {row.visual && row.visualFrame === "none" ? (
+                <div className={cn("w-fit max-w-full justify-self-center", mediaLeft ? "lg:order-1 lg:justify-self-start" : "lg:justify-self-end")}>
+                  {row.visual}
+                </div>
+              ) : row.visual ? (
+                <div
+                  className={cn(
+                    "web-tray w-fit max-w-full justify-self-center rounded-[calc(var(--radius-xl)+6px)]",
+                    mediaLeft ? "lg:order-1 lg:justify-self-start" : "lg:justify-self-end"
+                  )}
+                >
+                  <Plate className="overflow-hidden rounded-xl">{row.visual}</Plate>
+                </div>
+              ) : (
+                <div className={cn("web-tray rounded-[calc(var(--radius-xl)+6px)]", mediaLeft && "lg:order-1")}>
                   <MediaFrame label="Illustration" className="web-plate" />
-                )}
-              </div>
+                </div>
+              )}
             </div>
           )
         })}

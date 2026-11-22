@@ -14,10 +14,11 @@ import { Navbar } from "../sections/navbar"
 import { ClusterDiagram } from "../visuals/cluster-diagram"
 import { ConsoleBackupSchedule, ConsoleClusterOverview, ConsoleCreateCluster } from "../visuals/console"
 import { ConsoleClusterSetup } from "../visuals/console-setup"
+import { ZoneGlobe } from "../visuals/zone-globe"
 
 // The Resilience page of qdrant.tech (Figma: Qdrant Web Design, "Resilience-Subpage", node 19452:25124), built
 // from the section library (Juan, 2026-11-22): its copy from content/resilience.ts, its Console screens and
-// cluster diagrams from web/visuals. The case study, the FAQ and the call to action are light, as in the Figma.
+// cluster diagrams from web/visuals. One theme for the whole page, the site's (dark or light).
 export function ResiliencePage() {
   const { rows, cards } = resilienceCapabilities
   const consoles = [<ConsoleCreateCluster key="create" />, <ConsoleClusterOverview key="overview" />, <ConsoleBackupSchedule key="backup" />]
@@ -40,13 +41,14 @@ export function ResiliencePage() {
             ...item,
             visual: <ClusterDiagram diagram={diagram} />,
           })),
-          resilienceConfiguration.multiAz,
+          { ...resilienceConfiguration.multiAz, visual: <ZoneGlobe />, visualFrame: "none" },
         ]}
         columns={3}
         marker="none"
       />
       <AnchorNav label="Capabilities" items={resilienceCapabilities.tabs} sticky />
       <FeatureRows
+        cardPattern="depth-haze"
         header={resilienceCapabilities.header}
         rows={rows.map((row, i) => ({ ...row, visual: consoles[i] }))}
       />
@@ -58,7 +60,6 @@ export function ResiliencePage() {
         groups={resilienceDeployment.groups}
       />
       <CaseStudies
-        theme="light"
         layout="featured"
         header={resilienceCaseStudy.header}
         story={{
@@ -68,8 +69,8 @@ export function ResiliencePage() {
           ),
         }}
       />
-      <Faq theme="light" layout="split" header={resilienceFaq.header} items={resilienceFaq.items} />
-      <Cta theme="light" layout="panel" {...resilienceCta} />
+      <Faq layout="split" header={resilienceFaq.header} items={resilienceFaq.items} />
+      <Cta layout="panel" {...resilienceCta} />
       <Footer variant="full" {...footer} />
     </main>
   )

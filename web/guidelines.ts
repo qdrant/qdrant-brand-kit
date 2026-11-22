@@ -47,9 +47,9 @@ export const guidelines: GuidelineGroup[] = [
         source: "primitives/breakpoints/",
       },
       {
-        title: "Every section has a theme and a surface",
-        text: "Dark or light (or the page's), and default or raised. Inside the website, the design system's page, card, popover and highlight colors are the background roles, so its components follow the section. On dark the website is quieter than the roles: menus on neutral-925, cards a touch darker (Juan, 2026-11-22: 40% of the way from neutral-925 to the page's neutral-950, a mix since the palette has no step between them), highlights and hovers on neutral-900, a raised band's cards on neutral-900.",
-        decided: "Juan, 2026-11-21",
+        title: "A page is all dark or all light",
+        text: "The website is either fully dark or fully light, never a light run inside a dark page: every section follows the page's theme. Sections differ only by surface (default or raised). Inside the website, the design system's page, card, popover and highlight colors are the background roles, so its components follow. On dark the website is quieter than the roles: menus on neutral-925, cards a touch darker (Juan, 2026-11-22: 40% of the way from neutral-925 to the page's neutral-950, a mix since the palette has no step between them), highlights and hovers on neutral-900, a raised band's cards on neutral-900.",
+        decided: "Juan, 2026-11-21 and 2026-11-22",
         source: "web/styles/web.css",
       },
     ],
@@ -168,7 +168,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Nodes are hexagons, like the brandmark",
-        text: "Where lines meet, and before a kicker, a step or a tab, a small hexagon (7 by 8px) stands like the logo's brandmark, a point at the top and the bottom. Hollow, filled with the page's color over a line, and filled with indigo when active. Never a dot or another shape.",
+        text: "Where lines meet, and before a kicker, a step or a tab, a small hexagon (7 by 8px) stands like the logo's brandmark, a point at the top and the bottom. Hollow, filled with the page's color over a line, and filled with indigo when active. Never a dot or another shape. Nodes are alive: they blink like a live readout, a hard step to 25% and back every 2s, each at its own offset (Juan, 2026-11-22), and hold still for reduced motion.",
         decided: "Juan, 2026-11-22",
         source: "web/lib/node.tsx",
       },
@@ -185,6 +185,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "web/styles/web.css (.web-window-dot)",
       },
       {
+        title: "A visual's frame hugs the visual",
+        text: "A product screen, diagram or image sits in a frame (a plate in a tray) exactly its size, never in a bigger box, and on the outer side of its row when there's room (the right when the visual is on the right). A visual with its own look, like the globe, sits bare. Product screens are set in from the frame's top-left corner and cropped at its right and bottom, so the frame's surface shows around them.",
+        decided: "Juan, 2026-11-22",
+        source: "web/visuals/, web/sections/feature-rows.tsx",
+      },
+      {
         title: "Cards are plates",
         text: "Cards and panels are a touch lighter at the top, with a 1px inner highlight and a soft shadow on light. Media sit in a tray, a framed holder. Rows of facts sit in a hairline grid.",
         decided: "Juan, 2026-11-21",
@@ -199,7 +205,7 @@ export const guidelines: GuidelineGroup[] = [
     rules: [
       {
         title: "Patterns are added by hand, with intent",
-        text: "A pattern is a background behind a section or a surface inside its cards. None are set for now: Juan adds them one at a time. Never add or set one unless he asks. Patterns are still and subtle, in the website's variables.",
+        text: "A pattern is a background behind a section or a surface inside its cards. Juan adds them one at a time; never add or set one unless he asks. The first is Depth haze (a surface): slow violet haze with sparse stars, at half strength, behind product screens (the Resilience page's capabilities). Patterns are subtle, in the website's variables.",
         decided: "Juan, 2026-11-22",
         source: "web/patterns/",
       },

@@ -74,12 +74,14 @@ export function Hero({
     ) : undefined
 
   // Media sits on a plate inside a tray (web.css).
-  const mediaEl =
-    media === "none" && !visual ? null : (
+  // A visual's frame hugs it, on the right of a split hero when there's room.
+  const mediaEl = visual ? (
+    <div className={cn("web-tray w-fit max-w-full rounded-[calc(var(--radius-xl)+6px)]", centered ? "mx-auto" : "justify-self-center lg:justify-self-end")}>
+      <div className="web-plate overflow-hidden rounded-xl">{visual}</div>
+    </div>
+  ) : media === "none" ? null : (
       <div className="web-tray w-full rounded-[calc(var(--radius-xl)+6px)]">
-        {visual ? (
-          <div className="web-plate overflow-hidden rounded-xl">{visual}</div>
-        ) : media === "code" ? (
+        {media === "code" ? (
           <CodePanel title="quickstart.py" code={quickstartQuery} className="web-plate w-full" />
         ) : (
           <MediaFrame label={mediaLabel ?? "Product screenshot"} className="web-plate" />

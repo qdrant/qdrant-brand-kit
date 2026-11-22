@@ -69,7 +69,8 @@
   --web-tray: color-mix(in oklab, var(--foreground) 2.5%, transparent);
 }
 [data-web][data-theme="light"],
-[data-web] [data-theme="light"] {
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
   --web-line-mix: 9%;
   --web-line: color-mix(in oklab, var(--foreground) 9%, transparent);
   --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
@@ -106,6 +107,22 @@
 .web-hex-active polygon {
   fill: var(--web-indigo);
   stroke: var(--web-indigo);
+}
+/* Nodes are alive (Juan, 2026-11-22): they blink like the telemetry mark on the Space page, a hard step to 25% and
+   back every 2s, each at its own offset (--web-node-delay, set by Node). Still for reduced motion. */
+@keyframes web-node-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+.web-hex {
+  animation: web-node-blink 2s step-end infinite;
+  animation-delay: var(--web-node-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .web-hex {
+    animation: none;
+  }
 }
 .web-cells {
   border-block: 1px solid var(--web-line);
@@ -240,7 +257,8 @@
   --web-tone-orange-fg: var(--qd-color-orange-400);
 }
 [data-web][data-theme="light"],
-[data-web] [data-theme="light"] {
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
   --web-tone-indigo-bg: var(--qd-color-indigo-50);
   --web-tone-indigo-edge: var(--qd-color-indigo-200);
   --web-tone-indigo-fg: var(--qd-color-indigo-600);
@@ -346,7 +364,8 @@
   --web-node: color-mix(in oklab, var(--web-indigo) 60%, var(--web-line-strong));
 }
 [data-web][data-theme="light"],
-[data-web] [data-theme="light"] {
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
   --web-indigo: var(--qd-color-indigo-600);
   --web-indigo-text: var(--qd-color-secondary-text);
   --web-link: var(--web-indigo-text);
@@ -368,7 +387,8 @@
   --web-selected: var(--qd-color-neutral-800);
 }
 [data-web][data-theme="light"],
-[data-web] [data-theme="light"] {
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
   --web-selected: var(--qd-color-neutral-100);
 }
 .web-selected {
@@ -389,7 +409,8 @@
   --web-window-dot-rim: inset 0 0 0 0.5px color-mix(in oklab, var(--qd-color-neutral-0) 6%, transparent);
 }
 [data-web][data-theme="light"],
-[data-web] [data-theme="light"] {
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
   --web-window-dot: var(--qd-color-neutral-200);
   --web-window-dot-top: color-mix(in oklab, var(--qd-color-neutral-0) 45%, var(--web-window-dot));
   --web-window-dot-shine: color-mix(in oklab, var(--qd-color-neutral-0) 70%, transparent);
@@ -418,4 +439,49 @@
    data-web-patterns="off" (the studio's Patterns switch). */
 [data-web-patterns="off"] .web-pattern {
   display: none;
+}
+
+/* The website's scene colors (Juan, 2026-11-22), for the canvas and WebGL visuals in web/visuals (the globe) and
+   web/patterns (the depth haze): the Space page's palette, read by visuals/scene.tsx as --web-scene-<key>. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-scene-bg: var(--card);
+  --web-scene-surface: var(--card);
+  --web-scene-star: var(--qd-color-neutral-50);
+  --web-scene-dim: var(--qd-color-neutral-500);
+  --web-scene-grid: var(--qd-color-neutral-850);
+  --web-scene-line: var(--qd-color-neutral-700);
+  --web-scene-label: var(--qd-color-neutral-400);
+  --web-scene-haze: var(--qd-color-indigo-950);
+  --web-scene-violet: var(--qd-color-indigo-900);
+  --web-scene-glow: var(--qd-color-indigo-400);
+  --web-scene-bright: var(--qd-color-indigo-300);
+  --web-scene-accent: var(--qd-color-amaranth-500);
+  --web-scene-plum: var(--qd-color-purple-800);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-scene-star: var(--qd-color-neutral-700);
+  --web-scene-dim: var(--qd-color-neutral-400);
+  --web-scene-grid: var(--qd-color-neutral-100);
+  --web-scene-line: var(--qd-color-neutral-300);
+  --web-scene-label: var(--qd-color-neutral-600);
+  --web-scene-haze: var(--qd-color-indigo-50);
+  --web-scene-violet: var(--qd-color-indigo-100);
+  --web-scene-glow: var(--qd-color-indigo-500);
+  --web-scene-bright: var(--qd-color-indigo-600);
+  --web-scene-accent: var(--qd-color-amaranth-600);
+  --web-scene-plum: var(--qd-color-purple-200);
+}
+/* The depth haze, subtle (Juan, 2026-11-22): the shader at half strength (40% on light) over the card's fill. */
+.web-depth-haze {
+  opacity: 0.5;
+}
+[data-web][data-theme="light"] .web-depth-haze,
+[data-theme="light"] [data-web] .web-depth-haze {
+  opacity: 0.4;
 }

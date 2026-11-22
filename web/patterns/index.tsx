@@ -2,13 +2,13 @@
 
 import * as React from "react"
 
+import { depthHaze } from "./depth-haze"
 import type { PatternDefinition } from "./types"
 
 export * from "./types"
 
-// Every pattern, backgrounds first. Add a new one here. Empty for now: Juan adds them by hand, one at a time
-// (2026-11-22).
-export const patterns: PatternDefinition[] = []
+// Every pattern, backgrounds first. Add a new one here. Juan adds them by hand, one at a time (2026-11-22).
+export const patterns: PatternDefinition[] = [depthHaze]
 
 export const getPattern = (id: string) => patterns.find((p) => p.id === id)
 export const backgroundPatterns = () => patterns.filter((p) => p.kind === "background")

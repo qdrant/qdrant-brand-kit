@@ -45,7 +45,7 @@ import { CloudLogo } from "../lib/cloud-logo"
 // padding, as in the Figma.
 export function ConsoleClusterSetup() {
   return (
-    <div className="relative h-[518px] w-full">
+    <div className="relative h-[518px] w-[440px] max-w-full">
       <div
         data-context="product"
         className="absolute inset-0 overflow-hidden bg-background text-foreground"

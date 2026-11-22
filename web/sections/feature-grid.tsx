@@ -64,28 +64,49 @@ export function FeatureGrid({
         )}
       >
         {items.map((item, i) => {
-          const body = (
+          const markerEl = (
             <>
-            {marker === "icon" && item.icon && (
-              <IconTile name={item.icon} tone={(item.tone as Tone) ?? (tones === "mixed" ? toneAt(i) : tones)} />
-            )}
-            {marker === "number" && (
-              <span className="font-mono text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
-            )}
+              {marker === "icon" && item.icon && (
+                <IconTile name={item.icon} tone={(item.tone as Tone) ?? (tones === "mixed" ? toneAt(i) : tones)} />
+              )}
+              {marker === "number" && (
+                <span className="font-mono text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+              )}
+            </>
+          )
+          const textEl = (
             <div className="flex flex-1 flex-col items-start gap-2">
               <FeatureTag tag={item.tag} className="mb-2" />
               <h3 className={heading.card}>{item.title}</h3>
               {item.text && <p className={type.small}>{item.text}</p>}
             </div>
-            {item.visual && <div className="py-4">{item.visual}</div>}
-            <FeaturePoints points={item.points} />
-            {item.link && (
-              <ArrowLink href={item.link.href} className="text-sm">
-                {item.link.label}
-              </ArrowLink>
-            )}
-            </>
           )
+          const linkEl = item.link && (
+            <ArrowLink href={item.link.href} className="text-sm">
+              {item.link.label}
+            </ArrowLink>
+          )
+          // A wide card with a visual: the text on the left, the visual on the right, from lg.
+          const body =
+            item.wide && item.visual ? (
+              <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
+                <div className="flex flex-col items-start gap-4">
+                  {markerEl}
+                  {textEl}
+                  <FeaturePoints points={item.points} className="w-full" />
+                  {linkEl}
+                </div>
+                <div className="w-fit max-w-full justify-self-center lg:justify-self-end">{item.visual}</div>
+              </div>
+            ) : (
+              <>
+                {markerEl}
+                {textEl}
+                {item.visual && <div className="py-4">{item.visual}</div>}
+                <FeaturePoints points={item.points} />
+                {linkEl}
+              </>
+            )
           return appearance === "cards" ? (
             <Plate as="li" key={item.id ?? `${item.title}-${i}`} id={item.id} className={cn("flex scroll-mt-24 flex-col gap-4 rounded-xl p-6", item.wide && "col-span-full")}>
               {body}
