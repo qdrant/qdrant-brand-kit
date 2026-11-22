@@ -57,6 +57,7 @@ export function Navbar({
       theme={theme}
       surface={surface}
       spacing="none"
+      lines={false}
       id={id}
       className={cn(
         "web-navbar overflow-visible border-b border-(--web-line)",

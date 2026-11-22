@@ -111,7 +111,7 @@ export function Footer({
         </nav>
       </div>
 
-      <div className="grid gap-8 border-t border-(--web-line) pt-10 lg:grid-cols-2 lg:items-end">
+      <div className="web-rule web-bleed grid gap-8 pt-10 lg:grid-cols-2 lg:items-end">
         {newsletter && (
           <form className="web-plate flex flex-col gap-4 rounded-xl p-6" action="#">
             <div className="flex flex-col gap-1">
@@ -133,7 +133,7 @@ export function Footer({
         </ul>
       </div>
 
-      <div className="border-t border-(--web-line)">{legalBar}</div>
+      <div className="web-rule web-bleed">{legalBar}</div>
     </Section>
   )
 }

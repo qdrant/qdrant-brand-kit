@@ -98,7 +98,7 @@ export function Hero({
 
   const trustEl =
     trust && trust.length > 0 ? (
-      <ul className="web-cells grid grid-cols-2 text-sm text-muted-foreground md:grid-cols-4">
+      <ul className="web-cells web-bleed grid grid-cols-2 text-sm text-muted-foreground md:grid-cols-4">
         {trust.map((item) => (
           <li key={item.label} className="flex items-center justify-center gap-2 px-4 py-5 text-center">
             <Icon name={item.icon} className="size-4 shrink-0 text-foreground/70" />

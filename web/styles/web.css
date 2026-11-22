@@ -95,6 +95,18 @@
 .web-cells {
   border-block: 1px solid var(--web-line);
 }
+/* A horizontal line inside a section reaches the rails, 24px out on each side of the container, so the lines meet
+   (Juan, 2026-11-21). Put it on a cell row, a divider or a band. */
+.web-bleed {
+  margin-inline: -24px;
+  padding-inline: 24px;
+}
+.web-rule {
+  border-top: 1px solid var(--web-line);
+}
+[data-web-lines="off"] .web-rule {
+  border-top-color: var(--border);
+}
 .web-cells > * + * {
   border-inline-start: 1px solid var(--web-line);
 }

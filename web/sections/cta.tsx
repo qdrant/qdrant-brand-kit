@@ -34,7 +34,7 @@ export function Cta({ layout = "centered", title, description, primary, secondar
   if (layout === "band") {
     return (
       <Section theme={theme} surface={surface} spacing="compact" id={id} className={className}>
-        <div className="web-cells flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between">
+        <div className="web-cells web-bleed flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-col gap-1">
             <p className={heading.card}>{title}</p>
             {description && <p className={type.body}>{description}</p>}
