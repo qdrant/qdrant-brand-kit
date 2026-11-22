@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTheme } from "next-themes"
 import { Hand, Maximize, Minus, MousePointer2, Plus } from "lucide-react"
 
 
@@ -62,7 +63,13 @@ export function WebCanvas() {
   const viewport = React.useRef<HTMLDivElement>(null)
   const content = React.useRef<HTMLDivElement>(null)
   const [view, setView] = React.useState({ x: 48, y: 48, z: 0.25 })
-  const [mode, setMode] = React.useState<Mode>("dark")
+  // The frames follow the studio's theme (the moon and sun in the top menu). Picking Dark, Light or Both here
+  // holds until the studio's theme changes again.
+  const { resolvedTheme } = useTheme()
+  const studioTheme: "dark" | "light" = resolvedTheme === "light" ? "light" : "dark"
+  const [override, setOverride] = React.useState<{ mode: Mode; under: string } | null>(null)
+  const mode: Mode = override && override.under === studioTheme ? override.mode : studioTheme
+  const setMode = (m: Mode) => setOverride({ mode: m, under: studioTheme })
   const [interact, setInteract] = React.useState(true)
   const [space, setSpace] = React.useState(false)
   const [style, setStyle] = React.useState({ lines: true, material: true })

@@ -1,19 +1,37 @@
 /* The website's surfaces (Juan, 2026-11-21). Inside the website ([data-web], on a page's root), the design
-   system's page, card, popover and highlight colors are the brand background roles, so a section only sets its
+   system's page, card, popover and highlight colors come from the background roles, so a section only sets its
    theme (data-theme) and its surface (data-surface), and every design-system component in it follows:
    - default: the page is background/default, cards background/raised, menus background/overlay.
-   - raised: a raised band. The page is background/raised and cards step up to background/overlay.
-   Dark: default neutral-950, raised neutral-925, overlay neutral-850, highlight neutral-800. Light: default
-   neutral-25, raised and overlay white, highlight neutral-50. The roles flip with data-theme by themselves
-   (primitives/colors); this file only says which role each surface uses. Load it after the design system's
-   globals.css. Outside [data-web], the studio keeps the design system's own neutrals. */
+   - raised: a raised band. The page is background/raised and cards step up one.
+   On dark the website is quieter than the roles (Juan, 2026-11-21): menus and cards sit on neutral-925, the
+   highlight and hovers on neutral-900, and a raised band's cards on neutral-900, so nothing floats too bright.
+   Light: default neutral-25, raised and overlay white, highlight neutral-50, as the roles. The --web-surface-*
+   values are set per theme below (the last dark selector covers menus that open on <body> under a dark <html>); the roles flip with data-theme by themselves (primitives/colors). Load this
+   file after the design system's globals.css. Outside [data-web], the studio keeps the design system's own
+   neutrals. */
+[data-web],
+[data-web] [data-theme] {
+  --web-surface-page: var(--qd-color-background-default);
+  --web-surface-card: var(--qd-color-background-raised);
+  --web-surface-popover: var(--qd-color-background-overlay);
+  --web-surface-highlight: var(--qd-color-background-highlight);
+  --web-surface-raised: var(--qd-color-background-raised);
+  --web-surface-raised-card: var(--qd-color-background-overlay);
+}
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-surface-popover: var(--qd-color-neutral-925);
+  --web-surface-highlight: var(--qd-color-neutral-900);
+  --web-surface-raised-card: var(--qd-color-neutral-900);
+}
 [data-web],
 [data-web] [data-theme],
 [data-web] [data-surface] {
-  --qd-ui-page: var(--qd-color-background-default);
-  --qd-ui-card: var(--qd-color-background-raised);
-  --qd-ui-popover: var(--qd-color-background-overlay);
-  --qd-ui-highlight: var(--qd-color-background-highlight);
+  --qd-ui-page: var(--web-surface-page);
+  --qd-ui-card: var(--web-surface-card);
+  --qd-ui-popover: var(--web-surface-popover);
+  --qd-ui-highlight: var(--web-surface-highlight);
   --background: var(--qd-ui-page);
   --card: var(--qd-ui-card);
   --popover: var(--qd-ui-popover);
@@ -23,8 +41,8 @@
 }
 [data-web][data-surface="raised"],
 [data-web] [data-surface="raised"] {
-  --qd-ui-page: var(--qd-color-background-raised);
-  --qd-ui-card: var(--qd-color-background-overlay);
+  --qd-ui-page: var(--web-surface-raised);
+  --qd-ui-card: var(--web-surface-raised-card);
 }
 
 /* The website's lines and material (Juan, 2026-11-21): a subtle, shared structure every section draws on, before
@@ -39,8 +57,8 @@
 [data-web] [data-theme] {
   --web-line: color-mix(in oklab, var(--foreground) 8%, transparent);
   --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
-  --web-plate-top: color-mix(in oklab, var(--foreground) 3%, var(--card));
-  --web-highlight: color-mix(in oklab, var(--foreground) 7%, transparent);
+  --web-plate-top: color-mix(in oklab, var(--foreground) 2%, var(--card));
+  --web-highlight: color-mix(in oklab, var(--foreground) 5%, transparent);
   --web-plate-shadow: 0 0 0 0 transparent;
   --web-tray: color-mix(in oklab, var(--foreground) 2.5%, transparent);
 }
