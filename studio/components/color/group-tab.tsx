@@ -271,7 +271,7 @@ const alertText: Record<(typeof states)[number]["id"], string> = {
 function StatusExample() {
   return (
     <div className="flex flex-col gap-5">
-      <Labeled label="status/<state> on status/<state>-subtle">
+      <Labeled label="Badges: status/<state>/text on status/<state>/subtle">
         <div className="flex flex-wrap gap-2">
           {states.map(({ id, label, Icon }) => (
             <span

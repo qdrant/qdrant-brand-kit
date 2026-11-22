@@ -1,9 +1,8 @@
 /* Alert (components/ui/alert.tsx): the status variants, success, warning, info and destructive (error), each on
-   its family's steps (Juan, 2026-11-21). The box is the family's softest fill with a subtle border in its color,
-   and the icon, title and description are all in the state's color, stronger than Figma's status/<state> (800 on
-   light, 400 on dark) for even better legibility.
+   its family's steps (Juan, 2026-11-21), the same as Figma's status tokens: the fill is status/<state>/alert-fill,
+   the subtle border status/<state>/border, and the icon, title and description status/<state>/text.
    - Light: fill 50, border 200, text 900, at 8.8 to 9.4:1.
-   - Dark: fill 975, darker than the 950 of the status badges' soft fill so a long alert stays calm, border 950,
+   - Dark: fill 975, darker than the 950 of the status badges' fill so a long alert stays calm, border 950,
      text 200, at 12.9 to 14.9:1.
    Every pair passes WCAG AAA (7:1). They point at primitives until the status roles are in primitives/colors. */
 :root,
