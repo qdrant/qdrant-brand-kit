@@ -1,36 +1,24 @@
-/* Alert (components/ui/alert.tsx): the status variants, success, warning, info and destructive (error), each on
-   its family's steps (Juan, 2026-11-21), the same as Figma's status tokens: the fill is status/<state>/alert-fill,
-   the subtle border status/<state>/border, and the icon, title and description status/<state>/text.
+/* Alert (components/ui/alert.tsx): the status variants, success, warning, info and destructive (error), on the
+   status roles (primitives/colors, the same as Figma's status/<state> groups, Juan, 2026-11-21): the fill is
+   status-<state>-alert-fill, the subtle border status-<state>-border, and the icon, title and description
+   status-<state>-text.
    - Light: fill 50, border 200, text 900, at 8.8 to 9.4:1.
    - Dark: fill 975, darker than the 950 of the status badges' fill so a long alert stays calm, border 950,
      text 200, at 12.9 to 14.9:1.
-   Every pair passes WCAG AAA (7:1). They point at primitives until the status roles are in primitives/colors. */
+   Every pair passes WCAG AAA (7:1). The roles switch with the theme, so one block covers both. */
 :root,
-[data-theme="dark"] {
-  --qd-ui-alert-success-bg: var(--qd-color-teal-975);
-  --qd-ui-alert-success-border: var(--qd-color-teal-950);
-  --qd-ui-alert-success-fg: var(--qd-color-teal-200);
-  --qd-ui-alert-warning-bg: var(--qd-color-orange-975);
-  --qd-ui-alert-warning-border: var(--qd-color-orange-950);
-  --qd-ui-alert-warning-fg: var(--qd-color-orange-200);
-  --qd-ui-alert-info-bg: var(--qd-color-blue-975);
-  --qd-ui-alert-info-border: var(--qd-color-blue-950);
-  --qd-ui-alert-info-fg: var(--qd-color-blue-200);
-  --qd-ui-alert-error-bg: var(--qd-color-red-975);
-  --qd-ui-alert-error-border: var(--qd-color-red-950);
-  --qd-ui-alert-error-fg: var(--qd-color-red-200);
-}
-[data-theme="light"] {
-  --qd-ui-alert-success-bg: var(--qd-color-teal-50);
-  --qd-ui-alert-success-border: var(--qd-color-teal-200);
-  --qd-ui-alert-success-fg: var(--qd-color-teal-900);
-  --qd-ui-alert-warning-bg: var(--qd-color-orange-50);
-  --qd-ui-alert-warning-border: var(--qd-color-orange-200);
-  --qd-ui-alert-warning-fg: var(--qd-color-orange-900);
-  --qd-ui-alert-info-bg: var(--qd-color-blue-50);
-  --qd-ui-alert-info-border: var(--qd-color-blue-200);
-  --qd-ui-alert-info-fg: var(--qd-color-blue-900);
-  --qd-ui-alert-error-bg: var(--qd-color-red-50);
-  --qd-ui-alert-error-border: var(--qd-color-red-200);
-  --qd-ui-alert-error-fg: var(--qd-color-red-900);
+[data-theme],
+[data-context] {
+  --qd-ui-alert-success-bg: var(--qd-color-status-success-alert-fill);
+  --qd-ui-alert-success-border: var(--qd-color-status-success-border);
+  --qd-ui-alert-success-fg: var(--qd-color-status-success-text);
+  --qd-ui-alert-warning-bg: var(--qd-color-status-warning-alert-fill);
+  --qd-ui-alert-warning-border: var(--qd-color-status-warning-border);
+  --qd-ui-alert-warning-fg: var(--qd-color-status-warning-text);
+  --qd-ui-alert-info-bg: var(--qd-color-status-info-alert-fill);
+  --qd-ui-alert-info-border: var(--qd-color-status-info-border);
+  --qd-ui-alert-info-fg: var(--qd-color-status-info-text);
+  --qd-ui-alert-error-bg: var(--qd-color-status-error-alert-fill);
+  --qd-ui-alert-error-border: var(--qd-color-status-error-border);
+  --qd-ui-alert-error-fg: var(--qd-color-status-error-text);
 }

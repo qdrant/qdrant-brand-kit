@@ -2223,7 +2223,7 @@
     }
   },
   "semantic": {
-    "$description": "Roles, dark theme (the default). Use these in creatives and web, never a primitive step, unless a README says so. Background roles as decided with the Figma primitives (brand and marketing).",
+    "$description": "Roles, dark theme (the default), the same groups and values as the Color collection in the Figma file Qdrant Brand Design (2u6KfDsYjibQuf9ji6lFBR) since 2026-11-21: text, primary, secondary, status (one group per state), background, border, dataviz and static. Use these in creatives and web, never a primitive step, unless a README says so. A few roles stay in this repo only, for creatives: background.light and light-surface, text.on-light and body-on-light, border.on-dark and on-light. primary.primary and secondary.secondary are --qd-color-primary and --qd-color-secondary.",
     "color": {
       "background": {
         "default": {
@@ -2260,7 +2260,8 @@
       "text": {
         "primary": {
           "$type": "color",
-          "$value": "{color.neutral.50}"
+          "$value": "{color.neutral.50}",
+          "$description": "Titles and body text"
         },
         "secondary": {
           "$type": "color",
@@ -2269,11 +2270,13 @@
         },
         "disabled": {
           "$type": "color",
-          "$value": "{color.neutral.600}"
+          "$value": "{color.neutral.600}",
+          "$description": "Placeholders and disabled text"
         },
         "on-light": {
           "$type": "color",
-          "$value": "{color.neutral.950}"
+          "$value": "{color.neutral.950}",
+          "$description": "Text on the light card and on light pieces, in creatives, whatever the theme"
         },
         "body-on-light": {
           "$type": "color",
@@ -2283,96 +2286,224 @@
         "on-accent": {
           "$type": "color",
           "$value": "{color.neutral.0}",
-          "$description": "Text on a filled amaranth or indigo button"
+          "$description": "Text on primary and secondary, like a button label"
         }
       },
-      "accent": {
+      "primary": {
         "primary": {
           "$type": "color",
           "$value": "{color.amaranth.600}",
-          "$description": "Calls to action, highlights, the logo"
+          "$description": "Buttons and the one strong mark: --qd-color-primary. amaranth-600 in both themes"
         },
-        "primary-hover": {
+        "hover": {
           "$type": "color",
-          "$value": "{color.amaranth.700}"
+          "$value": "{color.amaranth.700}",
+          "$description": "The primary button on hover. amaranth-700 in both themes, so hover always darkens (Juan, 2026-11-21)"
         },
-        "primary-pressed": {
+        "subtle": {
           "$type": "color",
-          "$value": "{color.amaranth.800}"
+          "$value": "{color.amaranth.950}",
+          "$description": "Soft fills: kickers, chips, highlights"
         },
+        "text": {
+          "$type": "color",
+          "$value": "{color.amaranth.400}",
+          "$description": "Colored text, links and icons"
+        }
+      },
+      "secondary": {
         "secondary": {
           "$type": "color",
-          "$value": "{color.indigo.600}"
+          "$value": "{color.indigo.600}",
+          "$description": "Secondary marks, and the accent in product UI: --qd-color-secondary. indigo-600 in both themes"
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{color.indigo.950}",
+          "$description": "Tags and soft fills"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.indigo.400}",
+          "$description": "Text and icons on its soft fill"
         }
       },
       "border": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{color.neutral.850}",
+          "$description": "Dividers and card outlines"
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{color.neutral.700}",
+          "$description": "Lines that need to show: chart gridlines, tables"
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{color.neutral.500}",
+          "$description": "Fields and outline buttons, at 3:1. neutral-500 in both themes"
+        },
         "on-dark": {
           "$type": "color",
           "$value": "{color.neutral.700}",
-          "$description": "Decorative borders on dark. Inputs and focus rings use neutral.600 (3:1)"
+          "$description": "Decorative borders on dark pieces in creatives, whatever the theme"
         },
         "on-light": {
           "$type": "color",
-          "$value": "{color.neutral.200}"
+          "$value": "{color.neutral.200}",
+          "$description": "Borders on the light card and on light pieces in creatives, whatever the theme"
         }
       },
       "status": {
-        "success": {
-          "$type": "color",
-          "$value": "{color.teal.600}"
-        },
         "error": {
-          "$type": "color",
-          "$value": "{color.red.500}"
+          "text": {
+            "$type": "color",
+            "$value": "{color.red.200}",
+            "$description": "Text and icons in badges and alerts"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.red.950}",
+            "$description": "Badge fill"
+          },
+          "alert-fill": {
+            "$type": "color",
+            "$value": "{color.red.975}",
+            "$description": "Alert fill"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.red.950}",
+            "$description": "Alert border"
+          }
         },
         "warning": {
-          "$type": "color",
-          "$value": "{color.orange.500}"
+          "text": {
+            "$type": "color",
+            "$value": "{color.orange.200}",
+            "$description": "Text and icons in badges and alerts"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.orange.950}",
+            "$description": "Badge fill"
+          },
+          "alert-fill": {
+            "$type": "color",
+            "$value": "{color.orange.975}",
+            "$description": "Alert fill"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.orange.950}",
+            "$description": "Alert border"
+          }
         },
         "info": {
-          "$type": "color",
-          "$value": "{color.blue.400}"
+          "text": {
+            "$type": "color",
+            "$value": "{color.blue.200}",
+            "$description": "Text and icons in badges and alerts"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.blue.950}",
+            "$description": "Badge fill"
+          },
+          "alert-fill": {
+            "$type": "color",
+            "$value": "{color.blue.975}",
+            "$description": "Alert fill"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.blue.950}",
+            "$description": "Alert border"
+          }
+        },
+        "success": {
+          "text": {
+            "$type": "color",
+            "$value": "{color.teal.200}",
+            "$description": "Text and icons in badges and alerts"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.teal.950}",
+            "$description": "Badge fill"
+          },
+          "alert-fill": {
+            "$type": "color",
+            "$value": "{color.teal.975}",
+            "$description": "Alert fill"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{color.teal.950}",
+            "$description": "Alert border"
+          }
         }
       },
       "dataviz": {
         "1": {
           "$type": "color",
-          "$value": "{color.amaranth.600}"
+          "$value": "{color.amaranth.600}",
+          "$description": "Chart series 1, in order"
         },
         "2": {
           "$type": "color",
-          "$value": "{color.indigo.600}"
+          "$value": "{color.indigo.600}",
+          "$description": "Chart series 2, in order"
         },
         "3": {
           "$type": "color",
-          "$value": "{color.teal.600}"
+          "$value": "{color.teal.600}",
+          "$description": "Chart series 3, in order"
         },
         "4": {
           "$type": "color",
-          "$value": "{color.blue.400}"
+          "$value": "{color.blue.600}",
+          "$description": "Chart series 4, in order"
         },
         "5": {
           "$type": "color",
-          "$value": "{color.orange.500}"
+          "$value": "{color.orange.600}",
+          "$description": "Chart series 5, in order"
         },
         "6": {
           "$type": "color",
-          "$value": "{color.purple.700}"
+          "$value": "{color.purple.600}",
+          "$description": "Chart series 6, in order"
         },
         "7": {
           "$type": "color",
-          "$value": "{color.green.600}"
+          "$value": "{color.green.600}",
+          "$description": "Chart series 7, in order"
         },
         "8": {
           "$type": "color",
-          "$value": "{color.cyan.500}"
+          "$value": "{color.cyan.600}",
+          "$description": "Chart series 8, in order"
+        }
+      },
+      "static": {
+        "white": {
+          "$type": "color",
+          "$value": "{color.neutral.0}",
+          "$description": "White that never changes with the theme: text and logos on photos, art on patterns"
+        },
+        "black": {
+          "$type": "color",
+          "$value": "{color.neutral.1000}",
+          "$description": "Black that never changes with the theme: scrims on images"
         }
       }
     }
   },
   "theme": {
     "light": {
-      "$description": "Light theme overrides, used with [data-theme=\"light\"]. Accent colors stay the same in both themes.",
+      "$description": "Light theme overrides, used with [data-theme=\"light\"]. Roles not listed here are the same in both themes: primary.primary and hover, secondary.secondary, border.strong, dataviz, static, and the creative-only roles.",
       "color": {
         "background": {
           "default": {
@@ -2395,7 +2526,7 @@
         "text": {
           "primary": {
             "$type": "color",
-            "$value": "{color.neutral.950}"
+            "$value": "{color.neutral.900}"
           },
           "secondary": {
             "$type": "color",
@@ -2405,6 +2536,110 @@
           "disabled": {
             "$type": "color",
             "$value": "{color.neutral.400}"
+          }
+        },
+        "primary": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.amaranth.100}"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{color.amaranth.800}"
+          }
+        },
+        "secondary": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.indigo.100}"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{color.indigo.800}"
+          }
+        },
+        "border": {
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.neutral.200}"
+          },
+          "default": {
+            "$type": "color",
+            "$value": "{color.neutral.200}"
+          }
+        },
+        "status": {
+          "error": {
+            "text": {
+              "$type": "color",
+              "$value": "{color.red.900}"
+            },
+            "subtle": {
+              "$type": "color",
+              "$value": "{color.red.100}"
+            },
+            "alert-fill": {
+              "$type": "color",
+              "$value": "{color.red.50}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.red.200}"
+            }
+          },
+          "warning": {
+            "text": {
+              "$type": "color",
+              "$value": "{color.orange.900}"
+            },
+            "subtle": {
+              "$type": "color",
+              "$value": "{color.orange.100}"
+            },
+            "alert-fill": {
+              "$type": "color",
+              "$value": "{color.orange.50}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.orange.200}"
+            }
+          },
+          "info": {
+            "text": {
+              "$type": "color",
+              "$value": "{color.blue.900}"
+            },
+            "subtle": {
+              "$type": "color",
+              "$value": "{color.blue.100}"
+            },
+            "alert-fill": {
+              "$type": "color",
+              "$value": "{color.blue.50}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.blue.200}"
+            }
+          },
+          "success": {
+            "text": {
+              "$type": "color",
+              "$value": "{color.teal.900}"
+            },
+            "subtle": {
+              "$type": "color",
+              "$value": "{color.teal.100}"
+            },
+            "alert-fill": {
+              "$type": "color",
+              "$value": "{color.teal.50}"
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{color.teal.200}"
+            }
           }
         }
       }

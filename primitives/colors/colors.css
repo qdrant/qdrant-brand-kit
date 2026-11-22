@@ -163,33 +163,75 @@
   --qd-color-text-on-light: #070B11; /* neutral-950 */
   --qd-color-text-body-on-light: #2C3543; /* neutral-800 */
   --qd-color-text-on-accent: #FFFFFF; /* neutral-0 */
-  --qd-color-accent-primary: #DC244C; /* amaranth-600 */
-  --qd-color-accent-primary-hover: #BA1E41; /* amaranth-700 */
-  --qd-color-accent-primary-pressed: #9B1E3D; /* amaranth-800 */
-  --qd-color-accent-secondary: #6047FF; /* indigo-600 */
+  --qd-color-primary: #DC244C; /* amaranth-600 */
+  --qd-color-primary-hover: #BA1E41; /* amaranth-700 */
+  --qd-color-primary-subtle: #480D1C; /* amaranth-950 */
+  --qd-color-primary-text: #F67186; /* amaranth-400 */
+  --qd-color-secondary: #6047FF; /* indigo-600 */
+  --qd-color-secondary-subtle: #201A4B; /* indigo-950 */
+  --qd-color-secondary-text: #8385FF; /* indigo-400 */
+  --qd-color-border-subtle: #1F2835; /* neutral-850 */
+  --qd-color-border-default: #4A5563; /* neutral-700 */
+  --qd-color-border-strong: #889099; /* neutral-500 */
   --qd-color-border-on-dark: #4A5563; /* neutral-700 */
   --qd-color-border-on-light: #D7D9DD; /* neutral-200 */
-  --qd-color-status-success: #009487; /* teal-600 */
-  --qd-color-status-error: #F24134; /* red-500 */
-  --qd-color-status-warning: #FE9800; /* orange-500 */
-  --qd-color-status-info: #59A8E7; /* blue-400 */
+  --qd-color-status-error-text: #FDCBC9; /* red-200 */
+  --qd-color-status-error-subtle: #430D08; /* red-950 */
+  --qd-color-status-error-alert-fill: #220604; /* red-975 */
+  --qd-color-status-error-border: #430D08; /* red-950 */
+  --qd-color-status-warning-text: #FFE49B; /* orange-200 */
+  --qd-color-status-warning-subtle: #451A0A; /* orange-950 */
+  --qd-color-status-warning-alert-fill: #220D05; /* orange-975 */
+  --qd-color-status-warning-border: #451A0A; /* orange-950 */
+  --qd-color-status-info-text: #C1DCF3; /* blue-200 */
+  --qd-color-status-info-subtle: #13294A; /* blue-950 */
+  --qd-color-status-info-alert-fill: #0A1525; /* blue-975 */
+  --qd-color-status-info-border: #13294A; /* blue-950 */
+  --qd-color-status-success-text: #9FF5E2; /* teal-200 */
+  --qd-color-status-success-subtle: #082F2D; /* teal-950 */
+  --qd-color-status-success-alert-fill: #041817; /* teal-975 */
+  --qd-color-status-success-border: #082F2D; /* teal-950 */
   --qd-color-dataviz-1: #DC244C; /* amaranth-600 */
   --qd-color-dataviz-2: #6047FF; /* indigo-600 */
   --qd-color-dataviz-3: #009487; /* teal-600 */
-  --qd-color-dataviz-4: #59A8E7; /* blue-400 */
-  --qd-color-dataviz-5: #FE9800; /* orange-500 */
-  --qd-color-dataviz-6: #932EBC; /* purple-700 */
+  --qd-color-dataviz-4: #0070CF; /* blue-600 */
+  --qd-color-dataviz-5: #E07111; /* orange-600 */
+  --qd-color-dataviz-6: #AF38E4; /* purple-600 */
   --qd-color-dataviz-7: #3CA042; /* green-600 */
-  --qd-color-dataviz-8: #00B7CF; /* cyan-500 */
+  --qd-color-dataviz-8: #0092AE; /* cyan-600 */
+  --qd-color-static-white: #FFFFFF; /* neutral-0 */
+  --qd-color-static-black: #000000; /* neutral-1000 */
 }
 
-/* Light theme. Accent colors stay the same in both themes. */
+/* Light theme. Roles not listed here are the same in both themes. */
 [data-theme="light"] {
   --qd-color-background-default: #F8F8F9; /* neutral-25 */
   --qd-color-background-raised: #FFFFFF; /* neutral-0 */
   --qd-color-background-overlay: #FFFFFF; /* neutral-0 */
   --qd-color-background-highlight: #F3F3F5; /* neutral-50 */
-  --qd-color-text-primary: #070B11; /* neutral-950 */
+  --qd-color-text-primary: #141B25; /* neutral-900 */
   --qd-color-text-secondary: #636D79; /* neutral-600 */
   --qd-color-text-disabled: #ADB2B9; /* neutral-400 */
+  --qd-color-primary-subtle: #FCE5E7; /* amaranth-100 */
+  --qd-color-primary-text: #9B1E3D; /* amaranth-800 */
+  --qd-color-secondary-subtle: #E1E7FF; /* indigo-100 */
+  --qd-color-secondary-text: #3D29A9; /* indigo-800 */
+  --qd-color-border-subtle: #D7D9DD; /* neutral-200 */
+  --qd-color-border-default: #D7D9DD; /* neutral-200 */
+  --qd-color-status-error-text: #7D2119; /* red-900 */
+  --qd-color-status-error-subtle: #FDE3E1; /* red-100 */
+  --qd-color-status-error-alert-fill: #FDF2F2; /* red-50 */
+  --qd-color-status-error-border: #FDCBC9; /* red-200 */
+  --qd-color-status-warning-text: #79341A; /* orange-900 */
+  --qd-color-status-warning-subtle: #FFF2CF; /* orange-100 */
+  --qd-color-status-warning-alert-fill: #FFFBEF; /* orange-50 */
+  --qd-color-status-warning-border: #FFE49B; /* orange-200 */
+  --qd-color-status-info-text: #144179; /* blue-900 */
+  --qd-color-status-info-subtle: #DCEBF8; /* blue-100 */
+  --qd-color-status-info-alert-fill: #F0F6FC; /* blue-50 */
+  --qd-color-status-info-border: #C1DCF3; /* blue-200 */
+  --qd-color-status-success-text: #164E49; /* teal-900 */
+  --qd-color-status-success-subtle: #CFFAF0; /* teal-100 */
+  --qd-color-status-success-alert-fill: #F1FDFA; /* teal-50 */
+  --qd-color-status-success-border: #9FF5E2; /* teal-200 */
 }
