@@ -18,7 +18,7 @@ export default async function ComponentPage({ params }: { params: Promise<{ name
     <div className="flex flex-col gap-8 p-8">
       <header className="flex flex-col gap-2">
         <Link href="/design-system" className="text-muted-foreground text-xs hover:underline">
-          Design system
+          Components
         </Link>
         <h1 className="text-2xl font-semibold">{titleOf(name)}</h1>
         <p className="text-muted-foreground text-sm">

@@ -1,8 +1,10 @@
 // The Color page (/color): the palette (10 steps per color that keep their job in light and dark, built from the
-// primitives), the four background surfaces, a semantic layer to try on example assets, and Figma's palette
-// collection as it is today (Juan, 2026-11-19). The palette and the semantic layer are proposals to work on, not
-// decisions: nothing here is a token until it moves into primitives/colors (colors.tokens.json, then the Figma
-// file) with Vanesa's yes. In Figma they become one collection, Color, with the palette as one of its groups.
+// primitives), one tab per group of Figma's Color collection with its tokens and how to use them, and example
+// assets that follow the semantic tokens (Juan, 2026-11-19; the groups as in Figma on 2026-11-21). The tokens
+// here are the Color collection of the Figma file "Qdrant Brand Design" (2u6KfDsYjibQuf9ji6lFBR), read on
+// 2026-11-21: text, primary, secondary, status, background, border, palette, dataviz and static. Read them again
+// from Figma when the file changes. Nothing here is a token in the repo until it moves into primitives/colors
+// (colors.tokens.json) with Vanesa's yes.
 //
 // No file access here, so client components can use it too. The primitives' hex values come from
 // lib/color-primitives.ts (server) and are passed down.
@@ -15,22 +17,58 @@ export const colorTabs = [
       "The brand's colors as a rich palette that works in light and dark: every color in 10 steps that keep their job in both themes, like Geist's colors. Step 2 is a soft background in light and in dark: very light in one, very dark in the other. Use the step for the job, and the asset switches theme by itself.",
   },
   {
-    id: "surfaces",
-    label: "Surfaces",
+    id: "text",
+    label: "Text",
+    intro:
+      "The text colors, by job: primary for titles and body, secondary for supporting text, disabled for placeholders and inactive text, and on-accent for text on the primary color. They switch with the theme, so the same token reads right in light and in dark.",
+  },
+  {
+    id: "primary",
+    label: "Primary",
+    intro:
+      "Amaranth, the brand's accent. It marks the one action or highlight that matters most. Its solid is amaranth-600 in both themes, so the brand color never changes; its hover, soft fill and text step to fit the theme.",
+  },
+  {
+    id: "secondary",
+    label: "Secondary",
+    intro:
+      "Indigo, the second brand color: secondary marks in brand and marketing work, and the accent in product UI. Its solid is indigo-600 in both themes, with a soft fill and a text color that fit the theme.",
+  },
+  {
+    id: "status",
+    label: "Status",
+    intro:
+      "Four states, each with a text color and a soft fill: success in teal, error in red, warning in orange and info in blue. Use them to say how something went or what needs attention, and nothing else.",
+  },
+  {
+    id: "background",
+    label: "Background",
     intro:
       "Four background surfaces for brand and marketing work, named by their job, instead of the 24 numbered paper-elevation levels from MUI. Paper elevation stays in the product, where interfaces stack many layers.",
+  },
+  {
+    id: "border",
+    label: "Border",
+    intro:
+      "Three edges, from quiet to strong: subtle for dividers and card outlines, default for lines people read along, and strong for fields and outline buttons.",
+  },
+  {
+    id: "dataviz",
+    label: "Data viz",
+    intro:
+      "Eight chart colors, used in order: amaranth, indigo, teal, blue, orange, purple, green and cyan. Each one is its family's solid, the 600, and the same in both themes.",
+  },
+  {
+    id: "static",
+    label: "Static",
+    intro:
+      "White and black that never change with the theme, for text and marks on images and art, which look the same in light and in dark.",
   },
   {
     id: "assets",
     label: "Assets",
     intro:
       "Example assets built only from the semantic tokens, shown in light and dark at once. Change what a token points to in the panel and every asset follows, in both themes.",
-  },
-  {
-    id: "figma",
-    label: "Figma today",
-    intro:
-      "The palette collection of the Qdrant Brand Design System file in Figma as it is today, in its Light and Dark modes, next to the repo's roles. It's the MUI theme the product uses, so some values differ from the brand roles. It becomes the Color collection, with the palette as one of its groups. Below it, the primitives every value comes from.",
   },
 ] as const
 
@@ -144,7 +182,7 @@ export function onSolid(family: FamilyId, primitives: Primitives) {
   return solids.every((hex) => contrast(hex, primitives["neutral-0"]) >= 4.5) ? "neutral-0" : "neutral-950"
 }
 
-// ---- The four background surfaces (brand and marketing), from the Figma palette ----
+// ---- The four background surfaces (brand and marketing), the background group ----
 
 export const surfaces = [
   {
@@ -177,19 +215,37 @@ export const surfaces = [
   },
 ] as const
 
-// ---- The semantic layer to try on the assets ----
+// ---- The semantic tokens: Figma's Color collection, by group ----
 
 // A semantic token points at a primitive in each theme, never at a palette step, so changing the palette never moves
 // a token (Juan, 2026-11-19). The same rule holds in Figma, where every variable of the Color collection aliases the
 // Primitives library. A token that doesn't change with the theme has the same primitive in both.
 export type Mapping = { light: string; dark: string }
 
+// The groups of Figma's Color collection, in its order (the palette group has its own tab). Figma groups the brand
+// accents as primary/* and secondary/* (Juan, 2026-11-21).
+export const semanticGroups = [
+  { id: "text", label: "Text" },
+  { id: "primary", label: "Primary" },
+  { id: "secondary", label: "Secondary" },
+  { id: "status", label: "Status" },
+  { id: "background", label: "Background" },
+  { id: "border", label: "Border" },
+  { id: "dataviz", label: "Data viz" },
+  { id: "static", label: "Static" },
+] as const
+
+export type GroupId = (typeof semanticGroups)[number]["id"]
+
 export type SemanticToken = {
   id: string
+  // The Figma name, group/token.
   name: string
-  group: string
+  group: GroupId
   use: string
   default: Mapping
+  // The CSS variable Figma's code syntax gives it today. The repo still names the accents --qd-color-accent-*.
+  cssVar: string
   // The repo's role today (primitives/colors), light then dark, or null for a token the repo doesn't have.
   now: { role: string; light: string; dark: string } | null
   // For text and icons: the contrast it needs (0 shows it without a target, as for disabled text) and the token
@@ -198,174 +254,181 @@ export type SemanticToken = {
 }
 
 const pair = (light: string, dark: string = light): Mapping => ({ light, dark })
-
-export const semanticGroups = [
-  "Surfaces",
-  "Text",
-  "Borders",
-  "Brand accent",
-  "Secondary accent",
-  "Status",
-  "Data visualization",
-  "Static",
-] as const
+const css = (name: string) => `--qd-color-${name}`
 
 export const semanticTokens: SemanticToken[] = [
-  ...surfaces.map(
-    (s): SemanticToken => ({
-      id: `background-${s.id}`,
-      name: s.name,
-      group: "Surfaces",
-      use: s.use,
-      default: pair(s.light, s.dark),
-      now: { role: `background.${s.id}`, light: s.light, dark: s.dark },
-    })
-  ),
   {
     id: "text-primary",
     name: "text/primary",
-    group: "Text",
+    group: "text",
     use: "Titles and body text",
     default: pair("neutral-900", "neutral-50"),
+    cssVar: css("text-primary"),
     now: { role: "text.primary", light: "neutral-950", dark: "neutral-50" },
     contrast: { target: 4.5 },
   },
   {
     id: "text-secondary",
     name: "text/secondary",
-    group: "Text",
+    group: "text",
     use: "Supporting text, labels, captions",
     default: pair("neutral-600", "neutral-500"),
+    cssVar: css("text-secondary"),
     now: { role: "text.secondary", light: "neutral-600", dark: "neutral-500" },
     contrast: { target: 4.5 },
   },
   {
     id: "text-disabled",
     name: "text/disabled",
-    group: "Text",
+    group: "text",
     use: "Placeholders and disabled text",
     default: pair("neutral-400", "neutral-600"),
+    cssVar: css("text-disabled"),
     now: { role: "text.disabled", light: "neutral-400", dark: "neutral-600" },
     contrast: { target: 0 },
   },
   {
-    id: "border-subtle",
-    name: "border/subtle",
-    group: "Borders",
-    use: "Dividers and card outlines, as light as Figma's divider today",
-    default: pair("neutral-200", "neutral-850"),
-    now: null,
+    id: "text-on-accent",
+    name: "text/on-accent",
+    group: "text",
+    use: "Text on primary/primary, like a button label",
+    default: pair("neutral-0"),
+    cssVar: css("text-on-accent"),
+    now: { role: "text.on-accent", light: "neutral-0", dark: "neutral-0" },
+    contrast: { target: 4.5, on: "primary-primary" },
   },
   {
-    id: "border-default",
-    name: "border/default",
-    group: "Borders",
-    use: "Lines that need to show: chart gridlines, tables",
-    default: pair("neutral-200", "neutral-700"),
-    now: { role: "border.on-light / on-dark", light: "neutral-200", dark: "neutral-700" },
-  },
-  {
-    id: "border-strong",
-    name: "border/strong",
-    group: "Borders",
-    use: "Fields and outline buttons, at 3:1",
-    default: pair("neutral-500"),
-    now: null,
-    contrast: { target: 3, on: "background-raised" },
-  },
-  {
-    id: "accent-primary",
-    name: "accent/primary",
-    group: "Brand accent",
+    id: "primary-primary",
+    name: "primary/primary",
+    group: "primary",
     use: "Buttons and the one strong mark",
     default: pair("amaranth-600"),
+    cssVar: css("accent-primary"),
     now: { role: "accent.primary", light: "amaranth-600", dark: "amaranth-600" },
   },
   {
-    id: "accent-primary-hover",
-    name: "accent/primary-hover",
-    group: "Brand accent",
+    id: "primary-hover",
+    name: "primary/hover",
+    group: "primary",
     use: "The primary button on hover",
     default: pair("amaranth-700", "amaranth-500"),
+    cssVar: css("accent-primary-hover"),
     now: { role: "accent.primary-hover", light: "amaranth-700", dark: "amaranth-700" },
   },
   {
-    id: "accent-subtle",
-    name: "accent/subtle",
-    group: "Brand accent",
+    id: "primary-subtle",
+    name: "primary/subtle",
+    group: "primary",
     use: "Soft fills: kickers, chips, highlights",
     default: pair("amaranth-100", "amaranth-950"),
+    cssVar: css("accent-subtle"),
     now: null,
   },
   {
-    id: "accent-text",
-    name: "accent/text",
-    group: "Brand accent",
+    id: "primary-text",
+    name: "primary/text",
+    group: "primary",
     use: "Colored text, links and icons",
     default: pair("amaranth-800", "amaranth-400"),
+    cssVar: css("accent-text"),
     now: null,
     contrast: { target: 4.5 },
   },
   {
-    id: "text-on-accent",
-    name: "text/on-accent",
-    group: "Brand accent",
-    use: "Text on accent/primary",
-    default: pair("neutral-0"),
-    now: { role: "text.on-accent", light: "neutral-0", dark: "neutral-0" },
-    contrast: { target: 4.5, on: "accent-primary" },
-  },
-  {
-    id: "accent-secondary",
-    name: "accent/secondary",
-    group: "Secondary accent",
-    use: "Secondary marks and product",
+    id: "secondary-secondary",
+    name: "secondary/secondary",
+    group: "secondary",
+    use: "Secondary marks, and the accent in product UI",
     default: pair("indigo-600"),
+    cssVar: css("accent-secondary"),
     now: { role: "accent.secondary", light: "indigo-600", dark: "indigo-600" },
   },
   {
-    id: "accent-secondary-subtle",
-    name: "accent/secondary-subtle",
-    group: "Secondary accent",
+    id: "secondary-subtle",
+    name: "secondary/subtle",
+    group: "secondary",
     use: "Tags and soft fills",
     default: pair("indigo-100", "indigo-950"),
+    cssVar: css("accent-secondary-subtle"),
     now: null,
   },
   {
-    id: "accent-secondary-text",
-    name: "accent/secondary-text",
-    group: "Secondary accent",
+    id: "secondary-text",
+    name: "secondary/text",
+    group: "secondary",
     use: "Text and icons on its soft fill",
     default: pair("indigo-800", "indigo-400"),
+    cssVar: css("accent-secondary-text"),
     now: null,
-    contrast: { target: 4.5, on: "accent-secondary-subtle" },
+    contrast: { target: 4.5, on: "secondary-subtle" },
   },
   ...(
     [
-      ["success", "teal", "teal-600", "teal-600"],
       ["error", "red", "red-500", "red-500"],
       ["warning", "orange", "orange-500", "orange-500"],
       ["info", "blue", "blue-400", "blue-400"],
+      ["success", "teal", "teal-600", "teal-600"],
     ] as const
   ).flatMap(([status, family, light, dark]): SemanticToken[] => [
     {
       id: `status-${status}`,
       name: `status/${status}`,
-      group: "Status",
+      group: "status",
       use: "Text and icons",
       default: pair(`${family}-800`, `${family}-400`),
+      cssVar: css(`status-${status}`),
       now: { role: `status.${status}`, light, dark },
       contrast: { target: 4.5, on: `status-${status}-subtle` },
     },
     {
       id: `status-${status}-subtle`,
       name: `status/${status}-subtle`,
-      group: "Status",
+      group: "status",
       use: "Badge and alert fill",
       default: pair(`${family}-100`, `${family}-950`),
+      cssVar: css(`status-${status}-subtle`),
       now: null,
     },
   ]),
+  ...surfaces.map(
+    (s): SemanticToken => ({
+      id: `background-${s.id}`,
+      name: s.name,
+      group: "background",
+      use: s.use,
+      default: pair(s.light, s.dark),
+      cssVar: css(`background-${s.id}`),
+      now: { role: `background.${s.id}`, light: s.light, dark: s.dark },
+    })
+  ),
+  {
+    id: "border-subtle",
+    name: "border/subtle",
+    group: "border",
+    use: "Dividers and card outlines",
+    default: pair("neutral-200", "neutral-850"),
+    cssVar: css("border-subtle"),
+    now: null,
+  },
+  {
+    id: "border-default",
+    name: "border/default",
+    group: "border",
+    use: "Lines that need to show: chart gridlines, tables",
+    default: pair("neutral-200", "neutral-700"),
+    cssVar: css("border-default"),
+    now: { role: "border.on-light / on-dark", light: "neutral-200", dark: "neutral-700" },
+  },
+  {
+    id: "border-strong",
+    name: "border/strong",
+    group: "border",
+    use: "Fields and outline buttons, at 3:1",
+    default: pair("neutral-500"),
+    cssVar: css("border-strong"),
+    now: null,
+    contrast: { target: 3, on: "background-raised" },
+  },
   ...(
     [
       ["amaranth", "amaranth-600"],
@@ -381,29 +444,172 @@ export const semanticTokens: SemanticToken[] = [
     ([family, now], i): SemanticToken => ({
       id: `dataviz-${i + 1}`,
       name: `dataviz/${i + 1}`,
-      group: "Data visualization",
-      use: "Chart series, in order",
+      group: "dataviz",
+      use: `Chart series ${i + 1}`,
       default: pair(`${family}-600`),
+      cssVar: css(`dataviz-${i + 1}`),
       now: { role: `dataviz.${i + 1}`, light: now, dark: now },
     })
   ),
   {
     id: "static-white",
     name: "static/white",
-    group: "Static",
+    group: "static",
     use: "White that never changes with the theme: text and logos on photos, art on patterns",
     default: pair("neutral-0"),
+    cssVar: css("static-white"),
     now: null,
   },
   {
     id: "static-black",
     name: "static/black",
-    group: "Static",
+    group: "static",
     use: "Black that never changes with the theme: scrims on images",
     default: pair("neutral-1000"),
+    cssVar: css("static-black"),
     now: null,
   },
 ]
+
+// How to use each group, shown on its tab like the palette's steps: cards for the tokens or the main rules, then
+// notes. From the token descriptions in Figma and the rules in primitives/colors and design-system/DESIGN.md.
+export type GroupGuide = {
+  cards: { title: string; note: string }[]
+  notes: { lead: string; text: string }[]
+}
+
+export const groupGuides: Record<GroupId, GroupGuide> = {
+  text: {
+    cards: [
+      { title: "text/primary", note: "Titles and body text, at 4.5:1 or more on every background." },
+      { title: "text/secondary", note: "Labels, captions and supporting text. Still 4.5:1, so it's safe for body text that matters less." },
+      { title: "text/disabled", note: "Placeholders and disabled controls only. It's under 4.5:1 on purpose: never for text people need to read." },
+      { title: "text/on-accent", note: "Text on primary/primary, like a button label. White in both themes." },
+    ],
+    notes: [
+      {
+        lead: "Two levels are enough.",
+        text: "Most layouts need only primary and secondary. Colored text comes from primary/text, secondary/text or the status colors, never from a palette step picked by eye.",
+      },
+      {
+        lead: "Contrast.",
+        text: "WCAG AA: 4.5:1 for body text and 3:1 for text from 24px. Never light gray on medium gray. The table shows each token on background/default, and on-accent on primary/primary.",
+      },
+    ],
+  },
+  primary: {
+    cards: [
+      { title: "primary/primary", note: "Buttons and the one strong mark. Text on it is text/on-accent." },
+      { title: "primary/hover", note: "The primary button on hover: darker in light (700), lighter in dark (500)." },
+      { title: "primary/subtle", note: "Soft fills: kickers, chips and highlighted areas. Pair it with primary/text." },
+      { title: "primary/text", note: "Colored text, links and icons, at 4.5:1 on the backgrounds." },
+    ],
+    notes: [
+      {
+        lead: "An accent, not a surface.",
+        text: "Use it for buttons, highlights and small marks. Never a flat amaranth fill behind text. Red pattern backgrounds in creatives are the exception (guidelines, section 3).",
+      },
+      {
+        lead: "Marketing's accent.",
+        text: "Amaranth is the accent in brand and marketing work and on the web. Product UI uses indigo (Secondary) as its accent instead.",
+      },
+      {
+        lead: "Names.",
+        text: "Figma groups the brand accents as primary/* and secondary/* (2026-11-21). The repo's CSS still calls them --qd-color-accent-*, the variables shown in the table, until they're renamed.",
+      },
+    ],
+  },
+  secondary: {
+    cards: [
+      { title: "secondary/secondary", note: "Secondary marks, and the accent in product UI. indigo-600 in both themes." },
+      { title: "secondary/subtle", note: "Tags and soft fills. Pair it with secondary/text." },
+      { title: "secondary/text", note: "Text and icons on its soft fill, and indigo links, at 4.5:1." },
+    ],
+    notes: [
+      {
+        lead: "Next to primary, not instead of it.",
+        text: "In brand and marketing work amaranth leads and indigo supports: secondary calls to action, code highlights, secondary marks.",
+      },
+      {
+        lead: "The product's accent.",
+        text: "Product UI sets data-context=\"product\" on its root, and its buttons, links and focus take indigo where marketing takes amaranth.",
+      },
+    ],
+  },
+  status: {
+    cards: [
+      { title: "status/<state>", note: "Text and icons: the 800 in light, the 400 in dark, at 4.5:1 on its own soft fill." },
+      { title: "status/<state>-subtle", note: "The fill of badges and alerts: the 100 in light, the 950 in dark." },
+      { title: "Only for status", note: "Say how something went or what needs attention. For categories or decoration, use the palette or data viz." },
+      { title: "Never color alone", note: "Pair the color with an icon or a word, so the state reads without color." },
+    ],
+    notes: [
+      {
+        lead: "Use them in pairs.",
+        text: "A state's text goes on its own subtle fill, as in the badges and the alert below. Success is teal, error red, warning orange and info blue.",
+      },
+    ],
+  },
+  background: {
+    cards: surfaces.map((s) => ({ title: s.name, note: `${s.use}.` })),
+    notes: [
+      {
+        lead: "One step per layer.",
+        text: "Start every layout on default, then step up one surface for each layer that sits on top. Don't skip straight from default to highlight for a card.",
+      },
+      {
+        lead: "Depth by theme.",
+        text: "In dark, each surface is a little lighter than the one below, which is how depth reads on dark backgrounds. In light, raised and overlay are both white, so add a border or shadow to separate them.",
+      },
+      {
+        lead: "Highlight means emphasis.",
+        text: "Keep highlight for emphasis, not as a general card color, so it keeps its meaning. Illustrations, gradients and artwork use the palette directly.",
+      },
+    ],
+  },
+  border: {
+    cards: [
+      { title: "border/subtle", note: "Dividers and card outlines: quiet lines that only separate." },
+      { title: "border/default", note: "Lines people read along: chart gridlines and tables." },
+      { title: "border/strong", note: "Fields and outline buttons, at 3:1 so controls are easy to find." },
+    ],
+    notes: [
+      {
+        lead: "Pick the edge by its job.",
+        text: "Subtle for anything that only separates, default where the line carries information, strong for controls.",
+      },
+      {
+        lead: "In the design system.",
+        text: "The web components use their own edges (DESIGN.md, Soft edges and Control edge): the text color at 9% on dark and 10% on light, and neutral-800 or neutral-300 for controls.",
+      },
+    ],
+  },
+  dataviz: {
+    cards: [
+      { title: "In order", note: "Series 1 is amaranth, 2 indigo, 3 teal, and so on. Keep the order, so charts look alike everywhere." },
+      { title: "Never color alone", note: "Label the series, or use shape and position too, so a chart reads without color." },
+      { title: "Marks, not text", note: "For bars, lines and points. Labels and values stay text/primary or text/secondary." },
+    ],
+    notes: [
+      {
+        lead: "Tints of a series.",
+        text: "For a highlighted bar, a range or a soft area, use the same family's palette steps (Palette), so the series keeps its color.",
+      },
+    ],
+  },
+  static: {
+    cards: [
+      { title: "static/white", note: "Text and logos on photos, and art on patterns." },
+      { title: "static/black", note: "Scrims on images, under static/white text." },
+    ],
+    notes: [
+      {
+        lead: "Only on images and art.",
+        text: "On the page's own backgrounds use the text and background tokens, which switch with the theme. A static color on a themed surface disappears in one of the themes.",
+      },
+    ],
+  },
+}
 
 export const semanticVar = (id: string) => `--sem-${id}`
 

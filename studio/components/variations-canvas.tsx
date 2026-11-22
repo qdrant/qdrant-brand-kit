@@ -37,7 +37,7 @@ export function VariationsCanvas({ id, view }: { id: string; view: VariationView
           {variations.map((v, i) => (
             <Link
               key={v.id}
-              href={`/variations/${v.id}${query}`}
+              href={`/design-system/variations/${v.id}${query}`}
               title={`${v.description} From ${v.from}.`}
               aria-current={v.id === variation.id ? "page" : undefined}
               className={cn(

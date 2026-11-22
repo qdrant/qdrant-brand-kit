@@ -136,10 +136,10 @@ export function SemanticWorkbench({
 
         <div className="flex min-h-0 flex-col overflow-y-auto">
           {semanticGroups.map((group) => (
-            <section key={group} className="flex flex-col border-b px-4 py-3 last:border-b-0">
-              <h3 className="pb-1 font-mono text-[11px] text-muted-foreground uppercase">{group}</h3>
+            <section key={group.id} className="flex flex-col border-b px-4 py-3 last:border-b-0">
+              <h3 className="pb-1 font-mono text-[11px] text-muted-foreground uppercase">{group.label}</h3>
               {semanticTokens
-                .filter((t) => t.group === group)
+                .filter((t) => t.group === group.id)
                 .map((token) => (
                   <TokenRow
                     key={token.id}

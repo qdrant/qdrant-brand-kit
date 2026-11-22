@@ -14,7 +14,7 @@ const assets = [
     id: "post",
     name: "Event post",
     tests:
-      "A 1:1 social post: the base, a raised card outlined in border/subtle, the kicker on accent/subtle, icons in accent/text and the button on accent/primary.",
+      "A 1:1 social post: the base, a raised card outlined in border/subtle, the kicker on primary/subtle, icons in primary/text and the button on primary/primary.",
     Asset: EventPost,
   },
   {
@@ -92,7 +92,7 @@ function EventPost() {
       <div className="flex aspect-square flex-col justify-between bg-(--sem-background-default) p-[7cqw] text-(--sem-text-primary)">
         <Logo className="h-[4.5cqw]" />
         <div className="flex flex-col gap-[3cqw]">
-          <span className="w-fit rounded-[0.8cqw] bg-(--sem-accent-subtle) px-[1.8cqw] py-[0.7cqw] font-mono text-[2.4cqw] text-(--sem-accent-text) uppercase">
+          <span className="w-fit rounded-[0.8cqw] bg-(--sem-primary-subtle) px-[1.8cqw] py-[0.7cqw] font-mono text-[2.4cqw] text-(--sem-primary-text) uppercase">
             Kicker
           </span>
           <h3 className="text-[7cqw] leading-[1.08]">{SAMPLE}</h3>
@@ -104,13 +104,13 @@ function EventPost() {
           <dl className="flex flex-col gap-[1.6cqw] rounded-[1.6cqw] border border-(--sem-border-subtle) bg-(--sem-background-raised) p-[2.8cqw] text-[2.6cqw]">
             {rows.map(({ Icon, label, value }) => (
               <div key={label} className="flex items-center gap-[1.6cqw]">
-                <Icon className="size-[3.2cqw] text-(--sem-accent-text)" strokeWidth={1.75} />
+                <Icon className="size-[3.2cqw] text-(--sem-primary-text)" strokeWidth={1.75} />
                 <dt className="w-[9cqw] text-(--sem-text-secondary)">{label}</dt>
                 <dd>{value}</dd>
               </div>
             ))}
           </dl>
-          <span className="rounded-[1cqw] bg-(--sem-accent-primary) px-[3.6cqw] py-[1.8cqw] text-[2.8cqw] font-semibold text-(--sem-text-on-accent)">
+          <span className="rounded-[1cqw] bg-(--sem-primary-primary) px-[3.6cqw] py-[1.8cqw] text-[2.8cqw] font-semibold text-(--sem-text-on-accent)">
             Button
           </span>
         </div>
@@ -127,10 +127,10 @@ function ProductUpdate() {
     <div className="flex flex-col gap-5 bg-(--sem-background-default) p-6 text-sm text-(--sem-text-primary)">
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-1.5">
-          <span className="font-mono text-xs text-(--sem-accent-text) uppercase">Kicker</span>
+          <span className="font-mono text-xs text-(--sem-primary-text) uppercase">Kicker</span>
           <h3 className="text-xl leading-tight">Section title</h3>
         </div>
-        <span className="inline-flex items-center gap-1 text-(--sem-accent-text) underline-offset-4 hover:underline">
+        <span className="inline-flex items-center gap-1 text-(--sem-primary-text) underline-offset-4 hover:underline">
           Link <ArrowRight className="size-4" />
         </span>
       </div>
@@ -139,7 +139,7 @@ function ProductUpdate() {
         {["Tag", "Tag", "Tag"].map((tag, i) => (
           <span
             key={i}
-            className="rounded-full bg-(--sem-accent-secondary-subtle) px-2.5 py-0.5 text-xs text-(--sem-accent-secondary-text)"
+            className="rounded-full bg-(--sem-secondary-subtle) px-2.5 py-0.5 text-xs text-(--sem-secondary-text)"
           >
             {tag}
           </span>
@@ -179,11 +179,11 @@ function ProductUpdate() {
               <span className="font-mono">64%</span>
             </div>
             <div className="h-1.5 overflow-hidden rounded-full bg-(--sem-background-highlight)">
-              <div className="h-full w-[64%] rounded-full bg-(--sem-accent-secondary)" />
+              <div className="h-full w-[64%] rounded-full bg-(--sem-secondary-secondary)" />
             </div>
           </div>
           <div className="flex flex-wrap gap-2 pt-1">
-            <span className="rounded-md bg-(--sem-accent-primary) px-3.5 py-2 font-medium text-(--sem-text-on-accent) hover:bg-(--sem-accent-primary-hover)">
+            <span className="rounded-md bg-(--sem-primary-primary) px-3.5 py-2 font-medium text-(--sem-text-on-accent) hover:bg-(--sem-primary-hover)">
               Button
             </span>
             <span className="rounded-md border border-(--sem-border-strong) px-3.5 py-2 font-medium hover:bg-(--sem-background-highlight)">
@@ -194,7 +194,7 @@ function ProductUpdate() {
         <div className="flex flex-col gap-0.5 self-start rounded-lg border border-(--sem-border-subtle) bg-(--sem-background-overlay) p-1 shadow-lg">
           <span className="rounded-sm px-2 py-1.5">Menu item</span>
           <span className="flex items-center justify-between rounded-sm bg-(--sem-background-highlight) px-2 py-1.5">
-            Selected item <Check className="size-4 text-(--sem-accent-text)" />
+            Selected item <Check className="size-4 text-(--sem-primary-text)" />
           </span>
           <span className="rounded-sm px-2 py-1.5">Menu item</span>
           <span className="rounded-sm px-2 py-1.5 text-(--sem-text-disabled)">Disabled item</span>
@@ -219,7 +219,7 @@ function ChartSlide() {
       <div className="flex aspect-video flex-col gap-[3cqw] bg-(--sem-background-default) p-[5cqw] text-(--sem-text-primary)">
         <div className="flex items-start justify-between gap-[3cqw]">
           <div className="flex flex-col gap-[1cqw]">
-            <span className="font-mono text-[1.6cqw] text-(--sem-accent-text) uppercase">Kicker</span>
+            <span className="font-mono text-[1.6cqw] text-(--sem-primary-text) uppercase">Kicker</span>
             <h3 className="text-[3.6cqw] leading-tight">Chart title</h3>
           </div>
           <div className="flex gap-[2cqw] pt-[0.6cqw] text-[1.5cqw] text-(--sem-text-secondary)">
