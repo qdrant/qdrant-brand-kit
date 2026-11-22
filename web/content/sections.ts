@@ -16,8 +16,9 @@ export type Feature = {
   id?: string
   // A short label above the title, like who it applies to ("All replicated clusters").
   tag?: string
-  // Lines after the text, each on its own row, with an optional bold label ("Mechanics", "Guarantees").
-  points?: { label?: string; text: string }[]
+  // Lines after the text, each on its own row, with an optional bold label ("Mechanics", "Guarantees") and an
+  // optional Lucide icon (shown when the visual is in the center).
+  points?: { label?: string; text: string; icon?: string }[]
   // In a grid, take the whole row (a closing card under the others).
   wide?: boolean
   // A real image, product screen or diagram for the feature's media (web/visuals), instead of a placeholder. It sits
@@ -25,6 +26,9 @@ export type Feature = {
   // bare, for a visual with its own look (the globe).
   visual?: ReactNode
   visualFrame?: "plate" | "none"
+  // A wide card's visual: beside the text ("side", the default) or in the center with the points around it, two on
+  // each side, each with its icon ("center", for a visual that is the card's subject, like the globe).
+  visualPlacement?: "side" | "center"
 }
 
 // Home: the case-study carousel's companies (from its links) and the button under it.

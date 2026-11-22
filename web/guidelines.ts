@@ -153,6 +153,12 @@ export const guidelines: GuidelineGroup[] = [
         decided: "Juan, 2026-11-22",
         source: "web/styles/web.css (.web-selected)",
       },
+      {
+        title: "In-page links scroll with an ease",
+        text: "A link to a part of the same page (an anchor nav's tab) never jumps: the page scrolls there with a slow start and a slow stop (ease-in-out quart), in 600 to 1100ms by distance, and stops just under the sticky nav. The reader's own scroll stops it, and reduced motion jumps straight there.",
+        decided: "Juan, 2026-11-22",
+        source: "web/lib/smooth-scroll.ts",
+      },
     ],
   },
   {
@@ -189,6 +195,12 @@ export const guidelines: GuidelineGroup[] = [
         text: "A product screen, diagram or image sits in a frame (a plate in a tray) exactly its size, never in a bigger box, and on the outer side of its row when there's room (the right when the visual is on the right). A visual with its own look, like the globe, sits bare. Product screens are set in from the frame's top-left corner and cropped at its right and bottom, so the frame's surface shows around them.",
         decided: "Juan, 2026-11-22",
         source: "web/visuals/, web/sections/feature-rows.tsx",
+      },
+      {
+        title: "A card's subject can sit in the center",
+        text: "When the visual is what a wide card is about (the Multi-AZ globe), it sits in the center: the title above, the points around it, half on each side, each with its icon on a tile and the side's text facing the visual, and the link under it. On phones: the title, the visual, then the points.",
+        decided: "Juan, 2026-11-22",
+        source: "web/sections/feature-grid.tsx (visualPlacement)",
       },
       {
         title: "Cards are plates",

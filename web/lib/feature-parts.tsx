@@ -2,6 +2,7 @@ import { Badge } from "@qdrant/design-system/components/ui/badge"
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Feature } from "../content/sections"
+import { IconTile, type Tone } from "./tone"
 import { type } from "./type"
 
 // The optional parts of a feature (content/sections.ts), shared by the sections that show features.
@@ -26,6 +27,27 @@ export function FeaturePoints({ points, className }: { points?: Feature["points"
           {p.label && <strong className="font-semibold text-foreground">{p.label}</strong>} {p.text}
         </p>
       ))}
+    </div>
+  )
+}
+
+// One point on its own, with its icon on a small tile above it, for points set around a visual (a wide card's
+// center layout).
+export function FeaturePoint({
+  point,
+  tone = "indigo",
+  className,
+}: {
+  point: NonNullable<Feature["points"]>[number]
+  tone?: Tone
+  className?: string
+}) {
+  return (
+    <div className={cn("flex flex-col items-start gap-4", className)}>
+      {point.icon && <IconTile name={point.icon} tone={tone} />}
+      <p className={type.body}>
+        {point.label && <strong className="font-semibold text-foreground">{point.label}</strong>} {point.text}
+      </p>
     </div>
   )
 }

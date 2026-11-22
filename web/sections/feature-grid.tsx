@@ -2,7 +2,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Feature } from "../content/sections"
 import { ArrowLink } from "../lib/arrow-link"
-import { FeaturePoints, FeatureTag } from "../lib/feature-parts"
+import { FeaturePoint, FeaturePoints, FeatureTag } from "../lib/feature-parts"
 import { Plate } from "../lib/plate"
 import { IconTile, toneAt, type Tone } from "../lib/tone"
 import { LinkButton } from "../lib/link-button"
@@ -64,10 +64,11 @@ export function FeatureGrid({
         )}
       >
         {items.map((item, i) => {
+          const tone = (item.tone as Tone) ?? (tones === "mixed" ? toneAt(i) : tones)
           const markerEl = (
             <>
               {marker === "icon" && item.icon && (
-                <IconTile name={item.icon} tone={(item.tone as Tone) ?? (tones === "mixed" ? toneAt(i) : tones)} />
+                <IconTile name={item.icon} tone={tone} />
               )}
               {marker === "number" && (
                 <span className="font-mono text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
@@ -86,10 +87,37 @@ export function FeatureGrid({
               {item.link.label}
             </ArrowLink>
           )
-          // A wide card with a visual: the text on the left, the visual on the right, from lg.
+          const points = item.points ?? []
+          const half = Math.ceil(points.length / 2)
+          // From lg, each side sits close to the visual and mirrors the other: the left one aligned toward it.
+          const side = (list: typeof points, className?: string, toward?: boolean) => (
+            <div className={cn("flex flex-col gap-10 lg:max-w-64 lg:gap-16", className)}>
+              {list.map((p) => (
+                <FeaturePoint key={p.text} point={p} tone={tone} className={cn(toward && "lg:items-end lg:text-right")} />
+              ))}
+            </div>
+          )
+          // A wide card with its visual in the center (Juan, 2026-11-22): the title above, the points around the
+          // visual, half on each side, each with its icon and facing it, and the link under it. On phones: title, visual, points.
+          // A wide card with a visual beside it: the text on the left, the visual on the right, from lg.
           const body =
-            item.wide && item.visual ? (
-              <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
+            item.wide && item.visual && item.visualPlacement === "center" ? (
+              <div className="flex flex-col items-center gap-10">
+                <div className="flex flex-col items-center gap-4 text-center">
+                  {markerEl}
+                  <FeatureTag tag={item.tag} />
+                  <h3 className={heading.card}>{item.title}</h3>
+                  {item.text && <p className={cn(type.small, "max-w-xl")}>{item.text}</p>}
+                </div>
+                <div className="grid w-full grid-cols-1 items-center gap-10 sm:grid-cols-2 lg:grid-cols-[1fr_auto_1fr] lg:gap-(--qd-layout-column-gap)">
+                  <div className="w-fit max-w-full justify-self-center sm:col-span-2 lg:order-2 lg:col-span-1">{item.visual}</div>
+                  {side(points.slice(0, half), "lg:order-1 lg:justify-self-end", true)}
+                  {side(points.slice(half), "lg:order-3 lg:justify-self-start")}
+                </div>
+                {linkEl}
+              </div>
+            ) : item.wide && item.visual ? (
+              <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
                 <div className="flex flex-col items-start gap-4">
                   {markerEl}
                   {textEl}

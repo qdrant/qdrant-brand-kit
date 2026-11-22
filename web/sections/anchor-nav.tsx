@@ -6,6 +6,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Link } from "../content/site"
 import { Section, type SectionProps } from "../lib/section"
+import { smoothScrollTo } from "../lib/smooth-scroll"
 
 export type AnchorNavProps = SectionProps & {
   // The page's parts, each an in-page link (#id).
@@ -20,7 +21,8 @@ export type AnchorNavProps = SectionProps & {
 
 // A sticky in-page nav for long pages (2026-11-21): anchor tabs on one line, the active one marked in indigo. It
 // follows the reader: the part nearest the top of the screen is the active tab (scroll-spy), and a click marks the
-// tab right away. Parts it can't find on the page leave the active tab to clicks.
+// tab right away. Parts it can't find on the page leave the active tab to clicks. A click scrolls to its part with an
+// ease (lib/smooth-scroll.ts), stopping just under the nav, and the tabs don't follow the scroll on the way there.
 export function AnchorNav({
   items,
   label,
@@ -34,6 +36,24 @@ export function AnchorNav({
 }: AnchorNavProps) {
   const [active, setActive] = React.useState(items[0]?.href ?? "")
   const listRef = React.useRef<HTMLUListElement>(null)
+  const navRef = React.useRef<HTMLElement>(null)
+  // True while a click's scroll runs, so scroll-spy doesn't mark the parts it passes.
+  const jumping = React.useRef(false)
+
+  const go = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setActive(href)
+    const target = href.startsWith("#") ? document.getElementById(href.slice(1)) : null
+    if (!target || event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return
+    event.preventDefault()
+    // Stop under the nav: its own height plus where it sticks, and a little air.
+    const bar = navRef.current?.closest("section")
+    const offset = bar ? (parseFloat(getComputedStyle(bar).top) || 0) + bar.offsetHeight + 32 : 32
+    jumping.current = true
+    history.pushState(null, "", href)
+    void smoothScrollTo(target, offset).then(() => {
+      jumping.current = false
+    })
+  }
 
   // Scroll-spy: watch the parts the tabs point to, and mark the one in the top part of the screen.
   React.useEffect(() => {
@@ -44,7 +64,7 @@ export function AnchorNav({
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-        if (visible[0]) setActive(`#${visible[0].target.id}`)
+        if (visible[0] && !jumping.current) setActive(`#${visible[0].target.id}`)
       },
       { rootMargin: "-20% 0px -70% 0px" }
     )
@@ -74,7 +94,7 @@ export function AnchorNav({
       id={id}
       className={cn("border-b border-(--web-line)", sticky && "sticky top-(--web-sticky-top,0px) z-20", className)}
     >
-      <nav aria-label={label ?? "On this page"} className="flex items-center gap-8">
+      <nav ref={navRef} aria-label={label ?? "On this page"} className="flex items-center gap-8">
         {label && (
           <span className="hidden shrink-0 font-mono text-xs text-muted-foreground uppercase lg:block">{label}</span>
         )}
@@ -86,7 +106,7 @@ export function AnchorNav({
                 <a
                   href={item.href}
                   aria-current={on ? "location" : undefined}
-                  onClick={() => setActive(item.href)}
+                  onClick={(event) => go(event, item.href)}
                   className={cn(
                     "relative flex h-14 items-center px-4 text-sm whitespace-nowrap outline-none focus-visible:underline",
                     on ? "text-foreground" : "text-muted-foreground hover:text-foreground"

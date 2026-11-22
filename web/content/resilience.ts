@@ -96,11 +96,13 @@ export const resilienceConfiguration = {
     title: "Multi-AZ",
     icon: "Boxes",
     wide: true,
+    visualPlacement: "center",
+    // The icons are the library's choice; the Figma has none on these points.
     points: [
-      { text: "Enabled at cluster creation" },
-      { text: "Available on the Premium tier" },
-      { text: "Changes where your replicas are placed, not how many" },
-      { text: "Without it, a multi-node cluster keeps all replicas in one zone" },
+      { icon: "CirclePlus", text: "Enabled at cluster creation" },
+      { icon: "Gem", text: "Available on the Premium tier" },
+      { icon: "MapPin", text: "Changes where your replicas are placed, not how many" },
+      { icon: "Box", text: "Without it, a multi-node cluster keeps all replicas in one zone" },
     ],
     link: { label: "Read Documentation", href: "https://qdrant.tech/documentation/scaling/distributed_deployment/" },
   } as Feature,

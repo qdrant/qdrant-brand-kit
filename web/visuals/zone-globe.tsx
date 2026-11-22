@@ -154,7 +154,10 @@ const scene: CanvasScene<State> = {
       ctx.beginPath()
       ctx.arc(c.x, c.y, 2.4, 0, Math.PI * 2)
       ctx.fill()
-      label(ctx, p, "CLIENT REQUEST", c.x - 8, c.y - 14, { align: "right" })
+      // Left of the point, kept inside the canvas when the globe is small (phones).
+      ctx.font = `500 12px ${p.mono}`
+      const width = ctx.measureText("CLIENT REQUEST").width
+      label(ctx, p, "CLIENT REQUEST", Math.max(c.x - 8, width + 4), c.y - 14, { align: "right" })
     }
 
     // The zones: bright with a ring, or gray with the accent dot while down.
