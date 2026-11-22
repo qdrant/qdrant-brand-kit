@@ -118,6 +118,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "web/lib/tone.tsx",
       },
       {
+        title: "Icon lines are pixel perfect",
+        text: "An icon's line is always 1px, 1.5px or 2px, never a fraction from scaling. Take Lucide's default width for the icon's size (2px at 24px, so 1.67px at 20px) and round it up: 2px from 19px, 1.5px from 13 to 18px, 1px up to 12px. So the icon tiles get 1.5px (16px icon, small tile) and 2px (20px and 24px icons).",
+        decided: "Juan, 2026-11-22",
+        source: "web/styles/web.css",
+      },
+      {
         title: "Buttons may have one icon",
         text: "Web buttons may have one Lucide icon before or after their text, or be icon-only (close, copy, more). The creative button stays text only.",
         decided: "Juan, 2026-11-18",
