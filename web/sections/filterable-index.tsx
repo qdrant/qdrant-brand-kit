@@ -103,9 +103,9 @@ export function FilterableIndex({
       cardPattern={cardPattern}
       id={id}
       className={cn("overflow-visible", className)}
-      innerClassName="grid items-start gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12"
+      innerClassName="grid grid-cols-1 items-start gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12"
     >
-      <aside className="flex flex-col gap-6 lg:sticky lg:top-6">
+      <aside className="flex min-w-0 flex-col gap-6 lg:sticky lg:top-6">
         <div className="flex items-center justify-between gap-4">
           <h2 className={type.kicker}>{filterTitle}</h2>
           {active > 0 && (

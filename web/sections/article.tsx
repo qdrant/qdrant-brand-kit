@@ -33,7 +33,7 @@ export type ArticleProps = SectionProps & {
 // Shared with the legal section.
 export function Prose({ blocks, className }: { blocks: ProseBlock[]; className?: string }) {
   return (
-    <div className={cn("flex flex-col gap-5", className)}>
+    <div className={cn("flex flex-col gap-5 [overflow-wrap:anywhere]", className)}>
       {blocks.map((block, i) => {
         switch (block.type) {
           case "h2":

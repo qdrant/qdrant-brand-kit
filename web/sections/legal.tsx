@@ -53,8 +53,8 @@ export function Legal({
         {updated && <p className={cn(type.small, "font-mono")}>{updated}</p>}
       </header>
       <div className="web-rule web-bleed" />
-      <div className="grid items-start gap-12 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-16">
-        <aside className="lg:sticky lg:top-8 lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto">
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-16">
+        <aside className="min-w-0 lg:sticky lg:top-8 lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto">
           <Contents title={contentsTitle} entries={entries} />
         </aside>
         <Prose blocks={blocks} className="max-w-3xl min-w-0" />

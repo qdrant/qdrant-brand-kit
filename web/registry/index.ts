@@ -1,3 +1,12 @@
+import { caseStudies } from "./case-studies"
+import { comparisonTable } from "./comparison-table"
+import { contact } from "./contact"
+import { faq } from "./faq"
+import { newsletter } from "./newsletter"
+import { pricingCalculator } from "./pricing-calculator"
+import { pricingTiers } from "./pricing-tiers"
+import { signupForm } from "./signup-form"
+import { testimonials } from "./testimonials"
 import { anchorNav } from "./anchor-nav"
 import { architectureDiagram } from "./architecture-diagram"
 import { benchmarkChart } from "./benchmark-chart"
@@ -57,6 +66,8 @@ export const sections = [
   featureTabs,
   steps,
   stats,
+  testimonials,
+  caseStudies,
   codeShowcase,
   installCommand,
   sdkGrid,
@@ -65,7 +76,14 @@ export const sections = [
   securityCompliance,
   withWithout,
   promoBanner,
+  pricingTiers,
+  pricingCalculator,
+  comparisonTable,
+  faq,
   cta,
+  newsletter,
+  contact,
+  signupForm,
   blogGrid,
   resourceCards,
   filterableIndex,
