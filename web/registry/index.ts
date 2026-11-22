@@ -1,3 +1,13 @@
+import { article } from "./article"
+import { blogGrid } from "./blog-grid"
+import { changelog } from "./changelog"
+import { eventsList } from "./events-list"
+import { filterableIndex } from "./filterable-index"
+import { integrationsDirectory } from "./integrations-directory"
+import { legal } from "./legal"
+import { notFound } from "./not-found"
+import { pageHeader } from "./page-header"
+import { resourceCards } from "./resource-cards"
 import { aboutStory } from "./about-story"
 import { backers } from "./backers"
 import { communityChannels } from "./community-channels"
@@ -28,6 +38,7 @@ export const sections = [
   announcementBar,
   navbar,
   hero,
+  pageHeader,
   logoCloud,
   featureGrid,
   featureRows,
@@ -37,6 +48,14 @@ export const sections = [
   stats,
   codeShowcase,
   cta,
+  blogGrid,
+  resourceCards,
+  filterableIndex,
+  integrationsDirectory,
+  eventsList,
+  article,
+  legal,
+  changelog,
   teamGrid,
   profileGrid,
   partnerDirectory,
@@ -45,6 +64,7 @@ export const sections = [
   backers,
   communityChannels,
   communityWall,
+  notFound,
   footer,
 ] as unknown as SectionDefinition[]
 

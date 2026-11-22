@@ -8,7 +8,13 @@ import { PatternLayers, useCardPattern } from "../patterns"
 
 type PlateProps = React.HTMLAttributes<HTMLElement> & {
   as?: "div" | "li" | "article" | "figure" | "a" | "form" | "section"
+  // Link and form attributes, for a card that's a link or a form.
   href?: string
+  target?: string
+  rel?: string
+  action?: string
+  method?: string
+  noValidate?: boolean
   // A surface pattern for this card only; otherwise the section's cardPattern.
   pattern?: string
 }
