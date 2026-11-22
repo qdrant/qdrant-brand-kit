@@ -36,6 +36,7 @@ export function AnnouncementBar({ tag, text, link, theme, surface = "raised", id
       theme={theme}
       surface={surface}
       spacing="none"
+      lines={false}
       id={id}
       className={className}
       innerClassName="py-2.5"
