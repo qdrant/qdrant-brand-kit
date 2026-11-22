@@ -1,3 +1,13 @@
+import { anchorNav } from "./anchor-nav"
+import { architectureDiagram } from "./architecture-diagram"
+import { benchmarkChart } from "./benchmark-chart"
+import { eventAgenda } from "./event-agenda"
+import { installCommand } from "./install-command"
+import { promoBanner } from "./promo-banner"
+import { sdkGrid } from "./sdk-grid"
+import { securityCompliance } from "./security-compliance"
+import { sponsorTiers } from "./sponsor-tiers"
+import { withWithout } from "./with-without"
 import { article } from "./article"
 import { blogGrid } from "./blog-grid"
 import { changelog } from "./changelog"
@@ -37,6 +47,7 @@ export * from "./types"
 export const sections = [
   announcementBar,
   navbar,
+  anchorNav,
   hero,
   pageHeader,
   logoCloud,
@@ -47,6 +58,13 @@ export const sections = [
   steps,
   stats,
   codeShowcase,
+  installCommand,
+  sdkGrid,
+  benchmarkChart,
+  architectureDiagram,
+  securityCompliance,
+  withWithout,
+  promoBanner,
   cta,
   blogGrid,
   resourceCards,
@@ -64,6 +82,8 @@ export const sections = [
   backers,
   communityChannels,
   communityWall,
+  eventAgenda,
+  sponsorTiers,
   notFound,
   footer,
 ] as unknown as SectionDefinition[]
