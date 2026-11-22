@@ -9,6 +9,7 @@ import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
 import type { HeaderProps } from "../lib/section-props"
 import { type } from "../lib/type"
+import { Node } from "../lib/node"
 
 export type ArchitectureDiagramProps = SectionProps & {
   header: HeaderProps
@@ -26,10 +27,6 @@ export type ArchitectureDiagramProps = SectionProps & {
   layout?: "hybrid"
 }
 
-// A small hollow node, the same as where the page's lines meet.
-function Node({ className }: { className?: string }) {
-  return <span aria-hidden className={cn("size-[7px] shrink-0 rounded-full border border-(--web-node) bg-background", className)} />
-}
 
 // An arrowhead in indigo, pointing right unless rotated.
 function Arrow({ className }: { className?: string }) {
@@ -52,7 +49,7 @@ function NoteMark({ note }: { note: string }) {
 function Part({ part, node }: { part: ArchitecturePart; node?: "left" | "right" }) {
   return (
     <Plate pattern="" className="flex min-h-14 flex-col justify-center gap-1 overflow-visible rounded-lg px-4 py-3">
-      {node && <Node className={cn("absolute top-1/2 -translate-y-1/2", node === "left" ? "-left-1" : "-right-1")} />}
+      {node && <Node solid className={cn("absolute top-1/2 -translate-y-1/2", node === "left" ? "-left-1" : "-right-1")} />}
       <span className="text-sm text-foreground">{part.name}</span>
       {part.detail && <span className="font-mono text-xs break-words text-muted-foreground">{part.detail}</span>}
     </Plate>

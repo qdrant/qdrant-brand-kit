@@ -20,7 +20,6 @@ export const profileGrid = defineSection<ProfileGridProps>({
         badge: stars.badge,
         columns: 3,
         layout: "grid",
-        cardPattern: "grain",
       },
     },
   ],

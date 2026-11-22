@@ -21,14 +21,13 @@ export const pricingTiers = defineSection<PricingTiersProps>({
         header: { title: content.title, description: content.description, action: content.action, secondaryAction: content.secondaryAction },
         groups: content.groups,
         calculator: content.calculator,
-        pattern: ["horizon"],
       },
     },
     {
       id: "enterprise",
       name: "Enterprise cards",
       description: "Hybrid and Private Cloud as wide cards with what they're best for and their benefits (Pricing, On-Premise).",
-      props: { layout: "enterprise", groups: onPremise, calculator: content.calculator, cardPattern: "tint" },
+      props: { layout: "enterprise", groups: onPremise, calculator: content.calculator },
     },
   ],
   docs: {

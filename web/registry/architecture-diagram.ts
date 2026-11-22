@@ -24,7 +24,6 @@ export const architectureDiagram = defineSection<ArchitectureDiagramProps>({
         legend: a.legend,
         dataNote: a.dataNote,
         footnote: a.footnote,
-        cardPattern: "surface-grid",
       },
     },
   ],

@@ -33,7 +33,6 @@ export const aboutStory = defineSection<AboutStoryProps>({
         vision: ourStory.vision,
         mission: ourStory.mission,
         layout: "mission",
-        cardPattern: "tint",
       },
     },
   ],

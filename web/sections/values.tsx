@@ -8,6 +8,7 @@ import { SectionHeader } from "../lib/section-header"
 import type { HeaderProps } from "../lib/section-props"
 import { IconTile, toneAt, type Tone } from "../lib/tone"
 import { heading, type } from "../lib/type"
+import { Node } from "../lib/node"
 
 export type ValuesProps = SectionProps & {
   header: HeaderProps
@@ -44,7 +45,7 @@ export function Values({ header, items, layout = "numbered", tones = "mixed", th
           {items.map((item, i) => (
             <li key={item.title} className="flex flex-col gap-10 px-6 py-8 lg:gap-16">
               <span className="flex items-center gap-3 font-mono text-sm text-muted-foreground">
-                <span aria-hidden className="size-[7px] shrink-0 rounded-full border border-(--web-node)" />
+                <Node />
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="flex flex-col gap-2">

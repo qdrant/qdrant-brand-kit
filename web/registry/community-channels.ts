@@ -19,7 +19,6 @@ export const communityChannels = defineSection<CommunityChannelsProps>({
         items: programs.items,
         layout: "cards",
         tones: "mixed",
-        pattern: ["orbits"],
       },
     },
     {

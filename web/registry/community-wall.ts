@@ -14,7 +14,7 @@ export const communityWall = defineSection<CommunityWallProps>({
       id: "masonry",
       name: "Masonry",
       description: "Six members' posts, each cut to its first full sentence, with the Discord button (Community). Initials hold the avatars' place.",
-      props: { header: { title: wall.title, action: wall.action }, quotes: wall.quotes, layout: "masonry", cardPattern: "dots" },
+      props: { header: { title: wall.title, action: wall.action }, quotes: wall.quotes, layout: "masonry" },
     },
   ],
   docs: {

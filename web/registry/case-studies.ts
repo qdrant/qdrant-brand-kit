@@ -18,7 +18,6 @@ export const caseStudies = defineSection<CaseStudiesProps>({
         layout: "cards",
         header: { kicker: cloudCustomers.kicker, title: cloudCustomers.title },
         items: cloudCustomers.items,
-        cardPattern: "dots",
       },
     },
     {

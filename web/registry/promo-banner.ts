@@ -14,7 +14,7 @@ export const promoBanner = defineSection<PromoBannerProps>({
       id: "split",
       name: "Split with media",
       description: "The AI Agents page's on-demand webinar, with a slot for its cover on the right.",
-      props: { layout: "split", promo: agentsWebinar, media: "right", mediaLabel: "Webinar cover", tone: "purple", cardPattern: "dots" },
+      props: { layout: "split", promo: agentsWebinar, media: "right", mediaLabel: "Webinar cover", tone: "purple" },
     },
     {
       id: "slim",

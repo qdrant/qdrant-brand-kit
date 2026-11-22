@@ -8,6 +8,7 @@ import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
 import type { HeaderProps } from "../lib/section-props"
 import { heading, type } from "../lib/type"
+import { Node } from "../lib/node"
 
 export type EventsListProps = SectionProps & {
   // list: one event per row, reaching the rails. cards: events on plates in three columns.
@@ -106,7 +107,7 @@ function Group({ title, events, layout }: { title?: string; events: EventItem[];
     <div className="flex flex-col gap-6">
       {title && (
         <h2 className={cn(type.kicker, "flex items-center gap-2.5")}>
-          <span aria-hidden className="size-[7px] shrink-0 rounded-full border border-(--web-node)" />
+          <Node />
           {title}
           <span className="font-mono tabular-nums">{events.length}</span>
         </h2>

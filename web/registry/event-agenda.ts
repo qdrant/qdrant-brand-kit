@@ -20,7 +20,6 @@ export const eventAgenda = defineSection<EventAgendaProps>({
         facts: e.facts,
         action: e.action,
         tracks: e.agenda.tracks,
-        pattern: ["stars"],
       },
     },
     {

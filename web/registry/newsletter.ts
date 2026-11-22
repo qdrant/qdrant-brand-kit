@@ -20,7 +20,7 @@ export const newsletter = defineSection<NewsletterProps>({
       id: "card",
       name: "Card",
       description: "The same on a plate, centered, for the end of a blog post or a resource page.",
-      props: { layout: "card", ...content, pattern: ["stars"], cardPattern: "tint" },
+      props: { layout: "card", ...content },
     },
   ],
   docs: {

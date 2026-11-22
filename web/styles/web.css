@@ -50,7 +50,8 @@
    data-web-lines="off" and data-web-material="off".
    - Lines: rails, a hairline down each side of the page, 24px outside the 1200px container, so content never
      touches them; seams, a hairline
-     between sections; nodes, small hollow dots where a seam meets a rail, like the points of a vector graph.
+     between sections; nodes, small hollow hexagons where a seam meets a rail, upright like the logo's brandmark (Juan,
+     2026-11-22; lib/node.tsx).
    - Material: plates, a card whose fill is a touch lighter at the top, with a 1px inner highlight; trays, a framed
      holder around media (code, a screenshot); cells, hairline grids for rows of facts. */
 [data-web],
@@ -85,12 +86,20 @@
 }
 .web-node {
   position: absolute;
-  top: -4px;
-  width: 7px;
-  height: 7px;
-  border-radius: 9999px;
-  border: 1px solid var(--web-line-strong);
-  background: var(--background);
+  top: -4.5px;
+}
+.web-hex polygon {
+  fill: transparent;
+  stroke: var(--web-node, var(--web-line-strong));
+  stroke-width: 1;
+  transition: fill 150ms, stroke 150ms;
+}
+.web-hex-solid polygon {
+  fill: var(--background);
+}
+.web-hex-active polygon {
+  fill: var(--web-indigo);
+  stroke: var(--web-indigo);
 }
 .web-cells {
   border-block: 1px solid var(--web-line);
@@ -303,9 +312,6 @@
 [data-web-indigo="off"],
 [data-web-indigo="off"] [data-theme] {
   --web-node: var(--web-line-strong);
-}
-.web-node {
-  border-color: var(--web-node);
 }
 [data-web]:not([data-web-indigo="off"]) .web-link:hover {
   color: var(--web-indigo);

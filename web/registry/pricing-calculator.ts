@@ -16,7 +16,7 @@ export const pricingCalculator = defineSection<PricingCalculatorProps>({
       id: "aside",
       name: "Heading beside",
       description: "The heading on the left, the inputs and the estimate on the right (the guide's example: 1M vectors, 768 dimensions, 2 replicas).",
-      props: { layout: "aside", header, source: sizing.source, pattern: ["grid"] },
+      props: { layout: "aside", header, source: sizing.source },
     },
     {
       id: "stacked",

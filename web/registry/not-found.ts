@@ -6,15 +6,15 @@ export const notFound = defineSection<NotFoundProps>({
   id: "not-found",
   name: "Not found",
   category: "utility",
-  summary: "The 404 page: a big 404 in mono, the message, where to look instead, and two ways out, over the starfield.",
+  summary: "The 404 page: a big 404 in mono, the message, where to look instead, and two ways out.",
   file: "not-found",
   component: NotFound,
   variants: [
     {
       id: "stars",
-      name: "Starfield",
-      description: "The site's 404 copy and buttons over the starfield (/404).",
-      props: { ...notFoundPage, pattern: ["stars"] },
+      name: "Default",
+      description: "The site's 404 copy and buttons (/404).",
+      props: { ...notFoundPage },
     },
   ],
   docs: {
@@ -22,7 +22,6 @@ export const notFound = defineSection<NotFoundProps>({
     rules: [
       "The code is mono and large; the message is the page's H1.",
       "Two actions: home as the primary, support as the secondary.",
-      "One background pattern, the starfield by default.",
     ],
     anatomy: [
       { part: "Code", note: "404, in mono." },

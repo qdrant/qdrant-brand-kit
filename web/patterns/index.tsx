@@ -2,18 +2,13 @@
 
 import * as React from "react"
 
-import { graph } from "./graph"
-import { grid } from "./grid"
-import { horizon } from "./horizon"
-import { orbits } from "./orbits"
-import { stars } from "./stars"
-import { dots, grain, surfaceGrid, tint } from "./surface"
 import type { PatternDefinition } from "./types"
 
 export * from "./types"
 
-// Every pattern, backgrounds first. Add a new one here.
-export const patterns: PatternDefinition[] = [stars, orbits, horizon, grid, graph, grain, tint, dots, surfaceGrid]
+// Every pattern, backgrounds first. Add a new one here. Empty for now: Juan adds them by hand, one at a time
+// (2026-11-22).
+export const patterns: PatternDefinition[] = []
 
 export const getPattern = (id: string) => patterns.find((p) => p.id === id)
 export const backgroundPatterns = () => patterns.filter((p) => p.kind === "background")

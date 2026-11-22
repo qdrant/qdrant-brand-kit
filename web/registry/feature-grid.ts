@@ -14,7 +14,7 @@ export const featureGrid = defineSection<FeatureGridProps>({
       id: "cards",
       name: "Icon cards, 4 columns",
       description: "Deployment options on plates, each with an icon and a link (home).",
-      props: { header: { title: deploy.title, action: deploy.action }, items: deploy.items, columns: 4, appearance: "cards", marker: "icon", tones: "mixed", cardPattern: "tint" },
+      props: { header: { title: deploy.title, action: deploy.action }, items: deploy.items, columns: 4, appearance: "cards", marker: "icon", tones: "mixed" },
     },
     {
       id: "cells",

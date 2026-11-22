@@ -14,7 +14,7 @@ export const testimonials = defineSection<TestimonialsProps>({
       id: "single",
       name: "Single quote",
       description: "One large quote, centered, with the company as a text logo (Canva, home).",
-      props: { layout: "single", quotes: [canvaQuote], pattern: ["orbits"] },
+      props: { layout: "single", quotes: [canvaQuote] },
     },
     {
       id: "wall",

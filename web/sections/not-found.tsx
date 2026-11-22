@@ -18,7 +18,7 @@ export type NotFoundProps = SectionProps & {
 }
 
 // The 404 page (2026-11-21): a big "404" in mono, what happened, where to look instead, and two ways out. It fills
-// most of the screen, with the starfield behind it by default.
+// most of the screen.
 export function NotFound({ code = "404", title, help, primary, secondary, theme, surface, pattern, cardPattern, id, className }: NotFoundProps) {
   return (
     <Section

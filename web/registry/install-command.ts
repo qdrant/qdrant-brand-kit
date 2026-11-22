@@ -14,7 +14,7 @@ export const installCommand = defineSection<InstallCommandProps>({
       id: "terminal",
       name: "Terminal",
       description: "The quickstart's Docker commands in a terminal window under a centered heading, with what Qdrant serves once it runs.",
-      props: { layout: "terminal", header: content.header, lines: content.lines, output: content.output, links: content.links, pattern: ["grid"] },
+      props: { layout: "terminal", header: content.header, lines: content.lines, output: content.output, links: content.links },
     },
     {
       id: "inline",

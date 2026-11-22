@@ -34,7 +34,6 @@ export const signupForm = defineSection<SignupFormProps>({
         benefits: serverless.benefits,
         aside: serverless.aside,
         form: serverless.form,
-        pattern: ["stars"],
       },
     },
   ],

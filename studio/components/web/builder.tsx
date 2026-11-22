@@ -391,6 +391,9 @@ export function PageBuilder() {
               </Field>
               <Field label="Background patterns">
                 <div className="flex flex-col gap-1.5 rounded-lg border p-2">
+                  {backgroundPatterns().length === 0 && (
+                    <p className="text-xs text-muted-foreground">None yet. Add one in web/patterns.</p>
+                  )}
                   {backgroundPatterns().map((pt) => {
                     const current =
                       block.pattern ?? ((variantOf(def, block.variant).props as { pattern?: string[] }).pattern ?? [])

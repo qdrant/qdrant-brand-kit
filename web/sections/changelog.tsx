@@ -8,6 +8,7 @@ import { SectionHeader } from "../lib/section-header"
 import type { HeaderProps } from "../lib/section-props"
 import { heading, type } from "../lib/type"
 import { Inline } from "./blog-grid"
+import { Node } from "../lib/node"
 
 export type ChangelogProps = SectionProps & {
   // timeline: entries down a line, a node each, the date and version on the left from md. compact: one row per
@@ -84,13 +85,7 @@ export function Changelog({ layout = "timeline", header, items, theme, surface, 
           <span aria-hidden className="absolute top-2 bottom-0 left-[3px] w-px bg-(--web-line) md:left-[calc(11rem+3px)]" />
           {items.map((r, i) => (
             <li key={r.version} className="relative grid gap-4 pb-14 pl-8 last:pb-0 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-0 md:pl-0">
-              <span
-                aria-hidden
-                className={cn(
-                  "absolute top-1.5 left-0 size-[7px] rounded-full border md:left-44",
-                  i === 0 ? "border-(--web-indigo) bg-(--web-indigo)" : "border-(--web-node) bg-background"
-                )}
-              />
+              <Node solid active={i === 0} className="absolute top-1.5 left-0 md:left-44" />
               <div className="flex flex-row items-center gap-3 md:flex-col md:items-start md:gap-2 md:pr-8">
                 <Version value={r.version} />
                 <time dateTime={r.date} className="font-mono text-sm text-muted-foreground">

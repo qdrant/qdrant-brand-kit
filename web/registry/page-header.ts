@@ -19,14 +19,14 @@ export const pageHeader = defineSection<PageHeaderProps>({
     {
       id: "simple-actions",
       name: "Simple, two actions",
-      description: "Left-aligned, with a line and two actions, over the coordinate grid (Integrations).",
-      props: { layout: "simple", ...integrationsHeader, pattern: ["grid"] },
+      description: "Left-aligned, with a line and two actions (Integrations).",
+      props: { layout: "simple", ...integrationsHeader },
     },
     {
       id: "search",
       name: "Search",
-      description: "Centered, with a search field, over the starfield (Blog).",
-      props: { layout: "search", ...blogHeader, pattern: ["stars"] },
+      description: "Centered, with a search field (Blog).",
+      props: { layout: "search", ...blogHeader },
     },
   ],
   docs: {

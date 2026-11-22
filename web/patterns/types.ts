@@ -5,7 +5,7 @@ import type { ComponentType } from "react"
 // text. Patterns are how the site's space, data and vector themes come in, one layer at a time, and they can be
 // turned off as a whole (data-web-patterns="off", the studio's Patterns switch).
 //
-// To add one: write web/patterns/<id>.tsx exporting a PatternDefinition, and list it in web/patterns/index.ts. It
+// To add one: write web/patterns/<id>.tsx exporting a PatternDefinition, and list it in web/patterns/index.tsx. It
 // then shows in the studio's Patterns tab, in the builder's pattern pickers, and on any section through its
 // `pattern` (background) or `cardPattern` (surface) prop.
 export type PatternKind = "background" | "surface"

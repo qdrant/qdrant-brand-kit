@@ -3,6 +3,7 @@ import * as React from "react"
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import { heading, type } from "./type"
+import { Node } from "./node"
 
 // The heading block that opens most sections (2026-11-21): an optional kicker in mono capitals, the title, a
 // line or two of text, and actions.
@@ -29,10 +30,10 @@ export function SectionHeader({
   className?: string
 }) {
   const titleClass = cn(Heading === "h1" ? heading.page : heading.section, "text-balance")
-  // The kicker starts with a node, the same hollow dot as where the page's lines meet (web.css).
+  // The kicker starts with a node, the same hexagon as where the page's lines meet (web.css).
   const kickerEl = kicker ? (
     <p className={cn(type.kicker, "flex items-center gap-2.5")}>
-      <span aria-hidden className="size-[7px] shrink-0 rounded-full border border-(--web-node)" />
+      <Node />
       {kicker}
     </p>
   ) : null

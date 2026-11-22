@@ -20,7 +20,7 @@ export const eventsList = defineSection<EventsListProps>({
       id: "cards",
       name: "Cards",
       description: "The same events on plates in three columns, for a shorter list on another page.",
-      props: { layout: "cards", upcomingTitle: events.upcomingTitle, upcoming: events.upcoming, pastTitle: events.pastTitle, past: events.past.slice(0, 6), cardPattern: "tint" },
+      props: { layout: "cards", upcomingTitle: events.upcomingTitle, upcoming: events.upcoming, pastTitle: events.pastTitle, past: events.past.slice(0, 6) },
     },
   ],
   docs: {

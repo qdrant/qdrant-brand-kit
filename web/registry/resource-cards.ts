@@ -18,7 +18,6 @@ export const resourceCards = defineSection<ResourceCardsProps>({
         layout: "grid",
         header: { title: recentArticles.title, description: recentArticles.description, action: recentArticles.action },
         items: recentArticles.items,
-        cardPattern: "dots",
       },
     },
     {

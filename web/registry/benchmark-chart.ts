@@ -22,7 +22,6 @@ export const benchmarkChart = defineSection<BenchmarkChartProps>({
         methodology: benchmark.methodology,
         rawData: benchmark.rawData,
         defaultPrecision: "0.95",
-        pattern: ["grid"],
       },
     },
   ],

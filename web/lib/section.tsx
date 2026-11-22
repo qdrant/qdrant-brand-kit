@@ -3,6 +3,7 @@ import * as React from "react"
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import { CardPatternProvider, PatternLayers } from "../patterns"
+import { Node } from "./node"
 
 // What every website section accepts, so pages and the page builder can set them the same way on any section
 // (Juan, 2026-11-21). theme: dark or light, or the page's when left out. surface: the background role,
@@ -68,7 +69,7 @@ export function Section({
       data-theme={theme}
       data-surface={surface === "default" ? undefined : surface}
       className={cn(
-        "relative overflow-hidden bg-background px-6 text-foreground md:px-10",
+        "relative overflow-x-clip bg-background px-6 text-foreground md:px-10",
         lines && seam && "web-seam",
         spacings[spacing],
         className
@@ -83,8 +84,8 @@ export function Section({
         >
           {seam && (
             <>
-              <span className="web-node -left-1" />
-              <span className="web-node -right-1" />
+              <Node solid className="web-node -left-1" />
+              <Node solid className="web-node -right-1" />
             </>
           )}
         </div>

@@ -33,7 +33,6 @@ export const securityCompliance = defineSection<SecurityComplianceProps>({
         checklist: enterpriseTooling.items,
         badges: security.badges,
         compliance: security.compliance,
-        cardPattern: "tint",
       },
     },
   ],

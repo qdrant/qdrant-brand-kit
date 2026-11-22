@@ -10,6 +10,7 @@ import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
 import type { HeaderProps } from "../lib/section-props"
 import { heading, type } from "../lib/type"
+import { Node } from "../lib/node"
 
 export type FeatureTabsProps = SectionProps & {
   header: HeaderProps
@@ -30,13 +31,7 @@ export function FeatureTabs({ header, items, theme, surface, pattern, cardPatter
             const on = i === active
             return (
               <li key={item.title} className="relative">
-                <span
-                  aria-hidden
-                  className={cn(
-                    "absolute top-5 -left-1 size-[7px] rounded-full border border-(--web-node) bg-background transition-colors",
-                    on && "border-(--web-indigo) bg-(--web-indigo)"
-                  )}
-                />
+                <Node solid active={on} className="absolute top-5 -left-1" />
                 <button
                   type="button"
                   role="tab"

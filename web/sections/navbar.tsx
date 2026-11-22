@@ -147,7 +147,6 @@ function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: Navba
         <Plate
           as="a"
           href={featured.link.href}
-          pattern="tint"
           className="flex w-64 flex-col justify-between gap-6 rounded-lg p-4 text-sm outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)"
         >
           {featured.tag && (
