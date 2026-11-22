@@ -6,9 +6,9 @@ Agents: read [`AGENTS.md`](AGENTS.md).
 
 | Path | What it is |
 | --- | --- |
-| `sections/` | One file per section, each with its layouts as a prop: `announcement-bar`, `navbar`, `hero`, `cta`, `footer` so far. The `resilience-*`, `site-header`, `site-footer` and `cta-banner` files are the Resilience page's, built before the library |
+| `sections/` | One file per section, each with its layouts as a prop: `announcement-bar`, `navbar`, `hero`, `logo-cloud`, `feature-grid`, `feature-rows`, `bento`, `feature-tabs`, `steps`, `stats`, `code-showcase`, `cta` and `footer` so far. The `resilience-*`, `site-header`, `site-footer` and `cta-banner` files are the Resilience page's, built before the library |
 | `registry/` | The library's catalog: each section's category, variants (ready-made props), docs and the fields the page builder edits. The studio's canvas, docs and builder read it |
-| `content/` | Example content for the variants: real qdrant.tech copy, verbatim (`site.ts`: menus, heroes, the closing CTA, the footer) |
+| `content/` | Example content for the variants: real qdrant.tech copy, verbatim (`site.ts`: menus, heroes, the closing CTA, the footer; `sections.ts`: features, stats, steps, logos and the quickstart code) |
 | `styles/web.css` | The website's surfaces: inside `[data-web]`, the design system's page, card, popover and highlight colors are the background roles, by theme and surface |
 | `pages/` | Sections put together into a page, shown in the studio's Web page under Pages. First: `resilience.tsx`, rebuilt from the Figma (Qdrant Web Design, "Resilience-Subpage") |
 | `lib/` | Helpers every section uses: `section.tsx` (theme, surface, padding and the 1200px container), `section-header.tsx`, `type.tsx` (the web type scale and responsive headings), `link-button.tsx`, `icon.tsx` (Lucide icons by name), `logo.tsx`, `code-panel.tsx`, `copy-snippet.tsx`, `media-frame.tsx`, `arrow-link.tsx`, `assets.tsx`, `mono-image.tsx` and `cloud-logo.tsx` |
