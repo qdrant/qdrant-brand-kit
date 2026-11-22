@@ -358,13 +358,22 @@
 [data-web] [data-theme="dark"],
 [data-theme="dark"] [data-web] {
   --web-window-dot: var(--qd-color-neutral-800);
+  --web-window-dot-top: color-mix(in oklab, var(--qd-color-neutral-0) 10%, var(--web-window-dot));
+  --web-window-dot-shine: color-mix(in oklab, var(--qd-color-neutral-0) 16%, transparent);
+  --web-window-dot-rim: inset 0 0 0 0.5px color-mix(in oklab, var(--qd-color-neutral-0) 6%, transparent);
 }
 [data-web][data-theme="light"],
 [data-web] [data-theme="light"] {
   --web-window-dot: var(--qd-color-neutral-200);
+  --web-window-dot-top: color-mix(in oklab, var(--qd-color-neutral-0) 45%, var(--web-window-dot));
+  --web-window-dot-shine: color-mix(in oklab, var(--qd-color-neutral-0) 70%, transparent);
+  --web-window-dot-rim: inset 0 -0.5px 0 color-mix(in oklab, var(--qd-color-neutral-1000) 6%, transparent);
 }
+/* With a very subtle glass (Juan, 2026-11-22): a touch lighter at the top, a hairline highlight along the top edge
+   and a faint rim (on light, a faint shade at the bottom), in the palette's white and black. */
 .web-window-dot {
-  background: var(--web-window-dot);
+  background: linear-gradient(to bottom, var(--web-window-dot-top), var(--web-window-dot) 70%);
+  box-shadow: inset 0 0.5px 0 var(--web-window-dot-shine), var(--web-window-dot-rim);
 }
 
 /* A text link: indigo, underlined on hover. A title or crumb that is a link but reads as text (a card's title, a

@@ -168,7 +168,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "A window's dots are lighter than its bar",
-        text: "The three dots in a code panel's or terminal's top bar are neutral-800 on dark and neutral-200 on light: visible, never drawing the eye.",
+        text: "The three dots in a code panel's or terminal's top bar are neutral-800 on dark and neutral-200 on light, with a very subtle glass: a touch lighter at the top and a hairline highlight. Visible, never drawing the eye.",
         decided: "Juan, 2026-11-22",
         source: "web/styles/web.css (.web-window-dot)",
       },
