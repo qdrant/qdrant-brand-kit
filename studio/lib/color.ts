@@ -546,7 +546,11 @@ export const groupGuides: Record<GroupId, GroupGuide> = {
     notes: [
       {
         lead: "Use them in pairs.",
-        text: "A state's text goes on its own subtle fill, as in the badges and the alert below. Success is teal, error red, warning orange and info blue.",
+        text: "A state's text goes on its own subtle fill, as in the badges below. Success is teal, error red, warning orange and info blue.",
+      },
+      {
+        lead: "Alerts.",
+        text: "The design system's Alert has a variant per state (destructive for errors): the family's softest fill (50 in light, 975 in dark) with a subtle border in the state's color, and all its text in the state's color, stronger than the badges (900 in light, 200 in dark), at 8.8:1 or more in both themes (DESIGN.md, Status alerts).",
       },
     ],
   },

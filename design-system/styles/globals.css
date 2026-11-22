@@ -21,6 +21,7 @@
 @import "./components/input.css" layer(base);
 @import "./components/card.css" layer(base);
 @import "./components/badge.css" layer(base);
+@import "./components/alert.css" layer(base);
 @import "./components/menu.css" layer(base);
 @import "./components/tabs.css" layer(base);
 @import "./components/selection.css" layer(base);

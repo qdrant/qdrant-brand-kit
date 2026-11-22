@@ -1,6 +1,8 @@
 import type { ReactNode } from "react"
 import { ArrowRight, CircleCheck, CircleX, Info, TriangleAlert } from "lucide-react"
 
+import { Alert, AlertDescription, AlertTitle } from "@qdrant/design-system/components/ui/alert"
+
 import {
   contrast,
   groupGuides,
@@ -282,22 +284,14 @@ function StatusExample() {
           ))}
         </div>
       </Labeled>
-      <Labeled label="Alerts: the icon and title in status/<state>, the text in text/primary">
+      <Labeled label="Alert, from the design system: the softest fill, a border and all its text in the state's color">
         <div className="flex flex-col gap-2">
           {states.map(({ id, label, Icon }) => (
-            <div
-              key={id}
-              className="flex gap-3 rounded-md p-3"
-              style={{ background: `var(--sem-status-${id}-subtle)` }}
-            >
-              <Icon className="mt-0.5 size-4 shrink-0" style={{ color: `var(--sem-status-${id})` }} />
-              <div className="flex flex-col gap-0.5 text-sm">
-                <span className="font-medium" style={{ color: `var(--sem-status-${id})` }}>
-                  {label}
-                </span>
-                <span className="text-(--sem-text-primary)">{alertText[id]}</span>
-              </div>
-            </div>
+            <Alert key={id} variant={id === "error" ? "destructive" : id}>
+              <Icon />
+              <AlertTitle>{label}</AlertTitle>
+              <AlertDescription>{alertText[id]}</AlertDescription>
+            </Alert>
           ))}
         </div>
       </Labeled>
