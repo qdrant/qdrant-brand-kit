@@ -35,13 +35,13 @@ export const cta = defineSection<CtaProps>({
       "Panel or band in the middle of a long page, after the section that earns the click.",
     ],
     rules: [
-      "One primary action. A second action is outline and goes to a person (Contact Us) or a calculator.",
+      "One primary action. A second action is the secondary button and goes to a person (Contact Us) or a calculator.",
       "No glows or patterns for now (Juan, 2026-11-21); they come in a later style stage.",
     ],
     anatomy: [
       { part: "Heading", note: "A statement: 56px from lg in the centered layout, a section title in the panel, a card title in the band." },
       { part: "Description", note: "Optional, one line." },
-      { part: "Actions", note: "Primary, then an optional outline button." },
+      { part: "Actions", note: "Primary, then an optional secondary button." },
     ],
     props: [
       { name: "layout", type: '"centered" | "panel" | "band"', note: "Closing, framed, or slim." },

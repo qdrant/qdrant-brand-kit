@@ -100,7 +100,7 @@ export function Navbar({
           </LinkButton>
         )}
         {variant === "full" && contact && (
-          <LinkButton href={contact.href} variant="outline" className="hidden md:inline-flex">
+          <LinkButton href={contact.href} variant="secondary" className="hidden md:inline-flex">
             {contact.label}
           </LinkButton>
         )}
@@ -205,7 +205,7 @@ function MobileMenu({ menus, login, contact }: { menus: Menu[]; login?: Link; co
         </Accordion>
         <div className="mt-8 flex flex-col gap-2">
           {contact && (
-            <LinkButton href={contact.href} variant="outline">
+            <LinkButton href={contact.href} variant="secondary">
               {contact.label}
             </LinkButton>
           )}

@@ -24,7 +24,7 @@ export function Cta({ layout = "centered", title, description, primary, secondar
         {primary.label}
       </LinkButton>
       {secondary && (
-        <LinkButton href={secondary.href} size="lg" variant="outline">
+        <LinkButton href={secondary.href} size="lg" variant="secondary">
           {secondary.label}
         </LinkButton>
       )}

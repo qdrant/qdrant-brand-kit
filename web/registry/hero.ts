@@ -70,7 +70,7 @@ export const hero = defineSection<HeroProps>({
       "Centered for the home page and index pages; split when a visual (a screenshot, code, an illustration) proves the claim.",
     ],
     rules: [
-      "One primary action at most, and one secondary (outline). Pills and proof points are not buttons.",
+      "One primary action at most, and one secondary (the design system's secondary button). Pills and proof points are not buttons.",
       "The heading is SemiBold Mona Sans Display: 40px on phones, 56px from md, 64px from lg.",
       "A media placeholder is for review only; a page replaces it with the real image.",
       "Proof points are facts with a source (stars, members, certifications), never adjectives.",

@@ -43,7 +43,7 @@ export const navbar = defineSection<NavbarProps>({
     ],
     rules: [
       "Menus group items by job, each group under a mono label. An item has a Lucide icon and, when needed, one tag (Beta, Waitlist).",
-      "Three actions at most, in this order: Log in (ghost), Contact Us (outline), Start Free (primary). Only Start Free is primary.",
+      "Three actions at most, in this order: Log in (ghost), Contact Us (secondary), Start Free (primary). Only Start Free is primary.",
       "Below lg the menus move into a sheet with one accordion per menu; Log in hides below sm and Contact Us below md.",
       "Item descriptions stay empty until the site has copy for them. Never invent them.",
     ],
