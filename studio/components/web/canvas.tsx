@@ -3,10 +3,12 @@
 import * as React from "react"
 import { Hand, Maximize, Minus, MousePointer2, Plus } from "lucide-react"
 
+
 import { Button } from "@qdrant/design-system/components/ui/button"
 import { cn } from "@qdrant/design-system/lib/utils"
 import { sectionsByCategory } from "@qdrant/web/registry"
 
+import { styleQuery } from "./blocks"
 import { frameSrc, useFrameHeight, useFrameKey } from "./frame-view"
 
 type Mode = "dark" | "light" | "both"
@@ -18,12 +20,14 @@ function CanvasFrame({
   label,
   theme,
   interact,
+  query,
 }: {
   section: string
   variant: string
   label: string
   theme: "dark" | "light"
   interact: boolean
+  query: Record<string, string>
 }) {
   const key = useFrameKey()
   const height = useFrameHeight(key, 700)
@@ -35,7 +39,8 @@ function CanvasFrame({
       </figcaption>
       <iframe
         title={`${label} ${theme}`}
-        src={frameSrc(section, variant, theme, key)}
+        data-frame-key={key}
+        src={frameSrc(section, variant, theme, key, { canvas: "1", ...query })}
         loading="lazy"
         scrolling="no"
         className={cn("w-[1440px] rounded-md border-0 shadow-[0_0_0_2px_var(--border)]", !interact && "pointer-events-none")}
@@ -49,15 +54,19 @@ const MIN = 0.05
 const MAX = 2
 
 // The Web page's canvas (Juan, 2026-11-21): every section and variant of the library side by side, one row per
-// section, like a Figma page. Scroll or drag to pan, Ctrl or Cmd with the wheel (or a pinch) to zoom. Frames
-// ignore the pointer unless Interact is on, so dragging over them pans.
+// section, like a Figma page. The sections are live: hover the navbar for its menus, click its buttons. Scroll to
+// pan and Ctrl or Cmd with the wheel (or a pinch) to zoom, anywhere, frames included (they pass the wheel on).
+// Drag an empty area, or hold Space and drag, to pan; the hand tool makes every drag pan.
 export function WebCanvas() {
   const groups = sectionsByCategory()
   const viewport = React.useRef<HTMLDivElement>(null)
   const content = React.useRef<HTMLDivElement>(null)
   const [view, setView] = React.useState({ x: 48, y: 48, z: 0.25 })
   const [mode, setMode] = React.useState<Mode>("dark")
-  const [interact, setInteract] = React.useState(false)
+  const [interact, setInteract] = React.useState(true)
+  const [space, setSpace] = React.useState(false)
+  const [style, setStyle] = React.useState({ lines: true, material: true })
+  const panning = !interact || space
   const drag = React.useRef<{ x: number; y: number } | null>(null)
   const [dragging, setDragging] = React.useState(false)
 
@@ -69,18 +78,55 @@ export function WebCanvas() {
     })
   }, [])
 
+  const wheel = React.useCallback(
+    (dx: number, dy: number, zoom: boolean, clientX: number, clientY: number) => {
+      const el = viewport.current
+      if (!el) return
+      const r = el.getBoundingClientRect()
+      if (zoom) zoomAt(Math.exp(-dy * 0.01), clientX - r.left, clientY - r.top)
+      else setView((v) => ({ ...v, x: v.x - dx, y: v.y - dy }))
+    },
+    [zoomAt]
+  )
+
   React.useEffect(() => {
     const el = viewport.current
     if (!el) return
     const onWheel = (e: WheelEvent) => {
       e.preventDefault()
-      const r = el.getBoundingClientRect()
-      if (e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * 0.01), e.clientX - r.left, e.clientY - r.top)
-      else setView((v) => ({ ...v, x: v.x - e.deltaX, y: v.y - e.deltaY }))
+      wheel(e.deltaX, e.deltaY, e.ctrlKey || e.metaKey, e.clientX, e.clientY)
     }
     el.addEventListener("wheel", onWheel, { passive: false })
     return () => el.removeEventListener("wheel", onWheel)
-  }, [zoomAt])
+  }, [wheel])
+
+  // The wheel and Space from inside frames, in the frame's own coordinates.
+  React.useEffect(() => {
+    const onMessage = (e: MessageEvent) => {
+      if (e.data?.type === "qd-space") setSpace(Boolean(e.data.down))
+      if (e.data?.type !== "qd-wheel") return
+      const frame = document.querySelector<HTMLIFrameElement>(`iframe[data-frame-key="${e.data.key}"]`)
+      if (!frame) return
+      const r = frame.getBoundingClientRect()
+      const k = r.width / frame.offsetWidth
+      wheel(e.data.dx, e.data.dy, e.data.zoom, r.left + e.data.x * k, r.top + e.data.y * k)
+    }
+    const down = (e: KeyboardEvent) => {
+      if (e.code === "Space" && !(e.target instanceof HTMLInputElement)) {
+        e.preventDefault()
+        setSpace(true)
+      }
+    }
+    const up = (e: KeyboardEvent) => e.code === "Space" && setSpace(false)
+    window.addEventListener("message", onMessage)
+    window.addEventListener("keydown", down)
+    window.addEventListener("keyup", up)
+    return () => {
+      window.removeEventListener("message", onMessage)
+      window.removeEventListener("keydown", down)
+      window.removeEventListener("keyup", up)
+    }
+  }, [wheel])
 
   const fit = () => {
     const el = viewport.current
@@ -103,11 +149,11 @@ export function WebCanvas() {
         ref={viewport}
         className={cn(
           "absolute inset-0 touch-none overflow-hidden bg-muted/30 [background-image:radial-gradient(var(--border)_1px,transparent_1px)]",
-          dragging ? "cursor-grabbing" : "cursor-grab"
+          dragging ? "cursor-grabbing" : panning ? "cursor-grab" : "cursor-default"
         )}
         style={{ backgroundSize: `${24 * view.z}px ${24 * view.z}px`, backgroundPosition: `${view.x}px ${view.y}px` }}
         onPointerDown={(e) => {
-          if (interact && (e.target as HTMLElement).tagName === "IFRAME") return
+          if (!panning && (e.target as HTMLElement).tagName === "IFRAME") return
           drag.current = { x: e.clientX, y: e.clientY }
           setDragging(true)
           ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
@@ -144,7 +190,8 @@ export function WebCanvas() {
                           variant={v.id}
                           label={v.name}
                           theme={t}
-                          interact={interact}
+                          interact={!panning}
+                          query={styleQuery(style)}
                         />
                       ))
                     )}
@@ -185,6 +232,20 @@ export function WebCanvas() {
             className="capitalize"
           >
             {m}
+          </Button>
+        ))}
+        <span className="mx-1 h-5 w-px bg-border" />
+        {(["lines", "material"] as const).map((k) => (
+          <Button
+            key={k}
+            variant={style[k] ? "secondary" : "ghost"}
+            size="sm"
+            aria-pressed={style[k]}
+            title={k === "lines" ? "Rails, seams and nodes" : "Plates and trays"}
+            onClick={() => setStyle((s) => ({ ...s, [k]: !s[k] }))}
+            className="capitalize"
+          >
+            {k}
           </Button>
         ))}
         <span className="mx-1 h-5 w-px bg-border" />

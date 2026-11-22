@@ -6,8 +6,14 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import { getSection } from "@qdrant/web/registry"
 
 // The frame's URL for one section variant.
-export function frameSrc(section: string, variant: string, theme: "dark" | "light", key: string) {
-  const q = new URLSearchParams({ section, variant, theme, key })
+export function frameSrc(
+  section: string,
+  variant: string,
+  theme: "dark" | "light",
+  key: string,
+  extra: Record<string, string> = {}
+) {
+  const q = new URLSearchParams({ section, variant, theme, key, ...extra })
   const min = getSection(section)?.variants.find((v) => v.id === variant)?.frameMinHeight
   if (min) q.set("min", String(min))
   return `/web/frame?${q}`
@@ -38,12 +44,14 @@ export function FrameView({
   variant,
   theme,
   width = 1440,
+  query,
   className,
 }: {
   section: string
   variant: string
   theme: "dark" | "light"
   width?: number
+  query?: Record<string, string>
   className?: string
 }) {
   const key = useFrameKey()
@@ -67,7 +75,7 @@ export function FrameView({
       >
         <iframe
           title={`${section} ${variant} ${theme}`}
-          src={frameSrc(section, variant, theme, key)}
+          src={frameSrc(section, variant, theme, key, query)}
           loading="lazy"
           scrolling="no"
           className="origin-top-left border-0"

@@ -26,3 +26,93 @@
   --qd-ui-page: var(--qd-color-background-raised);
   --qd-ui-card: var(--qd-color-background-overlay);
 }
+
+/* The website's lines and material (Juan, 2026-11-21): a subtle, shared structure every section draws on, before
+   any pattern or shader. Two switches on a page's root (or <body>) turn them off to compare:
+   data-web-lines="off" and data-web-material="off".
+   - Lines: rails, a hairline down each side of the page, 24px outside the 1200px container, so content never
+     touches them; seams, a hairline
+     between sections; nodes, small hollow dots where a seam meets a rail, like the points of a vector graph.
+   - Material: plates, a card whose fill is a touch lighter at the top, with a 1px inner highlight; trays, a framed
+     holder around media (code, a screenshot); cells, hairline grids for rows of facts. */
+[data-web],
+[data-web] [data-theme] {
+  --web-line: color-mix(in oklab, var(--foreground) 8%, transparent);
+  --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
+  --web-plate-top: color-mix(in oklab, var(--foreground) 3%, var(--card));
+  --web-highlight: color-mix(in oklab, var(--foreground) 7%, transparent);
+  --web-plate-shadow: 0 0 0 0 transparent;
+  --web-tray: color-mix(in oklab, var(--foreground) 2.5%, transparent);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"] {
+  --web-line: color-mix(in oklab, var(--foreground) 9%, transparent);
+  --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
+  --web-plate-top: var(--card);
+  --web-highlight: rgb(255 255 255 / 0.9);
+  --web-plate-shadow: 0 1px 2px rgb(7 11 17 / 0.04), 0 4px 12px -4px rgb(7 11 17 / 0.05);
+  --web-tray: color-mix(in oklab, var(--foreground) 2.5%, transparent);
+}
+
+.web-seam {
+  border-top: 1px solid var(--web-line);
+}
+/* No seam on a page's first section, nor right under the navbar, which draws its own line. */
+.web-seam:first-child,
+.web-navbar + .web-seam {
+  border-top-color: transparent;
+}
+.web-rails {
+  border-inline: 1px solid var(--web-line);
+}
+.web-node {
+  position: absolute;
+  top: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  border: 1px solid var(--web-line-strong);
+  background: var(--background);
+}
+.web-cells {
+  border-block: 1px solid var(--web-line);
+}
+.web-cells > * + * {
+  border-inline-start: 1px solid var(--web-line);
+}
+[data-web-lines="off"] .web-rails,
+[data-web-lines="off"] .web-node {
+  display: none;
+}
+[data-web-lines="off"] .web-seam {
+  border-top-color: transparent;
+}
+[data-web-lines="off"] .web-cells,
+[data-web-lines="off"] .web-cells > * {
+  border-color: transparent;
+}
+
+.web-plate {
+  background: linear-gradient(to bottom, var(--web-plate-top), var(--card) 70%);
+  border: 1px solid var(--web-line-strong);
+  box-shadow: inset 0 1px 0 var(--web-highlight), var(--web-plate-shadow);
+}
+.web-tray {
+  padding: 6px;
+  border: 1px solid var(--web-line);
+  background: var(--web-tray);
+}
+[data-web-material="off"] .web-plate {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: none;
+}
+[data-web-material="off"] .web-tray {
+  padding: 0;
+  border-color: transparent;
+  background: none;
+}
+/* A section alone (in a frame) or first on a page has no seam above it, so no nodes either. */
+.web-seam:first-child .web-node {
+  display: none;
+}

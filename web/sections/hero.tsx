@@ -67,12 +67,17 @@ export function Hero({
       </>
     ) : undefined
 
+  // Media sits on a plate inside a tray (web.css).
   const mediaEl =
-    media === "code" ? (
-      <CodePanel title="quickstart.py" code={quickstartQuery} className="w-full" />
-    ) : media === "image" ? (
-      <MediaFrame label={mediaLabel ?? "Product screenshot"} />
-    ) : null
+    media === "none" ? null : (
+      <div className="web-tray w-full rounded-[calc(var(--radius-xl)+6px)]">
+        {media === "code" ? (
+          <CodePanel title="quickstart.py" code={quickstartQuery} className="web-plate w-full" />
+        ) : (
+          <MediaFrame label={mediaLabel ?? "Product screenshot"} className="web-plate" />
+        )}
+      </div>
+    )
 
   const extras = (
     <>
@@ -93,15 +98,10 @@ export function Hero({
 
   const trustEl =
     trust && trust.length > 0 ? (
-      <ul
-        className={cn(
-          "flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-8 text-sm text-muted-foreground",
-          centered ? "justify-center" : "justify-start"
-        )}
-      >
+      <ul className="web-cells grid grid-cols-2 text-sm text-muted-foreground md:grid-cols-4">
         {trust.map((item) => (
-          <li key={item.label} className="flex items-center gap-2">
-            <Icon name={item.icon} className="size-4 text-(--qd-color-primary-text)" />
+          <li key={item.label} className="flex items-center justify-center gap-2 px-4 py-5 text-center">
+            <Icon name={item.icon} className="size-4 shrink-0 text-foreground/70" />
             {item.label}
           </li>
         ))}

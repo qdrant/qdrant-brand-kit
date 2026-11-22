@@ -29,7 +29,13 @@ export function SectionHeader({
   className?: string
 }) {
   const titleClass = cn(Heading === "h1" ? heading.page : heading.section, "text-balance")
-  const kickerEl = kicker ? <p className={type.kicker}>{kicker}</p> : null
+  // The kicker starts with a node, the same hollow dot as where the page's lines meet (web.css).
+  const kickerEl = kicker ? (
+    <p className={cn(type.kicker, "flex items-center gap-2.5")}>
+      <span aria-hidden className="size-[7px] shrink-0 rounded-full border border-(--web-line-strong)" />
+      {kicker}
+    </p>
+  ) : null
   const descriptionEl = description ? (
     <p className={cn(type.lead, "text-pretty", align === "center" && "mx-auto max-w-2xl")}>{description}</p>
   ) : null

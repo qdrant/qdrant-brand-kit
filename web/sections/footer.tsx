@@ -64,7 +64,7 @@ export function Footer({
 
   if (variant === "minimal") {
     return (
-      <Section theme={theme} surface={surface} spacing="none" id={id} className={cn("border-t border-border", className)} innerClassName="pb-8">
+      <Section theme={theme} surface={surface} spacing="none" id={id} className={className} innerClassName="pb-8">
         {legalBar}
       </Section>
     )
@@ -76,7 +76,7 @@ export function Footer({
       surface={surface}
       spacing="compact"
       id={id}
-      className={cn("border-t border-border pb-8 lg:pb-8", className)}
+      className={cn("pb-8 lg:pb-8", className)}
       innerClassName="flex flex-col gap-12"
     >
       <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
@@ -111,9 +111,9 @@ export function Footer({
         </nav>
       </div>
 
-      <div className="grid gap-8 border-t border-border pt-10 lg:grid-cols-2 lg:items-end">
+      <div className="grid gap-8 border-t border-(--web-line) pt-10 lg:grid-cols-2 lg:items-end">
         {newsletter && (
-          <form className="flex flex-col gap-4" action="#">
+          <form className="web-plate flex flex-col gap-4 rounded-xl p-6" action="#">
             <div className="flex flex-col gap-1">
               <p className="font-medium text-foreground">{newsletter.title}</p>
               {newsletter.description && <p className={cn(type.small, "max-w-md")}>{newsletter.description}</p>}
@@ -133,7 +133,7 @@ export function Footer({
         </ul>
       </div>
 
-      <div className="border-t border-border">{legalBar}</div>
+      <div className="border-t border-(--web-line)">{legalBar}</div>
     </Section>
   )
 }

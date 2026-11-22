@@ -13,7 +13,7 @@ export const cta = defineSection<CtaProps>({
     {
       id: "centered",
       name: "Centered",
-      description: "The page's closing statement, with a soft light from above.",
+      description: "The page's closing statement, with room around it.",
       props: { layout: "centered", ...closingCta },
     },
     {
@@ -36,7 +36,7 @@ export const cta = defineSection<CtaProps>({
     ],
     rules: [
       "One primary action. A second action is outline and goes to a person (Contact Us) or a calculator.",
-      "The light in the centered layout is the only glow on the page; never add one to the panel or band.",
+      "No glows or patterns for now (Juan, 2026-11-21); they come in a later style stage.",
     ],
     anatomy: [
       { part: "Heading", note: "A statement: 56px from lg in the centered layout, a section title in the panel, a card title in the band." },

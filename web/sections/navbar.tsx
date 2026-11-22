@@ -59,7 +59,7 @@ export function Navbar({
       spacing="none"
       id={id}
       className={cn(
-        "overflow-visible border-b border-border",
+        "web-navbar overflow-visible border-b border-(--web-line)",
         sticky && "sticky top-0 z-40 bg-background/85 backdrop-blur-md",
         className
       )}
@@ -123,7 +123,7 @@ function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: Navba
             )}
             {group.items.map((item) => (
               <NavigationMenuLink key={item.label} href={item.href} className="gap-3 text-sm">
-                <span className="grid size-8 shrink-0 place-items-center rounded-md border border-border bg-background text-muted-foreground">
+                <span className="web-plate grid size-8 shrink-0 place-items-center rounded-md text-muted-foreground">
                   <Icon name={item.icon} className="size-4" />
                 </span>
                 <span className="flex-1">{item.label}</span>
@@ -140,7 +140,7 @@ function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: Navba
       {featured && (
         <a
           href={featured.link.href}
-          className="flex w-64 flex-col justify-between gap-6 rounded-lg border border-border bg-muted p-4 text-sm outline-none hover:border-foreground/20 focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)"
+          className="web-plate flex w-64 flex-col justify-between gap-6 rounded-lg p-4 text-sm outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)"
         >
           {featured.tag && (
             <Badge variant="outline" className="font-mono">

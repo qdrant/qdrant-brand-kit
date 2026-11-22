@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
 
+import { styleQuery } from "./blocks"
 import { FrameView } from "./frame-view"
 
 type Mode = "dark" | "light" | "both"
@@ -50,6 +51,8 @@ export function VariantsView({
 }) {
   const [mode, setMode] = React.useState<Mode>("both")
   const [viewport, setViewport] = React.useState<Viewport>("desktop")
+  const [lines, setLines] = React.useState<"on" | "off">("on")
+  const [material, setMaterial] = React.useState<"on" | "off">("on")
   const modes: ("dark" | "light")[] = mode === "both" ? ["dark", "light"] : [mode]
   const width = viewport === "desktop" ? 1440 : 390
 
@@ -66,6 +69,24 @@ export function VariantsView({
               { value: "dark", label: "Dark" },
               { value: "light", label: "Light" },
               { value: "both", label: "Both" },
+            ]}
+          />
+          <Toggle
+            label="Lines"
+            value={lines}
+            onChange={setLines}
+            options={[
+              { value: "on", label: "Lines" },
+              { value: "off", label: "Off" },
+            ]}
+          />
+          <Toggle
+            label="Material"
+            value={material}
+            onChange={setMaterial}
+            options={[
+              { value: "on", label: "Material" },
+              { value: "off", label: "Off" },
             ]}
           />
           <Toggle
@@ -91,7 +112,13 @@ export function VariantsView({
             {modes.map((m) => (
               <div key={m} className="flex min-w-0 flex-col gap-1.5">
                 <span className="font-mono text-[11px] text-muted-foreground uppercase">{m}</span>
-                <FrameView section={section} variant={v.id} theme={m} width={width} />
+                <FrameView
+                  section={section}
+                  variant={v.id}
+                  theme={m}
+                  width={width}
+                  query={styleQuery({ lines: lines === "on", material: material === "on" })}
+                />
               </div>
             ))}
           </div>

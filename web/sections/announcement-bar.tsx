@@ -1,7 +1,6 @@
 import { ArrowRight } from "lucide-react"
 
 import { Badge } from "@qdrant/design-system/components/ui/badge"
-import { cn } from "@qdrant/design-system/lib/utils"
 
 import { Section, type SectionProps } from "../lib/section"
 import type { Link } from "../content/site"
@@ -38,7 +37,7 @@ export function AnnouncementBar({ tag, text, link, theme, surface = "raised", id
       surface={surface}
       spacing="none"
       id={id}
-      className={cn("border-b border-border", className)}
+      className={className}
       innerClassName="py-2.5"
     >
       {link ? (

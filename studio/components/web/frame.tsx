@@ -21,6 +21,30 @@ export function WebFrame() {
   const root = React.useRef<HTMLDivElement>(null)
 
   const pageTheme = isBuilder ? (page?.theme ?? "dark") : theme
+  // The website's lines and material (web.css), on unless the query or the builder's page turns them off.
+  const lines = isBuilder ? page?.style?.lines !== false : params.get("lines") !== "0"
+  const material = isBuilder ? page?.style?.material !== false : params.get("material") !== "0"
+  const styleAttrs = {
+    "data-web-lines": lines ? undefined : "off",
+    "data-web-material": material ? undefined : "off",
+  }
+
+  // <body> carries them too, for menus and sheets that open in a portal.
+  React.useEffect(() => {
+    const b = document.body
+    if (lines) b.removeAttribute("data-web-lines")
+    else b.setAttribute("data-web-lines", "off")
+    if (material) b.removeAttribute("data-web-material")
+    else b.setAttribute("data-web-material", "off")
+  }, [lines, material])
+
+  // Hide Next.js's dev indicator (the "N" button) inside frames, so it never covers a section (Juan, 2026-11-21).
+  React.useEffect(() => {
+    const style = document.createElement("style")
+    style.textContent = "nextjs-portal{display:none!important}"
+    document.head.appendChild(style)
+    return () => style.remove()
+  }, [])
 
   // Keep <html> on this frame's theme, even if the studio's theme provider changes it.
   React.useEffect(() => {
@@ -46,6 +70,33 @@ export function WebFrame() {
     return () => ro.disconnect()
   }, [key])
 
+  // On the canvas, the frame passes the wheel and the Space key to the canvas, so it can pan and zoom over frames
+  // while the sections stay interactive.
+  const onCanvas = params.get("canvas") === "1"
+  React.useEffect(() => {
+    if (!onCanvas) return
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault()
+      window.parent.postMessage(
+        { type: "qd-wheel", key, dx: e.deltaX, dy: e.deltaY, zoom: e.ctrlKey || e.metaKey, x: e.clientX, y: e.clientY },
+        "*"
+      )
+    }
+    const onKey = (down: boolean) => (e: KeyboardEvent) => {
+      if (e.code === "Space") window.parent.postMessage({ type: "qd-space", key, down }, "*")
+    }
+    const keydown = onKey(true)
+    const keyup = onKey(false)
+    window.addEventListener("wheel", onWheel, { passive: false })
+    window.addEventListener("keydown", keydown)
+    window.addEventListener("keyup", keyup)
+    return () => {
+      window.removeEventListener("wheel", onWheel)
+      window.removeEventListener("keydown", keydown)
+      window.removeEventListener("keyup", keyup)
+    }
+  }, [onCanvas, key])
+
   // The builder sends its page and the selected block.
   React.useEffect(() => {
     if (!isBuilder) return
@@ -60,7 +111,7 @@ export function WebFrame() {
 
   if (isBuilder) {
     return (
-      <div ref={root} data-web data-theme={pageTheme} className="min-h-svh bg-background text-foreground">
+      <div ref={root} data-web data-theme={pageTheme} {...styleAttrs} className="min-h-svh bg-background text-foreground">
         {page?.blocks.length ? (
           page.blocks.map((block: Block) => (
             <div
@@ -95,7 +146,14 @@ export function WebFrame() {
   }
   const min = Number(params.get("min") ?? 0)
   return (
-    <div ref={root} data-web data-theme={theme} className="bg-background text-foreground" style={{ minHeight: min || undefined }}>
+    <div
+      ref={root}
+      data-web
+      data-theme={theme}
+      {...styleAttrs}
+      className="bg-background text-foreground"
+      style={{ minHeight: min || undefined }}
+    >
       <RenderBlock block={block} />
     </div>
   )

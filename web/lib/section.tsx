@@ -33,13 +33,16 @@ const spacings = {
   none: "",
 } as const
 
-// A page section: the theme and surface, the vertical padding, the side padding (24px on phones, 40px from md)
-// and the centered container.
+// A page section: the theme and surface, the vertical padding, the side padding (24px on phones, 40px from md),
+// the centered container, and the website's lines (web.css): the rails 24px outside the container, a seam at the top
+// and a node where they meet. `lines={false}` leaves them out; `seam={false}` keeps the rails without the seam.
 export function Section({
   theme,
   surface = "default",
   width = "content",
   spacing = "default",
+  lines = true,
+  seam = true,
   className,
   innerClassName,
   children,
@@ -48,6 +51,8 @@ export function Section({
   SectionProps & {
     width?: keyof typeof widths
     spacing?: keyof typeof spacings
+    lines?: boolean
+    seam?: boolean
     innerClassName?: string
   }) {
   return (
@@ -56,11 +61,25 @@ export function Section({
       data-surface={surface === "default" ? undefined : surface}
       className={cn(
         "relative overflow-hidden bg-background px-6 text-foreground md:px-10",
+        lines && seam && "web-seam",
         spacings[spacing],
         className
       )}
       {...props}
     >
+      {lines && (
+        <div
+          aria-hidden
+          className="web-rails pointer-events-none absolute inset-y-0 inset-x-0 mx-auto max-w-[calc(var(--qd-layout-content-width)+48px)] md:inset-x-4"
+        >
+          {seam && (
+            <>
+              <span className="web-node -left-1" />
+              <span className="web-node -right-1" />
+            </>
+          )}
+        </div>
+      )}
       <div className={cn("relative mx-auto w-full", widths[width], innerClassName)}>{children}</div>
     </section>
   )

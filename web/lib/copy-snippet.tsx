@@ -13,7 +13,7 @@ export function CopySnippet({ label, text, className }: { label?: string; text: 
   return (
     <div
       className={cn(
-        "flex w-full max-w-2xl items-center gap-3 rounded-lg border border-border bg-card py-1.5 pr-1.5 pl-4 text-left",
+        "web-plate flex w-full max-w-2xl items-center gap-3 rounded-lg py-1.5 pr-1.5 pl-4 text-left",
         className
       )}
     >
