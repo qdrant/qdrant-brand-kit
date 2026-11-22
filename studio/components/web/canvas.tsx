@@ -72,7 +72,7 @@ export function WebCanvas() {
   const setMode = (m: Mode) => setOverride({ mode: m, under: studioTheme })
   const [interact, setInteract] = React.useState(true)
   const [space, setSpace] = React.useState(false)
-  const [style, setStyle] = React.useState({ lines: true, material: true })
+  const [style, setStyle] = React.useState({ lines: true, material: true, trialType: true })
   const panning = !interact || space
   const drag = React.useRef<{ x: number; y: number } | null>(null)
   const [dragging, setDragging] = React.useState(false)
@@ -242,17 +242,22 @@ export function WebCanvas() {
           </Button>
         ))}
         <span className="mx-1 h-5 w-px bg-border" />
-        {(["lines", "material"] as const).map((k) => (
+        {(["lines", "material", "trialType"] as const).map((k) => (
           <Button
             key={k}
             variant={style[k] ? "secondary" : "ghost"}
             size="sm"
             aria-pressed={style[k]}
-            title={k === "lines" ? "Rails, seams and nodes" : "Plates and trays"}
+            title={
+              k === "lines"
+                ? "Rails, seams and nodes"
+                : k === "material"
+                  ? "Plates and trays"
+                  : "Headings from 60px in Medium; off shows today's type set"
+            }
             onClick={() => setStyle((s) => ({ ...s, [k]: !s[k] }))}
-            className="capitalize"
           >
-            {k}
+            {k === "lines" ? "Lines" : k === "material" ? "Material" : "Trial type"}
           </Button>
         ))}
         <span className="mx-1 h-5 w-px bg-border" />

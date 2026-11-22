@@ -20,13 +20,17 @@ export type WebPage = {
   name: string
   theme: "dark" | "light"
   // The website's lines and material (web/styles/web.css), on unless set to false.
-  style?: { lines?: boolean; material?: boolean }
+  style?: { lines?: boolean; material?: boolean; trialType?: boolean }
   blocks: Block[]
 }
 
-// The frame query for the lines and material switches: only what's off.
-export function styleQuery(style: { lines: boolean; material: boolean }): Record<string, string> {
-  return { ...(style.lines ? {} : { lines: "0" }), ...(style.material ? {} : { material: "0" }) }
+// The frame query for the lines, material and trial type switches: only what's off.
+export function styleQuery(style: { lines: boolean; material: boolean; trialType?: boolean }): Record<string, string> {
+  return {
+    ...(style.lines ? {} : { lines: "0" }),
+    ...(style.material ? {} : { material: "0" }),
+    ...(style.trialType === false ? { type: "current" } : {}),
+  }
 }
 
 export function variantOf(def: SectionDefinition, id: string) {

@@ -233,17 +233,22 @@ export function PageBuilder() {
           <NativeSelectOption value="dark">Dark page</NativeSelectOption>
           <NativeSelectOption value="light">Light page</NativeSelectOption>
         </NativeSelect>
-        {(["lines", "material"] as const).map((k) => (
+        {(["lines", "material", "trialType"] as const).map((k) => (
           <Button
             key={k}
             variant={page.style?.[k] === false ? "ghost" : "secondary"}
             size="sm"
             aria-pressed={page.style?.[k] !== false}
-            title={k === "lines" ? "Rails, seams and nodes" : "Plates and trays"}
+            title={
+              k === "lines"
+                ? "Rails, seams and nodes"
+                : k === "material"
+                  ? "Plates and trays"
+                  : "Headings from 60px in Medium; off shows today's type set"
+            }
             onClick={() => updatePage((p) => ({ ...p, style: { ...p.style, [k]: p.style?.[k] === false } }))}
-            className="capitalize"
           >
-            {k}
+            {k === "lines" ? "Lines" : k === "material" ? "Material" : "Trial type"}
           </Button>
         ))}
         <div className="flex rounded-lg border p-0.5">

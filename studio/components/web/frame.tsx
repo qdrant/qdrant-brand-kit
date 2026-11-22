@@ -24,9 +24,12 @@ export function WebFrame() {
   // The website's lines and material (web.css), on unless the query or the builder's page turns them off.
   const lines = isBuilder ? page?.style?.lines !== false : params.get("lines") !== "0"
   const material = isBuilder ? page?.style?.material !== false : params.get("material") !== "0"
+  // The website's trial type (web.css), on unless turned off.
+  const trialType = isBuilder ? page?.style?.trialType !== false : params.get("type") !== "current"
   const styleAttrs = {
     "data-web-lines": lines ? undefined : "off",
     "data-web-material": material ? undefined : "off",
+    "data-web-type": trialType ? undefined : "current",
   }
 
   // <body> carries them too, for menus and sheets that open in a portal.
@@ -36,7 +39,9 @@ export function WebFrame() {
     else b.setAttribute("data-web-lines", "off")
     if (material) b.removeAttribute("data-web-material")
     else b.setAttribute("data-web-material", "off")
-  }, [lines, material])
+    if (trialType) b.removeAttribute("data-web-type")
+    else b.setAttribute("data-web-type", "current")
+  }, [lines, material, trialType])
 
   // Hide Next.js's dev indicator (the "N" button) inside frames, so it never covers a section (Juan, 2026-11-21).
   React.useEffect(() => {

@@ -53,6 +53,7 @@ export function VariantsView({
   const [viewport, setViewport] = React.useState<Viewport>("desktop")
   const [lines, setLines] = React.useState<"on" | "off">("on")
   const [material, setMaterial] = React.useState<"on" | "off">("on")
+  const [typeSet, setTypeSet] = React.useState<"trial" | "current">("trial")
   const modes: ("dark" | "light")[] = mode === "both" ? ["dark", "light"] : [mode]
   const width = viewport === "desktop" ? 1440 : 390
 
@@ -90,6 +91,15 @@ export function VariantsView({
             ]}
           />
           <Toggle
+            label="Type"
+            value={typeSet}
+            onChange={setTypeSet}
+            options={[
+              { value: "trial", label: "Trial type" },
+              { value: "current", label: "Current" },
+            ]}
+          />
+          <Toggle
             label="Viewport"
             value={viewport}
             onChange={setViewport}
@@ -117,7 +127,7 @@ export function VariantsView({
                   variant={v.id}
                   theme={m}
                   width={width}
-                  query={styleQuery({ lines: lines === "on", material: material === "on" })}
+                  query={styleQuery({ lines: lines === "on", material: material === "on", trialType: typeSet === "trial" })}
                 />
               </div>
             ))}
