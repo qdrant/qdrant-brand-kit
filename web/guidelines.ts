@@ -42,7 +42,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Every section has a theme and a surface",
-        text: "Dark or light (or the page's), and default or raised. Inside the website, the design system's page, card, popover and highlight colors are the background roles, so its components follow the section. On dark the website is quieter than the roles: menus and cards on neutral-925, highlights and hovers on neutral-900, a raised band's cards on neutral-900.",
+        text: "Dark or light (or the page's), and default or raised. Inside the website, the design system's page, card, popover and highlight colors are the background roles, so its components follow the section. On dark the website is quieter than the roles: menus on neutral-925, cards a touch darker (a trial, Juan, 2026-11-22: 40% of the way from neutral-925 to the page's neutral-950), highlights and hovers on neutral-900, a raised band's cards on neutral-900.",
         decided: "Juan, 2026-11-21",
         source: "web/styles/web.css",
       },
