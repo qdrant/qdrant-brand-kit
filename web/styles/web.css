@@ -350,18 +350,18 @@
   color: var(--foreground);
 }
 
-/* The three dots in a code panel's or terminal's top bar (Juan, 2026-11-22): a step above the bar, neutral-850 on
-   dark and neutral-100 on light, so they read without drawing the eye. */
+/* The three dots in a code panel's or terminal's top bar (Juan, 2026-11-22): lighter than the bar, neutral-800 on
+   dark and neutral-200 on light, so they read without drawing the eye. */
 [data-web],
 [data-web] [data-theme],
 [data-web][data-theme="dark"],
 [data-web] [data-theme="dark"],
 [data-theme="dark"] [data-web] {
-  --web-window-dot: var(--qd-color-neutral-850);
+  --web-window-dot: var(--qd-color-neutral-800);
 }
 [data-web][data-theme="light"],
 [data-web] [data-theme="light"] {
-  --web-window-dot: var(--qd-color-neutral-100);
+  --web-window-dot: var(--qd-color-neutral-200);
 }
 .web-window-dot {
   background: var(--web-window-dot);

@@ -167,8 +167,8 @@ export const guidelines: GuidelineGroup[] = [
         source: "web/styles/web.css (.web-grid)",
       },
       {
-        title: "A window's dots sit a step above its bar",
-        text: "The three dots in a code panel's or terminal's top bar are neutral-850 on dark and neutral-100 on light: visible, never drawing the eye.",
+        title: "A window's dots are lighter than its bar",
+        text: "The three dots in a code panel's or terminal's top bar are neutral-800 on dark and neutral-200 on light: visible, never drawing the eye.",
         decided: "Juan, 2026-11-22",
         source: "web/styles/web.css (.web-window-dot)",
       },
