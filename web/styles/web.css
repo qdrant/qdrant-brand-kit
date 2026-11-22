@@ -350,6 +350,23 @@
   color: var(--foreground);
 }
 
+/* The three dots in a code panel's or terminal's top bar (Juan, 2026-11-22): a step above the bar, neutral-850 on
+   dark and neutral-100 on light, so they read without drawing the eye. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-window-dot: var(--qd-color-neutral-850);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"] {
+  --web-window-dot: var(--qd-color-neutral-100);
+}
+.web-window-dot {
+  background: var(--web-window-dot);
+}
+
 /* A text link: indigo, underlined on hover. A title or crumb that is a link but reads as text (a card's title, a
    breadcrumb) is .web-link-quiet: the text color, indigo on hover. */
 .web-link {

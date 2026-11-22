@@ -160,9 +160,9 @@ export function InstallCommand({
         <Plate as="figure" className="flex flex-col rounded-xl text-left">
           <figcaption className="flex items-center gap-2 border-b border-(--web-line) px-4 py-2.5 font-mono text-xs text-muted-foreground">
             <span className="flex gap-1.5" aria-hidden>
-              <span className="size-2.5 rounded-full bg-muted" />
-              <span className="size-2.5 rounded-full bg-muted" />
-              <span className="size-2.5 rounded-full bg-muted" />
+              <span className="web-window-dot size-2.5 rounded-full" />
+              <span className="web-window-dot size-2.5 rounded-full" />
+              <span className="web-window-dot size-2.5 rounded-full" />
             </span>
             <span className="ml-2">Terminal</span>
           </figcaption>

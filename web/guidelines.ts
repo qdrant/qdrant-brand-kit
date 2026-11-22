@@ -167,6 +167,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "web/styles/web.css (.web-grid)",
       },
       {
+        title: "A window's dots sit a step above its bar",
+        text: "The three dots in a code panel's or terminal's top bar are neutral-850 on dark and neutral-100 on light: visible, never drawing the eye.",
+        decided: "Juan, 2026-11-22",
+        source: "web/styles/web.css (.web-window-dot)",
+      },
+      {
         title: "Cards are plates",
         text: "Cards and panels are a touch lighter at the top, with a 1px inner highlight and a soft shadow on light. Media sit in a tray, a framed holder. Rows of facts sit in a hairline grid.",
         decided: "Juan, 2026-11-21",
