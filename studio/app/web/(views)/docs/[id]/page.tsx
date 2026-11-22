@@ -1,9 +1,8 @@
-import Link from "next/link"
 import { notFound } from "next/navigation"
 
-import { cn } from "@qdrant/design-system/lib/utils"
-import { categories, getSection, sections, sectionsByCategory } from "@qdrant/web/registry"
+import { categories, getSection, sections } from "@qdrant/web/registry"
 
+import { DocsSidebar } from "@/components/web/docs-sidebar"
 import { VariantsView } from "@/components/web/variants-view"
 
 export function generateStaticParams() {
@@ -32,29 +31,7 @@ export default async function SectionDocs({ params }: { params: Promise<{ id: st
 
   return (
     <div className="flex min-h-0 flex-1">
-      <aside className="sticky top-12 hidden h-[calc(100svh-3rem)] w-60 shrink-0 overflow-y-auto border-r p-4 md:block">
-        <nav aria-label="Sections" className="flex flex-col gap-5">
-          {sectionsByCategory().map((c) => (
-            <div key={c.id} className="flex flex-col gap-1">
-              <p className="px-2 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">{c.label}</p>
-              {c.sections.map((s) => (
-                <Link
-                  key={s.id}
-                  href={`/web/docs/${s.id}`}
-                  aria-current={s.id === id ? "page" : undefined}
-                  className={cn(
-                    "rounded-md px-2 py-1.5 text-sm hover:bg-muted",
-                    s.id === id ? "bg-muted font-semibold" : "text-muted-foreground"
-                  )}
-                >
-                  {s.name}
-                  <span className="ml-1.5 text-xs text-muted-foreground">{s.variants.length}</span>
-                </Link>
-              ))}
-            </div>
-          ))}
-        </nav>
-      </aside>
+      <DocsSidebar current={id} />
 
       <div className="flex min-w-0 flex-1 flex-col gap-10 p-8">
         <header className="flex max-w-3xl flex-col gap-3">

@@ -70,7 +70,7 @@ function PostCard({ post, images, size = "md", className }: { post: Post; images
         {post.tag && <p className={cn(type.xsmall, "font-mono uppercase")}>{post.tag}</p>}
         <h3 className={cn(size === "lg" ? `${type.h6} md:text-(length:--qd-type-h5-size) md:leading-(--qd-type-h5-line-height)` : heading.card, row && "text-(length:--qd-font-size-16) leading-snug")}>
           {/* The whole card is the link: the title's link stretches over it. */}
-          <a href={post.href} className="web-link outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline">
+          <a href={post.href} className="web-link-quiet outline-none after:absolute after:inset-0 after:content-[''] focus-visible:underline">
             {post.title}
           </a>
         </h3>

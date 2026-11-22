@@ -137,7 +137,7 @@ export function Testimonials({ layout = "single", header, quotes, metric, theme,
       {headerEl}
       {q && (
         <figure className="flex max-w-4xl flex-col items-center gap-10 text-center">
-          <span aria-hidden className="font-mono text-4xl leading-none text-(--web-indigo)">
+          <span aria-hidden className="font-mono text-4xl leading-none text-(--web-indigo-text)">
             “
           </span>
           <blockquote className={cn(largeQuote, "-mt-6 text-balance")}>{q.quote}</blockquote>

@@ -42,7 +42,7 @@ export function Crumbs({ items, className }: { items: Crumb[]; className?: strin
             {i > 0 && <BreadcrumbSeparator className="text-(--web-line-strong)">/</BreadcrumbSeparator>}
             <BreadcrumbItem>
               {item.href && i < items.length - 1 ? (
-                <BreadcrumbLink href={item.href} className="web-link">
+                <BreadcrumbLink href={item.href} className="web-link-quiet">
                   {item.label}
                 </BreadcrumbLink>
               ) : (

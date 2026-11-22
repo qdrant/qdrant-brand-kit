@@ -208,7 +208,7 @@ export function FilterableIndex({
                   <span className={cn("font-display text-lg font-medium tracking-tight text-foreground", view === "list" && "md:w-44 md:shrink-0")}>
                     {item.name}
                   </span>
-                  <h3 className={cn(heading.card, "flex-1 text-(length:--qd-font-size-18) leading-snug group-hover:text-(--web-indigo)", view === "list" && "text-(length:--qd-font-size-16)")}>
+                  <h3 className={cn(heading.card, "flex-1 text-(length:--qd-font-size-18) leading-snug group-hover:text-(--web-link)", view === "list" && "text-(length:--qd-font-size-16)")}>
                     {item.title}
                   </h3>
                   <div className={cn("flex flex-wrap items-center gap-x-3 gap-y-1", type.xsmall, view === "grid" && "mt-auto border-t border-(--web-line) pt-3")}>
@@ -238,7 +238,7 @@ export function FilterableIndex({
                   size="icon"
                   aria-current={p === current ? "page" : undefined}
                   onClick={() => setPage(p)}
-                  className={cn("font-mono tabular-nums", p === current && "text-(--web-indigo)")}
+                  className={cn("font-mono tabular-nums", p === current && "text-(--web-indigo-text)")}
                 >
                   {p}
                 </Button>

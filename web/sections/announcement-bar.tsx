@@ -24,7 +24,7 @@ export function AnnouncementBar({ tag, text, link, theme, surface = "raised", pa
       )}
       <span className="text-foreground">{text}</span>
       {link && (
-        <span className="inline-flex items-center gap-1 font-medium text-(--qd-color-primary-text)">
+        <span className="inline-flex items-center gap-1 font-medium text-(--web-link)">
           {link.label}
           <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
         </span>

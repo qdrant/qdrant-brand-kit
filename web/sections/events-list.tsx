@@ -61,7 +61,7 @@ function Row({ event }: { event: EventItem }) {
             <TypeTag value={event.type} />
             <span className="font-mono text-xs text-muted-foreground">{dateParts(event.date).year}</span>
           </div>
-          <h3 className={cn(heading.card, link && "group-hover:text-(--web-indigo)")}>{event.title}</h3>
+          <h3 className={cn(heading.card, link && "group-hover:text-(--web-link)")}>{event.title}</h3>
           {event.text && <p className={cn(type.small, "line-clamp-2 max-w-2xl")}>{event.text}</p>}
         </div>
         <p className={cn(type.small, "col-start-2 md:col-start-auto")}>
@@ -90,7 +90,7 @@ function Card({ event }: { event: EventItem }) {
           <DateBlock iso={event.date} />
           <TypeTag value={event.type} />
         </div>
-        <h3 className={cn(heading.card, link && "group-hover:text-(--web-indigo)")}>{event.title}</h3>
+        <h3 className={cn(heading.card, link && "group-hover:text-(--web-link)")}>{event.title}</h3>
         {event.text && <p className={cn(type.small, "line-clamp-3")}>{event.text}</p>}
         <p className={cn(type.small, "mt-auto flex items-center justify-between gap-4 border-t border-(--web-line) pt-4")}>
           <span className="text-foreground">{event.location}</span>

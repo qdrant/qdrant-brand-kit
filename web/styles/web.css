@@ -56,6 +56,7 @@
      holder around media (code, a screenshot); cells, hairline grids for rows of facts. */
 [data-web],
 [data-web] [data-theme] {
+  --web-line-mix: 8%;
   --web-line: color-mix(in oklab, var(--foreground) 8%, transparent);
   --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
   --web-plate-top: color-mix(in oklab, var(--foreground) 2%, var(--card));
@@ -65,6 +66,7 @@
 }
 [data-web][data-theme="light"],
 [data-web] [data-theme="light"] {
+  --web-line-mix: 9%;
   --web-line: color-mix(in oklab, var(--foreground) 9%, transparent);
   --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
   --web-plate-top: var(--card);
@@ -180,12 +182,18 @@
 
 /* A grid of cells with hairlines between them and around it, reaching the rails (logo walls, stats). Cells take
    the section's background, so the 1px gaps show the line. */
+/* A hairline grid of cells (Juan, 2026-11-22): the lines show through 1px gaps between cells that carry the
+   section's background, so every line, inside and out, is one solid color: a hairline over the background, the
+   same as the rails and seams look. The grid reaches the rails and draws its own sides on them, so the cells never
+   cover the rails and the outer and inner lines match. */
 .web-grid {
+  --web-grid-line: color-mix(in srgb, var(--foreground) var(--web-line-mix, 8%), var(--background));
   display: grid;
   gap: 1px;
   margin-inline: -24px;
-  background: var(--web-line);
-  border-block: 1px solid var(--web-line);
+  background: var(--web-grid-line);
+  background-clip: padding-box;
+  border: 1px solid var(--web-grid-line);
 }
 .web-grid > * {
   background: var(--background);
@@ -292,29 +300,47 @@
   color: var(--tone-fg);
 }
 
-/* Indigo hints (Juan, 2026-11-21): the second brand color as a thread through the website, never a fill behind
-   text. --web-indigo is indigo-400 on dark and indigo-600 on light; patterns use it for their accents. With the
-   hints on (the default), the nodes where lines meet, the kicker's node and the steps' nodes take an indigo ring,
-   the active node fills with it, and text links turn indigo on hover. data-web-indigo="off" keeps them neutral. */
+/* Indigo (Juan, 2026-11-21): the second brand color as a thread through the website, never a fill behind text. It
+   follows the color guidelines' contrast steps (primitives/colors), so it's lighter on dark than on light
+   (Juan, 2026-11-22):
+   - --web-indigo, for marks: icons, nodes, active borders and pattern accents. indigo-400 on dark, 600 on light.
+   - --web-indigo-text, for text: the secondary.text role, indigo-400 on dark and 800 on light (text on white
+     needs 700 or darker).
+   - --web-link, for text links (Juan, 2026-11-22): --web-indigo-text. A link is .web-link (ArrowLink sets it).
+   The nodes where lines meet take an indigo ring and the active one fills with it. data-web-indigo="off" keeps the
+   nodes and links neutral, to compare. */
 [data-web],
 [data-web] [data-theme],
 [data-web][data-theme="dark"],
 [data-web] [data-theme="dark"],
 [data-theme="dark"] [data-web] {
   --web-indigo: var(--qd-color-indigo-400);
+  --web-indigo-text: var(--qd-color-secondary-text);
+  --web-link: var(--web-indigo-text);
   --web-node: color-mix(in oklab, var(--web-indigo) 60%, var(--web-line-strong));
 }
 [data-web][data-theme="light"],
 [data-web] [data-theme="light"] {
   --web-indigo: var(--qd-color-indigo-600);
+  --web-indigo-text: var(--qd-color-secondary-text);
+  --web-link: var(--web-indigo-text);
   --web-node: color-mix(in oklab, var(--web-indigo) 55%, var(--web-line-strong));
 }
 [data-web-indigo="off"],
 [data-web-indigo="off"] [data-theme] {
   --web-node: var(--web-line-strong);
+  --web-link: var(--foreground);
 }
-[data-web]:not([data-web-indigo="off"]) .web-link:hover {
-  color: var(--web-indigo);
+/* A text link: indigo, underlined on hover. A title or crumb that is a link but reads as text (a card's title, a
+   breadcrumb) is .web-link-quiet: the text color, indigo on hover. */
+.web-link {
+  color: var(--web-link);
+}
+.web-link:hover {
+  text-decoration-line: underline;
+}
+.web-link-quiet:hover {
+  color: var(--web-link);
 }
 
 /* Patterns (web/patterns): layers behind a section's content or inside its cards. Off as a whole with

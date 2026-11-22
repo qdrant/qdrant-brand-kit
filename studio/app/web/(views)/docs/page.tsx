@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation"
 
-import { sections } from "@qdrant/web/registry"
 
-// The Docs tab opens the first section.
+// The Docs tab opens on the website's guidelines.
 export default function Docs() {
-  redirect(`/web/docs/${sections[0].id}`)
+  redirect("/web/docs/guidelines")
 }

@@ -22,6 +22,7 @@
     "./pages/*": "./pages/*.tsx",
     "./lib/*": "./lib/*.tsx",
     "./styles/*": "./styles/*",
+    "./guidelines": "./guidelines.ts",
     "./registry": "./registry/index.ts",
     "./registry/*": "./registry/*.ts",
     "./content/*": "./content/*.ts",

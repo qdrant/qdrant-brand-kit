@@ -57,7 +57,7 @@ export function Prose({ blocks, className }: { blocks: ProseBlock[]; className?:
           case "list": {
             const List = block.ordered ? "ol" : "ul"
             return (
-              <List key={i} className={cn(type.body, "flex flex-col gap-2 pl-5", block.ordered ? "list-decimal" : "list-disc marker:text-(--web-indigo)")}>
+              <List key={i} className={cn(type.body, "flex flex-col gap-2 pl-5", block.ordered ? "list-decimal" : "list-disc marker:text-(--web-indigo-text)")}>
                 {block.items.map((item) => (
                   <li key={item} className="pl-1">
                     <Inline text={item} />

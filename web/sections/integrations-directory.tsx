@@ -34,7 +34,7 @@ function Card({ item, showCategory }: { item: Integration; showCategory: boolean
       >
         <div className="flex items-start justify-between gap-3">
           {/* The integration's name stands in for its logo until the file is exported. */}
-          <h3 className={cn(heading.card, "text-(length:--qd-font-size-18) leading-snug group-hover:text-(--web-indigo)")}>{item.name}</h3>
+          <h3 className={cn(heading.card, "text-(length:--qd-font-size-18) leading-snug group-hover:text-(--web-link)")}>{item.name}</h3>
           {showCategory && (
             <span className="shrink-0 rounded-sm border border-(--web-line) px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground uppercase">
               {item.category}
@@ -107,7 +107,7 @@ export function IntegrationsDirectory({
                   )}
                 >
                   {tab.label}
-                  <span className={cn("font-mono text-xs tabular-nums", on ? "text-(--web-indigo)" : "text-muted-foreground")}>{tab.count}</span>
+                  <span className={cn("font-mono text-xs tabular-nums", on ? "text-(--web-indigo-text)" : "text-muted-foreground")}>{tab.count}</span>
                 </button>
               )
             })}

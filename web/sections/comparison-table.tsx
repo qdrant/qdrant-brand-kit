@@ -45,7 +45,7 @@ function CellValue({ value }: { value: Cell }) {
   return (
     <>
       {value.text}{" "}
-      <a href={value.link.href} className="web-link text-foreground underline underline-offset-4">
+      <a href={value.link.href} className="web-link underline underline-offset-4">
         {value.link.label}
       </a>
     </>

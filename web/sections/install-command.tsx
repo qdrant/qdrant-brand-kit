@@ -56,7 +56,7 @@ function CommandLine({ line }: { line: TerminalLine }) {
     <div className="flex flex-col gap-1.5">
       {line.comment && <p className="font-mono text-xs text-muted-foreground"># {line.comment}</p>}
       <div className="flex items-start gap-3">
-        <span aria-hidden className="pt-1 font-mono text-[13px] text-(--web-indigo) select-none">
+        <span aria-hidden className="pt-1 font-mono text-[13px] text-(--web-indigo-text) select-none">
           $
         </span>
         <pre className="min-w-0 flex-1 overflow-x-auto pt-1 font-mono text-[13px] leading-relaxed text-foreground">

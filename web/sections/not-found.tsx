@@ -42,7 +42,7 @@ export function NotFound({ code = "404", title, help, primary, secondary, theme,
               typeof part === "string" ? (
                 <React.Fragment key={i}>{part}</React.Fragment>
               ) : (
-                <a key={i} href={part.href} className="web-link text-foreground underline underline-offset-4">
+                <a key={i} href={part.href} className="web-link underline underline-offset-4">
                   {part.label}
                 </a>
               )

@@ -108,7 +108,7 @@ export function Contact({ title, description, options = [], form, theme, surface
                   <h2 className={heading.card}>{o.title}</h2>
                   <p className={type.small}>
                     {o.text}{" "}
-                    <a href={o.link.href} className="web-link font-medium text-foreground underline underline-offset-4">
+                    <a href={o.link.href} className="web-link font-medium underline underline-offset-4">
                       {o.link.label}
                     </a>
                   </p>

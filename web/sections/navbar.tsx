@@ -156,7 +156,7 @@ function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: Navba
           )}
           <span className="flex flex-col gap-2">
             <span className="font-medium text-foreground">{featured.title}</span>
-            <span className="text-(--web-indigo)">{featured.link.label}</span>
+            <span className="text-(--web-link)">{featured.link.label}</span>
           </span>
         </Plate>
       )}

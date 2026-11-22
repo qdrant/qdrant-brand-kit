@@ -33,7 +33,7 @@ function Questions({ items }: { items: FaqItem[] }) {
     <Accordion className="rounded-none border-0 border-y border-(--web-line)">
       {items.map((item) => (
         <AccordionItem key={item.question} value={item.question} className="border-(--web-line) data-open:bg-transparent">
-          <AccordionTrigger className="py-5 text-(length:--qd-font-size-16) leading-(--qd-line-height-150) font-medium text-foreground hover:no-underline hover:text-(--web-indigo) aria-expanded:text-foreground">
+          <AccordionTrigger className="py-5 text-(length:--qd-font-size-16) leading-(--qd-line-height-150) font-medium text-foreground hover:no-underline hover:text-(--web-link) aria-expanded:text-foreground">
             {item.question}
           </AccordionTrigger>
           <AccordionContent className={cn(type.body, "pb-6")}>{item.answer}</AccordionContent>

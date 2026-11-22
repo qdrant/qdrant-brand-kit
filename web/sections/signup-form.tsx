@@ -52,7 +52,7 @@ export function SignupForm({ layout = "application", header, benefitsTitle, bene
             <ol className="flex flex-col border-t border-(--web-line)">
               {benefits.map((b, i) => (
                 <li key={b.title} className="flex gap-5 border-b border-(--web-line) py-6">
-                  <span className="font-mono text-sm text-(--web-indigo)">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-mono text-sm text-(--web-indigo-text)">{String(i + 1).padStart(2, "0")}</span>
                   <div className="flex flex-col gap-1">
                     <h4 className={cn(heading.card, "text-lg")}>{b.title}</h4>
                     {b.text && <p className={type.small}>{b.text}</p>}
