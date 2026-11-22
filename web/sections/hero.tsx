@@ -29,6 +29,10 @@ export type HeroProps = SectionProps & {
   // What fills the media slot: nothing, Qdrant's quickstart search, or a placeholder for an image the page supplies.
   media?: "none" | "code" | "image"
   mediaLabel?: string
+  // The real image or product screen for the media slot (web/visuals), instead of the placeholder.
+  visual?: React.ReactNode
+  // One small line under the buttons, with a link in it: "Need more? Talk to our team about Enterprise."
+  note?: { text: string; link: Link; after?: string }
 }
 
 // The opening section of a page (2026-11-21): the page's H1 and its main actions, and optionally a media slot,
@@ -45,6 +49,8 @@ export function Hero({
   pills,
   media = "none",
   mediaLabel,
+  visual,
+  note,
   theme,
   surface, pattern, cardPattern,
   id,
@@ -69,9 +75,11 @@ export function Hero({
 
   // Media sits on a plate inside a tray (web.css).
   const mediaEl =
-    media === "none" ? null : (
+    media === "none" && !visual ? null : (
       <div className="web-tray w-full rounded-[calc(var(--radius-xl)+6px)]">
-        {media === "code" ? (
+        {visual ? (
+          <div className="web-plate overflow-hidden rounded-xl">{visual}</div>
+        ) : media === "code" ? (
           <CodePanel title="quickstart.py" code={quickstartQuery} className="web-plate w-full" />
         ) : (
           <MediaFrame label={mediaLabel ?? "Product screenshot"} className="web-plate" />
@@ -93,6 +101,15 @@ export function Hero({
         </ul>
       )}
       {snippet && <CopySnippet label={snippet.label} text={snippet.text} />}
+      {note && (
+        <p className={cn("text-sm text-muted-foreground", centered && "text-center")}>
+          {note.text}{" "}
+          <a href={note.link.href} className="web-link underline underline-offset-4">
+            {note.link.label}
+          </a>
+          {note.after && ` ${note.after}`}
+        </p>
+      )}
     </>
   )
 
@@ -112,7 +129,7 @@ export function Hero({
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col items-center gap-10">
         <SectionHeader as="h1" align="center" kicker={kicker} title={title} description={description} actions={actions} />
-        {(pills || snippet) && <div className="flex w-full flex-col items-center gap-6">{extras}</div>}
+        {(pills || snippet || note) && <div className="flex w-full flex-col items-center gap-6">{extras}</div>}
         {mediaEl && <div className="w-full max-w-4xl">{mediaEl}</div>}
         {trustEl && <div className="w-full">{trustEl}</div>}
       </Section>

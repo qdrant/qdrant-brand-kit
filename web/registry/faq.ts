@@ -47,7 +47,7 @@ export const faq = defineSection<FaqProps>({
     props: [
       { name: "layout", type: '"narrow" | "split" | "categories"', note: "The arrangement." },
       { name: "header", type: "{ kicker?, title, description?, action? }", note: "The heading block." },
-      { name: "items", type: "{ question, answer }[]", note: "Narrow and split." },
+      { name: "items", type: "{ question, answer? }[]", note: "Narrow and split. A question with no answer yet shows but doesn't open." },
       { name: "categories", type: "{ label, items }[]", note: "Categories." },
     ],
   },

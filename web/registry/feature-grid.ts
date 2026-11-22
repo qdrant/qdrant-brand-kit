@@ -50,8 +50,8 @@ export const featureGrid = defineSection<FeatureGridProps>({
       { part: "Link", note: "Optional, with a chevron." },
     ],
     props: [
-      { name: "header", type: "{ kicker?, title, description?, action? }", note: "The heading block." },
-      { name: "items", type: "{ title, text?, icon?, link? }[]", note: "The features." },
+      { name: "header", type: "{ kicker?, title, description?, action? }", note: "The heading block. Left out when the grid continues the section before it." },
+      { name: "items", type: "{ title, text?, icon?, tone?, link?, id?, tag?, points?, visual?, wide? }[]", note: "The features: a tag above the title, points (lines with an optional bold label), a visual from web/visuals, an id to jump to, and wide to take the whole row." },
       { name: "columns", type: "2 | 3 | 4", note: "From md (4 is two columns at md, four from lg)." },
       { name: "appearance, marker", type: '"cards" | "cells", "icon" | "number" | "none"', note: "The look." },
     ],

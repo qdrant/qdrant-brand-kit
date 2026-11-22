@@ -50,7 +50,7 @@ export const caseStudies = defineSection<CaseStudiesProps>({
     props: [
       { name: "layout", type: '"cards" | "featured"', note: "Cards or one story." },
       { name: "items", type: "{ company, metric, metricLabel?, text, category?, detail?, link }[]", note: "The cards." },
-      { name: "story", type: "{ company, summary?, quote?, metrics?, link, mediaLabel? }", note: "The featured story." },
+      { name: "story", type: "{ company, summary?, quote?, metrics?, link, mediaLabel?, visual? }", note: "The featured story; visual is the real image for its media (a logo on a plate)." },
       { name: "header", type: "{ kicker?, title, description?, action? }", note: "Optional." },
     ],
   },

@@ -2,9 +2,27 @@
 // text was longer than what was captured word for word, only its first full sentence is used, never a paraphrase.
 // Code is Qdrant's quickstart (qdrant.tech/documentation/quickstart).
 
+import type { ReactNode } from "react"
+
 import type { Link } from "./site"
 
-export type Feature = { title: string; text?: string; icon?: string; tone?: string; link?: Link }
+export type Feature = {
+  title: string
+  text?: string
+  icon?: string
+  tone?: string
+  link?: Link
+  // An in-page anchor (#id), for an anchor nav.
+  id?: string
+  // A short label above the title, like who it applies to ("All replicated clusters").
+  tag?: string
+  // Lines after the text, each on its own row, with an optional bold label ("Mechanics", "Guarantees").
+  points?: { label?: string; text: string }[]
+  // In a grid, take the whole row (a closing card under the others).
+  wide?: boolean
+  // A real image, product screen or diagram for the feature's media (web/visuals), instead of a placeholder.
+  visual?: ReactNode
+}
 
 // Home: the case-study carousel's companies (from its links) and the button under it.
 export const customers = {

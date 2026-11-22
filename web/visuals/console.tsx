@@ -11,17 +11,14 @@ import {
   Cpu,
   CreditCard,
   DatabaseBackup,
-  DollarSign,
   Ellipsis,
   HardDrive,
   Info,
   KeyRound,
   MemoryStick,
-  Phone,
   Rocket,
   Server,
   Settings,
-  Trophy,
   Users,
   X,
   type LucideIcon,
@@ -93,304 +90,15 @@ import {
 } from "@qdrant/design-system/components/ui/toggle-group"
 import { cn } from "@qdrant/design-system/lib/utils"
 
-import { ArrowLink } from "@qdrant/web/lib/arrow-link"
-import { CloudLogo } from "@qdrant/web/lib/cloud-logo"
-import { Section } from "@qdrant/web/lib/section"
-import { type } from "@qdrant/web/lib/type"
+import { type } from "../lib/type"
 
-// The Capabilities section of the Resilience page (Figma: Qdrant Web Design, "Capabilities", node 20034:36551).
-// Layout and copy from the Figma. The console mockups are rebuilt from design-system components, scaled down
-// with CSS zoom and cropped like the Figma; they're product UI, so they carry the indigo accent
-// (data-context="product"). Glows are drawn here in CSS, behind the content, never inside a component.
+import { CloudLogo } from "../lib/cloud-logo"
 
-type Capability = {
-  id: string
-  tag: string
-  icon: LucideIcon
-  // The tag icon's color in the Figma, as the nearest palette color (dark) and its 600 on light.
-  iconColor: string
-  title: string
-  mechanics: string
-  guarantees: string
-  link: { label: string; href: string }
-}
+// Qdrant Cloud Console screens (from the Resilience page's Figma, "Capabilities", node 20034:36551), rebuilt from
+// the design system's components with the Figma's copy, scaled down and cropped like the Figma. They're product UI,
+// so their accent is indigo (data-context="product"). Visuals for a section's `visual` slot: each export fills a
+// 504px-tall frame and crops the screen at its right and bottom edges.
 
-const failover: Capability = {
-  id: "automatic-failover",
-  tag: "ALL REPLICATED CLUSTERS",
-  icon: Copy,
-  iconColor: "text-(--qd-color-indigo-400) light:text-(--qd-color-indigo-600)",
-  title: "Automatic Failover",
-  mechanics:
-    "Qdrant Cloud runs health checks across nodes and routes around unhealthy nodes, so queries continue from healthy nodes. Every replica is equal, so there is no primary to promote.",
-  guarantees:
-    "Qdrant Cloud detects failures and keeps serving traffic from healthy nodes. No client-side changes required.",
-  link: {
-    label: "Set Up a Replicated Cluster (Docs)",
-    href: "https://qdrant.tech/documentation/cloud/create-cluster/",
-  },
-}
-
-const upgrades: Capability = {
-  id: "zero-downtime-upgrades",
-  tag: "ALL REPLICATED CLUSTERS",
-  icon: Copy,
-  iconColor: "text-(--qd-color-blue-400) light:text-(--qd-color-blue-600)",
-  title: "Zero-Downtime Upgrades",
-  mechanics:
-    "When a new version is available, you choose when to upgrade. Qdrant Cloud upgrades in a rolling fashion. If you are several versions behind, the required intermediate updates run automatically.",
-  guarantees:
-    "Multi-node clusters where all collections have replication factor 2 or higher stay fully available throughout the upgrade.",
-  link: {
-    label: "Update Your Cluster (Docs)",
-    href: "https://qdrant.tech/documentation/cloud/cluster-upgrades/",
-  },
-}
-
-const backups: Capability = {
-  id: "backup-recovery",
-  tag: "ALL PAID CLUSTERS",
-  icon: DollarSign,
-  iconColor: "text-(--qd-color-teal-400) light:text-(--qd-color-teal-600)",
-  title: "Backups and Disaster Recovery",
-  mechanics:
-    "Schedule backups, set days of retention, or take an on-demand backup any time. Backups restore into the same cluster or a new one.",
-  guarantees:
-    "Restore your cluster to the exact state of any backup within your retention window, including its configuration. No recovery scripts needed, so your team can focus on getting back online.",
-  link: {
-    label: "Back Up Your Cluster (Docs)",
-    href: "https://qdrant.tech/documentation/cloud/backups/",
-  },
-}
-
-const support: Capability = {
-  id: "support",
-  tag: "TIER-DEPENDENT",
-  icon: Phone,
-  iconColor: "text-(--qd-color-blue-400) light:text-(--qd-color-blue-600)",
-  title: "Engineering Support",
-  mechanics:
-    "Premium support covers production incidents 24/7, with severity-based response-time SLAs. Standard covers business hours.",
-  guarantees:
-    "Faster response times and around-the-clock coverage on Premium, with SLAs defined per severity level in the Qdrant Cloud SLA.",
-  link: { label: "See Support SLAs", href: "https://cloud.qdrant.io/sla" },
-}
-
-const multiAz: Capability = {
-  id: "multi-az-placement",
-  tag: "PREMIUM-TIER",
-  icon: Trophy,
-  iconColor: "text-(--qd-color-orange-400) light:text-(--qd-color-orange-600)",
-  title: "Multi-AZ Placement",
-  mechanics:
-    "Qdrant Cloud places your shard replicas across three availability zones, so each shard has a replica in a different zone. Traffic is routed between zones automatically, so the cluster stays available if one zone goes down. Enable Multi-AZ Deployment when you create the cluster.",
-  guarantees:
-    "An uptime SLA of up to 99.95% on the Premium tier with Multi-AZ enabled. Traffic reroutes across zones automatically, with no client-side changes.",
-  link: { label: "Start Free", href: "https://cloud.qdrant.io/signup" },
-}
-
-// The tab row scrolls to the matching card.
-const tabs = [
-  { id: failover.id, label: "Automatic Failover" },
-  { id: upgrades.id, label: "Zero-Downtime Upgrades" },
-  { id: backups.id, label: "Backup & Recovery" },
-  { id: support.id, label: "Support" },
-  { id: multiAz.id, label: "Multi-AZ Placement" },
-]
-
-// ---------------------------------------------------------------------------------------------------------
-// Glows (section-only, behind the content). Palette colors through their variables, softer under light.
-
-const mix = (color: string, amount: number) =>
-  `color-mix(in oklab, var(${color}) ${amount}%, transparent)`
-
-// "Background-Lights" (20840:111624): a blurred band behind the intro and the banner, navy to indigo.
-function BackgroundLights() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute top-0 left-[23%] -z-10 h-116 w-[83%] opacity-70 blur-3xl light:opacity-20"
-      style={{
-        backgroundImage: [
-          `radial-gradient(28% 34% at 28% 52%, ${mix("--qd-color-blue-950", 90)}, transparent)`,
-          `radial-gradient(30% 26% at 55% 46%, ${mix("--qd-color-indigo-600", 40)}, transparent)`,
-          `radial-gradient(24% 26% at 78% 42%, ${mix("--qd-color-indigo-600", 34)}, transparent)`,
-        ].join(", "),
-      }}
-    />
-  )
-}
-
-// The banner's stars ("Space-Background", 20840:111185): the ones that fall inside the 1110 × 160 banner,
-// as a share of its width and height. M stars are 2px, S stars 1px.
-const stars: [size: "m" | "s", x: number, y: number][] = [
-  ["m", 10, 16],
-  ["m", 443, 156],
-  ["m", 356, 86],
-  ["m", 501, 116],
-  ["m", 832, 141],
-  ["m", 875, 71],
-  ["m", 819, 50],
-  ["m", 254, 16],
-  ["m", 293, 56],
-  ["m", 200, 100],
-  ["m", 109, 71],
-  ["s", 53, 55],
-  ["s", 324, 151],
-  ["s", 414, 103],
-  ["s", 476, 47],
-  ["s", 786, 89],
-  ["s", 845, 21],
-  ["s", 880, 16],
-  ["s", 862, 146],
-  ["s", 261, 18],
-  ["s", 264, 81],
-]
-
-// The banner's "Line-Blur" (20840:111331): indigo light rising from the bottom edge, brightest in the
-// bottom-right corner, and a paler glow in the bottom-left one.
-function BannerGlow() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-      <div
-        className="absolute inset-0 light:opacity-40"
-        style={{
-          backgroundImage: [
-            `radial-gradient(34% 95% at 99% 108%, ${mix("--qd-color-indigo-600", 85)}, transparent)`,
-            `radial-gradient(32% 60% at 44% 112%, ${mix("--qd-color-indigo-600", 45)}, transparent)`,
-            `radial-gradient(14% 70% at 0% 100%, ${mix("--qd-color-indigo-400", 40)}, transparent)`,
-          ].join(", "),
-        }}
-      />
-      {stars.map(([size, x, y]) => (
-        <span
-          key={`${x}-${y}`}
-          className={cn(
-            "absolute rounded-full",
-            size === "m"
-              ? "size-0.5 bg-foreground/60 light:bg-foreground/30"
-              : "size-px bg-foreground/40 light:bg-foreground/20"
-          )}
-          style={{ left: `${(x / 1110) * 100}%`, top: `${(y / 160) * 100}%` }}
-        />
-      ))}
-    </div>
-  )
-}
-
-// The colored light behind each console mockup ("Card-Texture-Group"): a soft S-shaped ribbon from the
-// bottom-left corner to the top-right one, at the Figma's 54% (a wide halo at 18%). Its colors are the nearest
-// palette colors to the Figma's: Violet 30 #5700C9 (indigo-700), Blue 50 #2F6FF0 (blue-600) and teal/500 #009688
-// (teal-600). The Figma's grain texture on top is a raster and is left out.
-const RIBBON =
-  "M -60 480 C 80 440, 200 400, 250 320 C 290 250, 270 170, 340 140 C 410 115, 480 100, 620 50"
-
-function Ribbon({ stroke }: { stroke: string }) {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 557 504"
-      preserveAspectRatio="none"
-      fill="none"
-      className="pointer-events-none absolute inset-0 -z-10 size-full blur-xl light:opacity-35"
-    >
-      <path
-        d={RIBBON}
-        className={stroke}
-        strokeWidth={120}
-        strokeLinecap="round"
-        opacity={0.18}
-      />
-      <path
-        d={RIBBON}
-        className={stroke}
-        strokeWidth={48}
-        strokeLinecap="round"
-        opacity={0.54}
-      />
-    </svg>
-  )
-}
-
-// ---------------------------------------------------------------------------------------------------------
-// Capability cards
-
-function CapabilityText({
-  capability,
-  className,
-}: {
-  capability: Capability
-  className?: string
-}) {
-  const {
-    id,
-    tag,
-    icon: Icon,
-    iconColor,
-    title,
-    mechanics,
-    guarantees,
-    link,
-  } = capability
-  return (
-    <div
-      id={id}
-      className={cn(
-        "flex scroll-mt-24 flex-col justify-between gap-10 p-6 sm:p-8 lg:pr-20",
-        className
-      )}
-    >
-      <div className="flex flex-col items-start gap-4">
-        <Badge variant="outline">
-          <Icon aria-hidden className={iconColor} />
-          {tag}
-        </Badge>
-        <h3 className={type.h5}>{title}</h3>
-      </div>
-      <div className="flex flex-col gap-4">
-        <p className={cn(type.body, "border-b pb-4")}>
-          <strong className="font-semibold text-foreground">Mechanics</strong>{" "}
-          {mechanics}
-        </p>
-        <p className={cn(type.body, "border-b pb-4")}>
-          <strong className="font-semibold text-foreground">Guarantees</strong>{" "}
-          {guarantees}
-        </p>
-        <div className="pt-4">
-          <ArrowLink href={link.href}>{link.label}</ArrowLink>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// The right half of a card: a 557 × 504 frame (the Figma's), centered when the card stacks.
-function Visual({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="overflow-hidden border-t lg:border-t-0 lg:border-l">
-      <div className="relative isolate mx-auto h-[504px] w-full max-w-[557px]">
-        {children}
-      </div>
-    </div>
-  )
-}
-
-function CapabilityCard({
-  capability,
-  visual,
-}: {
-  capability: Capability
-  visual: React.ReactNode
-}) {
-  return (
-    <Card className="grid gap-0 py-0 lg:grid-cols-2">
-      <CapabilityText capability={capability} />
-      <Visual>{visual}</Visual>
-    </Card>
-  )
-}
-
-// ---------------------------------------------------------------------------------------------------------
 // Console mockups. Each is a picture of the product: one image for assistive tech, inert inside.
 
 // Anchored at the Figma's offset (98, 92) inside the visual and cropped by its right and bottom edges.
@@ -1008,103 +716,34 @@ function BackupScheduleMockup() {
   )
 }
 
-// ---------------------------------------------------------------------------------------------------------
+// A frame for a console screen, 504px tall (the Figma's 557 by 504), the screen anchored inside it.
+function Frame({ children }: { children: React.ReactNode }) {
+  return <div className="relative isolate h-[504px] w-full overflow-hidden">{children}</div>
+}
 
-export function ResilienceCapabilities() {
-  const [active, setActive] = React.useState(failover.id)
-
-  const goTo = (id: string) => {
-    setActive(id)
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    document
-      .getElementById(id)
-      ?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" })
-  }
-
+// "Create a Cluster": cloud provider and region.
+export function ConsoleCreateCluster() {
   return (
-    <Section>
-      <div className="relative isolate flex flex-col gap-16">
-        <BackgroundLights />
+    <Frame>
+      <CreateClusterMockup />
+    </Frame>
+  )
+}
 
-        <div className="flex flex-col items-start gap-6">
-          <p className={type.kicker}>CAPABILITIES</p>
-          <p className={type.body}>
-            These capabilities apply to replicated collections.
-            <br />
-            See cluster configuration above for the node count and replication
-            factor requirements.
-          </p>
-          <ArrowLink href="https://qdrant.tech/documentation/cloud/configure-cluster/">
-            Configure a Cluster (Docs)
-          </ArrowLink>
-        </div>
+// A cluster's overview: its nodes, their health and usage.
+export function ConsoleClusterOverview() {
+  return (
+    <Frame>
+      <ClusterOverviewMockup />
+    </Frame>
+  )
+}
 
-        <div className="flex flex-col gap-16">
-          <Card className="relative isolate px-6 py-8 sm:px-10">
-            <BannerGlow />
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-              <h2 className={cn(type.h4, "max-w-md")}>
-                What Qdrant Cloud Manages, By Tier
-              </h2>
-              <div className="flex flex-wrap items-center gap-4 sm:gap-8">
-                <Button size="lg">Start Free</Button>
-                <Button size="lg" variant="outline">
-                  Talk to Engineering
-                </Button>
-              </div>
-            </div>
-          </Card>
-
-          <Tabs value={active} onValueChange={(value) => goTo(String(value))}>
-            <div className="overflow-x-auto">
-              <TabsList aria-label="Capabilities" className="w-full min-w-max">
-                {tabs.map((tab) => (
-                  <TabsTrigger key={tab.id} value={tab.id}>
-                    {tab.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </div>
-          </Tabs>
-
-          <div className="flex flex-col gap-16">
-            <CapabilityCard
-              capability={failover}
-              visual={
-                <>
-                  <Ribbon stroke="stroke-(--qd-color-indigo-700)" />
-                  <CreateClusterMockup />
-                </>
-              }
-            />
-            <CapabilityCard
-              capability={upgrades}
-              visual={
-                <>
-                  <Ribbon stroke="stroke-(--qd-color-blue-600)" />
-                  <ClusterOverviewMockup />
-                </>
-              }
-            />
-            <CapabilityCard
-              capability={backups}
-              visual={
-                <>
-                  <Ribbon stroke="stroke-(--qd-color-teal-600)" />
-                  <BackupScheduleMockup />
-                </>
-              }
-            />
-            <Card className="grid gap-0 py-0 lg:grid-cols-2">
-              <CapabilityText capability={support} />
-              <CapabilityText
-                capability={multiAz}
-                className="border-t lg:border-t-0 lg:border-l"
-              />
-            </Card>
-          </div>
-        </div>
-      </div>
-    </Section>
+// "Set up Backup Schedule": a dialog.
+export function ConsoleBackupSchedule() {
+  return (
+    <Frame>
+      <BackupScheduleMockup />
+    </Frame>
   )
 }

@@ -74,7 +74,7 @@ export const menus: Menu[] = [
         title: "Learn",
         items: [
           { label: "Guides", href: "/documentation/guides/", icon: "Compass" },
-          { label: "Articles", href: "/articles/", icon: "BookMarked" },
+          { label: "Articles", href: "/articles/", icon: "BookOpenText" },
           { label: "Courses", href: "/course/", icon: "GraduationCap" },
           { label: "Tutorials", href: "/learn/examples/", icon: "SquareTerminal" },
         ],

@@ -7,7 +7,7 @@ const pages = [
   {
     href: "/web/pages/resilience",
     name: "Resilience",
-    note: "The Resilience page of qdrant.tech, rebuilt from the Figma (Qdrant Web Design) on 2026-11-16. A reference: its sections are page-specific and will be rebuilt from the section library.",
+    note: "The Resilience page of qdrant.tech (Figma: Qdrant Web Design), built from the section library on 2026-11-22, with its Console screens and cluster diagrams from web/visuals.",
   },
 ]
 

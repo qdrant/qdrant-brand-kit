@@ -2,6 +2,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Feature } from "../content/sections"
 import { ArrowLink } from "../lib/arrow-link"
+import { FeaturePoints, FeatureTag } from "../lib/feature-parts"
 import { Plate } from "../lib/plate"
 import { IconTile, toneAt, type Tone } from "../lib/tone"
 import { LinkButton } from "../lib/link-button"
@@ -11,7 +12,8 @@ import type { HeaderProps } from "../lib/section-props"
 import { heading, type } from "../lib/type"
 
 export type FeatureGridProps = SectionProps & {
-  header: HeaderProps
+  // Left out when the grid continues the section before it.
+  header?: HeaderProps
   items: Feature[]
   columns?: 2 | 3 | 4
   // cards: each feature on a plate. cells: features in a hairline grid, no cards.
@@ -40,19 +42,21 @@ export function FeatureGrid({
 }: FeatureGridProps) {
   return (
     <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
-      <SectionHeader
-        layout={header.action ? "action" : "stacked"}
-        kicker={header.kicker}
-        title={header.title}
-        description={header.description}
-        actions={
-          header.action ? (
-            <LinkButton href={header.action.href} variant="secondary">
-              {header.action.label}
-            </LinkButton>
-          ) : undefined
-        }
-      />
+      {header && (
+        <SectionHeader
+          layout={header.action ? "action" : "stacked"}
+          kicker={header.kicker}
+          title={header.title}
+          description={header.description}
+          actions={
+            header.action ? (
+              <LinkButton href={header.action.href} variant="secondary">
+                {header.action.label}
+              </LinkButton>
+            ) : undefined
+          }
+        />
+      )}
       <ul
         className={cn(
           appearance === "cells" ? "web-grid grid-cols-1" : "grid grid-cols-1 gap-(--qd-layout-column-gap)",
@@ -68,10 +72,13 @@ export function FeatureGrid({
             {marker === "number" && (
               <span className="font-mono text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
             )}
-            <div className="flex flex-1 flex-col gap-2">
+            <div className="flex flex-1 flex-col items-start gap-2">
+              <FeatureTag tag={item.tag} className="mb-2" />
               <h3 className={heading.card}>{item.title}</h3>
               {item.text && <p className={type.small}>{item.text}</p>}
             </div>
+            {item.visual && <div className="py-4">{item.visual}</div>}
+            <FeaturePoints points={item.points} />
             {item.link && (
               <ArrowLink href={item.link.href} className="text-sm">
                 {item.link.label}
@@ -80,11 +87,11 @@ export function FeatureGrid({
             </>
           )
           return appearance === "cards" ? (
-            <Plate as="li" key={item.title} className="flex flex-col gap-4 rounded-xl p-6">
+            <Plate as="li" key={item.id ?? `${item.title}-${i}`} id={item.id} className={cn("flex scroll-mt-24 flex-col gap-4 rounded-xl p-6", item.wide && "col-span-full")}>
               {body}
             </Plate>
           ) : (
-            <li key={item.title} className="flex flex-col gap-4 px-6 py-8">
+            <li key={item.id ?? `${item.title}-${i}`} id={item.id} className={cn("flex scroll-mt-24 flex-col gap-4 px-6 py-8", item.wide && "col-span-full")}>
               {body}
             </li>
           )

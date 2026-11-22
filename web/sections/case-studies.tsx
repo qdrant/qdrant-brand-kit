@@ -1,3 +1,5 @@
+import type * as React from "react"
+
 import { Avatar, AvatarFallback } from "@qdrant/design-system/components/ui/avatar"
 import { cn } from "@qdrant/design-system/lib/utils"
 
@@ -19,6 +21,8 @@ export type FeaturedStory = {
   metrics?: { value: string; label: string }[]
   link: Link
   mediaLabel?: string
+  // The real image for the media slot (a customer's logo on a plate, a photo), instead of the placeholder.
+  visual?: React.ReactNode
 }
 
 export type CaseStudiesProps = SectionProps & {
@@ -67,7 +71,11 @@ export function CaseStudies({ layout = "cards", header, items = [], story, theme
       {layout === "featured" && story ? (
         <Plate as="article" className="grid gap-1.5 rounded-[calc(var(--radius-xl)+6px)] p-1.5 lg:grid-cols-2">
           <div className="web-tray rounded-xl">
-            <MediaFrame label={story.mediaLabel ?? `${story.company} story`} className="web-plate h-full min-h-64" />
+            {story.visual ? (
+              <div className="web-plate grid h-full min-h-64 place-items-center overflow-hidden rounded-xl p-10">{story.visual}</div>
+            ) : (
+              <MediaFrame label={story.mediaLabel ?? `${story.company} story`} className="web-plate h-full min-h-64" />
+            )}
           </div>
           <div className="flex flex-col gap-8 p-6 lg:p-10">
             <CompanyMark name={story.company} className="text-2xl" />

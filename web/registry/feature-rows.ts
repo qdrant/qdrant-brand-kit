@@ -35,8 +35,8 @@ export const featureRows = defineSection<FeatureRowsProps>({
       { part: "Row", note: "Number, title, text and link beside the media." },
     ],
     props: [
-      { name: "header", type: "{ kicker?, title, description? }", note: "The heading block." },
-      { name: "rows", type: "{ title, text?, link? }[]", note: "The features." },
+      { name: "header", type: "{ kicker?, title, description?, action? }", note: "The heading block." },
+      { name: "rows", type: "{ title, text?, icon?, tone?, link?, id?, tag?, points?, visual? }[]", note: "The features. A row starts with its icon on a tile (or its number), and shows its visual (web/visuals) or a placeholder." },
       { name: "start", type: '"media-right" | "media-left"', note: "The first row's media side." },
     ],
   },

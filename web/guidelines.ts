@@ -36,6 +36,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "primitives/spacing/",
       },
       {
+        title: "Pages are built from the library",
+        text: "A page is made of the library's sections, with its copy in a content file and real visuals (product screens, diagrams) passed to the sections' visual slot. If a page needs something a section can't do, add it to the section as a prop or a slot, so every page gets it. Never a page-only section.",
+        decided: "Juan, 2026-11-22",
+        source: "web/pages/, web/visuals/",
+      },
+      {
         title: "Use the breakpoints from the primitives",
         text: "Every section works from phone (390px) to desktop. Grids collapse to one column on phones, and nothing scrolls sideways.",
         source: "primitives/breakpoints/",

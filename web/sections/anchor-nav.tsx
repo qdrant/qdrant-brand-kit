@@ -72,7 +72,7 @@ export function AnchorNav({
       spacing="none"
       lines={false}
       id={id}
-      className={cn("border-b border-(--web-line)", sticky && "sticky top-0 z-20", className)}
+      className={cn("border-b border-(--web-line)", sticky && "sticky top-(--web-sticky-top,0px) z-20", className)}
     >
       <nav aria-label={label ?? "On this page"} className="flex items-center gap-8">
         {label && (

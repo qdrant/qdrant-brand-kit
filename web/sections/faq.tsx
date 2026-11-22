@@ -32,7 +32,7 @@ function Questions({ items }: { items: FaqItem[] }) {
   return (
     <Accordion className="rounded-none border-0 border-y border-(--web-line)">
       {items.map((item) => (
-        <AccordionItem key={item.question} value={item.question} className="border-(--web-line) data-open:bg-transparent">
+        <AccordionItem key={item.question} value={item.question} disabled={!item.answer} className="border-(--web-line) data-open:bg-transparent">
           <AccordionTrigger className="py-5 text-(length:--qd-font-size-16) leading-(--qd-line-height-150) font-medium text-foreground hover:no-underline hover:text-(--web-link) aria-expanded:text-foreground">
             {item.question}
           </AccordionTrigger>

@@ -391,7 +391,8 @@ export const securityMatrix = {
 // ---------------------------------------------------------------------------------------------------------------
 // FAQ
 
-export type Faq = { question: string; answer: string }
+// A question with no answer yet (the design has none) shows, but doesn't open.
+export type Faq = { question: string; answer?: string }
 
 // Pricing: "FAQs".
 export const pricingFaq = {

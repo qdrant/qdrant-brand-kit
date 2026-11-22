@@ -1,6 +1,5 @@
 import { Check, CloudSync, Rocket } from "lucide-react"
 
-import { Button } from "@qdrant/design-system/components/ui/button"
 import {
   Card,
   CardContent,
@@ -33,65 +32,23 @@ import {
 } from "@qdrant/design-system/components/ui/toggle-group"
 import { cn } from "@qdrant/design-system/lib/utils"
 
-import { CloudLogo } from "@qdrant/web/lib/cloud-logo"
-import { Section } from "@qdrant/web/lib/section"
-import { type } from "@qdrant/web/lib/type"
+import { type } from "../lib/type"
 
-// The Resilience page's hero (Figma: Qdrant Web Design, "Hero", node 19452:25126): the heading and calls to action
-// on the left, and the Console's "Create a Cluster" screen on the right. The Figma gives no hrefs for the two
-// buttons, so they have none here.
-export function ResilienceHero() {
-  return (
-    <Section>
-      <div className="grid items-start gap-16 lg:grid-cols-[minmax(0,1fr)_450px]">
-        <div className="flex flex-col items-start gap-8">
-          <div className="flex flex-col gap-4">
-            <p className={type.kicker}>QDRANT CLOUD</p>
-            <h1 className={type.h3}>
-              Production-Ready Resilience, Managed on Qdrant Cloud
-            </h1>
-          </div>
-          <p className={type.lead}>
-            Go from single-node to fully replicated high availability in the
-            Console. Add Multi-AZ on the Premium tier for zone-level resilience
-            and an uptime SLA of up to 99.95%, and the cluster stays available
-            through a full availability-zone outage.
-          </p>
-          <div className="flex flex-wrap gap-6">
-            <Button size="lg">Start Free</Button>
-            <Button variant="outline" size="lg">
-              Read the Docs
-            </Button>
-          </div>
-          <p className={type.xsmall}>
-            Need four or five nines with contractual guarantees?{" "}
-            <a
-              href="https://qdrant.tech/contact-us/"
-              target="_blank"
-              rel="noreferrer"
-              className="underline underline-offset-4 hover:text-foreground"
-            >
-              Talk to our team
-            </a>{" "}
-            about Enterprise and Private Cloud.
-          </p>
-        </div>
+import { CloudLogo } from "../lib/cloud-logo"
 
-        <HeroVisual />
-      </div>
-    </Section>
-  )
-}
+// The Qdrant Cloud Console's "Create a Cluster" screen (from the Resilience page's Figma, "Hero", node
+// 20868:124485), rebuilt from the design system's components with the Figma's copy. Product UI, so its accent is
+// indigo. A visual for a hero's `visual` slot.
 
 // The Figma's window onto the Console: a 440×518 frame that crops the screen (its summary column falls outside),
 // fading into the page at the bottom. From lg the frame hangs below the text column, into the section's
 // padding, as in the Figma.
-function HeroVisual() {
+export function ConsoleClusterSetup() {
   return (
-    <div className="relative mx-auto h-[518px] w-full max-w-[440px] lg:h-auto lg:self-stretch">
+    <div className="relative h-[518px] w-full">
       <div
         data-context="product"
-        className="absolute inset-x-0 top-0 h-[518px] overflow-hidden rounded-lg border bg-background text-foreground"
+        className="absolute inset-0 overflow-hidden bg-background text-foreground"
       >
         {/* The screen at its real size, zoomed to 60% to fit the frame, like the Figma's small console. */}
         <div inert className="w-[730px]" style={{ zoom: 0.6 }}>
@@ -100,7 +57,7 @@ function HeroVisual() {
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-x-2 top-[217px] h-[347px] bg-linear-to-b from-transparent from-15% to-background to-80%"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[301px] bg-linear-to-b from-transparent from-15% to-background to-80%"
       />
     </div>
   )
