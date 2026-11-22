@@ -1,0 +1,28 @@
+/* The website's surfaces (Juan, 2026-11-21). Inside the website ([data-web], on a page's root), the design
+   system's page, card, popover and highlight colors are the brand background roles, so a section only sets its
+   theme (data-theme) and its surface (data-surface), and every design-system component in it follows:
+   - default: the page is background/default, cards background/raised, menus background/overlay.
+   - raised: a raised band. The page is background/raised and cards step up to background/overlay.
+   Dark: default neutral-950, raised neutral-925, overlay neutral-850, highlight neutral-800. Light: default
+   neutral-25, raised and overlay white, highlight neutral-50. The roles flip with data-theme by themselves
+   (primitives/colors); this file only says which role each surface uses. Load it after the design system's
+   globals.css. Outside [data-web], the studio keeps the design system's own neutrals. */
+[data-web],
+[data-web] [data-theme],
+[data-web] [data-surface] {
+  --qd-ui-page: var(--qd-color-background-default);
+  --qd-ui-card: var(--qd-color-background-raised);
+  --qd-ui-popover: var(--qd-color-background-overlay);
+  --qd-ui-highlight: var(--qd-color-background-highlight);
+  --background: var(--qd-ui-page);
+  --card: var(--qd-ui-card);
+  --popover: var(--qd-ui-popover);
+  --secondary: var(--qd-ui-highlight);
+  --muted: var(--qd-ui-highlight);
+  --sidebar: var(--qd-ui-card);
+}
+[data-web][data-surface="raised"],
+[data-web] [data-surface="raised"] {
+  --qd-ui-page: var(--qd-color-background-raised);
+  --qd-ui-card: var(--qd-color-background-overlay);
+}

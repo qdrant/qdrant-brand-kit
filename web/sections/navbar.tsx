@@ -1,0 +1,220 @@
+"use client"
+
+import { Menu as MenuIcon } from "lucide-react"
+
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@qdrant/design-system/components/ui/accordion"
+import { Badge } from "@qdrant/design-system/components/ui/badge"
+import { Button } from "@qdrant/design-system/components/ui/button"
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@qdrant/design-system/components/ui/navigation-menu"
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@qdrant/design-system/components/ui/sheet"
+import { cn } from "@qdrant/design-system/lib/utils"
+
+import type { Link, Menu, MenuGroup } from "../content/site"
+import { Icon } from "../lib/icon"
+import { LinkButton } from "../lib/link-button"
+import { Logo } from "../lib/logo"
+import { Section, type SectionProps } from "../lib/section"
+
+export type NavbarProps = SectionProps & {
+  // full: the menus, Pricing and three actions. minimal: the logo and two actions, for landing pages.
+  variant?: "full" | "minimal"
+  menus?: Menu[]
+  login?: Link
+  contact?: Link
+  start: Link
+  // A card in the first menu's panel, like the latest release.
+  featured?: { tag?: string; title: string; link: Link }
+  // Stays at the top of the window while the page scrolls.
+  sticky?: boolean
+}
+
+// The site's top menu (2026-11-21). From lg, each menu opens a panel of columns: a mono group label over items
+// with an icon and an optional tag (Beta, Waitlist). Below lg, the menus fold into a sheet with one accordion
+// per menu. The logo follows the theme.
+export function Navbar({
+  variant = "full",
+  menus = [],
+  login,
+  contact,
+  start,
+  featured,
+  sticky,
+  theme,
+  surface,
+  id,
+  className,
+}: NavbarProps) {
+  return (
+    <Section
+      theme={theme}
+      surface={surface}
+      spacing="none"
+      id={id}
+      className={cn(
+        "overflow-visible border-b border-border",
+        sticky && "sticky top-0 z-40 bg-background/85 backdrop-blur-md",
+        className
+      )}
+      innerClassName="flex h-16 items-center gap-6 lg:h-18"
+    >
+      <a href="/" className="flex shrink-0 items-center" aria-label="Qdrant home">
+        <Logo className="h-7" />
+      </a>
+
+      {variant === "full" && (
+        <NavigationMenu className="hidden lg:flex">
+          <NavigationMenuList className="gap-1">
+            {menus.map((menu, i) =>
+              menu.groups ? (
+                <NavigationMenuItem key={menu.label}>
+                  <NavigationMenuTrigger className="text-sm">{menu.label}</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <MegaPanel groups={menu.groups} featured={i === 0 ? featured : undefined} />
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              ) : (
+                <NavigationMenuItem key={menu.label}>
+                  <NavigationMenuLink href={menu.href} className={cn(navigationMenuTriggerStyle(), "text-sm")}>
+                    {menu.label}
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              )
+            )}
+          </NavigationMenuList>
+        </NavigationMenu>
+      )}
+
+      <div className="ml-auto flex items-center gap-2">
+        {login && (
+          <LinkButton href={login.href} variant="ghost" className="hidden sm:inline-flex">
+            {login.label}
+          </LinkButton>
+        )}
+        {variant === "full" && contact && (
+          <LinkButton href={contact.href} variant="outline" className="hidden md:inline-flex">
+            {contact.label}
+          </LinkButton>
+        )}
+        <LinkButton href={start.href}>{start.label}</LinkButton>
+        {variant === "full" && <MobileMenu menus={menus} login={login} contact={contact} />}
+      </div>
+    </Section>
+  )
+}
+
+function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: NavbarProps["featured"] }) {
+  return (
+    <div className="flex gap-2 p-2">
+      <div className={cn("grid gap-x-2 gap-y-4", groups.length > 2 ? "grid-cols-3" : groups.length === 2 ? "grid-cols-2" : "grid-cols-1")}>
+        {groups.map((group, i) => (
+          <div key={group.title ?? i} className="flex w-64 flex-col gap-1">
+            {group.title && (
+              <p className="px-2 pt-1 pb-1 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
+                {group.title}
+              </p>
+            )}
+            {group.items.map((item) => (
+              <NavigationMenuLink key={item.label} href={item.href} className="gap-3 text-sm">
+                <span className="grid size-8 shrink-0 place-items-center rounded-md border border-border bg-background text-muted-foreground">
+                  <Icon name={item.icon} className="size-4" />
+                </span>
+                <span className="flex-1">{item.label}</span>
+                {item.tag && (
+                  <Badge variant="outline" className="font-mono">
+                    {item.tag}
+                  </Badge>
+                )}
+              </NavigationMenuLink>
+            ))}
+          </div>
+        ))}
+      </div>
+      {featured && (
+        <a
+          href={featured.link.href}
+          className="flex w-64 flex-col justify-between gap-6 rounded-lg border border-border bg-muted p-4 text-sm outline-none hover:border-foreground/20 focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)"
+        >
+          {featured.tag && (
+            <Badge variant="outline" className="font-mono">
+              {featured.tag}
+            </Badge>
+          )}
+          <span className="flex flex-col gap-2">
+            <span className="font-medium text-foreground">{featured.title}</span>
+            <span className="text-(--qd-color-primary-text)">{featured.link.label}</span>
+          </span>
+        </a>
+      )}
+    </div>
+  )
+}
+
+function MobileMenu({ menus, login, contact }: { menus: Menu[]; login?: Link; contact?: Link }) {
+  return (
+    <Sheet>
+      <SheetTrigger render={<Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open the menu" />}>
+        <MenuIcon />
+      </SheetTrigger>
+      <SheetContent side="right" className="w-full gap-0 overflow-y-auto p-6 text-sm sm:max-w-sm">
+        <SheetTitle className="sr-only">Menu</SheetTitle>
+        <Accordion className="mt-10 rounded-none border-0">
+          {menus.map((menu) =>
+            menu.groups ? (
+              <AccordionItem key={menu.label} value={menu.label}>
+                <AccordionTrigger className="text-base">{menu.label}</AccordionTrigger>
+                <AccordionContent>
+                  <div className="flex flex-col gap-4 pb-2">
+                    {menu.groups.map((group, i) => (
+                      <div key={group.title ?? i} className="flex flex-col gap-1">
+                        {group.title && (
+                          <p className="font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
+                            {group.title}
+                          </p>
+                        )}
+                        {group.items.map((item) => (
+                          <a key={item.label} href={item.href} className="flex items-center gap-3 rounded-md py-1.5 text-sm no-underline! hover:text-foreground">
+                            <Icon name={item.icon} className="size-4 text-muted-foreground" />
+                            <span className="flex-1">{item.label}</span>
+                            {item.tag && (
+                              <Badge variant="outline" className="font-mono">
+                                {item.tag}
+                              </Badge>
+                            )}
+                          </a>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ) : (
+              <a key={menu.label} href={menu.href} className="flex border-t border-(--qd-ui-divider-color) p-2 text-base font-medium">
+                {menu.label}
+              </a>
+            )
+          )}
+        </Accordion>
+        <div className="mt-8 flex flex-col gap-2">
+          {contact && (
+            <LinkButton href={contact.href} variant="outline">
+              {contact.label}
+            </LinkButton>
+          )}
+          {login && (
+            <LinkButton href={login.href} variant="ghost">
+              {login.label}
+            </LinkButton>
+          )}
+        </div>
+      </SheetContent>
+    </Sheet>
+  )
+}

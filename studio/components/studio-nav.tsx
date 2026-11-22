@@ -24,6 +24,9 @@ export function StudioNav() {
   const pathname = usePathname()
   const { setTheme } = useTheme()
 
+  // The Web page's frames render sections alone, without the studio's menu.
+  if (pathname.startsWith("/web/frame")) return null
+
   return (
     <header className="sticky top-0 z-40 flex h-12 shrink-0 items-center gap-6 overflow-x-auto border-b bg-card px-4 text-card-foreground">
       <Link href="/" className="flex shrink-0 items-center gap-2">

@@ -25,9 +25,9 @@
 
   /* Web page layout, designed at a 1440px viewport */
   --qd-layout-viewport: 1440px;
-  --qd-layout-content-width: 1110px;
-  --qd-layout-side-padding: 165px;
-  --qd-layout-column-gap: 30px;
+  --qd-layout-content-width: 1200px;
+  --qd-layout-side-padding: 120px;
+  --qd-layout-column-gap: 24px;
   --qd-layout-narrow-content: 800px;
   --qd-layout-nav-height: 110px;
   --qd-layout-section-padding-min: 80px;
