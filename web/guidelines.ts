@@ -135,6 +135,12 @@ export const guidelines: GuidelineGroup[] = [
         decided: "Juan, 2026-11-21",
         source: "design-system/styles/components/",
       },
+      {
+        title: "The selected tab stands out",
+        text: "In a row of pill tabs or a toggle (a code panel's language, a chart's option, grid or list), the selected one has a clear fill: neutral-800 on dark and neutral-100 on light, with the text color (.web-selected). The others have no fill and muted text.",
+        decided: "Juan, 2026-11-22",
+        source: "web/styles/web.css (.web-selected)",
+      },
     ],
   },
   {

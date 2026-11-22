@@ -55,7 +55,7 @@ function Switch<T extends string>({
               className={cn(
                 "relative rounded-md border px-3 py-1.5 font-mono text-xs outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)",
                 on
-                  ? "border-(--web-line-strong) bg-muted text-foreground"
+                  ? "web-selected border-(--web-line-strong)"
                   : "border-(--web-line) text-muted-foreground hover:text-foreground"
               )}
             >

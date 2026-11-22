@@ -174,7 +174,7 @@ export function FilterableIndex({
                     onClick={() => setView(v)}
                     className={cn(
                       "grid size-8 place-items-center rounded-md outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)",
-                      view === v ? "bg-muted text-(--web-indigo)" : "text-muted-foreground hover:text-foreground"
+                      view === v ? "web-selected" : "text-muted-foreground hover:text-foreground"
                     )}
                   >
                     <Glyph className="size-4" aria-hidden />
