@@ -1,3 +1,11 @@
+import { aboutStory } from "./about-story"
+import { backers } from "./backers"
+import { communityChannels } from "./community-channels"
+import { communityWall } from "./community-wall"
+import { partnerDirectory } from "./partner-directory"
+import { profileGrid } from "./profile-grid"
+import { teamGrid } from "./team-grid"
+import { values } from "./values"
 import { announcementBar } from "./announcement-bar"
 import { bento } from "./bento"
 import { codeShowcase } from "./code-showcase"
@@ -29,6 +37,14 @@ export const sections = [
   stats,
   codeShowcase,
   cta,
+  teamGrid,
+  profileGrid,
+  partnerDirectory,
+  aboutStory,
+  values,
+  backers,
+  communityChannels,
+  communityWall,
   footer,
 ] as unknown as SectionDefinition[]
 
