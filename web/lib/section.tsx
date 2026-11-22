@@ -2,6 +2,8 @@ import * as React from "react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
 
+import { CardPatternProvider, PatternLayers } from "../patterns"
+
 // What every website section accepts, so pages and the page builder can set them the same way on any section
 // (Juan, 2026-11-21). theme: dark or light, or the page's when left out. surface: the background role,
 // default (background/default) or raised (background/raised, a band one step up); web/styles/web.css maps the
@@ -11,6 +13,10 @@ export type SectionSurface = "default" | "raised"
 export type SectionProps = {
   theme?: SectionTheme
   surface?: SectionSurface
+  // Background patterns behind the content (web/patterns), drawn in order.
+  pattern?: string[]
+  // A surface pattern inside every card (Plate) of the section.
+  cardPattern?: string
   id?: string
   className?: string
 }
@@ -39,6 +45,8 @@ const spacings = {
 export function Section({
   theme,
   surface = "default",
+  pattern,
+  cardPattern,
   width = "content",
   spacing = "default",
   lines = true,
@@ -67,6 +75,7 @@ export function Section({
       )}
       {...props}
     >
+      <PatternLayers ids={pattern} />
       {lines && (
         <div
           aria-hidden
@@ -80,7 +89,9 @@ export function Section({
           )}
         </div>
       )}
-      <div className={cn("relative mx-auto w-full", widths[width], innerClassName)}>{children}</div>
+      <div className={cn("relative mx-auto w-full", widths[width], innerClassName)}>
+        <CardPatternProvider value={cardPattern}>{children}</CardPatternProvider>
+      </div>
     </section>
   )
 }

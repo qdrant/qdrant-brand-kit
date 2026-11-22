@@ -11,8 +11,9 @@ import { Switch } from "@qdrant/design-system/components/ui/switch"
 import { Textarea } from "@qdrant/design-system/components/ui/textarea"
 import { cn } from "@qdrant/design-system/lib/utils"
 import { getSection, sectionsByCategory, type EditableField } from "@qdrant/web/registry"
+import { backgroundPatterns, surfacePatterns } from "@qdrant/web/patterns"
 
-import { uid, variantOf, type Block, type WebPage } from "./blocks"
+import { styleSwitches, uid, variantOf, type Block, type WebPage } from "./blocks"
 import { useFrameHeight, useFrameKey } from "./frame-view"
 
 const STORE = "qd-web-builder"
@@ -74,6 +75,8 @@ function toTsx(page: WebPage) {
         ...Object.entries(b.overrides ?? {}).map(([k, v]) => `${k}={${JSON.stringify(v)}}`),
         b.theme ? `theme="${b.theme}"` : "",
         b.surface ? `surface="${b.surface}"` : "",
+        b.pattern ? `pattern={${JSON.stringify(b.pattern)}}` : "",
+        b.cardPattern !== undefined ? `cardPattern=${b.cardPattern ? `"${b.cardPattern}"` : "{undefined}"}` : "",
       ].filter(Boolean)
       return `      <${pascal(def.file)} ${attrs.join(" ")} />`
     })
@@ -233,22 +236,16 @@ export function PageBuilder() {
           <NativeSelectOption value="dark">Dark page</NativeSelectOption>
           <NativeSelectOption value="light">Light page</NativeSelectOption>
         </NativeSelect>
-        {(["lines", "material", "trialType"] as const).map((k) => (
+        {styleSwitches.map((sw) => (
           <Button
-            key={k}
-            variant={page.style?.[k] === false ? "ghost" : "secondary"}
+            key={sw.key}
+            variant={page.style?.[sw.key] === false ? "ghost" : "secondary"}
             size="sm"
-            aria-pressed={page.style?.[k] !== false}
-            title={
-              k === "lines"
-                ? "Rails, seams and nodes"
-                : k === "material"
-                  ? "Plates and trays"
-                  : "Headings from 60px in Medium; off shows today's type set"
-            }
-            onClick={() => updatePage((p) => ({ ...p, style: { ...p.style, [k]: p.style?.[k] === false } }))}
+            aria-pressed={page.style?.[sw.key] !== false}
+            title={sw.title}
+            onClick={() => updatePage((p) => ({ ...p, style: { ...p.style, [sw.key]: p.style?.[sw.key] === false } }))}
           >
-            {k === "lines" ? "Lines" : k === "material" ? "Material" : "Trial type"}
+            {sw.label}
           </Button>
         ))}
         <div className="flex rounded-lg border p-0.5">
@@ -390,6 +387,47 @@ export function PageBuilder() {
                 >
                   <NativeSelectOption value="default">Default (background/default)</NativeSelectOption>
                   <NativeSelectOption value="raised">Raised (background/raised)</NativeSelectOption>
+                </NativeSelect>
+              </Field>
+              <Field label="Background patterns">
+                <div className="flex flex-col gap-1.5 rounded-lg border p-2">
+                  {backgroundPatterns().map((pt) => {
+                    const current =
+                      block.pattern ?? ((variantOf(def, block.variant).props as { pattern?: string[] }).pattern ?? [])
+                    const on = current.includes(pt.id)
+                    return (
+                      <label key={pt.id} className="flex items-center gap-2 text-xs" title={pt.description}>
+                        <input
+                          type="checkbox"
+                          checked={on}
+                          onChange={() =>
+                            updateBlock(block.uid, (b) => ({
+                              ...b,
+                              pattern: on ? current.filter((x) => x !== pt.id) : [...current, pt.id],
+                            }))
+                          }
+                        />
+                        {pt.name}
+                      </label>
+                    )
+                  })}
+                </div>
+              </Field>
+              <Field label="Card pattern">
+                <NativeSelect
+                  className="w-full"
+                  value={
+                    block.cardPattern ??
+                    ((variantOf(def, block.variant).props as { cardPattern?: string }).cardPattern ?? "")
+                  }
+                  onChange={(e) => updateBlock(block.uid, (b) => ({ ...b, cardPattern: e.target.value }))}
+                >
+                  <NativeSelectOption value="">None</NativeSelectOption>
+                  {surfacePatterns().map((pt) => (
+                    <NativeSelectOption key={pt.id} value={pt.id}>
+                      {pt.name}
+                    </NativeSelectOption>
+                  ))}
                 </NativeSelect>
               </Field>
               {def.fields.map((f) => (

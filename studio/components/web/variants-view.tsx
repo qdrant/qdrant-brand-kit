@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
 
-import { styleQuery } from "./blocks"
+import { defaultStyle, styleQuery, styleSwitches, type Style } from "./blocks"
 import { FrameView } from "./frame-view"
 
 type Mode = "dark" | "light" | "both"
@@ -51,9 +51,7 @@ export function VariantsView({
 }) {
   const [mode, setMode] = React.useState<Mode>("both")
   const [viewport, setViewport] = React.useState<Viewport>("desktop")
-  const [lines, setLines] = React.useState<"on" | "off">("on")
-  const [material, setMaterial] = React.useState<"on" | "off">("on")
-  const [typeSet, setTypeSet] = React.useState<"trial" | "current">("trial")
+  const [style, setStyle] = React.useState<Style>(defaultStyle)
   const modes: ("dark" | "light")[] = mode === "both" ? ["dark", "light"] : [mode]
   const width = viewport === "desktop" ? 1440 : 390
 
@@ -72,33 +70,23 @@ export function VariantsView({
               { value: "both", label: "Both" },
             ]}
           />
-          <Toggle
-            label="Lines"
-            value={lines}
-            onChange={setLines}
-            options={[
-              { value: "on", label: "Lines" },
-              { value: "off", label: "Off" },
-            ]}
-          />
-          <Toggle
-            label="Material"
-            value={material}
-            onChange={setMaterial}
-            options={[
-              { value: "on", label: "Material" },
-              { value: "off", label: "Off" },
-            ]}
-          />
-          <Toggle
-            label="Type"
-            value={typeSet}
-            onChange={setTypeSet}
-            options={[
-              { value: "trial", label: "Trial type" },
-              { value: "current", label: "Current" },
-            ]}
-          />
+          <div role="group" aria-label="Style" className="flex rounded-lg border p-0.5">
+            {styleSwitches.map((sw) => (
+              <button
+                key={sw.key}
+                type="button"
+                aria-pressed={style[sw.key]}
+                title={sw.title}
+                onClick={() => setStyle((st) => ({ ...st, [sw.key]: !st[sw.key] }))}
+                className={cn(
+                  "rounded-md px-3 py-1 text-xs",
+                  style[sw.key] ? "bg-muted font-semibold text-foreground" : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                {sw.label}
+              </button>
+            ))}
+          </div>
           <Toggle
             label="Viewport"
             value={viewport}
@@ -127,7 +115,7 @@ export function VariantsView({
                   variant={v.id}
                   theme={m}
                   width={width}
-                  query={styleQuery({ lines: lines === "on", material: material === "on", trialType: typeSet === "trial" })}
+                  query={styleQuery(style)}
                 />
               </div>
             ))}

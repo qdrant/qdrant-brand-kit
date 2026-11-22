@@ -14,7 +14,7 @@ export type AnnouncementBarProps = SectionProps & {
 
 // One line above the navbar for the news of the moment, usually a release (2026-11-21). The whole bar is the
 // link. Keep the text to one line on desktop; on phones it wraps.
-export function AnnouncementBar({ tag, text, link, theme, surface = "raised", id, className }: AnnouncementBarProps) {
+export function AnnouncementBar({ tag, text, link, theme, surface = "raised", pattern, cardPattern, id, className }: AnnouncementBarProps) {
   const content = (
     <span className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-sm">
       {tag && (
@@ -35,6 +35,8 @@ export function AnnouncementBar({ tag, text, link, theme, surface = "raised", id
     <Section
       theme={theme}
       surface={surface}
+      pattern={pattern}
+      cardPattern={cardPattern}
       spacing="none"
       lines={false}
       id={id}

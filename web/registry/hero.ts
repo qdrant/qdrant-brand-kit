@@ -22,6 +22,7 @@ export const hero = defineSection<HeroProps>({
         secondary: homeHero.secondary,
         snippet: homeHero.snippet,
         trust: homeHero.trust,
+        pattern: ["stars", "orbits"],
       },
     },
     {
@@ -36,6 +37,7 @@ export const hero = defineSection<HeroProps>({
         pills: cloudHero.pills,
         media: "image",
         mediaLabel: "Product screenshot",
+        pattern: ["graph"],
       },
     },
     {
@@ -49,6 +51,7 @@ export const hero = defineSection<HeroProps>({
         primary: homeHero.primary,
         secondary: homeHero.secondary,
         media: "code",
+        pattern: ["grid"],
       },
     },
     {

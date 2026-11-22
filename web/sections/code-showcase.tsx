@@ -22,7 +22,7 @@ export type CodeShowcaseProps = SectionProps & {
 
 // Code beside what it returns (2026-11-21): language tabs over one code panel, and the response next to it, on
 // plates in one tray, so a developer sees the call and its result together.
-export function CodeShowcase({ header, tabs, result, layout = "split", theme, surface, id, className }: CodeShowcaseProps) {
+export function CodeShowcase({ header, tabs, result, layout = "split", theme, surface, pattern, cardPattern, id, className }: CodeShowcaseProps) {
   const [active, setActive] = React.useState(0)
   const tab = tabs[active] ?? tabs[0] ?? { label: "", code: "" }
 
@@ -73,7 +73,7 @@ export function CodeShowcase({ header, tabs, result, layout = "split", theme, su
 
   if (layout === "aside") {
     return (
-      <Section theme={theme} surface={surface} id={id} className={className} innerClassName="grid items-start gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-(--qd-layout-column-gap)">
+      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="grid items-start gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-(--qd-layout-column-gap)">
         <SectionHeader kicker={header.kicker} title={header.title} description={header.description} actions={action} />
         {panel}
       </Section>
@@ -81,7 +81,7 @@ export function CodeShowcase({ header, tabs, result, layout = "split", theme, su
   }
 
   return (
-    <Section theme={theme} surface={surface} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
+    <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
       <SectionHeader layout={action ? "action" : "stacked"} kicker={header.kicker} title={header.title} description={header.description} actions={action} />
       {panel}
     </Section>

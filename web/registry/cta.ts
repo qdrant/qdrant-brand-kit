@@ -14,13 +14,13 @@ export const cta = defineSection<CtaProps>({
       id: "centered",
       name: "Centered",
       description: "The page's closing statement, with room around it.",
-      props: { layout: "centered", ...closingCta },
+      props: { layout: "centered", ...closingCta, pattern: ["stars", "horizon"] },
     },
     {
       id: "panel",
       name: "Panel",
       description: "A framed card inside a page: heading on the left, actions on the right.",
-      props: { layout: "panel", ...closingCta, secondary: navActions.contact },
+      props: { layout: "panel", ...closingCta, secondary: navActions.contact, cardPattern: "tint" },
     },
     {
       id: "band",

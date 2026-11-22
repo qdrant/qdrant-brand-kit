@@ -13,7 +13,7 @@ export function ArrowLink({
   return (
     <a
       className={cn(
-        "inline-flex items-center gap-1 text-(length:--qd-font-size-16) leading-(--qd-line-height-150) font-medium text-foreground underline-offset-4 hover:underline",
+        "web-link inline-flex items-center gap-1 text-(length:--qd-font-size-16) leading-(--qd-line-height-150) font-medium text-foreground underline-offset-4 hover:underline",
         className
       )}
       {...props}

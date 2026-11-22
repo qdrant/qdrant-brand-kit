@@ -24,6 +24,8 @@
     "./styles/*": "./styles/*",
     "./registry": "./registry/index.ts",
     "./registry/*": "./registry/*.ts",
-    "./content/*": "./content/*.ts"
+    "./content/*": "./content/*.ts",
+    "./patterns": "./patterns/index.tsx",
+    "./patterns/*": "./patterns/*.tsx"
   }
 }

@@ -19,6 +19,8 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Link, Menu, MenuGroup } from "../content/site"
 import { Icon } from "../lib/icon"
+import { Plate } from "../lib/plate"
+import { IconTile, type Tone } from "../lib/tone"
 import { LinkButton } from "../lib/link-button"
 import { Logo } from "../lib/logo"
 import { Section, type SectionProps } from "../lib/section"
@@ -48,7 +50,7 @@ export function Navbar({
   featured,
   sticky,
   theme,
-  surface,
+  surface, pattern, cardPattern,
   id,
   className,
 }: NavbarProps) {
@@ -56,6 +58,8 @@ export function Navbar({
     <Section
       theme={theme}
       surface={surface}
+      pattern={pattern}
+      cardPattern={cardPattern}
       spacing="none"
       lines={false}
       id={id}
@@ -111,6 +115,9 @@ export function Navbar({
   )
 }
 
+// Each menu group's icons take one color family, in order (web.css, Tones).
+const groupTones: Tone[] = ["indigo", "teal", "blue", "purple", "cyan", "green"]
+
 function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: NavbarProps["featured"] }) {
   return (
     <div className="flex gap-2 p-2">
@@ -124,9 +131,7 @@ function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: Navba
             )}
             {group.items.map((item) => (
               <NavigationMenuLink key={item.label} href={item.href} className="gap-3 text-sm">
-                <span className="web-plate grid size-8 shrink-0 place-items-center rounded-md text-muted-foreground">
-                  <Icon name={item.icon} className="size-4" />
-                </span>
+                <IconTile name={item.icon} tone={groupTones[i % groupTones.length]} size="sm" />
                 <span className="flex-1">{item.label}</span>
                 {item.tag && (
                   <Badge variant="outline" className="font-mono">
@@ -139,9 +144,11 @@ function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: Navba
         ))}
       </div>
       {featured && (
-        <a
+        <Plate
+          as="a"
           href={featured.link.href}
-          className="web-plate flex w-64 flex-col justify-between gap-6 rounded-lg p-4 text-sm outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)"
+          pattern="tint"
+          className="flex w-64 flex-col justify-between gap-6 rounded-lg p-4 text-sm outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)"
         >
           {featured.tag && (
             <Badge variant="outline" className="font-mono">
@@ -150,9 +157,9 @@ function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: Navba
           )}
           <span className="flex flex-col gap-2">
             <span className="font-medium text-foreground">{featured.title}</span>
-            <span className="text-(--qd-color-primary-text)">{featured.link.label}</span>
+            <span className="text-(--web-indigo)">{featured.link.label}</span>
           </span>
-        </a>
+        </Plate>
       )}
     </div>
   )

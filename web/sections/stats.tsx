@@ -1,5 +1,6 @@
 import { cn } from "@qdrant/design-system/lib/utils"
 
+import { Plate } from "../lib/plate"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
 import type { HeaderProps } from "../lib/section-props"
@@ -14,9 +15,9 @@ export type StatsProps = SectionProps & {
 
 // Numbers that prove a claim (2026-11-21): figures in mono, so they read as data, each with its label or source.
 // Only real figures, with a source; never a round number made up for the layout.
-export function Stats({ layout = "cells", header, items, theme, surface, id, className }: StatsProps) {
+export function Stats({ layout = "cells", header, items, theme, surface, pattern, cardPattern, id, className }: StatsProps) {
   return (
-    <Section theme={theme} surface={surface} spacing="compact" id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min)">
+    <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} spacing="compact" id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min)">
       {header && (
         <SectionHeader kicker={header.kicker} title={header.title} description={header.description} layout="stacked" />
       )}
@@ -45,11 +46,11 @@ export function Stats({ layout = "cells", header, items, theme, surface, id, cla
       ) : (
         <ul className="grid gap-(--qd-layout-column-gap) sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item) => (
-            <li key={item.value} className="web-plate flex flex-col gap-6 rounded-xl p-6">
+            <Plate as="li" key={item.value} className="flex flex-col gap-6 rounded-xl p-6">
               {item.company && <p className={cn(type.small, "font-mono uppercase")}>{item.company}</p>}
               <p className="font-mono text-xl leading-snug tracking-tight text-foreground">{item.value}</p>
               {item.text && <p className={type.small}>{item.text}</p>}
-            </li>
+            </Plate>
           ))}
         </ul>
       )}

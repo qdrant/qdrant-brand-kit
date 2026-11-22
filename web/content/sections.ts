@@ -4,7 +4,7 @@
 
 import type { Link } from "./site"
 
-export type Feature = { title: string; text?: string; icon?: string; link?: Link }
+export type Feature = { title: string; text?: string; icon?: string; tone?: string; link?: Link }
 
 // Home: the case-study carousel's companies (from its links) and the button under it.
 export const customers = {

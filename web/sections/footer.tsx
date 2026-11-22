@@ -5,6 +5,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import type { Link } from "../content/site"
 import { ASSETS } from "../lib/assets"
 import { Logo } from "../lib/logo"
+import { Plate } from "../lib/plate"
 import { MonoImage } from "../lib/mono-image"
 import { Section, type SectionProps } from "../lib/section"
 import { type } from "../lib/type"
@@ -45,7 +46,7 @@ export function Footer({
   legal = [],
   copyright,
   theme,
-  surface,
+  surface, pattern, cardPattern,
   id,
   className,
 }: FooterProps) {
@@ -64,7 +65,7 @@ export function Footer({
 
   if (variant === "minimal") {
     return (
-      <Section theme={theme} surface={surface} spacing="none" id={id} className={className} innerClassName="pb-8">
+      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} spacing="none" id={id} className={className} innerClassName="pb-8">
         {legalBar}
       </Section>
     )
@@ -74,6 +75,8 @@ export function Footer({
     <Section
       theme={theme}
       surface={surface}
+      pattern={pattern}
+      cardPattern={cardPattern}
       spacing="compact"
       id={id}
       className={cn("pb-8 lg:pb-8", className)}
@@ -113,7 +116,7 @@ export function Footer({
 
       <div className="web-rule web-bleed grid gap-8 pt-10 lg:grid-cols-2 lg:items-end">
         {newsletter && (
-          <form className="web-plate flex flex-col gap-4 rounded-xl p-6" action="#">
+          <Plate as="form" className="flex flex-col gap-4 rounded-xl p-6">
             <div className="flex flex-col gap-1">
               <p className="font-medium text-foreground">{newsletter.title}</p>
               {newsletter.description && <p className={cn(type.small, "max-w-md")}>{newsletter.description}</p>}
@@ -122,7 +125,7 @@ export function Footer({
               <Input type="email" placeholder="Enter your email" aria-label="Email" />
               <Button type="submit">Subscribe</Button>
             </div>
-          </form>
+          </Plate>
         )}
         <ul className="flex items-center gap-6 text-muted-foreground lg:justify-end">
           {badges.map((b) => (

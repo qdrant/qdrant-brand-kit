@@ -19,6 +19,7 @@ export const stats = defineSection<StatsProps>({
         layout: "cards",
         header: { title: applications.title },
         items: applications.cards.map((c) => ({ company: c.company, value: c.value, text: c.text })),
+        cardPattern: "dots",
       },
     },
   ],

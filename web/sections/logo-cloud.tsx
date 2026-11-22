@@ -25,9 +25,9 @@ function Logo({ name, src }: { name: string; src?: string }) {
 
 // Customer or partner logos (2026-11-21). A logo is never redrawn or recolored; until the files exist, the
 // company name stands in as text.
-export function LogoCloud({ layout = "row", label, logos, action, theme, surface, id, className }: LogoCloudProps) {
+export function LogoCloud({ layout = "row", label, logos, action, theme, surface, pattern, cardPattern, id, className }: LogoCloudProps) {
   return (
-    <Section theme={theme} surface={surface} spacing="compact" id={id} className={className} innerClassName="flex flex-col gap-10">
+    <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} spacing="compact" id={id} className={className} innerClassName="flex flex-col gap-10">
       {(label || action) && (
         <div className="flex flex-wrap items-center justify-between gap-4">
           {label && <p className={cn(type.small, "font-mono uppercase")}>{label}</p>}

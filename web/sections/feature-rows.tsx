@@ -17,9 +17,9 @@ export type FeatureRowsProps = SectionProps & {
 
 // Features one per row, text beside media, alternating sides (2026-11-21). Each row's media sits on a plate in a
 // tray; until a page supplies the image, a placeholder holds its place.
-export function FeatureRows({ header, rows, start = "media-right", theme, surface, id, className }: FeatureRowsProps) {
+export function FeatureRows({ header, rows, start = "media-right", theme, surface, pattern, cardPattern, id, className }: FeatureRowsProps) {
   return (
-    <Section theme={theme} surface={surface} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
+    <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
       <SectionHeader layout="split" kicker={header.kicker} title={header.title} description={header.description} />
       <div className="flex flex-col gap-16 lg:gap-24">
         {rows.map((row, i) => {

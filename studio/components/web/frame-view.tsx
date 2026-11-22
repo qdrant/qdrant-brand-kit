@@ -14,7 +14,7 @@ export function frameSrc(
   extra: Record<string, string> = {}
 ) {
   const q = new URLSearchParams({ section, variant, theme, key, ...extra })
-  const min = getSection(section)?.variants.find((v) => v.id === variant)?.frameMinHeight
+  const min = section ? getSection(section)?.variants.find((v) => v.id === variant)?.frameMinHeight : undefined
   if (min) q.set("min", String(min))
   return `/web/frame?${q}`
 }

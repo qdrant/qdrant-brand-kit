@@ -11,6 +11,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 const tabs = [
   { href: "/web/canvas", label: "Canvas" },
   { href: "/web/docs", label: "Docs" },
+  { href: "/web/patterns", label: "Patterns" },
   { href: "/web/pages", label: "Pages" },
   { href: "/web/builder", label: "Builder" },
 ]

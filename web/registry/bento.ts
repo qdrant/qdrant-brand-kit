@@ -18,6 +18,7 @@ export const bento = defineSection<BentoProps>({
         header: { title: enterprise.title, description: enterprise.description, action: enterprise.action },
         list: { items: enterprise.list },
         tiles: enterprise.tiles,
+        cardPattern: "grain",
       },
     },
   ],

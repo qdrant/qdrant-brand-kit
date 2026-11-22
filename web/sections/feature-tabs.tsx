@@ -19,10 +19,10 @@ export type FeatureTabsProps = SectionProps & {
 // Features as a list on the left that switches the media on the right (2026-11-21). The active item shows its
 // text and a node on the rail beside the list; the others show their title only. On phones the list stacks above
 // the media.
-export function FeatureTabs({ header, items, theme, surface, id, className }: FeatureTabsProps) {
+export function FeatureTabs({ header, items, theme, surface, pattern, cardPattern, id, className }: FeatureTabsProps) {
   const [active, setActive] = React.useState(0)
   return (
-    <Section theme={theme} surface={surface} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
+    <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
       <SectionHeader kicker={header.kicker} title={header.title} description={header.description} />
       <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-(--qd-layout-column-gap)">
         <ul role="tablist" aria-orientation="vertical" className="flex flex-col border-l border-(--web-line)">
@@ -33,8 +33,8 @@ export function FeatureTabs({ header, items, theme, surface, id, className }: Fe
                 <span
                   aria-hidden
                   className={cn(
-                    "absolute top-5 -left-1 size-[7px] rounded-full border border-(--web-line-strong) bg-background transition-colors",
-                    on && "border-foreground bg-foreground"
+                    "absolute top-5 -left-1 size-[7px] rounded-full border border-(--web-node) bg-background transition-colors",
+                    on && "border-(--web-indigo) bg-(--web-indigo)"
                   )}
                 />
                 <button

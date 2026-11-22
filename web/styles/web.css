@@ -185,3 +185,134 @@
   background: transparent;
   border-color: transparent;
 }
+
+/* Tones (Juan, 2026-11-21): color for icons, in a subtle way. An icon sits on a small tile tinted with its color
+   family, with a hairline edge in that family, and the icon itself in a solid color of it: on dark the 975
+   (mixed into the surface) with a 400 icon, on light the 50 with a 600 icon, the icon contrast steps in
+   primitives/colors. Families: indigo (the default), teal, blue, purple, cyan, green and orange. Never amaranth
+   for icons; red stays for errors. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-tone-indigo-bg: color-mix(in oklab, var(--qd-color-indigo-975) 70%, var(--background));
+  --web-tone-indigo-edge: color-mix(in oklab, var(--qd-color-indigo-900) 70%, transparent);
+  --web-tone-indigo-fg: var(--qd-color-indigo-400);
+  --web-tone-teal-bg: color-mix(in oklab, var(--qd-color-teal-975) 70%, var(--background));
+  --web-tone-teal-edge: color-mix(in oklab, var(--qd-color-teal-900) 70%, transparent);
+  --web-tone-teal-fg: var(--qd-color-teal-400);
+  --web-tone-blue-bg: color-mix(in oklab, var(--qd-color-blue-975) 70%, var(--background));
+  --web-tone-blue-edge: color-mix(in oklab, var(--qd-color-blue-900) 70%, transparent);
+  --web-tone-blue-fg: var(--qd-color-blue-400);
+  --web-tone-purple-bg: color-mix(in oklab, var(--qd-color-purple-975) 70%, var(--background));
+  --web-tone-purple-edge: color-mix(in oklab, var(--qd-color-purple-900) 70%, transparent);
+  --web-tone-purple-fg: var(--qd-color-purple-400);
+  --web-tone-cyan-bg: color-mix(in oklab, var(--qd-color-cyan-975) 70%, var(--background));
+  --web-tone-cyan-edge: color-mix(in oklab, var(--qd-color-cyan-900) 70%, transparent);
+  --web-tone-cyan-fg: var(--qd-color-cyan-400);
+  --web-tone-green-bg: color-mix(in oklab, var(--qd-color-green-975) 70%, var(--background));
+  --web-tone-green-edge: color-mix(in oklab, var(--qd-color-green-900) 70%, transparent);
+  --web-tone-green-fg: var(--qd-color-green-400);
+  --web-tone-orange-bg: color-mix(in oklab, var(--qd-color-orange-975) 70%, var(--background));
+  --web-tone-orange-edge: color-mix(in oklab, var(--qd-color-orange-900) 70%, transparent);
+  --web-tone-orange-fg: var(--qd-color-orange-400);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"] {
+  --web-tone-indigo-bg: var(--qd-color-indigo-50);
+  --web-tone-indigo-edge: var(--qd-color-indigo-200);
+  --web-tone-indigo-fg: var(--qd-color-indigo-600);
+  --web-tone-teal-bg: var(--qd-color-teal-50);
+  --web-tone-teal-edge: var(--qd-color-teal-200);
+  --web-tone-teal-fg: var(--qd-color-teal-600);
+  --web-tone-blue-bg: var(--qd-color-blue-50);
+  --web-tone-blue-edge: var(--qd-color-blue-200);
+  --web-tone-blue-fg: var(--qd-color-blue-600);
+  --web-tone-purple-bg: var(--qd-color-purple-50);
+  --web-tone-purple-edge: var(--qd-color-purple-200);
+  --web-tone-purple-fg: var(--qd-color-purple-600);
+  --web-tone-cyan-bg: var(--qd-color-cyan-50);
+  --web-tone-cyan-edge: var(--qd-color-cyan-200);
+  --web-tone-cyan-fg: var(--qd-color-cyan-600);
+  --web-tone-green-bg: var(--qd-color-green-50);
+  --web-tone-green-edge: var(--qd-color-green-200);
+  --web-tone-green-fg: var(--qd-color-green-600);
+  --web-tone-orange-bg: var(--qd-color-orange-50);
+  --web-tone-orange-edge: var(--qd-color-orange-200);
+  --web-tone-orange-fg: var(--qd-color-orange-600);
+}
+.web-tone-indigo {
+  --tone-bg: var(--web-tone-indigo-bg);
+  --tone-edge: var(--web-tone-indigo-edge);
+  --tone-fg: var(--web-tone-indigo-fg);
+}
+.web-tone-teal {
+  --tone-bg: var(--web-tone-teal-bg);
+  --tone-edge: var(--web-tone-teal-edge);
+  --tone-fg: var(--web-tone-teal-fg);
+}
+.web-tone-blue {
+  --tone-bg: var(--web-tone-blue-bg);
+  --tone-edge: var(--web-tone-blue-edge);
+  --tone-fg: var(--web-tone-blue-fg);
+}
+.web-tone-purple {
+  --tone-bg: var(--web-tone-purple-bg);
+  --tone-edge: var(--web-tone-purple-edge);
+  --tone-fg: var(--web-tone-purple-fg);
+}
+.web-tone-cyan {
+  --tone-bg: var(--web-tone-cyan-bg);
+  --tone-edge: var(--web-tone-cyan-edge);
+  --tone-fg: var(--web-tone-cyan-fg);
+}
+.web-tone-green {
+  --tone-bg: var(--web-tone-green-bg);
+  --tone-edge: var(--web-tone-green-edge);
+  --tone-fg: var(--web-tone-green-fg);
+}
+.web-tone-orange {
+  --tone-bg: var(--web-tone-orange-bg);
+  --tone-edge: var(--web-tone-orange-edge);
+  --tone-fg: var(--web-tone-orange-fg);
+}
+.web-icon-tile {
+  background: var(--tone-bg);
+  box-shadow: inset 0 0 0 1px var(--tone-edge);
+  color: var(--tone-fg);
+}
+
+/* Indigo hints (Juan, 2026-11-21): the second brand color as a thread through the website, never a fill behind
+   text. --web-indigo is indigo-400 on dark and indigo-600 on light; patterns use it for their accents. With the
+   hints on (the default), the nodes where lines meet, the kicker's node and the steps' nodes take an indigo ring,
+   the active node fills with it, and text links turn indigo on hover. data-web-indigo="off" keeps them neutral. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-indigo: var(--qd-color-indigo-400);
+  --web-node: color-mix(in oklab, var(--web-indigo) 60%, var(--web-line-strong));
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"] {
+  --web-indigo: var(--qd-color-indigo-600);
+  --web-node: color-mix(in oklab, var(--web-indigo) 55%, var(--web-line-strong));
+}
+[data-web-indigo="off"],
+[data-web-indigo="off"] [data-theme] {
+  --web-node: var(--web-line-strong);
+}
+.web-node {
+  border-color: var(--web-node);
+}
+[data-web]:not([data-web-indigo="off"]) .web-link:hover {
+  color: var(--web-indigo);
+}
+
+/* Patterns (web/patterns): layers behind a section's content or inside its cards. Off as a whole with
+   data-web-patterns="off" (the studio's Patterns switch). */
+[data-web-patterns="off"] .web-pattern {
+  display: none;
+}

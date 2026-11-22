@@ -6,7 +6,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import type { Link } from "../content/site"
 import { CodePanel, quickstartQuery } from "../lib/code-panel"
 import { CopySnippet } from "../lib/copy-snippet"
-import { Icon } from "../lib/icon"
+import { IconTile, toneAt } from "../lib/tone"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
 import { Section, type SectionProps } from "../lib/section"
@@ -46,7 +46,7 @@ export function Hero({
   media = "none",
   mediaLabel,
   theme,
-  surface,
+  surface, pattern, cardPattern,
   id,
   className,
 }: HeroProps) {
@@ -99,9 +99,9 @@ export function Hero({
   const trustEl =
     trust && trust.length > 0 ? (
       <ul className="web-cells web-bleed grid grid-cols-2 text-sm text-muted-foreground md:grid-cols-4">
-        {trust.map((item) => (
-          <li key={item.label} className="flex items-center justify-center gap-2 px-4 py-5 text-center">
-            <Icon name={item.icon} className="size-4 shrink-0 text-foreground/70" />
+        {trust.map((item, i) => (
+          <li key={item.label} className="flex items-center justify-center gap-3 px-4 py-5 text-center">
+            <IconTile name={item.icon} tone={toneAt(i)} size="sm" />
             {item.label}
           </li>
         ))}
@@ -110,7 +110,7 @@ export function Hero({
 
   if (centered) {
     return (
-      <Section theme={theme} surface={surface} id={id} className={className} innerClassName="flex flex-col items-center gap-10">
+      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col items-center gap-10">
         <SectionHeader as="h1" align="center" kicker={kicker} title={title} description={description} actions={actions} />
         {(pills || snippet) && <div className="flex w-full flex-col items-center gap-6">{extras}</div>}
         {mediaEl && <div className="w-full max-w-4xl">{mediaEl}</div>}
@@ -120,7 +120,7 @@ export function Hero({
   }
 
   return (
-    <Section theme={theme} surface={surface} id={id} className={className} innerClassName="flex flex-col gap-12">
+    <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-12">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
         <div className="flex flex-col items-start gap-6">
           <SectionHeader as="h1" kicker={kicker} title={title} description={description} actions={actions} />

@@ -14,7 +14,7 @@ export const featureGrid = defineSection<FeatureGridProps>({
       id: "cards",
       name: "Icon cards, 4 columns",
       description: "Deployment options on plates, each with an icon and a link (home).",
-      props: { header: { title: deploy.title, action: deploy.action }, items: deploy.items, columns: 4, appearance: "cards", marker: "icon" },
+      props: { header: { title: deploy.title, action: deploy.action }, items: deploy.items, columns: 4, appearance: "cards", marker: "icon", tones: "mixed", cardPattern: "tint" },
     },
     {
       id: "cells",
@@ -26,6 +26,7 @@ export const featureGrid = defineSection<FeatureGridProps>({
         columns: 4,
         appearance: "cells",
         marker: "icon",
+        tones: "mixed",
       },
     },
     {
@@ -58,5 +59,20 @@ export const featureGrid = defineSection<FeatureGridProps>({
   fields: [
     { prop: "appearance", label: "Appearance", kind: "select", options: [{ value: "cards", label: "Cards" }, { value: "cells", label: "Cells" }] },
     { prop: "marker", label: "Marker", kind: "select", options: [{ value: "icon", label: "Icon" }, { value: "number", label: "Number" }, { value: "none", label: "None" }] },
+    {
+      prop: "tones",
+      label: "Icon colors",
+      kind: "select",
+      options: [
+        { value: "mixed", label: "Mixed" },
+        { value: "indigo", label: "Indigo" },
+        { value: "teal", label: "Teal" },
+        { value: "blue", label: "Blue" },
+        { value: "purple", label: "Purple" },
+        { value: "cyan", label: "Cyan" },
+        { value: "green", label: "Green" },
+        { value: "orange", label: "Orange" },
+      ],
+    },
   ],
 })

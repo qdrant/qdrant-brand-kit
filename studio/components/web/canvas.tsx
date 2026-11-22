@@ -9,7 +9,7 @@ import { Button } from "@qdrant/design-system/components/ui/button"
 import { cn } from "@qdrant/design-system/lib/utils"
 import { sectionsByCategory } from "@qdrant/web/registry"
 
-import { styleQuery } from "./blocks"
+import { defaultStyle, styleQuery, styleSwitches, type Style } from "./blocks"
 import { frameSrc, useFrameHeight, useFrameKey } from "./frame-view"
 
 type Mode = "dark" | "light" | "both"
@@ -72,7 +72,7 @@ export function WebCanvas() {
   const setMode = (m: Mode) => setOverride({ mode: m, under: studioTheme })
   const [interact, setInteract] = React.useState(true)
   const [space, setSpace] = React.useState(false)
-  const [style, setStyle] = React.useState({ lines: true, material: true, trialType: true })
+  const [style, setStyle] = React.useState<Style>(defaultStyle)
   const panning = !interact || space
   const drag = React.useRef<{ x: number; y: number } | null>(null)
   const [dragging, setDragging] = React.useState(false)
@@ -242,22 +242,16 @@ export function WebCanvas() {
           </Button>
         ))}
         <span className="mx-1 h-5 w-px bg-border" />
-        {(["lines", "material", "trialType"] as const).map((k) => (
+        {styleSwitches.map((sw) => (
           <Button
-            key={k}
-            variant={style[k] ? "secondary" : "ghost"}
+            key={sw.key}
+            variant={style[sw.key] ? "secondary" : "ghost"}
             size="sm"
-            aria-pressed={style[k]}
-            title={
-              k === "lines"
-                ? "Rails, seams and nodes"
-                : k === "material"
-                  ? "Plates and trays"
-                  : "Headings from 60px in Medium; off shows today's type set"
-            }
-            onClick={() => setStyle((s) => ({ ...s, [k]: !s[k] }))}
+            aria-pressed={style[sw.key]}
+            title={sw.title}
+            onClick={() => setStyle((s) => ({ ...s, [sw.key]: !s[sw.key] }))}
           >
-            {k === "lines" ? "Lines" : k === "material" ? "Material" : "Trial type"}
+            {sw.label}
           </Button>
         ))}
         <span className="mx-1 h-5 w-px bg-border" />

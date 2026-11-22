@@ -16,7 +16,7 @@ export const codeShowcase = defineSection<CodeShowcaseProps>({
       id: "split",
       name: "Code and response",
       description: "Language tabs over the code, the response beside it (Qdrant's quickstart search).",
-      props: { header, tabs: builders.tabs, result: builders.result, layout: "split" },
+      props: { header, tabs: builders.tabs, result: builders.result, layout: "split", pattern: ["grid"] },
     },
     {
       id: "aside",

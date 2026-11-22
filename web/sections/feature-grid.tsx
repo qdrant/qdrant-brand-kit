@@ -2,7 +2,8 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Feature } from "../content/sections"
 import { ArrowLink } from "../lib/arrow-link"
-import { Icon } from "../lib/icon"
+import { Plate } from "../lib/plate"
+import { IconTile, toneAt, type Tone } from "../lib/tone"
 import { LinkButton } from "../lib/link-button"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
@@ -15,8 +16,10 @@ export type FeatureGridProps = SectionProps & {
   columns?: 2 | 3 | 4
   // cards: each feature on a plate. cells: features in a hairline grid, no cards.
   appearance?: "cards" | "cells"
-  // icon: a Lucide icon on a small plate. number: 01, 02… in mono. none: the title alone.
+  // icon: a Lucide icon on a tinted tile. number: 01, 02… in mono. none: the title alone.
   marker?: "icon" | "number" | "none"
+  // The icons' color: one family for all (indigo by default), or mixed, each item the next family (web.css, Tones).
+  tones?: Tone | "mixed"
 }
 
 const cols = { 2: "md:grid-cols-2", 3: "md:grid-cols-3", 4: "md:grid-cols-2 lg:grid-cols-4" }
@@ -29,13 +32,14 @@ export function FeatureGrid({
   columns = 3,
   appearance = "cards",
   marker = "icon",
+  tones = "indigo",
   theme,
-  surface,
+  surface, pattern, cardPattern,
   id,
   className,
 }: FeatureGridProps) {
   return (
-    <Section theme={theme} surface={surface} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
+    <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
       <SectionHeader
         layout={header.action ? "action" : "stacked"}
         kicker={header.kicker}
@@ -55,15 +59,11 @@ export function FeatureGrid({
           cols[columns]
         )}
       >
-        {items.map((item, i) => (
-          <li
-            key={item.title}
-            className={cn("flex flex-col gap-4", appearance === "cards" ? "web-plate rounded-xl p-6" : "px-6 py-8")}
-          >
+        {items.map((item, i) => {
+          const body = (
+            <>
             {marker === "icon" && item.icon && (
-              <span className="web-plate grid size-10 place-items-center rounded-lg text-foreground/80">
-                <Icon name={item.icon} className="size-5" />
-              </span>
+              <IconTile name={item.icon} tone={(item.tone as Tone) ?? (tones === "mixed" ? toneAt(i) : tones)} />
             )}
             {marker === "number" && (
               <span className="font-mono text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
@@ -77,8 +77,18 @@ export function FeatureGrid({
                 {item.link.label}
               </ArrowLink>
             )}
-          </li>
-        ))}
+            </>
+          )
+          return appearance === "cards" ? (
+            <Plate as="li" key={item.title} className="flex flex-col gap-4 rounded-xl p-6">
+              {body}
+            </Plate>
+          ) : (
+            <li key={item.title} className="flex flex-col gap-4 px-6 py-8">
+              {body}
+            </li>
+          )
+        })}
       </ul>
     </Section>
   )

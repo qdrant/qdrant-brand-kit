@@ -4,8 +4,11 @@ import * as React from "react"
 import { useSearchParams } from "next/navigation"
 
 import { cn } from "@qdrant/design-system/lib/utils"
+import { Plate } from "@qdrant/web/lib/plate"
+import { Section } from "@qdrant/web/lib/section"
+import { getPattern } from "@qdrant/web/patterns"
 
-import { RenderBlock, type Block, type WebPage } from "./blocks"
+import { RenderBlock, defaultStyle, styleAttributes, styleFromQuery, styleSwitches, type Block, type Style, type WebPage } from "./blocks"
 
 // The inside of a frame (app/web/frame). Query: section, variant, theme and surface for one section, or
 // page=builder for the page the builder sends by postMessage. It keeps <html> on the frame's theme (menus and
@@ -21,27 +24,17 @@ export function WebFrame() {
   const root = React.useRef<HTMLDivElement>(null)
 
   const pageTheme = isBuilder ? (page?.theme ?? "dark") : theme
-  // The website's lines and material (web.css), on unless the query or the builder's page turns them off.
-  const lines = isBuilder ? page?.style?.lines !== false : params.get("lines") !== "0"
-  const material = isBuilder ? page?.style?.material !== false : params.get("material") !== "0"
-  // The website's trial type (web.css), on unless turned off.
-  const trialType = isBuilder ? page?.style?.trialType !== false : params.get("type") !== "current"
-  const styleAttrs = {
-    "data-web-lines": lines ? undefined : "off",
-    "data-web-material": material ? undefined : "off",
-    "data-web-type": trialType ? undefined : "current",
-  }
+  // The website's style switches (blocks.tsx), on unless the query or the builder's page turns them off.
+  const style: Style = isBuilder ? { ...defaultStyle, ...page?.style } : styleFromQuery(params)
+  const styleAttrs = styleAttributes(style)
+  const styleKey = JSON.stringify(styleAttrs)
 
   // <body> carries them too, for menus and sheets that open in a portal.
   React.useEffect(() => {
     const b = document.body
-    if (lines) b.removeAttribute("data-web-lines")
-    else b.setAttribute("data-web-lines", "off")
-    if (material) b.removeAttribute("data-web-material")
-    else b.setAttribute("data-web-material", "off")
-    if (trialType) b.removeAttribute("data-web-type")
-    else b.setAttribute("data-web-type", "current")
-  }, [lines, material, trialType])
+    for (const s of styleSwitches) b.removeAttribute(s.attr[0])
+    for (const [k, v] of Object.entries(JSON.parse(styleKey) as Record<string, string>)) b.setAttribute(k, v)
+  }, [styleKey])
 
   // Hide Next.js's dev indicator (the "N" button) inside frames, so it never covers a section (Juan, 2026-11-21).
   React.useEffect(() => {
@@ -137,6 +130,29 @@ export function WebFrame() {
           <p className="grid min-h-svh place-items-center p-10 text-sm text-muted-foreground">
             Add sections from the library on the left.
           </p>
+        )}
+      </div>
+    )
+  }
+
+  // A pattern on its own, for the Patterns tab: a background behind an empty section, or a surface in three cards.
+  const previewId = params.get("pattern-preview")
+  if (previewId) {
+    const def = getPattern(previewId)
+    return (
+      <div ref={root} data-web data-theme={theme} {...styleAttrs} className="bg-background text-foreground">
+        {def?.kind === "surface" ? (
+          <Section cardPattern={previewId} spacing="compact" innerClassName="grid gap-6 md:grid-cols-3">
+            {["Plate", "Plate", "Plate"].map((label, i) => (
+              <Plate key={i} className="flex h-48 items-end rounded-xl p-6 font-mono text-xs text-muted-foreground uppercase">
+                {def.name}
+              </Plate>
+            ))}
+          </Section>
+        ) : (
+          <Section pattern={[previewId]} innerClassName="grid min-h-80 place-items-center">
+            <p className="font-mono text-xs text-muted-foreground uppercase">{def?.name ?? previewId}</p>
+          </Section>
         )}
       </div>
     )
