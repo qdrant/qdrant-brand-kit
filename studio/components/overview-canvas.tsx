@@ -5,7 +5,6 @@ import * as React from "react"
 import { NativeSelect, NativeSelectOption } from "@qdrant/design-system/components/ui/native-select"
 
 import Preview from "@/examples/preview"
-import { useProductContext } from "@/components/product-context"
 import { PrototypeToggles } from "@/components/prototype-toggles"
 
 // shadcn's preview lays its cards out 2,600px wide (plus its padding). It opens at 100%, the real size;
@@ -41,9 +40,8 @@ function useWidth(ref: React.RefObject<HTMLDivElement | null>) {
   )
 }
 
-// In the product context, so the accent is indigo (Juan, 2026-11-15).
+// Product UI, so the accent is indigo: the design system's default (globals.css).
 export function OverviewCanvas() {
-  useProductContext()
   const ref = React.useRef<HTMLDivElement>(null)
   const [zoom, setZoom] = React.useState("1")
   const width = useWidth(ref)
@@ -53,7 +51,7 @@ export function OverviewCanvas() {
   const mounted = width > 0
 
   return (
-    <div data-context="product" className="flex flex-col">
+    <div className="flex flex-col">
       <header className="flex flex-wrap items-center gap-4 px-4 py-3">
         <h1 className="text-sm font-semibold">Overview</h1>
         {/* Space-theme prototypes to compare on the real components (lib/prototypes.ts). */}

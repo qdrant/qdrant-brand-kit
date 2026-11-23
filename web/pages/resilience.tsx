@@ -18,13 +18,14 @@ import { ZoneGlobe } from "../visuals/zone-globe"
 
 // The Resilience page of qdrant.tech (Figma: Qdrant Web Design, "Resilience-Subpage", node 19452:25124), built
 // from the section library (Juan, 2026-11-22): its copy from content/resilience.ts, its Console screens and
-// cluster diagrams from web/visuals. One theme for the whole page, the site's (dark or light).
+// cluster diagrams from web/visuals. One theme for the whole page, the site's (dark or light), and the marketing
+// context, so its accent is amaranth.
 export function ResiliencePage() {
   const { rows, cards } = resilienceCapabilities
   const consoles = [<ConsoleCreateCluster key="create" />, <ConsoleClusterOverview key="overview" />, <ConsoleBackupSchedule key="backup" />]
 
   return (
-    <main data-web className="bg-background text-foreground">
+    <main data-web data-context="marketing" className="bg-background text-foreground">
       <Navbar variant="full" menus={menus} {...navActions} />
       <Hero layout="split" {...resilienceHero} visual={<ConsoleClusterSetup />} />
       <FeatureGrid

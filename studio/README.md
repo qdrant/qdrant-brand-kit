@@ -52,7 +52,6 @@ Nothing changes in the code:
 | `lib/overrides.ts` | The controls, and the token each one changes |
 | `lib/dials.ts` | Turns the controls into DialKit's config and into the CSS overrides |
 | `components/overview-canvas.tsx` | The Overview page, with its zoom |
-| `components/product-context.tsx` | Puts a page in the product context (the indigo accent), with its menus and dialogs: used by Overview and Variations |
 | `lib/prototypes.ts` | The space-theme prototypes: studio-only overrides of design-system tokens, switched on from the Overview heading. They stay on across pages and are saved in your browser. Not decisions |
 | `lib/variations.ts` | The variations: each one is design-system tokens overridden while its page is open, plus a little CSS for looks no token covers yet |
 | `lib/typography.ts`, `components/type-specimen.tsx` | The Typography page: the styles it shows (the `--qd-type-*` variables, and the creative and brand-component classes with the shapes that share a size) and one specimen, which measures its sample in the browser |

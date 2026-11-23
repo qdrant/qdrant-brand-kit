@@ -47,8 +47,8 @@ const footerLinks = ["Status", "Documentation", "Support", "Terms", "SLA", "Secu
 
 export function CloudShell({ active, children }: { active: string; children: React.ReactNode }) {
   return (
-    // Product UI: the indigo accent (data-context, styles/globals.css). Fills the studio below its 48px top menu.
-    <SidebarProvider data-context="product" className="min-h-[calc(100svh-3rem)]">
+    // Product UI, so the accent is indigo, the design system's default. Fills the studio below its 48px top menu.
+    <SidebarProvider className="min-h-[calc(100svh-3rem)]">
       {/* h-auto: the static sidebar is h-full, which doesn't resolve in a min-height row; auto lets it stretch. */}
       <Sidebar collapsible="none" className="h-auto border-r">
         <SidebarHeader className="h-16 justify-center border-b px-6">
