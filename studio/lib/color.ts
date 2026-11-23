@@ -244,10 +244,8 @@ export type SemanticToken = {
   group: GroupId
   use: string
   default: Mapping
-  // The CSS variable Figma's code syntax gives it today. The repo still names the accents --qd-color-accent-*.
+  // The role's CSS variable in primitives/colors, which Figma's code syntax names too.
   cssVar: string
-  // The repo's role today (primitives/colors), light then dark, or null for a token the repo doesn't have.
-  now: { role: string; light: string; dark: string } | null
   // For text and icons: the contrast it needs (0 shows it without a target, as for disabled text) and the token
   // it sits on, background/default unless said.
   contrast?: { target: number; on?: string }
@@ -264,7 +262,6 @@ export const semanticTokens: SemanticToken[] = [
     use: "Titles and body text",
     default: pair("neutral-900", "neutral-50"),
     cssVar: css("text-primary"),
-    now: { role: "text.primary", light: "neutral-950", dark: "neutral-50" },
     contrast: { target: 4.5 },
   },
   {
@@ -274,7 +271,6 @@ export const semanticTokens: SemanticToken[] = [
     use: "Supporting text, labels, captions",
     default: pair("neutral-600", "neutral-500"),
     cssVar: css("text-secondary"),
-    now: { role: "text.secondary", light: "neutral-600", dark: "neutral-500" },
     contrast: { target: 4.5 },
   },
   {
@@ -284,7 +280,6 @@ export const semanticTokens: SemanticToken[] = [
     use: "Placeholders and disabled text",
     default: pair("neutral-400", "neutral-600"),
     cssVar: css("text-disabled"),
-    now: { role: "text.disabled", light: "neutral-400", dark: "neutral-600" },
     contrast: { target: 0 },
   },
   {
@@ -294,7 +289,6 @@ export const semanticTokens: SemanticToken[] = [
     use: "Text on primary/primary, like a button label",
     default: pair("neutral-0"),
     cssVar: css("text-on-accent"),
-    now: { role: "text.on-accent", light: "neutral-0", dark: "neutral-0" },
     contrast: { target: 4.5, on: "primary-primary" },
   },
   {
@@ -303,17 +297,15 @@ export const semanticTokens: SemanticToken[] = [
     group: "primary",
     use: "Buttons and the one strong mark",
     default: pair("amaranth-600"),
-    cssVar: css("accent-primary"),
-    now: { role: "accent.primary", light: "amaranth-600", dark: "amaranth-600" },
+    cssVar: css("primary"),
   },
   {
     id: "primary-hover",
     name: "primary/hover",
     group: "primary",
     use: "The primary button on hover",
-    default: pair("amaranth-700", "amaranth-500"),
-    cssVar: css("accent-primary-hover"),
-    now: { role: "accent.primary-hover", light: "amaranth-700", dark: "amaranth-700" },
+    default: pair("amaranth-700"),
+    cssVar: css("primary-hover"),
   },
   {
     id: "primary-subtle",
@@ -321,8 +313,7 @@ export const semanticTokens: SemanticToken[] = [
     group: "primary",
     use: "Soft fills: kickers, chips, highlights",
     default: pair("amaranth-100", "amaranth-950"),
-    cssVar: css("accent-subtle"),
-    now: null,
+    cssVar: css("primary-subtle"),
   },
   {
     id: "primary-text",
@@ -330,8 +321,7 @@ export const semanticTokens: SemanticToken[] = [
     group: "primary",
     use: "Colored text, links and icons",
     default: pair("amaranth-800", "amaranth-400"),
-    cssVar: css("accent-text"),
-    now: null,
+    cssVar: css("primary-text"),
     contrast: { target: 4.5 },
   },
   {
@@ -340,8 +330,7 @@ export const semanticTokens: SemanticToken[] = [
     group: "secondary",
     use: "Secondary marks, and the accent in product UI",
     default: pair("indigo-600"),
-    cssVar: css("accent-secondary"),
-    now: { role: "accent.secondary", light: "indigo-600", dark: "indigo-600" },
+    cssVar: css("secondary"),
   },
   {
     id: "secondary-subtle",
@@ -349,8 +338,7 @@ export const semanticTokens: SemanticToken[] = [
     group: "secondary",
     use: "Tags and soft fills",
     default: pair("indigo-100", "indigo-950"),
-    cssVar: css("accent-secondary-subtle"),
-    now: null,
+    cssVar: css("secondary-subtle"),
   },
   {
     id: "secondary-text",
@@ -358,26 +346,24 @@ export const semanticTokens: SemanticToken[] = [
     group: "secondary",
     use: "Text and icons on its soft fill",
     default: pair("indigo-800", "indigo-400"),
-    cssVar: css("accent-secondary-text"),
-    now: null,
+    cssVar: css("secondary-text"),
     contrast: { target: 4.5, on: "secondary-subtle" },
   },
   ...(
     [
-      ["error", "red", "red-500", "red-500"],
-      ["warning", "orange", "orange-500", "orange-500"],
-      ["info", "blue", "blue-400", "blue-400"],
-      ["success", "teal", "teal-600", "teal-600"],
+      ["error", "red"],
+      ["warning", "orange"],
+      ["info", "blue"],
+      ["success", "teal"],
     ] as const
-  ).flatMap(([status, family, light, dark]): SemanticToken[] => [
+  ).flatMap(([status, family]): SemanticToken[] => [
     {
       id: `status-${status}`,
       name: `status/${status}/text`,
       group: "status",
       use: "Text and icons, in badges and alerts",
       default: pair(`${family}-900`, `${family}-200`),
-      cssVar: css(`status-${status}`),
-      now: { role: `status.${status}`, light, dark },
+      cssVar: css(`status-${status}-text`),
       contrast: { target: 4.5, on: `status-${status}-alert-fill` },
     },
     {
@@ -387,7 +373,6 @@ export const semanticTokens: SemanticToken[] = [
       use: "Badge fill",
       default: pair(`${family}-100`, `${family}-950`),
       cssVar: css(`status-${status}-subtle`),
-      now: null,
     },
     {
       id: `status-${status}-alert-fill`,
@@ -396,7 +381,6 @@ export const semanticTokens: SemanticToken[] = [
       use: "Alert fill",
       default: pair(`${family}-50`, `${family}-975`),
       cssVar: css(`status-${status}-alert-fill`),
-      now: null,
     },
     {
       id: `status-${status}-border`,
@@ -405,7 +389,6 @@ export const semanticTokens: SemanticToken[] = [
       use: "Alert border",
       default: pair(`${family}-200`, `${family}-950`),
       cssVar: css(`status-${status}-border`),
-      now: null,
     },
   ]),
   ...surfaces.map(
@@ -416,7 +399,6 @@ export const semanticTokens: SemanticToken[] = [
       use: s.use,
       default: pair(s.light, s.dark),
       cssVar: css(`background-${s.id}`),
-      now: { role: `background.${s.id}`, light: s.light, dark: s.dark },
     })
   ),
   {
@@ -426,7 +408,6 @@ export const semanticTokens: SemanticToken[] = [
     use: "Dividers and card outlines",
     default: pair("neutral-200", "neutral-850"),
     cssVar: css("border-subtle"),
-    now: null,
   },
   {
     id: "border-default",
@@ -435,7 +416,6 @@ export const semanticTokens: SemanticToken[] = [
     use: "Lines that need to show: chart gridlines, tables",
     default: pair("neutral-200", "neutral-700"),
     cssVar: css("border-default"),
-    now: { role: "border.on-light / on-dark", light: "neutral-200", dark: "neutral-700" },
   },
   {
     id: "border-strong",
@@ -444,29 +424,27 @@ export const semanticTokens: SemanticToken[] = [
     use: "Fields and outline buttons, at 3:1",
     default: pair("neutral-500"),
     cssVar: css("border-strong"),
-    now: null,
     contrast: { target: 3, on: "background-raised" },
   },
   ...(
     [
-      ["amaranth", "amaranth-600"],
-      ["indigo", "indigo-600"],
-      ["teal", "teal-600"],
-      ["blue", "blue-400"],
-      ["orange", "orange-500"],
-      ["purple", "purple-700"],
-      ["green", "green-600"],
-      ["cyan", "cyan-500"],
+      "amaranth",
+      "indigo",
+      "teal",
+      "blue",
+      "orange",
+      "purple",
+      "green",
+      "cyan",
     ] as const
   ).map(
-    ([family, now], i): SemanticToken => ({
+    (family, i): SemanticToken => ({
       id: `dataviz-${i + 1}`,
       name: `dataviz/${i + 1}`,
       group: "dataviz",
       use: `Chart series ${i + 1}`,
       default: pair(`${family}-600`),
       cssVar: css(`dataviz-${i + 1}`),
-      now: { role: `dataviz.${i + 1}`, light: now, dark: now },
     })
   ),
   {
@@ -476,7 +454,6 @@ export const semanticTokens: SemanticToken[] = [
     use: "White that never changes with the theme: text and logos on photos, art on patterns",
     default: pair("neutral-0"),
     cssVar: css("static-white"),
-    now: null,
   },
   {
     id: "static-black",
@@ -485,7 +462,6 @@ export const semanticTokens: SemanticToken[] = [
     use: "Black that never changes with the theme: scrims on images",
     default: pair("neutral-1000"),
     cssVar: css("static-black"),
-    now: null,
   },
 ]
 
@@ -518,7 +494,7 @@ export const groupGuides: Record<GroupId, GroupGuide> = {
   primary: {
     cards: [
       { title: "primary/primary", note: "Buttons and the one strong mark. Text on it is text/on-accent." },
-      { title: "primary/hover", note: "The primary button on hover: darker in light (700), lighter in dark (500)." },
+      { title: "primary/hover", note: "The primary button on hover: amaranth-700 in both themes, so hover always darkens." },
       { title: "primary/subtle", note: "Soft fills: kickers, chips and highlighted areas. Pair it with primary/text." },
       { title: "primary/text", note: "Colored text, links and icons, at 4.5:1 on the backgrounds." },
     ],
@@ -533,7 +509,7 @@ export const groupGuides: Record<GroupId, GroupGuide> = {
       },
       {
         lead: "Names.",
-        text: "Figma groups the brand accents as primary/* and secondary/* (2026-11-21). The repo's CSS still calls them --qd-color-accent-*, the variables shown in the table, until they're renamed.",
+        text: "Figma groups the brand accents as primary/* and secondary/*, and so does the repo since 2026-11-21: the main token of each group is --qd-color-primary and --qd-color-secondary, and the rest follow the Figma name, like --qd-color-primary-hover.",
       },
     ],
   },

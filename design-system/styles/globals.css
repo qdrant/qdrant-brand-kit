@@ -102,12 +102,12 @@
    on :root and the contexts, so a [data-theme] section inside a context keeps that context's accent. */
 :root,
 [data-context="marketing"] {
-  --qd-ui-accent: var(--qd-color-accent-primary);
-  --qd-ui-accent-hover: var(--qd-color-accent-primary-hover);
+  --qd-ui-accent: var(--qd-color-primary);
+  --qd-ui-accent-hover: var(--qd-color-primary-hover);
   --qd-ui-accent-muted: var(--qd-color-amaranth-400);
 }
 [data-context="product"] {
-  --qd-ui-accent: var(--qd-color-accent-secondary);
+  --qd-ui-accent: var(--qd-color-secondary);
   --qd-ui-accent-hover: var(--qd-color-indigo-700);
   --qd-ui-accent-muted: var(--qd-color-indigo-400);
 }
@@ -137,7 +137,6 @@
   --muted-foreground: var(--qd-color-text-secondary);
   --accent: var(--qd-ui-hover);
   --accent-foreground: var(--qd-color-text-primary);
-  --destructive: var(--qd-color-status-error);
   --ring: var(--qd-ui-accent);
   /* Charts never use the brand colors, so they stand apart from the accent and the brand (DESIGN.md,
      2026-11-16): the dataviz roles after amaranth and indigo, in their order. */
@@ -178,6 +177,10 @@
   --qd-ui-hover: color-mix(in oklab, var(--foreground) 4%, transparent);
   --border: color-mix(in oklab, var(--foreground) 9%, transparent);
   --input: var(--qd-color-neutral-800);
+  /* Destructive is text, borders and tints, never a solid fill: the soft destructive button, error text and
+     invalid fields. red-400 on dark and red-700 on light keep it at 5.4:1 or more on its tint and 6.5:1 on
+     cards (Juan, 2026-11-21; it was the status error color, red-500, at 3.3 to 4.3:1). */
+  --destructive: var(--qd-color-red-400);
   --sidebar-border: var(--border);
   /* The sidebar's hovered and active item: neutral-900 on the neutral-950 sidebar (dark), neutral-25 on
      white (light), so it's subtle (DESIGN.md, 2026-11-16). */
@@ -193,6 +196,7 @@
   --qd-ui-hover: var(--qd-color-background-highlight);
   --border: color-mix(in oklab, var(--foreground) 10%, transparent);
   --input: var(--qd-color-neutral-300);
+  --destructive: var(--qd-color-red-700);
   --sidebar-border: var(--border);
   --sidebar-accent: var(--qd-color-neutral-25);
 }

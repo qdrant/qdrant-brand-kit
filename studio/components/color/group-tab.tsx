@@ -151,21 +151,12 @@ function Value({ token, mode, primitives }: { token: SemanticToken; mode: Mode; 
   )
 }
 
-// What primitives/colors has for the token today: the role Figma's code syntax names, or the older role it
-// replaces.
+// What primitives/colors has for the token today: the role its CSS variable names.
 function Repo({ token, roles }: { token: SemanticToken; roles: Roles }) {
-  const role = token.cssVar.replace("--qd-color-", "")
-  const repo = roles[role] ?? (token.now ? { light: token.now.light, dark: token.now.dark } : null)
+  const repo = roles[token.cssVar.replace("--qd-color-", "")]
   if (!repo) return <>Not in the repo yet.</>
-  const same = repo.light === token.default.light && repo.dark === token.default.dark
-  const name = roles[role] ? null : token.now?.role
-  if (same) return <>Same{name ? `, as ${name}` : ""}.</>
-  return (
-    <>
-      {name ? `As ${name}: ` : ""}
-      <span className="font-mono">{mappingLabel(repo)}</span>
-    </>
-  )
+  if (repo.light === token.default.light && repo.dark === token.default.dark) return <>Same.</>
+  return <span className="font-mono">{mappingLabel(repo)}</span>
 }
 
 // ---- Each group at work, drawn only from the --sem-* variables ----

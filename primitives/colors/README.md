@@ -40,25 +40,42 @@ Before 2026-11-12 the families were `primary` (red, main at 500) and `secondary`
 
 ## Roles
 
-Use the roles, never a primitive step, unless a README names one.
+Use the roles, never a primitive step, unless a README names one. They're the same groups and values as the Color collection in the Figma file [Qdrant Brand Design](https://www.figma.com/design/2u6KfDsYjibQuf9ji6lFBR/Qdrant-Brand-Design) (decided 2026-11-21): a role named `primary/hover` in Figma is `primary.hover` in `colors.tokens.json` and `--qd-color-primary-hover` in CSS. The main token of a group drops its repeated name: `primary/primary` is `--qd-color-primary`, and `secondary/secondary` is `--qd-color-secondary`.
 
-| Role | Dark (default) | Light |
-| --- | --- | --- |
-| `background.default` | `neutral-950` | `neutral-25` |
-| `background.raised` | `neutral-925` | `neutral-0` |
-| `background.overlay` | `neutral-850` | `neutral-0` |
-| `background.highlight` | `neutral-800` | `neutral-50` |
-| `text.primary` | `neutral-50` | `neutral-950` |
-| `text.secondary` | `neutral-500` | `neutral-600` |
-| `border.on-dark` / `border.on-light` | `neutral-700` | `neutral-200` |
-| `accent.primary` | `amaranth-600` | `amaranth-600` |
+| Role | Dark (default) | Light | Use |
+| --- | --- | --- | --- |
+| `text.primary` | `neutral-50` | `neutral-900` | Titles and body text |
+| `text.secondary` | `neutral-500` | `neutral-600` | Supporting text, labels, captions |
+| `text.disabled` | `neutral-600` | `neutral-400` | Placeholders and disabled text |
+| `text.on-accent` | `neutral-0` | `neutral-0` | Text on primary and secondary, like a button label |
+| `primary.primary` | `amaranth-600` | `amaranth-600` | Buttons and the one strong mark |
+| `primary.hover` | `amaranth-700` | `amaranth-700` | The primary button on hover: it always darkens |
+| `primary.subtle` | `amaranth-950` | `amaranth-100` | Soft fills: kickers, chips, highlights |
+| `primary.text` | `amaranth-400` | `amaranth-800` | Colored text, links and icons |
+| `secondary.secondary` | `indigo-600` | `indigo-600` | Secondary marks, and the accent in product UI |
+| `secondary.subtle` | `indigo-950` | `indigo-100` | Tags and soft fills |
+| `secondary.text` | `indigo-400` | `indigo-800` | Text and icons on its soft fill |
+| `status.<state>.text` | 200 | 900 | Text and icons in badges and alerts |
+| `status.<state>.subtle` | 950 | 100 | Badge fill |
+| `status.<state>.alert-fill` | 975 | 50 | Alert fill |
+| `status.<state>.border` | 950 | 200 | Alert border |
+| `background.default` | `neutral-950` | `neutral-25` | The base of the page, slide or post |
+| `background.raised` | `neutral-925` | `neutral-0` | Cards, panels and content blocks on the base |
+| `background.overlay` | `neutral-850` | `neutral-0` | Menus, popovers, modals, tooltips, and a card inside a card |
+| `background.highlight` | `neutral-800` | `neutral-50` | Selected states, chips, areas to draw attention to |
+| `border.subtle` | `neutral-850` | `neutral-200` | Dividers and card outlines |
+| `border.default` | `neutral-700` | `neutral-200` | Lines that need to show: chart gridlines, tables |
+| `border.strong` | `neutral-500` | `neutral-500` | Fields and outline buttons, at 3:1 |
+| `static.white` / `static.black` | `neutral-0` / `neutral-1000` | the same | On images and art, whatever the theme |
 
+- **Status** has one group per state, in its family: `error` red, `warning` orange, `info` blue, `success` teal. So `status.success.text` is `teal-200` on dark and `teal-900` on light.
 - The four background roles are the brand and marketing roles decided with the Figma primitives. A card is `raised`; a card inside a card is `overlay` ([`layout/`](../../guidelines/layout/) "Box").
-- Also: `background.light` (`neutral-0`) and `background.light-surface` (`neutral-25`, the light card) for light pieces on a dark creative; `text.disabled`, `text.on-light`, `text.body-on-light` (documents), `text.on-accent` (white on a filled button); `accent.primary-hover` (700), `accent.primary-pressed` (800), `accent.secondary` (`indigo-600`); `status.success` (`teal-600`), `status.error` (`red-500`), `status.warning` (`orange-500`), `status.info` (`blue-400`).
+- **Only in this repo, for creatives** (Figma's Color collection doesn't have them, and they don't change with the theme): `background.light` (`neutral-0`) and `background.light-surface` (`neutral-25`, the light card) for light pieces on a dark creative; `text.on-light` (`neutral-950`) and `text.body-on-light` (`neutral-800`, documents and the light card); `border.on-dark` (`neutral-700`) and `border.on-light` (`neutral-200`).
+- **Before 2026-11-21** the brand accents were `accent.primary`, `accent.primary-hover`, `accent.primary-pressed` (removed: nothing used it, and Figma doesn't have it) and `accent.secondary`, and each status was one color (`status.success` `teal-600`, `status.error` `red-500`, `status.warning` `orange-500`, `status.info` `blue-400`). `text.primary` was `neutral-950` on light, and `dataviz.4` to `dataviz.8` used other steps (blue 400, orange 500, purple 700, cyan 500).
 
 ## Data visualization
 
-Use `dataviz.1` to `dataviz.8` in order: amaranth, indigo, teal, blue, orange, purple, green, cyan (each family's main color).
+Use `dataviz.1` to `dataviz.8` in order: amaranth, indigo, teal, blue, orange, purple, green, cyan, each family's 600 (its solid, step 7 of the palette) in both themes.
 
 ## Contrast
 
@@ -71,7 +88,7 @@ From the Figma primitives. These hold for every family and pass WCAG 2.2 AA (4.5
 | White label on a filled button | 600 or darker for amaranth, indigo, red, blue, purple, pink. 700 or darker for orange, green, teal, cyan |
 | Neutral body text, dark | `neutral-500` or lighter |
 | Neutral body text, light | `neutral-600` or darker (`neutral-500` on white only for large text) |
-| Tint badges and alerts | 800 text on a 50 background (light), 300 text on a 950 background (dark) |
+| Tint badges and alerts | The status roles: `status.<state>.text` (900 on light, 200 on dark) on the badge fill (100, 950) or the alert fill (50, 975), at 8:1 or more |
 | Borders of inputs, checkboxes and focus rings (3:1) | `neutral-600` on dark. `neutral-700` and `neutral-800` are for decorative borders only |
 
 Supporting colors in marketing: on dark backgrounds, step 500 of any family. On light backgrounds, step 600 for fills and 700 for text.

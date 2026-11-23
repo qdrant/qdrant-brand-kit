@@ -240,10 +240,7 @@ function TokenRow({
       </div>
 
       <p className="text-[11px] leading-snug text-muted-foreground">
-        {token.use}.{" "}
-        {token.now
-          ? `Repo now: ${token.now.light === token.now.dark ? token.now.light : `${token.now.light} / ${token.now.dark}`}.`
-          : "New token."}
+        {token.use}.
         {ratios && (
           <>
             {" "}
