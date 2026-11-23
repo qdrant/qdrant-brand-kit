@@ -143,8 +143,8 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | --- | --- | --- |
 | `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Medium violet) |
 | `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways), Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Light violet, Red), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet) |
-| `"both"` | Both work: offer the 40% mask and no mask, and let the person pick | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet), Mesh-Dithered-Pattern-A |
-| not set | Not decided yet: render it with and without the mask and ask | every other preset or colorway |
+| `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet), Mesh-Dithered-Pattern-A |
+| not set | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick | every other preset or colorway |
 
 - When the answer differs by colorway (Burst-A, Glyph-B), `textMask` sits on the colorway instead of the preset.
 - **Never mask a light-colored pattern:** the mask turns its light colors grey (Vanesa, 2026-11-16).
