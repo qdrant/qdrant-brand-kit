@@ -169,7 +169,7 @@ export const guidelines: GuidelineGroup[] = [
     rules: [
       {
         title: "Rails, seams and nodes",
-        text: "A hairline runs down each side of the page, 24px outside the container (the rails), and between sections (the seam). A horizontal line inside a section reaches the rails, so the lines meet. The navbar and the announcement bar have no rails, and no vertical lines; the navbar keeps its bottom line.",
+        text: "A hairline runs down each side of the page, 24px outside the container (the rails), and between sections (the seam). A horizontal line inside a section reaches the rails, so the lines meet. The navbar and the announcement bar have no rails, and no vertical lines; the navbar keeps its bottom line. The anchor nav's background never hides them: the rails run through it, sticky or not (Juan, 2026-11-23).",
         decided: "Juan, 2026-11-21",
         source: "web/styles/web.css",
       },
