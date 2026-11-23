@@ -19,7 +19,7 @@ This repo is the Qdrant brand system: the rules and materials for **creatives** 
 
 1. **Read, in this order:** [`design-system/AGENTS.md`](design-system/AGENTS.md) (the UI rules, and which "Never" rules below apply to web UI), [`design-system/DESIGN.md`](design-system/DESIGN.md) (the look and its decisions), then for a web section [`web/AGENTS.md`](web/AGENTS.md) and the website's rules in [`web/guidelines.ts`](web/guidelines.ts) (also in the studio, Web, Docs, Guidelines). A website rule Juan decides goes into `web/guidelines.ts` in the same commit.
 2. **Use what exists:** the components in `design-system/components/`, styled only through the primitives.
-3. **Pick the context:** amaranth is the accent for brand and marketing (the default), indigo for product. Product UI puts `data-context="product"` on its root ([`design-system/AGENTS.md`](design-system/AGENTS.md)).
+3. **Pick the context:** indigo is the accent for product (the design system's default), amaranth for brand and marketing. The website and other marketing UI put `data-context="marketing"` on their root ([`design-system/AGENTS.md`](design-system/AGENTS.md)).
 4. **Check it in the studio** ([`studio/`](studio/)): `pnpm install` once, then `pnpm dev` from the repo root, in dark and in light.
 5. **Run** `pnpm lint`, `pnpm typecheck` and `pnpm build` before committing.
 

@@ -8,7 +8,6 @@ import { Switch } from "@qdrant/design-system/components/ui/switch"
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import Preview from "@/examples/preview"
-import { useProductContext } from "@/components/product-context"
 import { ServerlessSpace } from "@/product/serverless-space"
 import { variationCss, variations } from "@/lib/variations"
 
@@ -18,10 +17,9 @@ const subscribe = () => () => {}
 
 // One variation of the design system (lib/variations.ts) on the Overview's components or on the App's
 // serverless space. The variation's CSS applies to the whole studio while this page is open, so menus,
-// popovers and dialogs (which open outside the canvas) follow it too. In the product context, so the accent
-// is indigo (Juan, 2026-11-15).
+// popovers and dialogs (which open outside the canvas) follow it too. Product UI, so the accent is indigo,
+// the design system's default.
 export function VariationsCanvas({ id, view }: { id: string; view: VariationView }) {
-  useProductContext()
   const router = useRouter()
   const pathname = usePathname()
   // The components render in the browser only: some show today's date in the browser's locale.
@@ -30,7 +28,7 @@ export function VariationsCanvas({ id, view }: { id: string; view: VariationView
   const query = view === "app" ? "?view=app" : ""
 
   return (
-    <div data-variation-canvas data-context="product" className="flex min-h-full flex-col">
+    <div data-variation-canvas className="flex min-h-full flex-col">
       <style id="studio-variation">{variationCss(variation)}</style>
       <header className="flex flex-wrap items-center gap-4 px-4 py-3">
         <nav aria-label="Variations" className="flex flex-wrap items-center gap-1">

@@ -91,7 +91,7 @@ const variant = (section: string, id: string) =>
 
 export function ${name}Page() {
   return (
-    <main data-web data-theme="${page.theme}" className="bg-background text-foreground">
+    <main data-web data-context="marketing" data-theme="${page.theme}" className="bg-background text-foreground">
 ${body}
     </main>
   )
