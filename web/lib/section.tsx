@@ -43,6 +43,9 @@ const spacings = {
 // A page section: the theme and surface, the vertical padding, the side padding (24px on phones, 40px from md),
 // the centered container, and the website's lines (web.css): the rails 24px outside the container, a seam at the top
 // and a node where they meet. `lines={false}` leaves them out; `seam={false}` keeps the rails without the seam.
+// `seam="bottom"` puts the nodes on the section's bottom line instead, for a section that draws its own bottom line
+// and sits above the next one (the sticky anchor nav), so its nodes are never under its background; the next
+// section then draws no seam (web.css).
 export function Section({
   theme,
   surface = "default",
@@ -61,7 +64,7 @@ export function Section({
     width?: keyof typeof widths
     spacing?: keyof typeof spacings
     lines?: boolean
-    seam?: boolean
+    seam?: boolean | "bottom"
     innerClassName?: string
   }) {
   return (
@@ -70,7 +73,8 @@ export function Section({
       data-surface={surface === "default" ? undefined : surface}
       className={cn(
         "relative overflow-x-clip bg-background px-6 text-foreground md:px-10",
-        lines && seam && "web-seam",
+        lines && seam === true && "web-seam",
+        lines && seam === "bottom" && "web-seam-bottom",
         spacings[spacing],
         className
       )}
@@ -84,8 +88,8 @@ export function Section({
         >
           {seam && (
             <>
-              <Node solid className="web-node -left-1" />
-              <Node solid className="web-node -right-1" />
+              <Node solid className={cn("web-node -left-1", seam === "bottom" && "web-node-bottom")} />
+              <Node solid className={cn("web-node -right-1", seam === "bottom" && "web-node-bottom")} />
             </>
           )}
         </div>

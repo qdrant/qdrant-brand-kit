@@ -94,6 +94,20 @@
 .web-node {
   position: absolute;
   top: -4.5px;
+  /* Nodes are always on top of the lines and of what's next to them (Juan, 2026-11-23). */
+  z-index: 1;
+}
+/* On a section's bottom line (Section seam="bottom", the sticky anchor nav), so they move and stay on top with it.
+   The section after it draws no seam of its own: the line and its nodes are already there. */
+.web-node-bottom {
+  top: auto;
+  bottom: -4.5px;
+}
+.web-seam-bottom + .web-seam {
+  border-top-color: transparent;
+}
+.web-seam-bottom + .web-seam > .web-rails > .web-node {
+  display: none;
 }
 .web-hex polygon {
   fill: transparent;
