@@ -42,14 +42,15 @@ export const navbar = defineSection<NavbarProps>({
       "Turn on sticky on long pages, so the menus and Start Free stay in reach.",
     ],
     rules: [
-      "Menus group items by job, each group under a mono label. An item has a Lucide icon and, when needed, one tag (Beta, Waitlist).",
+      "Menus group items by job, each group under a mono label. An item has a Lucide icon, bare and neutral (no tile), and, when needed, one tag (Beta, Waitlist).",
+      "Every panel opens centered under the bar and has the tray's double border. A column holds up to five links; a group of six or more splits into even columns, so panels grow across, not down.",
       "Three actions at most, in this order: Log in (ghost), Contact Us (secondary), Start Free (primary). Only Start Free is primary.",
       "Below lg the menus move into a sheet with one accordion per menu; Log in hides below sm and Contact Us below md.",
       "Item descriptions stay empty until the site has copy for them. Never invent them.",
     ],
     anatomy: [
       { part: "Logo", note: "From brand-assets, the version for the section's theme. Links home." },
-      { part: "Menus", note: "Triggers that open a panel of columns; Pricing is a plain link." },
+      { part: "Menus", note: "Triggers that open a panel of columns, centered under the bar; Pricing is a plain link." },
       { part: "Featured card", note: "Optional, in the first panel: a release or event, on the highlight surface." },
       { part: "Actions", note: "Log in, Contact Us, Start Free." },
       { part: "Mobile sheet", note: "Below lg: the menus as accordions, then the actions." },

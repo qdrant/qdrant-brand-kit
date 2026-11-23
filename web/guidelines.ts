@@ -120,9 +120,15 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Icons have color, never amaranth",
-        text: "An icon sits on an IconTile: a small tile with a subtle tint of a color family and a hairline in it, the icon in the family's solid color (400 on dark, 600 on light). Families: indigo (the default), teal, blue, purple, cyan, green and orange. One family for a set, or cycle through them for features of equal weight.",
+        text: "An icon sits on an IconTile: a small tile with a subtle tint of a color family and a hairline in it, the icon in the family's solid color (400 on dark, 600 on light). Families: indigo (the default), teal, blue, purple, cyan, green and orange. One family for a set, or cycle through them for features of equal weight. The one exception is the navbar's menus (below).",
         decided: "Juan, 2026-11-21",
         source: "web/lib/tone.tsx",
+      },
+      {
+        title: "Menu icons are bare and neutral",
+        text: "In the navbar's menus, an icon has no tile and no color family: it's bare, 16px, in the muted text color, and turns to the text color when its item is hovered or focused, so the menu reads as a list of words (Cloudflare's menus were the reference).",
+        decided: "Juan, 2026-11-23",
+        source: "web/sections/navbar.tsx",
       },
       {
         title: "Icon lines are pixel perfect",
@@ -159,6 +165,12 @@ export const guidelines: GuidelineGroup[] = [
         text: "A link to a part of the same page (an anchor nav's tab) never jumps: the page scrolls there with a slow start and a slow stop (ease-in-out quart), in 600 to 1100ms by distance, and stops just under the sticky nav. The reader's own scroll stops it, and reduced motion jumps straight there.",
         decided: "Juan, 2026-11-22",
         source: "web/lib/smooth-scroll.ts",
+      },
+      {
+        title: "Menus open in the center",
+        text: "A menu's panel always opens centered under the whole navbar, whichever menu opened it, and slides between sizes as the reader moves from menu to menu. A panel grows across, not down: a column holds up to five links, as wide as its longest label, and a group of six or more splits into columns of even length, filled top to bottom. Groups sit side by side, each a mono label over its columns, with a hairline between them. The panel has the tray's double border: the outer frame with its 6px band, then the panel's own line.",
+        decided: "Juan, 2026-11-23",
+        source: "web/sections/navbar.tsx",
       },
     ],
   },

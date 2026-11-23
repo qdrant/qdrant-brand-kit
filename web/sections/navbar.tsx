@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import { Menu as MenuIcon } from "lucide-react"
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@qdrant/design-system/components/ui/accordion"
@@ -20,7 +21,6 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import type { Link, Menu, MenuGroup } from "../content/site"
 import { Icon } from "../lib/icon"
 import { Plate } from "../lib/plate"
-import { IconTile, type Tone } from "../lib/tone"
 import { LinkButton } from "../lib/link-button"
 import { Logo } from "../lib/logo"
 import { Section, type SectionProps } from "../lib/section"
@@ -39,8 +39,9 @@ export type NavbarProps = SectionProps & {
 }
 
 // The site's top menu (2026-11-21). From lg, each menu opens a panel of columns: a mono group label over items
-// with an icon and an optional tag (Beta, Waitlist). Below lg, the menus fold into a sheet with one accordion
-// per menu. The logo follows the theme.
+// with an icon and an optional tag (Beta, Waitlist). Every panel opens centered under the whole bar, whichever menu
+// opened it (Juan, 2026-11-23, like Cloudflare's). Below lg, the menus fold into a sheet with one accordion per
+// menu. The logo follows the theme.
 export function Navbar({
   variant = "full",
   menus = [],
@@ -54,8 +55,11 @@ export function Navbar({
   id,
   className,
 }: NavbarProps) {
+  // The panels are placed against the whole bar, not the menu that opened them, so they're always centered.
+  const bar = React.useRef<HTMLElement>(null)
   return (
     <Section
+      ref={bar}
       theme={theme}
       surface={surface}
       pattern={pattern}
@@ -75,13 +79,21 @@ export function Navbar({
       </a>
 
       {variant === "full" && (
-        <NavigationMenu className="hidden lg:flex">
+        <NavigationMenu
+          anchor={bar}
+          align="center"
+          sideOffset={8}
+          // The tray's double border (web.css .web-tray): the popup is the outer frame and its 6px band, and the
+          // panel inside has its own line (Juan, 2026-11-23).
+          popupClassName="rounded-[calc(var(--radius-xl)+6px)] bg-[linear-gradient(var(--web-tray),var(--web-tray))] ring-(--web-line)"
+          className="hidden lg:flex"
+        >
           <NavigationMenuList className="gap-1">
             {menus.map((menu, i) =>
               menu.groups ? (
                 <NavigationMenuItem key={menu.label}>
                   <NavigationMenuTrigger className="text-sm">{menu.label}</NavigationMenuTrigger>
-                  <NavigationMenuContent>
+                  <NavigationMenuContent className="p-1.5">
                     <MegaPanel groups={menu.groups} featured={i === 0 ? featured : undefined} />
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -115,31 +127,50 @@ export function Navbar({
   )
 }
 
-// Each menu group's icons take one color family, in order (web.css, Tones).
-const groupTones: Tone[] = ["indigo", "teal", "blue", "purple", "cyan", "green"]
+// A column holds up to five links, as wide as its longest label (labels never wrap). A group with six or more splits into columns of even length, filled top to
+// bottom, so a panel grows across rather than down (Juan, 2026-11-23).
+const MAX_PER_COLUMN = 5
 
+function columnsOf<T>(items: T[]): T[][] {
+  const count = Math.ceil(items.length / MAX_PER_COLUMN)
+  const size = Math.ceil(items.length / count)
+  return Array.from({ length: count }, (_, i) => items.slice(i * size, (i + 1) * size))
+}
+
+// A menu's panel (Juan, 2026-11-23, after Cloudflare's): quiet and easy to read. Each group is a mono label over
+// its columns, with a hairline between groups. An item is its icon, bare and neutral (no tile, no color family; it
+// turns to the text color on hover), its label and an optional tag. The panel has the tray's inner line.
 function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: NavbarProps["featured"] }) {
   return (
-    <div className="flex gap-2 p-2">
-      <div className={cn("grid gap-x-2 gap-y-4", groups.length > 2 ? "grid-cols-3" : groups.length === 2 ? "grid-cols-2" : "grid-cols-1")}>
+    <div className="flex h-full gap-2 rounded-xl border border-(--web-line) bg-popover p-2">
+      <div className="flex divide-x divide-(--web-line,var(--border))">
         {groups.map((group, i) => (
-          <div key={group.title ?? i} className="flex w-64 flex-col gap-1">
+          <div key={group.title ?? i} className="flex flex-col gap-2 px-4 py-3 first:pl-2 last:pr-2">
             {group.title && (
-              <p className="px-2 pt-1 pb-1 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
-                {group.title}
-              </p>
+              <p className="px-2 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">{group.title}</p>
             )}
-            {group.items.map((item) => (
-              <NavigationMenuLink key={item.label} href={item.href} className="gap-3 text-sm">
-                <IconTile name={item.icon} tone={groupTones[i % groupTones.length]} size="sm" />
-                <span className="flex-1">{item.label}</span>
-                {item.tag && (
-                  <Badge variant="outline" className="font-mono">
-                    {item.tag}
-                  </Badge>
-                )}
-              </NavigationMenuLink>
-            ))}
+            <div className="flex gap-2">
+              {columnsOf(group.items).map((column, c) => (
+                <ul key={c} className="flex min-w-56 flex-col gap-0.5">
+                  {column.map((item) => (
+                    <li key={item.label}>
+                      <NavigationMenuLink href={item.href} className="group/item gap-3 px-2 py-2 text-sm">
+                        <Icon
+                          name={item.icon}
+                          className="size-4 shrink-0 text-muted-foreground transition-colors group-hover/item:text-foreground group-focus-visible/item:text-foreground"
+                        />
+                        <span className="flex-1 whitespace-nowrap">{item.label}</span>
+                        {item.tag && (
+                          <Badge variant="outline" className="font-mono">
+                            {item.tag}
+                          </Badge>
+                        )}
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
           </div>
         ))}
       </div>
