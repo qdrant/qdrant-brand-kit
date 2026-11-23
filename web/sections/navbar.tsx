@@ -72,9 +72,14 @@ export function Navbar({
         sticky && "sticky top-0 z-40 bg-background/85 backdrop-blur-md",
         className
       )}
-      innerClassName="flex h-16 items-center gap-6 lg:h-18"
+      // From lg the full bar is three columns, so the menus sit at its center whatever the logo and the actions
+      // measure (Juan, 2026-11-23).
+      innerClassName={cn(
+        "flex h-16 items-center gap-6 lg:h-18",
+        variant === "full" && "lg:grid lg:grid-cols-[1fr_auto_1fr]"
+      )}
     >
-      <a href="/" className="flex shrink-0 items-center" aria-label="Qdrant home">
+      <a href="/" className="flex shrink-0 items-center justify-self-start" aria-label="Qdrant home">
         <Logo className="h-7" />
       </a>
 
@@ -109,18 +114,20 @@ export function Navbar({
         </NavigationMenu>
       )}
 
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex items-center gap-2 justify-self-end">
         {login && (
-          <LinkButton href={login.href} variant="ghost" className="hidden sm:inline-flex">
+          <LinkButton href={login.href} variant="ghost" size="sm" className="hidden sm:inline-flex">
             {login.label}
           </LinkButton>
         )}
         {variant === "full" && contact && (
-          <LinkButton href={contact.href} variant="secondary" className="hidden md:inline-flex">
+          <LinkButton href={contact.href} variant="secondary" size="sm" className="hidden md:inline-flex">
             {contact.label}
           </LinkButton>
         )}
-        <LinkButton href={start.href}>{start.label}</LinkButton>
+        <LinkButton href={start.href} size="sm">
+          {start.label}
+        </LinkButton>
         {variant === "full" && <MobileMenu menus={menus} login={login} contact={contact} />}
       </div>
     </Section>
@@ -198,7 +205,7 @@ function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: Navba
 function MobileMenu({ menus, login, contact }: { menus: Menu[]; login?: Link; contact?: Link }) {
   return (
     <Sheet>
-      <SheetTrigger render={<Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open the menu" />}>
+      <SheetTrigger render={<Button variant="ghost" size="icon-sm" className="lg:hidden" aria-label="Open the menu" />}>
         <MenuIcon />
       </SheetTrigger>
       <SheetContent side="right" className="w-full gap-0 overflow-y-auto p-6 text-sm sm:max-w-sm">

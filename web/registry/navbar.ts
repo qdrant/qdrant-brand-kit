@@ -44,7 +44,8 @@ export const navbar = defineSection<NavbarProps>({
     rules: [
       "Menus group items by job, each group under a mono label. An item has a Lucide icon, bare and neutral (no tile), and, when needed, one tag (Beta, Waitlist).",
       "Every panel opens centered under the bar and has the tray's double border. A column holds up to five links; a group of six or more splits into even columns, so panels grow across, not down.",
-      "Three actions at most, in this order: Log in (ghost), Contact Us (secondary), Start Free (primary). Only Start Free is primary.",
+      "Three actions at most, in this order: Log in (ghost), Contact Us (secondary), Start Free (primary), all in the small size. Only Start Free is primary.",
+      "From lg the menus sit at the center of the bar, between the logo and the actions.",
       "Below lg the menus move into a sheet with one accordion per menu; Log in hides below sm and Contact Us below md.",
       "Item descriptions stay empty until the site has copy for them. Never invent them.",
     ],

@@ -155,6 +155,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "design-system/styles/components/",
       },
       {
+        title: "The navbar's buttons are small",
+        text: "Log in, Contact Us and Start Free take the design system's sm button (32px tall, 12px text), one step under the default, so the bar stays light. The phone menu's button is icon-sm. Buttons in the sections keep the default size.",
+        decided: "Juan, 2026-11-23",
+        source: "web/sections/navbar.tsx",
+      },
+      {
         title: "The selected tab stands out",
         text: "In a row of pill tabs or a toggle (a code panel's language, a chart's option, grid or list), the selected one has a clear fill: neutral-800 on dark and neutral-100 on light, with the text color (.web-selected). The others have no fill and muted text.",
         decided: "Juan, 2026-11-22",
@@ -168,7 +174,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Menus open in the center",
-        text: "A menu's panel always opens centered under the whole navbar, whichever menu opened it, and slides between sizes as the reader moves from menu to menu. A panel grows across, not down: a column holds up to five links, as wide as its longest label, and a group of six or more splits into columns of even length, filled top to bottom. Groups sit side by side, each a mono label over its columns, with a hairline between them. The panel has the tray's double border: the outer frame with its 6px band, then the panel's own line.",
+        text: "The menus sit at the center of the bar, between the logo on the left and the actions on the right (from lg; where the bar is too narrow for both sides to match, they move toward the logo). A menu's panel always opens centered under the whole navbar, whichever menu opened it, and slides between sizes as the reader moves from menu to menu. A panel grows across, not down: a column holds up to five links, as wide as its longest label, and a group of six or more splits into columns of even length, filled top to bottom. Groups sit side by side, each a mono label over its columns, with a hairline between them. The panel has the tray's double border: the outer frame with its 6px band, then the panel's own line.",
         decided: "Juan, 2026-11-23",
         source: "web/sections/navbar.tsx",
       },
