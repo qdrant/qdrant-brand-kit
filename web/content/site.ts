@@ -6,7 +6,8 @@ export type Link = { label: string; href: string }
 
 export type MenuItem = Link & { tag?: string; icon?: string }
 export type MenuGroup = { title?: string; items: MenuItem[] }
-export type Menu = { label: string; groups: MenuGroup[] } | (Link & { groups?: undefined })
+// `hidden` keeps a menu out of the bar and the phone sheet while keeping its copy here.
+export type Menu = ({ label: string; groups: MenuGroup[] } | (Link & { groups?: undefined })) & { hidden?: boolean }
 
 export const announcement = {
   tag: "1.20",
@@ -35,6 +36,8 @@ export const menus: Menu[] = [
   },
   {
     label: "Solutions",
+    // Hidden for now (Juan, 2026-11-23).
+    hidden: true,
     groups: [
       {
         title: "Use Cases",

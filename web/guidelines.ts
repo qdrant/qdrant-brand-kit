@@ -156,7 +156,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "The navbar's buttons are small",
-        text: "Log in, Contact Us and Start Free take the design system's sm button (32px tall, 12px text), one step under the default, so the bar stays light. The phone menu's button is icon-sm. Buttons in the sections keep the default size.",
+        text: "Log in, Contact Us and Start Free take the design system's sm button (32px tall), one step under the default, so the bar stays light, with 14px text like every link in the bar, the menus and Pricing included. The phone menu's button is icon-sm. Buttons in the sections keep the default size.",
         decided: "Juan, 2026-11-23",
         source: "web/sections/navbar.tsx",
       },
@@ -174,7 +174,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Menus open in the center",
-        text: "The menus sit at the center of the bar, between the logo on the left and the actions on the right (from lg; where the bar is too narrow for both sides to match, they move toward the logo). A menu's panel always opens centered under the whole navbar, whichever menu opened it, and slides between sizes as the reader moves from menu to menu. A panel grows across, not down: a column holds up to five links, as wide as its longest label, and a group of six or more splits into columns of even length, filled top to bottom. Groups sit side by side, each a mono label over its columns, with a hairline between them. The panel has the tray's double border: the outer frame with its 6px band, then the panel's own line.",
+        text: "The menus sit at the center of the page: from lg the bar is three columns, and the logo's and the actions' are always the same width, whatever each holds. Between 1024 and about 1064px the actions are wider than their column and reach up to 20px into the side margin, inside the rails. A menu's panel always opens centered under the whole navbar, whichever menu opened it, and slides between sizes as the reader moves from menu to menu. Its links have 12px padding (the step after 8 on the spacing scale), so they're easy to hit. A panel grows across, not down: a column holds up to five links, as wide as its longest label, and a group of six or more splits into columns of even length, filled top to bottom. Groups sit side by side, each a mono label over its columns, with a hairline between them. The panel has the tray's double border: the outer frame with its 6px band, then the panel's own line.",
         decided: "Juan, 2026-11-23",
         source: "web/sections/navbar.tsx",
       },

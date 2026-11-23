@@ -13,7 +13,7 @@ export const navbar = defineSection<NavbarProps>({
     {
       id: "full",
       name: "Full",
-      description: "Products, Solutions, Developers and Resources menus, Pricing, and three actions.",
+      description: "Products, Developers and Resources menus (Solutions is hidden for now), Pricing, and three actions.",
       props: { variant: "full", menus, ...navActions },
       frameMinHeight: 480,
     },
@@ -44,8 +44,9 @@ export const navbar = defineSection<NavbarProps>({
     rules: [
       "Menus group items by job, each group under a mono label. An item has a Lucide icon, bare and neutral (no tile), and, when needed, one tag (Beta, Waitlist).",
       "Every panel opens centered under the bar and has the tray's double border. A column holds up to five links; a group of six or more splits into even columns, so panels grow across, not down.",
-      "Three actions at most, in this order: Log in (ghost), Contact Us (secondary), Start Free (primary), all in the small size. Only Start Free is primary.",
-      "From lg the menus sit at the center of the bar, between the logo and the actions.",
+      "Three actions at most, in this order: Log in (ghost), Contact Us (secondary), Start Free (primary), all in the small size with 14px text, like the menus. Only Start Free is primary.",
+      "From lg the menus sit at the center of the page: the logo's and the actions' columns are always the same width.",
+      "A menu with `hidden` stays out of the bar and the sheet, with its copy kept (Solutions, for now).",
       "Below lg the menus move into a sheet with one accordion per menu; Log in hides below sm and Contact Us below md.",
       "Item descriptions stay empty until the site has copy for them. Never invent them.",
     ],

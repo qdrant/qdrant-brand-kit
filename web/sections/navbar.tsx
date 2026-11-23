@@ -44,7 +44,7 @@ export type NavbarProps = SectionProps & {
 // menu. The logo follows the theme.
 export function Navbar({
   variant = "full",
-  menus = [],
+  menus: allMenus = [],
   login,
   contact,
   start,
@@ -55,6 +55,7 @@ export function Navbar({
   id,
   className,
 }: NavbarProps) {
+  const shown = allMenus.filter((menu) => !menu.hidden)
   // The panels are placed against the whole bar, not the menu that opened them, so they're always centered.
   const bar = React.useRef<HTMLElement>(null)
   return (
@@ -72,11 +73,11 @@ export function Navbar({
         sticky && "sticky top-0 z-40 bg-background/85 backdrop-blur-md",
         className
       )}
-      // From lg the full bar is three columns, so the menus sit at its center whatever the logo and the actions
-      // measure (Juan, 2026-11-23).
+      // From lg the full bar is three columns, the logo's and the actions' always the same width, so the menus sit
+      // at the center of the page (Juan, 2026-11-23). Every link and button in the bar is 14px.
       innerClassName={cn(
         "flex h-16 items-center gap-6 lg:h-18",
-        variant === "full" && "lg:grid lg:grid-cols-[1fr_auto_1fr]"
+        variant === "full" && "lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]"
       )}
     >
       <a href="/" className="flex shrink-0 items-center justify-self-start" aria-label="Qdrant home">
@@ -94,7 +95,7 @@ export function Navbar({
           className="hidden lg:flex"
         >
           <NavigationMenuList className="gap-1">
-            {menus.map((menu, i) =>
+            {shown.map((menu, i) =>
               menu.groups ? (
                 <NavigationMenuItem key={menu.label}>
                   <NavigationMenuTrigger className="text-sm">{menu.label}</NavigationMenuTrigger>
@@ -116,19 +117,19 @@ export function Navbar({
 
       <div className="ml-auto flex items-center gap-2 justify-self-end">
         {login && (
-          <LinkButton href={login.href} variant="ghost" size="sm" className="hidden sm:inline-flex">
+          <LinkButton href={login.href} variant="ghost" size="sm" className="hidden text-sm sm:inline-flex">
             {login.label}
           </LinkButton>
         )}
         {variant === "full" && contact && (
-          <LinkButton href={contact.href} variant="secondary" size="sm" className="hidden md:inline-flex">
+          <LinkButton href={contact.href} variant="secondary" size="sm" className="hidden text-sm md:inline-flex">
             {contact.label}
           </LinkButton>
         )}
-        <LinkButton href={start.href} size="sm">
+        <LinkButton href={start.href} size="sm" className="text-sm">
           {start.label}
         </LinkButton>
-        {variant === "full" && <MobileMenu menus={menus} login={login} contact={contact} />}
+        {variant === "full" && <MobileMenu menus={shown} login={login} contact={contact} />}
       </div>
     </Section>
   )
@@ -154,14 +155,14 @@ function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: Navba
         {groups.map((group, i) => (
           <div key={group.title ?? i} className="flex flex-col gap-2 px-4 py-3 first:pl-2 last:pr-2">
             {group.title && (
-              <p className="px-2 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">{group.title}</p>
+              <p className="px-3 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">{group.title}</p>
             )}
             <div className="flex gap-2">
               {columnsOf(group.items).map((column, c) => (
                 <ul key={c} className="flex min-w-56 flex-col gap-0.5">
                   {column.map((item) => (
                     <li key={item.label}>
-                      <NavigationMenuLink href={item.href} className="group/item gap-3 px-2 py-2 text-sm">
+                      <NavigationMenuLink href={item.href} className="group/item gap-3 p-3 text-sm">
                         <Icon
                           name={item.icon}
                           className="size-4 shrink-0 text-muted-foreground transition-colors group-hover/item:text-foreground group-focus-visible/item:text-foreground"
