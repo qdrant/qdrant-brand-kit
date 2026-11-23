@@ -116,6 +116,8 @@ def check_one(m, rules):
     W, H, shape = m["target"]["w"], m["target"]["h"], m["target"]["shape"]
     S = shapes[shape]
     u = min(W / S["ref"][0], H / S["ref"][1])
+    if (m.get("print") or {}).get("uPx"):  # print: the scale comes from the finished size, not trim + bleed
+        u = m["print"]["uPx"]
     from PIL import Image
     im = Image.open(m["file"]).convert("RGB")
     bg = Image.open(m["file"].replace(".png", ".bg.png")).convert("RGB") if os.path.exists(m["file"].replace(".png", ".bg.png")) else None
@@ -127,6 +129,9 @@ def check_one(m, rules):
     texts = [t for t in m["texts"]]
     main = [t for t in texts if t["role"] == "text"]
     L, T, R, B = S["mx"] * u, S["mt"] * u, W - S["mx"] * u, H - S["mb"] * u
+    pr = m.get("print")
+    if pr:  # print (review/print.py): the margins are the bleed plus the format's margin
+        L, T, R, B = pr["marginPx"]["x"], pr["marginPx"]["top"], W - pr["marginPx"]["x"], H - pr["marginPx"]["bottom"]
     out = []
     for kind, items in (("text", [t["box"] for t in texts]), ("logo", [l["rect"] for l in m["logos"]]),
                         ("button", [b["rect"] for b in m["buttons"]])):
@@ -137,10 +142,14 @@ def check_one(m, rules):
         "all inside" if not out else "; ".join(out[:4]) + f" (margins {round(L)}/{round(T)}/{round(W-R)}/{round(H-B)})",
         "checks.md, Inside margins")
 
-    starts = [L + k * (S["col"] + S["gut"]) * u for k in range(S["cols"])]
-    ends = [L + (k * (S["col"] + S["gut"]) + S["col"]) * u for k in range(S["cols"])]
+    col = S["col"] * u
+    if pr:  # the columns share the width inside the print margins
+        col = (R - L - (S["cols"] - 1) * S["gut"] * u) / S["cols"]
+    starts = [L + k * (col + S["gut"] * u) for k in range(S["cols"])]
+    ends = [L + k * (col + S["gut"] * u) + col for k in range(S["cols"])]
     off = []
-    lefts = [("text", t["box"]) for t in main] + [("logo", l["rect"]) for l in m["logos"] if not l.get("inBook")] + \
+    # Text inside a card sits on the card's padding, not on a column line: check the card, not its text.
+    lefts = [("text", t["box"]) for t in main if not t.get("inBox")] + [("logo", l["rect"]) for l in m["logos"] if not l.get("inBook")] + \
             [("card", c["rect"]) for c in m["cards"]]
     # Text after an icon on the same row starts after the icon and a tight gap; the icon is what sits on the grid.
     icon_ends = [(i["rect"]["x"] + i["rect"]["w"], i["rect"]["y"], i["rect"]["h"]) for i in m.get("icons", [])]
@@ -199,14 +208,28 @@ def check_one(m, rules):
             step = {"title-short": "title-medium", "title-medium": "title-long"}.get(want)
             qbot = shape == "ultrawide" and any("/mascot/" in i.get("src", "") for i in m["images"])
             ok_size = abs(top - exp) <= 1.5 or (qbot and step and abs(top - val(step) * u) <= 1.5)
-            add("Title size by length", ok_size,
-                f"{words} words → {want} {val(want):g} at reference = {exp:.1f} px; used {top:.1f} px"
-                + (f" (one step down to {step} {val(step):g} allowed beside Qbot)" if qbot and step else ""),
-                "typography README, Text in creatives")
-            sup = val("supporting") * u
-            others = sorted({round(t["fontSize"], 1) for t in main if abs(t["fontSize"] - top) >= 0.5})
-            add("Supporting size", all(abs(s - sup) <= 1.5 for s in others),
-                f"wanted {sup:.1f} px; used {others or 'none'}", "typography README, Text in creatives")
+            ptype = (m.get("print") or {}).get("type")
+            if ptype:  # print: the format's sizes in pt (print.tokens.json), not the social creative scale
+                px_pt = lambda v: v * m["print"]["dpi"] / 72
+                lo_t, hi_t = px_pt(ptype["titleMin"]), px_pt(max(ptype["title"], ptype.get("titleCover") or 0))
+                ok_size = lo_t - 1.5 <= top <= hi_t + 1.5
+                add("Title size by length", ok_size,
+                    f"print: {ptype['titleMin']:g}–{ptype['title']:g} pt = {lo_t:.1f}–{hi_t:.1f} px; used {top:.1f} px",
+                    "guidelines/print/ section 4, Text in print")
+                lo_s, hi_s = px_pt(ptype["supportingMin"]), px_pt(ptype["supporting"])
+                others = sorted({round(t["fontSize"], 1) for t in main if abs(t["fontSize"] - top) >= 0.5})
+                add("Supporting size", all(lo_s - 1.5 <= x <= hi_s + 1.5 for x in others),
+                    f"print: {ptype['supportingMin']:g}–{ptype['supporting']:g} pt = {lo_s:.1f}–{hi_s:.1f} px; used {others or 'none'}",
+                    "guidelines/print/ section 4, Text in print")
+            else:
+                add("Title size by length", ok_size,
+                    f"{words} words → {want} {val(want):g} at reference = {exp:.1f} px; used {top:.1f} px"
+                    + (f" (one step down to {step} {val(step):g} allowed beside Qbot)" if qbot and step else ""),
+                    "typography README, Text in creatives")
+                sup = val("supporting") * u
+                others = sorted({round(t["fontSize"], 1) for t in main if abs(t["fontSize"] - top) >= 0.5})
+                add("Supporting size", all(abs(s - sup) <= 1.5 for s in others),
+                    f"wanted {sup:.1f} px; used {others or 'none'}", "typography README, Text in creatives")
             bad_case = []
             for t in titles:
                 condensed = "Condensed" in t.get("family", "") or t["stretch"] not in ("100%", "normal")
@@ -326,6 +349,8 @@ def check_one(m, rules):
     ov = []
     for i, a in enumerate(texts):
         for b in texts[i + 1:]:
+            if a.get("nested") or b.get("nested"):
+                continue  # a bold word inside a sentence is part of that sentence, not a second text
             if overlap(a["box"], b["box"]) > 0.2:
                 ov.append(f"\"{a['text'][:12]}\" × \"{b['text'][:12]}\"")
     big = W * H * 0.6
