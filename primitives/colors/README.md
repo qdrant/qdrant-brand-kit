@@ -4,12 +4,12 @@ The Qdrant palette as tokens. The primitives come from the Figma file **Qdrant D
 
 | File | What it is |
 | --- | --- |
-| `colors.tokens.json` | The source. W3C tokens: `color` (the Figma primitives, exact, plus `neutral-975`, added here first and then to Figma on 2026-11-16), then this repo's brand layer, semantic tokens that stay out of the Figma file (it holds primitives only): `brand` (the brand color names), `asset`, `gradient`, `semantic` roles (dark theme) and `theme.light` overrides |
+| `colors.tokens.json` | The source. W3C tokens: `color` (the Figma primitives, exact, plus `neutral-975`, added here first and then to Figma on 2026-11-16, and a 975 for every other color on 2026-11-19), then this repo's brand layer, semantic tokens that stay out of the Figma file (it holds primitives only): `brand` (the brand color names), `asset`, `gradient`, `semantic` roles (dark theme) and `theme.light` overrides |
 | `colors.css` | Generated from the JSON by [`../build.mjs`](../build.mjs): `--qd-color-*` and `--qd-gradient-*` variables. The dark roles are on `:root` and `[data-theme="dark"]`, the light ones on `[data-theme="light"]`, so any section can switch theme. Never edit it by hand |
 
 ## Primitives
 
-11 families, each with 11 steps from 50 to 950, built in OKLCH on one lightness curve, so a step number means the same lightness in every family. A family's main color sits on the step that matches its natural lightness, so it isn't always 500.
+11 families, each with 11 steps from 50 to 950, built in OKLCH on one lightness curve, so a step number means the same lightness in every family. A family's main color sits on the step that matches its natural lightness, so it isn't always 500. Each family also has a **975**, halfway from its 950 to black, like `neutral-975`: the deepest tint, for backgrounds in dark (added 2026-11-19).
 
 | Family | Main color | Use |
 | --- | --- | --- |

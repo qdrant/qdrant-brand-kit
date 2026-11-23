@@ -11,11 +11,12 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 const nav = [
   { href: "/", label: "Overview" },
-  { href: "/variations", label: "Variations" },
-  { href: "/typography", label: "Typography" },
   { href: "/design-system", label: "Design system" },
+  { href: "/color", label: "Color" },
+  { href: "/typography", label: "Typography" },
   { href: "/web", label: "Web" },
   { href: "/app", label: "App" },
+  { href: "/space", label: "Space" },
 ]
 
 // The top menu: the pages, and the theme on the right.

@@ -8,8 +8,15 @@ const alertVariants = cva(
     variants: {
       variant: {
         default: "bg-card text-card-foreground",
+        // The status variants (design-system/styles/components/alert.css): the soft fill with a border in the
+        // state's color, and the icon, title and description in that color (at 7:1 or more in both themes).
         destructive:
-          "bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
+          "border-(--qd-ui-alert-error-border) bg-(--qd-ui-alert-error-bg) text-(--qd-ui-alert-error-fg) *:data-[slot=alert-description]:text-current",
+        success:
+          "border-(--qd-ui-alert-success-border) bg-(--qd-ui-alert-success-bg) text-(--qd-ui-alert-success-fg) *:data-[slot=alert-description]:text-current",
+        warning:
+          "border-(--qd-ui-alert-warning-border) bg-(--qd-ui-alert-warning-bg) text-(--qd-ui-alert-warning-fg) *:data-[slot=alert-description]:text-current",
+        info: "border-(--qd-ui-alert-info-border) bg-(--qd-ui-alert-info-bg) text-(--qd-ui-alert-info-fg) *:data-[slot=alert-description]:text-current",
       },
     },
     defaultVariants: {

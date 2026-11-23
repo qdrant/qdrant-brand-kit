@@ -1,0 +1,7 @@
+/* The Color page (/color). Studio-only: what's decided here goes into primitives/colors. */
+
+/* The assets' titles, from the primitives: Mona Sans Display SemiBold. */
+.color-asset :where(h2, h3) {
+  font-family: var(--qd-font-family-display);
+  font-weight: 600;
+}

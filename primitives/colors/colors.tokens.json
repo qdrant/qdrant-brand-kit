@@ -1,5 +1,5 @@
 {
-  "$description": "Qdrant colors. The `color` group is the primitives, copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12; `neutral-975` was added here first and then to the Figma file, on 2026-11-16. The other groups are this repo's brand layer: semantic tokens, so they stay out of the Figma file, which holds primitives only. They are the brand color names, roles for creatives and web, gradients and the mascot glow, all aliases of the primitives. Source of truth: this file. colors.css is generated from it by primitives/build.mjs.",
+  "$description": "Qdrant colors. The `color` group is the primitives, copied exactly from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), exported 2026-11-12; `neutral-975` was added here first and then to the Figma file, on 2026-11-16, and so was a 975 for every other color on 2026-11-19. The other groups are this repo's brand layer: semantic tokens, so they stay out of the Figma file, which holds primitives only. They are the brand color names, roles for creatives and web, gradients and the mascot glow, all aliases of the primitives. Source of truth: this file. colors.css is generated from it by primitives/build.mjs.",
   "color": {
     "$description": "Color primitives. Raw values only: no meaning. Use semantic tokens in components.",
     "neutral": {
@@ -344,6 +344,19 @@
           "hex": "#480d1c"
         }
       },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1412,
+            0.0235,
+            0.0549
+          ],
+          "hex": "#24060e"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from amaranth-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+      },
       "a100": {
         "$type": "color",
         "$value": {
@@ -530,6 +543,19 @@
           ],
           "hex": "#201a4b"
         }
+      },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0627,
+            0.051,
+            0.149
+          ],
+          "hex": "#100d26"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from indigo-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -718,6 +744,19 @@
           "hex": "#430d08"
         }
       },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1333,
+            0.0235,
+            0.0157
+          ],
+          "hex": "#220604"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from red-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+      },
       "a100": {
         "$type": "color",
         "$value": {
@@ -904,6 +943,19 @@
           ],
           "hex": "#451a0a"
         }
+      },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1333,
+            0.051,
+            0.0196
+          ],
+          "hex": "#220d05"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from orange-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -1092,6 +1144,19 @@
           "hex": "#102d16"
         }
       },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0314,
+            0.0863,
+            0.0431
+          ],
+          "hex": "#08160b"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from green-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+      },
       "a100": {
         "$type": "color",
         "$value": {
@@ -1278,6 +1343,19 @@
           ],
           "hex": "#082f2d"
         }
+      },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0157,
+            0.0941,
+            0.0902
+          ],
+          "hex": "#041817"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from teal-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -1466,6 +1544,19 @@
           "hex": "#0b3341"
         }
       },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0235,
+            0.098,
+            0.1255
+          ],
+          "hex": "#061920"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from cyan-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+      },
       "a100": {
         "$type": "color",
         "$value": {
@@ -1652,6 +1743,19 @@
           ],
           "hex": "#13294a"
         }
+      },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0392,
+            0.0824,
+            0.1451
+          ],
+          "hex": "#0a1525"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from blue-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -1840,6 +1944,19 @@
           "hex": "#411252"
         }
       },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1294,
+            0.0353,
+            0.1608
+          ],
+          "hex": "#210929"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from purple-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+      },
       "a100": {
         "$type": "color",
         "$value": {
@@ -2026,6 +2143,19 @@
           ],
           "hex": "#490f32"
         }
+      },
+      "975": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1412,
+            0.0314,
+            0.098
+          ],
+          "hex": "#240819"
+        },
+        "$description": "The deepest tint (Juan, 2026-11-19): halfway from pink-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       }
     }
   },

@@ -29,6 +29,7 @@
   --qd-color-amaranth-800: #9B1E3D;
   --qd-color-amaranth-900: #821F3B;
   --qd-color-amaranth-950: #480D1C;
+  --qd-color-amaranth-975: #24060E;
   --qd-color-indigo-50: #EFF2FF;
   --qd-color-indigo-100: #E1E7FF;
   --qd-color-indigo-200: #C9D1FF;
@@ -40,6 +41,7 @@
   --qd-color-indigo-800: #3D29A9;
   --qd-color-indigo-900: #352B83;
   --qd-color-indigo-950: #201A4B;
+  --qd-color-indigo-975: #100D26;
   --qd-color-red-50: #FDF2F2;
   --qd-color-red-100: #FDE3E1;
   --qd-color-red-200: #FDCBC9;
@@ -51,6 +53,7 @@
   --qd-color-red-800: #991D10;
   --qd-color-red-900: #7D2119;
   --qd-color-red-950: #430D08;
+  --qd-color-red-975: #220604;
   --qd-color-orange-50: #FFFBEF;
   --qd-color-orange-100: #FFF2CF;
   --qd-color-orange-200: #FFE49B;
@@ -62,6 +65,7 @@
   --qd-color-orange-800: #943D1B;
   --qd-color-orange-900: #79341A;
   --qd-color-orange-950: #451A0A;
+  --qd-color-orange-975: #220D05;
   --qd-color-green-50: #F2FCF4;
   --qd-color-green-100: #E1FAE6;
   --qd-color-green-200: #C5F4CF;
@@ -73,6 +77,7 @@
   --qd-color-green-800: #2A6331;
   --qd-color-green-900: #24512C;
   --qd-color-green-950: #102D16;
+  --qd-color-green-975: #08160B;
   --qd-color-teal-50: #F1FDFA;
   --qd-color-teal-100: #CFFAF0;
   --qd-color-teal-200: #9FF5E2;
@@ -84,6 +89,7 @@
   --qd-color-teal-800: #115E58;
   --qd-color-teal-900: #164E49;
   --qd-color-teal-950: #082F2D;
+  --qd-color-teal-975: #041817;
   --qd-color-cyan-50: #EEFEFE;
   --qd-color-cyan-100: #D3F9FB;
   --qd-color-cyan-200: #ABF2F7;
@@ -95,6 +101,7 @@
   --qd-color-cyan-800: #145F72;
   --qd-color-cyan-900: #194E5F;
   --qd-color-cyan-950: #0B3341;
+  --qd-color-cyan-975: #061920;
   --qd-color-blue-50: #F0F6FC;
   --qd-color-blue-100: #DCEBF8;
   --qd-color-blue-200: #C1DCF3;
@@ -106,6 +113,7 @@
   --qd-color-blue-800: #004B9A;
   --qd-color-blue-900: #144179;
   --qd-color-blue-950: #13294A;
+  --qd-color-blue-975: #0A1525;
   --qd-color-purple-50: #FAF5FF;
   --qd-color-purple-100: #F5EAFF;
   --qd-color-purple-200: #EBD4FF;
@@ -117,6 +125,7 @@
   --qd-color-purple-800: #792999;
   --qd-color-purple-900: #64277B;
   --qd-color-purple-950: #411252;
+  --qd-color-purple-975: #210929;
   --qd-color-pink-50: #FAF3FA;
   --qd-color-pink-100: #F7E8F7;
   --qd-color-pink-200: #F2D2F1;
@@ -128,6 +137,7 @@
   --qd-color-pink-800: #942068;
   --qd-color-pink-900: #7A2159;
   --qd-color-pink-950: #490F32;
+  --qd-color-pink-975: #240819;
 
   /* Brand names (aliases) */
   --qd-color-brand-amaranth: #DC244C; /* amaranth-600 */

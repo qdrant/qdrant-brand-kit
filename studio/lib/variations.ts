@@ -1,4 +1,4 @@
-// Variations of the design system, shown on /variations (components/variations-canvas.tsx). Each one keeps
+// Variations of the design system, shown on /design-system/variations (components/variations-canvas.tsx). Each one keeps
 // Qdrant's colors (the context accent, status and chart colors) and changes structure: buttons, borders,
 // surfaces and depth, radius, type, density and motion. Only the neutrals may move: which neutral each
 // background role uses, and the border steps. They draw on research into Supabase, Vercel, Neon, Exa,

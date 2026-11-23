@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
+import { qdrantExamples } from "@/components/qdrant-examples"
 import { examples } from "@/examples"
 import { allComponents, titleOf } from "@/lib/catalog"
 
@@ -13,12 +14,14 @@ export default async function ComponentPage({ params }: { params: Promise<{ name
   if (!allComponents.includes(name)) notFound()
   const load = examples[name]
   const Example = load ? (await load()).default : null
+  const loadQdrant = qdrantExamples[name]
+  const QdrantExample = loadQdrant ? (await loadQdrant()).default : null
 
   return (
     <div className="flex flex-col gap-8 p-8">
       <header className="flex flex-col gap-2">
         <Link href="/design-system" className="text-muted-foreground text-xs hover:underline">
-          Design system
+          Components
         </Link>
         <h1 className="text-2xl font-semibold">{titleOf(name)}</h1>
         <p className="text-muted-foreground text-sm">
@@ -40,6 +43,12 @@ export default async function ComponentPage({ params }: { params: Promise<{ name
           No example yet. shadcn&apos;s example for this one needs code from its own website (the AI components), or
           shadcn has none (direction).
         </p>
+      )}
+      {QdrantExample && (
+        <section className="flex flex-col gap-4">
+          <h2 className="text-base font-semibold">Qdrant variants</h2>
+          <QdrantExample />
+        </section>
       )}
     </div>
   )
