@@ -52,6 +52,7 @@ export function WebFrame() {
     }
     apply()
     document.body.setAttribute("data-web", "")
+    document.body.setAttribute("data-context", "marketing")
     const obs = new MutationObserver(apply)
     obs.observe(html, { attributes: true, attributeFilter: ["data-theme"] })
     return () => obs.disconnect()
@@ -109,7 +110,7 @@ export function WebFrame() {
 
   if (isBuilder) {
     return (
-      <div ref={root} data-web data-theme={pageTheme} {...styleAttrs} className="min-h-svh bg-background text-foreground">
+      <div ref={root} data-web data-context="marketing" data-theme={pageTheme} {...styleAttrs} className="min-h-svh bg-background text-foreground">
         {page?.blocks.length ? (
           page.blocks.map((block: Block) => (
             <div
@@ -140,7 +141,7 @@ export function WebFrame() {
   if (previewId) {
     const def = getPattern(previewId)
     return (
-      <div ref={root} data-web data-theme={theme} {...styleAttrs} className="bg-background text-foreground">
+      <div ref={root} data-web data-context="marketing" data-theme={theme} {...styleAttrs} className="bg-background text-foreground">
         {def?.kind === "surface" ? (
           <Section cardPattern={previewId} spacing="compact" innerClassName="grid gap-6 md:grid-cols-3">
             {["Plate", "Plate", "Plate"].map((label, i) => (
@@ -170,6 +171,7 @@ export function WebFrame() {
     <div
       ref={root}
       data-web
+      data-context="marketing"
       data-theme={theme}
       {...styleAttrs}
       className="bg-background text-foreground"

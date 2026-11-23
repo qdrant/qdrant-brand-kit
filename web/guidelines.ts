@@ -91,8 +91,9 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Amaranth is the accent",
-        text: "For the primary button, highlights and small brand marks. Never a flat fill behind text, and no gradient on text. Red is for errors.",
-        source: "primitives/colors/",
+        text: "For the primary button, highlights and small brand marks. Never a flat fill behind text, and no gradient on text. Red is for errors. The design system's components are indigo by default (they're the product's), so a page's root sets data-context=\"marketing\" next to data-web, and its buttons, focus and checks turn amaranth. Product screens shown on a page keep data-context=\"product\", so they stay indigo.",
+        decided: "Juan, 2026-11-23",
+        source: "design-system/styles/globals.css",
       },
       {
         title: "Indigo is the second color",

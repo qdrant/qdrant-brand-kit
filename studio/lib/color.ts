@@ -526,7 +526,7 @@ export const groupGuides: Record<GroupId, GroupGuide> = {
       },
       {
         lead: "The product's accent.",
-        text: "Product UI sets data-context=\"product\" on its root, and its buttons, links and focus take indigo where marketing takes amaranth.",
+        text: "The design system's components are the product's, so their buttons, links and focus are indigo. The website and other marketing set data-context=\"marketing\" on their root, where they take amaranth.",
       },
     ],
   },
