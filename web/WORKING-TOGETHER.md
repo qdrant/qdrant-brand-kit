@@ -20,7 +20,7 @@ This repo is Qdrant's brand system: the rules and materials for creatives, the d
 | `studio/` | The Next.js app where everything is reviewed. The Web page shows the library; the Space page holds the space-theme explorations |
 | `brand-assets/`, `brand-components/`, `guidelines/`, `review/` | Creatives (social posts, ads, banners). Not part of this work |
 
-The website library lives on the branch `web-sections`, in PR [qdrant/qdrant-brand-kit#16](https://github.com/qdrant/qdrant-brand-kit/pull/16). That PR sits on #15 (color roles), which sits on #14, so `main` doesn't have any of this yet. Always start from `web-sections`.
+The website library lives on the branch `web-sections`, in PR [qdrant/qdrant-brand-kit#16](https://github.com/qdrant/qdrant-brand-kit/pull/16). It targets `main` and waits on Vanesa's review. `main` already has the color work (#14, #15) and Vanesa's creative and print changes (#11 to #13), but not the website library. Always start from `web-sections`.
 
 ## Read these first
 
