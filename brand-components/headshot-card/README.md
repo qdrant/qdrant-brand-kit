@@ -35,7 +35,7 @@ Each card spans whole columns of the shape's grid. Every card in a row has the s
 | `story` 1080×1920 (4 cols) | span 2, right, or `headshot-circle` (the person picks) | span 2 each | use `headshot-circle` | use `headshot-circle` |
 | `ultrawide` 3000×400 | use `headshot-circle` | | | |
 
-"Right" means the cards take the last columns. On `wide` the title sits in the columns to their left. On `square`, `portrait` and `story` the title stays full width at the top margin (a 96 px title doesn't fit beside the card), and the supporting block and button sit in the columns to the left of the card, on the bottom margin. Otherwise the title sits above the row.
+"Right" means the cards take the last columns. On `wide` the title sits in the columns to their left. On `square`, `portrait` and `story` the title stays full width at the top margin (a 104 px title doesn't fit beside the card), and the supporting block and button sit in the columns to the left of the card, on the bottom margin. Otherwise the title sits above the row.
 
 **Wide covers with 2 speakers** (slides, decided 2026-11-11): span-3 cards on the right, at the size of a full row, level or staggered (`qd-headshot-row--stagger`). When staggered, put the logo in the left text column so the cards can use the full height. Never span-2 cards on a wide cover: too small. Circles on wide only for a quiet, text-led cover.
 

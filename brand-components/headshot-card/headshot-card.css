@@ -46,7 +46,7 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 5 / 7;
-  border-radius: calc(16 * var(--qd-canvas-u)); /* radius.lg */
+  border-radius: calc(16 * var(--qd-canvas-u)); /* radius.md (16) at the reference canvas */
   /* Gradient on an opaque base: the 70% gradient alone lets a pattern show through (Vanesa, 2026-11-04). */
   background: var(--qd-gradient-headshot), var(--qd-color-background-default);
 }
