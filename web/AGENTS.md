@@ -27,6 +27,8 @@ The website's rules (layout, type, color, links, icons, actions, lines, patterns
 - **Images** go in `assets/`, exported from the Figma as they are. A one-color image takes the theme's color through `MonoImage`; the one exception is a logo whose maker has a version for light backgrounds, like `aws-on-light.svg`. Product screens drawn in a Figma are rebuilt with the design system's components (in `data-context="product"`, so their accent is indigo).
 - **Style switches** compare the website with and without a decision: `data-web-lines`, `data-web-material`, `data-web-patterns` and `data-web-indigo` set to `"off"`, and `data-web-type="current"` for the type set as it is (the trial type moves into `primitives/typography` if it's kept, with Vanesa's yes). The studio's Canvas, Docs and Builder have them.
 
+- **Proposals** (Juan, 2026-11-24): a new layout to review is a variant with a `proposal` note (what it adds, where the idea comes from) and a new value of the section's `layout` prop, commented as a proposal; a visual enhancement is a switch in the studio's `blocks.tsx` marked `proposal`, off by default, with its CSS in the "Proposals" block of `styles/web.css` under its attribute. Neither is a rule until Juan keeps it; then it loses its flag, and its rule goes into `guidelines.ts`. A section has four layouts at most.
+
 ## Adding a section
 
 1. **The section**: one file in `sections/`, named for what it is (`hero.tsx`, `feature-grid.tsx`), one exported component that takes `SectionProps` plus its content, and passes `theme`, `surface`, `pattern`, `cardPattern`, `id` and `className` to `Section`. Layouts are a prop (`layout`), not separate files. Cards are `Plate`s; icons are `IconTile`s.

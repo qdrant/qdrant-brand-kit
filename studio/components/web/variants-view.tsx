@@ -47,7 +47,7 @@ export function VariantsView({
   variants,
 }: {
   section: string
-  variants: { id: string; name: string; description: string }[]
+  variants: { id: string; name: string; description: string; proposal?: string }[]
 }) {
   const [mode, setMode] = React.useState<Mode>("both")
   const [viewport, setViewport] = React.useState<Viewport>("desktop")
@@ -74,12 +74,13 @@ export function VariantsView({
             {styleSwitches.map((sw) => (
               <button
                 key={sw.key}
+                data-proposal={"proposal" in sw ? "" : undefined}
                 type="button"
                 aria-pressed={style[sw.key]}
                 title={sw.title}
                 onClick={() => setStyle((st) => ({ ...st, [sw.key]: !st[sw.key] }))}
                 className={cn(
-                  "rounded-md px-3 py-1 text-xs",
+                  "rounded-md px-3 py-1 text-xs data-proposal:italic",
                   style[sw.key] ? "bg-muted font-semibold text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -103,8 +104,14 @@ export function VariantsView({
           <div className="flex flex-col gap-0.5">
             <h3 className="font-semibold">
               {v.name} <code className="ml-1 font-mono text-xs font-normal text-muted-foreground">{v.id}</code>
+              {v.proposal && (
+                <span className="ml-2 rounded border border-dashed border-current px-1.5 font-mono text-[10px] font-normal text-(--qd-color-secondary) uppercase">
+                  Proposal
+                </span>
+              )}
             </h3>
             <p className="text-sm text-muted-foreground">{v.description}</p>
+            {v.proposal && <p className="text-sm text-muted-foreground italic">{v.proposal}</p>}
           </div>
           <div className={cn("grid gap-4", viewport === "phone" && "grid-cols-[repeat(auto-fill,390px)]")}>
             {modes.map((m) => (

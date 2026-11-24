@@ -29,6 +29,19 @@ export const pricingTiers = defineSection<PricingTiersProps>({
       description: "Hybrid and Private Cloud as wide cards with what they're best for and their benefits (Pricing, On-Premise).",
       props: { layout: "enterprise", groups: onPremise, calculator: content.calculator },
     },
+    {
+      id: "rows",
+      name: "Price list",
+      description: "Each tier one row of a hairline table: name, price, what's included, action.",
+      props: {
+        layout: "rows",
+        header: { title: content.title, description: content.description },
+        groups: content.groups,
+        calculator: content.calculator,
+      },
+      proposal:
+        "Prices line up in one column and every tier's action sits on the same edge, so the page reads like a price list, the way infrastructure is usually priced (fal's GPU table, Browserbase's plan rows). The highlighted tier is marked by an indigo edge on its left instead of its top.",
+    },
   ],
   docs: {
     use: [
@@ -47,11 +60,11 @@ export const pricingTiers = defineSection<PricingTiersProps>({
       { part: "Calculator line", note: "A question and a link to the calculator." },
     ],
     props: [
-      { name: "layout", type: '"grid" | "enterprise"', note: "Hairline grid or wide cards." },
+      { name: "layout", type: '"grid" | "enterprise" | "rows"', note: "Hairline grid, wide cards, or rows (proposed)." },
       { name: "groups", type: "{ label, tiers: { name, price?, description?, features?, featureGroups?, note?, cta, highlight? }[] }[]", note: "One group per tab." },
       { name: "header", type: "{ kicker?, title, description?, action?, secondaryAction? }", note: "Optional." },
       { name: "calculator", type: "{ text, prefix?, link }", note: "The line under the tiers." },
     ],
   },
-  fields: [{ prop: "layout", label: "Layout", kind: "select", options: [{ value: "grid", label: "Tier grid" }, { value: "enterprise", label: "Enterprise cards" }] }],
+  fields: [{ prop: "layout", label: "Layout", kind: "select", options: [{ value: "grid", label: "Tier grid" }, { value: "enterprise", label: "Enterprise cards" }, { value: "rows", label: "Price list" }] }],
 })

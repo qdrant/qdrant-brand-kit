@@ -9,7 +9,9 @@ import { heading, type } from "../lib/type"
 export type CtaProps = SectionProps & {
   // centered: a closing statement with room around it. panel: a framed card, heading left and actions right.
   // band: one slim line between sections.
-  layout?: "centered" | "panel" | "band"
+  // Proposal (2026-11-24): command, the title as a command at a prompt in a terminal window, with a blinking caret,
+  // the description as a comment under it and the actions below.
+  layout?: "centered" | "panel" | "band" | "command"
   title: string
   description?: string
   primary: Link
@@ -42,6 +44,34 @@ export function Cta({ layout = "centered", title, description, primary, secondar
           </div>
           {actions}
         </div>
+      </Section>
+    )
+  }
+
+  if (layout === "command") {
+    return (
+      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex justify-center">
+        <Plate className="flex w-full max-w-4xl flex-col rounded-2xl">
+          <div className="flex items-center gap-2 border-b border-(--web-line) px-5 py-3.5">
+            {[0, 1, 2].map((i) => (
+              <span key={i} aria-hidden className="web-window-dot size-2.5 rounded-full" />
+            ))}
+            <span className="ml-3 font-mono text-xs text-muted-foreground">qdrant</span>
+          </div>
+          <div className="flex flex-col gap-10 p-8 md:p-12">
+            <div className="flex flex-col gap-4">
+              <h2 className={cn(heading.section, "text-balance")}>
+                <span aria-hidden className="mr-4 font-mono text-[0.6em] text-(--web-indigo)">
+                  &gt;
+                </span>
+                {title}
+                <span aria-hidden className="web-caret ml-2 inline-block h-[0.8em] w-[0.45em] translate-y-[0.08em] bg-foreground" />
+              </h2>
+              {description && <p className={cn(type.lead, "font-mono text-base")}># {description}</p>}
+            </div>
+            {actions}
+          </div>
+        </Plate>
       </Section>
     )
   }

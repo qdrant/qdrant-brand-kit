@@ -236,18 +236,22 @@ export function PageBuilder() {
           <NativeSelectOption value="dark">Dark page</NativeSelectOption>
           <NativeSelectOption value="light">Light page</NativeSelectOption>
         </NativeSelect>
-        {styleSwitches.map((sw) => (
-          <Button
-            key={sw.key}
-            variant={page.style?.[sw.key] === false ? "ghost" : "secondary"}
-            size="sm"
-            aria-pressed={page.style?.[sw.key] !== false}
-            title={sw.title}
-            onClick={() => updatePage((p) => ({ ...p, style: { ...p.style, [sw.key]: p.style?.[sw.key] === false } }))}
-          >
-            {sw.label}
-          </Button>
-        ))}
+        {styleSwitches.map((sw) => {
+          const on = page.style?.[sw.key] ?? sw.on
+          return (
+            <Button
+              key={sw.key}
+              variant={on ? "secondary" : "ghost"}
+              size="sm"
+              aria-pressed={on}
+              title={sw.title}
+              className={cn("proposal" in sw && "border border-dashed border-border")}
+              onClick={() => updatePage((p) => ({ ...p, style: { ...p.style, [sw.key]: !on } }))}
+            >
+              {sw.label}
+            </Button>
+          )
+        })}
         <div className="flex rounded-lg border p-0.5">
           {viewports.map((v) => (
             <Button

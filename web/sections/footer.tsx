@@ -29,7 +29,9 @@ const badges = [
 export type FooterProps = SectionProps & {
   // full: the brand block, link columns, newsletter, badges and the legal bar. minimal: the legal bar only, for
   // landing pages.
-  variant?: "full" | "minimal"
+  // Proposal (2026-11-24): signature, the link columns as cells split by hairlines with the brand block first, then
+  // the logo across the whole container as the page's last word, then the legal bar.
+  variant?: "full" | "minimal" | "signature"
   tagline?: string
   columns?: { title: string; links: Link[] }[]
   newsletter?: { title: string; description?: string }
@@ -67,6 +69,69 @@ export function Footer({
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} spacing="none" id={id} className={className} innerClassName="pb-8">
         {legalBar}
+      </Section>
+    )
+  }
+
+  const socialList = (
+    <ul className="flex items-center gap-4 text-muted-foreground">
+      {social.map((s) => (
+        <li key={s.name}>
+          <a href={s.href} className="flex hover:text-foreground" aria-label={s.name}>
+            <MonoImage src={`${ASSETS}/social/${s.file}.svg`} label={s.name} className={s.className} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+
+  if (variant === "signature") {
+    return (
+      <Section
+        theme={theme}
+        surface={surface}
+        pattern={pattern}
+        cardPattern={cardPattern}
+        spacing="compact"
+        id={id}
+        className={cn("pb-8 lg:pb-8", className)}
+        innerClassName="flex flex-col gap-16"
+      >
+        <nav aria-label="Footer" className="web-grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          <div className="col-span-2 flex flex-col justify-between gap-8 px-6 py-8 md:col-span-3 lg:col-span-1">
+            {tagline && <p className={type.small}>{tagline}</p>}
+            {socialList}
+          </div>
+          {columns.map((col) => (
+            <div key={col.title} className="flex flex-col gap-4 px-6 py-8">
+              <p className="font-mono text-xs tracking-wider text-muted-foreground uppercase">{col.title}</p>
+              <ul className="flex flex-col gap-2.5 text-sm">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} className="text-foreground/85 hover:text-foreground">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        <div className="flex flex-col gap-8">
+          <Logo className="h-auto w-full [&_img]:h-auto [&_img]:w-full" />
+          <div className="flex flex-wrap items-center justify-between gap-6">
+            <ul className="flex items-center gap-6 text-muted-foreground">
+              {badges.map((b) => (
+                <li key={b.name}>
+                  <MonoImage src={`${ASSETS}/badges/${b.file}.svg`} label={b.name} className="size-10" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="web-rule web-bleed">{legalBar}</div>
       </Section>
     )
   }

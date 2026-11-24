@@ -34,6 +34,13 @@ export type Feature = {
 // Home: the case-study carousel's companies (from its links) and the button under it.
 export const customers = {
   names: ["HubSpot", "Bayer", "Tripadvisor", "OpenTable", "Bazaarvoice", "Flipkart", "Sprinklr", "Deutsche Telekom"],
+  // Each name's logo in the customer logo library (content/customer-logos.ts).
+  logos: ["hubspot", "bayer", "tripadvisor", "opentable", "bazaarvoice", "flipkart", "sprinklr", "telekom"],
+  // A wider selection for a wall of logos (2026-11-24), from the customer logo library: a proposal, not a decided list.
+  wall: [
+    "hubspot", "bayer", "tripadvisor", "opentable", "bazaarvoice", "flipkart", "sprinklr", "telekom", "canva", "roche",
+    "discord", "perplexity", "cognizant", "dailymotion", "zscaler", "servicenow", "voiceflow", "deloitte",
+  ],
   action: { label: "See more customers", href: "/customers/" },
 }
 

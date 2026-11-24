@@ -3,8 +3,9 @@
 // kickers Mona Sans Mono (2026-11-17).
 export const type = {
   // Mono labels above headings, in capitals.
+  // web-kicker is a hook for the studio's Readout proposal (web.css).
   kicker:
-    "font-mono text-(length:--qd-font-size-14) leading-(--qd-line-height-150) uppercase tracking-normal text-muted-foreground",
+    "web-kicker font-mono text-(length:--qd-font-size-14) leading-(--qd-line-height-150) uppercase tracking-normal text-muted-foreground",
   h1: "font-display text-(length:--qd-type-h1-size) leading-(--qd-type-h1-line-height) tracking-(--qd-type-h1-letter-spacing) font-[var(--web-heading-weight,600)] text-foreground",
   h2: "font-display text-(length:--qd-type-h2-size) leading-(--qd-type-h2-line-height) tracking-(--qd-type-h2-letter-spacing) font-[var(--web-heading-weight,600)] text-foreground",
   h3: "font-display text-(length:--qd-type-h3-size) leading-(--qd-type-h3-line-height) tracking-(--qd-type-h3-letter-spacing) font-[var(--web-heading-weight,600)] text-foreground",

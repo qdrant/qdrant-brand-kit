@@ -18,7 +18,9 @@ import { heading, type } from "../lib/type"
 export type PricingTiersProps = SectionProps & {
   // grid: tiers side by side in a hairline grid, with a toggle between groups. enterprise: wide cards with
   // labeled lists, for deployment options sold through sales.
-  layout?: "grid" | "enterprise"
+  // Proposal (2026-11-24): rows, each tier one row of a hairline table (name, price, what's included, action), so
+  // the prices line up in one column and read like a price list.
+  layout?: "grid" | "enterprise" | "rows"
   header?: HeaderProps & { secondaryAction?: Link }
   // One group per tab (Managed, On-Premise). The toggle shows when there are two or more.
   groups: TierGroup[]
@@ -172,7 +174,33 @@ export function PricingTiers({ layout = "grid", header, groups, calculator, them
             ))}
           </div>
         )}
-        {group && (
+        {group && layout === "rows" && (
+          <ul
+            id={`${tabsId}-panel`}
+            role={groups.length > 1 ? "tabpanel" : undefined}
+            aria-labelledby={groups.length > 1 ? `${tabsId}-tab-${active}` : undefined}
+            className="web-grid grid-cols-1"
+          >
+            {group.tiers.map((tier) => (
+              <li key={tier.name} className="relative grid gap-6 px-6 py-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)_minmax(0,4fr)_auto] lg:items-start lg:gap-10">
+                {tier.highlight && <span aria-hidden className="absolute inset-y-0 left-0 w-0.5 bg-(--web-indigo)" />}
+                <div className="flex flex-col gap-2">
+                  <h3 className={heading.card}>{tier.name}</h3>
+                  {tier.description && <p className={type.small}>{tier.description}</p>}
+                </div>
+                <p className="font-mono text-lg text-foreground">{tier.price}</p>
+                <div className="flex flex-col gap-6">
+                  <GroupedLists tier={tier} />
+                  {tier.note && <p className={cn(type.xsmall, "font-mono")}>{tier.note}</p>}
+                </div>
+                <LinkButton href={tier.cta.href} variant={tier.highlight ? "default" : "secondary"} className="lg:min-w-40">
+                  {tier.cta.label}
+                </LinkButton>
+              </li>
+            ))}
+          </ul>
+        )}
+        {group && layout !== "rows" && (
           <ul
             id={`${tabsId}-panel`}
             role={groups.length > 1 ? "tabpanel" : undefined}

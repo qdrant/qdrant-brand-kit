@@ -106,7 +106,7 @@ export default async function SectionDocs({ params }: { params: Promise<{ id: st
 
         <VariantsView
           section={def.id}
-          variants={def.variants.map((v) => ({ id: v.id, name: v.name, description: v.description }))}
+          variants={def.variants.map((v) => ({ id: v.id, name: v.name, description: v.description, proposal: v.proposal }))}
         />
       </div>
     </div>

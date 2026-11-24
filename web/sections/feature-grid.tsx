@@ -17,7 +17,9 @@ export type FeatureGridProps = SectionProps & {
   items: Feature[]
   columns?: 2 | 3 | 4
   // cards: each feature on a plate. cells: features in a hairline grid, no cards.
-  appearance?: "cards" | "cells"
+  // Proposal (2026-11-24): index, the heading held on the left while the features run down the right as rows of a
+  // hairline list, each with its marker, title, text and link on one line, like a spec sheet.
+  appearance?: "cards" | "cells" | "index"
   // icon: a Lucide icon on a tinted tile. number: 01, 02… in mono. none: the title alone.
   marker?: "icon" | "number" | "none"
   // The icons' color: one family for all (indigo by default), or mixed, each item the next family (web.css, Tones).
@@ -40,6 +42,57 @@ export function FeatureGrid({
   id,
   className,
 }: FeatureGridProps) {
+  if (appearance === "index") {
+    return (
+      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-(--qd-layout-column-gap)">
+        {header && (
+          <SectionHeader
+            kicker={header.kicker}
+            title={header.title}
+            description={header.description}
+            actions={
+              header.action ? (
+                <LinkButton href={header.action.href} variant="secondary">
+                  {header.action.label}
+                </LinkButton>
+              ) : undefined
+            }
+            className="lg:sticky lg:top-24 lg:self-start lg:pr-10"
+          />
+        )}
+        <ul className="flex flex-col border-t border-(--web-line)">
+          {items.map((item, i) => {
+            const tone = (item.tone as Tone) ?? (tones === "mixed" ? toneAt(i) : tones)
+            return (
+              <li
+                key={item.id ?? `${item.title}-${i}`}
+                id={item.id}
+                className="group/row grid scroll-mt-24 grid-cols-[auto_minmax(0,1fr)] gap-x-5 gap-y-2 border-b border-(--web-line) py-7 sm:grid-cols-[auto_minmax(0,2fr)_minmax(0,3fr)]"
+              >
+                <span className="row-span-2 pt-0.5 sm:row-span-1">
+                  {marker === "icon" && item.icon ? (
+                    <IconTile name={item.icon} tone={tone} />
+                  ) : (
+                    <span className="font-mono text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+                  )}
+                </span>
+                <h3 className={cn(heading.card, "self-center")}>{item.title}</h3>
+                <div className="col-start-2 flex flex-col items-start gap-3 sm:col-start-3">
+                  {item.text && <p className={type.small}>{item.text}</p>}
+                  {item.link && (
+                    <ArrowLink href={item.link.href} className="text-sm">
+                      {item.link.label}
+                    </ArrowLink>
+                  )}
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      </Section>
+    )
+  }
+
   return (
     <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
       {header && (
