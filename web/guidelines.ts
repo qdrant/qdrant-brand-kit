@@ -144,9 +144,15 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Menu icons are bare and neutral",
-        text: "In the navbar's menus, an icon has no tile and no color family: it's bare, 16px, in the muted text color, and turns to the text color when its item is hovered or focused, so the menu reads as a list of words (Cloudflare's menus were the reference).",
+        text: "In the navbar's menus, an icon has no tile and no color family: it's bare, 16px, in the muted text color, and turns to the text color when its item is hovered or focused, so the menu reads as a list of words (Cloudflare's menus were the reference). The one exception is a menu's special section (below).",
         decided: "Design lead, 2026-11-23",
         source: "web/sections/navbar.tsx",
+      },
+      {
+        title: "A menu's special section: the products (exploring)",
+        text: "The Products menu is the menu's special section: each product has a 48px tile in its color family with its icon drawn in hexagons, a 15px label with its tag, and a one-line description in the muted text color, taken word for word from qdrant.tech. Two columns of three, the rows lined up. The hexagon icons are Lucide's own shapes measured onto a grid of small upright hexagons, like the brandmark: full size on the icon's lines, smaller around them like a halftone, and a touch larger in rings from the center, so they read as organic (web/lib/hex-icon.tsx). Exploring: they may change.",
+        decided: "Design lead, 2026-11-24",
+        source: "web/sections/navbar.tsx, web/lib/hex-icon.tsx",
       },
       {
         title: "Icon lines are pixel perfect",
