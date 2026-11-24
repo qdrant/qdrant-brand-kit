@@ -32,8 +32,8 @@ import { makeFrame } from "./effects.js";
 
 export { loadTokens, resolveToken } from "./tokens.js";
 export { canUseImage, meshesForImage } from "./library.js";
-export { varyLetterLayer, letterLayerProblems, isLetterLayer } from "./letter-variations.js";
-import { varyLetterLayer, isLetterLayer } from "./letter-variations.js";
+export { varyLetterLayer, letterLayerProblems, isLetterLayer, letterVariation, fromStudioParams } from "./letter-variations.js";
+import { varyLetterLayer, isLetterLayer, letterVariation } from "./letter-variations.js";
 export { loadPreset };
 
 // Recipe name (the "recipe" field in a preset) to its code.
@@ -81,9 +81,11 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
   // Layers (transparent generative patterns) are drawn on top, in order. A layer's
   // colorways pair with the pattern's by position: colorway 1 of the pattern draws
   // colorway 1 of the layer. options.letters makes a variation of every letter layer,
-  // within the rules in letter-variations.js.
+  // within the rules in letter-variations.js: a number picks variant n (0 = as approved),
+  // an object sets the allowed values directly.
+  const letters = typeof options.letters === "number" ? letterVariation(options.letters) : options.letters;
   for (const base of preset.layers ?? []) {
-    const layer = options.letters && isLetterLayer(base) ? varyLetterLayer(base, options.letters) : base;
+    const layer = letters && isLetterLayer(base) ? varyLetterLayer(base, letters) : base;
     const top = document.createElement("canvas");
     renderBase(top, tokens, layer, { width: canvas.width, height: canvas.height, phase: options.phase, colorway: options.colorway });
     canvas.getContext("2d").drawImage(top, 0, 0);

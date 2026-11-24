@@ -8,18 +8,18 @@
     {
       "name": "Red",
       "colors": [
-        "{color.primary.800}",
-        "{color.primary.500}",
-        "{color.primary.300}"
+        "{color.amaranth.800}",
+        "{color.amaranth.600}",
+        "{color.amaranth.200}"
       ],
       "backdrop": null
     },
     {
       "name": "Violet",
       "colors": [
-        "{color.secondary.800}",
-        "{color.secondary.500}",
-        "{color.secondary.200}"
+        "{color.indigo.800}",
+        "{color.indigo.600}",
+        "{color.indigo.200}"
       ],
       "backdrop": null
     }
@@ -53,6 +53,16 @@
       "colorMap": "random",
       "backdrop": "none",
       "noiseScale": 4.5
+    },
+    "cellRange": {
+      "shortSide": [
+        1080,
+        2160
+      ],
+      "cell": [
+        24,
+        40
+      ]
     }
   }
 }
