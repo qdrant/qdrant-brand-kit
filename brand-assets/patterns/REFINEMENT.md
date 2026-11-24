@@ -33,3 +33,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Motion-Streaks-A, B | Direction proposals P4 to P7 (96°, 104°, 144°, 160°) | Approved, with 124°, as the only streak directions; other angles snap to the nearest. P2, P3 and P8 to P10 not approved | 2026-11-24 |
 | Motion-Streaks-A, B | Direction proposals P11 (288°) and P12 (320°) | Approved; added to the streak directions | 2026-11-24 |
 | Motion-Streaks-A, B | Direction proposal P1 (0°, horizontal) | Approved; added to the streak directions | 2026-11-24 |
+| Generative-Hexagon | Proposals P1 to P3, P6 to P12 | Not approved (too busy). P4 and P5 kept as the directions to explore | 2026-11-24 |
