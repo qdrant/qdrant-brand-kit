@@ -33,6 +33,18 @@
         "seed": 35,
         "warp": 0.03,
         "drift": 0.41
+      },
+      {
+        "name": "Terminal v10",
+        "source": "pattern_variations look terminal, 2026-11-24",
+        "glyphs": "ramp",
+        "colorMap": "radial",
+        "scale": 0.65,
+        "noiseAmount": 0.62,
+        "noiseScale": 2.4,
+        "seed": 86,
+        "warp": 0.33,
+        "drift": 0.53
       }
     ]
   }

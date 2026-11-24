@@ -107,7 +107,7 @@ At its `designSize`, the pattern is pixel-identical to the tool. At any other si
 
 `renderPattern(canvas, tokens, colorSlicedB, { colorway, stripes, letters: fromStudioParams(variation.params), width, height })`
 
-Approved letter options live in B's `settings.letterOptions` (Terminal v8 and v9 so far). Use one with `{ letterOption: n }` instead of `letters`.
+Approved letter options live in B's `settings.letterOptions` (Terminal v8, v9 and v10 so far). Use one with `{ letterOption: n }` instead of `letters`.
 
 **Rotating letter variants (for agents).** Color-Sliced-Pattern-B and Motion-Streaks-Pattern-B share the same letter-layer behavior: the grid grows from 24 px (short side 1080 or less) to 40 px (4K), the letters use the colorway's 800, 600 and 200 steps from the color primitives, and variations follow the rules above. Two ways to make a variant:
 

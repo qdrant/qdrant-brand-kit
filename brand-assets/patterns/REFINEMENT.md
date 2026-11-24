@@ -22,3 +22,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Color-Sliced-A, Generative-Burst-A | Open proposals (stripes P25, P29 to P36; burst P1 to P6) | Set aside for now; nothing from them is in the presets | 2026-11-24 |
 | Color-Sliced-B | Proposal P8 (terminal v8: word glyphs, color by x, noise 0.44 at 4.7, scale 0.65) | Approved; added as letter option 0 in every colorway | 2026-11-24 |
 | Color-Sliced-B | Proposal P9 (terminal v9: random glyphs, color by y, noise 0.68 at 4.45, scale 0.65) | Approved; added as letter option 1 in every colorway | 2026-11-24 |
+| Color-Sliced-B | Proposal P10 (terminal v10: ramp glyphs, color radial, noise 0.62 at 2.4, scale 0.65) | Approved; added as letter option 2 in every colorway | 2026-11-24 |
