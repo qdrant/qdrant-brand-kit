@@ -6,6 +6,7 @@
   "colorways": [
     {
       "name": "One family, 600 → 400",
+      "onHold": "Under review: Vanesa isn't sure about this pattern yet (2026-11-24). Don't use it in creatives until she decides.",
       "from": "color.{family}.600",
       "to": "color.{family}.400",
       "defaultFamily": "indigo",
@@ -17,6 +18,7 @@
     },
     {
       "name": "Amaranth 200 → Indigo 400",
+      "onHold": "Under review: Vanesa isn't sure about this pattern yet (2026-11-24). Don't use it in creatives until she decides.",
       "textMask": "none",
       "textColor": "dark",
       "$textColor": "Light pattern: dark text and the Light logo, no mask (Vanesa, 2026-11-16). Never the monochrome Black logo.",
