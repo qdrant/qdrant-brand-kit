@@ -45,6 +45,18 @@
         "seed": 86,
         "warp": 0.33,
         "drift": 0.53
+      },
+      {
+        "name": "Terminal v4",
+        "source": "pattern_variations look terminal, 2026-11-24",
+        "glyphs": "ramp",
+        "colorMap": "radial",
+        "scale": 0.63,
+        "noiseAmount": 0.49,
+        "noiseScale": 2.25,
+        "seed": 46,
+        "warp": 0.2,
+        "drift": 0.85
       }
     ]
   }
