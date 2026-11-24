@@ -65,5 +65,8 @@ export const navbar = defineSection<NavbarProps>({
       { name: "sticky", type: "boolean", note: "Keeps it at the top while the page scrolls." },
     ],
   },
-  fields: [{ prop: "sticky", label: "Sticky", kind: "boolean" }],
+  fields: [
+    { prop: "sticky", label: "Sticky", kind: "boolean" },
+    { prop: "markStyle", label: "Product marks", kind: "select", options: [{ value: "halftone", label: "Halftone" }, { value: "tones", label: "Tones" }, { value: "outline", label: "Outline" }, { value: "matrix", label: "Matrix" }] },
+  ],
 })

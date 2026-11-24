@@ -9,7 +9,7 @@ const item = (on: boolean) =>
   cn("rounded-md px-2 py-1.5 text-sm hover:bg-muted", on ? "bg-muted font-semibold" : "text-muted-foreground")
 
 // The Docs tab's sidebar: the website's guidelines and customer logos first, then every section by category. `current`
-// is a section id, "guidelines" or "customer-logos".
+// is a section id, "guidelines", "customer-logos" or "product-marks".
 export function DocsSidebar({ current }: { current: string }) {
   return (
     <aside className="sticky top-12 hidden h-[calc(100svh-3rem)] w-60 shrink-0 overflow-y-auto border-r p-4 md:block">
@@ -33,6 +33,13 @@ export function DocsSidebar({ current }: { current: string }) {
           >
             Customer logos
             <span className="ml-1.5 text-xs text-muted-foreground">{customerLogos.length}</span>
+          </Link>
+          <Link
+            href="/web/docs/product-marks"
+            aria-current={current === "product-marks" ? "page" : undefined}
+            className={item(current === "product-marks")}
+          >
+            Product marks
           </Link>
         </div>
         {sectionsByCategory().map((c) => (

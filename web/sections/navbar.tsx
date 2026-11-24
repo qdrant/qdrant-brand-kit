@@ -29,7 +29,7 @@ import {
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Link, Menu, MenuGroup } from "../content/site"
-import { HexIcon } from "../lib/hex-icon"
+import { HexIcon, type HexStyle } from "../lib/hex-icon"
 import { Icon } from "../lib/icon"
 import { toneAt } from "../lib/tone"
 import { Plate } from "../lib/plate"
@@ -48,6 +48,8 @@ export type NavbarProps = SectionProps & {
   featured?: { tag?: string; title: string; link: Link }
   // Stays at the top of the window while the page scrolls.
   sticky?: boolean
+  // How the products' marks are drawn in the menu's special section (exploring, design lead, 2026-11-24).
+  markStyle?: HexStyle
 }
 
 // The site's top menu (2026-11-21). From lg, each menu opens a panel of columns: a mono group label over items
@@ -62,6 +64,7 @@ export function Navbar({
   start,
   featured,
   sticky,
+  markStyle = "halftone",
   theme,
   surface,
   pattern,
@@ -124,6 +127,7 @@ export function Navbar({
                     <MegaPanel
                       groups={menu.groups}
                       featured={i === 0 ? featured : undefined}
+                      markStyle={markStyle}
                     />
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -191,9 +195,11 @@ function columnsOf<T>(items: T[]): T[][] {
 function FeatureItem({
   item,
   index,
+  markStyle,
 }: {
   item: MenuGroup["items"][number]
   index: number
+  markStyle: HexStyle
 }) {
   return (
     <NavigationMenuLink
@@ -202,11 +208,14 @@ function FeatureItem({
     >
       <span
         className={cn(
-          "web-icon-tile grid size-12 shrink-0 place-items-center rounded-xl",
-          `web-tone-${toneAt(index)}`
+          "web-icon-tile grid size-12 shrink-0 place-items-center overflow-hidden rounded-xl",
+          `web-tone-${toneAt(index)}`,
+          markStyle === "matrix" && "web-mark-matrix"
         )}
       >
-        {(item.mark || item.icon) && <HexIcon mark={item.mark} name={item.icon} className="size-9" />}
+        {(item.mark || item.icon) && (
+          <HexIcon mark={item.mark} name={item.icon} variant={markStyle} className="size-9" />
+        )}
       </span>
       <span className="flex min-w-0 flex-col gap-1 pt-0.5">
         <span className="flex items-center gap-2 text-[15px] leading-snug font-medium text-foreground">
@@ -233,9 +242,11 @@ function FeatureItem({
 function MegaPanel({
   groups,
   featured,
+  markStyle,
 }: {
   groups: MenuGroup[]
   featured?: NavbarProps["featured"]
+  markStyle: HexStyle
 }) {
   return (
     <div className="flex h-full gap-2 rounded-xl border border-(--web-line) bg-popover p-2">
@@ -260,7 +271,7 @@ function MegaPanel({
               >
                 {group.items.map((item, index) => (
                   <li key={item.label} className="flex">
-                    <FeatureItem item={item} index={index} />
+                    <FeatureItem item={item} index={index} markStyle={markStyle} />
                   </li>
                 ))}
               </ul>
