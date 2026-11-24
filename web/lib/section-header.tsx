@@ -30,10 +30,13 @@ export function SectionHeader({
   className?: string
 }) {
   const titleClass = cn(Heading === "h1" ? heading.page : heading.section, "text-balance")
-  // The kicker starts with a node, the same hexagon as where the page's lines meet (web.css).
+  // The kicker starts with a node, the same hexagon as where the page's lines meet (web.css), centered on the
+  // kicker's first line, however many lines it takes (design lead, 2026-11-24).
   const kickerEl = kicker ? (
-    <p className={cn(type.kicker, "flex items-center gap-2.5")}>
-      <Node blink />
+    <p className={cn(type.kicker, "flex items-start gap-2.5")}>
+      <span className="flex h-[1lh] shrink-0 items-center">
+        <Node blink />
+      </span>
       {kicker}
     </p>
   ) : null

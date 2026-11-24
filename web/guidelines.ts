@@ -70,6 +70,12 @@ export const guidelines: GuidelineGroup[] = [
         text: "The creative limit of two text sizes doesn't apply: web pages need more sizes, and tables may right-align numbers.",
         source: "design-system/AGENTS.md",
       },
+      {
+        title: "Kickers are 12px on phones, and their node sits on the first line",
+        text: "A kicker (the mono label above a heading) is 14px, and 12px under 640px. Its hexagon node is centered on the kicker's first line, so a kicker that wraps keeps the node beside its first word, not between the lines.",
+        decided: "Design lead, 2026-11-24",
+        source: "web/lib/type.tsx, web/lib/section-header.tsx",
+      },
     ],
   },
   {
