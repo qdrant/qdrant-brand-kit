@@ -270,10 +270,15 @@ function MegaPanel({
   highlightStyle?: NavbarProps["highlightStyle"]
 }) {
   // The highlighted item has its own space, so it leaves its group's list.
+  // The highlighted item has its own space, so it leaves its group's list, and so do the links it shows (the tile's
+  // main sections include API Reference).
+  const shownByHighlight = new Set(
+    highlight ? [highlight.href, ...(highlightStyle === "tile" ? highlight.areas.map((a) => a.href) : [])] : []
+  )
   const groups = highlight
     ? allGroups.map((group) => ({
         ...group,
-        items: group.items.filter((item) => item.href !== highlight.href),
+        items: group.items.filter((item) => !shownByHighlight.has(item.href)),
       }))
     : allGroups
   const band = highlight && highlightStyle === "band"
@@ -516,7 +521,7 @@ const docsDrift = generativePattern({
 //   the right, the menu's groups below it (after Slack API's docs menu, which opens with a header row).
 // - hub: a column of its own on a tray, with its Getting Started links and a grid of the client libraries (after
 //   Codecademy's Docs, which opens its own space with a chip per language).
-// - tile: a compact card with no paragraph and no icon, its title and its quickstarts, and Pixel drift moving
+// - tile: a compact card with no paragraph and no icon, its title and the docs' main sections stacked, and Pixel drift moving
 //   quietly in its lower corner (after the design lead's reference: dark resource tiles with a pixel accent in a corner).
 function Highlight({
   item,
@@ -576,18 +581,18 @@ function Highlight({
     return (
       <Plate
         as="div"
-        className="group/tile relative flex w-60 shrink-0 flex-col gap-2 overflow-hidden rounded-lg p-4"
+        className="group/tile relative flex w-60 shrink-0 flex-col gap-1 overflow-hidden rounded-lg p-2"
       >
-        {/* The pattern fills the lower right and fades toward the title. */}
+        {/* The pattern fills the lower right, past where the labels end, and fades toward the title. */}
         <span
           aria-hidden
-          className="pointer-events-none absolute right-0 bottom-0 h-[78%] w-[72%] [mask-image:radial-gradient(120%_100%_at_100%_100%,black_30%,transparent_75%)]"
+          className="pointer-events-none absolute right-0 bottom-0 h-[80%] w-[42%] [mask-image:radial-gradient(130%_100%_at_100%_100%,black_35%,transparent_80%)]"
         >
           <Drift />
         </span>
         <NavigationMenuLink
           href={item.href}
-          className="relative w-fit gap-1.5 p-0 text-[15px] leading-snug font-medium text-foreground hover:bg-transparent hover:text-(--web-link)"
+          className="relative w-fit gap-1.5 px-3 pt-3 pb-2 text-[15px] leading-snug font-medium text-foreground hover:bg-transparent hover:text-(--web-link)"
         >
           {item.label}
           <ArrowUpRight
@@ -595,13 +600,11 @@ function Highlight({
             aria-hidden
           />
         </NavigationMenuLink>
-        <ul className="relative flex flex-wrap gap-x-3 gap-y-1">
-          {item.start.map((link) => (
+        {/* The docs' main sections, stacked, at the size of the menu's other links. */}
+        <ul className="relative flex flex-col gap-0.5">
+          {item.areas.map((link) => (
             <li key={link.label}>
-              <NavigationMenuLink
-                href={link.href}
-                className="p-0 text-xs text-muted-foreground hover:bg-transparent hover:text-foreground"
-              >
+              <NavigationMenuLink href={link.href} className="p-3 text-sm">
                 {link.label}
               </NavigationMenuLink>
             </li>

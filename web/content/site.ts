@@ -16,6 +16,8 @@ export type MenuHighlight = Link & {
   // Getting Started links, then the sections.
   start: Link[]
   sections: Link[]
+  // The main sections, in the docs' own top bar.
+  areas: Link[]
   libraries: Link[]
   action: Link
 }
@@ -41,6 +43,14 @@ export const docsHighlight: MenuHighlight = {
   sections: [
     { label: "Deploy", href: "/documentation/deploy-intro/" },
     { label: "Ecosystem", href: "/documentation/ecosystem/" },
+  ],
+  // The docs' top bar, in its order (qdrant.tech/documentation, read 2026-11-24).
+  areas: [
+    { label: "Develop", href: "/documentation/" },
+    { label: "Deploy", href: "/documentation/deploy-intro/" },
+    { label: "Ecosystem", href: "/documentation/ecosystem/" },
+    { label: "Learn", href: "/learn/" },
+    { label: "API Reference", href: "https://api.qdrant.tech/api-reference" },
   ],
   libraries: [
     { label: "Python", href: "https://python-client.qdrant.tech/" },
