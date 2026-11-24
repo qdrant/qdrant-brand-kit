@@ -48,7 +48,7 @@ export type NavbarProps = SectionProps & {
   featured?: { tag?: string; title: string; link: Link }
   // Stays at the top of the window while the page scrolls.
   sticky?: boolean
-  // How the products' marks are drawn in the menu's special section (exploring, design lead, 2026-11-24).
+  // How the products' marks are drawn in the menu's special section (exploring; matrix, design lead, 2026-11-24).
   markStyle?: HexStyle
 }
 
@@ -64,7 +64,7 @@ export function Navbar({
   start,
   featured,
   sticky,
-  markStyle = "halftone",
+  markStyle = "matrix",
   theme,
   surface,
   pattern,
@@ -209,8 +209,7 @@ function FeatureItem({
       <span
         className={cn(
           "web-icon-tile grid size-12 shrink-0 place-items-center overflow-hidden rounded-xl",
-          `web-tone-${toneAt(index)}`,
-          markStyle === "matrix" && "web-mark-matrix"
+          `web-tone-${toneAt(index)}`
         )}
       >
         {(item.mark || item.icon) && (

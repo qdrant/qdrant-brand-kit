@@ -441,19 +441,6 @@
   box-shadow: inset 0 0.5px 0 var(--web-window-dot-shine), var(--web-window-dot-rim);
 }
 
-/* A product mark's tile in the matrix style (Products menu, exploring, design lead, 2026-11-24): a saturated gradient
-   in the mark's color family, lighter at the top left, with the mark in white over it. */
-.web-mark-matrix {
-  box-shadow: none;
-  background: linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--tone-fg) 55%, white) 0%,
-    var(--tone-fg) 55%,
-    color-mix(in oklab, var(--tone-fg) 75%, black) 100%
-  );
-  color: white;
-}
-
 /* Syntax colors for code (web/lib/code.tsx, design lead, 2026-11-24): VS Code's Dark+ and Light+ roles in the
    palette, 300 on dark and 700 on light, each at 5:1 or more on a code panel. Comments take the muted text color;
    names, operators and brackets keep the text color. Never amaranth or red. */

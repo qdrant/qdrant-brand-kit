@@ -19,12 +19,12 @@ const styles: { id: HexStyle; name: string; note: string }[] = [
   {
     id: "matrix",
     name: "Matrix",
-    note: "A coarse grid, 10 across: even white hexagons, a little smaller at the edges, on a gradient tile with a faint field.",
+    note: "A coarse grid, 13 across: even hexagons, a little smaller at the edges, over a faint field of tiny ones, on the same tinted tile. The menu's.",
   },
 ]
 
 const tile = (style: HexStyle, i: number) =>
-  cn("web-icon-tile grid shrink-0 place-items-center overflow-hidden", `web-tone-${toneAt(i)}`, style === "matrix" && "web-mark-matrix")
+  cn("web-icon-tile grid shrink-0 place-items-center overflow-hidden", `web-tone-${toneAt(i)}`)
 
 // Every product mark in every style, large and at the menu's size (the Docs tab's Product marks page). A client
 // component, since the marks are drawn in the browser.

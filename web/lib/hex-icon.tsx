@@ -15,8 +15,8 @@ import { icons } from "./icon"
 //   (after halftone-dot icon sets).
 // - outline: 20 across; full hexagons along each shape's edge, small ones inside it, so a mark reads as an outline
 //   with a light fill.
-// - matrix: a coarse grid, 10 across, even hexagons like an LED matrix, a little smaller along the edges, meant for a
-//   saturated gradient tile with a faint field of tiny hexagons behind them.
+// - matrix: a coarse grid, 13 across, even hexagons like an LED matrix, a little smaller along the edges, over a faint
+//   field of tiny hexagons, in the mark's color on its tinted tile like the others (the menu's, design lead, 2026-11-24).
 //
 // How: the shapes are rendered hidden at their 24-unit size and every cell of a hex grid asks the browser whether it's
 // inside them (isPointInFill; for a Lucide icon also isPointInStroke). It runs in the browser once per mark and style.
@@ -27,7 +27,7 @@ type Cell = { x: number; y: number; r: number }
 
 const cache = new Map<string, Cell[]>()
 
-const densities: Record<HexStyle, number> = { halftone: 14, tones: 22, outline: 20, matrix: 10 }
+const densities: Record<HexStyle, number> = { halftone: 14, tones: 22, outline: 20, matrix: 13 }
 
 // Qdrant's product marks: custom, from simple solid shapes on the 24-unit grid, each about the same weight. Shapes are
 // drawn in order: data-hole cuts out; data-shade shades what's already drawn, and data-shade-add draws a shaded area
@@ -40,13 +40,13 @@ const hexagon = (r: number, cx = 12, cy = 12) =>
 export const marks: Record<string, { name: string; shapes: React.ReactNode }> = {
   engine: {
     name: "Vector Search Engine",
-    // An upright hexagon like the brandmark, a ring around a hexagonal core; shaded between them.
+    // Search: a magnifying glass, its lens shaded.
     shapes: (
       <>
-        <polygon points={hexagon(10.5)} />
-        <polygon data-hole points={hexagon(6.6)} />
-        <polygon data-shade-add points={hexagon(6.6)} />
-        <polygon points={hexagon(3.2)} />
+        <circle cx="10" cy="10" r="8" />
+        <circle data-hole cx="10" cy="10" r="4.8" />
+        <circle data-shade-add cx="10" cy="10" r="4.8" />
+        <polygon points="14.6,16.9 16.9,14.6 23,20.7 20.7,23" />
       </>
     ),
   },
@@ -65,35 +65,47 @@ export const marks: Record<string, { name: string; shapes: React.ReactNode }> = 
   },
   hybrid: {
     name: "Hybrid Cloud",
-    // A circle (the cloud, shaded) beside a square (your infrastructure, solid), a clear gap between them.
+    // A cloud (shaded) above a server (your infrastructure, solid), with a slot.
     shapes: (
       <>
-        <circle cx="6.5" cy="12" r="6" />
-        <circle data-shade cx="6.5" cy="12" r="6" />
-        <rect x="14" y="6" width="9.5" height="12" />
+        <circle cx="7.5" cy="7.5" r="3.5" />
+        <circle cx="12.5" cy="5.5" r="4.5" />
+        <circle cx="17" cy="8" r="3.2" />
+        <rect x="7.5" y="7" width="9.5" height="4.2" />
+        <rect data-shade x="0" y="0" width="24" height="12" />
+        <rect x="3" y="14" width="18" height="8.5" rx="1" />
+        <rect data-hole x="6" y="17.3" width="9" height="2" />
       </>
     ),
   },
   private: {
     name: "Private Cloud",
-    // A shield with a round lock; its right half shaded.
+    // A padlock: a shackle over a solid body with a keyhole; the shackle shaded.
     shapes: (
       <>
-        <path d="M12 2 20.5 5.5V11.5C20.5 16.5 17 20.4 12 22 7 20.4 3.5 16.5 3.5 11.5V5.5Z" />
-        <rect data-shade x="12" y="0" width="12" height="24" />
-        <circle data-hole cx="12" cy="11.5" r="3" />
+        <circle cx="12" cy="9" r="6.5" />
+        <circle data-hole cx="12" cy="9" r="3.4" />
+        <rect data-shade x="0" y="0" width="24" height="11" />
+        <rect x="3.5" y="10.5" width="17" height="12" rx="1.5" />
+        <circle data-hole cx="12" cy="15.5" r="1.8" />
+        <rect data-hole x="11.2" y="15.5" width="1.6" height="3.5" />
       </>
     ),
   },
   edge: {
     name: "Edge",
-    // A solid point inside a ring, computing close to the data; the ring shaded.
+    // A robot head like Qbot's: a rounded helmet with a tab on top and an ear on each side, its visor cut out (shaded
+    // in the tones style) and two eyes inside it.
     shapes: (
       <>
-        <circle cx="12" cy="12" r="10.5" />
-        <circle data-shade cx="12" cy="12" r="10.5" />
-        <circle data-hole cx="12" cy="12" r="7.5" />
-        <circle cx="12" cy="12" r="4.5" />
+        <rect x="9" y="1" width="6" height="4" rx="1" />
+        <rect x="0.5" y="9" width="3.5" height="6" rx="1.5" />
+        <rect x="20" y="9" width="3.5" height="6" rx="1.5" />
+        <rect x="3" y="3.5" width="18" height="17.5" rx="7" />
+        <rect data-hole x="5.5" y="7.5" width="13" height="10" rx="4" />
+        <rect data-shade-add x="5.5" y="7.5" width="13" height="10" rx="4" />
+        <circle cx="9" cy="12.5" r="2" />
+        <circle cx="15" cy="12.5" r="2" />
       </>
     ),
   },
