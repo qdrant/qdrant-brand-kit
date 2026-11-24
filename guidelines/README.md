@@ -44,7 +44,7 @@ Decided by Vanesa on 2026-11-04.
 | Tone | Family | Patterns |
 | --- | --- | --- |
 | Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Refracted-Pattern-A, Color-Sliced-Pattern-A, Color-Sliced-Pattern-B |
-| Serious / technical | Mesh and generative patterns | Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A, every Generative pattern (Hexagon, Burst, Dash, Glyph), in any colorway, and Color-Sliced-Pattern-B |
+| Serious / technical | Mesh and generative patterns | Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A, every Generative pattern (Hexagon, Burst, Dash), in any colorway, and Color-Sliced-Pattern-B |
 
 Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (decided 2026-11-11).
 
