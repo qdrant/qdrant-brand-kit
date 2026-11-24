@@ -24,3 +24,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Color-Sliced-B | Proposal P9 (terminal v9: random glyphs, color by y, noise 0.68 at 4.45, scale 0.65) | Approved; added as letter option 1 in every colorway | 2026-11-24 |
 | Color-Sliced-B | Proposal P10 (terminal v10: ramp glyphs, color radial, noise 0.62 at 2.4, scale 0.65) | Approved; added as letter option 2 in every colorway | 2026-11-24 |
 | Color-Sliced-B | Proposal P16 (terminal v4: ramp glyphs, color radial, noise 0.49 at 2.25, scale 0.63) | Approved; added as letter option 3 in every colorway. The other terminal proposals are not approved | 2026-11-24 |
+| Generative-Hexagon-B | All | Same as the other generative patterns: Motion Streaks gradient, colorways Indigo, Amaranth, Teal (on hold), hexagons in 800/600/200 | 2026-11-24 |
