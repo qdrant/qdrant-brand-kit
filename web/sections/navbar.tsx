@@ -303,7 +303,9 @@ function MegaPanel({
           {groups.map((group, i) => (
             <div
               key={group.title ?? i}
-              className="flex flex-col gap-2 px-3 py-3 first:pl-2 last:pr-2"
+              // The same 12px between a row's hover and the line beside it, inside and at the panel's edges
+              // (the panel's own 8px plus 4px; design lead, 2026-11-24).
+              className="flex flex-col gap-2 px-3 py-3 first:pl-1 last:pr-1"
             >
               {group.title && (
                 <p className="px-3 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
@@ -501,8 +503,9 @@ const docsDrift = generativePattern({
   fade: false,
   params: {
     layout: "grid",
-    // Smaller than Pixel drift's 10px cells, for the tile's short height (design lead, 2026-11-24).
-    cell: 6,
+    // Smaller than Pixel drift's 10px cells, for the tile's short height, and spaced out for about a quarter fewer
+    // hexagons at the same size (design lead, 2026-11-24).
+    cell: 7,
     shape: "gradient",
     rotation: 40,
     size: 1,
@@ -516,7 +519,7 @@ const docsDrift = generativePattern({
     element: "hexagon",
     orientation: "fixed",
     elementRotation: 30,
-    scale: 0.62,
+    scale: 0.53,
     sizeByValue: false,
     density: "stochastic",
     threshold: 0,
@@ -589,9 +592,15 @@ function Highlight({
   if (variant === "tile") {
     const Drift = docsDrift.Layer
     return (
+      // A simple plate (no inner top light) with a much quieter edge than a card's: the text color at 6%
+      // (design lead, 2026-11-24).
       <Plate
         as="div"
+        simple
         className="group/tile relative isolate flex h-11 shrink-0 overflow-hidden rounded-lg"
+        style={{
+          borderColor: "color-mix(in oklab, var(--foreground) 6%, transparent)",
+        }}
       >
         {/* The whole tile is the link, with the menu's links' hover; its label and arrow turn indigo on hover, and the arrow is
             as heavy as the label (2.75 on Lucide's grid, Mona Sans Medium's stem, like ArrowLink; design lead, 2026-11-24). The label sits at the top, in line with the column's rows. */}
