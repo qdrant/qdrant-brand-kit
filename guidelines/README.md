@@ -60,7 +60,7 @@ The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patter
 - **On hold: teal.** Teal pattern colorways (Motion Streaks) are allowed in principle but **on hold until the council approves the sub-direction** (Vanesa, 2026-11-24). Until then, never use a colorway marked `onHold`. Other colors stay out of pattern backgrounds.
 - **On hold: mesh patterns and Color-Refracted-Pattern-A.** Every mesh pattern (Mesh-Refracted A to D, Mesh-Sliced-A, Mesh-Dithered-A) and both Color-Refracted-A colorways are on hold while Vanesa reviews them (2026-11-24). A pattern or colorway marked `onHold` is never used in creatives.
 - **Proportions (provisional):** indigo for most creatives, amaranth rarely. These aren't final: they'll be revised after the council approves the direction (Vanesa, 2026-11-24).
-- **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway, Hexagon-B, Dash-B) is only for creatives that need to **grab a lot of attention and be more impactful**.
+- **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway) is only for creatives that need to **grab a lot of attention and be more impactful**.
 - **Ask:** never pick amaranth on your own. Offer it, and use it only when the person says yes.
 - Everywhere else, amaranth stays an accent (buttons, highlights), as [`primitives/colors/`](../primitives/colors/) says.
 - **Must: never amaranth on amaranth** (Vanesa, 2026-11-16). On an amaranth pattern:
@@ -86,8 +86,8 @@ Rules:
   | `textMask` | Patterns | What to do |
   | --- | --- | --- |
   | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern-A, Generative-Dash-Pattern-B | Mask, 40% behind the text |
-  | `none` | Color-Refracted-Pattern-A, Generative-Hexagon-Pattern-B | No mask: text sits straight on the pattern |
-  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A, Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
+  | `none` | Color-Refracted-Pattern-A | No mask: text sits straight on the pattern |
+  | `both` | Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A, Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
   | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.

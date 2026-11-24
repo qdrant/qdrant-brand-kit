@@ -1,10 +1,10 @@
 {
   "name": "Generative-Hexagon-Pattern-B",
-  "textMask": "none",
+  "textMask": "both",
   "recipe": "generative-pattern",
   "extends": "generative-pattern.shared",
   "source": "Pattern Studio export, 1620 x 1080",
-  "$description": "Pattern Studio's hexagons, colored by height, on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%, top to bottom), hexagons in the family's 800, 600 and 200, like every generative pattern (Vanesa, 2026-11-24).",
+  "$description": "Pattern Studio's hexagons on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%, top to bottom), hexagons in the family's 800, 600 and 200, like every generative pattern. Hexagon-C was merged into it on 2026-11-24 (the only difference was the color mapping), so it has two approved looks: colored top to bottom (as is) and from the center out (renderPattern option variant: 0).",
   "colorways": [
     {
       "name": "Background → Indigo 900",
@@ -85,6 +85,12 @@
       "colorMap": "y",
       "alphaByValue": true,
       "minAlpha": 0
-    }
+    },
+    "variants": [
+      {
+        "name": "From the center out (was Hexagon-C)",
+        "colorMap": "radial"
+      }
+    ]
   }
 }

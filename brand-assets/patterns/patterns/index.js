@@ -74,7 +74,7 @@ export function choicesFor(preset, tokens) {
 // 1080 x 1080 when left out. A wide banner, a tall story or a 4K poster all work.
 // options: { colorway: index, family, stripes } for color patterns (stripes: an index into
 // the preset's approved stripes, Color-Sliced-A), { mesh } for mesh patterns,
-// { colorway } for generative patterns (optional { phase } to draw
+// { colorway, variant } for generative patterns (variant: an index into settings.variants; optional { phase } to draw
 // another moment of the loop, for animation later). Mesh patterns return the brand check:
 // { pass, offBrand: % of off-palette pixels }.
 export function renderPattern(canvas, tokens, preset, options = {}) {
@@ -104,7 +104,16 @@ function renderBase(canvas, tokens, preset, options) {
   const height = Math.round(options.height ?? 1080);
   if (!(width >= 1 && height >= 1)) throw new Error(`Width and height must be at least 1 px, got ${width} x ${height}`);
   const frame = makeFrame(width, height);
-  if (isGenerativePattern(preset)) return recipe.render(canvas, tokens, preset, null, frame, { phase: options.phase, colorway: options.colorway });
+  if (isGenerativePattern(preset)) {
+    // options.variant picks one of the preset's approved variants (settings.variants): engine values on top of its own.
+    const variant = options.variant == null ? null : preset.settings.variants?.[options.variant];
+    if (options.variant != null && !variant) throw new Error(`${preset.name} has no approved variant #${options.variant}`);
+    if (variant) {
+      const { name, ...engine } = variant;
+      preset = { ...preset, settings: { ...preset.settings, engine: { ...preset.settings.engine, ...engine } } };
+    }
+    return recipe.render(canvas, tokens, preset, null, frame, { phase: options.phase, colorway: options.colorway });
+  }
   if (isMeshPattern(preset)) {
     if (!options.mesh) throw new Error(`${preset.name} needs a mesh: createMesh(image, tokens, preset)`);
     return recipe.render(canvas, tokens, preset, options.mesh, frame);

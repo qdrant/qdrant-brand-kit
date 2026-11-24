@@ -122,6 +122,13 @@ for (const id of ids) {
     }
   }
 
+  // Approved variants (generative): only engine settings the pattern already has.
+  for (const v of p.settings?.variants ?? []) {
+    const { name, ...values } = v;
+    const unknown = Object.keys(values).filter((k) => !(k in (p.settings?.engine ?? {})));
+    if (unknown.length) errors.push(`${where}: variant "${name}" sets ${unknown.join(", ")}, which the engine doesn't have`);
+  }
+
   // Approved letter options: only the settings a letter variation may change.
   for (const o of p.settings?.letterOptions ?? []) {
     const { name, source, ...values } = o;
