@@ -60,9 +60,9 @@ export const guidelines: GuidelineGroup[] = [
     intro: "Mona Sans, with ss05 and ss06 on, in the type set's sizes.",
     rules: [
       {
-        title: "Headings from 60px, in Medium (a trial)",
-        text: "H1 60, H2 52, H3 44, H4 38, H5 30, H6 22, with line heights 1.1, 1.12, 1.14, 1.16, 1.21 and 1.3, in Medium instead of SemiBold. Never Bold. If it's kept, it moves into the type primitives.",
-        decided: "Design lead, 2026-11-21 (H3 44)",
+        title: "Headings from 56px, in Medium (a trial)",
+        text: "H1 56, H2 48, H3 40, H4 32, H5 24, H6 20: steps of 8 down to 24, then 20. Line heights 1.11, 1.13, 1.16, 1.2, 1.27 and 1.33, on the same curve as before. In Medium instead of SemiBold. Never Bold. If it's kept, it moves into the type primitives. Until 2026-11-24 the trial started at 60 (60, 52, 44, 38, 30, 22).",
+        decided: "Design lead, 2026-11-21; from 56px on 2026-11-24",
         source: "web/styles/web.css",
       },
       {

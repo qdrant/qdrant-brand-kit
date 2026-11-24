@@ -188,7 +188,7 @@ All of these are in `web/guidelines.ts` with their dates. A short list, so you k
   - A visual's frame hugs it and sits on the outer side of its row.
   - A wide card's subject (the Multi-AZ globe) can sit in the center, with its points around it.
 - **Motion.** In-page links scroll with an ease-in-out, in 0.6 to 1.1 seconds.
-- **Type.** A trial for headings, from 60px in Medium, with a switch to compare it. It goes into the primitives only with the visual designer's yes.
+- **Type.** A trial for headings, from 56px in Medium, with a switch to compare it. It goes into the primitives only with the visual designer's yes.
 
 ## Never
 
