@@ -6,15 +6,15 @@
   "extends": "shared",
   "colorways": [
     {
-      "name": "Neutral 950 → Primary 500",
+      "name": "Neutral 950 → Amaranth 600",
       "from": "color.neutral.950",
-      "to": "color.primary.500",
+      "to": "color.amaranth.600",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
     },
     {
-      "name": "Neutral 950 → Secondary 500",
+      "name": "Neutral 950 → Indigo 600",
       "from": "color.neutral.950",
-      "to": "color.secondary.500",
+      "to": "color.indigo.600",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
     }
   ],

@@ -6,8 +6,8 @@
     "noise": null,
     "grade": {
       "anchors": [
-        "{color.primary.500}",
-        "{color.secondary.500}"
+        "{color.amaranth.600}",
+        "{color.indigo.600}"
       ],
       "hueSnap": 100,
       "minSaturation": 70,

@@ -24,6 +24,7 @@ import * as meshRefracted from "./mesh-refracted-pattern.js";
 import * as meshSliced from "./mesh-sliced-pattern.js";
 import * as meshDithered from "./mesh-dithered-pattern.js";
 import * as generative from "./generative-pattern.js";
+import * as motionStreaks from "./motion-streaks-pattern.js";
 import { colorwayTokens, familiesFor } from "./tokens.js";
 import { imageToMesh } from "./mesh-source.js";
 import { loadAllPresets, loadPreset } from "./presets.js";
@@ -31,6 +32,8 @@ import { makeFrame } from "./effects.js";
 
 export { loadTokens, resolveToken } from "./tokens.js";
 export { canUseImage, meshesForImage } from "./library.js";
+export { varyLetterLayer, letterLayerProblems, isLetterLayer, letterVariation, fromStudioParams } from "./letter-variations.js";
+import { varyLetterLayer, isLetterLayer, letterVariation } from "./letter-variations.js";
 export { loadPreset };
 
 // Recipe name (the "recipe" field in a preset) to its code.
@@ -41,6 +44,7 @@ export const recipes = {
   "mesh-sliced-pattern": meshSliced,
   "mesh-dithered-pattern": meshDithered,
   "generative-pattern": generative,
+  "motion-streaks-pattern": motionStreaks,
 };
 
 // Every preset listed in presets/index.json, with its shared settings merged in.
@@ -76,8 +80,12 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
   const result = renderBase(canvas, tokens, preset, options);
   // Layers (transparent generative patterns) are drawn on top, in order. A layer's
   // colorways pair with the pattern's by position: colorway 1 of the pattern draws
-  // colorway 1 of the layer.
-  for (const layer of preset.layers ?? []) {
+  // colorway 1 of the layer. options.letters makes a variation of every letter layer,
+  // within the rules in letter-variations.js: a number picks variant n (0 = as approved),
+  // an object sets the allowed values directly.
+  const letters = typeof options.letters === "number" ? letterVariation(options.letters) : options.letters;
+  for (const base of preset.layers ?? []) {
+    const layer = letters && isLetterLayer(base) ? varyLetterLayer(base, letters) : base;
     const top = document.createElement("canvas");
     renderBase(top, tokens, layer, { width: canvas.width, height: canvas.height, phase: options.phase, colorway: options.colorway });
     canvas.getContext("2d").drawImage(top, 0, 0);
@@ -99,7 +107,7 @@ function renderBase(canvas, tokens, preset, options) {
   }
   const colorway = preset.colorways[options.colorway ?? 0];
   const family = options.family ?? colorway.defaultFamily;
-  return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame);
+  return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame, options);
 }
 
 // Generative patterns that draw letters need their fonts loaded first, or the browser

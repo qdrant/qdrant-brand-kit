@@ -1,0 +1,6 @@
+{
+  "name": "qdrant-patterns",
+  "private": true,
+  "type": "module",
+  "description": "Plain ES modules, so the validator can share code with the browser. Not part of the pnpm workspace."
+}

@@ -24,7 +24,10 @@ export function hexToRgba(hex) {
 // chosen color family, so one colorway can work for every family.
 export function colorwayTokens(colorway, family) {
   const ref = (path) => `{${path.replace("{family}", family)}}`;
-  return { from: ref(colorway.from), to: ref(colorway.to) };
+  const tokens = { from: ref(colorway.from), to: ref(colorway.to) };
+  // Motion streaks also take the streak color.
+  if (colorway.streak) tokens.streak = ref(colorway.streak);
+  return tokens;
 }
 
 // The families that have every step a colorway needs, limited to the colorway's own

@@ -5,23 +5,23 @@
   "extends": "shared",
   "colorways": [
     {
-      "name": "One family, 500 → 300",
-      "from": "color.{family}.500",
-      "to": "color.{family}.300",
-      "defaultFamily": "secondary",
+      "name": "One family, 600 → 400",
+      "from": "color.{family}.600",
+      "to": "color.{family}.400",
+      "defaultFamily": "indigo",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546",
       "families": [
-        "secondary"
+        "indigo"
       ],
       "$familiesNote": "Families this colorway may use. Neutral is left out: it would make a gray gradient. Primary (red) removed by Vanesa on 2026-11-11: few use cases, and backgrounds lean violet. Teal removed the same day: no teal patterns."
     },
     {
-      "name": "Primary 100 → Secondary 400",
+      "name": "Amaranth 200 → Indigo 400",
       "textMask": "none",
       "textColor": "dark",
       "$textColor": "Light pattern: dark text and the Light logo, no mask (Vanesa, 2026-11-16). Never the monochrome Black logo.",
-      "from": "color.primary.100",
-      "to": "color.secondary.400",
+      "from": "color.amaranth.200",
+      "to": "color.indigo.400",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-23406"
     }
   ],
