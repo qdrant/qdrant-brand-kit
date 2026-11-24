@@ -6,8 +6,8 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import { icons } from "./icon"
 
-// A Lucide icon drawn as a field of small hexagons, upright like the logo's brandmark (design lead, 2026-11-24,
-// exploring). The icon is filled, not outlined: its shapes are solid hexagons, and the lines drawn inside another
+// A product mark (marks, below) or a Lucide icon drawn as a field of small hexagons, upright like the logo's
+// brandmark (design lead, 2026-11-24, exploring). The Products menu uses the marks; a Lucide icon works the same way. The icon is filled, not outlined: its shapes are solid hexagons, and the lines drawn inside another
 // shape (a shield's check, a chip's inner square, a database's seams) are cut out as gaps, as filled icons show detail.
 // The hexagons come in four sizes, largest in the center ring and smaller in each ring out to the edges, a clear
 // halftone; 14 across, large enough that the center's nearly touch, so icons read as simple and even. A faint
@@ -96,6 +96,80 @@ function measure(svg: SVGSVGElement, { density = 14, falloff = 0.6, halo = 0 }: 
   return out
 }
 
+// Qdrant's product marks (design lead, 2026-11-24, exploring): custom, from simple solid shapes on the 24-unit grid,
+// each about the same weight, for the hexagon halftone. A shape marked data-hole is cut out. They're product marks,
+// not UI icons: UI icons stay Lucide.
+const hexagon = (r: number, cx = 12, cy = 12) =>
+  [-90, -30, 30, 90, 150, 210]
+    .map((a) => `${cx + r * Math.cos((a * Math.PI) / 180)},${cy + r * Math.sin((a * Math.PI) / 180)}`)
+    .join(" ")
+
+export const marks: Record<string, React.ReactNode> = {
+  // Vector Search Engine: an upright hexagon like the brandmark, with a hexagonal core.
+  engine: (
+    <>
+      <polygon points={hexagon(10.5)} />
+      <polygon data-hole points={hexagon(4.2)} />
+    </>
+  ),
+  // Managed Cloud: a cloud of three circles on a flat base.
+  cloud: (
+    <>
+      <circle cx="7" cy="15" r="4.5" />
+      <circle cx="12.5" cy="9.5" r="6.5" />
+      <circle cx="18" cy="14" r="5" />
+      <rect x="7" y="14" width="11" height="5.5" />
+    </>
+  ),
+  // Hybrid Cloud: a circle (the cloud) beside a square (your infrastructure), a clear gap between them.
+  hybrid: (
+    <>
+      <circle cx="6.5" cy="12" r="6" />
+      <rect x="14" y="6" width="9.5" height="12" />
+    </>
+  ),
+  // Private Cloud: a shield with a round lock.
+  private: (
+    <>
+      <path d="M12 2 20.5 5.5V11.5C20.5 16.5 17 20.4 12 22 7 20.4 3.5 16.5 3.5 11.5V5.5Z" />
+      <circle data-hole cx="12" cy="11.5" r="3" />
+    </>
+  ),
+  // Edge: a solid point inside a ring, computing close to the data.
+  edge: (
+    <>
+      <circle cx="12" cy="12" r="10.5" />
+      <circle data-hole cx="12" cy="12" r="7.5" />
+      <circle cx="12" cy="12" r="4.5" />
+    </>
+  ),
+  // Serverless: a lightning bolt.
+  serverless: <polygon points="17.5,0.5 2,15.5 10.5,15.5 6.5,23.5 22.5,8 13.5,8" />,
+}
+
+// A mark's cells: inside a solid shape and outside its holes; a shape drawn after a hole fills back in.
+function measureMark(svg: SVGSVGElement, { density = 14, falloff = 0.6 }: HexIconOptions): Cell[] {
+  const shapes = [...svg.querySelectorAll<SVGGeometryElement>("circle, ellipse, path, polygon, rect")]
+  const point = svg.createSVGPoint()
+  const step = 24 / density
+  const rowStep = (step * Math.sqrt(3)) / 2
+  const out: Cell[] = []
+  for (let row = 0, y = 0; y <= 24; row++, y = row * rowStep) {
+    for (let col = 0; ; col++) {
+      const x = col * step + (row % 2 ? step / 2 : 0)
+      if (x > 24) break
+      point.x = x
+      point.y = y
+      let on = false
+      for (const shape of shapes) if (shape.isPointInFill(point)) on = !shape.hasAttribute("data-hole")
+      if (!on) continue
+      const ring = Math.min(3, Math.floor(Math.hypot(x - 12, y - 12) / 3.6))
+      out.push({ x, y, r: step * 0.52 * (1 - (falloff * ring) / 3) })
+    }
+  }
+  return out
+}
+
 // A pointy-top hexagon: points at the top and the bottom, like the brandmark.
 const hexPoints = ({ x, y, r }: Cell) =>
   [-90, -30, 30, 90, 150, 210]
@@ -107,19 +181,21 @@ const hexPoints = ({ x, y, r }: Cell) =>
 
 export function HexIcon({
   name,
+  mark,
   className,
   ...options
-}: { name: string; className?: string } & HexIconOptions) {
-  const key = `${name}:${options.density ?? 14}:${options.falloff ?? 0.6}:${options.halo ?? 0}`
+}: { name?: string; mark?: string; className?: string } & HexIconOptions) {
+  const key = `${mark ? `mark-${mark}` : name}:${options.density ?? 14}:${options.falloff ?? 0.6}:${options.halo ?? 0}`
   const [, measured] = React.useState(0)
   const cells = cache.get(key)
-  const Icon = icons[name]
+  const Icon = name ? icons[name] : undefined
+  const markShapes = mark ? marks[mark] : undefined
   // The hidden icon measures itself as it mounts, once per icon and options; the result is cached for every copy.
   const probe = React.useCallback(
     (node: HTMLSpanElement | null) => {
       const svg = node?.querySelector("svg")
       if (!svg || cache.has(key)) return
-      cache.set(key, measure(svg, options))
+      cache.set(key, markShapes ? measureMark(svg, options) : measure(svg, options))
       measured((n) => n + 1)
     },
     // options are part of key
@@ -127,12 +203,18 @@ export function HexIcon({
     [key]
   )
 
-  if (!Icon) return null
+  if (!Icon && !markShapes) return null
   return (
     <span className={cn("relative inline-block size-8 shrink-0", className)} aria-hidden>
       {!cells && (
         <span ref={probe} className="pointer-events-none invisible absolute size-6">
-          <Icon />
+          {markShapes ? (
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              {markShapes}
+            </svg>
+          ) : (
+            Icon && <Icon />
+          )}
         </span>
       )}
       {cells && (

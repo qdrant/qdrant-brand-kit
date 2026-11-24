@@ -206,7 +206,7 @@ function FeatureItem({
           `web-tone-${toneAt(index)}`
         )}
       >
-        {item.icon && <HexIcon name={item.icon} className="size-9" />}
+        {(item.mark || item.icon) && <HexIcon mark={item.mark} name={item.icon} className="size-9" />}
       </span>
       <span className="flex min-w-0 flex-col gap-1 pt-0.5">
         <span className="flex items-center gap-2 text-[15px] leading-snug font-medium text-foreground">

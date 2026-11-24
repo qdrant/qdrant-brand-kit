@@ -133,7 +133,7 @@ export const guidelines: GuidelineGroup[] = [
     rules: [
       {
         title: "Lucide only",
-        text: "Never draw an icon or use another set. Use the nearest Lucide icon when a design has another one.",
+        text: "Never draw an icon or use another set. Use the nearest Lucide icon when a design has another one. The one exception is Qdrant's product marks in the Products menu: custom, from simple shapes, drawn in hexagons (design lead, 2026-11-24, exploring; see the menu's special section).",
         source: "brand-assets/icons/",
       },
       {
@@ -150,7 +150,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "A menu's special section: the products (exploring)",
-        text: "The Products menu is the menu's special section: each product has a 48px tile in its color family with its icon drawn in hexagons, a 15px label with its tag, and a one-line description in the muted text color, taken word for word from qdrant.tech. Two columns of three, the rows lined up. The hexagon icons are Lucide's own shapes measured onto a grid of small upright hexagons, like the brandmark, and filled: the shapes are solid, details inside them (a shield's check, a chip's inner square, a database's seams) are cut out as gaps, and the hexagons come in four sizes, a clear halftone: full size in the center ring, then 80, 60 and 40% in the rings out to the edges. 14 hexagons across, large enough that the center's nearly touch, so the icons read as simple and even (web/lib/hex-icon.tsx). Exploring: they may change.",
+        text: "The Products menu is the menu's special section: each product has a 48px tile in its color family with its product mark drawn in hexagons, a 15px label with its tag, and a one-line description in the muted text color, taken word for word from qdrant.tech. Two columns of three, the rows lined up. The product marks are custom and simple, one solid shape each with at most a cut-out, of about the same weight: the Vector Search Engine an upright hexagon with a hexagonal core, Managed Cloud a cloud of three circles, Hybrid Cloud a circle beside a square, Private Cloud a shield with a round lock, Edge a dot inside a ring, Serverless a lightning bolt. They're measured onto a grid of small upright hexagons, like the brandmark, in four sizes, a clear halftone: full size in the center ring, then 80, 60 and 40% in the rings out to the edges. 14 hexagons across, large enough that the center's nearly touch, so the icons read as simple and even (web/lib/hex-icon.tsx). Exploring: they may change.",
         decided: "Design lead, 2026-11-24",
         source: "web/sections/navbar.tsx, web/lib/hex-icon.tsx",
       },

@@ -4,7 +4,7 @@
 
 export type Link = { label: string; href: string }
 
-export type MenuItem = Link & { tag?: string; icon?: string; description?: string }
+export type MenuItem = Link & { tag?: string; icon?: string; description?: string; mark?: string }
 // `feature` shows a group as the menu's special section (design lead, 2026-11-24): larger icons drawn in hexagons,
 // larger labels and each item's description.
 export type MenuGroup = { title?: string; feature?: boolean; items: MenuItem[] }
@@ -30,12 +30,12 @@ export const menus: Menu[] = [
         // ("Qdrant. Efficient, Scalable, Fast."), Cloud, Hybrid (its first sentence), Private and Edge from the home
         // page's Deploy cards, and Serverless from its page.
         items: [
-          { label: "Qdrant Vector Search Engine", href: "/qdrant-vector-database/", icon: "Database", description: "Efficient, Scalable, Fast." },
-          { label: "Qdrant Managed Cloud", href: "/cloud/", icon: "Cloud", description: "Fully managed with high availability and auto-sharding on AWS, GCP, or Azure." },
-          { label: "Qdrant Hybrid Cloud", href: "/hybrid-cloud/", icon: "Layers", description: "Bring your own Kubernetes with decoupled control and data planes." },
-          { label: "Qdrant Private Cloud", href: "/private-cloud/", icon: "ShieldCheck", description: "Maximum control with air-gapped, compliant deployments." },
-          { label: "Qdrant Edge", href: "/edge/", tag: "Beta", icon: "Cpu", description: "Lightweight, low-latency vector search close to where data is generated." },
-          { label: "Qdrant Serverless", href: "/serverless/", tag: "Waitlist", icon: "Zap", description: "Serverless vector search removes the cluster from the equation." },
+          { label: "Qdrant Vector Search Engine", href: "/qdrant-vector-database/", icon: "Database", mark: "engine", description: "Efficient, Scalable, Fast." },
+          { label: "Qdrant Managed Cloud", href: "/cloud/", icon: "Cloud", mark: "cloud", description: "Fully managed with high availability and auto-sharding on AWS, GCP, or Azure." },
+          { label: "Qdrant Hybrid Cloud", href: "/hybrid-cloud/", icon: "Layers", mark: "hybrid", description: "Bring your own Kubernetes with decoupled control and data planes." },
+          { label: "Qdrant Private Cloud", href: "/private-cloud/", icon: "ShieldCheck", mark: "private", description: "Maximum control with air-gapped, compliant deployments." },
+          { label: "Qdrant Edge", href: "/edge/", tag: "Beta", icon: "Cpu", mark: "edge", description: "Lightweight, low-latency vector search close to where data is generated." },
+          { label: "Qdrant Serverless", href: "/serverless/", tag: "Waitlist", icon: "Zap", mark: "serverless", description: "Serverless vector search removes the cluster from the equation." },
         ],
       },
     ],
