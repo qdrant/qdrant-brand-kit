@@ -23,6 +23,7 @@ for (const recipe of recipes) if (!existsSync(`patterns/${recipe}.js`)) errors.p
 const needs = {
   "color-refracted-pattern": ["gradient", "refraction", "noise"],
   "color-sliced-pattern": ["gradient", "slice", "noise"],
+  "motion-streaks-pattern": ["gradient", "streaks"],
   "mesh-refracted-pattern": ["grade", "blur", "contrast", "mesh", "refraction", "noise"],
   "mesh-sliced-pattern": ["grade", "blur", "contrast", "mesh", "slice", "noise"],
   "mesh-dithered-pattern": ["grade", "blur", "contrast", "mesh", "dither"],
@@ -54,7 +55,7 @@ for (const id of ids) {
   const where = p.name ?? id;
 
   // Name and file agree: Color-Refracted-Pattern-A <-> color-refracted-pattern-a.json.
-  if (!/^(Color|Mesh|Generative)-[A-Z][a-z]+-Pattern-[A-Z]$/.test(p.name ?? "")) errors.push(`${where}: name should look like Color-Refracted-Pattern-A`);
+  if (!/^(Color|Mesh|Generative|Motion)-[A-Z][a-z]+-Pattern-[A-Z]$/.test(p.name ?? "")) errors.push(`${where}: name should look like Color-Refracted-Pattern-A`);
   else if (p.name.toLowerCase() !== id) errors.push(`${where}: file should be presets/${p.name.toLowerCase()}.json`);
 
   if (!recipes.includes(p.recipe)) errors.push(`${where}: recipe "${p.recipe}" isn't registered in patterns/index.js`);
@@ -93,10 +94,19 @@ for (const id of ids) {
       const families = colorway.families ?? Object.keys(tokens.color);
       if ((colorway.from + colorway.to).includes("{family}") && !colorway.families) errors.push(`${where} / ${colorway.name}: a {family} colorway needs a "families" list, so it can't pick neutral (gray)`);
       for (const f of colorway.families ?? []) if (!tokens.color[f]) errors.push(`${where} / ${colorway.name}: family "${f}" doesn't exist`);
-      for (const path of [colorway.from, colorway.to]) {
+      for (const path of [colorway.from, colorway.to, ...(colorway.streak ? [colorway.streak] : [])]) {
         const ok = path.includes("{family}") ? families.some((f) => tokenExists(path.replace("{family}", f))) : tokenExists(path);
         if (!ok) errors.push(`${where} / ${colorway.name}: no token for ${path}`);
       }
+    }
+  }
+
+  // Motion streaks: defaults inside the approved ranges (patterns/motion-streaks-pattern.js).
+  if (p.recipe === "motion-streaks-pattern") {
+    const ranges = { length: [16, 80], density: [8, 64], softness: [32, 56] };
+    for (const [key, [lo, hi]] of Object.entries(ranges)) {
+      const v = p.settings?.streaks?.[key];
+      if (!(v >= lo && v <= hi)) warnings.push(`${where}: streaks.${key} is ${v}, outside the approved ${lo} to ${hi}`);
     }
   }
 

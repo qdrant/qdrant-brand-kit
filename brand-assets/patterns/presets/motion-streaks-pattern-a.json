@@ -1,0 +1,41 @@
+{
+  "name": "Motion-Streaks-Pattern-A",
+  "recipe": "motion-streaks-pattern",
+  "$description": "A token gradient with soft light streaks on top, from Figma's Motion streaks shader. Streak values can change within the approved ranges (see the recipe); these are the defaults.",
+  "figma": "https://www.figma.com/design/2u6KfDsYjibQuf9ji6lFBR/Qdrant-Brand-Design?node-id=23789-66977",
+  "colorways": [
+    {
+      "name": "Indigo",
+      "from": "color.neutral.950",
+      "to": "color.secondary.900",
+      "streak": "color.secondary.800"
+    },
+    {
+      "name": "Amaranth",
+      "from": "color.neutral.950",
+      "to": "color.primary.900",
+      "streak": "color.primary.800"
+    },
+    {
+      "name": "Teal",
+      "from": "color.neutral.950",
+      "to": "color.teal.900",
+      "streak": "color.teal.800"
+    }
+  ],
+  "settings": {
+    "size": 1080,
+    "gradient": {
+      "angle": 180,
+      "fromStop": 5.59,
+      "toStop": 116.67
+    },
+    "streaks": {
+      "length": 75,
+      "direction": 129,
+      "density": 42,
+      "softness": 59,
+      "opacity": 24
+    }
+  }
+}

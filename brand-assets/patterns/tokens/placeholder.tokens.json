@@ -336,6 +336,48 @@
           }
         }
       }
+    },
+    "teal": {
+      "200": {
+        "$type": "color",
+        "$value": "#9FF5E2",
+        "$description": "From color.teal.200 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.teal.200"
+          }
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#00B9A4",
+        "$description": "From color.teal.500 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.teal.500"
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#115E58",
+        "$description": "From color.teal.800 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.teal.800"
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#164E49",
+        "$description": "From color.teal.900 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.teal.900"
+          }
+        }
+      }
     }
   }
 }

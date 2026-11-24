@@ -24,6 +24,7 @@ import * as meshRefracted from "./mesh-refracted-pattern.js";
 import * as meshSliced from "./mesh-sliced-pattern.js";
 import * as meshDithered from "./mesh-dithered-pattern.js";
 import * as generative from "./generative-pattern.js";
+import * as motionStreaks from "./motion-streaks-pattern.js";
 import { colorwayTokens, familiesFor } from "./tokens.js";
 import { imageToMesh } from "./mesh-source.js";
 import { loadAllPresets, loadPreset } from "./presets.js";
@@ -41,6 +42,7 @@ export const recipes = {
   "mesh-sliced-pattern": meshSliced,
   "mesh-dithered-pattern": meshDithered,
   "generative-pattern": generative,
+  "motion-streaks-pattern": motionStreaks,
 };
 
 // Every preset listed in presets/index.json, with its shared settings merged in.
@@ -99,7 +101,7 @@ function renderBase(canvas, tokens, preset, options) {
   }
   const colorway = preset.colorways[options.colorway ?? 0];
   const family = options.family ?? colorway.defaultFamily;
-  return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame);
+  return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame, options);
 }
 
 // Generative patterns that draw letters need their fonts loaded first, or the browser
