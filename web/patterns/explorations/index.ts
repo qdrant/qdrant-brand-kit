@@ -1,5 +1,4 @@
 import type { PatternDefinition, PatternNote } from "../types"
-import { brandPatterns } from "./brand"
 import { generativePattern } from "./generative"
 import { spacePatterns } from "./space"
 
@@ -8,8 +7,9 @@ import { spacePatterns } from "./space"
 // web/patterns/index.tsx, and add its rule to web/guidelines.ts and a dated row to design-system/DESIGN.md.
 //
 // The Pattern Studio looks (2026-11-23) are from the Deploy Card page (Figma node 21705:27762): its own pattern
-// ("Your pattern", the hex rings pasted into it) and 1, 5, 6, 7, 8, 9 and 10 of its ten variations (7, Terminal,
-// and "Your pattern" added later the same day). 2 (Orbit), 3 (Vector graph) and 4 (Bloom) were left out.
+// ("Your pattern", the hex rings pasted into it) and 1, 5, 6, 7, 8 and 10 of its ten variations (7, Terminal,
+// and "Your pattern" added later the same day). 2 (Orbit), 3 (Vector graph) and 4 (Bloom) were left out, and
+// 9 (Contours) was removed on 2026-11-24.
 
 // Every look loops every 6 seconds, as on the Deploy Card page.
 const LOOPS: PatternNote = {
@@ -362,36 +362,6 @@ export const explorations: PatternDefinition[] = [
     },
   }),
   generativePattern({
-    id: "contours",
-    name: "Contours",
-    kind: "surface",
-    description: "Strokes following warped hexagon contour lines, like a topographic map.",
-    // From: Pattern Studio, Deploy Card, 9.
-    notes: [LOOPS, STEPPED],
-    params: {
-      layout: "grid",
-      cell: 12,
-      shape: "hexagon",
-      size: 0.7,
-      shaping: "rings",
-      ringFrequency: 2.5,
-      ringSpeed: 1,
-      ringFade: 0,
-      warp: 0.35,
-      noiseAmount: 0,
-      element: "line",
-      orientation: "contour",
-      lineLength: 1.7,
-      lineWidth: 2,
-      scale: 1,
-      sizeByValue: false,
-      threshold: 0,
-      alphaByValue: true,
-      minAlpha: 0.35,
-      seed: 7,
-    },
-  }),
-  generativePattern({
     id: "q-monogram",
     name: "Q monogram",
     kind: "surface",
@@ -440,6 +410,4 @@ export const explorations: PatternDefinition[] = [
   }),
   // The simplest options from the studio's Space page, polished (space.tsx).
   ...spacePatterns,
-  // Brand patterns from brand-assets/patterns, drawn by the brand's own library (brand.tsx).
-  ...brandPatterns,
 ]
