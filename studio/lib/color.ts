@@ -345,7 +345,8 @@ export const semanticTokens: SemanticToken[] = [
     name: "secondary/text",
     group: "secondary",
     use: "Text and icons on its soft fill",
-    default: pair("indigo-800", "indigo-400"),
+    // Light indigo-700 since 2026-11-24 (design lead), in Figma and the repo; it was indigo-800.
+    default: pair("indigo-700", "indigo-400"),
     cssVar: css("secondary-text"),
     contrast: { target: 4.5, on: "secondary-subtle" },
   },
