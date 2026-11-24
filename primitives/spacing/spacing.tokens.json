@@ -158,17 +158,18 @@
     },
     "content-width": {
       "$type": "dimension",
-      "$value": "1110px"
+      "$value": "1200px",
+      "$description": "The website's content container (Juan, 2026-11-21; it was 1110px)"
     },
     "side-padding": {
       "$type": "dimension",
-      "$value": "165px",
-      "$description": "Off-grid on purpose: (1440 - 1110) / 2"
+      "$value": "120px",
+      "$description": "(1440 - 1200) / 2 at the design width"
     },
     "column-gap": {
       "$type": "dimension",
-      "$value": "30px",
-      "$description": "Off-grid on purpose: 3 x 350 + 2 x 30 = 1110"
+      "$value": "24px",
+      "$description": "On the 4px grid: 3 x 384 + 2 x 24 = 1200 (Juan, 2026-11-21; it was 30px, off-grid)"
     },
     "narrow-content": {
       "$type": "dimension",
@@ -196,6 +197,6 @@
       "$type": "dimension",
       "$value": "64px"
     },
-    "$description": "Web and landing page layout, designed at a 1440px viewport. Moves to web/ when that folder exists."
+    "$description": "Web and landing page layout, designed at a 1440px viewport with a 1200px content container (Juan, 2026-11-21). web/ builds on it."
   }
 }

@@ -96,20 +96,22 @@
   --color-background: var(--background);
 }
 
-/* The accent, by context (Juan, 2026-11-15): amaranth for brand and marketing, indigo for product.
-   Marketing is the default (creatives, web pages, the studio's Design system and Web pages). Product UI puts
-   data-context="product" on its root; data-context="marketing" switches a piece back inside it. Declared only
-   on :root and the contexts, so a [data-theme] section inside a context keeps that context's accent. */
+/* The accent, by context: indigo for product, amaranth for brand and marketing (Juan, 2026-11-15). Product is
+   the default since 2026-11-23 (Juan): the design system is the product's, so its components are indigo. The
+   website and anything else for brand or marketing put data-context="marketing" on their root (a website page
+   has it next to data-web); data-context="product" switches a piece back inside it, like a Console screen on a
+   web page. Declared only on :root and the contexts, so a [data-theme] section inside a context keeps that
+   context's accent. Creatives don't load this file: their button takes amaranth from components/button.css. */
 :root,
-[data-context="marketing"] {
-  --qd-ui-accent: var(--qd-color-primary);
-  --qd-ui-accent-hover: var(--qd-color-primary-hover);
-  --qd-ui-accent-muted: var(--qd-color-amaranth-400);
-}
 [data-context="product"] {
   --qd-ui-accent: var(--qd-color-secondary);
   --qd-ui-accent-hover: var(--qd-color-indigo-700);
   --qd-ui-accent-muted: var(--qd-color-indigo-400);
+}
+[data-context="marketing"] {
+  --qd-ui-accent: var(--qd-color-primary);
+  --qd-ui-accent-hover: var(--qd-color-primary-hover);
+  --qd-ui-accent-muted: var(--qd-color-amaranth-400);
 }
 
 /* shadcn's tokens, mapped by meaning onto the Qdrant roles (primitives/colors/README.md "Roles").

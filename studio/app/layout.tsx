@@ -1,4 +1,5 @@
 import "@qdrant/design-system/globals.css"
+import "@qdrant/web/styles/web.css"
 import "./studio.css"
 import { TooltipProvider } from "@qdrant/design-system/components/ui/tooltip"
 import { PrototypeStyles } from "@/components/prototype-styles"

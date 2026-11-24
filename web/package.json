@@ -20,6 +20,13 @@
   "exports": {
     "./sections/*": "./sections/*.tsx",
     "./pages/*": "./pages/*.tsx",
-    "./lib/*": "./lib/*.tsx"
+    "./lib/*": "./lib/*.tsx",
+    "./styles/*": "./styles/*",
+    "./guidelines": "./guidelines.ts",
+    "./registry": "./registry/index.ts",
+    "./registry/*": "./registry/*.ts",
+    "./content/*": "./content/*.ts",
+    "./patterns": "./patterns/index.tsx",
+    "./patterns/*": "./patterns/*.tsx"
   }
 }
