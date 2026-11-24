@@ -3,7 +3,7 @@ import * as React from "react"
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import { CardPatternProvider, PatternLayers } from "../patterns"
-import { Node } from "./node"
+import { Junction } from "./node"
 
 // What every website section accepts, so pages and the page builder can set them the same way on any section
 // (design lead, 2026-11-21). theme: dark or light, or the page's when left out. surface: the background role,
@@ -88,8 +88,8 @@ export function Section({
         >
           {seam && (
             <>
-              <Node solid className={cn("web-node -left-1", seam === "bottom" && "web-node-bottom")} />
-              <Node solid className={cn("web-node -right-1", seam === "bottom" && "web-node-bottom")} />
+              <Junction className={cn("web-node -left-1.5", seam === "bottom" && "web-node-bottom")} />
+              <Junction className={cn("web-node -right-1.5", seam === "bottom" && "web-node-bottom")} />
             </>
           )}
         </div>

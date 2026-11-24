@@ -93,7 +93,7 @@
 }
 .web-node {
   position: absolute;
-  top: -4.5px;
+  top: -6px;
   /* Nodes are always on top of the lines and of what's next to them (design lead, 2026-11-23). */
   z-index: 1;
 }
@@ -101,13 +101,21 @@
    The section after it draws no seam of its own: the line and its nodes are already there. */
 .web-node-bottom {
   top: auto;
-  bottom: -4.5px;
+  bottom: -6px;
 }
 .web-seam-bottom + .web-seam {
   border-top-color: transparent;
 }
 .web-seam-bottom + .web-seam > .web-rails > .web-node {
   display: none;
+}
+/* The four-point star where a seam meets the rails (Junction in lib/node.tsx, design lead, 2026-11-24). */
+.web-star path {
+  fill: var(--background);
+  stroke: var(--web-node, var(--web-line-strong));
+  stroke-width: 1;
+  stroke-linejoin: miter;
+  stroke-miterlimit: 10;
 }
 .web-hex polygon {
   fill: transparent;

@@ -39,3 +39,14 @@ export function Node({
     </svg>
   )
 }
+
+// Where a seam meets the rails, at the outer edges of a section (design lead, 2026-11-24): a four-point star instead
+// of a hexagon, points up, down and to the sides along the lines, square (11 by 11px), its sides curved in so the
+// points are sharp. Filled with the page's background so the lines stop at its edge, outlined like a node, and still.
+export function Junction({ className }: { className?: string }) {
+  return (
+    <svg aria-hidden viewBox="0 0 11 11" className={cn("web-star block size-[11px] shrink-0 overflow-visible", className)}>
+      <path d="M5.5 0.5Q6.3 4.7 10.5 5.5Q6.3 6.3 5.5 10.5Q4.7 6.3 0.5 5.5Q4.7 4.7 5.5 0.5Z" />
+    </svg>
+  )
+}
