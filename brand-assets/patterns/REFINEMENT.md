@@ -17,3 +17,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Generative-Dash-A, Generative-Dash-B | All | Same as Burst-A and Hexagon-C: Motion Streaks gradient, three colorways, 800/600/200 | 2026-11-24 |
 | All mesh patterns | All | On hold for now | 2026-11-24 |
 | Color-Sliced-A | Stripe proposals P1 (thickness 40, -160°), P2 (160, -160°), P9 (24, -160°), P11 (40, -152°) and P13 (40, -168°) | Approved. Not approved: P3 to P8, and the horizontal and almost-horizontal P15 to P20 | 2026-11-24 |
+| Color-Sliced-A | Approved stripes P1, P2, P9, P11, P13 | Added to the preset as `stripes` (renderPattern option `stripes`), with a new Neutral 950 → Teal 600 colorway on hold | 2026-11-24 |

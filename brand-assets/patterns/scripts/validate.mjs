@@ -122,6 +122,12 @@ for (const id of ids) {
     }
   }
 
+  // Approved stripes (Color-Sliced): thickness on the 8 grid, an angle in degrees.
+  for (const s of p.settings?.stripes ?? []) {
+    if (!(s.thickness > 0) || s.thickness % 8 !== 0) errors.push(`${where}: stripes "${s.name}" thickness ${s.thickness} isn't on the 8 grid`);
+    if (typeof s.angle !== "number") errors.push(`${where}: stripes "${s.name}" needs an angle`);
+  }
+
   // Layers: transparent generative presets drawn on top. Same token and tone checks.
   for (const id of p.layers ?? []) {
     let layer;

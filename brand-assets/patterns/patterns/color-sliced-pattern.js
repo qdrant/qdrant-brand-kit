@@ -9,8 +9,13 @@ import { sliceShift, drawNoise, gradientSampler, makeFrame } from "./effects.js"
 
 // color = { from, to } token references, from colorwayTokens() in tokens.js.
 // frame = makeFrame(width, height): any size or shape. Defaults to 1080 x 1080.
-export function render(canvas, tokens, preset, color, frame = makeFrame()) {
-  const { gradient, slice, noise } = preset.settings;
+// options.stripes = index into the preset's approved "stripes" (thickness and angle);
+// left out, the slices are the preset's own.
+export function render(canvas, tokens, preset, color, frame = makeFrame(), options = {}) {
+  const { gradient, noise } = preset.settings;
+  const stripes = options.stripes == null ? null : preset.settings.stripes?.[options.stripes];
+  if (options.stripes != null && !stripes) throw new Error(`${preset.name} has no approved stripes #${options.stripes}`);
+  const slice = stripes ? { ...preset.settings.slice, r: stripes.thickness, a: stripes.angle } : preset.settings.slice;
   canvas.width = frame.width;
   canvas.height = frame.height;
   const ctx = canvas.getContext("2d");

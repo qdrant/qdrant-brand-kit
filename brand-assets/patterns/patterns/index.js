@@ -72,7 +72,8 @@ export function choicesFor(preset, tokens) {
 
 // Draws a pattern on a canvas at any size and shape: { width, height } in px,
 // 1080 x 1080 when left out. A wide banner, a tall story or a 4K poster all work.
-// options: { colorway: index, family } for color patterns, { mesh } for mesh patterns,
+// options: { colorway: index, family, stripes } for color patterns (stripes: an index into
+// the preset's approved stripes, Color-Sliced-A), { mesh } for mesh patterns,
 // { colorway } for generative patterns (optional { phase } to draw
 // another moment of the loop, for animation later). Mesh patterns return the brand check:
 // { pass, offBrand: % of off-palette pixels }.
