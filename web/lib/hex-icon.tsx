@@ -15,8 +15,8 @@ import { icons } from "./icon"
 //   (after halftone-dot icon sets).
 // - outline: 20 across; full hexagons along each shape's edge, small ones inside it, so a mark reads as an outline
 //   with a light fill.
-// - matrix: a coarse grid, 13 across, even hexagons like an LED matrix, a little smaller along the edges, over a faint
-//   field of tiny hexagons, in the mark's color on its tinted tile like the others (the menu's, design lead, 2026-11-24).
+// - matrix: a coarse grid, 13 across, even hexagons like an LED matrix, a little smaller along the edges, in the mark's
+//   color on its tinted tile like the others, with nothing behind it (the menu's, design lead, 2026-11-24).
 //
 // How: the shapes are rendered hidden at their 24-unit size and every cell of a hex grid asks the browser whether it's
 // inside them (isPointInFill; for a Lucide icon also isPointInStroke). It runs in the browser once per mark and style.
@@ -35,13 +35,14 @@ const densities: Record<HexStyle, number> = { halftone: 14, tones: 22, outline: 
 export const marks: Record<string, { name: string; shapes: React.ReactNode }> = {
   engine: {
     name: "Vector Search Engine",
-    // Search: a magnifying glass, its lens shaded.
+    // Search: a magnifying glass. The lens is centered on a grid point of the matrix (13 across) so its ring comes out
+    // even, and the handle runs along the grid's 60-degree line so it's a clean bar; the lens shaded.
     shapes: (
       <>
-        <circle cx="10" cy="10" r="8" />
-        <circle data-hole cx="10" cy="10" r="4.8" />
-        <circle data-shade-add cx="10" cy="10" r="4.8" />
-        <polygon points="14.6,16.9 16.9,14.6 23,20.7 20.7,23" />
+        <circle cx="11.077" cy="9.593" r="7.6" />
+        <circle data-hole cx="11.077" cy="9.593" r="4.4" />
+        <circle data-shade-add cx="11.077" cy="9.593" r="4.4" />
+        <polygon points="13.97,16.01 16.57,14.51 20.27,20.91 17.67,22.41" />
       </>
     ),
   },
@@ -246,16 +247,6 @@ const hexPoints = ({ x, y, r }: Cell) =>
     })
     .join(" ")
 
-// The matrix style's faint field: tiny hexagons on a fine grid past the mark's box, for its tile to clip.
-const field = (() => {
-  const out: Cell[] = []
-  const step = 2
-  const rowStep = (step * Math.sqrt(3)) / 2
-  for (let row = -4; row * rowStep <= 28; row++)
-    for (let x = -6 + (row % 2 ? step / 2 : 0); x <= 30; x += step) out.push({ x, y: row * rowStep, r: 0.22 })
-  return out
-})()
-
 export function HexIcon({
   name,
   mark,
@@ -302,13 +293,6 @@ export function HexIcon({
       )}
       {cells && (
         <svg viewBox="-1 -1 26 26" className="size-full overflow-visible" fill="currentColor">
-          {style === "matrix" && (
-            <g opacity="0.3">
-              {field.map((cell) => (
-                <polygon key={`f${cell.x.toFixed(2)}-${cell.y.toFixed(2)}`} points={hexPoints(cell)} />
-              ))}
-            </g>
-          )}
           {cells.map((cell) => (
             <polygon key={`${cell.x.toFixed(2)}-${cell.y.toFixed(2)}`} points={hexPoints(cell)} />
           ))}

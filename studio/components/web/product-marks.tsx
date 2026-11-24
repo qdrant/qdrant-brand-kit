@@ -19,7 +19,7 @@ const styles: { id: HexStyle; name: string; note: string }[] = [
   {
     id: "matrix",
     name: "Matrix",
-    note: "A coarse grid, 13 across: even hexagons, a little smaller at the edges, over a faint field of tiny ones, on the same tinted tile. The menu's.",
+    note: "A coarse grid, 13 across: even hexagons, a little smaller at the edges, on the same tinted tile, nothing behind them. The menu's.",
   },
 ]
 
