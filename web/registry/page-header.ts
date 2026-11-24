@@ -6,14 +6,14 @@ export const pageHeader = defineSection<PageHeaderProps>({
   id: "page-header",
   name: "Page header",
   category: "hero",
-  summary: "The opener of an index or inner page: breadcrumbs, a kicker, the H1, a line, and a search field or actions.",
+  summary: "The opener of an index or inner page: a kicker, the H1, a line, and a search field or actions.",
   file: "page-header",
   component: PageHeader,
   variants: [
     {
       id: "simple",
       name: "Simple",
-      description: "Left-aligned, with a kicker and one action (Customers). The site shows no breadcrumbs here; they use its menu names.",
+      description: "Left-aligned, with a kicker and one action (Customers).",
       props: { layout: "simple", ...customersHeader },
     },
     {
@@ -36,12 +36,10 @@ export const pageHeader = defineSection<PageHeaderProps>({
     ],
     rules: [
       "One H1 per page, and it's this one.",
-      "Breadcrumbs only below the top level, ending with the current page, which isn't a link.",
       "One primary action at most. A search field replaces the actions; don't use both.",
       "It's compact (80px of padding) so the page's content starts high.",
     ],
     anatomy: [
-      { part: "Breadcrumbs", note: "Home / section / page, separated by slashes. Optional." },
       { part: "Kicker", note: "Mono capitals with the node. Optional." },
       { part: "Title", note: "The page's H1." },
       { part: "Description", note: "A line or two. Optional." },
@@ -49,7 +47,6 @@ export const pageHeader = defineSection<PageHeaderProps>({
     ],
     props: [
       { name: "layout", type: '"simple" | "search"', note: "Left-aligned, or centered with search." },
-      { name: "breadcrumbs", type: "{ label, href? }[]", note: "The last item is the current page." },
       { name: "kicker, title, description", type: "string", note: "The heading block." },
       { name: "search", type: "{ placeholder, action? }", note: "The field sends ?q= to action." },
       { name: "primary, secondary", type: "{ label, href }", note: "The actions." },

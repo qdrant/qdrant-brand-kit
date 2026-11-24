@@ -1,13 +1,11 @@
 import { cn } from "@qdrant/design-system/lib/utils"
 
-import type { Crumb, ProseBlock } from "../content/listings"
+import type { ProseBlock } from "../content/listings"
 import { Section, type SectionProps } from "../lib/section"
 import { heading, type } from "../lib/type"
 import { Contents, Prose } from "./article"
-import { Crumbs } from "./page-header"
 
 export type LegalProps = SectionProps & {
-  breadcrumbs?: Crumb[]
   title: string
   // A line under the title, like the date it took effect, when the page has one.
   updated?: string
@@ -20,7 +18,6 @@ export type LegalProps = SectionProps & {
 // A legal page (2026-11-21): the title, then numbered sections in a narrow column for reading, with the contents
 // beside them from lg, sticky as the reader scrolls, and above them on smaller screens.
 export function Legal({
-  breadcrumbs,
   title,
   updated,
   contentsTitle = "Contents",
@@ -48,7 +45,6 @@ export function Legal({
       innerClassName="flex flex-col gap-10 lg:gap-14"
     >
       <header className="flex flex-col gap-6">
-        {breadcrumbs && <Crumbs items={breadcrumbs} />}
         <h1 className={heading.page}>{title}</h1>
         {updated && <p className={cn(type.small, "font-mono")}>{updated}</p>}
       </header>

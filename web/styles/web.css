@@ -122,19 +122,20 @@
   fill: var(--web-indigo);
   stroke: var(--web-indigo);
 }
-/* Nodes are alive (design lead, 2026-11-22): they blink like the telemetry mark on the Space page, a hard step to 25% and
-   back every 2s, each at its own offset (--web-node-delay, set by Node). Still for reduced motion. */
+/* A kicker's node is alive (design lead, 2026-11-22; only the kicker's since 2026-11-24, the rest are still): it
+   blinks like the telemetry mark on the Space page, a hard step to 25% and back every 2s, each at its own offset
+   (--web-node-delay, set by Node). Still for reduced motion. */
 @keyframes web-node-blink {
   50% {
     opacity: 0.25;
   }
 }
-.web-hex {
+.web-hex-blink {
   animation: web-node-blink 2s step-end infinite;
   animation-delay: var(--web-node-delay, 0s);
 }
 @media (prefers-reduced-motion: reduce) {
-  .web-hex {
+  .web-hex-blink {
     animation: none;
   }
 }
@@ -437,8 +438,8 @@
   box-shadow: inset 0 0.5px 0 var(--web-window-dot-shine), var(--web-window-dot-rim);
 }
 
-/* A text link: indigo, underlined on hover. A title or crumb that is a link but reads as text (a card's title, a
-   breadcrumb) is .web-link-quiet: the text color, indigo on hover. */
+/* A text link: indigo, underlined on hover. A title that is a link but reads as text (a card's title) is
+   .web-link-quiet: the text color, indigo on hover. */
 .web-link {
   color: var(--web-link);
 }
@@ -732,33 +733,6 @@
   inset: 10px;
 }
 
-/* Readout: kickers read like an instrument's labels. Each section's kicker is numbered (01, 02…) down the page,
-   the letters open up a little, and a short hairline trails it. */
-[data-web-readout="on"] {
-  counter-reset: web-readout;
-}
-[data-web-readout="on"] .web-kicker {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  letter-spacing: 0.08em;
-}
-[data-web-readout="on"] .web-kicker > .web-hex {
-  order: -2;
-}
-[data-web-readout="on"] .web-kicker:has(> .web-hex)::before {
-  counter-increment: web-readout;
-  content: counter(web-readout, decimal-leading-zero) " /";
-  order: -1;
-  color: color-mix(in oklab, var(--muted-foreground) 70%, transparent);
-}
-[data-web-readout="on"] .web-kicker::after {
-  content: "";
-  flex: 0 0 40px;
-  height: 1px;
-  background: var(--web-line-strong);
-}
-
 /* Recess: media sits in a well cut into the page, darker than the page on dark and a step grey on light, shaded
    along its top edge and lit along its bottom one, so screens and code read as set into the surface. */
 [data-web-recess="on"] .web-tray {
@@ -769,25 +743,6 @@
     inset 0 2px 4px var(--web-well-shade),
     inset 0 1px 0 var(--web-well-shade),
     0 1px 0 var(--web-highlight);
-}
-
-/* Roomy: one step more space everywhere. Sections 96 to 144px tall in padding, 56 to 80px from a heading to its
-   content, and cards one padding step up (24 to 32px, 20 to 28px, 32 to 40px). The 24px column gap stays, since the
-   rails are drawn from it. */
-[data-web-roomy="on"] {
-  --qd-layout-section-padding-min: 96px;
-  --qd-layout-section-padding-max: 144px;
-  --qd-layout-heading-to-content-min: 56px;
-  --qd-layout-heading-to-content-max: 80px;
-}
-[data-web-roomy="on"] .web-plate.p-5 {
-  padding: 28px;
-}
-[data-web-roomy="on"] .web-plate.p-6 {
-  padding: 32px;
-}
-[data-web-roomy="on"] .web-plate.p-8 {
-  padding: 40px;
 }
 
 /* A marquee of logos (logo cloud, proposal 2026-11-24): the row drifts left, 60s a lap, and holds still on hover and

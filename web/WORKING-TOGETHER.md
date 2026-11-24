@@ -166,7 +166,7 @@ The design lead decided these. They're in `web/guidelines.ts` and `design-system
 - **Space comes from light, type and motion, never glow** (`DESIGN.md`, Space theme). Light comes from above. Avoid glows, colored shadows, nebula gradients, literal rockets and planets, and twinkling stars behind data.
 - **Effects belong in sections, never in design-system components.**
 - **A page is all dark or all light** (design lead, 2026-11-22), so a pattern never switches a section's theme.
-- **Nodes blink** (design lead, 2026-11-22). The hexagon nodes where lines meet blink like a live readout: a hard step to 25% and back every 2 seconds, each at its own offset. That's the model for "alive" motion: stepped and quiet, like the telemetry mark on the Space page's Telemetry footer (SF-19).
+- **Kicker nodes blink** (design lead, 2026-11-22; only kickers' since 2026-11-24). The hexagon before a kicker blinks like a live readout: a hard step to 25% and back every 2 seconds, each at its own offset. That's the model for "alive" motion: stepped and quiet, like the telemetry mark on the Space page's Telemetry footer (SF-19).
 
 ## Decisions made so far, for context
 

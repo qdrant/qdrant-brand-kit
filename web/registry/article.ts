@@ -6,7 +6,7 @@ export const article = defineSection<ArticleProps>({
   id: "article",
   name: "Article",
   category: "content",
-  summary: "A blog post: breadcrumbs, title and byline, a hero image slot, prose with a sticky contents list, and share links.",
+  summary: "A blog post: title and byline, a hero image slot, prose with a sticky contents list, and share links.",
   file: "article",
   component: Article,
   variants: [
@@ -16,7 +16,6 @@ export const article = defineSection<ArticleProps>({
       description:
         "The opening of the Qdrant 1.20 post, verbatim. The pull quote is a labeled placeholder (the post has none), and the hero and chart are placeholder frames.",
       props: {
-        breadcrumbs: releasePost.breadcrumbs,
         title: releasePost.title,
         authors: releasePost.authors,
         date: releasePost.date,
@@ -37,7 +36,6 @@ export const article = defineSection<ArticleProps>({
       "Figures carry the post's own caption.",
     ],
     anatomy: [
-      { part: "Breadcrumbs", note: "Home / Blog / the post." },
       { part: "Title and byline", note: "The H1, authors and date in mono." },
       { part: "Hero image", note: "A wide slot, a placeholder until the post's image." },
       { part: "Prose", note: "H2, H3, paragraphs, lists, code, quote, figure." },

@@ -104,7 +104,7 @@ export const hero = defineSection<HeroProps>({
       { name: "layout", type: '"centered" | "split" | "wide"', note: "Split puts the media on the right from lg; wide (proposed) puts it across the container under a split heading." },
       { name: "kicker, title, description", type: "string", note: "title is required." },
       { name: "primary, secondary", type: "{ label, href }", note: "The actions." },
-      { name: "snippet", type: "{ label?, text }", note: "One line to copy, like a prompt for an agent." },
+      { name: "snippet", type: "{ label?, text, agents? }", note: "One line to copy. With agents (claude, codex, cursor), a prompt for agents: their marks and the label show, and the text is only copied." },
       { name: "pills", type: "string[]", note: "Short claims." },
       { name: "trust", type: "{ label, icon? }[]", note: "Proof points, each with a Lucide icon name." },
       { name: "media", type: '"none" | "code" | "image"', note: "What fills the media slot." },

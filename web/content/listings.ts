@@ -9,9 +9,6 @@
 
 import type { Link } from "./site"
 
-// The site's breadcrumbs: Home / Blog / the page.
-export type Crumb = { label: string; href?: string }
-
 // A block of long-form text, for the article and legal sections. Text can mark `code` and **bold**.
 export type ProseBlock =
   | { type: "h2" | "h3"; id: string; text: string }
@@ -24,9 +21,8 @@ export type ProseBlock =
 // ---------------------------------------------------------------------------------------------------------------
 // Page headers
 
-// /customers/: the hero's label, title and button. The page has no breadcrumbs; Home and Customers are its menu names.
+// /customers/: the hero's label, title and button.
 export const customersHeader = {
-  breadcrumbs: [{ label: "Home", href: "/" }, { label: "Customers" }] as Crumb[],
   kicker: "Customer Case Studies",
   title: "Explore What Leading Teams Build with Qdrant",
   primary: { label: "Talk to Sales", href: "/contact-us/" } as Link,
@@ -34,7 +30,6 @@ export const customersHeader = {
 
 // /integrations/: the title, the line under it and its two links.
 export const integrationsHeader = {
-  breadcrumbs: [{ label: "Home", href: "/" }, { label: "Integrations" }] as Crumb[],
   title: "Integrations",
   description:
     "Connect Qdrant to the embedding models, AI frameworks, data pipelines, platforms, and observability tools you already use.",
@@ -44,7 +39,6 @@ export const integrationsHeader = {
 
 // /blog/: the title, the page's description (its meta description) and the search field's text.
 export const blogHeader = {
-  breadcrumbs: [{ label: "Home", href: "/" }, { label: "Blog" }] as Crumb[],
   title: "Qdrant Blog",
   description:
     "A place to learn how to become an expert traveler through vector space. Subscribe and we will update you on features and news.",
@@ -387,7 +381,6 @@ export const articleToc = [
 ]
 
 export const releasePost = {
-  breadcrumbs: [{ label: "Home", href: "/" }, { label: "Blog", href: "/blog/" }, { label: "Qdrant 1.20 - Full-Text Search Improvements" }] as Crumb[],
   title: "Qdrant 1.20 - Full-Text Search Improvements",
   authors: "Andrey Vasnetsov",
   date: "October 22, 2026",

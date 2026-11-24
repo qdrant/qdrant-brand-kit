@@ -41,9 +41,7 @@ export const styleSwitches = [
   { key: "topLight", label: "Top light", title: "Proposal: light from above. A lit top edge on plates, trays and seams, fading at the ends", query: ["toplight", "1"], attr: ["data-web-top-light", "on"], on: false, proposal: true },
   { key: "bevel", label: "Bevel", title: "Proposal: cards and trays with cut corners, the hexagon's angle, instead of rounded ones", query: ["bevel", "1"], attr: ["data-web-bevel", "on"], on: false, proposal: true },
   { key: "marks", label: "Marks", title: "Proposal: registration marks at the corners of plates and trays, like a technical drawing", query: ["marks", "1"], attr: ["data-web-marks", "on"], on: false, proposal: true },
-  { key: "readout", label: "Readout", title: "Proposal: kickers and labels as instrument readouts: mono, a square marker and a trailing hairline", query: ["readout", "1"], attr: ["data-web-readout", "on"], on: false, proposal: true },
   { key: "recess", label: "Recess", title: "Proposal: media sits in a recessed well, darker than the page, lit from above", query: ["recess", "1"], attr: ["data-web-recess", "on"], on: false, proposal: true },
-  { key: "roomy", label: "Roomy", title: "Proposal: one step more space: card padding 32px, heading to content 64px, wider gaps", query: ["roomy", "1"], attr: ["data-web-roomy", "on"], on: false, proposal: true },
 ] as const
 
 export type StyleKey = (typeof styleSwitches)[number]["key"]

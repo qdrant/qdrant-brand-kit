@@ -130,7 +130,8 @@ export const homeHero = {
   description: "Qdrant helps you build the AI retrieval you want.",
   primary: { label: "Start Free in Qdrant Cloud", href: "https://cloud.qdrant.io/signup" },
   secondary: { label: "See How It Works", href: "/qdrant-vector-database/" },
-  snippet: { label: "Give this to your agent:", text: "set up qdrant with https://qdrant.tech/llms.txt" },
+  // The prompt is copied, not shown; the marks are the agents it's for (design lead, 2026-11-24).
+  snippet: { label: "Give this to your agent", text: "set up qdrant with https://qdrant.tech/llms.txt", agents: ["claude", "codex", "cursor"] as ("claude" | "codex" | "cursor")[] },
   trust: [
     { label: "35k+ GitHub Stars", icon: "Star" },
     { label: "60k+ Community Members", icon: "Users" },

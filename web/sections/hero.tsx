@@ -5,7 +5,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Link } from "../content/site"
 import { CodePanel, quickstartQuery } from "../lib/code-panel"
-import { CopySnippet } from "../lib/copy-snippet"
+import { CopySnippet, type AgentId } from "../lib/copy-snippet"
 import { IconTile, toneAt } from "../lib/tone"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
@@ -23,7 +23,7 @@ export type HeroProps = SectionProps & {
   primary?: Link
   secondary?: Link
   // One line to copy under the buttons, like a prompt for an agent.
-  snippet?: { label?: string; text: string }
+  snippet?: { label?: string; text: string; agents?: AgentId[] }
   // Proof points under everything, each with a Lucide icon.
   trust?: { label: string; icon?: string }[]
   // Short claims as pills, under the buttons.
@@ -104,7 +104,7 @@ export function Hero({
           ))}
         </ul>
       )}
-      {snippet && <CopySnippet label={snippet.label} text={snippet.text} />}
+      {snippet && <CopySnippet label={snippet.label} text={snippet.text} agents={snippet.agents} />}
       {note && (
         <p className={cn("text-sm text-muted-foreground", centered && "text-center")}>
           {note.text}{" "}

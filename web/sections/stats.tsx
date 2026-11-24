@@ -1,6 +1,5 @@
 import { cn } from "@qdrant/design-system/lib/utils"
 
-import { Node } from "../lib/node"
 import { Plate } from "../lib/plate"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
@@ -9,9 +8,8 @@ import { type } from "../lib/type"
 
 export type StatsProps = SectionProps & {
   // cells: numbers in a hairline grid. cards: a customer's result on a plate, with its line.
-  // Proposals (2026-11-24): readout, the figures as rows of an instrument board, label left and figure right on one
-  // line; lead, the first figure large across the width with the rest in cells under it.
-  layout?: "cells" | "cards" | "readout" | "lead"
+  // Proposal (2026-11-24): lead, the first figure large across the width with the rest in cells under it.
+  layout?: "cells" | "cards" | "lead"
   header?: HeaderProps
   items: { value: string; label?: string; company?: string; text?: string; href?: string }[]
 }
@@ -24,35 +22,7 @@ export function Stats({ layout = "cells", header, items, theme, surface, pattern
       {header && (
         <SectionHeader kicker={header.kicker} title={header.title} description={header.description} layout="stacked" />
       )}
-      {layout === "readout" ? (
-        <Plate as="div" className="rounded-xl p-2">
-          <ul className="flex flex-col">
-            {items.map((item) => {
-              const row = (
-                <>
-                  <span className="flex min-w-0 items-center gap-3">
-                    <Node />
-                    <span className="truncate font-mono text-sm tracking-[0.12em] text-muted-foreground uppercase">{item.label}</span>
-                  </span>
-                  <span aria-hidden className="h-px min-w-8 flex-1 border-t border-dashed border-(--web-line-strong)" />
-                  <span className="font-mono text-3xl tracking-tight text-foreground tabular-nums md:text-4xl">{item.value}</span>
-                </>
-              )
-              return (
-                <li key={item.value + item.label} className="border-b border-(--web-line) last:border-b-0">
-                  {item.href ? (
-                    <a href={item.href} className="flex items-center gap-4 rounded-lg px-4 py-5 hover:bg-(--web-tray) md:px-6">
-                      {row}
-                    </a>
-                  ) : (
-                    <div className="flex items-center gap-4 px-4 py-5 md:px-6">{row}</div>
-                  )}
-                </li>
-              )
-            })}
-          </ul>
-        </Plate>
-      ) : layout === "lead" ? (
+      {layout === "lead" ? (
         <ul className="web-grid grid-cols-1 md:grid-cols-3">
           {items.map((item, i) => (
             <li

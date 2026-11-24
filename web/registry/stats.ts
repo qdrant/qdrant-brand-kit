@@ -22,14 +22,6 @@ export const stats = defineSection<StatsProps>({
       },
     },
     {
-      id: "readout",
-      name: "Readout",
-      description: "The company's figures as rows of an instrument board: label left, figure right.",
-      props: { layout: "readout", items: aboutStats },
-      proposal:
-        "Figures read as live telemetry, which suits a database: each row a node, a spaced mono label, a dashed leader and the figure, on one plate. From Railway's split-flap usage board, made quieter: no flaps, no motion.",
-    },
-    {
       id: "lead",
       name: "Lead figure",
       description: "The first figure large across the width, the others in cells under it.",
@@ -51,10 +43,10 @@ export const stats = defineSection<StatsProps>({
       { part: "Label or line", note: "What the figure counts, or the sentence it comes from." },
     ],
     props: [
-      { name: "layout", type: '"cells" | "cards" | "readout" | "lead"', note: "Hairline grid, plates, readout board or lead figure (the last two proposed)." },
+      { name: "layout", type: '"cells" | "cards" | "lead"', note: "Hairline grid, plates or lead figure (the last proposed)." },
       { name: "items", type: "{ value, label?, company?, text?, href? }[]", note: "The figures." },
       { name: "header", type: "{ kicker?, title, description? }", note: "Optional." },
     ],
   },
-  fields: [{ prop: "layout", label: "Layout", kind: "select", options: [{ value: "cells", label: "Cells" }, { value: "cards", label: "Cards" }, { value: "readout", label: "Readout" }, { value: "lead", label: "Lead figure" }] }],
+  fields: [{ prop: "layout", label: "Layout", kind: "select", options: [{ value: "cells", label: "Cells" }, { value: "cards", label: "Cards" }, { value: "lead", label: "Lead figure" }] }],
 })

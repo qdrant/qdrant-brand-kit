@@ -33,7 +33,7 @@ export function SectionHeader({
   // The kicker starts with a node, the same hexagon as where the page's lines meet (web.css).
   const kickerEl = kicker ? (
     <p className={cn(type.kicker, "flex items-center gap-2.5")}>
-      <Node />
+      <Node blink />
       {kicker}
     </p>
   ) : null

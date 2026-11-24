@@ -85,7 +85,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Links are indigo",
-        text: "Text links take secondary.text: indigo-400 on dark, indigo-800 on light, underlined on hover (the .web-link class, and ArrowLink for \"Read more >\" links). A link that reads as text, like a card's title or a breadcrumb, keeps the text color and turns indigo on hover (.web-link-quiet). Menus and the footer keep their own hover. Calls to action are buttons, never links.",
+        text: "Text links take secondary.text: indigo-400 on dark, indigo-800 on light, underlined on hover (the .web-link class, and ArrowLink for \"Read more >\" links). A link that reads as text, like a card's title, keeps the text color and turns indigo on hover (.web-link-quiet). Menus and the footer keep their own hover. Calls to action are buttons, never links.",
         decided: "Design lead, 2026-11-22",
         source: "web/styles/web.css",
       },
@@ -178,6 +178,18 @@ export const guidelines: GuidelineGroup[] = [
         decided: "Design lead, 2026-11-23",
         source: "web/sections/navbar.tsx",
       },
+      {
+        title: "No breadcrumbs or pagination",
+        text: "The website has neither. The navbar's menus place a page, so an inner page opens with its header, not a trail of links. A directory shows every result on one page, narrowed by its filters and search.",
+        decided: "Design lead, 2026-11-24",
+        source: "web/sections/page-header.tsx, web/sections/filterable-index.tsx",
+      },
+      {
+        title: "A prompt for agents shows the agents, not the prompt",
+        text: "Give this to your agent: the marks of the agents it's for (Claude, Codex, Cursor), one color in the muted text color, then the label and a copy button. The prompt itself isn't shown; the button copies it, and it shows when you hover the button.",
+        decided: "Design lead, 2026-11-24",
+        source: "web/lib/copy-snippet.tsx, web/assets/logos/agents/",
+      },
     ],
   },
   {
@@ -193,7 +205,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Nodes are hexagons, like the brandmark",
-        text: "Where lines meet, and before a kicker, a step or an item in a vertical list of tabs, a small hexagon (7 by 8px) stands like the logo's brandmark, a point at the top and the bottom. Hollow, filled with the page's color over a line, and filled with indigo when active. Never a dot or another shape. Nodes are alive: they blink like a live readout, a hard step to 25% and back every 2s, each at its own offset (design lead, 2026-11-22), and hold still for reduced motion. Never in a row of tabs, like tabs on a tray: the active tab's plate marks it (design lead, 2026-11-24).",
+        text: "Where lines meet, and before a kicker, a step or an item in a vertical list of tabs, a small hexagon (7 by 8px) stands like the logo's brandmark, a point at the top and the bottom. Hollow, filled with the page's color over a line, and filled with indigo when active. Never a dot or another shape. A kicker's node is alive: it blinks like a live readout, a hard step to 25% and back every 2s, each at its own offset (design lead, 2026-11-22), and holds still for reduced motion. Every other node is still (design lead, 2026-11-24). Never in a row of tabs, like tabs on a tray: the active tab's plate marks it (design lead, 2026-11-24).",
         decided: "Design lead, 2026-11-22 and 2026-11-24",
         source: "web/lib/node.tsx",
       },
