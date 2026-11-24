@@ -1,0 +1,72 @@
+{
+  "name": "Generative-Glyph-Layer-B",
+  "recipe": "generative-pattern",
+  "extends": "generative-pattern.shared",
+  "$description": "A transparent layer of random QDRANT letters scattered over the whole canvas, with no shape in the middle. Drawn on top of Motion-Streaks-Pattern-B; its colorways pair with the pattern's by position. Not a pattern on its own, so it's not in index.json.",
+  "source": "Pattern Studio export, 1920 x 1080, transparent background (Vanesa's good example, 2026-11-24)",
+  "colorways": [
+    {
+      "name": "Indigo",
+      "colors": [
+        "{color.secondary.800}",
+        "{color.secondary.500}",
+        "{color.secondary.200}"
+      ],
+      "backdrop": null
+    },
+    {
+      "name": "Amaranth",
+      "colors": [
+        "{color.primary.800}",
+        "{color.primary.500}",
+        "{color.primary.300}"
+      ],
+      "backdrop": null
+    },
+    {
+      "name": "Teal",
+      "colors": [
+        "{color.teal.800}",
+        "{color.teal.500}",
+        "{color.teal.200}"
+      ],
+      "backdrop": null
+    }
+  ],
+  "settings": {
+    "designSize": {
+      "width": 1920,
+      "height": 1080
+    },
+    "background": null,
+    "cellRange": {
+      "shortSide": [
+        1080,
+        2160
+      ],
+      "cell": [
+        24,
+        40
+      ]
+    },
+    "engine": {
+      "shape": "text",
+      "text": "",
+      "size": 0.05,
+      "shaping": "glow",
+      "noiseAmount": 0.37,
+      "blend": "mix",
+      "noiseScale": 5.9,
+      "warp": 0.03,
+      "zoom": 1,
+      "rotation": 0,
+      "threshold": 0.12,
+      "element": "ascii",
+      "scale": 0.53,
+      "glyphs": "random",
+      "ramp": "QDRANT",
+      "colorMap": "random",
+      "backdrop": "none"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "Motion-Streaks-Pattern-A",
   "recipe": "motion-streaks-pattern",
-  "$description": "A token gradient with soft light streaks on top, from Figma's Motion streaks shader. Streak values can change within the approved ranges (see the recipe); these are the defaults.",
+  "$description": "A token gradient with soft light streaks on top, from Figma's Motion streaks shader. Streak values can change within the approved ranges (see the recipe); these are the defaults, on the 8 grid.",
   "figma": "https://www.figma.com/design/2u6KfDsYjibQuf9ji6lFBR/Qdrant-Brand-Design?node-id=23789-66977",
   "colorways": [
     {
@@ -31,10 +31,10 @@
       "toStop": 116.67
     },
     "streaks": {
-      "length": 75,
-      "direction": 129,
-      "density": 42,
-      "softness": 59,
+      "length": 72,
+      "direction": 124,
+      "density": 40,
+      "softness": 56,
       "opacity": 24
     }
   }

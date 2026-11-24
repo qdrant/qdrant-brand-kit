@@ -103,10 +103,11 @@ for (const id of ids) {
 
   // Motion streaks: defaults inside the approved ranges (patterns/motion-streaks-pattern.js).
   if (p.recipe === "motion-streaks-pattern") {
-    const ranges = { length: [16, 80], density: [8, 64], softness: [32, 56] };
+    const ranges = { length: [16, 80], density: [8, 64], softness: [32, 64] };
     for (const [key, [lo, hi]] of Object.entries(ranges)) {
       const v = p.settings?.streaks?.[key];
-      if (!(v >= lo && v <= hi)) warnings.push(`${where}: streaks.${key} is ${v}, outside the approved ${lo} to ${hi}`);
+      if (!(v >= lo && v <= hi)) errors.push(`${where}: streaks.${key} is ${v}, outside the approved ${lo} to ${hi}`);
+      else if (v % 8 !== 0) errors.push(`${where}: streaks.${key} is ${v}, not on the 8 grid`);
     }
   }
 

@@ -10,13 +10,14 @@
 import { resolveToken, hexToRgba } from "./tokens.js";
 import { gradientSampler, makeFrame } from "./effects.js";
 
-// Approved by Vanesa on 2026-11-24. Direction can be any angle (124° is the usual).
+// Approved by Vanesa on 2026-11-24. Length, density and softness sit on the 8 grid;
+// direction can be any angle (124° is the usual).
 export const STREAK_RANGES = {
   length: [16, 80],
   density: [8, 64],
-  softness: [32, 56],
-  direction: [-180, 360],
+  softness: [32, 64],
 };
+const ON_GRID = ["length", "density", "softness"];
 
 // The shader's hash, in 32-bit floats like the GPU.
 const f = Math.fround;
@@ -31,10 +32,15 @@ const smoothstep = (a, b, x) => {
   return t * t * (3 - 2 * t);
 };
 
-// Clamps streak values to the approved ranges.
+// Rounds length, density and softness to the 8 grid and keeps them in the approved
+// ranges. Direction can be any angle.
 export function streakSettings(base, overrides = {}) {
   const s = { ...base, ...overrides };
-  for (const [key, [lo, hi]] of Object.entries(STREAK_RANGES)) s[key] = clamp(Number(s[key]), lo, hi);
+  for (const key of ON_GRID) {
+    const [lo, hi] = STREAK_RANGES[key];
+    s[key] = clamp(Math.round(Number(s[key]) / 8) * 8, lo, hi);
+  }
+  s.direction = Number(s.direction);
   return s;
 }
 
