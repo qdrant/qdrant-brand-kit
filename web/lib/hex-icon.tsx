@@ -9,7 +9,8 @@ import { icons } from "./icon"
 // A Lucide icon drawn as a field of small hexagons, upright like the logo's brandmark (design lead, 2026-11-24,
 // exploring). The icon is filled, not outlined: its shapes are solid hexagons, and the lines drawn inside another
 // shape (a shield's check, a chip's inner square, a database's seams) are cut out as gaps, as filled icons show detail.
-// The hexagons are largest at the center and get smaller toward the outer edges, so the icon reads as organic. A faint
+// The hexagons come in four sizes, largest in the center ring and smaller in each ring out to the edges, a clear
+// halftone; 14 across, large enough that the center's nearly touch, so icons read as simple and even. A faint
 // halftone past the outline is an option (halo), off by default: in a filled icon it blurs the gaps. The shape is always the Lucide icon's own: it's measured, never redrawn.
 //
 // How: the Lucide icon is rendered hidden at its 24-unit size, and every cell of a hex grid asks the browser whether
@@ -19,7 +20,7 @@ import { icons } from "./icon"
 export type HexIconOptions = {
   // Cells across the icon's 24 units. More is finer.
   density?: number
-  // How much smaller the hexagons get from the center to the edges, 0 to 1.
+  // How much smaller the outermost of the four sizes is than the center's, 0 to 1.
   falloff?: number
   // How far the halftone reaches past the outline, 0 to 1.
   halo?: number
@@ -29,12 +30,7 @@ type Cell = { x: number; y: number; r: number }
 
 const cache = new Map<string, Cell[]>()
 
-const smoothstep = (edge0: number, edge1: number, x: number) => {
-  const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)))
-  return t * t * (3 - 2 * t)
-}
-
-function measure(svg: SVGSVGElement, { density = 18, falloff = 0.55, halo = 0 }: HexIconOptions): Cell[] {
+function measure(svg: SVGSVGElement, { density = 14, falloff = 0.6, halo = 0 }: HexIconOptions): Cell[] {
   const shapes = [...svg.querySelectorAll<SVGGeometryElement>("path, circle, ellipse, line, polyline, polygon, rect")]
   const point = svg.createSVGPoint()
   const at = (x: number, y: number) => {
@@ -87,10 +83,12 @@ function measure(svg: SVGSVGElement, { density = 18, falloff = 0.55, halo = 0 }:
         size = 1
       else if (halo > 0 && outer.some((shape) => inStroke(shape, 2 + 2.4 * halo, p))) size = 0.3
       if (!size) continue
-      // Largest at the center, smaller toward the edges.
-      const f = 1 - falloff * smoothstep(1, 12.5, Math.hypot(x - 12, y - 12))
+      // Largest at the center, smaller toward the edges, in four clear steps of halftone (design lead, 2026-11-24):
+      // the ring a cell falls in, out from the center, sets its size.
+      const ring = Math.min(3, Math.floor(Math.hypot(x - 12, y - 12) / 3.6))
+      const f = 1 - (falloff * ring) / 3
       // A full cell is 0.9 of half the step, so neighbors never touch.
-      const r = step * 0.45 * size * f
+      const r = step * 0.52 * size * f
       if (r >= 0.12) out.push({ x, y, r })
     }
   }
@@ -112,7 +110,7 @@ export function HexIcon({
   className,
   ...options
 }: { name: string; className?: string } & HexIconOptions) {
-  const key = `${name}:${options.density ?? 18}:${options.falloff ?? 0.55}:${options.halo ?? 0}`
+  const key = `${name}:${options.density ?? 14}:${options.falloff ?? 0.6}:${options.halo ?? 0}`
   const [, measured] = React.useState(0)
   const cells = cache.get(key)
   const Icon = icons[name]
