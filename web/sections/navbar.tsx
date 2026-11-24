@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Menu as MenuIcon } from "lucide-react"
+import { ArrowUpRight, Menu as MenuIcon } from "lucide-react"
 
 import {
   Accordion,
@@ -30,6 +30,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Link, Menu, MenuGroup, MenuHighlight } from "../content/site"
 import { ArrowLink } from "../lib/arrow-link"
+import { generativePattern } from "../patterns/explorations/generative"
 import { HexIcon, type HexStyle } from "../lib/hex-icon"
 import { Icon } from "../lib/icon"
 import { toneAt } from "../lib/tone"
@@ -54,7 +55,7 @@ export type NavbarProps = SectionProps & {
   // How a menu's highlight (the Developers menu's Documentation) takes its own space (exploring, design lead,
   // 2026-11-24): card, a feature card at the panel's side; band, a band across the top; hub, a column of its own
   // with its quickstarts and client libraries.
-  highlightStyle?: "card" | "band" | "hub"
+  highlightStyle?: "card" | "band" | "hub" | "tile"
   // A menu open from the start, for previews (the studio's canvas and docs).
   openMenu?: string
 }
@@ -474,13 +475,49 @@ function MobileMenu({
   )
 }
 
-// A menu's highlight (design lead, 2026-11-24, exploring), one item given its own space, in three layouts:
+// The tile's pattern: Pixel drift (web/patterns/explorations, the marketing designer's), with its own params, on a
+// 20-second loop instead of 6 so it drifts more quietly, and without its fade, since the tile masks it to a corner.
+const docsDrift = generativePattern({
+  id: "docs-pixel-drift",
+  name: "Pixel drift (Documentation tile)",
+  kind: "surface",
+  description:
+    "Pixel drift, slower, for the Documentation tile in the Developers menu.",
+  loop: 20,
+  fade: false,
+  params: {
+    layout: "grid",
+    cell: 10,
+    shape: "gradient",
+    rotation: 40,
+    size: 1,
+    shaping: "fill",
+    softness: 1.2,
+    noiseAmount: 0.45,
+    blend: "add",
+    noiseScale: 4,
+    octaves: 2,
+    warp: 0,
+    element: "hexagon",
+    orientation: "fixed",
+    elementRotation: 30,
+    scale: 0.7,
+    sizeByValue: false,
+    density: "stochastic",
+    threshold: 0,
+    seed: 7,
+  },
+})
+
+// A menu's highlight (design lead, 2026-11-24, exploring), one item given its own space, in four layouts:
 // - card: a feature card at the panel's start, its big mark, title, description, Getting Started links and Read
 //   the Docs (after Lululemon's and Hers' menus, whose side card carries a large visual).
 // - band: a band across the top of the panel, the mark, title and description on the left and its links as chips on
 //   the right, the menu's groups below it (after Slack API's docs menu, which opens with a header row).
 // - hub: a column of its own on a tray, with its Getting Started links and a grid of the client libraries (after
 //   Codecademy's Docs, which opens its own space with a chip per language).
+// - tile: a compact card with no paragraph and no icon, its title and its quickstarts, and Pixel drift moving
+//   quietly in its lower corner (after the design lead's reference: dark resource tiles with a pixel accent in a corner).
 function Highlight({
   item,
   variant = "card",
@@ -533,6 +570,46 @@ function Highlight({
       ))}
     </ul>
   )
+
+  if (variant === "tile") {
+    const Drift = docsDrift.Layer
+    return (
+      <Plate
+        as="div"
+        className="group/tile relative flex w-60 shrink-0 flex-col gap-2 overflow-hidden rounded-lg p-4"
+      >
+        {/* The pattern fills the lower right and fades toward the title. */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute right-0 bottom-0 h-[78%] w-[72%] [mask-image:radial-gradient(120%_100%_at_100%_100%,black_30%,transparent_75%)]"
+        >
+          <Drift />
+        </span>
+        <NavigationMenuLink
+          href={item.href}
+          className="relative w-fit gap-1.5 p-0 text-[15px] leading-snug font-medium text-foreground hover:bg-transparent hover:text-(--web-link)"
+        >
+          {item.label}
+          <ArrowUpRight
+            className="size-3.5 text-muted-foreground"
+            aria-hidden
+          />
+        </NavigationMenuLink>
+        <ul className="relative flex flex-wrap gap-x-3 gap-y-1">
+          {item.start.map((link) => (
+            <li key={link.label}>
+              <NavigationMenuLink
+                href={link.href}
+                className="p-0 text-xs text-muted-foreground hover:bg-transparent hover:text-foreground"
+              >
+                {link.label}
+              </NavigationMenuLink>
+            </li>
+          ))}
+        </ul>
+      </Plate>
+    )
+  }
 
   if (variant === "band") {
     return (

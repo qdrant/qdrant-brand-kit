@@ -54,6 +54,14 @@ export const navbar = defineSection<NavbarProps>({
       proposal: "Documentation becomes a small hub inside the menu, with the quickstarts and a chip per client library. After Codecademy's Docs, which opens its own space with a chip per language.",
     },
     {
+      id: "docs-tile",
+      name: "Docs: pattern tile",
+      description: "The Developers menu with Documentation as a compact tile: its title and quickstarts, no paragraph or icon, and Pixel drift moving quietly in its lower corner.",
+      props: { variant: "full", menus, ...navActions, openMenu: "Developers", highlightStyle: "tile" },
+      frameMinHeight: 480,
+      proposal: "Documentation stands out through a living surface rather than a big icon or a paragraph: a compact tile where the marketing designer's Pixel drift pattern fills one corner and drifts slowly. After the design lead's reference: compact dark resource tiles with a pixel accent in a corner.",
+    },
+    {
       id: "minimal",
       name: "Minimal",
       description: "The logo, Log in and Start Free, for landing pages that keep the reader on one action.",
@@ -91,7 +99,7 @@ export const navbar = defineSection<NavbarProps>({
   },
   fields: [
     { prop: "sticky", label: "Sticky", kind: "boolean" },
-    { prop: "highlightStyle", label: "Docs highlight", kind: "select", options: [{ value: "card", label: "Feature card" }, { value: "band", label: "Top band" }, { value: "hub", label: "Hub column" }] },
+    { prop: "highlightStyle", label: "Docs highlight", kind: "select", options: [{ value: "card", label: "Feature card" }, { value: "band", label: "Top band" }, { value: "hub", label: "Hub column" }, { value: "tile", label: "Pattern tile" }] },
     { prop: "markStyle", label: "Product marks", kind: "select", options: [{ value: "halftone", label: "Halftone" }, { value: "tones", label: "Tones" }, { value: "outline", label: "Outline" }, { value: "matrix", label: "Matrix" }] },
   ],
 })
