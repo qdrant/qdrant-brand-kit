@@ -40,13 +40,23 @@ export function Node({
   )
 }
 
-// Where a seam meets the rails, at the outer edges of a section (design lead, 2026-11-24): a four-point star instead
-// of a hexagon, points up, down and to the sides along the lines, square (11 by 11px), its sides curved in so the
-// points are sharp. Filled with the page's background so the lines stop at its edge, outlined like a node, and still.
+// Where a seam meets the rails, at the outer edges of a section (design lead, 2026-11-24): the corners the two lines
+// make are filled with curves in the lines' own color, so the lines widen into a four-point star where they cross.
+// Each corner is its own shape, drawn beside the 1px lines and never over them (the lines are translucent, so an
+// overlap would read darker), with its curve tangent to both lines, so the points are sharp. 11 by 11px, centered on
+// the crossing; the lines run through x and y 5 to 6. The upper or lower pair is left out where its line stops
+// (styles/web.css), so a line that ends at the seam gets only the corners it has.
 export function Junction({ className }: { className?: string }) {
   return (
     <svg aria-hidden viewBox="0 0 11 11" className={cn("web-star block size-[11px] shrink-0 overflow-visible", className)}>
-      <path d="M5.5 0.5Q6.3 4.7 10.5 5.5Q6.3 6.3 5.5 10.5Q4.7 6.3 0.5 5.5Q4.7 4.7 5.5 0.5Z" />
+      <g className="web-star-up">
+        <path d="M5 0Q4.4 4.4 0 5H5Z" />
+        <path d="M6 0Q6.6 4.4 11 5H6Z" />
+      </g>
+      <g className="web-star-down">
+        <path d="M5 11Q4.4 6.6 0 6H5Z" />
+        <path d="M6 11Q6.6 6.6 11 6H6Z" />
+      </g>
     </svg>
   )
 }

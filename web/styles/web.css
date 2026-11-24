@@ -109,13 +109,22 @@
 .web-seam-bottom + .web-seam > .web-rails > .web-node {
   display: none;
 }
-/* The four-point star where a seam meets the rails (Junction in lib/node.tsx, design lead, 2026-11-24). */
+/* Where a seam meets the rails (Junction in lib/node.tsx, design lead, 2026-11-24): the corners filled in the lines'
+   color, so they read as one four-point star. Under the navbar the line is the navbar's own bottom border, 1px
+   higher than a seam, and no rail comes down from above: the rails start 1px higher to meet it, and the star keeps
+   only its lower corners.
+   The same where any section above has no rails, and on a bottom seam with no rails below it. */
 .web-star path {
-  fill: var(--background);
-  stroke: var(--web-node, var(--web-line-strong));
-  stroke-width: 1;
-  stroke-linejoin: miter;
-  stroke-miterlimit: 10;
+  fill: var(--web-line);
+}
+.web-navbar + .web-seam > .web-rails {
+  top: -1px;
+}
+:not(:has(> .web-rails)) + .web-seam > .web-rails > .web-star .web-star-up {
+  display: none;
+}
+.web-seam-bottom:is(:last-child, :has(+ :not(:has(> .web-rails)))) > .web-rails > .web-star .web-star-down {
+  display: none;
 }
 .web-hex polygon {
   fill: transparent;
