@@ -5,56 +5,56 @@
   "source": "Pattern Studio export, 1620 x 1080",
   "colorways": [
     {
-      "name": "Dark violet",
+      "name": "Neutral 950 → Indigo 900",
       "textMask": "both",
       "colors": [
-        "{color.secondary.800}",
-        "{color.secondary.500}",
-        "{color.secondary.200}"
+        "{color.indigo.800}",
+        "{color.indigo.600}",
+        "{color.indigo.200}"
       ],
       "backdrop": [
         "{color.neutral.950}",
-        "{color.secondary.900}"
+        "{color.indigo.900}"
       ]
     },
     {
-      "name": "Medium violet",
+      "name": "Neutral 950 → Indigo 600",
       "textMask": "mask",
       "colors": [
-        "{color.secondary.800}",
-        "{color.secondary.500}",
-        "{color.secondary.200}"
+        "{color.indigo.800}",
+        "{color.indigo.600}",
+        "{color.indigo.200}"
       ],
       "backdrop": [
         "{color.neutral.950}",
-        "{color.secondary.500}"
+        "{color.indigo.600}"
       ]
     },
     {
-      "name": "Light violet",
+      "name": "Indigo 600 → Indigo 400",
       "textMask": "none",
       "colors": [
-        "{color.secondary.800}",
-        "{color.secondary.500}",
-        "{color.secondary.200}"
+        "{color.indigo.800}",
+        "{color.indigo.600}",
+        "{color.indigo.200}"
       ],
       "backdrop": [
-        "{color.secondary.500}",
-        "{color.secondary.300}"
+        "{color.indigo.600}",
+        "{color.indigo.400}"
       ]
     },
     {
-      "name": "Red",
+      "name": "Neutral 950 → Amaranth 600",
       "textMask": "none",
       "colors": [
-        "{color.primary.800}",
-        "{color.primary.500}",
-        "{color.primary.300}"
+        "{color.amaranth.800}",
+        "{color.amaranth.600}",
+        "{color.amaranth.400}"
       ],
       "backdrop": [
         "{color.neutral.950}",
         {
-          "token": "{color.primary.500}",
+          "token": "{color.amaranth.600}",
           "at": 1.39
         }
       ]

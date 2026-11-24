@@ -4,7 +4,9 @@ This repo is the Qdrant brand system: the rules and materials for **creatives** 
 
 ## Making a creative
 
-1. **Ask first.** Settle the questions in [`guidelines/`](guidelines/) section 1 (tone, pattern or image, hero, red, other sizes) unless the request already answers them. Never decide a layout or look on your own when the person hasn't said: ask, with rendered options when it's visual.
+**Printed?** If the person asks for something printed (flyer, brochure, poster, roll-up, business card, booth, print PDF), also read [`guidelines/print/`](guidelines/print/) first: it starts with the printer's spec and adds the print rules on top of everything below (2026-11-20). In print: no patterns; instead of the main-visual question, ask for dark with space imagery or plain and serious (light or dark), with the recommendation from the print rules; margins 8% of the short side, so they shrink with the format (Vanesa, 2026-11-20). Large-format print (booths, roll-ups and retractable banners, backdrops, posters A2 and bigger) is in progress: treat it as a test (Vanesa, 2026-11-20).
+
+1. **Ask only for the main visual.** Unless the request says, ask whether the creative has space imagery (astronaut), Qbot, a pattern only, or headshots (speaker announcements), with the recommended one marked ([`guidelines/`](guidelines/) section 1). Don't ask design questions (tone, pattern, layout, mask, other sizes): take them from the rules. Where a rule offers options, make each one and show them together, with the recommended one marked; the person picks (Vanesa, 2026-11-20).
 2. **Read, in this order:**
    - [`guidelines/README.md`](guidelines/README.md): all of it. Section 11 (Composition) is how to lay a creative out. There are no fixed post templates.
    - [`primitives/typography/README.md`](primitives/typography/README.md), "Text in creatives": the title scale and the one supporting size. Classes `.qd-title` (`--medium`, `--long`) and `.qd-supporting`.
@@ -13,7 +15,7 @@ This repo is the Qdrant brand system: the rules and materials for **creatives** 
    - Then **only** what you use: [`brand-assets/logo/`](brand-assets/logo/), [`icons/`](brand-assets/icons/), [`patterns/`](brand-assets/patterns/), [`imagery/`](brand-assets/imagery/) (incl. `headshots/`), [`mascot/`](brand-assets/mascot/), and the parts in [`brand-components/`](brand-components/) (button, headshot-card, headshot-circle, partner-lockup).
 3. **Build** in HTML/CSS with the repo's CSS and classes. Never redraw the logo, a part or a pattern.
 4. **Review it** with [`review/`](review/): `render.py`, `check.py`, `sheet.py`. Fix every fail, then look at each render yourself (the checker lists what it can't judge).
-5. **Show** the contact sheet and say what you'd ask or change.
+5. **Show** the contact sheet and the images, nothing else. Don't say what you'd ask or change: the person decides, and asks for changes if they want any (Vanesa, 2026-11-20).
 
 ## Building web UI
 
@@ -36,7 +38,7 @@ These rules are written for creatives. [`design-system/AGENTS.md`](design-system
 - Use red as a background without the person's yes.
 - Show, recommend or deliver a creative that fails contrast or puts text, the logo, the button or a headshot outside the margins or story safe zones ([`guidelines/layout/checks.md`](guidelines/layout/checks.md)).
 - Resize the button to make room, use the monochrome Black logo, put the red brandmark on a red pattern, or mask a light-colored pattern ([`guidelines/`](guidelines/) sections 3, 4 and 11).
-- Spend money (Design Lab or image generations) without asking first.
+- Generate an image the creative doesn't need. Space imagery (astronaut) is generated new for every creative that uses it, without asking. A new Qbot pose only when the person asks for one the approved poses don't have (Vanesa, 2026-11-20).
 - Save working files, renders or photos inside this repo. Work in a folder outside it, with absolute paths.
 
 ## Changing the repo

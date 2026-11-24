@@ -61,7 +61,17 @@ export function render(canvas, tokens, preset, _input, frame = makeFrame(), opti
     colors: look.colors.map((ref) => resolveToken(tokens, ref)),
     backdropColors: look.backdrop ? backdropColors(tokens, look.backdrop) : null,
   };
-  if (s.cellScaling !== "fixed") {
+  if (s.cellRange) {
+    // The grid grows with the canvas's short side between two sizes, e.g. 24 px at a
+    // short side of 1080 or less up to 40 px at 2160 (4K) and above. The field is
+    // measured by the short side, like Pattern Studio and the motion streaks.
+    const [s0, s1] = s.cellRange.shortSide;
+    const [c0, c1] = s.cellRange.cell;
+    const t = Math.min(1, Math.max(0, (Math.min(width, height) - s0) / (s1 - s0)));
+    const ratio = (c0 + (c1 - c0) * t) / s.engine.cell;
+    params.unit = Math.min(width, height) / 2;
+    for (const key of PIXEL_SIZES) params[key] = s.engine[key] * ratio;
+  } else if (s.cellScaling !== "fixed") {
     for (const key of PIXEL_SIZES) params[key] = s.engine[key] * scale;
   }
 

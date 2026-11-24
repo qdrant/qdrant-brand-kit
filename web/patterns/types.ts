@@ -7,8 +7,22 @@ import type { ComponentType } from "react"
 //
 // To add one: write web/patterns/<id>.tsx exporting a PatternDefinition, and list it in web/patterns/index.tsx. It
 // then shows in the studio's Patterns tab, in the builder's pattern pickers, and on any section through its
-// `pattern` (background) or `cardPattern` (surface) prop.
+// `pattern` (background) or `cardPattern` (surface) prop. A pattern still being explored goes in
+// web/patterns/explorations/ instead: it shows only in the Patterns tab, marked Exploring, until Juan says yes.
 export type PatternKind = "background" | "surface"
+
+// Approved (in web/patterns/index.tsx, Juan's yes) or exploring (web/patterns/explorations/).
+export type PatternStatus = "approved" | "exploring"
+
+// Where a pattern stretches or breaks a written rule, so it's raised before Juan sees it.
+export type PatternNote = {
+  // The rule, in a few words.
+  rule: string
+  // The file the rule is written in.
+  source: string
+  // How this pattern differs from it.
+  text: string
+}
 
 export type PatternDefinition = {
   id: string
@@ -19,6 +33,9 @@ export type PatternDefinition = {
   // The layer. It fills its parent (absolute, inset 0) and should read in both themes through the website's
   // variables (--web-line, --web-indigo, --foreground…), never a hex.
   Layer: ComponentType
+  // Approved when it's left out.
+  status?: PatternStatus
+  notes?: PatternNote[]
 }
 
 export function definePattern(p: PatternDefinition) {

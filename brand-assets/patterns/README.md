@@ -6,7 +6,7 @@ Brand patterns written as code, ready to live in Design Lab as primitives. No im
 
 | Piece | What it is | Where |
 | --- | --- | --- |
-| **Tokens** | Brand colors in W3C format. The names stay (`primary` = amaranth, `secondary` = indigo, `neutral`), because presets, meshes and Design Lab use them. Each value comes from a primitive in [`primitives/colors/`](../../primitives/colors/), the nearest Figma color, and is written by `node primitives/build.mjs` (2026-11-12). | `tokens/placeholder.tokens.json` |
+| **Tokens** | Brand colors in W3C format. Named exactly like the design system's color primitives in [`primitives/colors/`](../../primitives/colors/): `amaranth`, `indigo`, `teal`, `neutral` and `background.default` (the semantic role), so a preset shows which primitive it uses. `node primitives/build.mjs` fills every value from its primitive; never edit a value. Colorway names use the same names. `primary`, `secondary`, `neutral.white` and `neutral.black` are legacy aliases kept only for meshes Design Lab stored before 2026-11-24; presets and the meshes here never use them (the validator checks). | `tokens/placeholder.tokens.json` |
 | **Recipe** | A set of effects, as code. One file per recipe. | `patterns/<recipe>.js` |
 | **Preset** | A pattern: a recipe plus fixed values from Figma. Named `<Source>-<Effect>-Pattern-<Letter>`. | `presets/<name>.json` |
 | **Shared settings** | Values every pattern of a kind uses. Change once, all update. | `presets/shared.json`, `presets/mesh-pattern.shared.json`, `presets/mesh-dithered-pattern.shared.json`, `presets/generative-pattern.shared.json` |
@@ -84,10 +84,26 @@ Patterns made in Pattern Studio (the `qdrant-pattern-studio` repo) are added fro
 
 1. Make a preset that `extends` `generative-pattern.shared`. The shared file holds Pattern Studio's default settings (`engine`), its tone curves (`tones`) and the design size, 1620 × 1080.
 2. In the preset's `settings.engine`, list only the export's `PARAMS` that differ from the shared `engine` (never `width`, `height` or `colors`). If the export's `TONE` isn't one of the shared `tones`, add it there under a new name, and set `settings.tone` to that name.
-3. Turn the colors into tokens in `colorways`: each has a `name`, `colors` and `backdrop` (the gradient behind). If the same pattern was exported in other colors, don't make a new pattern: add a colorway, and pick it with `renderPattern(..., { colorway })`. A backdrop stop past the bottom of the frame, like the red brand gradient, is written `{ "token": "{color.primary.500}", "at": 1.39 }`.
+3. Turn the colors into tokens in `colorways`: each has a `name`, `colors` and `backdrop` (the gradient behind). If the same pattern was exported in other colors, don't make a new pattern: add a colorway, and pick it with `renderPattern(..., { colorway })`. A backdrop stop past the bottom of the frame, like the red brand gradient, is written `{ "token": "{color.amaranth.600}", "at": 1.39 }`.
 4. Add the preset to `presets/index.json`, run the validator, and compare it with the tool's export at 1620 × 1080: it should match pixel for pixel.
 
 At its `designSize`, the pattern is pixel-identical to the tool. At any other size, the field and the elements keep their scale by canvas area, so nothing stretches: a wider canvas shows more of the same field. `cellScaling` sets what the elements do on bigger canvases: `"canvas"` (they grow with it, like every other pattern) or `"fixed"` (they keep their px size, so there are more of them). `generative-scaling.html` shows both side by side.
+
+**Letter layers: what a variation may change** (Vanesa, 2026-11-24). Pass `renderPattern(..., { letters: { ... } })`, or call `varyLetterLayer(layer, changes)`. Anything else is refused, and the validator checks every letter layer:
+
+| Setting | Rule |
+| --- | --- |
+| Color mapping (`colorMap`) | Any: field value, x, y, radial, random, angle |
+| Glyphs (`glyphs`) | Ramp, word or random, but the characters are always the letters `QDRANT` |
+| Scale (`scale`) | A little: 0.45 to 0.65 |
+| Noise | Anything: amount, blend, scale, octaves, drift, warp, seed |
+| Jitter | Never |
+| Shape | Never a circle, hexagon, word or other shape in the middle: `"none"`, or `"text"` with no text |
+
+**Rotating letter variants (for agents).** Color-Sliced-Pattern-B and Motion-Streaks-Pattern-B share the same letter-layer behavior: the grid grows from 24 px (short side 1080 or less) to 40 px (4K), the letters use the colorway's 800, 600 and 200 steps from the color primitives, and variations follow the rules above. Two ways to make a variant:
+
+1. **Built in:** `renderPattern(canvas, tokens, preset, { colorway, width, height, letters: n })`. Each number `n` is a different variant (the same `n` always gives the same one; `0` is the layer as approved). Variants change color mapping, glyph mode, scale and the noise's size, octaves, drift, warp and seed, and keep the layer's noise amount and blend, so the letter density stays close to the approved one. To rotate, try `n = 1, 2, 3…`.
+2. **From the Pattern Studio connector (MCP):** call `pattern_variations` with `look: "terminal"`, `params: { element: "ascii", shape: "text", text: "", jitter: 0, ramp: "QDRANT", word: "QDRANT" }` and `vary: ["noise", "density"]`, then pass each variation through `fromStudioParams(variation.params)` and use the result as `letters`. It keeps only the allowed settings, so the connector's own shapes, colors, fonts and jitter never reach a creative. Always draw with `renderPattern` from this folder, never with the connector's `create_pattern` code: the colors must come from the tokens here.
 
 **Layers:** a preset can list `"layers"`: transparent generative presets drawn on top of it, in order. A layer has `"background": null`, one colorway per pattern colorway in the same order, each with `"backdrop": null`, and isn't in `presets/index.json`, because it isn't a pattern on its own. Color-Sliced-Pattern-B uses `generative-glyph-layer-a`. Adding a layer to a pattern is an effect change, so it gets a new letter.
 
@@ -141,14 +157,14 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 
 | `textMask` | Meaning | Presets |
 | --- | --- | --- |
-| `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Medium violet) |
-| `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways), Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Light violet, Red), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet) |
-| `"both"` | Both work: offer the 40% mask and no mask, and let the person pick | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet), Mesh-Dithered-Pattern-A |
-| not set | Not decided yet: render it with and without the mask and ask | every other preset or colorway |
+| `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Neutral 950 → Indigo 600) |
+| `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways), Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Neutral 950 → Indigo 600) |
+| `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Neutral 950 → Indigo 900), Generative-Glyph-Pattern-B (Indigo 600 → Indigo 400), Mesh-Dithered-Pattern-A |
+| not set | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick | every other preset or colorway |
 
 - When the answer differs by colorway (Burst-A, Glyph-B), `textMask` sits on the colorway instead of the preset.
 - **Never mask a light-colored pattern:** the mask turns its light colors grey (Vanesa, 2026-11-16).
-- **`textColor: "dark"`** on a colorway (Color-Refracted-Pattern-A, Primary 100 → Secondary 400) means the pattern is light: dark text, the Light logo, no mask. Never the monochrome Black logo.
+- **`textColor: "dark"`** on a colorway (Color-Refracted-Pattern-A, Amaranth 200 → Indigo 400) means the pattern is light: dark text, the Light logo, no mask. Never the monochrome Black logo.
 - The old values `"soft-1"` and `"soft-2"` mean `"mask"`, and their classes now give 40%, so older files still work.
 
 ## Patterns (V1)
@@ -159,21 +175,23 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 
 | Pattern | Choices | Figma | Notes |
 | --- | --- | --- | --- |
-| Color-Refracted-Pattern-A | Secondary 500 → 300, or Primary 100 → Secondary 400. The red family (primary 500 → 300) and teal were removed on 2026-11-11 | [Luma-Background-10](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546) | Refraction tuned by eye against Figma |
-| Color-Sliced-Pattern-A | Neutral 950 → Primary 500, or Neutral 950 → Secondary 500 | [Frame 20943:36252](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252) | Exact port of Figma's Slice shift shader. No noise **Not the default:** use Color-Sliced-Pattern-B (with letters); A only behind headshots (Vanesa, 2026-11-11). |
-| Color-Sliced-Pattern-B | Red (primary letters on Neutral 950 → Primary 500), Violet (secondary letters on Neutral 950 → Secondary 500) | Pattern Studio export (layer) | Color-Sliced-A with a layer of QDRANT letters on top (`generative-glyph-layer-a`: 24 px grid, letters 0.55, noise 4.5). The layer matches the tool pixel for pixel at 1920 × 1080. Needs `loadPatternFonts` first |
+| Color-Refracted-Pattern-A | Indigo 600 → 400, or Amaranth 200 → Indigo 400. The amaranth family (600 → 400) and teal were removed on 2026-11-11 | [Luma-Background-10](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546) | Refraction tuned by eye against Figma |
+| Color-Sliced-Pattern-A | Neutral 950 → Amaranth 600, or Neutral 950 → Indigo 600 | [Frame 20943:36252](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252) | Exact port of Figma's Slice shift shader. No noise **Not the default:** use Color-Sliced-Pattern-B (with letters); A only behind headshots (Vanesa, 2026-11-11). |
+| Color-Sliced-Pattern-B | Neutral 950 → Amaranth 600 (amaranth 800, 600, 200 letters), Neutral 950 → Indigo 600 (indigo 800, 600, 200 letters) | Pattern Studio export (layer) | Color-Sliced-A with a layer of QDRANT letters on top (`generative-glyph-layer-a`: grid from 24 px at a short side of 1080 to 40 px at 4K, letters 0.55, noise 4.5). The layer matches the tool at 1920 × 1080 except the letter shapes: the letters are Mona Sans Mono, the brand mono font since 2026-11-17, not the export's Geist Mono (about 0.2% of pixels differ, most visibly the Q's tail). Re-approved with Mona Sans Mono by Vanesa on 2026-11-19. Needs `loadPatternFonts` first |
+| Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (teal on hold until the council approves) (streaks in the family's 800) | [Frame 23789:66977](https://www.figma.com/design/2u6KfDsYjibQuf9ji6lFBR/Qdrant-Brand-Design?node-id=23789-66977) | **Draft.** Line-for-line port of Figma's Motion streaks shader, at 24% over the gradient. Defaults on the 8 grid: length 72, density 40, softness 56, direction 124°. Values can change within the approved ranges, rounded to the 8 grid: length 16–80%, density 8–64, softness 32–64, any direction. Same formula as Figma, but streak positions differ (Figma's depend on the graphics card) |
+| Motion-Streaks-Pattern-B | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (teal on hold until the council approves) (letters in the family's 800, 600 and 200) | Pattern Studio export (layer) | **Draft.** Motion-Streaks-A with random QDRANT letters scattered over the whole canvas (`generative-glyph-layer-b`), never a shape in the middle. The letter grid grows from 24 px (short side 1080 or less) to 40 px (4K). Needs `loadPatternFonts` first |
 | Mesh-Refracted-Pattern-A | Any library image | [Luma-Background-9](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574) | Smoothness 72%, angle -120° |
 | Mesh-Refracted-Pattern-B | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50585) | Smoothness 88%, angle -48° |
 | Mesh-Refracted-Pattern-C | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50609) | Horizontal bands: dispersion 56%, R 16%, angle 90° |
 | Mesh-Refracted-Pattern-D | Any library image | [Luma-Background-8](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50612) | Dispersion 88%, X 40%, R 16%, angle 144° |
 | Mesh-Sliced-Pattern-A | Any library image | [Frame 20713:50540](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50540) | Approved slice shift (tuned by eye) |
-| Generative-Hexagon-Pattern-B | Red | Pattern Studio export | Small outlined hexagons scattered on a 56 px grid, colored top to bottom. Pixel-identical to the tool at 1620 × 1080 |
-| Generative-Hexagon-Pattern-C | Dark violet, Medium violet | Pattern Studio export | Like Hexagon-B, colored from the center out. Pixel-identical to the tool at 1620 × 1080 |
-| Generative-Burst-Pattern-A | Dark violet, Medium violet, Light violet, Red | Pattern Studio export | 1,100 short lines bursting out from the center. Pixel-identical to the tool at 1620 × 1080 (Medium violet within 2/255: the tool's #090E1A isn't a token, so it uses neutral.950) |
-| Generative-Dash-Pattern-A | Dark violet | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field. Pixel-identical to the tool at 1620 × 1080 |
-| Generative-Dash-Pattern-B | Red | Pattern Studio export | Like Dash-A, on a finer 48 px grid with 40 px padding. Pixel-identical to the tool at 1620 × 1080 |
-| Generative-Glyph-Pattern-A | Dark violet, Red | Pattern Studio export | Letters of QDRANT in Mona Sans Mono on a 32 px grid, in soft noisy patches. Same as the tool at 1620 × 1080 except the letter shapes: the export used Geist Mono, which the brand replaced on 2026-11-17 (under 0.6% of pixels differ). Needs `loadPatternFonts` first |
-| Generative-Glyph-Pattern-B | Light violet (neutral 50 letters), Medium violet | Pattern Studio export | Like Glyph-A with outline shaping, in white letters. Same as the tool at 1620 × 1080 except the letter shapes (Mona Sans Mono, like Glyph-A). Needs `loadPatternFonts` first |
+| Generative-Hexagon-Pattern-B | Neutral 950 → Amaranth 600 | Pattern Studio export | Small outlined hexagons scattered on a 56 px grid, colored top to bottom. Pixel-identical to the tool at 1620 × 1080 |
+| Generative-Hexagon-Pattern-C | Neutral 950 → Indigo 900, Neutral 950 → Indigo 600 | Pattern Studio export | Like Hexagon-B, colored from the center out. Pixel-identical to the tool at 1620 × 1080 |
+| Generative-Burst-Pattern-A | Neutral 950 → Indigo 900, Neutral 950 → Indigo 600, Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600 | Pattern Studio export | 1,100 short lines bursting out from the center. Pixel-identical to the tool at 1620 × 1080 (Neutral 950 → Indigo 600 within 2/255: the tool's #090E1A isn't a token, so it uses neutral.950) |
+| Generative-Dash-Pattern-A | Neutral 950 → Indigo 900 | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field. Pixel-identical to the tool at 1620 × 1080 |
+| Generative-Dash-Pattern-B | Neutral 950 → Amaranth 600 | Pattern Studio export | Like Dash-A, on a finer 48 px grid with 40 px padding. Pixel-identical to the tool at 1620 × 1080 |
+| Generative-Glyph-Pattern-A | Neutral 950 → Indigo 900, Neutral 950 → Amaranth 600 | Pattern Studio export | Letters of QDRANT in Mona Sans Mono on a 32 px grid, in soft noisy patches. Same as the tool at 1620 × 1080 except the letter shapes: the export used Geist Mono, which the brand replaced on 2026-11-17 (under 0.6% of pixels differ). Needs `loadPatternFonts` first |
+| Generative-Glyph-Pattern-B | Indigo 600 → Indigo 400 (neutral 50 letters), Neutral 950 → Indigo 600 | Pattern Studio export | Like Glyph-A with outline shaping, in white letters. Same as the tool at 1620 × 1080 except the letter shapes (Mona Sans Mono, like Glyph-A). Needs `loadPatternFonts` first |
 | Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Bayer 16×16, darker grade, no noise. Dithers lightness only |
 
 ## Known limits

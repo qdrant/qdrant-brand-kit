@@ -61,7 +61,7 @@ Use `.qd-grid`. Rows are a `section` gap apart.
 
 ## Rules
 
-- **Always a photo.** Every speaker has one. If a photo is missing, stop and ask for it. Never use initials, a silhouette or text only in its place.
+- **Always a photo.** Every speaker has one. If a photo is missing, stop and ask for it. Never use initials, a silhouette or text only in its place, and never the design system's Avatar, which falls back to initials (2026-11-19).
 - **Opaque circle.** The 70% headshot gradient sits on an opaque `background.default` base, so a pattern never shows through the circle. The CSS does this (decided 2026-11-11).
 - **Never inside a Box card** (`.qd-box--card`) or any frame of your own: speakers sit straight on the canvas or pattern. The only container a speaker may sit in is the light card, as a circle (decided 2026-11-11).
 - **Prepared cutouts only.** Every photo is a cutout that passes [`brand-assets/imagery/headshots/`](../../brand-assets/imagery/headshots/): the slide 56 checklist and `check-headshot.py`.

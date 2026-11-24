@@ -5,13 +5,24 @@
 // Errors (exit code 1): a preset that can't render, like a missing recipe, a token
 // that doesn't exist, or a missing mesh. Warnings: values off the 8 grid.
 
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
+import { letterLayerProblems } from "../patterns/letter-variations.js";
 
 const read = (path) => JSON.parse(readFileSync(path, "utf8"));
 const errors = [];
 const warnings = [];
 
 const tokens = read("tokens/placeholder.tokens.json");
+// The pattern tokens are named like the color primitives. primary, secondary,
+// neutral.white and neutral.black are legacy aliases for meshes stored in Design Lab only.
+const LEGACY = /color\.(primary|secondary)\.|color\.neutral\.(white|black)\b|^(primary|secondary|neutral\.white|neutral\.black)$/;
+for (const file of [...readdirSync("presets").map((f) => `presets/${f}`), ...readdirSync("meshes").map((f) => `meshes/${f}`)]) {
+  if (!file.endsWith(".json")) continue;
+  const text = readFileSync(file, "utf8");
+  const json = JSON.parse(text);
+  const legacy = text.match(/color\.(primary|secondary)\.[a-z0-9]+|color\.neutral\.(white|black)\b/) ?? (json.settings?.mesh?.palette ?? []).find((e) => LEGACY.test(e));
+  if (legacy) errors.push(`${file}: uses the legacy name ${legacy[0] ?? legacy}; use the color primitive's name (e.g. color.indigo.600)`);
+}
 const tokenExists = (path) => path.split(".").slice(1).reduce((node, key) => node?.[key], tokens.color)?.$value !== undefined;
 
 // Recipes registered in patterns/index.js.
@@ -23,6 +34,7 @@ for (const recipe of recipes) if (!existsSync(`patterns/${recipe}.js`)) errors.p
 const needs = {
   "color-refracted-pattern": ["gradient", "refraction", "noise"],
   "color-sliced-pattern": ["gradient", "slice", "noise"],
+  "motion-streaks-pattern": ["gradient", "streaks"],
   "mesh-refracted-pattern": ["grade", "blur", "contrast", "mesh", "refraction", "noise"],
   "mesh-sliced-pattern": ["grade", "blur", "contrast", "mesh", "slice", "noise"],
   "mesh-dithered-pattern": ["grade", "blur", "contrast", "mesh", "dither"],
@@ -54,7 +66,7 @@ for (const id of ids) {
   const where = p.name ?? id;
 
   // Name and file agree: Color-Refracted-Pattern-A <-> color-refracted-pattern-a.json.
-  if (!/^(Color|Mesh|Generative)-[A-Z][a-z]+-Pattern-[A-Z]$/.test(p.name ?? "")) errors.push(`${where}: name should look like Color-Refracted-Pattern-A`);
+  if (!/^(Color|Mesh|Generative|Motion)-[A-Z][a-z]+-Pattern-[A-Z]$/.test(p.name ?? "")) errors.push(`${where}: name should look like Color-Refracted-Pattern-A`);
   else if (p.name.toLowerCase() !== id) errors.push(`${where}: file should be presets/${p.name.toLowerCase()}.json`);
 
   if (!recipes.includes(p.recipe)) errors.push(`${where}: recipe "${p.recipe}" isn't registered in patterns/index.js`);
@@ -70,7 +82,7 @@ for (const id of ids) {
     if (!p.settings?.tones?.[p.settings?.tone]) errors.push(`${where}: tone curve "${p.settings?.tone}" isn't in settings.tones`);
     const refs = looks.flatMap((look) => [...(look.colors ?? []), ...(look.backdrop ?? []).map((stop) => stop?.token ?? stop)]);
     for (const ref of [...refs, p.settings?.background]) {
-      if (typeof ref !== "string" || !/^\{.+\}$/.test(ref)) errors.push(`${where}: color ${ref} should be a token like {color.secondary.500}`);
+      if (typeof ref !== "string" || !/^\{.+\}$/.test(ref)) errors.push(`${where}: color ${ref} should be a token like {color.indigo.600}`);
       else if (!tokenExists(ref.slice(1, -1))) errors.push(`${where}: token ${ref} doesn't exist`);
     }
   } else if (p.meshGroup) {
@@ -93,10 +105,20 @@ for (const id of ids) {
       const families = colorway.families ?? Object.keys(tokens.color);
       if ((colorway.from + colorway.to).includes("{family}") && !colorway.families) errors.push(`${where} / ${colorway.name}: a {family} colorway needs a "families" list, so it can't pick neutral (gray)`);
       for (const f of colorway.families ?? []) if (!tokens.color[f]) errors.push(`${where} / ${colorway.name}: family "${f}" doesn't exist`);
-      for (const path of [colorway.from, colorway.to]) {
+      for (const path of [colorway.from, colorway.to, ...(colorway.streak ? [colorway.streak] : [])]) {
         const ok = path.includes("{family}") ? families.some((f) => tokenExists(path.replace("{family}", f))) : tokenExists(path);
         if (!ok) errors.push(`${where} / ${colorway.name}: no token for ${path}`);
       }
+    }
+  }
+
+  // Motion streaks: defaults inside the approved ranges (patterns/motion-streaks-pattern.js).
+  if (p.recipe === "motion-streaks-pattern") {
+    const ranges = { length: [16, 80], density: [8, 64], softness: [32, 64] };
+    for (const [key, [lo, hi]] of Object.entries(ranges)) {
+      const v = p.settings?.streaks?.[key];
+      if (!(v >= lo && v <= hi)) errors.push(`${where}: streaks.${key} is ${v}, outside the approved ${lo} to ${hi}`);
+      else if (v % 8 !== 0) errors.push(`${where}: streaks.${key} is ${v}, not on the 8 grid`);
     }
   }
 
@@ -111,6 +133,7 @@ for (const id of ids) {
     }
     if (layer.recipe !== "generative-pattern") errors.push(`${where}: layer ${id} should be a generative pattern`);
     if (layer.settings?.background) errors.push(`${where}: layer ${id} should have no background`);
+    if (layer.settings?.engine?.element === "ascii") for (const problem of letterLayerProblems(layer.settings.engine)) errors.push(`${where}: letter layer ${id} ${problem}`);
     if ((layer.colorways?.length ?? 0) !== (p.colorways?.length ?? 0)) errors.push(`${where}: layer ${id} needs one colorway per pattern colorway (${p.colorways?.length}), in the same order`);
     if (!layer.settings?.tones?.[layer.settings?.tone]) errors.push(`${where}: layer ${id} tone curve "${layer.settings?.tone}" isn't in settings.tones`);
     for (const look of layer.colorways ?? []) {

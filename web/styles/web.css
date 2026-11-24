@@ -500,6 +500,122 @@
   opacity: 0.4;
 }
 
+/* Patterns being explored (web/patterns/explorations, 2026-11-23, not approved): the Pattern Studio looks, at a
+   low strength over the card's fill like the depth haze, softer on light. */
+.web-generative {
+  opacity: 0.5;
+}
+[data-web][data-theme="light"] .web-generative,
+[data-theme="light"] [data-web] .web-generative {
+  opacity: 0.4;
+}
+/* Background explorations (Hex field, Dot field): stronger than a card surface's, with the violet wash under the
+   marks at half strength, softer on light. */
+.web-field {
+  opacity: 0.7;
+}
+[data-web] .web-pattern-backdrop {
+  opacity: 0.5;
+}
+[data-web][data-theme="light"] .web-field,
+[data-theme="light"] [data-web] .web-field {
+  opacity: 0.6;
+}
+[data-web][data-theme="light"] .web-pattern-backdrop,
+[data-theme="light"] [data-web] .web-pattern-backdrop {
+  opacity: 0.6;
+}
+
+/* Surfaces from the Space page (web/patterns/explorations/space.tsx, 2026-11-23, exploring), in the scene
+   colors. Each fades out before a card's copy, at the bottom. */
+
+/* SF-05 Halftone corner: five layers of dots on one 8px grid, each smaller and reaching further from the top
+   right, so the dots shrink with distance. */
+.web-sp-halftone {
+  opacity: 0.6;
+  mask-image: linear-gradient(to bottom, black 25%, transparent 62%);
+}
+[data-web][data-theme="light"] .web-sp-halftone,
+[data-theme="light"] [data-web] .web-sp-halftone {
+  opacity: 0.5;
+}
+.web-sp-halftone__dots {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 4px 4px, var(--web-scene-glow) var(--web-sp-r), transparent calc(var(--web-sp-r) + 0.6px))
+    100% 0 / 8px 8px;
+  mask-image: radial-gradient(circle at 100% 0, black calc(var(--web-sp-at) - 40px), transparent var(--web-sp-at));
+}
+.web-sp-halftone__dots--1 { --web-sp-r: 3.2px; --web-sp-at: 80px; }
+.web-sp-halftone__dots--2 { --web-sp-r: 2.5px; --web-sp-at: 128px; }
+.web-sp-halftone__dots--3 { --web-sp-r: 1.8px; --web-sp-at: 176px; }
+.web-sp-halftone__dots--4 { --web-sp-r: 1.2px; --web-sp-at: 224px; }
+.web-sp-halftone__dots--5 { --web-sp-r: 0.7px; --web-sp-at: 272px; }
+
+/* SF-09 Blueprint: dashed lines every 8px, stronger every 32px. */
+.web-sp-blueprint {
+  mask-image: linear-gradient(to bottom, black 20%, transparent 72%);
+}
+.web-sp-blueprint::before,
+.web-sp-blueprint::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.web-sp-blueprint::before {
+  background:
+    linear-gradient(to right, color-mix(in oklab, var(--web-scene-line) 80%, transparent) 1px, transparent 1px) 0 0 / 32px 100%,
+    linear-gradient(to right, color-mix(in oklab, var(--web-scene-line) 40%, transparent) 1px, transparent 1px) 0 0 / 8px 100%;
+  mask-image: repeating-linear-gradient(to bottom, black 0 2px, transparent 2px 4px);
+}
+.web-sp-blueprint::after {
+  background:
+    linear-gradient(to bottom, color-mix(in oklab, var(--web-scene-line) 80%, transparent) 1px, transparent 1px) 0 0 / 100% 32px,
+    linear-gradient(to bottom, color-mix(in oklab, var(--web-scene-line) 40%, transparent) 1px, transparent 1px) 0 0 / 100% 8px;
+  mask-image: repeating-linear-gradient(to right, black 0 2px, transparent 2px 4px);
+}
+
+/* SH-01 Dither haze (exploring): the violet ramp it dithers into, from the Space page's --sp-ramp-1 to 4 (its
+   ramp-0 is the section's own background here). */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-scene-ramp-1: var(--qd-color-indigo-950);
+  --web-scene-ramp-2: var(--qd-color-indigo-900);
+  --web-scene-ramp-3: var(--qd-color-indigo-800);
+  --web-scene-ramp-4: var(--qd-color-indigo-600);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-scene-ramp-1: var(--qd-color-neutral-50);
+  --web-scene-ramp-2: var(--qd-color-indigo-50);
+  --web-scene-ramp-3: var(--qd-color-indigo-100);
+  --web-scene-ramp-4: var(--qd-color-indigo-200);
+}
+.web-sp-dither {
+  --web-scene-bg: var(--background);
+}
+
+/* Depth haze on light (2026-11-23, exploring: it changes Juan's approved pattern, so it needs his yes). On white,
+   the stars in neutral 700 and 400 read as specks of dust, and indigo 50 and 100 at 40% as smudges. Here the stars
+   are indigo, like the other patterns' marks on light, the haze a step deeper, and the layer at 80% (from 40%), so
+   it reads as soft light falling from the top, as clearly as on dark. Scoped to the depth haze: --web-scene-star
+   and --web-scene-dim also color the globe. The middle selector is the studio's previews (data-web outside, the
+   theme inside), which got the 50% strength of dark. */
+[data-web][data-theme="light"] .web-depth-haze,
+[data-web] [data-theme="light"] .web-depth-haze,
+[data-theme="light"] [data-web] .web-depth-haze {
+  --web-scene-star: var(--qd-color-indigo-500);
+  --web-scene-dim: var(--qd-color-indigo-300);
+  --web-scene-haze: var(--qd-color-indigo-100);
+  --web-scene-violet: var(--qd-color-indigo-200);
+  --web-scene-plum: var(--qd-color-purple-100);
+  opacity: 0.8;
+}
+
 /* ---------------------------------------------------------------------------------------------------------------
    Proposals (2026-11-24): visual enhancements to review, each behind its own switch in the studio's bottom bar
    (studio/components/web/blocks.tsx), off by default. They take the space, developer-tool and instrument themes

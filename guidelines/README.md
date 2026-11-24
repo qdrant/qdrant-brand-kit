@@ -4,6 +4,8 @@ The other folders say how each piece is built. This one says **which pieces to p
 
 The layout rules for creatives (Canvas, Grid, Stack, Box and the checks) are in [`layout/`](layout/), moved here from `primitives/` on 2026-11-12 because layout is a rule, not a token.
 
+Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). Print differs in a few places: no patterns, a choice between space imagery and a plain look, wider margins, text sizes in pt (Vanesa, 2026-11-20).
+
 Three kinds of rule:
 
 - **Must:** never break it.
@@ -12,17 +14,28 @@ Three kinds of rule:
 
 Decided by Vanesa on 2026-11-04.
 
-## 1. Ask first
+## 1. Ask about the main visual, take the design from the rules
 
-Before making a creative, settle these with the person. Skip a question only when the request already answers it.
+**Ask:** unless the request already says, ask one question: which **main visual**? Put the recommended one first and mark it (Vanesa, 2026-11-20).
 
-| Ask | Why |
+| Main visual | Recommend it for |
 | --- | --- |
-| Is the tone **community / playful** or **serious / technical**? | It suggests the pattern family (section 2). |
-| **Pattern or generated image** as the background? Suggest an image for storytelling and blog heroes, a pattern for everything else. | The person decides. |
-| Should it have a **hero**: Qbot, a product screen, or nothing? | Only one hero per creative (section 5). |
-| Does it need to **grab a lot of attention**? | Only then can the background be red (section 3). |
-| Is this the **same creative in other sizes or channels**? | Then reuse the same pattern and colorway (section 10). |
+| **Space imagery** (a generated astronaut image) | DevRel and community, and Sales (whichever fits the content better) |
+| **Qbot** | DevRel and community (with space imagery, whichever fits better) |
+| **Pattern only** | Sales, and guide or docs downloads (with the light card) |
+| **Headshots** | Speaker announcements (webinar, talk, panel) |
+
+**Don't ask design questions.** Take these from the rules (Vanesa, 2026-11-20):
+
+| Design choice | Where it comes from |
+| --- | --- |
+| Tone: community / playful or serious / technical | The content. It suggests the pattern family (section 2). |
+| Pattern, colorway and mask | Sections 2 and 4. |
+| Hero | The main visual. Only one hero per creative (section 5). |
+| Red background | Never on your own: only when the person asks for it (section 3). |
+| Same creative in other sizes or channels | The same pattern and colorway (section 10). |
+
+**Where a rule offers options** (a `both` or unset `textMask`, the small display units), make every option and show them together on the contact sheet, the recommended one marked in its label. The person picks.
 
 ## 2. Pick the pattern by tone
 
@@ -43,14 +56,16 @@ The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patter
 
 ## 3. Red backgrounds
 
-- **Must: patterns are violet or red, never another color.** No teal or other colors in a pattern background, ever (decided 2026-11-11). Red only in its approved presets and colorways.
-- **Must:** violet is the default. A red pattern background (a red colorway, Hexagon-B, Dash-B) is only for creatives that need to **grab a lot of attention and be more impactful**.
-- **Ask:** never pick red on your own. Offer it, and use it only when the person says yes.
-- Everywhere else, red stays an accent (buttons, highlights), as [`primitives/colors/`](../primitives/colors/) says.
-- **Must: never red on red** (Vanesa, 2026-11-16). On a red pattern:
-  - where the logo sits on red, it's the **White** logo, never the red brandmark. On the masked part of a red pattern the logo sits on near-black neutral, so the usual **Dark** logo is fine there;
+- **Must: patterns are indigo or amaranth.** Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
+- **On hold: teal.** Teal pattern colorways (Motion Streaks) are allowed in principle but **on hold until the council approves the sub-direction** (Vanesa, 2026-11-24). Until then, never use a colorway marked `onHold`. Other colors stay out of pattern backgrounds.
+- **Proportions (provisional):** indigo for most creatives, amaranth rarely. These aren't final: they'll be revised after the council approves the direction (Vanesa, 2026-11-24).
+- **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway, Hexagon-B, Dash-B) is only for creatives that need to **grab a lot of attention and be more impactful**.
+- **Ask:** never pick amaranth on your own. Offer it, and use it only when the person says yes.
+- Everywhere else, amaranth stays an accent (buttons, highlights), as [`primitives/colors/`](../primitives/colors/) says.
+- **Must: never amaranth on amaranth** (Vanesa, 2026-11-16). On an amaranth pattern:
+  - where the logo sits on amaranth, it's the **White** logo, never the red brandmark. On the masked part of an amaranth pattern the logo sits on near-black neutral, so the usual **Dark** logo is fine there;
   - the button goes **top-right, beside the logo** and at its height, on the dark part of the pattern, and Qbot (if any) sits below the text, cut by the bottom edge (section 6);
-  - the button keeps **3:1 or more against what's around it**. If it can't, choose another pattern. This 3:1 rule is for red patterns only: on violet patterns and the light card the button stays as it is.
+  - the button keeps **3:1 or more against what's around it**. If it can't, choose another pattern. This 3:1 rule is for amaranth patterns only: on indigo patterns and the light card the button stays as it is.
 
 ## 4. How the pattern covers the canvas
 
@@ -69,14 +84,14 @@ Rules:
 
   | `textMask` | Patterns | What to do |
   | --- | --- | --- |
-  | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Medium violet) | Mask, 40% behind the text |
-  | `none` | Color-Refracted-Pattern-A, Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Light violet, Red), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet) | No mask: text sits straight on the pattern |
-  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet), Mesh-Dithered-Pattern-A | Both work: offer the 40% mask and no mask, and let the person pick |
-  | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask and ask |
+  | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Neutral 950 → Indigo 600) | Mask, 40% behind the text |
+  | `none` | Color-Refracted-Pattern-A, Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Neutral 950 → Indigo 600) | No mask: text sits straight on the pattern |
+  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Neutral 950 → Indigo 900), Generative-Glyph-Pattern-B (Indigo 600 → Indigo 400), Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
+  | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
 
-- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (Color-Refracted-Pattern-A, Primary 100 → Secondary 400, marked `textColor: "dark"`), use **dark text and the Light logo**, no mask (Vanesa, 2026-11-16).
+- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (Color-Refracted-Pattern-A, Amaranth 200 → Indigo 400, marked `textColor: "dark"`), use **dark text and the Light logo**, no mask (Vanesa, 2026-11-16).
 - **Must: a contrast fail is a hard stop.** A creative whose text fails the contrast check is never shown, recommended or delivered. On a `none` pattern, mask it at 40% if the pattern is dark enough not to turn grey; otherwise pick another colorway or pattern (Vanesa, 2026-11-16).
 
 - **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to 40% behind the text, with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). The LinkedIn profile cover has its heading on the right, so its fade runs from the right (`.qd-pattern-mask--from-right`, [`guidelines/layout/`](layout/)). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`guidelines/layout/`](layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself. **On every shape the mask is one smooth, continuous gradient across the whole canvas: it starts gently on the text side and builds to full strength on the far side. You must not be able to tell the mask and the pattern are two layers: never a hold-then-fade, a visible edge or a cut** (decided 2026-11-11). If the pattern is calm enough for the text, use no mask at all.
@@ -210,7 +225,7 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 1. **Must: never make up content.** Use only the copy, dates, speakers and links the person gives. Write copy only when asked.
 2. **Suggest: reading order.** Logo → title → supporting line → date, time and place → speakers → button. On tall sizes it runs top to bottom. On wide sizes, text is on the left and the visual on the right, except the LinkedIn profile cover, where the heading sits on the right ([`guidelines/layout/`](layout/), "LinkedIn profile cover").
 3. **Suggest: avoid eyebrows** (the small label above the title). They make creatives look AI-generated. Don't suggest one; use one only when the person asks for it (decided 2026-11-04).
-   **Must: the event type** ("Hands-On Workshop", "Webinar") or series is **left out by default**; that's cleaner and preferred. If the content needs it, it's a **label with the heading**, directly above the title: Mona Sans Mono, all caps, at the supporting size, `text.secondary` on dark or `text.body-on-light` on the light card, a `tight` gap to the title. **Never** in the date / time / place list. Until the badge component exists, this is the only allowed form (decided 2026-11-11).
+   **Must: the event type** ("Hands-On Workshop", "Webinar") or series is **left out by default**; that's cleaner and preferred. If the content needs it, it's a **label with the heading**, directly above the title: Mona Sans Mono, all caps, letter spacing **+0.08em** (as the design system's captions, `--qd-ui-caption-tracking`, Vanesa 2026-11-19), at the supporting size, `text.secondary` on dark or `text.body-on-light` on the light card, a `tight` gap to the title. **Never** in the date / time / place list. Until the badge component exists, this is the only allowed form (decided 2026-11-11). The design system's Badge (`design-system/components/ui/badge.tsx`, a small red pill) is for web, never for creatives (Vanesa, 2026-11-19).
 4. **Suggest: left-aligned by default.** Centered is fine when the whole composition is symmetric and nothing sits beside the text, e.g. a title with the date and time under it, or a story with one centered hero. The agent decides.
 5. **Must: never mix alignments, never right-align.** All the text in a creative is either left-aligned or centered. Left-aligned items share the same left edge.
 6. **Must: two text sizes.** One title in Mona Sans Display SemiBold, Title Case, sized by its length, and one supporting size for everything else (body, date, time, place), in Mona Sans Display Regular. Both are steps of the type set (2026-11-18). Names and roles inside the headshot parts are the only exception. Sizes and the Mona Sans Mono rule (one or two words only) are in [`primitives/typography/`](../primitives/typography/), "Text in creatives". Mona Sans titles are always Title Case (supporting text stays in sentence case); Mona Sans Display Condensed is always all caps and only for special occasions, when asked.
