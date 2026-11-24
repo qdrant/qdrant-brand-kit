@@ -389,8 +389,8 @@
    follows the color guidelines' contrast steps (primitives/colors), so it's lighter on dark than on light
    (design lead, 2026-11-22):
    - --web-indigo, for marks: icons, nodes, active borders and pattern accents. indigo-400 on dark, 600 on light.
-   - --web-indigo-text, for text: the secondary.text role, indigo-400 on dark and 800 on light (text on white
-     needs 700 or darker).
+   - --web-indigo-text, for text: the secondary.text role, indigo-400 on dark and 700 on light (800 until
+     2026-11-24; text on white needs 700 or darker).
    - --web-link, for text links (design lead, 2026-11-22): --web-indigo-text. A link is .web-link (ArrowLink sets it).
    The nodes where lines meet take an indigo ring and the active one fills with it. data-web-indigo="off" keeps the
    nodes and links neutral, to compare. */
