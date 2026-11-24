@@ -189,7 +189,7 @@ export function FeatureGrid({
               </>
             )
           return appearance === "cards" ? (
-            <Plate as="li" key={item.id ?? `${item.title}-${i}`} id={item.id} className={cn("flex scroll-mt-24 flex-col gap-4 rounded-xl p-6", item.wide && "col-span-full")}>
+            <Plate as="li" simple key={item.id ?? `${item.title}-${i}`} id={item.id} className={cn("flex scroll-mt-24 flex-col gap-4 rounded-xl p-6", item.wide && "col-span-full")}>
               {body}
             </Plate>
           ) : (

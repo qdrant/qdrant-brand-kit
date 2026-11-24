@@ -59,7 +59,7 @@ export function CommunityChannels({ header, items, layout = "cards", tones = "mi
       {layout === "cards" ? (
         <ul className="grid grid-cols-1 gap-(--qd-layout-column-gap) md:grid-cols-2 lg:grid-cols-3">
           {items.map((item, i) => (
-            <Plate as="li" key={item.title} className="flex flex-col gap-4 rounded-xl p-6">
+            <Plate as="li" simple key={item.title} className="flex flex-col gap-4 rounded-xl p-6">
               <ChannelTile item={item} tone={toneFor(i)} />
               <div className="flex flex-1 flex-col gap-2">
                 <h3 className={heading.card}>{item.title}</h3>

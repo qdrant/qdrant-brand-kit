@@ -235,8 +235,8 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Cards are plates",
-        text: "Cards and panels are a touch lighter at the top, with a 1px inner highlight and a soft shadow on light. Media sit in a tray, a framed holder. Rows of facts sit in a hairline grid.",
-        decided: "Design lead, 2026-11-21",
+        text: "Cards and panels are a touch lighter at the top, with a 1px inner highlight and a soft shadow on light. A simple card, an icon with a title and a line of text (feature, value, channel and contact cards), has no inner highlight, so its top shows one line, not two (Plate simple, 2026-11-24). Media sit in a tray, a framed holder. Rows of facts sit in a hairline grid.",
+        decided: "Design lead, 2026-11-21 and 2026-11-24",
         source: "web/lib/plate.tsx",
       },
     ],

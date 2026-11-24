@@ -196,6 +196,10 @@
   border: 1px solid var(--web-line);
   background: var(--web-tray);
 }
+/* A simple card (Plate simple: an icon, a title and a line of text) has no inner top light (design lead, 2026-11-24). */
+.web-plate-simple {
+  box-shadow: var(--web-plate-shadow);
+}
 [data-web-material="off"] .web-plate {
   background: var(--card);
   border-color: var(--border);
