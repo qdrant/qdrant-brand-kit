@@ -2,41 +2,9 @@
   "name": "Color-Sliced-Pattern-B",
   "textMask": "mask",
   "recipe": "color-sliced-pattern",
-  "extends": "shared",
-  "$description": "Color-Sliced-Pattern-A's slices with a layer of QDRANT letters on top, in matching colors: red letters on the red slices, violet on the violet.",
-  "colorways": [
-    {
-      "name": "Neutral 950 → Amaranth 600",
-      "from": "color.neutral.950",
-      "to": "color.amaranth.600",
-      "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
-    },
-    {
-      "name": "Neutral 950 → Indigo 600",
-      "from": "color.neutral.950",
-      "to": "color.indigo.600",
-      "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
-    }
-  ],
+  "extends": "color-sliced-pattern-a",
+  "$description": "Two layers, each from its own source (Vanesa, 2026-11-24). Base: Color-Sliced-Pattern-A, inherited whole (every colorway, the approved stripes, its slices), so A's changes reach B. Letters on top: generative-glyph-layer-a, varied with the Pattern Studio connector's terminal look through fromStudioParams(). An agent makes a B by picking an A colorway (and stripes) and a terminal-look letter variation: renderPattern(canvas, tokens, B, { colorway, stripes, letters }).",
   "layers": [
     "generative-glyph-layer-a"
-  ],
-  "settings": {
-    "size": 1080,
-    "gradient": {
-      "angle": 180,
-      "fromStop": 0,
-      "toStop": 130.68
-    },
-    "slice": {
-      "shift": 200,
-      "softness": 0,
-      "randomOffset": 500,
-      "x": 50,
-      "y": 50,
-      "r": 80,
-      "a": -160
-    },
-    "noise": null
-  }
+  ]
 }

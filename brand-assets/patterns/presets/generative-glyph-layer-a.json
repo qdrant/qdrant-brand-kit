@@ -22,6 +22,15 @@
         "{color.indigo.200}"
       ],
       "backdrop": null
+    },
+    {
+      "name": "Teal",
+      "colors": [
+        "{color.teal.800}",
+        "{color.teal.600}",
+        "{color.teal.200}"
+      ],
+      "backdrop": null
     }
   ],
   "settings": {
