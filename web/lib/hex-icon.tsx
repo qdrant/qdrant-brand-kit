@@ -32,11 +32,6 @@ const densities: Record<HexStyle, number> = { halftone: 14, tones: 22, outline: 
 // Qdrant's product marks: custom, from simple solid shapes on the 24-unit grid, each about the same weight. Shapes are
 // drawn in order: data-hole cuts out; data-shade shades what's already drawn, and data-shade-add draws a shaded area
 // (both in the tones style only; the others ignore them). They're product marks, not UI icons: UI icons stay Lucide.
-const hexagon = (r: number, cx = 12, cy = 12) =>
-  [-90, -30, 30, 90, 150, 210]
-    .map((a) => `${cx + r * Math.cos((a * Math.PI) / 180)},${cy + r * Math.sin((a * Math.PI) / 180)}`)
-    .join(" ")
-
 export const marks: Record<string, { name: string; shapes: React.ReactNode }> = {
   engine: {
     name: "Vector Search Engine",
