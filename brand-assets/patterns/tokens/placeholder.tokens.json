@@ -378,6 +378,102 @@
           }
         }
       }
+    },
+    "indigo": {
+      "200": {
+        "$type": "color",
+        "$value": "#C9D1FF",
+        "$description": "From color.indigo.200 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.indigo.200"
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#6047FF",
+        "$description": "From color.indigo.600 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.indigo.600"
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#3D29A9",
+        "$description": "From color.indigo.800 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.indigo.800"
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#352B83",
+        "$description": "From color.indigo.900 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.indigo.900"
+          }
+        }
+      }
+    },
+    "amaranth": {
+      "400": {
+        "$type": "color",
+        "$value": "#F67186",
+        "$description": "From color.amaranth.400 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.amaranth.400"
+          }
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#DC244C",
+        "$description": "From color.amaranth.600 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.amaranth.600"
+          }
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#9B1E3D",
+        "$description": "From color.amaranth.800 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.amaranth.800"
+          }
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#821F3B",
+        "$description": "From color.amaranth.900 (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "color.amaranth.900"
+          }
+        }
+      }
+    },
+    "background": {
+      "default": {
+        "$type": "color",
+        "$value": "#070B11",
+        "$description": "From semantic.color.background.default (primitives/colors).",
+        "$extensions": {
+          "qdrant": {
+            "from": "semantic.color.background.default"
+          }
+        }
+      }
     }
   }
 }
