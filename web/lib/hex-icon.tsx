@@ -60,16 +60,14 @@ export const marks: Record<string, { name: string; shapes: React.ReactNode }> = 
   },
   hybrid: {
     name: "Hybrid Cloud",
-    // A cloud (shaded) above a server (your infrastructure, solid), with a slot.
+    // A globe, anywhere you run it: a solid circle with its meridian and equator cut out; its left half shaded.
     shapes: (
       <>
-        <circle cx="7.5" cy="7.5" r="3.5" />
-        <circle cx="12.5" cy="5.5" r="4.5" />
-        <circle cx="17" cy="8" r="3.2" />
-        <rect x="7.5" y="7" width="9.5" height="4.2" />
-        <rect data-shade x="0" y="0" width="24" height="12" />
-        <rect x="3" y="14" width="18" height="8.5" rx="1" />
-        <rect data-hole x="6" y="17.3" width="9" height="2" />
+        <circle cx="12" cy="12" r="10.5" />
+        <ellipse data-hole cx="12" cy="12" rx="5.8" ry="12" />
+        <ellipse cx="12" cy="12" rx="3.6" ry="10.5" />
+        <rect data-hole x="0" y="10.9" width="24" height="2.2" />
+        <rect data-shade x="0" y="0" width="12" height="24" />
       </>
     ),
   },
