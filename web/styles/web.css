@@ -1,9 +1,9 @@
-/* The website's surfaces (Juan, 2026-11-21). Inside the website ([data-web], on a page's root), the design
+/* The website's surfaces (design lead, 2026-11-21). Inside the website ([data-web], on a page's root), the design
    system's page, card, popover and highlight colors come from the background roles, so a section only sets its
    theme (data-theme) and its surface (data-surface), and every design-system component in it follows:
    - default: the page is background/default, cards background/raised, menus background/overlay.
    - raised: a raised band. The page is background/raised and cards step up one.
-   On dark the website is quieter than the roles (Juan, 2026-11-21): menus sit on neutral-925, cards a touch darker
+   On dark the website is quieter than the roles (design lead, 2026-11-21): menus sit on neutral-925, cards a touch darker
    (2026-11-22), the
    highlight and hovers on neutral-900, and a raised band's cards on neutral-900, so nothing floats too bright.
    Light: default neutral-25, raised and overlay white, highlight neutral-50, as the roles. The --web-surface-*
@@ -23,7 +23,7 @@
 [data-web] [data-theme="dark"],
 [data-theme="dark"] [data-web] {
   /* Cards a touch darker than neutral-925, 40% of the way to the page's neutral-950, for a quieter, more modern
-     site (Juan, 2026-11-22). The palette has no step between them, so it's a mix of the two. */
+     site (design lead, 2026-11-22). The palette has no step between them, so it's a mix of the two. */
   --web-surface-card: color-mix(in oklab, var(--qd-color-neutral-925) 60%, var(--qd-color-neutral-950));
   --web-surface-popover: var(--qd-color-neutral-925);
   --web-surface-highlight: var(--qd-color-neutral-900);
@@ -49,12 +49,12 @@
   --qd-ui-card: var(--web-surface-raised-card);
 }
 
-/* The website's lines and material (Juan, 2026-11-21): a subtle, shared structure every section draws on, before
+/* The website's lines and material (design lead, 2026-11-21): a subtle, shared structure every section draws on, before
    any pattern or shader. Two switches on a page's root (or <body>) turn them off to compare:
    data-web-lines="off" and data-web-material="off".
    - Lines: rails, a hairline down each side of the page, 24px outside the 1200px container, so content never
      touches them; seams, a hairline
-     between sections; nodes, small hollow hexagons where a seam meets a rail, upright like the logo's brandmark (Juan,
+     between sections; nodes, small hollow hexagons where a seam meets a rail, upright like the logo's brandmark (design lead,
      2026-11-22; lib/node.tsx).
    - Material: plates, a card whose fill is a touch lighter at the top, with a 1px inner highlight; trays, a framed
      holder around media (code, a screenshot); cells, hairline grids for rows of facts. */
@@ -108,7 +108,7 @@
   fill: var(--web-indigo);
   stroke: var(--web-indigo);
 }
-/* Nodes are alive (Juan, 2026-11-22): they blink like the telemetry mark on the Space page, a hard step to 25% and
+/* Nodes are alive (design lead, 2026-11-22): they blink like the telemetry mark on the Space page, a hard step to 25% and
    back every 2s, each at its own offset (--web-node-delay, set by Node). Still for reduced motion. */
 @keyframes web-node-blink {
   50% {
@@ -128,7 +128,7 @@
   border-block: 1px solid var(--web-line);
 }
 /* A horizontal line inside a section reaches the rails, 24px out on each side of the container, so the lines meet
-   (Juan, 2026-11-21). Put it on a cell row, a divider or a band. */
+   (design lead, 2026-11-21). Put it on a cell row, a divider or a band. */
 .web-bleed {
   margin-inline: -24px;
   padding-inline: 24px;
@@ -179,7 +179,7 @@
   display: none;
 }
 
-/* Trial type for the website (Juan, 2026-11-21): headings from 60px instead of 64px, scaled by 60/64 and rounded
+/* Trial type for the website (design lead, 2026-11-21): headings from 60px instead of 64px, scaled by 60/64 and rounded
    to whole pixels (halves to even), with H6 at 22px; line heights from the type set's curve, 1 + k / size^p,
    through H6 at 1.3 and H1 at 1.1; and headings in Medium instead of SemiBold. On by default inside the website;
    data-web-type="current" shows the type set as it is (the studio's Trial type switch). It changes nothing outside
@@ -203,7 +203,7 @@
 
 /* A grid of cells with hairlines between them and around it, reaching the rails (logo walls, stats). Cells take
    the section's background, so the 1px gaps show the line. */
-/* A hairline grid of cells (Juan, 2026-11-22): the lines show through 1px gaps between cells that carry the
+/* A hairline grid of cells (design lead, 2026-11-22): the lines show through 1px gaps between cells that carry the
    section's background, so every line, inside and out, is one solid color: a hairline over the background, the
    same as the rails and seams look. The grid reaches the rails and draws its own sides on them, so the cells never
    cover the rails and the outer and inner lines match. */
@@ -224,7 +224,7 @@
   border-color: transparent;
 }
 
-/* Tones (Juan, 2026-11-21): color for icons, in a subtle way. An icon sits on a small tile tinted with its color
+/* Tones (design lead, 2026-11-21): color for icons, in a subtle way. An icon sits on a small tile tinted with its color
    family, with a hairline edge in that family, and the icon itself in a solid color of it: on dark the 975
    (mixed into the surface) with a 400 icon, on light the 50 with a 600 icon, the icon contrast steps in
    primitives/colors. Families: indigo (the default), teal, blue, purple, cyan, green and orange. Never amaranth
@@ -316,7 +316,7 @@
   --tone-edge: var(--web-tone-orange-edge);
   --tone-fg: var(--web-tone-orange-fg);
 }
-/* Icon lines are pixel perfect (Juan, 2026-11-22): a Lucide icon's line is always 1px, 1.5px or 2px, by the icon's
+/* Icon lines are pixel perfect (design lead, 2026-11-22): a Lucide icon's line is always 1px, 1.5px or 2px, by the icon's
    size: 1px up to 18px (12, 14, 16, 18), 1.5px from 20 to 32px (20, 24, 32), 2px from 40px. The icon is a size
    container, so the width follows whatever size a section gives it, and the stroke doesn't scale with the
    drawing. */
@@ -344,13 +344,13 @@
   color: var(--tone-fg);
 }
 
-/* Indigo (Juan, 2026-11-21): the second brand color as a thread through the website, never a fill behind text. It
+/* Indigo (design lead, 2026-11-21): the second brand color as a thread through the website, never a fill behind text. It
    follows the color guidelines' contrast steps (primitives/colors), so it's lighter on dark than on light
-   (Juan, 2026-11-22):
+   (design lead, 2026-11-22):
    - --web-indigo, for marks: icons, nodes, active borders and pattern accents. indigo-400 on dark, 600 on light.
    - --web-indigo-text, for text: the secondary.text role, indigo-400 on dark and 800 on light (text on white
      needs 700 or darker).
-   - --web-link, for text links (Juan, 2026-11-22): --web-indigo-text. A link is .web-link (ArrowLink sets it).
+   - --web-link, for text links (design lead, 2026-11-22): --web-indigo-text. A link is .web-link (ArrowLink sets it).
    The nodes where lines meet take an indigo ring and the active one fills with it. data-web-indigo="off" keeps the
    nodes and links neutral, to compare. */
 [data-web],
@@ -376,7 +376,7 @@
   --web-node: var(--web-line-strong);
   --web-link: var(--foreground);
 }
-/* The selected pill in a row of tabs or a toggle (a code panel's language, a chart's option, grid or list), Juan,
+/* The selected pill in a row of tabs or a toggle (a code panel's language, a chart's option, grid or list), design lead,
    2026-11-22: a clear fill that stands out on a card, neutral-800 on dark and neutral-100 on light, with the text
    color. Unselected pills have no fill. */
 [data-web],
@@ -396,7 +396,7 @@
   color: var(--foreground);
 }
 
-/* The three dots in a code panel's or terminal's top bar (Juan, 2026-11-22): lighter than the bar, neutral-800 on
+/* The three dots in a code panel's or terminal's top bar (design lead, 2026-11-22): lighter than the bar, neutral-800 on
    dark and neutral-200 on light, so they read without drawing the eye. */
 [data-web],
 [data-web] [data-theme],
@@ -416,7 +416,7 @@
   --web-window-dot-shine: color-mix(in oklab, var(--qd-color-neutral-0) 70%, transparent);
   --web-window-dot-rim: inset 0 -0.5px 0 color-mix(in oklab, var(--qd-color-neutral-1000) 6%, transparent);
 }
-/* With a very subtle glass (Juan, 2026-11-22): a touch lighter at the top, a hairline highlight along the top edge
+/* With a very subtle glass (design lead, 2026-11-22): a touch lighter at the top, a hairline highlight along the top edge
    and a faint rim (on light, a faint shade at the bottom), in the palette's white and black. */
 .web-window-dot {
   background: linear-gradient(to bottom, var(--web-window-dot-top), var(--web-window-dot) 70%);
@@ -441,7 +441,7 @@
   display: none;
 }
 
-/* The website's scene colors (Juan, 2026-11-22), for the canvas and WebGL visuals in web/visuals (the globe) and
+/* The website's scene colors (design lead, 2026-11-22), for the canvas and WebGL visuals in web/visuals (the globe) and
    web/patterns (the depth haze): the Space page's palette, read by visuals/scene.tsx as --web-scene-<key>. */
 [data-web],
 [data-web] [data-theme],
@@ -477,7 +477,7 @@
   --web-scene-accent: var(--qd-color-amaranth-600);
   --web-scene-plum: var(--qd-color-purple-200);
 }
-/* The depth haze, subtle (Juan, 2026-11-22): the shader at half strength (40% on light) over the card's fill. */
+/* The depth haze, subtle (design lead, 2026-11-22): the shader at half strength (40% on light) over the card's fill. */
 .web-depth-haze {
   opacity: 0.5;
 }
@@ -585,7 +585,7 @@
   --web-scene-bg: var(--background);
 }
 
-/* Depth haze on light (2026-11-23, exploring: it changes Juan's approved pattern, so it needs his yes). On white,
+/* Depth haze on light (2026-11-23, exploring: it changes the design lead's approved pattern, so it needs his yes). On white,
    the stars in neutral 700 and 400 read as specks of dust, and indigo 50 and 100 at 40% as smudges. Here the stars
    are indigo, like the other patterns' marks on light, the haze a step deeper, and the layer at 80% (from 40%), so
    it reads as soft light falling from the top, as clearly as on dark. Scoped to the depth haze: --web-scene-star

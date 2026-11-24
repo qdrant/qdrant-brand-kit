@@ -1,5 +1,5 @@
 {
-  "$description": "Qdrant breakpoints (minimum widths): Tailwind's defaults, which shadcn uses (Juan, 2026-11-18), so the design system, the product and Figma share one set. Until then they were xs 444, sm 600, md 900, lg 1200 and xl 1536, from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), which now has these values too. breakpoints.css is generated from this file by primitives/build.mjs.",
+  "$description": "Qdrant breakpoints (minimum widths): Tailwind's defaults, which shadcn uses (design lead, 2026-11-18), so the design system, the product and Figma share one set. Until then they were xs 444, sm 600, md 900, lg 1200 and xl 1536, from the Figma file Qdrant Design System Primitives (UUpGTk4Ifmpr0FwNr6pXVg), which now has these values too. breakpoints.css is generated from this file by primitives/build.mjs.",
   "breakpoint": {
     "sm": {
       "$type": "dimension",

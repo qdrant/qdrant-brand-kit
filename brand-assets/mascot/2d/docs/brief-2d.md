@@ -50,7 +50,7 @@ A second mascot style in Design Lab. Same character as the 3D Qbot, drawn as a f
 ## Feasibility test (before UI work)
 
 1. Run `generate.mjs` for 5 requests not in the library: excited + jumping, curious + thinking, happy + thumbs up, focused + sitting with laptop, proud + pointing right.
-2. Review each with `review-2d.txt`; Vanesa scores the same set.
+2. Review each with `review-2d.txt`; the visual designer scores the same set.
 3. Go if the character and style hold in at least 4 of 5. Pick native transparent vs grey + BiRefNet by edge quality.
 4. If the style drifts toward 3D, add more 2D references before building.
 

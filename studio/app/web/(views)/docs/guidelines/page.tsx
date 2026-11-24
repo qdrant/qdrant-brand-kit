@@ -4,7 +4,7 @@ import { DocsSidebar } from "@/components/web/docs-sidebar"
 
 export const metadata = { title: "Guidelines · Web · Qdrant Studio" }
 
-// The website's guidelines (Juan, 2026-11-22): every rule for building the site from the library, for the team and
+// The website's guidelines (design lead, 2026-11-22): every rule for building the site from the library, for the team and
 // for agents, here and in the Hugo build. Its text comes from web/guidelines.ts; add a rule there when it's decided.
 export default function Guidelines() {
   return (

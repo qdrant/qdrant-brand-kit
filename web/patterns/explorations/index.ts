@@ -3,7 +3,7 @@ import { generativePattern } from "./generative"
 import { spacePatterns } from "./space"
 
 // Patterns being explored, not approved: they show only in the studio's Patterns tab, marked Exploring, and not in
-// the Builder's pickers. When Juan says yes to one, move it to web/patterns/<id>.tsx, list it in
+// the Builder's pickers. When the design lead says yes to one, move it to web/patterns/<id>.tsx, list it in
 // web/patterns/index.tsx, and add its rule to web/guidelines.ts and a dated row to design-system/DESIGN.md.
 //
 // The Pattern Studio looks (2026-11-23) are from the Deploy Card page (Figma node 21705:27762): its own pattern
@@ -306,7 +306,7 @@ export const explorations: PatternDefinition[] = [
       },
       {
         rule: "Mona Sans Mono replaced Geist Mono",
-        source: "primitives/typography/README.md (Juan, 2026-11-17)",
+        source: "primitives/typography/README.md (design lead, 2026-11-17)",
         text: "Pattern Studio draws the characters in Geist Mono, the brand's old mono. Here they're in Mona Sans Mono, Medium.",
       },
       LOOPS,

@@ -58,7 +58,7 @@
 [data-theme="light"] {
   --qd-ui-button-drop: 0 1px 3px 0 var(--qd-ui-button-drop-color);
 }
-/* The secondary button's fill, by theme (Juan, 2026-11-21): on dark it's the highlight surface (shadcn's
+/* The secondary button's fill, by theme (design lead, 2026-11-21): on dark it's the highlight surface (shadcn's
    `secondary`); on light it's white, so it stands up from the page like a raised surface, with the raised edge
    and drop shadow above. Badges, tracks and muted items that use `secondary` don't change. */
 :root,

@@ -20,7 +20,7 @@ const componentName = (file: string) =>
     .map((w) => w[0].toUpperCase() + w.slice(1))
     .join("")
 
-// One section of the library (Juan, 2026-11-21): what it's for, its rules, parts and props, and every variant in
+// One section of the library (design lead, 2026-11-21): what it's for, its rules, parts and props, and every variant in
 // dark and light. The same page serves the team and agents; its text comes from the web registry.
 export default async function SectionDocs({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

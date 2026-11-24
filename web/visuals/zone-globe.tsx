@@ -2,7 +2,7 @@
 
 import { SceneCanvas, alpha, clear, label, type CanvasScene, type Palette } from "./scene"
 
-// Multi-AZ on a dotted globe (Juan, 2026-11-22; the globe is the Space page's SG-04). How Qdrant Cloud's Multi-AZ
+// Multi-AZ on a dotted globe (design lead, 2026-11-22; the globe is the Space page's SG-04). How Qdrant Cloud's Multi-AZ
 // works, per its docs (Premium, Resilience): a cluster's nodes spread across three availability zones in one
 // region, each shard has replicas in different zones, and traffic is routed between zones, so the cluster stays
 // available if one zone goes down. The globe rocks gently with the region in front; the three zones (AZ-A, AZ-B,

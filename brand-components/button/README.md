@@ -2,7 +2,7 @@
 
 The call to action in a post ("Start Free", "Register", "Read more"). Written as rules, not fixed sizes: an agent reads them and builds the button for the creative it's making.
 
-Based on the Qdrant Web Design button (Figma [Qdrant Web Design, node 793-2956](https://www.figma.com/design/ubPe8s8pViytom0Mapcno8/Qdrant-Web-Design?node-id=793-2956)). It's no longer interim: the Qdrant Brand Design System's Figma button (file `8y0svqBDPZX6caRNF6lddG`, node `13872:1092`) isn't used, and the buttons in the Figma files will be updated from this repo (Juan, 2026-11-18).
+Based on the Qdrant Web Design button (Figma [Qdrant Web Design, node 793-2956](https://www.figma.com/design/ubPe8s8pViytom0Mapcno8/Qdrant-Web-Design?node-id=793-2956)). It's no longer interim: the Qdrant Brand Design System's Figma button (file `8y0svqBDPZX6caRNF6lddG`, node `13872:1092`) isn't used, and the buttons in the Figma files will be updated from this repo (design lead, 2026-11-18).
 
 **The look comes from the design system** (since 2026-11-12): [`design-system/styles/components/button.css`](../../design-system/styles/components/button.css) holds the fill, the raised edge and shadow, the label color and weight, and the web states, as `--qd-ui-button-*` variables. The web Button in the design system reads the same file, so the two always match. This folder only sizes the button for the canvas. To change the look, change that file, never `button.css` here.
 
@@ -47,7 +47,7 @@ Part.
 5. **SemiBold (600)**, the same weight as the Figma button and every heading style in `typography/`. Not Bold, even though most creatives on the Campaigns page used Bold.
 6. **Placement:** last in the text block, aligned with the text, top-right level with the logo, or bottom-right on the bottom margin when the details run along the bottom-left. **Always in a corner (bottom-left, top-right or bottom-right), never mid-layout** (2026-11-16): top-right only when the text block spans the full width; when the text block is only part of the width (e.g. wide with a visual on the right), the button goes last in the text block ([`guidelines/`](../../guidelines/) section 11, rule 10, decided 2026-11-11). **Exception, the light card:** outside the card, centered below it, sized by the card (`.qd-book__cta`, see [`layout/`](../../guidelines/layout/) "Light card layout"). Never full width ([`guidelines/`](../../guidelines/) section 11, rule 10).
 7. **Beside the logo, the same height as the logo.** Add `qd-button--beside-logo`: the height becomes the logo's height for the shape (72 or 80 px) and the text, padding and corners follow it in the same proportions. The button is never taller than the logo next to it (decided 2026-11-04).
-8. **Never resized to make room** (Vanesa, 2026-11-16). When a creative is tight, tighten the gaps, shrink the headshots or cut copy ([`guidelines/`](../../guidelines/) section 11, rule 11). The button keeps its size for the shape.
+8. **Never resized to make room** (visual designer, 2026-11-16). When a creative is tight, tighten the gaps, shrink the headshots or cut copy ([`guidelines/`](../../guidelines/) section 11, rule 11). The button keeps its size for the shape.
 9. **On a red pattern: top-right beside the logo,** on the dark part of the pattern, with **3:1 or more** against what's around it. This 3:1 rule is only for red patterns ([`guidelines/`](../../guidelines/) section 3, 2026-11-16).
 10. **Never an icon.** The creative button is text only, Main and Secondary (decided 2026-11-11). Web and product buttons, from the design system, may have one ([`design-system/AGENTS.md`](../../design-system/AGENTS.md), 2026-11-18).
 11. **One button per post.**
@@ -64,7 +64,7 @@ In px at the reference canvas:
 
 ## Colors
 
-**Flat and raised since 2026-11-19 (Vanesa):** the creative button matches the web button (`design-system/components/ui/button.tsx`): one flat amaranth fill, no gradient and no inner highlight, on a raised surface (a faint 1 px edge, a top light and a short drop shadow). The edge and shadow are shares of the button's height (1/36 and 3/36, from the 36 px web button), so they scale with every canvas. It replaces the gradient and top highlight from the Qdrant Web Design button.
+**Flat and raised since 2026-11-19 (visual designer):** the creative button matches the web button (`design-system/components/ui/button.tsx`): one flat amaranth fill, no gradient and no inner highlight, on a raised surface (a faint 1 px edge, a top light and a short drop shadow). The edge and shadow are shares of the button's height (1/36 and 3/36, from the 36 px web button), so they scale with every canvas. It replaces the gradient and top highlight from the Qdrant Web Design button.
 
 Set in [`design-system/styles/components/button.css`](../../design-system/styles/components/button.css), token names only. Figma colors that have no token use the nearest one. Moved to the Figma primitive names on 2026-11-12: the brand red is `amaranth-600`, the same `#DC244C` as before.
 
@@ -111,4 +111,4 @@ From the Figma button, at web size (XS / MD / LG = 36 / 40 / 48px tall, SemiBold
 
 ## Approved by / date
 
-Vanesa, 2026-11-04.
+Visual designer, 2026-11-04.

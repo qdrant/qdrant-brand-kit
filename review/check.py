@@ -291,7 +291,7 @@ def check_one(m, rules):
         if abs(ratio - want_ratio) > 0.02:
             biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
         Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
-        k = 1.6  # title: 1.6x the Figma share on every shape, in Mona Sans Display (Vanesa, 2026-11-19; wide was 1.95x)
+        k = 1.6  # title: 1.6x the Figma share on every shape, in Mona Sans Display (visual designer, 2026-11-19; wide was 1.95x)
         btexts = [t for t in texts if t["role"] == "book"]
         if btexts:
             top = max(t["fontSize"] for t in btexts)

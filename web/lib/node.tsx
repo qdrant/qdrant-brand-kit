@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
 
-// A node (Juan, 2026-11-22): the small hexagon where the website's lines meet, and the mark before a kicker, a step
+// A node (design lead, 2026-11-22): the small hexagon where the website's lines meet, and the mark before a kicker, a step
 // or a tab. It stands like the logo's brandmark, a point at the top and the bottom, 7 by 8px. Hollow by default;
 // `solid` fills it with the page's background so a line under it stops at its edge; `active` fills it with indigo.
 // Nodes blink like a live readout (the Space page's telemetry mark): on, then dim, every 2s, each one at its own

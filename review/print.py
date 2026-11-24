@@ -21,7 +21,7 @@ It writes, in OUT_DIR:
 Margins are the format's margin (8% of the short side, never under 1.5 × the safe area), from the
 trim; the shape and scale come from the finished size, not trim + bleed. Text sizes come from the
 format's title / supporting values in pt (--print-scale small: titleMin / supportingMin, for space
-imagery). All from guidelines/print/ (Vanesa, 2026-11-20).
+imagery). All from guidelines/print/ (visual designer, 2026-11-20).
 
 The page is built like any creative (one .qd-canvas, canvas.js, repo CSS). It's laid out at 300 dpi
 (about 11.8 px per mm), so patterns and images come out at print resolution.
@@ -40,7 +40,7 @@ PX_PER_MM = DPI / 25.4
 PT_PER_PX = 72 / DPI
 BUSY = 0.06      # share of detailed pixels behind a text box that counts as busy (tuned 2026-11-20)
 BUSY_STD = 25    # or a spread of brightness (0-255) that means a subject or ground behind the text
-TOPAZ = ("To decide (Vanesa): the Topaz Labs upscale API is proposed (needs approval). A 4× upscale "
+TOPAZ = ("To decide (visual designer): the Topaz Labs upscale API is proposed (needs approval). A 4× upscale "
          "(4096 × 6144) would cover A4 and A3 at 300 dpi. Until then, offer the plain, solid version.")
 GS_INSTALL = ("Ghostscript isn't installed, so the PDF is still in screen colors (RGB) and isn't print-ready.\n"
               "Install it once: on a Mac with Homebrew, `brew install ghostscript` (no Homebrew: install it from\n"
@@ -112,7 +112,7 @@ def main():
     ref_w, ref_h = layout_shapes()[shape]
     u = min(TW / ref_w, TH / ref_h)
     # The content margin, from the trim: 8% of the short side (the folded panel for brochures),
-    # never under 1.5 × the safe area (Vanesa, 2026-11-20). The preset's value unless the spec changes the size.
+    # never under 1.5 × the safe area (visual designer, 2026-11-20). The preset's value unless the spec changes the size.
     if a.trim or a.panels or fmt.get("margin") is None:
         short = min(min(panels) if panels else trim[0], trim[1])
         margin = round(0.08 * short, 1)
@@ -241,7 +241,7 @@ def main():
     def row(check, ok, detail):
         rows.append((check, "pass" if ok is True else ("fail" if ok is False else ok), detail))
     defaults_used = [x for x in ("finished size", "bleed", "safe area") if x not in from_spec]
-    if fmt.get("status") == "in-progress":  # large format (guidelines/print/, Vanesa 2026-11-20)
+    if fmt.get("status") == "in-progress":  # large format (guidelines/print/, visual designer 2026-11-20)
         row("Format", "look", f"{fmt['name']} is in progress: large-format rules aren't settled. Treat this as a test and have a designer check it")
     row("Printer's spec", True if not defaults_used else "look",
         "all from the spec" if not defaults_used else
@@ -372,7 +372,7 @@ def main():
     row("Fonts", True if not t3 else "look", "no Type 3 fonts" if not t3 else
         f"{t3} Type 3 fonts: some printers reject them; check with the printer or outline text")
     no_profile = not rgb_only and not a.icc
-    # Color is always checked (Vanesa, 2026-11-20): without the printer's profile the piece isn't deliverable.
+    # Color is always checked (visual designer, 2026-11-20): without the printer's profile the piece isn't deliverable.
     row("Color", True if (rgb_only or "Converted" in color_note) else False,
         color_note.split(". ")[0] if no_profile else color_note.split("\n")[0])
     md = [f"# Print checks: {name}", "", f"{fmt['name']}: {trim[0]} × {trim[1]} mm, bleed {bleed} mm, "

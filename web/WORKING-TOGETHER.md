@@ -1,10 +1,10 @@
 # Working together on the website library
 
-A handoff for the designer joining Juan on the website library (2026-11-23). It covers what's been built, where the rules live, how to set up, how the two of you split the work, and how to branch so you don't get in each other's way. Give it to your Claude session first: it's written for both of you.
+A handoff for the marketing designer joining the design lead on the website library (2026-11-23). It covers what's been built, where the rules live, how to set up, how the two of you split the work, and how to branch so you don't get in each other's way. Give it to your Claude session first: it's written for both of you.
 
 ## The plan
 
-- **Juan** keeps refining the baseline components on the studio's Canvas: the sections in `web/sections/`, their parts in `web/lib/`, and the design system they're built from.
+- **The design lead** keeps refining the baseline components on the studio's Canvas: the sections in `web/sections/`, their parts in `web/lib/`, and the design system they're built from.
 - **You** work on the patterns and shaders that are added to those components later: the layers in `web/patterns/`, the scene engine in `web/visuals/scene.tsx`, and new canvas or WebGL scenes.
 - Each of you works on your own branch, and both branches merge into `web-sections`. From there, everything goes to `main` through PR #16.
 
@@ -20,7 +20,7 @@ This repo is Qdrant's brand system: the rules and materials for creatives, the d
 | `studio/` | The Next.js app where everything is reviewed. The Web page shows the library; the Space page holds the space-theme explorations |
 | `brand-assets/`, `brand-components/`, `guidelines/`, `review/` | Creatives (social posts, ads, banners). Not part of this work |
 
-The website library lives on the branch `web-sections`, in PR [qdrant/qdrant-brand-kit#16](https://github.com/qdrant/qdrant-brand-kit/pull/16). It targets `main` and waits on Vanesa's review. `main` already has the color work (#14, #15) and Vanesa's creative and print changes (#11 to #13), but not the website library. Always start from `web-sections`.
+The website library lives on the branch `web-sections`, in PR [qdrant/qdrant-brand-kit#16](https://github.com/qdrant/qdrant-brand-kit/pull/16). It targets `main` and waits on the visual designer's review. `main` already has the color work (#14, #15) and the visual designer's creative and print changes (#11 to #13), but not the website library. Always start from `web-sections`.
 
 ## Read these first
 
@@ -62,7 +62,7 @@ Each of you works on your own branch, cut from `web-sections`. Neither of you co
 
 | Who | Branch | Pull request into |
 | --- | --- | --- |
-| Juan | `juan-web-components` | `web-sections` |
+| The design lead | `web-components` | `web-sections` |
 | You | `web-patterns` | `web-sections` |
 
 ### Create your branch (once)
@@ -119,11 +119,11 @@ Conflicts happen when two branches change the same lines. Stay in your own files
 
 - `web/patterns/`: every pattern file, `index.tsx` and `types.ts`.
 - `web/visuals/scene.tsx`: the canvas and WebGL engine.
-- New scene files in `web/visuals/`. Juan owns the existing visual files there (`console.tsx`, `console-setup.tsx`, `cluster-diagram.tsx`, `zone-globe.tsx`), so ask before changing them.
+- New scene files in `web/visuals/`. The design lead owns the existing visual files there (`console.tsx`, `console-setup.tsx`, `cluster-diagram.tsx`, `zone-globe.tsx`), so ask before changing them.
 - `studio/components/web/patterns-view.tsx` and `studio/app/web/(views)/patterns/`: the studio's Patterns tab.
 - `studio/components/space/`, `studio/lib/space.ts` and `studio/app/space/`: the Space page, where options are explored.
 
-**Juan's (components):**
+**The design lead's (components):**
 
 - `web/sections/`, `web/lib/`, `web/registry/`, `web/content/` and `web/pages/`.
 - `design-system/` and `primitives/`.
@@ -134,7 +134,7 @@ Conflicts happen when two branches change the same lines. Stay in your own files
 - **`web/styles/web.css`.** Pattern CSS goes in one block, at the end, under a comment that says it belongs to patterns. Leave the rest of the file alone. The `--web-scene-*` colors and `.web-depth-haze` are already there; keep changes to them in that block.
 - **`web/guidelines.ts`.** Add your rules to the "patterns" group (Patterns and effects) only.
 - **`design-system/DESIGN.md`.** Add a new row for a decision; don't edit the rows above it.
-- **Where patterns are drawn.** `web/lib/section.tsx` renders a section's `pattern`, and `web/lib/plate.tsx` renders the `cardPattern` inside each card. Both are Juan's. If you need them to change, say so first.
+- **Where patterns are drawn.** `web/lib/section.tsx` renders a section's `pattern`, and `web/lib/plate.tsx` renders the `cardPattern` inside each card. Both are the design lead's. If you need them to change, say so first.
 
 ## How patterns work
 
@@ -158,15 +158,15 @@ Conflicts happen when two branches change the same lines. Stay in your own files
 
 ## The rules for patterns so far
 
-Juan decided these. They're in `web/guidelines.ts` and `design-system/DESIGN.md`:
+The design lead decided these. They're in `web/guidelines.ts` and `design-system/DESIGN.md`:
 
-- **Added by hand, with intent** (Juan, 2026-11-22). Juan removed the first batch of patterns so they come back one at a time, each for a reason. Propose patterns to Juan with a rendered example; one goes into `web/patterns/index.tsx` and onto a section only with his yes.
+- **Added by hand, with intent** (design lead, 2026-11-22). The design lead removed the first batch of patterns so they come back one at a time, each for a reason. Propose patterns to the design lead with a rendered example; one goes into `web/patterns/index.tsx` and onto a section only with his yes.
 - **Subtle, and slow or still.** A pattern supports the content and never competes with it.
 - **Both themes.** Each pattern is checked in dark and light, at desktop and phone width.
 - **Space comes from light, type and motion, never glow** (`DESIGN.md`, Space theme). Light comes from above. Avoid glows, colored shadows, nebula gradients, literal rockets and planets, and twinkling stars behind data.
 - **Effects belong in sections, never in design-system components.**
-- **A page is all dark or all light** (Juan, 2026-11-22), so a pattern never switches a section's theme.
-- **Nodes blink** (Juan, 2026-11-22). The hexagon nodes where lines meet blink like a live readout: a hard step to 25% and back every 2 seconds, each at its own offset. That's the model for "alive" motion: stepped and quiet, like the telemetry mark on the Space page's Telemetry footer (SF-19).
+- **A page is all dark or all light** (design lead, 2026-11-22), so a pattern never switches a section's theme.
+- **Nodes blink** (design lead, 2026-11-22). The hexagon nodes where lines meet blink like a live readout: a hard step to 25% and back every 2 seconds, each at its own offset. That's the model for "alive" motion: stepped and quiet, like the telemetry mark on the Space page's Telemetry footer (SF-19).
 
 ## Decisions made so far, for context
 
@@ -188,13 +188,13 @@ All of these are in `web/guidelines.ts` with their dates. A short list, so you k
   - A visual's frame hugs it and sits on the outer side of its row.
   - A wide card's subject (the Multi-AZ globe) can sit in the center, with its points around it.
 - **Motion.** In-page links scroll with an ease-in-out, in 0.6 to 1.1 seconds.
-- **Type.** A trial for headings, from 60px in Medium, with a switch to compare it. It goes into the primitives only with Vanesa's yes.
+- **Type.** A trial for headings, from 60px in Medium, with a switch to compare it. It goes into the primitives only with the visual designer's yes.
 
 ## Never
 
 The full list is in the root `AGENTS.md`. The ones that matter most here:
 
-- **Rules and review.** Rules come from Juan, and changes to shared rules need Vanesa's yes. Every rule Juan decides goes into `web/guidelines.ts` in the same commit.
+- **Rules and review.** Rules come from the design lead, and changes to shared rules need the visual designer's yes. Every rule the design lead decides goes into `web/guidelines.ts` in the same commit.
 - **Content.** Never invent content: copy, dates, names or links.
 - **Files in the repo.**
   - Never save working files, renders or screenshots in this repo. Keep them in a folder outside it.
