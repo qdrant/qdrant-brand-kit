@@ -84,7 +84,10 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
   // colorway 1 of the layer. options.letters makes a variation of every letter layer,
   // within the rules in letter-variations.js: a number picks variant n (0 = as approved),
   // an object sets the allowed values directly.
-  const letters = typeof options.letters === "number" ? letterVariation(options.letters) : options.letters;
+  // options.letterOption picks one of the preset's approved letter options (settings.letterOptions).
+  const option = options.letterOption == null ? null : preset.settings?.letterOptions?.[options.letterOption];
+  if (options.letterOption != null && !option) throw new Error(`${preset.name} has no approved letter option #${options.letterOption}`);
+  const letters = option ? (({ name, source, ...values }) => values)(option) : typeof options.letters === "number" ? letterVariation(options.letters) : options.letters;
   for (const base of preset.layers ?? []) {
     const layer = letters && isLetterLayer(base) ? varyLetterLayer(base, letters) : base;
     const top = document.createElement("canvas");

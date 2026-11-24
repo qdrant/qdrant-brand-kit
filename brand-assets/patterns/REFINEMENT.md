@@ -20,3 +20,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Color-Sliced-A | Approved stripes P1, P2, P9, P11, P13 | Added to the preset as `stripes` (renderPattern option `stripes`), with a new Neutral 950 → Teal 600 colorway on hold | 2026-11-24 |
 | Color-Sliced-B | All | Base inherited from Color-Sliced-A (colorways, stripes); letters varied from the Pattern Studio terminal look via `fromStudioParams`. Teal letters added to the layer | 2026-11-24 |
 | Color-Sliced-A, Generative-Burst-A | Open proposals (stripes P25, P29 to P36; burst P1 to P6) | Set aside for now; nothing from them is in the presets | 2026-11-24 |
+| Color-Sliced-B | Proposal P8 (terminal v8: word glyphs, color by x, noise 0.44 at 4.7, scale 0.65) | Approved; added as letter option 0 in every colorway | 2026-11-24 |

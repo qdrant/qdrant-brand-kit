@@ -6,7 +6,7 @@
 // that doesn't exist, or a missing mesh. Warnings: values off the 8 grid.
 
 import { readFileSync, existsSync, readdirSync } from "node:fs";
-import { letterLayerProblems } from "../patterns/letter-variations.js";
+import { letterLayerProblems, fromStudioParams } from "../patterns/letter-variations.js";
 
 const read = (path) => JSON.parse(readFileSync(path, "utf8"));
 const errors = [];
@@ -120,6 +120,15 @@ for (const id of ids) {
       if (!(v >= lo && v <= hi)) errors.push(`${where}: streaks.${key} is ${v}, outside the approved ${lo} to ${hi}`);
       else if (v % 8 !== 0) errors.push(`${where}: streaks.${key} is ${v}, not on the 8 grid`);
     }
+  }
+
+  // Approved letter options: only the settings a letter variation may change.
+  for (const o of p.settings?.letterOptions ?? []) {
+    const { name, source, ...values } = o;
+    const changes = fromStudioParams(values);
+    const extra = Object.keys(values).filter((k) => !(k in changes));
+    if (extra.length) errors.push(`${where}: letter option "${name}" sets ${extra.join(", ")}, which letter layers can't change`);
+    if (values.scale != null && (values.scale < 0.45 || values.scale > 0.65)) errors.push(`${where}: letter option "${name}" scale ${values.scale} is outside 0.45 to 0.65`);
   }
 
   // Approved stripes (Color-Sliced): thickness on the 8 grid, an angle in degrees.
