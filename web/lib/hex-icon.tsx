@@ -61,14 +61,18 @@ export const marks: Record<string, { name: string; shapes: React.ReactNode }> = 
   },
   hybrid: {
     name: "Hybrid Cloud",
-    // A globe, anywhere you run it: a solid circle with its meridian and equator cut out; its left half shaded.
+    // A globe, anywhere you run it, as a wireframe: an outer ring, an oval meridian and the equator, about two hexagons wide, the equator one row.
+    // Centered on a grid point of the matrix (13 across) so the ring is even and the equator is one clean row; its
+    // inside shaded in the tones style.
     shapes: (
       <>
-        <circle cx="12" cy="12" r="10.5" />
-        <ellipse data-hole cx="12" cy="12" rx="5.8" ry="12" />
-        <ellipse cx="12" cy="12" rx="3.6" ry="10.5" />
-        <rect data-hole x="0" y="10.9" width="24" height="2.2" />
-        <rect data-shade x="0" y="0" width="12" height="24" />
+        <circle cx="12.000" cy="11.192" r="10.6" />
+        <circle data-hole cx="12.000" cy="11.192" r="8" />
+        <circle data-shade-add cx="12.000" cy="11.192" r="8" />
+        <ellipse cx="12.000" cy="11.192" rx="5.8" ry="10.6" />
+        <ellipse data-hole cx="12.000" cy="11.192" rx="3.4" ry="8" />
+        <ellipse data-shade-add cx="12.000" cy="11.192" rx="3.4" ry="8" />
+        <rect x="1.6" y="10.39" width="20.8" height="1.6" />
       </>
     ),
   },
