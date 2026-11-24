@@ -14,11 +14,14 @@ export function Node({
   solid,
   active,
   blink,
+  filled,
   className,
 }: {
   solid?: boolean
   active?: boolean
   blink?: boolean
+  // A fill in the node color with no outline, like a kicker's node (design lead, 2026-11-24).
+  filled?: boolean
   className?: string
 }) {
   const id = React.useId()
@@ -33,9 +36,9 @@ export function Node({
       aria-hidden
       viewBox="0 0 7 8"
       style={blink ? ({ "--web-node-delay": `${delay}s` } as React.CSSProperties) : undefined}
-      className={cn("web-hex block h-2 w-[7px] shrink-0 overflow-visible", solid && "web-hex-solid", active && "web-hex-active", blink && "web-hex-blink", className)}
+      className={cn("web-hex block h-2 w-[7px] shrink-0 overflow-visible", solid && "web-hex-solid", active && "web-hex-active", blink && "web-hex-blink", filled && "web-hex-filled", className)}
     >
-      <polygon points="3.5,0.5 6.53,2.25 6.53,5.75 3.5,7.5 0.47,5.75 0.47,2.25" />
+      <polygon points={filled ? "3.5,0 7,2 7,6 3.5,8 0,6 0,2" : "3.5,0.5 6.53,2.25 6.53,5.75 3.5,7.5 0.47,5.75 0.47,2.25"} />
     </svg>
   )
 }

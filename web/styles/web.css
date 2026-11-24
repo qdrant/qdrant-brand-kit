@@ -139,6 +139,12 @@
 .web-hex-solid polygon {
   fill: var(--background);
 }
+/* A filled node (a kicker's, design lead, 2026-11-24): a fill in the node color and no outline; its points reach the
+   full 7 by 8px (Node draws them), so it's the same size as an outlined node. */
+.web-hex-filled polygon {
+  fill: var(--web-node, var(--web-line-strong));
+  stroke: none;
+}
 .web-hex-active polygon {
   fill: var(--web-indigo);
   stroke: var(--web-indigo);

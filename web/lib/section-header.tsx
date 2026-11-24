@@ -35,7 +35,7 @@ export function SectionHeader({
   const kickerEl = kicker ? (
     <p className={cn(type.kicker, "flex items-start gap-2.5")}>
       <span className="flex h-[1lh] shrink-0 items-center">
-        <Node blink />
+        <Node blink filled />
       </span>
       {kicker}
     </p>
