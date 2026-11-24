@@ -89,6 +89,17 @@ Patterns made in Pattern Studio (the `qdrant-pattern-studio` repo) are added fro
 
 At its `designSize`, the pattern is pixel-identical to the tool. At any other size, the field and the elements keep their scale by canvas area, so nothing stretches: a wider canvas shows more of the same field. `cellScaling` sets what the elements do on bigger canvases: `"canvas"` (they grow with it, like every other pattern) or `"fixed"` (they keep their px size, so there are more of them). `generative-scaling.html` shows both side by side.
 
+**Letter layers: what a variation may change** (Vanesa, 2026-11-24). Pass `renderPattern(..., { letters: { ... } })`, or call `varyLetterLayer(layer, changes)`. Anything else is refused, and the validator checks every letter layer:
+
+| Setting | Rule |
+| --- | --- |
+| Color mapping (`colorMap`) | Any: field value, x, y, radial, random, angle |
+| Glyphs (`glyphs`) | Ramp, word or random, but the characters are always the letters `QDRANT` |
+| Scale (`scale`) | A little: 0.45 to 0.65 |
+| Noise | Anything: amount, blend, scale, octaves, drift, warp, seed |
+| Jitter | Never |
+| Shape | Never a circle, hexagon, word or other shape in the middle: `"none"`, or `"text"` with no text |
+
 **Layers:** a preset can list `"layers"`: transparent generative presets drawn on top of it, in order. A layer has `"background": null`, one colorway per pattern colorway in the same order, each with `"backdrop": null`, and isn't in `presets/index.json`, because it isn't a pattern on its own. Color-Sliced-Pattern-B uses `generative-glyph-layer-a`. Adding a layer to a pattern is an effect change, so it gets a new letter.
 
 **Letters need fonts:** patterns that draw letters (Glyph) use Mona Sans Mono (Geist Mono until 2026-11-17). Call `await loadPatternFonts(patterns)` once before rendering, or the browser draws them in a fallback font.

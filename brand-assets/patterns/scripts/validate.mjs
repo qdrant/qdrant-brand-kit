@@ -6,6 +6,7 @@
 // that doesn't exist, or a missing mesh. Warnings: values off the 8 grid.
 
 import { readFileSync, existsSync } from "node:fs";
+import { letterLayerProblems } from "../patterns/letter-variations.js";
 
 const read = (path) => JSON.parse(readFileSync(path, "utf8"));
 const errors = [];
@@ -122,6 +123,7 @@ for (const id of ids) {
     }
     if (layer.recipe !== "generative-pattern") errors.push(`${where}: layer ${id} should be a generative pattern`);
     if (layer.settings?.background) errors.push(`${where}: layer ${id} should have no background`);
+    if (layer.settings?.engine?.element === "ascii") for (const problem of letterLayerProblems(layer.settings.engine)) errors.push(`${where}: letter layer ${id} ${problem}`);
     if ((layer.colorways?.length ?? 0) !== (p.colorways?.length ?? 0)) errors.push(`${where}: layer ${id} needs one colorway per pattern colorway (${p.colorways?.length}), in the same order`);
     if (!layer.settings?.tones?.[layer.settings?.tone]) errors.push(`${where}: layer ${id} tone curve "${layer.settings?.tone}" isn't in settings.tones`);
     for (const look of layer.colorways ?? []) {
