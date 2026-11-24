@@ -10,7 +10,7 @@
   "mesh-refracted-pattern-d",
   "mesh-sliced-pattern-a",
   "mesh-dithered-pattern-a",
-  "generative-hexagon-pattern-b",
-  "generative-burst-pattern-a",
-  "generative-dash-pattern-a"
+  "generative-hexagon-pattern",
+  "generative-burst-pattern",
+  "generative-dash-pattern"
 ]

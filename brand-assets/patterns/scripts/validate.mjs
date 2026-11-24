@@ -66,7 +66,9 @@ for (const id of ids) {
   const where = p.name ?? id;
 
   // Name and file agree: Color-Refracted-Pattern-A <-> color-refracted-pattern-a.json.
-  if (!/^(Color|Mesh|Generative|Motion)-[A-Z][a-z]+-Pattern-[A-Z]$/.test(p.name ?? "")) errors.push(`${where}: name should look like Color-Refracted-Pattern-A`);
+  // Generative patterns have no letter: one pattern per element, looks as variants (Vanesa, 2026-11-24).
+  const named = p.recipe === "generative-pattern" ? /^Generative-[A-Z][a-z]+-Pattern$/ : /^(Color|Mesh|Motion)-[A-Z][a-z]+-Pattern-[A-Z]$/;
+  if (!named.test(p.name ?? "")) errors.push(`${where}: name should look like ${p.recipe === "generative-pattern" ? "Generative-Burst-Pattern" : "Color-Refracted-Pattern-A"}`);
   else if (p.name.toLowerCase() !== id) errors.push(`${where}: file should be presets/${p.name.toLowerCase()}.json`);
 
   if (!recipes.includes(p.recipe)) errors.push(`${where}: recipe "${p.recipe}" isn't registered in patterns/index.js`);

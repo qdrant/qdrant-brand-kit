@@ -29,3 +29,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Generative-Dash-A, B | All; proposals P1 to P12 | Merged into Generative-Dash-Pattern-A: Dash-B is variant 0, the 12 proposals (all approved) are variants 1 to 12 | 2026-11-24 |
 | Generative-Burst-A | Proposal P16 (thick lines by value) | Not approved | 2026-11-24 |
 | Generative-Burst-A | Proposals P7, P19 to P30 | Approved; added as variants 0 to 12 in every colorway | 2026-11-24 |
+| Generative patterns | Names | No more A/B letters: Generative-Hexagon-Pattern (was Hexagon-B and C), Generative-Burst-Pattern (was Burst-A), Generative-Dash-Pattern (was Dash-A and B). Files renamed to match; the studio's dash field updated | 2026-11-24 |

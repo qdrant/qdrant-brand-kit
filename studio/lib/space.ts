@@ -94,7 +94,7 @@ const firstRound: SpaceOption[] = [
     id: "dash-field",
     tab: "backgrounds",
     name: "Dash field",
-    idea: "The brand's Generative-Dash-Pattern-A, drawn by the pattern library itself, used as a star field. It fades out under the copy, with a hairline grid on top.",
+    idea: "The brand's Generative-Dash-Pattern, drawn by the pattern library itself, used as a star field. It fades out under the copy, with a hairline grid on top.",
     source: "DESIGN.md, still to explore: Dash as a star field",
     tech: "Brand pattern",
     motion: "Still, renders once per size",
