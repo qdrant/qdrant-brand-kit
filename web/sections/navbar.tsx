@@ -489,8 +489,8 @@ function MobileMenu({
   )
 }
 
-// The tile's pattern: Pixel drift (web/patterns/explorations, the marketing designer's), with its own params, on a
-// 20-second loop instead of 6 so it drifts more quietly, and without its fade, since the tile masks it to a corner.
+// The tile's pattern: Pixel drift (web/patterns/explorations, the marketing designer's), with its own params and
+// smaller hexagons, on a 20-second loop instead of 6 so it drifts more quietly, and without its fade, since the tile masks it to a corner.
 const docsDrift = generativePattern({
   id: "docs-pixel-drift",
   name: "Pixel drift (Documentation tile)",
@@ -501,7 +501,8 @@ const docsDrift = generativePattern({
   fade: false,
   params: {
     layout: "grid",
-    cell: 10,
+    // Smaller than Pixel drift's 10px cells, for the tile's short height (design lead, 2026-11-24).
+    cell: 6,
     shape: "gradient",
     rotation: 40,
     size: 1,
@@ -515,7 +516,7 @@ const docsDrift = generativePattern({
     element: "hexagon",
     orientation: "fixed",
     elementRotation: 30,
-    scale: 0.7,
+    scale: 0.62,
     sizeByValue: false,
     density: "stochastic",
     threshold: 0,
