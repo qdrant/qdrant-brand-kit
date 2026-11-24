@@ -246,6 +246,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "web/sections/feature-grid.tsx (visualPlacement)",
       },
       {
+        title: "A row's icon sits with its title, and the row reads from the top",
+        text: "In a row of a list (an icon or a number, a title, then its description beside it), the icon and the title sit side by side, centered on each other, and the description starts at the top of the row, 48px away, never centered against it. On phones the description goes under the title. The title and the description get equal halves, so a title fits on one line.",
+        decided: "Design lead, 2026-11-24",
+        source: "web/sections/feature-grid.tsx (index)",
+      },
+      {
         title: "Cards are plates",
         text: "Every page has the material, always, not as an option (2026-11-24). Cards and panels are a touch lighter at the top, with a 1px inner highlight and a soft shadow on light. Their edge is one step under the strong line: the text color at 11% on dark (about neutral-850) and 10% on light (about neutral-100) (--web-plate-edge, 2026-11-24). A simple card, an icon with a title and a line of text (feature, value, channel and contact cards), has no inner highlight, so its top shows one line, not two (Plate simple, 2026-11-24). Media sit in a tray, a framed holder. Rows of facts sit in a hairline grid.",
         decided: "Design lead, 2026-11-21 and 2026-11-24",

@@ -64,20 +64,22 @@ export function FeatureGrid({
           {items.map((item, i) => {
             const tone = (item.tone as Tone) ?? (tones === "mixed" ? toneAt(i) : tones)
             return (
+              // The icon and the heading side by side, centered on each other; the description beside them, 48px
+              // away, and all of it aligned to the top of the row (design lead, 2026-11-24).
               <li
                 key={item.id ?? `${item.title}-${i}`}
                 id={item.id}
-                className="group/row grid scroll-mt-24 grid-cols-[auto_minmax(0,1fr)] gap-x-5 gap-y-2 border-b border-(--web-line) py-7 sm:grid-cols-[auto_minmax(0,2fr)_minmax(0,3fr)]"
+                className="group/row grid scroll-mt-24 gap-y-4 border-b border-(--web-line) py-7 sm:grid-cols-2 sm:items-start sm:gap-x-12"
               >
-                <span className="row-span-2 pt-0.5 sm:row-span-1">
+                <div className="flex items-center gap-4">
                   {marker === "icon" && item.icon ? (
                     <IconTile name={item.icon} tone={tone} />
                   ) : (
                     <span className="font-mono text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
                   )}
-                </span>
-                <h3 className={cn(heading.card, "self-center")}>{item.title}</h3>
-                <div className="col-start-2 flex flex-col items-start gap-3 sm:col-start-3">
+                  <h3 className={heading.card}>{item.title}</h3>
+                </div>
+                <div className="flex flex-col items-start gap-3">
                   {item.text && <p className={type.small}>{item.text}</p>}
                   {item.link && (
                     <ArrowLink href={item.link.href} className="text-sm">
