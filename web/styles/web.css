@@ -392,6 +392,8 @@
    - --web-indigo-text, for text: the secondary.text role, indigo-400 on dark and 700 on light (800 until
      2026-11-24; text on white needs 700 or darker).
    - --web-link, for text links (design lead, 2026-11-22): --web-indigo-text. A link is .web-link (ArrowLink sets it).
+   - --web-link-hover (design lead, 2026-11-24): one step lighter on hover, so it visibly answers the pointer:
+     indigo-300 on dark (10:1), indigo-600 on light (4.9:1 or more on the light surfaces).
    The nodes where lines meet take an indigo ring and the active one fills with it. data-web-indigo="off" keeps the
    nodes and links neutral, to compare. */
 [data-web],
@@ -402,6 +404,7 @@
   --web-indigo: var(--qd-color-indigo-400);
   --web-indigo-text: var(--qd-color-secondary-text);
   --web-link: var(--web-indigo-text);
+  --web-link-hover: var(--qd-color-indigo-300);
   --web-node: color-mix(in oklab, var(--web-indigo) 60%, var(--web-line-strong));
 }
 [data-web][data-theme="light"],
@@ -410,12 +413,14 @@
   --web-indigo: var(--qd-color-indigo-600);
   --web-indigo-text: var(--qd-color-secondary-text);
   --web-link: var(--web-indigo-text);
+  --web-link-hover: var(--qd-color-indigo-600);
   --web-node: color-mix(in oklab, var(--web-indigo) 55%, var(--web-line-strong));
 }
 [data-web-indigo="off"],
 [data-web-indigo="off"] [data-theme] {
   --web-node: var(--web-line-strong);
   --web-link: var(--foreground);
+  --web-link-hover: var(--foreground);
 }
 /* The selected pill in a row of tabs or a toggle (a code panel's language, a chart's option, grid or list), design lead,
    2026-11-22: a clear fill that stands out on a card, neutral-800 on dark and neutral-100 on light, with the text
@@ -470,7 +475,35 @@
   color: var(--web-link);
 }
 .web-link:hover {
+  color: var(--web-link-hover);
   text-decoration-line: underline;
+}
+/* ArrowLink's chevron becomes an arrow on hover and keyboard focus (design lead, 2026-11-24): the chevron slides 3
+   units right on its 24-unit grid and a shaft fades in and grows from its tip. 200ms, easing out; for reduced motion
+   it changes without moving. */
+.web-arrow-head,
+.web-arrow-shaft {
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.web-arrow-shaft {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: 17.5px 12px;
+}
+.web-arrow-link:is(:hover, :focus-visible) .web-arrow-head {
+  transform: translateX(3px);
+}
+.web-arrow-link:is(:hover, :focus-visible) .web-arrow-shaft {
+  opacity: 1;
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .web-arrow-head,
+  .web-arrow-shaft {
+    transition: none;
+  }
 }
 .web-link-quiet:hover {
   color: var(--web-link);

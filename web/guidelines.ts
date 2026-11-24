@@ -85,7 +85,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Links are indigo",
-        text: "Text links take secondary.text: indigo-400 on dark, indigo-700 on light (800 until 2026-11-24), underlined on hover (the .web-link class, and ArrowLink for \"Read more >\" links). A link that reads as text, like a card's title, keeps the text color and turns indigo on hover (.web-link-quiet). Menus and the footer keep their own hover. Calls to action are buttons, never links.",
+        text: "Text links take secondary.text: indigo-400 on dark, indigo-700 on light (800 until 2026-11-24), underlined on hover and one step lighter, so the hover shows: indigo-300 on dark, indigo-600 on light (2026-11-24) (the .web-link class, and ArrowLink for \"Read more >\" links). ArrowLink's chevron is as heavy as the text (a 0.116em stroke, Mona Sans Medium's stem) and 1em in size, and on hover it slides right and gains a shaft, a chevron becoming an arrow, in 200ms (2026-11-24). A link that reads as text, like a card's title, keeps the text color and turns indigo on hover (.web-link-quiet). Menus and the footer keep their own hover. Calls to action are buttons, never links.",
         decided: "Design lead, 2026-11-22 and 2026-11-24",
         source: "web/styles/web.css",
       },
