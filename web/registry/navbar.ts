@@ -30,6 +30,30 @@ export const navbar = defineSection<NavbarProps>({
       frameMinHeight: 480,
     },
     {
+      id: "docs-card",
+      name: "Docs: feature card",
+      description: "The Developers menu with Documentation as a feature card at the panel's start: its big mark, description, Getting Started links and Read the Docs.",
+      props: { variant: "full", menus, ...navActions, openMenu: "Developers", highlightStyle: "card" },
+      frameMinHeight: 560,
+      proposal: "Documentation is the most important part of the site for developers, so it gets its own space and a big mark instead of one line in a list. After Lululemon's and Hers' menus, whose side card carries a large visual.",
+    },
+    {
+      id: "docs-band",
+      name: "Docs: top band",
+      description: "The Developers menu with Documentation as a band across the top: the mark, title and description, its links as chips, the groups below.",
+      props: { variant: "full", menus, ...navActions, openMenu: "Developers", highlightStyle: "band" },
+      frameMinHeight: 560,
+      proposal: "Documentation reads first, across the whole panel, before the rest of the menu. After Slack API's docs menu, which opens with a header row for its guides and docs.",
+    },
+    {
+      id: "docs-hub",
+      name: "Docs: hub column",
+      description: "The Developers menu with Documentation as a column of its own on a tray: its Getting Started links and a grid of the client libraries.",
+      props: { variant: "full", menus, ...navActions, openMenu: "Developers", highlightStyle: "hub" },
+      frameMinHeight: 560,
+      proposal: "Documentation becomes a small hub inside the menu, with the quickstarts and a chip per client library. After Codecademy's Docs, which opens its own space with a chip per language.",
+    },
+    {
       id: "minimal",
       name: "Minimal",
       description: "The logo, Log in and Start Free, for landing pages that keep the reader on one action.",
@@ -67,6 +91,7 @@ export const navbar = defineSection<NavbarProps>({
   },
   fields: [
     { prop: "sticky", label: "Sticky", kind: "boolean" },
+    { prop: "highlightStyle", label: "Docs highlight", kind: "select", options: [{ value: "card", label: "Feature card" }, { value: "band", label: "Top band" }, { value: "hub", label: "Hub column" }] },
     { prop: "markStyle", label: "Product marks", kind: "select", options: [{ value: "halftone", label: "Halftone" }, { value: "tones", label: "Tones" }, { value: "outline", label: "Outline" }, { value: "matrix", label: "Matrix" }] },
   ],
 })

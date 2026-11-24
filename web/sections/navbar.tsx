@@ -28,7 +28,8 @@ import {
 } from "@qdrant/design-system/components/ui/sheet"
 import { cn } from "@qdrant/design-system/lib/utils"
 
-import type { Link, Menu, MenuGroup } from "../content/site"
+import type { Link, Menu, MenuGroup, MenuHighlight } from "../content/site"
+import { ArrowLink } from "../lib/arrow-link"
 import { HexIcon, type HexStyle } from "../lib/hex-icon"
 import { Icon } from "../lib/icon"
 import { toneAt } from "../lib/tone"
@@ -50,6 +51,12 @@ export type NavbarProps = SectionProps & {
   sticky?: boolean
   // How the products' marks are drawn in the menu's special section (exploring; matrix, design lead, 2026-11-24).
   markStyle?: HexStyle
+  // How a menu's highlight (the Developers menu's Documentation) takes its own space (exploring, design lead,
+  // 2026-11-24): card, a feature card at the panel's side; band, a band across the top; hub, a column of its own
+  // with its quickstarts and client libraries.
+  highlightStyle?: "card" | "band" | "hub"
+  // A menu open from the start, for previews (the studio's canvas and docs).
+  openMenu?: string
 }
 
 // The site's top menu (2026-11-21). From lg, each menu opens a panel of columns: a mono group label over items
@@ -65,6 +72,8 @@ export function Navbar({
   featured,
   sticky,
   markStyle = "matrix",
+  highlightStyle = "card",
+  openMenu,
   theme,
   surface,
   pattern,
@@ -115,11 +124,12 @@ export function Navbar({
           // panel inside has its own line (design lead, 2026-11-23).
           popupClassName="rounded-[calc(var(--radius-xl)+6px)] bg-[linear-gradient(var(--web-tray),var(--web-tray))] ring-(--web-line)"
           className="hidden lg:flex"
+          defaultValue={openMenu}
         >
           <NavigationMenuList className="gap-1">
             {shown.map((menu, i) =>
               menu.groups ? (
-                <NavigationMenuItem key={menu.label}>
+                <NavigationMenuItem key={menu.label} value={menu.label}>
                   <NavigationMenuTrigger className="text-sm">
                     {menu.label}
                   </NavigationMenuTrigger>
@@ -128,6 +138,8 @@ export function Navbar({
                       groups={menu.groups}
                       featured={i === 0 ? featured : undefined}
                       markStyle={markStyle}
+                      highlight={menu.highlight}
+                      highlightStyle={highlightStyle}
                     />
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -213,7 +225,12 @@ function FeatureItem({
         )}
       >
         {(item.mark || item.icon) && (
-          <HexIcon mark={item.mark} name={item.icon} variant={markStyle} className="size-9" />
+          <HexIcon
+            mark={item.mark}
+            name={item.icon}
+            variant={markStyle}
+            className="size-9"
+          />
         )}
       </span>
       <span className="flex min-w-0 flex-col gap-1 pt-0.5">
@@ -239,92 +256,122 @@ function FeatureItem({
 // its columns, with a hairline between groups. An item is its icon, bare and neutral (no tile, no color family; it
 // turns to the text color on hover), its label and an optional tag. The panel has the tray's inner line.
 function MegaPanel({
-  groups,
+  groups: allGroups,
   featured,
   markStyle,
+  highlight,
+  highlightStyle = "card",
 }: {
   groups: MenuGroup[]
   featured?: NavbarProps["featured"]
   markStyle: HexStyle
+  highlight?: MenuHighlight
+  highlightStyle?: NavbarProps["highlightStyle"]
 }) {
+  // The highlighted item has its own space, so it leaves its group's list.
+  const groups = highlight
+    ? allGroups.map((group) => ({
+        ...group,
+        items: group.items.filter((item) => item.href !== highlight.href),
+      }))
+    : allGroups
+  const band = highlight && highlightStyle === "band"
   return (
-    <div className="flex h-full gap-2 rounded-xl border border-(--web-line) bg-popover p-2">
-      <div className="flex divide-x divide-(--web-line,var(--border))">
-        {groups.map((group, i) => (
-          <div
-            key={group.title ?? i}
-            className="flex flex-col gap-2 px-4 py-3 first:pl-2 last:pr-2"
-          >
-            {group.title && (
-              <p className="px-3 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
-                {group.title}
-              </p>
-            )}
-            {group.feature ? (
-              // One grid, filled column by column, so the rows line up across columns however long a description is.
-              <ul
-                className="grid grid-flow-col grid-cols-[repeat(2,22rem)] gap-x-2 gap-y-0.5"
-                style={{
-                  gridTemplateRows: `repeat(${Math.ceil(group.items.length / 2)}, auto)`,
-                }}
-              >
-                {group.items.map((item, index) => (
-                  <li key={item.label} className="flex">
-                    <FeatureItem item={item} index={index} markStyle={markStyle} />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="flex gap-2">
-                {columnsOf(group.items).map((column, c) => (
-                  <ul key={c} className="flex min-w-56 flex-col gap-0.5">
-                    {column.map((item) => (
-                      <li key={item.label}>
-                        <NavigationMenuLink
-                          href={item.href}
-                          className="group/item gap-3 p-3 text-sm"
-                        >
-                          <Icon
-                            name={item.icon}
-                            className="size-4 shrink-0 text-muted-foreground transition-colors group-hover/item:text-foreground group-focus-visible/item:text-foreground"
-                          />
-                          <span className="flex-1 whitespace-nowrap">
-                            {item.label}
-                          </span>
-                          {item.tag && (
-                            <Badge variant="outline" className="font-mono">
-                              {item.tag}
-                            </Badge>
-                          )}
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      {featured && (
-        <Plate
-          as="a"
-          href={featured.link.href}
-          className="flex w-64 flex-col justify-between gap-6 rounded-lg p-4 text-sm outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)"
-        >
-          {featured.tag && (
-            <Badge variant="outline" className="font-mono">
-              {featured.tag}
-            </Badge>
-          )}
-          <span className="flex flex-col gap-2">
-            <span className="font-medium text-foreground">
-              {featured.title}
-            </span>
-            <span className="text-(--web-link)">{featured.link.label}</span>
-          </span>
-        </Plate>
+    <div
+      className={cn(
+        "flex h-full gap-2 rounded-xl border border-(--web-line) bg-popover p-2",
+        band && "flex-col"
       )}
+    >
+      {highlight && (
+        <Highlight
+          item={highlight}
+          variant={highlightStyle}
+          markStyle={markStyle}
+        />
+      )}
+      <div className="flex gap-2">
+        <div className="flex divide-x divide-(--web-line,var(--border))">
+          {groups.map((group, i) => (
+            <div
+              key={group.title ?? i}
+              className="flex flex-col gap-2 px-4 py-3 first:pl-2 last:pr-2"
+            >
+              {group.title && (
+                <p className="px-3 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
+                  {group.title}
+                </p>
+              )}
+              {group.feature ? (
+                // One grid, filled column by column, so the rows line up across columns however long a description is.
+                <ul
+                  className="grid grid-flow-col grid-cols-[repeat(2,22rem)] gap-x-2 gap-y-0.5"
+                  style={{
+                    gridTemplateRows: `repeat(${Math.ceil(group.items.length / 2)}, auto)`,
+                  }}
+                >
+                  {group.items.map((item, index) => (
+                    <li key={item.label} className="flex">
+                      <FeatureItem
+                        item={item}
+                        index={index}
+                        markStyle={markStyle}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="flex gap-2">
+                  {columnsOf(group.items).map((column, c) => (
+                    <ul key={c} className="flex min-w-56 flex-col gap-0.5">
+                      {column.map((item) => (
+                        <li key={item.label}>
+                          <NavigationMenuLink
+                            href={item.href}
+                            className="group/item gap-3 p-3 text-sm"
+                          >
+                            <Icon
+                              name={item.icon}
+                              className="size-4 shrink-0 text-muted-foreground transition-colors group-hover/item:text-foreground group-focus-visible/item:text-foreground"
+                            />
+                            <span className="flex-1 whitespace-nowrap">
+                              {item.label}
+                            </span>
+                            {item.tag && (
+                              <Badge variant="outline" className="font-mono">
+                                {item.tag}
+                              </Badge>
+                            )}
+                          </NavigationMenuLink>
+                        </li>
+                      ))}
+                    </ul>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        {featured && (
+          <Plate
+            as="a"
+            href={featured.link.href}
+            className="flex w-64 flex-col justify-between gap-6 rounded-lg p-4 text-sm outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)"
+          >
+            {featured.tag && (
+              <Badge variant="outline" className="font-mono">
+                {featured.tag}
+              </Badge>
+            )}
+            <span className="flex flex-col gap-2">
+              <span className="font-medium text-foreground">
+                {featured.title}
+              </span>
+              <span className="text-(--web-link)">{featured.link.label}</span>
+            </span>
+          </Plate>
+        )}
+      </div>
     </div>
   )
 }
@@ -424,5 +471,144 @@ function MobileMenu({
         </div>
       </SheetContent>
     </Sheet>
+  )
+}
+
+// A menu's highlight (design lead, 2026-11-24, exploring), one item given its own space, in three layouts:
+// - card: a feature card at the panel's start, its big mark, title, description, Getting Started links and Read
+//   the Docs (after Lululemon's and Hers' menus, whose side card carries a large visual).
+// - band: a band across the top of the panel, the mark, title and description on the left and its links as chips on
+//   the right, the menu's groups below it (after Slack API's docs menu, which opens with a header row).
+// - hub: a column of its own on a tray, with its Getting Started links and a grid of the client libraries (after
+//   Codecademy's Docs, which opens its own space with a chip per language).
+function Highlight({
+  item,
+  variant = "card",
+  markStyle,
+}: {
+  item: MenuHighlight
+  variant?: NavbarProps["highlightStyle"]
+  markStyle: HexStyle
+}) {
+  const mark = (size: "md" | "lg") => (
+    <span
+      className={cn(
+        "web-icon-tile web-tone-indigo grid shrink-0 place-items-center overflow-hidden",
+        size === "lg" ? "size-16 rounded-2xl" : "size-14 rounded-xl"
+      )}
+    >
+      <HexIcon
+        mark={item.mark}
+        variant={markStyle}
+        className={size === "lg" ? "size-12" : "size-10"}
+      />
+    </span>
+  )
+  const title = (
+    <NavigationMenuLink
+      href={item.href}
+      className="w-fit p-0 text-[17px] leading-snug font-medium text-foreground hover:bg-transparent hover:text-(--web-link)"
+    >
+      {item.label}
+    </NavigationMenuLink>
+  )
+  const description = (
+    <p className="text-[13px] leading-snug text-muted-foreground">
+      {item.description}
+    </p>
+  )
+  const label = (text: string) => (
+    <p className="font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
+      {text}
+    </p>
+  )
+  const quickLinks = (
+    <ul className="flex flex-col gap-0.5">
+      {item.start.map((link) => (
+        <li key={link.label}>
+          <NavigationMenuLink href={link.href} className="px-2 py-1.5 text-sm">
+            {link.label}
+          </NavigationMenuLink>
+        </li>
+      ))}
+    </ul>
+  )
+
+  if (variant === "band") {
+    return (
+      <div className="web-tray flex items-center gap-5 rounded-lg p-4">
+        {mark("md")}
+        <div className="flex max-w-md min-w-0 flex-col gap-1">
+          {title}
+          {description}
+        </div>
+        <ul className="ml-auto flex max-w-sm flex-wrap justify-end gap-1.5">
+          {[...item.start, ...item.sections].map((link) => (
+            <li key={link.label}>
+              <NavigationMenuLink
+                href={link.href}
+                className="rounded-md border border-(--web-line) bg-popover px-2.5 py-1 text-xs whitespace-nowrap"
+              >
+                {link.label}
+              </NavigationMenuLink>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  if (variant === "hub") {
+    return (
+      <div className="web-tray flex w-80 shrink-0 flex-col gap-4 rounded-lg p-4">
+        <div className="flex items-center gap-4">
+          {mark("md")}
+          {title}
+        </div>
+        {description}
+        <div className="flex flex-col gap-1.5">
+          {label("Getting Started")}
+          {quickLinks}
+        </div>
+        <div className="flex flex-col gap-2">
+          {label("Client Libraries")}
+          <ul className="grid grid-cols-3 gap-1.5">
+            {item.libraries.map((lib) => (
+              <li key={lib.label}>
+                <NavigationMenuLink
+                  href={lib.href}
+                  className="justify-center rounded-md border border-(--web-line) bg-popover px-2 py-1.5 font-mono text-xs"
+                >
+                  {lib.label}
+                </NavigationMenuLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <ArrowLink href={item.action.href} className="text-sm">
+          {item.action.label}
+        </ArrowLink>
+      </div>
+    )
+  }
+
+  return (
+    <Plate
+      as="div"
+      className="flex w-72 shrink-0 flex-col gap-4 rounded-lg p-5"
+    >
+      {mark("lg")}
+      <div className="flex flex-col gap-1.5">
+        {title}
+        {description}
+      </div>
+      <div className="flex flex-col gap-1.5">
+        {label("Getting Started")}
+        {quickLinks}
+      </div>
+      <ArrowLink href={item.action.href} className="mt-auto text-sm">
+        {item.action.label}
+      </ArrowLink>
+    </Plate>
   )
 }

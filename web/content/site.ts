@@ -8,8 +8,50 @@ export type MenuItem = Link & { tag?: string; icon?: string; description?: strin
 // `feature` shows a group as the menu's special section (design lead, 2026-11-24): larger icons drawn in hexagons,
 // larger labels and each item's description.
 export type MenuGroup = { title?: string; feature?: boolean; items: MenuItem[] }
+// A menu's highlight: one item given its own space in the panel, with a big mark, its description and links into
+// it (design lead, 2026-11-24, exploring; the Developers menu's Documentation).
+export type MenuHighlight = Link & {
+  mark: string
+  description: string
+  // Getting Started links, then the sections.
+  start: Link[]
+  sections: Link[]
+  libraries: Link[]
+  action: Link
+}
+
 // `hidden` keeps a menu out of the bar and the phone sheet while keeping its copy here.
-export type Menu = ({ label: string; groups: MenuGroup[] } | (Link & { groups?: undefined })) & { hidden?: boolean }
+export type Menu = ({ label: string; groups: MenuGroup[]; highlight?: MenuHighlight } | (Link & { groups?: undefined })) & {
+  hidden?: boolean
+}
+
+// Documentation, from qdrant.tech/documentation (read 2026-11-24), word for word: the page's own description, its
+// Getting Started quickstarts, two of its sections (API Reference is in the menu already), and the client libraries (content/platform.ts, as linked
+// there). "Read the Docs" is the site's own label for it.
+export const docsHighlight: MenuHighlight = {
+  label: "Documentation",
+  href: "/documentation/",
+  mark: "docs",
+  description:
+    "Official Qdrant documentation for vector search and retrieval — quickstarts, deployment guides, integrations, and references for self-hosted and Qdrant Cloud.",
+  start: [
+    { label: "Cloud Quickstart", href: "/documentation/cloud-quickstart/" },
+    { label: "Local Quickstart", href: "/documentation/quickstart/" },
+  ],
+  sections: [
+    { label: "Deploy", href: "/documentation/deploy-intro/" },
+    { label: "Ecosystem", href: "/documentation/ecosystem/" },
+  ],
+  libraries: [
+    { label: "Python", href: "https://python-client.qdrant.tech/" },
+    { label: "TypeScript", href: "https://github.com/qdrant/qdrant-js" },
+    { label: "Rust", href: "https://github.com/qdrant/rust-client" },
+    { label: "Go", href: "https://github.com/qdrant/go-client" },
+    { label: ".NET", href: "https://github.com/qdrant/qdrant-dotnet" },
+    { label: "Java", href: "https://github.com/qdrant/java-client" },
+  ],
+  action: { label: "Read the Docs", href: "/documentation/" },
+}
 
 export const announcement = {
   tag: "1.20",
@@ -69,6 +111,7 @@ export const menus: Menu[] = [
   },
   {
     label: "Developers",
+    highlight: docsHighlight,
     groups: [
       {
         title: "Build",
