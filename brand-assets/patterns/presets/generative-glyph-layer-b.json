@@ -19,7 +19,7 @@
       "colors": [
         "{color.amaranth.800}",
         "{color.amaranth.600}",
-        "{color.amaranth.400}"
+        "{color.amaranth.200}"
       ],
       "backdrop": null
     },
@@ -27,7 +27,7 @@
       "name": "Teal",
       "colors": [
         "{color.teal.800}",
-        "{color.teal.500}",
+        "{color.teal.600}",
         "{color.teal.200}"
       ],
       "backdrop": null

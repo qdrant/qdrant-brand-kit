@@ -348,13 +348,13 @@
           }
         }
       },
-      "500": {
+      "600": {
         "$type": "color",
-        "$value": "#00B9A4",
-        "$description": "From color.teal.500 (primitives/colors).",
+        "$value": "#009487",
+        "$description": "From color.teal.600 (primitives/colors).",
         "$extensions": {
           "qdrant": {
-            "from": "color.teal.500"
+            "from": "color.teal.600"
           }
         }
       },
@@ -422,13 +422,13 @@
       }
     },
     "amaranth": {
-      "400": {
+      "200": {
         "$type": "color",
-        "$value": "#F67186",
-        "$description": "From color.amaranth.400 (primitives/colors).",
+        "$value": "#FACFD5",
+        "$description": "From color.amaranth.200 (primitives/colors).",
         "$extensions": {
           "qdrant": {
-            "from": "color.amaranth.400"
+            "from": "color.amaranth.200"
           }
         }
       },
