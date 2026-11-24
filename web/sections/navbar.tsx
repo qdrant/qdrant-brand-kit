@@ -269,8 +269,8 @@ function MegaPanel({
   highlight?: MenuHighlight
   highlightStyle?: NavbarProps["highlightStyle"]
 }) {
-  // The highlighted item has its own space, so it leaves its group's list. The tile sits in that group, at the bottom
-  // of its column; the other layouts sit at the panel's start or top.
+  // The highlighted item has its own space, so it leaves its group's list. The tile sits in that group, at the top of
+  // its column; the other layouts sit at the panel's start or top.
   const tile = highlight && highlightStyle === "tile"
   const homeGroup = highlight
     ? allGroups.find((group) =>
@@ -309,6 +309,13 @@ function MegaPanel({
                 <p className="px-3 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
                   {group.title}
                 </p>
+              )}
+              {tile && highlight && homeGroup?.title === group.title && (
+                <Highlight
+                  item={highlight}
+                  variant="tile"
+                  markStyle={markStyle}
+                />
               )}
               {group.feature ? (
                 // One grid, filled column by column, so the rows line up across columns however long a description is.
@@ -356,13 +363,6 @@ function MegaPanel({
                     </ul>
                   ))}
                 </div>
-              )}
-              {tile && highlight && homeGroup?.title === group.title && (
-                <Highlight
-                  item={highlight}
-                  variant="tile"
-                  markStyle={markStyle}
-                />
               )}
             </div>
           ))}
@@ -531,7 +531,7 @@ const docsDrift = generativePattern({
 //   the right, the menu's groups below it (after Slack API's docs menu, which opens with a header row).
 // - hub: a column of its own on a tray, with its Getting Started links and a grid of the client libraries (after
 //   Codecademy's Docs, which opens its own space with a chip per language).
-// - tile: only the main link, as a compact card at the bottom of its group's column (under its other links), with
+// - tile: only the main link, as a compact card at the top of its group's column (above its other links), with
 //   Pixel drift moving quietly on its right side (after the design lead's reference: dark resource tiles with a pixel accent in a corner).
 function Highlight({
   item,
@@ -591,17 +591,18 @@ function Highlight({
     return (
       <Plate
         as="div"
-        className="group/tile relative isolate flex min-h-11 flex-1 overflow-hidden rounded-lg"
+        className="group/tile relative isolate flex h-11 shrink-0 overflow-hidden rounded-lg"
       >
-        {/* The whole tile is the link, with the menu's links' hover; its label sits at the top, in line with the
-            column's rows. */}
+        {/* The whole tile is the link, with the menu's links' hover; its label and arrow turn indigo on hover, and the arrow is
+            as heavy as the label (2.75 on Lucide's grid, Mona Sans Medium's stem, like ArrowLink; design lead, 2026-11-24). The label sits at the top, in line with the column's rows. */}
         <NavigationMenuLink
           href={item.href}
-          className="z-0 w-full items-start gap-1.5 rounded-lg p-3 text-sm font-medium text-foreground"
+          className="group/doc z-0 w-full items-center gap-1.5 rounded-lg p-3 text-sm font-medium text-foreground hover:text-(--web-link) focus-visible:text-(--web-link)"
         >
           {item.label}
           <ArrowUpRight
-            className="size-3.5 text-muted-foreground"
+            strokeWidth={2.75}
+            className="web-icon-text size-[1em] shrink-0 text-muted-foreground transition-colors group-hover/doc:text-(--web-link) group-focus-visible/doc:text-(--web-link)"
             aria-hidden
           />
         </NavigationMenuLink>

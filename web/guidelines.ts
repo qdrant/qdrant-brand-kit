@@ -156,7 +156,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Icon lines are pixel perfect",
-        text: "An icon's line is always 1px, 1.5px or 2px, by its size, never a fraction from scaling: 1px for 12, 14, 16 and 18px icons, 1.5px for 20, 24 and 32px, 2px for 40px and above.",
+        text: "An icon's line is always 1px, 1.5px or 2px, by its size, never a fraction from scaling: 1px for 12, 14, 16 and 18px icons, 1.5px for 20, 24 and 32px, 2px for 40px and above. An icon set in a line of text, like the Documentation tile's arrow, follows the text instead: its stroke scales with the text, as heavy as the letters (.web-icon-text, 2026-11-24).",
         decided: "Design lead, 2026-11-22",
         source: "web/styles/web.css",
       },

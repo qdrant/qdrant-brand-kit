@@ -56,7 +56,7 @@ export const navbar = defineSection<NavbarProps>({
     {
       id: "docs-tile",
       name: "Docs: pattern tile",
-      description: "The Developers menu with Documentation as a compact tile at the bottom of the Build column, under API Reference, GitHub and Blog: only its main link, with Pixel drift moving quietly on its right.",
+      description: "The Developers menu with Documentation as a compact tile at the top of the Build column, above API Reference, GitHub and Blog: only its main link, with Pixel drift moving quietly on its right.",
       props: { variant: "full", menus, ...navActions, openMenu: "Developers", highlightStyle: "tile" },
       frameMinHeight: 480,
       proposal: "Documentation stands out through a living surface rather than a big icon or a paragraph: a compact tile where the marketing designer's Pixel drift pattern fills one corner and drifts slowly. After the design lead's reference: compact dark resource tiles with a pixel accent in a corner.",

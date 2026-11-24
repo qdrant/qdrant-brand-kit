@@ -356,6 +356,12 @@
     stroke-width: 1px;
   }
 }
+/* An icon set in a line of text (.web-icon-text, like the Documentation tile's arrow) follows the text instead: its
+   stroke scales with it, at the weight its own stroke-width gives (design lead, 2026-11-24). */
+[data-web] svg.lucide.web-icon-text * {
+  vector-effect: none;
+  stroke-width: inherit;
+}
 
 .web-icon-tile {
   background: var(--tone-bg);
