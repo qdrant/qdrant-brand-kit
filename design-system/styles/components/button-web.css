@@ -37,11 +37,11 @@
 
   /* The primary's flat fill: the context's accent (globals.css), amaranth for marketing and indigo for product.
      It has no inner highlight on the web (2026-11-15), so hover changes the fill to the accent's 700. Disabled
-     is the accent's 400, and focus a 2px ring in the accent at 40%, as in the approved button (button.css). */
+     is the accent's 400, and focus a 2px ring at 40% in indigo (`--ring`, design lead, 2026-11-24), on the website too. */
   --qd-ui-button-web-fill: var(--primary);
   --qd-ui-button-web-fill-hover: var(--qd-ui-accent-hover);
   --qd-ui-button-web-fill-disabled: var(--qd-ui-accent-muted);
-  --qd-ui-button-web-focus-ring: color-mix(in srgb, var(--qd-ui-accent) 40%, transparent);
+  --qd-ui-button-web-focus-ring: color-mix(in srgb, var(--ring) 40%, transparent);
 
   /* Raised surface (primary and secondary): a drop shadow and edges, from the theme blocks below. */
   --qd-ui-button-raised:

@@ -120,7 +120,7 @@
    surfaces: `secondary` and `muted` are the highlight (`--qd-ui-highlight`) and `accent` the hover
    (`--qd-ui-hover`). The page, cards (and the sidebar) and popovers are `--qd-ui-page`, `--qd-ui-card` and
    `--qd-ui-popover`: Hairline's neutrals, not the primitives' background roles, which creatives keep. All of
-   them by theme below; `primary` and `ring` are the context's accent. Values that differ by theme (the highlight and the edges) go in the theme blocks below,
+   them by theme below; `primary` is the context's accent and `ring` is always indigo. Values that differ by theme (the highlight and the edges) go in the theme blocks below,
    never here: a [data-context] inside a light section would reset them to dark. */
 :root,
 [data-theme],
@@ -139,7 +139,9 @@
   --muted-foreground: var(--qd-color-text-secondary);
   --accent: var(--qd-ui-hover);
   --accent-foreground: var(--qd-color-text-primary);
-  --ring: var(--qd-ui-accent);
+  /* Focus is indigo in every context (design lead, 2026-11-24): an amaranth ring on the website read like an error.
+     secondary is indigo-600 in both themes. */
+  --ring: var(--qd-color-secondary);
   /* Charts never use the brand colors, so they stand apart from the accent and the brand (DESIGN.md,
      2026-11-16): the dataviz roles after amaranth and indigo, in their order. */
   --chart-1: var(--qd-color-dataviz-3);

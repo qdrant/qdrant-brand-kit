@@ -102,6 +102,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "web/styles/web.css",
       },
       {
+        title: "Focus is indigo",
+        text: "Every focus ring and focused field on the website is indigo (indigo-600 at 30%, 40% on buttons), never amaranth: an amaranth ring next to a field reads like an error. It's the design system's ring in every context.",
+        decided: "Design lead, 2026-11-24",
+        source: "design-system/styles/globals.css (--ring)",
+      },
+      {
         title: "Diagrams take the palette color nearest to the Figma's",
         text: "By OKLab distance, through its --qd-color-* variable, never a hex. Fills, borders and dots use the dark theme's value; colored text and icons use the contrast steps above. Give every color a light value.",
         decided: "Design lead, 2026-11-16",
