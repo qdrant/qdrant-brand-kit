@@ -193,8 +193,8 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Nodes are hexagons, like the brandmark",
-        text: "Where lines meet, and before a kicker, a step or a tab, a small hexagon (7 by 8px) stands like the logo's brandmark, a point at the top and the bottom. Hollow, filled with the page's color over a line, and filled with indigo when active. Never a dot or another shape. Nodes are alive: they blink like a live readout, a hard step to 25% and back every 2s, each at its own offset (Juan, 2026-11-22), and hold still for reduced motion.",
-        decided: "Juan, 2026-11-22",
+        text: "Where lines meet, and before a kicker, a step or an item in a vertical list of tabs, a small hexagon (7 by 8px) stands like the logo's brandmark, a point at the top and the bottom. Hollow, filled with the page's color over a line, and filled with indigo when active. Never a dot or another shape. Nodes are alive: they blink like a live readout, a hard step to 25% and back every 2s, each at its own offset (Juan, 2026-11-22), and hold still for reduced motion. Never in a row of tabs, like tabs on a tray: the active tab's plate marks it (Juan, 2026-11-24).",
+        decided: "Juan, 2026-11-22 and 2026-11-24",
         source: "web/lib/node.tsx",
       },
       {

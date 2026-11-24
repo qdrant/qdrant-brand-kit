@@ -44,11 +44,10 @@ export function FeatureTabs({ header, items, layout = "vertical", theme, surface
                   aria-selected={on}
                   onClick={() => setActive(i)}
                   className={cn(
-                    "flex shrink-0 items-center gap-2.5 rounded-lg px-4 py-2 text-sm whitespace-nowrap outline-none focus-visible:underline",
+                    "shrink-0 rounded-lg px-4 py-2 text-sm whitespace-nowrap outline-none focus-visible:underline",
                     on ? "web-plate text-foreground" : "text-muted-foreground hover:text-foreground"
                   )}
                 >
-                  <Node solid active={on} />
                   {item.title}
                 </button>
               )
