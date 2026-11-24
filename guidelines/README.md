@@ -73,7 +73,7 @@ Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits
 | --- | --- | --- |
 | Color-Sliced-Pattern-A | Amaranth 975 → Amaranth 700, Indigo 975 → Indigo 700 | Its own slices, or one of the 5 approved stripes (`stripes: 0` to `4`) |
 | Color-Sliced-Pattern-B | Same as A (inherited) | Any Color-Sliced-A base (above) × letters: one of the 4 approved letter options (`letterOption: 0` to `3`), or any letter variation within the letter-layer rules (Pattern Studio terminal look through `fromStudioParams`, or `letters: n`) |
-| Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900 | Length 16–80, density 8–64, softness 32–64, all on the 8 grid; direction 0°, 96°, 124°, 144°, 160°, 288° or 320° |
+| Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900 | Length 16–80, density 8–64, softness 32–64, all on the 8 grid; direction 0°, 124°, 144°, 160°, 288° or 320° |
 | Motion-Streaks-Pattern-B | Same as A | Everything A allows × letter variations within the letter-layer rules |
 | Generative-Hexagon-Pattern | Background → Indigo 900, Background → Amaranth 900 | As is, or one of its approved variants (`variant: n`) |
 | Generative-Burst-Pattern | Same | As is, or one of its 13 line variants |
