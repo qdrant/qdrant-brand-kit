@@ -5,7 +5,7 @@
 // Errors (exit code 1): a preset that can't render, like a missing recipe, a token
 // that doesn't exist, or a missing mesh. Warnings: values off the 8 grid.
 
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { letterLayerProblems } from "../patterns/letter-variations.js";
 
 const read = (path) => JSON.parse(readFileSync(path, "utf8"));
@@ -13,6 +13,16 @@ const errors = [];
 const warnings = [];
 
 const tokens = read("tokens/placeholder.tokens.json");
+// The pattern tokens are named like the color primitives. primary, secondary,
+// neutral.white and neutral.black are legacy aliases for meshes stored in Design Lab only.
+const LEGACY = /color\.(primary|secondary)\.|color\.neutral\.(white|black)\b|^(primary|secondary|neutral\.white|neutral\.black)$/;
+for (const file of [...readdirSync("presets").map((f) => `presets/${f}`), ...readdirSync("meshes").map((f) => `meshes/${f}`)]) {
+  if (!file.endsWith(".json")) continue;
+  const text = readFileSync(file, "utf8");
+  const json = JSON.parse(text);
+  const legacy = text.match(/color\.(primary|secondary)\.[a-z0-9]+|color\.neutral\.(white|black)\b/) ?? (json.settings?.mesh?.palette ?? []).find((e) => LEGACY.test(e));
+  if (legacy) errors.push(`${file}: uses the legacy name ${legacy[0] ?? legacy}; use the color primitive's name (e.g. color.indigo.600)`);
+}
 const tokenExists = (path) => path.split(".").slice(1).reduce((node, key) => node?.[key], tokens.color)?.$value !== undefined;
 
 // Recipes registered in patterns/index.js.
@@ -72,7 +82,7 @@ for (const id of ids) {
     if (!p.settings?.tones?.[p.settings?.tone]) errors.push(`${where}: tone curve "${p.settings?.tone}" isn't in settings.tones`);
     const refs = looks.flatMap((look) => [...(look.colors ?? []), ...(look.backdrop ?? []).map((stop) => stop?.token ?? stop)]);
     for (const ref of [...refs, p.settings?.background]) {
-      if (typeof ref !== "string" || !/^\{.+\}$/.test(ref)) errors.push(`${where}: color ${ref} should be a token like {color.secondary.500}`);
+      if (typeof ref !== "string" || !/^\{.+\}$/.test(ref)) errors.push(`${where}: color ${ref} should be a token like {color.indigo.600}`);
       else if (!tokenExists(ref.slice(1, -1))) errors.push(`${where}: token ${ref} doesn't exist`);
     }
   } else if (p.meshGroup) {

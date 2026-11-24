@@ -5,19 +5,19 @@
   "figma": "https://www.figma.com/design/2u6KfDsYjibQuf9ji6lFBR/Qdrant-Brand-Design?node-id=23789-66977",
   "colorways": [
     {
-      "name": "Indigo",
+      "name": "Background → Indigo 900",
       "from": "color.background.default",
       "to": "color.indigo.900",
       "streak": "color.indigo.800"
     },
     {
-      "name": "Amaranth",
+      "name": "Background → Amaranth 900",
       "from": "color.background.default",
       "to": "color.amaranth.900",
       "streak": "color.amaranth.800"
     },
     {
-      "name": "Teal",
+      "name": "Background → Teal 900",
       "from": "color.background.default",
       "to": "color.teal.900",
       "streak": "color.teal.800"

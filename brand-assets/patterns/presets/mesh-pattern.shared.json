@@ -47,8 +47,8 @@
     "size": 1080,
     "grade": {
       "anchors": [
-        "{color.primary.500}",
-        "{color.secondary.500}"
+        "{color.amaranth.600}",
+        "{color.indigo.600}"
       ],
       "hueSnap": 100,
       "minSaturation": 45,
@@ -66,11 +66,25 @@
       "midtones": 0.6
     },
     "mesh": {
-      "$description": "Every mesh point is snapped to the closest token from this list: whole families, or single steps like neutral.950. No grays: light areas use pastel primary and secondary steps and white, dark areas use the deep violets, reds and neutral.950.",
+      "$description": "Every mesh point is snapped to the closest token from this list: whole families, or single steps like neutral.950. No grays: light areas use pastel amaranth and indigo steps and white, dark areas use the deep violets, reds and neutral.950. Named like the color primitives; the same steps the old primary and secondary families used, so meshes come out the same.",
       "palette": [
-        "primary",
-        "secondary",
-        "neutral.white",
+        "amaranth.50",
+        "amaranth.200",
+        "amaranth.300",
+        "amaranth.400",
+        "amaranth.500",
+        "amaranth.600",
+        "amaranth.700",
+        "amaranth.800",
+        "amaranth.900",
+        "indigo.100",
+        "indigo.200",
+        "indigo.400",
+        "indigo.600",
+        "indigo.700",
+        "indigo.800",
+        "indigo.900",
+        "neutral.0",
         "neutral.950"
       ]
     }

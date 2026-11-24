@@ -6,7 +6,7 @@
   "source": "Pattern Studio export, 1920 x 1080, transparent background",
   "colorways": [
     {
-      "name": "Red",
+      "name": "Amaranth",
       "colors": [
         "{color.amaranth.800}",
         "{color.amaranth.600}",
@@ -15,7 +15,7 @@
       "backdrop": null
     },
     {
-      "name": "Violet",
+      "name": "Indigo",
       "colors": [
         "{color.indigo.800}",
         "{color.indigo.600}",

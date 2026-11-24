@@ -56,14 +56,14 @@ The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patter
 
 ## 3. Red backgrounds
 
-- **Must: patterns are violet or red, never another color.** No teal or other colors in a pattern background, ever (decided 2026-11-11). Red only in its approved presets and colorways.
-- **Must:** violet is the default. A red pattern background (a red colorway, Hexagon-B, Dash-B) is only for creatives that need to **grab a lot of attention and be more impactful**.
-- **Ask:** never pick red on your own. Offer it, and use it only when the person says yes.
-- Everywhere else, red stays an accent (buttons, highlights), as [`primitives/colors/`](../primitives/colors/) says.
-- **Must: never red on red** (Vanesa, 2026-11-16). On a red pattern:
-  - where the logo sits on red, it's the **White** logo, never the red brandmark. On the masked part of a red pattern the logo sits on near-black neutral, so the usual **Dark** logo is fine there;
+- **Must: patterns are indigo or amaranth, never another color.** No teal or other colors in a pattern background, ever (decided 2026-11-11). Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
+- **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway, Hexagon-B, Dash-B) is only for creatives that need to **grab a lot of attention and be more impactful**.
+- **Ask:** never pick amaranth on your own. Offer it, and use it only when the person says yes.
+- Everywhere else, amaranth stays an accent (buttons, highlights), as [`primitives/colors/`](../primitives/colors/) says.
+- **Must: never amaranth on amaranth** (Vanesa, 2026-11-16). On an amaranth pattern:
+  - where the logo sits on amaranth, it's the **White** logo, never the red brandmark. On the masked part of an amaranth pattern the logo sits on near-black neutral, so the usual **Dark** logo is fine there;
   - the button goes **top-right, beside the logo** and at its height, on the dark part of the pattern, and Qbot (if any) sits below the text, cut by the bottom edge (section 6);
-  - the button keeps **3:1 or more against what's around it**. If it can't, choose another pattern. This 3:1 rule is for red patterns only: on violet patterns and the light card the button stays as it is.
+  - the button keeps **3:1 or more against what's around it**. If it can't, choose another pattern. This 3:1 rule is for amaranth patterns only: on indigo patterns and the light card the button stays as it is.
 
 ## 4. How the pattern covers the canvas
 
@@ -82,14 +82,14 @@ Rules:
 
   | `textMask` | Patterns | What to do |
   | --- | --- | --- |
-  | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Medium violet) | Mask, 40% behind the text |
-  | `none` | Color-Refracted-Pattern-A, Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Light violet, Red), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Medium violet) | No mask: text sits straight on the pattern |
-  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Dark violet), Generative-Glyph-Pattern-B (Light violet), Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
+  | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Neutral 950 → Indigo 600) | Mask, 40% behind the text |
+  | `none` | Color-Refracted-Pattern-A, Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Neutral 950 → Indigo 600) | No mask: text sits straight on the pattern |
+  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Neutral 950 → Indigo 900), Generative-Glyph-Pattern-B (Indigo 600 → Indigo 400), Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
   | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
 
-- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (Color-Refracted-Pattern-A, Primary 100 → Secondary 400, marked `textColor: "dark"`), use **dark text and the Light logo**, no mask (Vanesa, 2026-11-16).
+- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (Color-Refracted-Pattern-A, Amaranth 200 → Indigo 400, marked `textColor: "dark"`), use **dark text and the Light logo**, no mask (Vanesa, 2026-11-16).
 - **Must: a contrast fail is a hard stop.** A creative whose text fails the contrast check is never shown, recommended or delivered. On a `none` pattern, mask it at 40% if the pattern is dark enough not to turn grey; otherwise pick another colorway or pattern (Vanesa, 2026-11-16).
 
 - **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to 40% behind the text, with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). The LinkedIn profile cover has its heading on the right, so its fade runs from the right (`.qd-pattern-mask--from-right`, [`guidelines/layout/`](layout/)). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`guidelines/layout/`](layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself. **On every shape the mask is one smooth, continuous gradient across the whole canvas: it starts gently on the text side and builds to full strength on the far side. You must not be able to tell the mask and the pattern are two layers: never a hold-then-fade, a visible edge or a cut** (decided 2026-11-11). If the pattern is calm enough for the text, use no mask at all.
