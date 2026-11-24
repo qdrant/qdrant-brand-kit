@@ -11,3 +11,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Pattern | Combination | Decision | Date |
 | --- | --- | --- | --- |
 | Color-Refracted-A | #1 and #2 (both colorways) | On hold: not sure about this pattern yet | 2026-11-24 |
+| Generative-Hexagon-C | All | Hexagons on the Motion Streaks gradient without streaks; colorways Indigo, Amaranth, Teal (on hold), hexagons in 800/600/200 | 2026-11-24 |
