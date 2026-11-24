@@ -235,7 +235,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Cards are plates",
-        text: "Cards and panels are a touch lighter at the top, with a 1px inner highlight and a soft shadow on light. A simple card, an icon with a title and a line of text (feature, value, channel and contact cards), has no inner highlight, so its top shows one line, not two (Plate simple, 2026-11-24). Media sit in a tray, a framed holder. Rows of facts sit in a hairline grid.",
+        text: "Cards and panels are a touch lighter at the top, with a 1px inner highlight and a soft shadow on light. Their edge is one step under the strong line: the text color at 11% on dark (about neutral-850) and 10% on light (about neutral-100) (--web-plate-edge, 2026-11-24). A simple card, an icon with a title and a line of text (feature, value, channel and contact cards), has no inner highlight, so its top shows one line, not two (Plate simple, 2026-11-24). Media sit in a tray, a framed holder. Rows of facts sit in a hairline grid.",
         decided: "Design lead, 2026-11-21 and 2026-11-24",
         source: "web/lib/plate.tsx",
       },

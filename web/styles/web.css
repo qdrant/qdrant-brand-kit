@@ -63,6 +63,8 @@
   --web-line-mix: 8%;
   --web-line: color-mix(in oklab, var(--foreground) 8%, transparent);
   --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
+  /* Cards' edge (design lead, 2026-11-24): one step under the strong line, about neutral-850 over a card. */
+  --web-plate-edge: color-mix(in oklab, var(--foreground) 11%, transparent);
   --web-plate-top: color-mix(in oklab, var(--foreground) 2%, var(--card));
   --web-highlight: color-mix(in oklab, var(--foreground) 5%, transparent);
   --web-plate-shadow: 0 0 0 0 transparent;
@@ -74,6 +76,8 @@
   --web-line-mix: 9%;
   --web-line: color-mix(in oklab, var(--foreground) 9%, transparent);
   --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
+  /* About neutral-100 over a white card, one step under the strong line's neutral-200. */
+  --web-plate-edge: color-mix(in oklab, var(--foreground) 10%, transparent);
   --web-plate-top: var(--card);
   --web-highlight: rgb(255 255 255 / 0.9);
   --web-plate-shadow: 0 1px 2px rgb(7 11 17 / 0.04), 0 4px 12px -4px rgb(7 11 17 / 0.05);
@@ -188,7 +192,7 @@
 
 .web-plate {
   background: linear-gradient(to bottom, var(--web-plate-top), var(--card) 70%);
-  border: 1px solid var(--web-line-strong);
+  border: 1px solid var(--web-plate-edge);
   box-shadow: inset 0 1px 0 var(--web-highlight), var(--web-plate-shadow);
 }
 .web-tray {
