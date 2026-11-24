@@ -11,6 +11,7 @@ import { makeFrame } from "./effects.js";
 export const MESH_LAYOUTS = {
   diagonal: (u, v) => (u + v) / 2, // light toward the bottom right (E25)
   "diagonal-up": (u, v) => (u + 1 - v) / 2, // light toward the top right (E26)
+  "vertical": (u, v) => v, // Vertical, light at the bottom (E27)
 };
 
 // color = { from, to } token references from the colorway; the family is read from them

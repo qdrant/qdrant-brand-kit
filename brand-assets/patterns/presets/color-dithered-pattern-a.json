@@ -76,6 +76,10 @@
       {
         "name": "Diagonal, light toward the top right (was exploration E26)",
         "layout": "diagonal-up"
+      },
+      {
+        "name": "Vertical, light at the bottom (was exploration E27)",
+        "layout": "vertical"
       }
     ]
   }

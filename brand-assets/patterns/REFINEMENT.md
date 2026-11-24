@@ -47,3 +47,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Generative-Hexagon | Remaining proposals (P4, P5, P13, P14, P16, P17, P19, P20, P22, P23, P24, P25, P26, P29, P30, P31, P32) | Not approved; the proposals row is closed | 2026-11-24 |
 | Color-Dithered-Pattern-A (new) | Exploration E25 | Approved: new pattern, the dither of Mesh-Dithered-A on a mesh of the family's five dark steps (diagonal), in Indigo, Amaranth and Teal (on hold) | 2026-11-24 |
 | Color-Dithered-Pattern-A | Exploration E26 (diagonal, light top right) | Approved; added as variant 0 in every colorway | 2026-11-24 |
+| Color-Dithered-Pattern-A | Exploration E27 (Vertical, light at the bottom) | Approved; added as variant 1 in every colorway | 2026-11-24 |
