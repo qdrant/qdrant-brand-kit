@@ -20,6 +20,7 @@
 
 import * as colorRefracted from "./color-refracted-pattern.js";
 import * as colorSliced from "./color-sliced-pattern.js";
+import * as colorDithered from "./color-dithered-pattern.js";
 import * as meshRefracted from "./mesh-refracted-pattern.js";
 import * as meshSliced from "./mesh-sliced-pattern.js";
 import * as meshDithered from "./mesh-dithered-pattern.js";
@@ -40,6 +41,7 @@ export { loadPreset };
 export const recipes = {
   "color-refracted-pattern": colorRefracted,
   "color-sliced-pattern": colorSliced,
+  "color-dithered-pattern": colorDithered,
   "mesh-refracted-pattern": meshRefracted,
   "mesh-sliced-pattern": meshSliced,
   "mesh-dithered-pattern": meshDithered,

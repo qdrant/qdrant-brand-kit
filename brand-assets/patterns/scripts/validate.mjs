@@ -34,6 +34,7 @@ for (const recipe of recipes) if (!existsSync(`patterns/${recipe}.js`)) errors.p
 const needs = {
   "color-refracted-pattern": ["gradient", "refraction", "noise"],
   "color-sliced-pattern": ["gradient", "slice", "noise"],
+  "color-dithered-pattern": ["meshLayout", "grade", "contrast", "mesh", "dither"],
   "motion-streaks-pattern": ["gradient", "streaks"],
   "mesh-refracted-pattern": ["grade", "blur", "contrast", "mesh", "refraction", "noise"],
   "mesh-sliced-pattern": ["grade", "blur", "contrast", "mesh", "slice", "noise"],

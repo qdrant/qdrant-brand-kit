@@ -87,7 +87,7 @@ Rules:
   | --- | --- | --- |
   | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern | Mask, 40% behind the text |
   | `none` | Color-Refracted-Pattern-A | No mask: text sits straight on the pattern |
-  | `both` | Generative-Hexagon-Pattern, Generative-Burst-Pattern, Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
+  | `both` | Color-Dithered-Pattern-A, Generative-Hexagon-Pattern, Generative-Burst-Pattern, Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
   | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
