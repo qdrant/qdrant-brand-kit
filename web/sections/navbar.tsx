@@ -269,16 +269,18 @@ function MegaPanel({
   highlight?: MenuHighlight
   highlightStyle?: NavbarProps["highlightStyle"]
 }) {
-  // The highlighted item has its own space, so it leaves its group's list.
-  // The highlighted item has its own space, so it leaves its group's list, and so do the links it shows (the tile's
-  // main sections include API Reference).
-  const shownByHighlight = new Set(
-    highlight ? [highlight.href, ...(highlightStyle === "tile" ? highlight.areas.map((a) => a.href) : [])] : []
-  )
+  // The highlighted item has its own space, so it leaves its group's list. The tile sits in that group, at the bottom
+  // of its column; the other layouts sit at the panel's start or top.
+  const tile = highlight && highlightStyle === "tile"
+  const homeGroup = highlight
+    ? allGroups.find((group) =>
+        group.items.some((item) => item.href === highlight.href)
+      )
+    : undefined
   const groups = highlight
     ? allGroups.map((group) => ({
         ...group,
-        items: group.items.filter((item) => !shownByHighlight.has(item.href)),
+        items: group.items.filter((item) => item.href !== highlight.href),
       }))
     : allGroups
   const band = highlight && highlightStyle === "band"
@@ -289,7 +291,7 @@ function MegaPanel({
         band && "flex-col"
       )}
     >
-      {highlight && (
+      {highlight && !tile && (
         <Highlight
           item={highlight}
           variant={highlightStyle}
@@ -354,6 +356,13 @@ function MegaPanel({
                     </ul>
                   ))}
                 </div>
+              )}
+              {tile && highlight && homeGroup?.title === group.title && (
+                <Highlight
+                  item={highlight}
+                  variant="tile"
+                  markStyle={markStyle}
+                />
               )}
             </div>
           ))}
@@ -521,8 +530,8 @@ const docsDrift = generativePattern({
 //   the right, the menu's groups below it (after Slack API's docs menu, which opens with a header row).
 // - hub: a column of its own on a tray, with its Getting Started links and a grid of the client libraries (after
 //   Codecademy's Docs, which opens its own space with a chip per language).
-// - tile: a compact card with no paragraph and no icon, its title and the docs' main sections stacked, and Pixel drift moving
-//   quietly in its lower corner (after the design lead's reference: dark resource tiles with a pixel accent in a corner).
+// - tile: only the main link, as a compact card at the bottom of its group's column (under its other links), with
+//   Pixel drift moving quietly on its right side (after the design lead's reference: dark resource tiles with a pixel accent in a corner).
 function Highlight({
   item,
   variant = "card",
@@ -581,18 +590,19 @@ function Highlight({
     return (
       <Plate
         as="div"
-        className="group/tile relative flex w-60 shrink-0 flex-col gap-1 overflow-hidden rounded-lg p-2"
+        className="group/tile relative flex min-h-11 flex-1 items-start overflow-hidden rounded-lg"
       >
-        {/* The pattern fills the lower right, past where the labels end, and fades toward the title. */}
+        {/* The pattern fills the right side, past the label, and fades toward it. It's mirrored so its dense side (it
+            gathers toward the lower left) sits at the tile's edge, and a little stronger than in a card. */}
         <span
           aria-hidden
-          className="pointer-events-none absolute right-0 bottom-0 h-[80%] w-[42%] [mask-image:radial-gradient(130%_100%_at_100%_100%,black_35%,transparent_80%)]"
+          className="pointer-events-none absolute inset-y-0 right-0 w-[58%] -scale-x-100 [mask-image:linear-gradient(to_left,transparent,black_55%)] [&_.web-generative]:opacity-85"
         >
           <Drift />
         </span>
         <NavigationMenuLink
           href={item.href}
-          className="relative w-fit gap-1.5 px-3 pt-3 pb-2 text-[15px] leading-snug font-medium text-foreground hover:bg-transparent hover:text-(--web-link)"
+          className="relative gap-1.5 p-3 text-sm font-medium text-foreground hover:bg-transparent hover:text-(--web-link)"
         >
           {item.label}
           <ArrowUpRight
@@ -600,16 +610,6 @@ function Highlight({
             aria-hidden
           />
         </NavigationMenuLink>
-        {/* The docs' main sections, stacked, at the size of the menu's other links. */}
-        <ul className="relative flex flex-col gap-0.5">
-          {item.areas.map((link) => (
-            <li key={link.label}>
-              <NavigationMenuLink href={link.href} className="p-3 text-sm">
-                {link.label}
-              </NavigationMenuLink>
-            </li>
-          ))}
-        </ul>
       </Plate>
     )
   }
