@@ -42,3 +42,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Generative-Hexagon | Proposal P35 (outlined hexagons, 64 px grid, scale 0.45) | Approved; added as variant 5 in every colorway | 2026-11-24 |
 | Generative-Hexagon | Proposal P34 (outlined hexagons, 56 px grid, scale 0.5) | Approved; added as variant 6 in every colorway | 2026-11-24 |
 | Generative-Hexagon | Proposal P33 (outlined hexagons, 48 px grid, scale 0.65) | Approved; added as variant 7 in every colorway | 2026-11-24 |
+| Generative-Hexagon | Proposal P28 (outlined hexagons, 32 px grid, scale 0.6) | Approved; added as variant 8 in every colorway | 2026-11-24 |
