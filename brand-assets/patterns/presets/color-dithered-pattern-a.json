@@ -1,5 +1,6 @@
 {
   "name": "Color-Dithered-Pattern-A",
+  "onHold": "On hold for now (Vanesa, 2026-11-24), like the mesh patterns. Don't use it in creatives until she takes it off hold.",
   "textMask": "both",
   "recipe": "color-dithered-pattern",
   "extends": "shared",

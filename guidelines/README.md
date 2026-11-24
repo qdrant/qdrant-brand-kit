@@ -58,7 +58,7 @@ The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patter
 
 - **Must: patterns are indigo or amaranth.** Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
 - **On hold: teal.** Teal pattern colorways (Motion Streaks) are allowed in principle but **on hold until the council approves the sub-direction** (Vanesa, 2026-11-24). Until then, never use a colorway marked `onHold`. Other colors stay out of pattern backgrounds.
-- **On hold: mesh patterns and Color-Refracted-Pattern-A.** Every mesh pattern (Mesh-Refracted A to D, Mesh-Sliced-A, Mesh-Dithered-A) and both Color-Refracted-A colorways are on hold while Vanesa reviews them (2026-11-24). A pattern or colorway marked `onHold` is never used in creatives.
+- **On hold: mesh patterns, Color-Refracted-Pattern-A and Color-Dithered-Pattern-A.** Every mesh pattern (Mesh-Refracted A to D, Mesh-Sliced-A, Mesh-Dithered-A), both Color-Refracted-A colorways and Color-Dithered-A are on hold while Vanesa reviews them (2026-11-24). A pattern or colorway marked `onHold` is never used in creatives.
 - **Proportions (provisional):** indigo for most creatives, amaranth rarely. These aren't final: they'll be revised after the council approves the direction (Vanesa, 2026-11-24).
 - **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway) is only for creatives that need to **grab a lot of attention and be more impactful**.
 - **Ask:** never pick amaranth on your own. Offer it, and use it only when the person says yes.
