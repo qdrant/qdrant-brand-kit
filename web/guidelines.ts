@@ -71,8 +71,8 @@ export const guidelines: GuidelineGroup[] = [
         source: "design-system/AGENTS.md",
       },
       {
-        title: "Kickers are 12px on phones, and their node sits on the first line",
-        text: "A kicker (the mono label above a heading) is 14px, and 12px under 640px. Its hexagon node is centered on the kicker's first line, so a kicker that wraps keeps the node beside its first word, not between the lines.",
+        title: "Kickers are 12px, and their node sits on the first line",
+        text: "A kicker (the mono label above a heading) is 12px at every size (it was 14px until 2026-11-24). Its hexagon node is centered on the kicker's first line, so a kicker that wraps keeps the node beside its first word, not between the lines.",
         decided: "Design lead, 2026-11-24",
         source: "web/lib/type.tsx, web/lib/section-header.tsx",
       },
