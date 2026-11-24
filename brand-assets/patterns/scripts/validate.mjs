@@ -122,7 +122,7 @@ for (const id of ids) {
       if (!(v >= lo && v <= hi)) errors.push(`${where}: streaks.${key} is ${v}, outside the approved ${lo} to ${hi}`);
       else if (v % 8 !== 0) errors.push(`${where}: streaks.${key} is ${v}, not on the 8 grid`);
     }
-    const dirs = [96, 104, 124, 144, 160, 288, 320]; // STREAK_DIRECTIONS in patterns/motion-streaks-pattern.js
+    const dirs = [0, 96, 104, 124, 144, 160, 288, 320]; // STREAK_DIRECTIONS in patterns/motion-streaks-pattern.js
     if (!dirs.includes(p.settings?.streaks?.direction)) errors.push(`${where}: streaks.direction is ${p.settings?.streaks?.direction}; approved: ${dirs.join(", ")}`);
   }
 

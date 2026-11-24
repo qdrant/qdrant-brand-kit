@@ -11,15 +11,15 @@ import { resolveToken, hexToRgba } from "./tokens.js";
 import { gradientSampler, makeFrame } from "./effects.js";
 
 // Approved by Vanesa on 2026-11-24. Length, density and softness sit on the 8 grid.
-// Direction: only the approved angles (124° is the usual; 96°, 104°, 144°, 160°, 288°
-// and 320° approved in the Pattern Library review). Any other angle snaps to the
+// Direction: only the approved angles (124° is the usual; 0°, 96°, 104°, 144°, 160°,
+// 288° and 320° approved in the Pattern Library review). Any other angle snaps to the
 // nearest one, measured around the circle.
 export const STREAK_RANGES = {
   length: [16, 80],
   density: [8, 64],
   softness: [32, 64],
 };
-export const STREAK_DIRECTIONS = [96, 104, 124, 144, 160, 288, 320];
+export const STREAK_DIRECTIONS = [0, 96, 104, 124, 144, 160, 288, 320];
 const ON_GRID = ["length", "density", "softness"];
 
 // The shader's hash, in 32-bit floats like the GPU.
