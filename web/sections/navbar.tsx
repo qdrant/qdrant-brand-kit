@@ -303,7 +303,7 @@ function MegaPanel({
           {groups.map((group, i) => (
             <div
               key={group.title ?? i}
-              className="flex flex-col gap-2 px-4 py-3 first:pl-2 last:pr-2"
+              className="flex flex-col gap-2 px-3 py-3 first:pl-2 last:pr-2"
             >
               {group.title && (
                 <p className="px-3 font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
