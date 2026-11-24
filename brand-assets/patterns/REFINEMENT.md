@@ -30,4 +30,5 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Generative-Burst-A | Proposal P16 (thick lines by value) | Not approved | 2026-11-24 |
 | Generative-Burst-A | Proposals P7, P19 to P30 | Approved; added as variants 0 to 12 in every colorway | 2026-11-24 |
 | Generative patterns | Names | No more A/B letters: Generative-Hexagon-Pattern (was Hexagon-B and C), Generative-Burst-Pattern (was Burst-A), Generative-Dash-Pattern (was Dash-A and B). Files renamed to match; the studio's dash field updated | 2026-11-24 |
-| Motion-Streaks-A, B | Direction proposals P4 to P7 (96°, 104°, 144°, 160°) | Approved, with 124°, as the only streak directions; other angles snap to the nearest. P1 to P3 and P8 to P12 not approved | 2026-11-24 |
+| Motion-Streaks-A, B | Direction proposals P4 to P7 (96°, 104°, 144°, 160°) | Approved, with 124°, as the only streak directions; other angles snap to the nearest. P1 to P3 and P8 to P10 not approved | 2026-11-24 |
+| Motion-Streaks-A, B | Direction proposals P11 (288°) and P12 (320°) | Approved; added to the streak directions | 2026-11-24 |
