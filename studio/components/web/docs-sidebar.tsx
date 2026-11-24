@@ -1,14 +1,15 @@
 import Link from "next/link"
 
 import { cn } from "@qdrant/design-system/lib/utils"
+import { customerLogos } from "@qdrant/web/content/customer-logos"
 import { guidelines } from "@qdrant/web/guidelines"
 import { sectionsByCategory } from "@qdrant/web/registry"
 
 const item = (on: boolean) =>
   cn("rounded-md px-2 py-1.5 text-sm hover:bg-muted", on ? "bg-muted font-semibold" : "text-muted-foreground")
 
-// The Docs tab's sidebar: the website's guidelines first, then every section by category. `current` is a section id,
-// or "guidelines".
+// The Docs tab's sidebar: the website's guidelines and customer logos first, then every section by category. `current`
+// is a section id, "guidelines" or "customer-logos".
 export function DocsSidebar({ current }: { current: string }) {
   return (
     <aside className="sticky top-12 hidden h-[calc(100svh-3rem)] w-60 shrink-0 overflow-y-auto border-r p-4 md:block">
@@ -24,6 +25,14 @@ export function DocsSidebar({ current }: { current: string }) {
             <span className="ml-1.5 text-xs text-muted-foreground">
               {guidelines.reduce((n, g) => n + g.rules.length, 0)}
             </span>
+          </Link>
+          <Link
+            href="/web/docs/customer-logos"
+            aria-current={current === "customer-logos" ? "page" : undefined}
+            className={item(current === "customer-logos")}
+          >
+            Customer logos
+            <span className="ml-1.5 text-xs text-muted-foreground">{customerLogos.length}</span>
           </Link>
         </div>
         {sectionsByCategory().map((c) => (

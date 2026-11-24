@@ -268,9 +268,15 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Images come from the Figma or brand assets",
-        text: "Illustrations, logos, social marks and badges are exported as they are (SVG for vectors, PNG for the rest), never redrawn or recolored. Ask before adding a photo. The logo, Qbot and patterns follow their own rules in brand-assets.",
+        text: "Illustrations, logos, social marks and badges are exported as they are (SVG for vectors, PNG for the rest), never redrawn or recolored, except customer logos (below). Ask before adding a photo. The logo, Qbot and patterns follow their own rules in brand-assets.",
         decided: "Juan, 2026-11-16",
         source: "brand-assets/",
+      },
+      {
+        title: "Customer logos come in three versions",
+        text: "Every customer logo the site shows is an SVG in web/assets/logos/customers, used through CustomerLogo: color (the brand's colors, for light backgrounds), light (white, for dark backgrounds) and dark (near-black, for light backgrounds), or mono, which takes the text color, so a wall of logos can be one neutral that blends in. The light, dark and mono versions come from one one-color file. The files come from the Brand Design System's Figma (Customer-Logos) and qdrant.tech's own, trimmed to the artwork and minified; never redrawn. A logo without a color file shows its dark version.",
+        decided: "Juan, 2026-11-23",
+        source: "web/content/customer-logos.ts",
       },
     ],
   },
