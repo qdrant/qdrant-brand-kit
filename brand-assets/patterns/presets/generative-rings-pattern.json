@@ -1,0 +1,158 @@
+{
+  "name": "Generative-Rings-Pattern",
+  "textMask": "both",
+  "recipe": "generative-pattern",
+  "extends": "generative-pattern.shared",
+  "source": "Pattern Studio export shared by Vanesa (Hex pulse settings), 1920 x 1080, 2026-11-24",
+  "$description": "Hexagons on a hex grid, lit in broken hexagon rings (frequency 19.4) by heavy multiply noise, on the Motion Streaks gradient without the streaks: background.default → the family's 900, hexagons in the family's 800, 600 and 200, like every generative pattern. Built from Vanesa's reference export (exploration X1). Ten approved variants (X3, X6, X8 to X10, X12 to X16): renderPattern(..., { variant: n }).",
+  "colorways": [
+    {
+      "name": "Background → Indigo 900",
+      "colors": [
+        "{color.indigo.800}",
+        "{color.indigo.600}",
+        "{color.indigo.200}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.indigo.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Amaranth 900",
+      "colors": [
+        "{color.amaranth.800}",
+        "{color.amaranth.600}",
+        "{color.amaranth.200}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.amaranth.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Teal 900",
+      "colors": [
+        "{color.teal.800}",
+        "{color.teal.600}",
+        "{color.teal.200}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.teal.900}",
+          "at": 1.1667
+        }
+      ],
+      "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
+    }
+  ],
+  "settings": {
+    "designSize": {
+      "width": 1920,
+      "height": 1080
+    },
+    "engine": {
+      "layout": "hex",
+      "cell": 32,
+      "padding": 0,
+      "shape": "hexagon",
+      "size": 0.34,
+      "shaping": "rings",
+      "softness": 0.05,
+      "outlineWidth": 0.02,
+      "ringFrequency": 19.4,
+      "ringSpeed": 2,
+      "ringFade": 0.9,
+      "repeat": 1,
+      "noiseAmount": 0.71,
+      "blend": "multiply",
+      "noiseScale": 4.15,
+      "octaves": 3,
+      "drift": 0.5,
+      "warp": 0.15,
+      "seed": 322,
+      "zoom": 1,
+      "rotation": 0,
+      "fieldTurns": 0,
+      "twist": 0,
+      "threshold": 0.05,
+      "density": "continuous",
+      "invert": false,
+      "element": "hexagon",
+      "scale": 0.62,
+      "sizeByValue": true,
+      "minSize": 0,
+      "strokeWidth": 1.5,
+      "paint": "fill",
+      "orientation": "fixed",
+      "elementRotation": 30,
+      "elementTurns": 0,
+      "jitter": 0,
+      "colorMap": "y",
+      "alphaByValue": false,
+      "minAlpha": 0.2
+    },
+    "variants": [
+      {
+        "name": "Tighter rings (was X3)",
+        "ringFrequency": 28
+      },
+      {
+        "name": "Less noise, cleaner rings (was X6)",
+        "noiseAmount": 0.4
+      },
+      {
+        "name": "Smaller 24 px grid (was X8)",
+        "cell": 24
+      },
+      {
+        "name": "Bigger 48 px grid, bigger hexagons (was X9)",
+        "cell": 48,
+        "scale": 0.7
+      },
+      {
+        "name": "Outlined hexagons (was X10)",
+        "paint": "stroke"
+      },
+      {
+        "name": "Rings fade fast, small center (was X12)",
+        "ringFade": 2
+      },
+      {
+        "name": "Another noise seed, larger noise (was X13)",
+        "seed": 77,
+        "noiseScale": 2.5
+      },
+      {
+        "name": "Color by distance from the center (was X14)",
+        "colorMap": "radial"
+      },
+      {
+        "name": "Circle shape instead of hexagon (was X15)",
+        "shape": "circle",
+        "size": 0.4
+      },
+      {
+        "name": "Dots instead of hexagons (was X16)",
+        "element": "circle",
+        "scale": 0.55
+      }
+    ]
+  }
+}

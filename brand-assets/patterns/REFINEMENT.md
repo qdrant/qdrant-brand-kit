@@ -53,3 +53,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Dithered explorations | Remaining (E28, E29, E30, E33, E34, E35, E36) | Not approved; the Explorations column is closed | 2026-11-24 |
 | Color-Dithered-Pattern-A | All, with variants 0 to 3 | On hold, with the mesh patterns | 2026-11-24 |
 | Generative-Pulse-Pattern (new) | Exploration H73 (Hex pulse look, big rings filling the frame) | Approved: new generative pattern in Indigo, Amaranth and Teal (on hold) | 2026-11-24 |
+| Generative-Rings-Pattern (new) | Explorations X1 (reference), X3, X6, X8, X9, X10, X12 to X16 | Approved: new generative pattern from Vanesa's reference, X1 as the base and the others as variants 0 to 9, in Indigo, Amaranth and Teal (on hold) | 2026-11-24 |
