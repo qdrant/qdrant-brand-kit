@@ -4,7 +4,7 @@
   "recipe": "generative-pattern",
   "extends": "generative-pattern.shared",
   "source": "Pattern Studio export, 1620 x 1080",
-  "$description": "Pattern Studio's hexagons on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%, top to bottom), hexagons in the family's 800, 600 and 200, like every generative pattern. The old Hexagon-B and Hexagon-C were merged into it on 2026-11-24 (the only difference was the color mapping), so it has two approved looks: colored top to bottom (as is) and from the center out (renderPattern option variant: 0). Variants 1 to 5 are bigger, flat hexagons from the Pattern Studio connector, approved in the Pattern Library review (2026-11-24).",
+  "$description": "Pattern Studio's hexagons on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%, top to bottom), hexagons in the family's 800, 600 and 200, like every generative pattern. The old Hexagon-B and Hexagon-C were merged into it on 2026-11-24 (the only difference was the color mapping), so it has two approved looks: colored top to bottom (as is) and from the center out (renderPattern option variant: 0). Variants 1 to 6 are bigger, flat hexagons from the Pattern Studio connector, approved in the Pattern Library review (2026-11-24).",
   "colorways": [
     {
       "name": "Background → Indigo 900",
@@ -155,6 +155,20 @@
         "paint": "stroke",
         "cell": 64,
         "scale": 0.45,
+        "threshold": 0.13,
+        "noiseAmount": 0.46,
+        "noiseScale": 3.8,
+        "seed": 10,
+        "warp": 0.17
+      },
+      {
+        "name": "Outlined hexagons, 56 px grid (was proposal P34)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "stroke",
+        "cell": 56,
+        "scale": 0.5,
         "threshold": 0.13,
         "noiseAmount": 0.46,
         "noiseScale": 3.8,
