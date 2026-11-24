@@ -50,3 +50,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Color-Dithered-Pattern-A | Exploration E27 (Vertical, light at the bottom) | Approved; added as variant 1 in every colorway | 2026-11-24 |
 | Color-Dithered-Pattern-A | Exploration E31 (Corner glow, bottom left) | Approved; added as variant 2 in every colorway | 2026-11-24 |
 | Color-Dithered-Pattern-A | Exploration E32 (Corner glow, top right) | Approved; added as variant 3 in every colorway | 2026-11-24 |
+| Dithered explorations | Remaining (E28, E29, E30, E33, E34, E35, E36) | Not approved; the Explorations column is closed | 2026-11-24 |
