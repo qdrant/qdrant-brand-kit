@@ -7,6 +7,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import type { ProseBlock } from "../content/listings"
 import type { Link } from "../content/site"
 import { ArrowLink } from "../lib/arrow-link"
+import { Code, languageOf } from "../lib/code"
 import { MediaFrame } from "../lib/media-frame"
 import { Section, type SectionProps } from "../lib/section"
 import { heading, type } from "../lib/type"
@@ -71,7 +72,7 @@ export function Prose({ blocks, className }: { blocks: ProseBlock[]; className?:
                   <figcaption className="border-b border-(--web-line) px-4 py-2.5 font-mono text-xs text-muted-foreground">{block.title}</figcaption>
                 )}
                 <pre className="overflow-x-auto p-5 font-mono text-[13px] leading-relaxed text-foreground">
-                  <code>{block.code}</code>
+                  <Code code={block.code} language={languageOf(block.title)} />
                 </pre>
               </figure>
             )

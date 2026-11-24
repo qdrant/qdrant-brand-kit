@@ -31,7 +31,7 @@ function NameTile({ name }: { name: string }) {
 
 // The install line to copy, or, for a library the docs give no line for, its registry link.
 function Install({ sdk }: { sdk: Sdk }) {
-  if (sdk.install) return <CopySnippet text={sdk.install} className="max-w-none" />
+  if (sdk.install) return <CopySnippet text={sdk.install} language="shell" className="max-w-none" />
   if (sdk.registry)
     return (
       <ArrowLink href={sdk.registry.href} className="text-sm">

@@ -469,6 +469,42 @@
   box-shadow: inset 0 0.5px 0 var(--web-window-dot-shine), var(--web-window-dot-rim);
 }
 
+/* Syntax colors for code (web/lib/code.tsx, design lead, 2026-11-24): VS Code's Dark+ and Light+ roles in the
+   palette, 300 on dark and 700 on light, each at 5:1 or more on a code panel. Comments take the muted text color;
+   names, operators and brackets keep the text color. Never amaranth or red. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-code-keyword: var(--qd-color-purple-300);
+  --web-code-function: var(--qd-color-blue-300);
+  --web-code-type: var(--qd-color-teal-300);
+  --web-code-string: var(--qd-color-orange-300);
+  --web-code-number: var(--qd-color-green-300);
+  --web-code-constant: var(--qd-color-indigo-300);
+  --web-code-property: var(--qd-color-cyan-300);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-code-keyword: var(--qd-color-purple-700);
+  --web-code-function: var(--qd-color-blue-700);
+  --web-code-type: var(--qd-color-teal-700);
+  --web-code-string: var(--qd-color-orange-700);
+  --web-code-number: var(--qd-color-green-700);
+  --web-code-constant: var(--qd-color-indigo-700);
+  --web-code-property: var(--qd-color-cyan-700);
+}
+.web-tok-keyword { color: var(--web-code-keyword); }
+.web-tok-function { color: var(--web-code-function); }
+.web-tok-type { color: var(--web-code-type); }
+.web-tok-string { color: var(--web-code-string); }
+.web-tok-number { color: var(--web-code-number); }
+.web-tok-constant { color: var(--web-code-constant); }
+.web-tok-property { color: var(--web-code-property); }
+.web-tok-comment { color: var(--muted-foreground); }
+
 /* A text link: indigo, underlined on hover. A title that is a link but reads as text (a card's title) is
    .web-link-quiet: the text color, indigo on hover. */
 .web-link {

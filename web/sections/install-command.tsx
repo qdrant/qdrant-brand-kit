@@ -9,6 +9,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import type { Link } from "../content/site"
 import type { TerminalLine } from "../content/platform"
 import { ArrowLink } from "../lib/arrow-link"
+import { Code } from "../lib/code"
 import { LinkButton } from "../lib/link-button"
 import { Plate } from "../lib/plate"
 import { Section, type SectionProps } from "../lib/section"
@@ -60,7 +61,7 @@ function CommandLine({ line }: { line: TerminalLine }) {
           $
         </span>
         <pre className="min-w-0 flex-1 overflow-x-auto pt-1 font-mono text-[13px] leading-relaxed text-foreground">
-          <code>{line.command}</code>
+          <Code code={line.command} language="shell" />
         </pre>
         <CopyButton text={line.command} />
       </div>

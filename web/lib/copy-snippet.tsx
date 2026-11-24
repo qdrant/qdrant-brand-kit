@@ -7,6 +7,7 @@ import { Button } from "@qdrant/design-system/components/ui/button"
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import { ASSETS } from "./assets"
+import { Code, type CodeLanguage } from "./code"
 import { MonoImage } from "./mono-image"
 
 // The coding agents a prompt is for, as one-color marks in web/assets/logos/agents (design lead, 2026-11-24):
@@ -27,11 +28,14 @@ export function CopySnippet({
   label,
   text,
   agents: agentIds,
+  language,
   className,
 }: {
   label?: string
   text: string
   agents?: AgentId[]
+  // The text's language, for its syntax colors (lib/code.tsx), like "shell" for an install command.
+  language?: CodeLanguage
   className?: string
 }) {
   const [copied, setCopied] = React.useState(false)
@@ -77,7 +81,11 @@ export function CopySnippet({
     >
       <span className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-2">
         {label && <span className="shrink-0 text-sm text-muted-foreground">{label}</span>}
-        <code className="truncate font-mono text-sm text-foreground">{text}</code>
+        {language ? (
+          <Code code={text} language={language} className="truncate font-mono text-sm text-foreground" />
+        ) : (
+          <code className="truncate font-mono text-sm text-foreground">{text}</code>
+        )}
       </span>
       {button}
     </div>

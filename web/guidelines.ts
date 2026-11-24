@@ -108,6 +108,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "design-system/styles/globals.css (--ring)",
       },
       {
+        title: "Code has syntax colors",
+        text: "Code on the website, in panels, terminals and install lines, is colored by role, like VS Code's default themes, in the palette: keywords purple, functions and shell commands blue (VS Code's yellow; the palette has none), types and classes teal, strings orange, numbers green, constants like True, None and null indigo, parameters, properties, JSON keys and shell flags cyan, and comments in the muted text color. Names, operators and brackets keep the text color. The 300 step on dark, the 700 step on light, each at 5:1 or more on a code panel. Never amaranth or red in code. Python, TypeScript and JavaScript, JSON, shell and HTTP are recognized from a file name or a label.",
+        decided: "Design lead, 2026-11-24",
+        source: "web/lib/code.tsx, web/styles/web.css",
+      },
+      {
         title: "Diagrams take the palette color nearest to the Figma's",
         text: "By OKLab distance, through its --qd-color-* variable, never a hex. Fills, borders and dots use the dark theme's value; colored text and icons use the contrast steps above. Give every color a light value.",
         decided: "Design lead, 2026-11-16",
