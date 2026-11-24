@@ -20,7 +20,8 @@
       "name": "Background → Teal 900",
       "from": "color.background.default",
       "to": "color.teal.900",
-      "streak": "color.teal.800"
+      "streak": "color.teal.800",
+      "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
     }
   ],
   "layers": [
