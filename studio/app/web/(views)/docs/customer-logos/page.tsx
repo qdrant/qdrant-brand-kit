@@ -7,7 +7,7 @@ export const metadata = { title: "Customer logos · Web · Qdrant Studio" }
 
 const kb = (bytes: number) => `${(bytes / 1024).toFixed(1)} KB`
 
-// Every customer logo the website can use (Juan, 2026-11-23), from web/content/customer-logos.ts and
+// Every customer logo the website can use (design lead, 2026-11-23), from web/content/customer-logos.ts and
 // web/assets/logos/customers: each in its three versions, on the background it's for. The tiles keep their own
 // backgrounds in both studio themes.
 export default function CustomerLogos() {

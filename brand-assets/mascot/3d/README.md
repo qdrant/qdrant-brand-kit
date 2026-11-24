@@ -73,10 +73,10 @@ npm run finish -- references/loving.png --out test.png
 ## Open decisions
 
 - Background path A (native transparent) vs B (grey + BiRefNet): decided by the feasibility test
-- One automatic retry when a generation fails the review: waiting on Neil to confirm it fits the monthly cost cap
+- One automatic retry when a generation fails the review: waiting on the head of Growth & DevRel to confirm it fits the monthly cost cap
 - Who can promote outputs into the approved library
 
-## In progress (2026-11-04, Vanesa continues on 2026-11-05)
+## In progress (2026-11-04, the visual designer continues on 2026-11-05)
 
 - **`tool/moods.json` crop for happy** doesn't match the Figma mascot frame (built from it, the frame was off by a mean of 32 / 255; a plain `object-fit: cover` matched). The other moods' `rect` and `crop` aren't checked yet. The file mirrors Design Lab, so the fix goes there too.
 - **`tool/mascot.yaml`:** `min_height` 240 px is still to confirm, and `max_crop: 0.4` doesn't fit the Close-up and Peek crops in guidelines section 6.

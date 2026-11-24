@@ -1,6 +1,6 @@
 # Icons
 
-Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, ISC license). Icons help say an action, a feature or an idea quickly. From Brand Guide 2.0, slides 38–39 (Figma `djCexPSttVyDjQXDo9Rka4`, nodes [1:9637](https://www.figma.com/design/djCexPSttVyDjQXDo9Rka4/?node-id=1-9637) and [1:10073](https://www.figma.com/design/djCexPSttVyDjQXDo9Rka4/?node-id=1-10073)). Rules decided by Vanesa on 2026-11-11.
+Qdrant uses one icon set: **[Lucide](https://lucide.dev/icons/)** (open source, ISC license). Icons help say an action, a feature or an idea quickly. From Brand Guide 2.0, slides 38–39 (Figma `djCexPSttVyDjQXDo9Rka4`, nodes [1:9637](https://www.figma.com/design/djCexPSttVyDjQXDo9Rka4/?node-id=1-9637) and [1:10073](https://www.figma.com/design/djCexPSttVyDjQXDo9Rka4/?node-id=1-10073)). Rules decided by the visual designer on 2026-11-11.
 
 | File | What it is |
 | --- | --- |

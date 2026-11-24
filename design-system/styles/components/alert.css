@@ -1,5 +1,5 @@
 /* Alert (components/ui/alert.tsx): the status variants, success, warning, info and destructive (error), on the
-   status roles (primitives/colors, the same as Figma's status/<state> groups, Juan, 2026-11-21): the fill is
+   status roles (primitives/colors, the same as Figma's status/<state> groups, design lead, 2026-11-21): the fill is
    status-<state>-alert-fill, the subtle border status-<state>-border, and the icon, title and description
    status-<state>-text.
    - Light: fill 50, border 200, text 900, at 8.8 to 9.4:1.

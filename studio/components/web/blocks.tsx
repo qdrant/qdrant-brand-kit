@@ -29,7 +29,7 @@ export type WebPage = {
 
 // The website's style switches (web/styles/web.css and web/patterns). Each is a query key for the frame and an
 // attribute it sets when the switch isn't in its default state. The first five are decisions, on by default; the
-// ones marked `proposal` are visual enhancements to review (Juan, 2026-11-24), off by default: turn one on to see
+// ones marked `proposal` are visual enhancements to review (design lead, 2026-11-24), off by default: turn one on to see
 // it, and keep it by making its CSS the default (web.css, "Proposals") and removing it from here, or drop it by
 // deleting both. Add a switch here and it appears in the canvas, the docs and the builder.
 export const styleSwitches = [

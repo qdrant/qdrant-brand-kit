@@ -44,7 +44,7 @@ export const cta = defineSection<CtaProps>({
     ],
     rules: [
       "One primary action. A second action is the secondary button and goes to a person (Contact Us) or a calculator.",
-      "No glows or patterns for now (Juan, 2026-11-21); they come in a later style stage.",
+      "No glows or patterns for now (design lead, 2026-11-21); they come in a later style stage.",
     ],
     anatomy: [
       { part: "Heading", note: "A statement: 56px from lg in the centered layout, a section title in the panel, a card title in the band." },

@@ -36,7 +36,7 @@ export function WebFrame() {
     for (const [k, v] of Object.entries(JSON.parse(styleKey) as Record<string, string>)) b.setAttribute(k, v)
   }, [styleKey])
 
-  // Hide Next.js's dev indicator (the "N" button) inside frames, so it never covers a section (Juan, 2026-11-21).
+  // Hide Next.js's dev indicator (the "N" button) inside frames, so it never covers a section (design lead, 2026-11-21).
   React.useEffect(() => {
     const style = document.createElement("style")
     style.textContent = "nextjs-portal{display:none!important}"

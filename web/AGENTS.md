@@ -1,6 +1,6 @@
 # Web (for agents)
 
-`@qdrant/web` is Qdrant's website section library: every section a site the size of qdrant.tech needs (navigation, heroes, features, proof, pricing, FAQ, calls to action, listings, footers and more), built from the [design system](../design-system/), with variants, docs and a page builder in the studio's Web page (Juan, 2026-11-21). The qdrant.tech website itself lives in another repo; this is where its sections are designed, documented and reviewed. The work is code-first: a section is built and approved here, and goes to Figma afterwards.
+`@qdrant/web` is Qdrant's website section library: every section a site the size of qdrant.tech needs (navigation, heroes, features, proof, pricing, FAQ, calls to action, listings, footers and more), built from the [design system](../design-system/), with variants, docs and a page builder in the studio's Web page (design lead, 2026-11-21). The qdrant.tech website itself lives in another repo; this is where its sections are designed, documented and reviewed. The work is code-first: a section is built and approved here, and goes to Figma afterwards.
 
 Read these first. Their rules apply here too:
 
@@ -11,7 +11,7 @@ Read these first. Their rules apply here too:
 
 The website's rules (layout, type, color, links, icons, actions, lines, patterns, content) are in [`guidelines.ts`](guidelines.ts), shown first in the studio's Web page, Docs, Guidelines. They're for this repo and for the Hugo build: the dev team and their agents build qdrant.tech from them. Read them all before you build or change a section. Each section's own rules are in its registry entry.
 
-**When Juan decides a rule for the website, add it to `guidelines.ts` in the same commit as the change** (Juan, 2026-11-22): in its group, as a short title and what it means in practice, with who decided it and when, and where its values live. Change a rule there when it changes. Don't keep a second copy of a rule here; this file says only how to work in this repo.
+**When the design lead decides a rule for the website, add it to `guidelines.ts` in the same commit as the change** (design lead, 2026-11-22): in its group, as a short title and what it means in practice, with who decided it and when, and where its values live. Change a rule there when it changes. Don't keep a second copy of a rule here; this file says only how to work in this repo.
 
 ## How sections are built
 
@@ -25,9 +25,9 @@ The website's rules (layout, type, color, links, icons, actions, lines, patterns
 - **Effects, when they come,** go in the section file with CSS (gradients, blur), in palette colors through their variables, absolutely positioned behind the content, `aria-hidden` and `pointer-events-none`. Never inside a component in `design-system/`. Qbot uses its own glow, `.qd-mascot--glow`.
 - **Visuals** go in [`visuals/`](visuals/): product screens rebuilt from the design system (in `data-context="product"`, so their accent is indigo), diagrams and canvas scenes, each a component with its own size that a page passes to a section's `visual` slot (hero, feature grid and rows, case study); the section's frame hugs it, or `visualFrame: "none"` shows it bare. Canvas and WebGL visuals (the zone globe, the depth haze pattern) run on `visuals/scene.tsx`, which reads its colors from the `--web-scene-*` variables in `styles/web.css`, draws only on screen and holds still for reduced motion. A section shows a placeholder (`MediaFrame`) until a page gives it a visual; never ship a placeholder.
 - **Images** go in `assets/`, exported from the Figma as they are. A one-color image takes the theme's color through `MonoImage`; the one exception is a logo whose maker has a version for light backgrounds, like `aws-on-light.svg`. Product screens drawn in a Figma are rebuilt with the design system's components (in `data-context="product"`, so their accent is indigo).
-- **Style switches** compare the website with and without a decision: `data-web-lines`, `data-web-material`, `data-web-patterns` and `data-web-indigo` set to `"off"`, and `data-web-type="current"` for the type set as it is (the trial type moves into `primitives/typography` if it's kept, with Vanesa's yes). The studio's Canvas, Docs and Builder have them.
+- **Style switches** compare the website with and without a decision: `data-web-lines`, `data-web-material`, `data-web-patterns` and `data-web-indigo` set to `"off"`, and `data-web-type="current"` for the type set as it is (the trial type moves into `primitives/typography` if it's kept, with the visual designer's yes). The studio's Canvas, Docs and Builder have them.
 
-- **Proposals** (Juan, 2026-11-24): a new layout to review is a variant with a `proposal` note (what it adds, where the idea comes from) and a new value of the section's `layout` prop, commented as a proposal; a visual enhancement is a switch in the studio's `blocks.tsx` marked `proposal`, off by default, with its CSS in the "Proposals" block of `styles/web.css` under its attribute. Neither is a rule until Juan keeps it; then it loses its flag, and its rule goes into `guidelines.ts`. A section has four layouts at most.
+- **Proposals** (design lead, 2026-11-24): a new layout to review is a variant with a `proposal` note (what it adds, where the idea comes from) and a new value of the section's `layout` prop, commented as a proposal; a visual enhancement is a switch in the studio's `blocks.tsx` marked `proposal`, off by default, with its CSS in the "Proposals" block of `styles/web.css` under its attribute. Neither is a rule until the design lead keeps it; then it loses its flag, and its rule goes into `guidelines.ts`. A section has four layouts at most.
 
 ## Adding a section
 
@@ -35,7 +35,7 @@ The website's rules (layout, type, color, links, icons, actions, lines, patterns
 2. **Its registry entry**: a file in `registry/` with `defineSection`: its category, a one-line summary, its variants (ready-made props from `content/`, each with a name and a line on when to use it), its docs (when to use it, rules, anatomy, props) and the fields the page builder can edit. Add it to `registry/index.ts`. The studio's canvas, docs and builder read the registry, so a section without an entry doesn't exist for them.
 3. **Check it** in the studio's Web page: every variant in the Docs tab, in dark and light, at desktop and phone width, then on the Canvas. Fix what reads wrong, then commit.
 
-**Pages** go in `pages/`, built from the library only: content from `content/<page>.ts`, word for word, and real visuals from `visuals/` passed to the sections' `visual` slot (Juan, 2026-11-22). If a page needs something the library can't do, add it to the section (a prop, a slot) so every page gets it, never a page-only section. The Resilience page (`pages/resilience.tsx`) is the first.
+**Pages** go in `pages/`, built from the library only: content from `content/<page>.ts`, word for word, and real visuals from `visuals/` passed to the sections' `visual` slot (design lead, 2026-11-22). If a page needs something the library can't do, add it to the section (a prop, a slot) so every page gets it, never a page-only section. The Resilience page (`pages/resilience.tsx`) is the first.
 
 ## Adding a pattern
 

@@ -16,7 +16,7 @@ export function generateStaticParams() {
   return colorTabs.map(({ id }) => ({ tab: id }))
 }
 
-// The color palette and its rules, to work on in one place (Juan, 2026-11-19): the palette, one tab per group of
+// The color palette and its rules, to work on in one place (design lead, 2026-11-19): the palette, one tab per group of
 // Figma's Color collection with how to use it (2026-11-21), and assets that follow the semantic tokens (lib/color.ts).
 export default async function ColorTab({ params }: { params: Promise<{ tab: string }> }) {
   const { tab } = await params

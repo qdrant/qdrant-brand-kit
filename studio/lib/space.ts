@@ -2,7 +2,7 @@
 // decisions. Each one follows the Brand Direction: dark first, precise (hairline grids, 8px measures, mono
 // labels), violet depth, the accent only for one small mark, and stars that are always data.
 //
-// When Juan keeps one, it moves to web/ (a section's background, signature or card surface), never into a
+// When the design lead keeps one, it moves to web/ (a section's background, signature or card surface), never into a
 // design-system component, and gets a dated line in design-system/DESIGN.md.
 //
 // The first 15 options are below; the second round (2026-11-19, from the Cosmos references on dots, data and

@@ -25,7 +25,7 @@ export type AnchorNavProps = SectionProps & {
 // ease (lib/smooth-scroll.ts), stopping just under the nav, and the tabs don't follow the scroll on the way there.
 // Its background covers what scrolls under it, so it draws the page's rails itself, without a seam on top: they run
 // through it, sticky or not. The nodes where they meet its bottom line are its own too (seam="bottom"), so its
-// background never covers them (Juan, 2026-11-23).
+// background never covers them (design lead, 2026-11-23).
 export function AnchorNav({
   items,
   label,

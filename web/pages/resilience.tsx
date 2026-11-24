@@ -17,7 +17,7 @@ import { ConsoleClusterSetup } from "../visuals/console-setup"
 import { ZoneGlobe } from "../visuals/zone-globe"
 
 // The Resilience page of qdrant.tech (Figma: Qdrant Web Design, "Resilience-Subpage", node 19452:25124), built
-// from the section library (Juan, 2026-11-22): its copy from content/resilience.ts, its Console screens and
+// from the section library (design lead, 2026-11-22): its copy from content/resilience.ts, its Console screens and
 // cluster diagrams from web/visuals. One theme for the whole page, the site's (dark or light), and the marketing
 // context, so its accent is amaranth.
 export function ResiliencePage() {

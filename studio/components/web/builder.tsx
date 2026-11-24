@@ -99,7 +99,7 @@ ${body}
 `
 }
 
-// The page builder (Juan, 2026-11-21): put a page together from the section library. Layers and the library on
+// The page builder (design lead, 2026-11-21): put a page together from the section library. Layers and the library on
 // the left, the page in the middle at a real width, the selected section's settings on the right. Pages are kept
 // in this browser (localStorage); Copy TSX gives a page component for web/pages, Copy JSON the page as data.
 export function PageBuilder() {

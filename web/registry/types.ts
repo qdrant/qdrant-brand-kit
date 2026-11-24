@@ -42,7 +42,7 @@ export type SectionVariant<P> = {
   surface?: SectionSurface
   // Room below the section in previews, for panels that open past it (the navbar's menus).
   frameMinHeight?: number
-  // A layout proposed for review (Juan, 2026-11-24), not a decision: what it adds and where the idea comes from.
+  // A layout proposed for review (design lead, 2026-11-24), not a decision: what it adds and where the idea comes from.
   // The studio marks it "Proposal" and can show proposals alone. Keep it by removing this field; drop it by
   // deleting the variant and its layout in the section.
   proposal?: string

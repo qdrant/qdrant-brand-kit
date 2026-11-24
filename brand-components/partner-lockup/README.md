@@ -73,4 +73,4 @@ The plus and divider take the text color: white on dark and on patterns, dark on
 
 ## Approved by / date
 
-Vanesa, 2026-11-04.
+Visual designer, 2026-11-04.

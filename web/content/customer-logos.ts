@@ -1,4 +1,4 @@
-// The website's customer logos (Juan, 2026-11-23): every customer qdrant.tech shows, plus the ones in the Brand Design
+// The website's customer logos (design lead, 2026-11-23): every customer qdrant.tech shows, plus the ones in the Brand Design
 // System's Figma (Customer-Logos, node 17146:33059). Files in web/assets/logos/customers: `<id>.svg` in color and
 // `<id>-mono.svg`, a one-color mask (the logo white, the parts cut out of it black) that CustomerLogo paints in any
 // color (lib/customer-logo.tsx). Both are trimmed to the artwork and minified with SVGO. `width` and `height` are

@@ -36,7 +36,7 @@ export const menus: Menu[] = [
   },
   {
     label: "Solutions",
-    // Hidden for now (Juan, 2026-11-23).
+    // Hidden for now (design lead, 2026-11-23).
     hidden: true,
     groups: [
       {

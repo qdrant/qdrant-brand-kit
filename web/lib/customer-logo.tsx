@@ -5,7 +5,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import { customerLogos, type CustomerLogoData } from "../content/customer-logos"
 import { ASSETS } from "./assets"
 
-// A customer's logo from web/assets/logos/customers (Juan, 2026-11-23), in one of four versions:
+// A customer's logo from web/assets/logos/customers (design lead, 2026-11-23), in one of four versions:
 // - "color": the brand's colors, for light backgrounds (only for logos with a color file; the others fall back to
 //   "dark").
 // - "light": one color, white, for dark backgrounds.

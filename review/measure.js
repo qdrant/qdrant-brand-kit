@@ -73,7 +73,7 @@
                        naturalWidth: el.naturalWidth, naturalHeight: el.naturalHeight, shown: rect(el),
                        cls: holder ? "headshot" : (el.className || ""), inBook: !!el.closest(".qd-book") };
           // Source pixels across the shown width, for the print resolution check: an object-view-box crop
-          // (Qbot) or object-fit: cover shows only part of the file (Vanesa, 2026-11-20).
+          // (Qbot) or object-fit: cover shows only part of the file (visual designer, 2026-11-20).
           var st = getComputedStyle(el), srcW = el.naturalWidth, srcH = el.naturalHeight;
           var vb = /inset\(([^)]*)\)/.exec(st.objectViewBox || "");
           if (vb) {

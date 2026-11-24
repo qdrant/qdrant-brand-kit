@@ -8,7 +8,7 @@ import { allPatterns, type PatternDefinition } from "@qdrant/web/patterns"
 
 import { FrameView } from "./frame-view"
 
-// The website's patterns (web/patterns), each on its own in dark and light (Juan, 2026-11-21): approved patterns
+// The website's patterns (web/patterns), each on its own in dark and light (design lead, 2026-11-21): approved patterns
 // and the ones being explored (web/patterns/explorations, 2026-11-23), with their rule notes.
 
 const KINDS = [
@@ -95,7 +95,7 @@ export function PatternsView() {
           content, and surfaces inside its cards. Approved patterns are listed in{" "}
           <code className="font-mono">web/patterns/index.tsx</code> and reach the Builder. Patterns being
           explored live in <code className="font-mono">web/patterns/explorations</code> and show only here, until
-          Juan says yes.
+          The design lead says yes.
         </p>
         <p className="font-mono text-xs text-muted-foreground">
           {all.length} patterns · {approved} approved · {all.length - approved} exploring

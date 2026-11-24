@@ -150,7 +150,7 @@ export function FeatureGrid({
               ))}
             </div>
           )
-          // A wide card with its visual in the center (Juan, 2026-11-22): the title above, the points around the
+          // A wide card with its visual in the center (design lead, 2026-11-22): the title above, the points around the
           // visual, half on each side, each with its icon and facing it, and the link under it. On phones: title, visual, points.
           // A wide card with a visual beside it: the text on the left, the visual on the right, from lg.
           const body =

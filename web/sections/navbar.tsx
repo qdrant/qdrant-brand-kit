@@ -40,7 +40,7 @@ export type NavbarProps = SectionProps & {
 
 // The site's top menu (2026-11-21). From lg, each menu opens a panel of columns: a mono group label over items
 // with an icon and an optional tag (Beta, Waitlist). Every panel opens centered under the whole bar, whichever menu
-// opened it (Juan, 2026-11-23, like Cloudflare's). Below lg, the menus fold into a sheet with one accordion per
+// opened it (design lead, 2026-11-23, like Cloudflare's). Below lg, the menus fold into a sheet with one accordion per
 // menu. The logo follows the theme.
 export function Navbar({
   variant = "full",
@@ -74,7 +74,7 @@ export function Navbar({
         className
       )}
       // From lg the full bar is three columns, the logo's and the actions' always the same width, so the menus sit
-      // at the center of the page (Juan, 2026-11-23). Every link and button in the bar is 14px.
+      // at the center of the page (design lead, 2026-11-23). Every link and button in the bar is 14px.
       innerClassName={cn(
         "flex h-16 items-center gap-6 lg:h-18",
         variant === "full" && "lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]"
@@ -90,7 +90,7 @@ export function Navbar({
           align="center"
           sideOffset={8}
           // The tray's double border (web.css .web-tray): the popup is the outer frame and its 6px band, and the
-          // panel inside has its own line (Juan, 2026-11-23).
+          // panel inside has its own line (design lead, 2026-11-23).
           popupClassName="rounded-[calc(var(--radius-xl)+6px)] bg-[linear-gradient(var(--web-tray),var(--web-tray))] ring-(--web-line)"
           className="hidden lg:flex"
         >
@@ -136,7 +136,7 @@ export function Navbar({
 }
 
 // A column holds up to five links, as wide as its longest label (labels never wrap). A group with six or more splits into columns of even length, filled top to
-// bottom, so a panel grows across rather than down (Juan, 2026-11-23).
+// bottom, so a panel grows across rather than down (design lead, 2026-11-23).
 const MAX_PER_COLUMN = 5
 
 function columnsOf<T>(items: T[]): T[][] {
@@ -145,7 +145,7 @@ function columnsOf<T>(items: T[]): T[][] {
   return Array.from({ length: count }, (_, i) => items.slice(i * size, (i + 1) * size))
 }
 
-// A menu's panel (Juan, 2026-11-23, after Cloudflare's): quiet and easy to read. Each group is a mono label over
+// A menu's panel (design lead, 2026-11-23, after Cloudflare's): quiet and easy to read. Each group is a mono label over
 // its columns, with a hairline between groups. An item is its icon, bare and neutral (no tile, no color family; it
 // turns to the text color on hover), its label and an optional tag. The panel has the tray's inner line.
 function MegaPanel({ groups, featured }: { groups: MenuGroup[]; featured?: NavbarProps["featured"] }) {

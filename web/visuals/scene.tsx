@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react"
 import { cn } from "@qdrant/design-system/lib/utils"
 
 // The engine for the website's canvas and WebGL visuals (the globe, the depth haze), from the studio's Space page
-// (Juan, 2026-11-22). Every scene:
+// (design lead, 2026-11-22). Every scene:
 // - reads its colors from the --web-scene-* variables in styles/web.css, so it follows the theme;
 // - draws only while it's on screen and the tab is visible;
 // - draws one still frame when the visitor prefers reduced motion;
