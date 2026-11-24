@@ -36,3 +36,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Generative-Hexagon | Proposals P1 to P3, P6 to P12 | Not approved (too busy). P4 and P5 kept as the directions to explore | 2026-11-24 |
 | Generative-Hexagon | Proposal P18 (filled hexagons, 32 px grid, scale 0.4) | Approved | 2026-11-24 |
 | Generative-Hexagon | Proposal P15 (filled hexagons, 24 px grid, scale 0.4) | Approved | 2026-11-24 |
+| Generative-Hexagon | Proposal P27 (outlined hexagons, 32 px grid, scale 0.45) | Approved | 2026-11-24 |
