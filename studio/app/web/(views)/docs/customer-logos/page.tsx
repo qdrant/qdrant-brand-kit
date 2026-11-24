@@ -24,7 +24,8 @@ export default function CustomerLogos() {
             {customerLogos.length} customers, as SVG in <code className="font-mono text-sm">web/assets/logos/customers</code>
             . Each has a one-color file that the website paints in any color, so the light and dark versions (or a
             neutral, to blend in) come from one file; {withColor} also have a color file, and the rest show the dark
-            version until one is found. Use them with{" "}
+            version until one is found. Color files come from the Figma, qdrant.tech, or the company itself (its press
+            kit, brand page, GitHub or site, or a public-domain file on Wikimedia Commons); each says where. Use them with{" "}
             <code className="font-mono text-sm">{'<CustomerLogo id="hubspot" version="mono" />'}</code> from{" "}
             <code className="font-mono text-sm">web/lib/customer-logo.tsx</code>.
           </p>
@@ -76,7 +77,14 @@ export default function CustomerLogos() {
                     <a href={customerLogoSrc(logo, "mono")} className="block hover:text-foreground">
                       {logo.id}-mono.svg · {kb(logo.bytes)}
                     </a>
-                    <span className="block">From {logo.source}</span>
+                    <span className="block">
+                      {logo.rebrand ? "Current logo" : `One color from ${logo.source}`}
+                    </span>
+                    {logo.colorFrom && (
+                      <a href={logo.colorFrom.url} className="block hover:text-foreground">
+                        {logo.rebrand ? "From" : "Color from"} {logo.colorFrom.kind} ↗
+                      </a>
+                    )}
                   </td>
                 </tr>
               ))}
