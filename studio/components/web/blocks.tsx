@@ -33,10 +33,6 @@ export type WebPage = {
 // it, and keep it by making its CSS the default (web.css, "Proposals") and removing it from here, or drop it by
 // deleting both. Add a switch here and it appears in the canvas, the docs and the builder.
 export const styleSwitches = [
-  { key: "lines", label: "Lines", title: "Rails, seams and nodes", query: ["lines", "0"], attr: ["data-web-lines", "off"], on: true },
-  { key: "material", label: "Material", title: "Plates and trays", query: ["material", "0"], attr: ["data-web-material", "off"], on: true },
-  { key: "patterns", label: "Patterns", title: "Space, data and vector patterns behind sections and in cards", query: ["patterns", "0"], attr: ["data-web-patterns", "off"], on: true },
-  { key: "indigo", label: "Indigo", title: "Indigo hints on nodes, links and pattern accents", query: ["indigo", "0"], attr: ["data-web-indigo", "off"], on: true },
   { key: "trialType", label: "Trial type", title: "Headings from 56px in Medium; off shows today's type set", query: ["type", "current"], attr: ["data-web-type", "current"], on: true },
   { key: "topLight", label: "Top light", title: "Proposal: light from above. A lit top edge on plates, trays and seams, fading at the ends", query: ["toplight", "1"], attr: ["data-web-top-light", "on"], on: false, proposal: true },
   { key: "bevel", label: "Bevel", title: "Proposal: cards and trays with cut corners, the hexagon's angle, instead of rounded ones", query: ["bevel", "1"], attr: ["data-web-bevel", "on"], on: false, proposal: true },

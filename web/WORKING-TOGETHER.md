@@ -140,7 +140,7 @@ Conflicts happen when two branches change the same lines. Stay in your own files
 
 - **Two kinds.** A pattern is one file in `web/patterns/` exporting `definePattern({ id, name, kind, description, Layer })`. A `"background"` pattern sits behind a section's content, and a `"surface"` pattern sits inside each card of a section.
 - **Registering one.** List it in `web/patterns/index.tsx`. It then shows in the studio's Patterns tab and in the Builder's pattern pickers, and any section can use it through its `pattern` or `cardPattern` prop.
-- **What a Layer is.** It fills its parent (absolute, inset 0) and is purely decorative: `aria-hidden`, no pointer events, never text. The `data-web-patterns="off"` switch on the Canvas hides every pattern at once, so you can compare with and without.
+- **What a Layer is.** It fills its parent (absolute, inset 0) and is purely decorative: `aria-hidden`, no pointer events, never text.
 - **The engine.** Canvas and WebGL scenes run on `web/visuals/scene.tsx`:
   - `SceneCanvas` for 2D canvas scenes;
   - `SceneShader` for WebGL2 fragment shaders, which get `u_res`, `u_time`, `u_pointer`, `u_dpr` and the palette colors you ask for as `u_c0…`;

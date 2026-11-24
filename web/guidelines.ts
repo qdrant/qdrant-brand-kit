@@ -97,8 +97,8 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Indigo is the second color",
-        text: "A thread through the website: nodes, the active state of tabs and steps, links and checkmarks. Marks use --web-indigo (indigo-400 on dark, 600 on light), text uses --web-indigo-text (400 on dark, 800 on light). Never a flat fill behind text.",
-        decided: "Design lead, 2026-11-21",
+        text: "A thread through the website: nodes, the active state of tabs and steps, links and checkmarks. Marks use --web-indigo (indigo-400 on dark, 600 on light), text uses --web-indigo-text (400 on dark, 700 on light). It's the secondary color, so the website carries it strongly, always, not as an option (2026-11-24). Never a flat fill behind text.",
+        decided: "Design lead, 2026-11-21 and 2026-11-24",
         source: "web/styles/web.css",
       },
       {
@@ -211,8 +211,8 @@ export const guidelines: GuidelineGroup[] = [
     rules: [
       {
         title: "Rails, seams and nodes",
-        text: "A hairline runs down each side of the page, 24px outside the container (the rails), and between sections (the seam). A horizontal line inside a section reaches the rails, so the lines meet. The navbar and the announcement bar have no rails, and no vertical lines; the navbar keeps its bottom line. The anchor nav's background never hides them: the rails run through it, sticky or not, and the nodes on its bottom line are its own, so they stay with it. Nodes are always on top: no background, sticky or not, ever covers one (design lead, 2026-11-23).",
-        decided: "Design lead, 2026-11-21",
+        text: "Every page and every section has them, always: they're part of the website, not an option (2026-11-24). A hairline runs down each side of the page, 24px outside the container (the rails), and between sections (the seam). A horizontal line inside a section reaches the rails, so the lines meet. The navbar and the announcement bar have no rails, and no vertical lines; the navbar keeps its bottom line. The anchor nav's background never hides them: the rails run through it, sticky or not, and the nodes on its bottom line are its own, so they stay with it. Nodes are always on top: no background, sticky or not, ever covers one (design lead, 2026-11-23).",
+        decided: "Design lead, 2026-11-21 and 2026-11-24",
         source: "web/styles/web.css",
       },
       {
@@ -247,7 +247,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Cards are plates",
-        text: "Cards and panels are a touch lighter at the top, with a 1px inner highlight and a soft shadow on light. Their edge is one step under the strong line: the text color at 11% on dark (about neutral-850) and 10% on light (about neutral-100) (--web-plate-edge, 2026-11-24). A simple card, an icon with a title and a line of text (feature, value, channel and contact cards), has no inner highlight, so its top shows one line, not two (Plate simple, 2026-11-24). Media sit in a tray, a framed holder. Rows of facts sit in a hairline grid.",
+        text: "Every page has the material, always, not as an option (2026-11-24). Cards and panels are a touch lighter at the top, with a 1px inner highlight and a soft shadow on light. Their edge is one step under the strong line: the text color at 11% on dark (about neutral-850) and 10% on light (about neutral-100) (--web-plate-edge, 2026-11-24). A simple card, an icon with a title and a line of text (feature, value, channel and contact cards), has no inner highlight, so its top shows one line, not two (Plate simple, 2026-11-24). Media sit in a tray, a framed holder. Rows of facts sit in a hairline grid.",
         decided: "Design lead, 2026-11-21 and 2026-11-24",
         source: "web/lib/plate.tsx",
       },

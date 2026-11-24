@@ -50,8 +50,8 @@
 }
 
 /* The website's lines and material (design lead, 2026-11-21): a subtle, shared structure every section draws on, before
-   any pattern or shader. Two switches on a page's root (or <body>) turn them off to compare:
-   data-web-lines="off" and data-web-material="off".
+   any pattern or shader. Both are always on, on every page (design lead, 2026-11-24, when their switches were
+   removed).
    - Lines: rails, a hairline down each side of the page, 24px outside the 1200px container, so content never
      touches them; seams, a hairline
      between sections; nodes, small hollow hexagons where a seam meets a rail, upright like the logo's brandmark (design lead,
@@ -172,22 +172,8 @@
 .web-rule {
   border-top: 1px solid var(--web-line);
 }
-[data-web-lines="off"] .web-rule {
-  border-top-color: var(--border);
-}
 .web-cells > * + * {
   border-inline-start: 1px solid var(--web-line);
-}
-[data-web-lines="off"] .web-rails,
-[data-web-lines="off"] .web-node {
-  display: none;
-}
-[data-web-lines="off"] .web-seam {
-  border-top-color: transparent;
-}
-[data-web-lines="off"] .web-cells,
-[data-web-lines="off"] .web-cells > * {
-  border-color: transparent;
 }
 
 .web-plate {
@@ -203,16 +189,6 @@
 /* A simple card (Plate simple: an icon, a title and a line of text) has no inner top light (design lead, 2026-11-24). */
 .web-plate-simple {
   box-shadow: var(--web-plate-shadow);
-}
-[data-web-material="off"] .web-plate {
-  background: var(--card);
-  border-color: var(--border);
-  box-shadow: none;
-}
-[data-web-material="off"] .web-tray {
-  padding: 0;
-  border-color: transparent;
-  background: none;
 }
 /* A section alone (in a frame) or first on a page has no seam above it, so no nodes either. */
 .web-seam:first-child .web-node {
@@ -259,10 +235,6 @@
 }
 .web-grid > * {
   background: var(--background);
-}
-[data-web-lines="off"] .web-grid {
-  background: transparent;
-  border-color: transparent;
 }
 
 /* Tones (design lead, 2026-11-21): color for icons, in a subtle way. An icon sits on a small tile tinted with its color
@@ -394,8 +366,8 @@
    - --web-link, for text links (design lead, 2026-11-22): --web-indigo-text. A link is .web-link (ArrowLink sets it).
    - --web-link-hover (design lead, 2026-11-24): one step lighter on hover, so it visibly answers the pointer:
      indigo-300 on dark (10:1), indigo-600 on light (4.9:1 or more on the light surfaces).
-   The nodes where lines meet take an indigo ring and the active one fills with it. data-web-indigo="off" keeps the
-   nodes and links neutral, to compare. */
+   The nodes where lines meet take an indigo ring and the active one fills with it. Indigo is always on: the website
+   carries the secondary color strongly (design lead, 2026-11-24, when its switch was removed). */
 [data-web],
 [data-web] [data-theme],
 [data-web][data-theme="dark"],
@@ -415,12 +387,6 @@
   --web-link: var(--web-indigo-text);
   --web-link-hover: var(--qd-color-indigo-600);
   --web-node: color-mix(in oklab, var(--web-indigo) 55%, var(--web-line-strong));
-}
-[data-web-indigo="off"],
-[data-web-indigo="off"] [data-theme] {
-  --web-node: var(--web-line-strong);
-  --web-link: var(--foreground);
-  --web-link-hover: var(--foreground);
 }
 /* The selected pill in a row of tabs or a toggle (a code panel's language, a chart's option, grid or list), design lead,
    2026-11-22: a clear fill that stands out on a card, neutral-800 on dark and neutral-100 on light, with the text
@@ -543,12 +509,6 @@
 }
 .web-link-quiet:hover {
   color: var(--web-link);
-}
-
-/* Patterns (web/patterns): layers behind a section's content or inside its cards. Off as a whole with
-   data-web-patterns="off" (the studio's Patterns switch). */
-[data-web-patterns="off"] .web-pattern {
-  display: none;
 }
 
 /* The website's scene colors (design lead, 2026-11-22), for the canvas and WebGL visuals in web/visuals (the globe) and
