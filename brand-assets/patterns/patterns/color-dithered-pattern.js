@@ -13,6 +13,7 @@ export const MESH_LAYOUTS = {
   "diagonal-up": (u, v) => (u + 1 - v) / 2, // light toward the top right (E26)
   "vertical": (u, v) => v, // Vertical, light at the bottom (E27)
   "corner-glow-bottom-left": (u, v) => 1 - Math.hypot(u - 0.15, v - 1) / 0.95, // Corner glow, bottom left (E31)
+  "corner-glow-top-right": (u, v) => 1 - Math.hypot(u - 0.9, v - 0.05) / 0.95, // Corner glow, top right (E32)
 };
 
 // color = { from, to } token references from the colorway; the family is read from them

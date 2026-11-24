@@ -84,6 +84,10 @@
       {
         "name": "Corner glow, bottom left (was exploration E31)",
         "layout": "corner-glow-bottom-left"
+      },
+      {
+        "name": "Corner glow, top right (was exploration E32)",
+        "layout": "corner-glow-top-right"
       }
     ]
   }
