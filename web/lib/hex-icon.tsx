@@ -7,20 +7,21 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import { icons } from "./icon"
 
 // A Lucide icon drawn as a field of small hexagons, upright like the logo's brandmark (design lead, 2026-11-24,
-// exploring): the hexagons on the icon's lines are full size, the ones around them get smaller with distance, like a
-// halftone, and a slow wave from the center makes them a touch larger in rings, so the icon reads as organic rather
-// than pixelated. The shape is always the Lucide icon's own: it's measured, never redrawn.
+// exploring). The icon is filled, not outlined: its shapes are solid hexagons, and the lines drawn inside another
+// shape (a shield's check, a chip's inner square, a database's seams) are cut out as gaps, as filled icons show detail.
+// The hexagons are largest at the center and get smaller toward the outer edges, so the icon reads as organic. A faint
+// halftone past the outline is an option (halo), off by default: in a filled icon it blurs the gaps. The shape is always the Lucide icon's own: it's measured, never redrawn.
 //
 // How: the Lucide icon is rendered hidden at its 24-unit size, and every cell of a hex grid asks the browser whether
-// it falls inside the icon's lines drawn thicker and thicker (isPointInStroke). The thinnest band it falls in sets its
-// size. It runs in the browser once per icon and options, after the first render.
+// it falls inside a shape (isPointInFill) or on its line (isPointInStroke). A shape whose center lies inside a bigger
+// shape is a detail: its line is cut out instead. It runs in the browser once per icon and options.
 
 export type HexIconOptions = {
   // Cells across the icon's 24 units. More is finer.
   density?: number
-  // How strong the concentric rings are, 0 to 1.
-  rings?: number
-  // How far the halftone reaches past the lines, 0 to 1.
+  // How much smaller the hexagons get from the center to the edges, 0 to 1.
+  falloff?: number
+  // How far the halftone reaches past the outline, 0 to 1.
   halo?: number
 }
 
@@ -28,43 +29,68 @@ type Cell = { x: number; y: number; r: number }
 
 const cache = new Map<string, Cell[]>()
 
-// The bands, from the line out: the stroke width each one is tested at (Lucide's own is 2) and the cell's size in it.
-const bands = (halo: number) => [
-  { width: 2, size: 1 },
-  { width: 2.5, size: 0.6 },
-  { width: 2.5 + 1.6 * halo, size: 0.34 },
-  { width: 2.5 + 3.4 * halo, size: 0.18 },
-]
+const smoothstep = (edge0: number, edge1: number, x: number) => {
+  const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)))
+  return t * t * (3 - 2 * t)
+}
 
-function measure(svg: SVGSVGElement, { density = 18, rings = 0.9, halo = 0.3 }: HexIconOptions): Cell[] {
+function measure(svg: SVGSVGElement, { density = 18, falloff = 0.55, halo = 0 }: HexIconOptions): Cell[] {
   const shapes = [...svg.querySelectorAll<SVGGeometryElement>("path, circle, ellipse, line, polyline, polygon, rect")]
+  const point = svg.createSVGPoint()
+  const at = (x: number, y: number) => {
+    point.x = x
+    point.y = y
+    return point
+  }
+  const inStroke = (shape: SVGGeometryElement, width: number, p: DOMPoint) => {
+    shape.style.strokeWidth = String(width)
+    return shape.isPointInStroke(p)
+  }
+  // A detail is a shape whose center lies inside a bigger shape's fill.
+  const boxes = shapes.map((shape) => shape.getBBox())
+  const isDetail = shapes.map((shape, i) => {
+    const b = boxes[i]!
+    const center = at(b.x + b.width / 2, b.y + b.height / 2)
+    return shapes.some((other, j) => {
+      const o = boxes[j]!
+      return j !== i && o.width * o.height > b.width * b.height && other.isPointInFill(center)
+    })
+  })
+  const outer = shapes.filter((_, i) => !isDetail[i])
+  const details = shapes.filter((_, i) => isDetail[i])
+  // A thin open line (like a layer's chevron) stays a line: filling it would turn it into a wedge.
+  const isClosed = (shape: SVGGeometryElement) =>
+    shape.tagName !== "path" && shape.tagName !== "polyline" && shape.tagName !== "line"
+      ? true
+      : /z\s*$/i.test(shape.getAttribute("d") ?? "")
+  const fills = shapes.filter((shape, i) => {
+    const b = boxes[i]!
+    return isClosed(shape) || b.height / Math.max(b.width, 0.01) > 0.35
+  })
+  const lines = outer.filter((shape) => !fills.includes(shape))
+
   const step = 24 / density
   const rowStep = (step * Math.sqrt(3)) / 2
   const out: Cell[] = []
-  const point = svg.createSVGPoint()
-  const ringLength = 24 / 3.2
   for (let row = 0, y = 0; y <= 24; row++, y = row * rowStep) {
     for (let col = 0; ; col++) {
       const x = col * step + (row % 2 ? step / 2 : 0)
       if (x > 24) break
-      point.x = x
-      point.y = y
+      const p = at(x, y)
       let size = 0
-      for (const band of bands(halo)) {
-        const hit = shapes.some((shape) => {
-          shape.style.strokeWidth = String(band.width)
-          return shape.isPointInStroke(point)
-        })
-        if (hit) {
-          size = band.size
-          break
-        }
-      }
+      if (details.some((shape) => inStroke(shape, 1.5, p))) size = 0
+      else if (
+        fills.some((shape) => shape.isPointInFill(p)) ||
+        outer.some((shape) => inStroke(shape, 2, p)) ||
+        lines.some((shape) => inStroke(shape, 2.4, p))
+      )
+        size = 1
+      else if (halo > 0 && outer.some((shape) => inStroke(shape, 2 + 2.4 * halo, p))) size = 0.3
       if (!size) continue
-      const distance = Math.hypot(x - 12, y - 12)
-      const wave = 0.5 + 0.5 * Math.cos((2 * Math.PI * distance) / ringLength)
-      // A full cell is 0.88 of half the step, so neighbors never touch.
-      const r = step * 0.44 * size * (1 - rings * 0.4 + rings * 0.4 * wave)
+      // Largest at the center, smaller toward the edges.
+      const f = 1 - falloff * smoothstep(1, 12.5, Math.hypot(x - 12, y - 12))
+      // A full cell is 0.9 of half the step, so neighbors never touch.
+      const r = step * 0.45 * size * f
       if (r >= 0.12) out.push({ x, y, r })
     }
   }
@@ -86,7 +112,7 @@ export function HexIcon({
   className,
   ...options
 }: { name: string; className?: string } & HexIconOptions) {
-  const key = `${name}:${options.density ?? 18}:${options.rings ?? 0.9}:${options.halo ?? 0.3}`
+  const key = `${name}:${options.density ?? 18}:${options.falloff ?? 0.55}:${options.halo ?? 0}`
   const [, measured] = React.useState(0)
   const cells = cache.get(key)
   const Icon = icons[name]
