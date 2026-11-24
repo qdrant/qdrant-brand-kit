@@ -1,0 +1,89 @@
+{
+  "name": "Generative-Pulse-Pattern",
+  "textMask": "both",
+  "recipe": "generative-pattern",
+  "extends": "generative-pattern.shared",
+  "source": "Pattern Studio connector, Hex pulse look (2026-11-24)",
+  "$description": "Outlined hexagons in big hexagon-shaped rings that fill the frame, from the Pattern Studio connector's Hex pulse look, on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%), hexagons in the family's 800, 600 and 200, like every generative pattern. Approved in the Pattern Library review (exploration H73), 2026-11-24.",
+  "colorways": [
+    {
+      "name": "Background → Indigo 900",
+      "colors": [
+        "{color.indigo.800}",
+        "{color.indigo.600}",
+        "{color.indigo.200}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.indigo.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Amaranth 900",
+      "colors": [
+        "{color.amaranth.800}",
+        "{color.amaranth.600}",
+        "{color.amaranth.200}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.amaranth.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Teal 900",
+      "colors": [
+        "{color.teal.800}",
+        "{color.teal.600}",
+        "{color.teal.200}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.teal.900}",
+          "at": 1.1667
+        }
+      ],
+      "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
+    }
+  ],
+  "settings": {
+    "engine": {
+      "layout": "hex",
+      "cell": 40,
+      "shape": "hexagon",
+      "size": 5,
+      "shaping": "rings",
+      "ringFrequency": 3,
+      "ringSpeed": 1,
+      "ringFade": 1,
+      "noiseAmount": 0.2,
+      "element": "hexagon",
+      "orientation": "fixed",
+      "elementRotation": 30,
+      "scale": 1.0,
+      "minSize": 0.05,
+      "threshold": 0.12,
+      "paint": "stroke",
+      "noiseScale": 3.55,
+      "seed": 13,
+      "warp": 0.29,
+      "drift": 0.4
+    }
+  }
+}

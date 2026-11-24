@@ -168,7 +168,7 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | --- | --- | --- |
 | `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern |
 | `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways) |
-| `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Color-Dithered-Pattern-A, Generative-Hexagon-Pattern, Generative-Burst-Pattern, Mesh-Dithered-Pattern-A |
+| `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Color-Dithered-Pattern-A, Generative-Pulse-Pattern, Generative-Hexagon-Pattern, Generative-Burst-Pattern, Mesh-Dithered-Pattern-A |
 | not set | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick | every other preset or colorway |
 
 - When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
@@ -198,6 +198,7 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | Generative-Hexagon-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | Small outlined hexagons scattered on a 56 px grid, colored top to bottom or, with `{ variant: 0 }`, from the center out (Hexagon-C, merged in 2026-11-24), on the Motion Streaks gradient without the streaks. Hexagons in the family's 800, 600 and 200. Variants 1 to 9: bigger flat hexagons (filled on 24, 32 and 40 px grids, outlined on 32, 48, 56 and 64 px), approved 2026-11-24 |
 | Generative-Burst-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | 1,100 short lines bursting out from the center, on the Motion Streaks gradient without the streaks. Lines in the family's 800, 600 and 200. 13 approved line variants (`{ variant: n }`) from the Pattern Library review |
 | Generative-Dash-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field, on the Motion Streaks gradient without the streaks. 13 approved variants (`{ variant: n }`): 0 is the finer 48 px grid (Dash-B, merged in 2026-11-24), 1 to 12 the looks from the Pattern Library review |
+| Generative-Pulse-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio connector (Hex pulse look) | Outlined hexagons in big hexagon rings that fill the frame, 40 px grid, on the Motion Streaks gradient without the streaks. Hexagons in the family's 800, 600 and 200 |
 | Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Bayer 16×16, darker grade, no noise. Dithers lightness only |
 
 ## Known limits

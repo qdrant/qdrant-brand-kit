@@ -44,7 +44,7 @@ Decided by Vanesa on 2026-11-04.
 | Tone | Family | Patterns |
 | --- | --- | --- |
 | Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Refracted-Pattern-A, Color-Sliced-Pattern-A, Color-Sliced-Pattern-B |
-| Serious / technical | Mesh and generative patterns | Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A, every Generative pattern (Hexagon, Burst, Dash), in any colorway, and Color-Sliced-Pattern-B |
+| Serious / technical | Mesh and generative patterns | Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A, every Generative pattern (Hexagon, Burst, Dash, Pulse), in any colorway, and Color-Sliced-Pattern-B |
 
 Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (decided 2026-11-11).
 
@@ -87,7 +87,7 @@ Rules:
   | --- | --- | --- |
   | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern | Mask, 40% behind the text |
   | `none` | Color-Refracted-Pattern-A | No mask: text sits straight on the pattern |
-  | `both` | Color-Dithered-Pattern-A, Generative-Hexagon-Pattern, Generative-Burst-Pattern, Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
+  | `both` | Color-Dithered-Pattern-A, Generative-Pulse-Pattern, Generative-Hexagon-Pattern, Generative-Burst-Pattern, Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
   | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
