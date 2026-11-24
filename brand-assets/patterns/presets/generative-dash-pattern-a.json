@@ -4,7 +4,7 @@
   "recipe": "generative-pattern",
   "extends": "generative-pattern.shared",
   "source": "Pattern Studio export, 1620 x 1080",
-  "$description": "Pattern Studio's dashes on a 64 px grid on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%, top to bottom), in the family's 800, 600 and 200, like Motion-Streaks-Pattern-B's letters (Vanesa, 2026-11-24).",
+  "$description": "Pattern Studio's dashes on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%, top to bottom), in the family's 800, 600 and 200, like every generative pattern. Dash-B was merged into it on 2026-11-24 as variant 0 (finer 48 px grid). Variants 1 to 12 are the dash looks approved in the Pattern Library review (from the Pattern Studio connector). Draw one with renderPattern(..., { variant: n }).",
   "colorways": [
     {
       "name": "Background → Indigo 900",
@@ -77,6 +77,149 @@
       "lineWidth": 3,
       "orientation": "fixed",
       "elementRotation": -180
-    }
+    },
+    "variants": [
+      {
+        "name": "Finer grid (was Dash-B)",
+        "cell": 48,
+        "padding": 40
+      },
+      {
+        "name": "Dense, patchy (was proposal P1)",
+        "shape": "none",
+        "cell": 32,
+        "scale": 1.04,
+        "threshold": 0.15,
+        "noiseAmount": 0.64,
+        "noiseScale": 3.35,
+        "seed": 10,
+        "warp": 0.06
+      },
+      {
+        "name": "Sparser, larger dashes (was proposal P2)",
+        "shape": "none",
+        "cell": 40,
+        "scale": 0.97,
+        "threshold": 0.29,
+        "noiseAmount": 0.32,
+        "noiseScale": 2.1,
+        "seed": 36,
+        "warp": 0.04
+      },
+      {
+        "name": "Fine grid, even (was proposal P3)",
+        "shape": "none",
+        "cell": 24,
+        "scale": 0.66,
+        "threshold": 0.02,
+        "noiseAmount": 0.04,
+        "noiseScale": 2.75,
+        "seed": 39,
+        "warp": 0.28
+      },
+      {
+        "name": "Wide grid, patchy and warped (was proposal P4)",
+        "shape": "none",
+        "cell": 48,
+        "scale": 0.93,
+        "threshold": 0.04,
+        "noiseAmount": 0.69,
+        "noiseScale": 4.05,
+        "seed": 8,
+        "warp": 0.32
+      },
+      {
+        "name": "Dense, short dashes (was proposal P5)",
+        "shape": "none",
+        "cell": 32,
+        "scale": 0.52,
+        "threshold": 0.03,
+        "noiseAmount": 0.65,
+        "noiseScale": 4.05,
+        "seed": 27,
+        "warp": 0.34
+      },
+      {
+        "name": "Even spread (was proposal P6)",
+        "shape": "none",
+        "cell": 40,
+        "scale": 0.67,
+        "threshold": 0.08,
+        "noiseAmount": 0.29,
+        "noiseScale": 4.1,
+        "seed": 91,
+        "warp": 0.27
+      },
+      {
+        "name": "Fine grid, warped (was proposal P7)",
+        "shape": "none",
+        "cell": 24,
+        "scale": 0.69,
+        "threshold": 0.07,
+        "noiseAmount": 0.28,
+        "noiseScale": 2.4,
+        "seed": 24,
+        "warp": 0.32
+      },
+      {
+        "name": "Wide grid, short dashes (was proposal P8)",
+        "shape": "none",
+        "cell": 48,
+        "scale": 0.51,
+        "threshold": 0.05,
+        "noiseAmount": 0.56,
+        "noiseScale": 2.55,
+        "seed": 20,
+        "warp": 0.02
+      },
+      {
+        "name": "Long thin dashes, faint (was proposal P9)",
+        "shape": "none",
+        "cell": 32,
+        "scale": 0.75,
+        "threshold": 0.01,
+        "lineLength": 1.6,
+        "lineWidth": 1,
+        "noiseAmount": 0.14,
+        "noiseScale": 1.6,
+        "seed": 83,
+        "warp": 0.04
+      },
+      {
+        "name": "Even, large dashes (was proposal P10)",
+        "shape": "none",
+        "cell": 40,
+        "scale": 0.85,
+        "threshold": 0.2,
+        "noiseAmount": 0.04,
+        "noiseScale": 2.4,
+        "seed": 92,
+        "warp": 0.27
+      },
+      {
+        "name": "Short thin dashes, faint (was proposal P11)",
+        "shape": "none",
+        "cell": 32,
+        "scale": 0.85,
+        "threshold": 0.19,
+        "lineLength": 0.85,
+        "lineWidth": 1,
+        "noiseAmount": 0.28,
+        "noiseScale": 2.8,
+        "seed": 67,
+        "warp": 0.26
+      },
+      {
+        "name": "Wide grid, medium (was proposal P12)",
+        "shape": "none",
+        "cell": 48,
+        "scale": 0.6,
+        "threshold": 0.1,
+        "noiseAmount": 0.33,
+        "noiseScale": 3,
+        "seed": 47,
+        "warp": 0.3
+      }
+    ]
   }
 }

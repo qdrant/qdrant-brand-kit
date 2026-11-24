@@ -166,7 +166,7 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 
 | `textMask` | Meaning | Presets |
 | --- | --- | --- |
-| `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern-A, Generative-Dash-Pattern-B |
+| `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern-A |
 | `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways) |
 | `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A, Mesh-Dithered-Pattern-A |
 | not set | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick | every other preset or colorway |
@@ -196,8 +196,7 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | Mesh-Sliced-Pattern-A | Any library image | [Frame 20713:50540](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50540) | Approved slice shift (tuned by eye) |
 | Generative-Hexagon-Pattern-B | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | Small outlined hexagons scattered on a 56 px grid, colored top to bottom or, with `{ variant: 0 }`, from the center out (Hexagon-C, merged in 2026-11-24), on the Motion Streaks gradient without the streaks. Hexagons in the family's 800, 600 and 200 |
 | Generative-Burst-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | 1,100 short lines bursting out from the center, on the Motion Streaks gradient without the streaks. Lines in the family's 800, 600 and 200 |
-| Generative-Dash-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field, on the Motion Streaks gradient without the streaks |
-| Generative-Dash-Pattern-B | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | Like Dash-A, on a finer 48 px grid with 40 px padding |
+| Generative-Dash-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field, on the Motion Streaks gradient without the streaks. 13 approved variants (`{ variant: n }`): 0 is the finer 48 px grid (Dash-B, merged in 2026-11-24), 1 to 12 the looks from the Pattern Library review |
 | Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Bayer 16×16, darker grade, no noise. Dithers lightness only |
 
 ## Known limits

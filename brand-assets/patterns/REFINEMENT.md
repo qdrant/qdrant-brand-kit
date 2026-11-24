@@ -26,3 +26,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Color-Sliced-B | Proposal P16 (terminal v4: ramp glyphs, color radial, noise 0.49 at 2.25, scale 0.63) | Approved; added as letter option 3 in every colorway. The other terminal proposals are not approved | 2026-11-24 |
 | Generative-Hexagon-B | All | Same as the other generative patterns: Motion Streaks gradient, colorways Indigo, Amaranth, Teal (on hold), hexagons in 800/600/200 | 2026-11-24 |
 | Generative-Hexagon-B, C | All | Merged into Generative-Hexagon-Pattern-B (they differed only in color mapping). C's center-out look is variant 0 | 2026-11-24 |
+| Generative-Dash-A, B | All; proposals P1 to P12 | Merged into Generative-Dash-Pattern-A: Dash-B is variant 0, the 12 proposals (all approved) are variants 1 to 12 | 2026-11-24 |
