@@ -4,23 +4,24 @@
   "textMask": "mask",
   "recipe": "color-sliced-pattern",
   "extends": "shared",
+  "$colorways": "Each colorway runs from its family's 975 to its 700, for a softer contrast between dark and light areas (Vanesa, 2026-11-24, proposal S6). It replaced Neutral 950 → the family's 600. Teal stays on hold.",
   "colorways": [
     {
-      "name": "Neutral 950 → Amaranth 600",
-      "from": "color.neutral.950",
-      "to": "color.amaranth.600",
+      "name": "Amaranth 975 → Amaranth 700",
+      "from": "color.amaranth.975",
+      "to": "color.amaranth.700",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
     },
     {
-      "name": "Neutral 950 → Indigo 600",
-      "from": "color.neutral.950",
-      "to": "color.indigo.600",
+      "name": "Indigo 975 → Indigo 700",
+      "from": "color.indigo.975",
+      "to": "color.indigo.700",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
     },
     {
-      "name": "Neutral 950 → Teal 600",
-      "from": "color.neutral.950",
-      "to": "color.teal.600",
+      "name": "Teal 975 → Teal 700",
+      "from": "color.teal.975",
+      "to": "color.teal.700",
       "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
     }
   ],
