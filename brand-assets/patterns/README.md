@@ -157,9 +157,9 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 
 | `textMask` | Meaning | Presets |
 | --- | --- | --- |
-| `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Neutral 950 → Indigo 600) |
-| `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways), Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600) |
-| `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Neutral 950 → Indigo 900), Mesh-Dithered-Pattern-A |
+| `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern-A, Generative-Dash-Pattern-B |
+| `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways), Generative-Hexagon-Pattern-B |
+| `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A, Mesh-Dithered-Pattern-A |
 | not set | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick | every other preset or colorway |
 
 - When the answer differs by colorway (Burst-A, Glyph-B), `textMask` sits on the colorway instead of the preset.
@@ -187,9 +187,9 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | Mesh-Sliced-Pattern-A | Any library image | [Frame 20713:50540](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50540) | Approved slice shift (tuned by eye) |
 | Generative-Hexagon-Pattern-B | Neutral 950 → Amaranth 600 | Pattern Studio export | Small outlined hexagons scattered on a 56 px grid, colored top to bottom. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Hexagon-Pattern-C | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | Like Hexagon-B, colored from the center out, on the Motion Streaks gradient without the streaks. Hexagons in the family's 800, 600 and 200 |
-| Generative-Burst-Pattern-A | Neutral 950 → Indigo 900, Neutral 950 → Indigo 600, Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600 | Pattern Studio export | 1,100 short lines bursting out from the center. Pixel-identical to the tool at 1620 × 1080 (Neutral 950 → Indigo 600 within 2/255: the tool's #090E1A isn't a token, so it uses neutral.950) |
-| Generative-Dash-Pattern-A | Neutral 950 → Indigo 900 | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field. Pixel-identical to the tool at 1620 × 1080 |
-| Generative-Dash-Pattern-B | Neutral 950 → Amaranth 600 | Pattern Studio export | Like Dash-A, on a finer 48 px grid with 40 px padding. Pixel-identical to the tool at 1620 × 1080 |
+| Generative-Burst-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | 1,100 short lines bursting out from the center, on the Motion Streaks gradient without the streaks. Lines in the family's 800, 600 and 200 |
+| Generative-Dash-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field, on the Motion Streaks gradient without the streaks |
+| Generative-Dash-Pattern-B | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold) | Pattern Studio export | Like Dash-A, on a finer 48 px grid with 40 px padding |
 | Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Bayer 16×16, darker grade, no noise. Dithers lightness only |
 
 ## Known limits

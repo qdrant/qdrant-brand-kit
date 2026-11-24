@@ -13,3 +13,5 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Color-Refracted-A | #1 and #2 (both colorways) | On hold: not sure about this pattern yet | 2026-11-24 |
 | Generative-Hexagon-C | All | Hexagons on the Motion Streaks gradient without streaks; colorways Indigo, Amaranth, Teal (on hold), hexagons in 800/600/200 | 2026-11-24 |
 | Generative-Glyph-A, Generative-Glyph-B | All | Removed. The letter layers (generative-glyph-layer-a/b) stay | 2026-11-24 |
+| Generative-Burst-A | All | On the Motion Streaks gradient, colorways Indigo, Amaranth, Teal (on hold), lines in 800/600/200. Indigo 600 → Indigo 400 removed | 2026-11-24 |
+| Generative-Dash-A, Generative-Dash-B | All | Same as Burst-A and Hexagon-C: Motion Streaks gradient, three colorways, 800/600/200 | 2026-11-24 |
