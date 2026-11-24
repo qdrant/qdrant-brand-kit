@@ -40,8 +40,6 @@ export const styleSwitches = [
   { key: "trialType", label: "Trial type", title: "Headings from 56px in Medium; off shows today's type set", query: ["type", "current"], attr: ["data-web-type", "current"], on: true },
   { key: "topLight", label: "Top light", title: "Proposal: light from above. A lit top edge on plates, trays and seams, fading at the ends", query: ["toplight", "1"], attr: ["data-web-top-light", "on"], on: false, proposal: true },
   { key: "bevel", label: "Bevel", title: "Proposal: cards and trays with cut corners, the hexagon's angle, instead of rounded ones", query: ["bevel", "1"], attr: ["data-web-bevel", "on"], on: false, proposal: true },
-  { key: "marks", label: "Marks", title: "Proposal: registration marks at the corners of plates and trays, like a technical drawing", query: ["marks", "1"], attr: ["data-web-marks", "on"], on: false, proposal: true },
-  { key: "recess", label: "Recess", title: "Proposal: media sits in a recessed well, darker than the page, lit from above", query: ["recess", "1"], attr: ["data-web-recess", "on"], on: false, proposal: true },
 ] as const
 
 export type StyleKey = (typeof styleSwitches)[number]["key"]

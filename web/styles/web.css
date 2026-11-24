@@ -726,18 +726,12 @@
 [data-theme="dark"] [data-web] {
   --web-lit: color-mix(in oklab, var(--foreground) 32%, transparent);
   --web-lit-soft: color-mix(in oklab, var(--foreground) 4%, transparent);
-  --web-mark: color-mix(in oklab, var(--foreground) 40%, transparent);
-  --web-well: color-mix(in oklab, var(--qd-color-neutral-1000) 22%, var(--background));
-  --web-well-shade: rgb(0 0 0 / 0.35);
 }
 [data-web][data-theme="light"],
 [data-web] [data-theme="light"],
 [data-theme="light"] [data-web] {
   --web-lit: rgb(255 255 255 / 1);
   --web-lit-soft: color-mix(in oklab, var(--qd-color-indigo-100) 35%, transparent);
-  --web-mark: color-mix(in oklab, var(--foreground) 35%, transparent);
-  --web-well: var(--qd-color-neutral-50);
-  --web-well-shade: rgb(7 11 17 / 0.08);
 }
 
 /* Top light: light from above. Cards and trays get a lit top edge, brightest in the middle and fading to the corners,
@@ -791,53 +785,6 @@
 [data-web-bevel="on"] .web-tray[class*="radius-xl"] > * {
   corner-shape: bevel;
   border-radius: 14px;
-}
-
-/* Marks: registration marks at a card's and a tray's corners, as on a technical drawing or a viewfinder, 8px long,
-   6px in from the edge. */
-[data-web-marks="on"] .web-plate,
-[data-web-marks="on"] .web-tray {
-  position: relative;
-  isolation: isolate;
-}
-[data-web-marks="on"] .web-plate::before,
-[data-web-marks="on"] .web-tray[class*="radius-xl"]::before {
-  --m: var(--web-mark);
-  content: "";
-  position: absolute;
-  inset: 6px;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(var(--m), var(--m)) left top / 8px 1px no-repeat,
-    linear-gradient(var(--m), var(--m)) left top / 1px 8px no-repeat,
-    linear-gradient(var(--m), var(--m)) right top / 8px 1px no-repeat,
-    linear-gradient(var(--m), var(--m)) right top / 1px 8px no-repeat,
-    linear-gradient(var(--m), var(--m)) left bottom / 8px 1px no-repeat,
-    linear-gradient(var(--m), var(--m)) left bottom / 1px 8px no-repeat,
-    linear-gradient(var(--m), var(--m)) right bottom / 8px 1px no-repeat,
-    linear-gradient(var(--m), var(--m)) right bottom / 1px 8px no-repeat;
-}
-[data-web-marks="on"] .web-tray[class*="radius-xl"]::before {
-  inset: -4px;
-}
-/* With Bevel on, the marks step in past the cut corners. */
-[data-web-bevel="on"][data-web-marks="on"] .web-plate::before,
-[data-web-bevel="on"] [data-web-marks="on"] .web-plate::before,
-[data-web-marks="on"][data-web-bevel="on"] .web-plate::before {
-  inset: 10px;
-}
-
-/* Recess: media sits in a well cut into the page, darker than the page on dark and a step grey on light, shaded
-   along its top edge and lit along its bottom one, so screens and code read as set into the surface. */
-[data-web-recess="on"] .web-tray {
-  padding: 8px;
-  background: var(--web-well);
-  border-color: var(--web-line);
-  box-shadow:
-    inset 0 2px 4px var(--web-well-shade),
-    inset 0 1px 0 var(--web-well-shade),
-    0 1px 0 var(--web-highlight);
 }
 
 /* A marquee of logos (logo cloud, proposal 2026-11-24): the row drifts left, 60s a lap, and holds still on hover and
