@@ -3,7 +3,7 @@
   "textMask": "both",
   "recipe": "color-dithered-pattern",
   "extends": "shared",
-  "$description": "Mesh-Dithered-Pattern-A's dither on a mesh built from one family's five dark steps (975, 950, 900, 800, 700), dark top left to lighter bottom right. No library image, so it isn't on hold with the mesh patterns. Approved in the Pattern Library review (exploration E25), 2026-11-24.",
+  "$description": "Mesh-Dithered-Pattern-A's dither on a mesh built from one family's five dark steps (975, 950, 900, 800, 700), dark top left to lighter bottom right. No library image, so it isn't on hold with the mesh patterns. Approved in the Pattern Library review (exploration E25), 2026-11-24. Variant 0 (renderPattern option variant: 0) lays the mesh the other way, lighter toward the top right (E26).",
   "colorways": [
     {
       "name": "Indigo 975 → Indigo 700",
@@ -71,6 +71,12 @@
       "contrast": 1.24,
       "darkest": 8,
       "lightest": 96
-    }
+    },
+    "variants": [
+      {
+        "name": "Diagonal, light toward the top right (was exploration E26)",
+        "layout": "diagonal-up"
+      }
+    ]
   }
 }

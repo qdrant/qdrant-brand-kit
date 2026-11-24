@@ -7,6 +7,7 @@
 
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { letterLayerProblems, fromStudioParams } from "../patterns/letter-variations.js";
+import { MESH_LAYOUTS } from "../patterns/color-dithered-pattern.js";
 
 const read = (path) => JSON.parse(readFileSync(path, "utf8"));
 const errors = [];
@@ -128,7 +129,11 @@ for (const id of ids) {
   }
 
   // Approved variants (generative): only engine settings the pattern already has.
-  for (const v of p.settings?.variants ?? []) {
+  // Color-Dithered variants name another mesh layout.
+  if (p.recipe === "color-dithered-pattern") {
+    for (const v of [p.settings?.meshLayout?.kind, ...(p.settings?.variants ?? []).map((x) => x.layout)])
+      if (!(v in MESH_LAYOUTS)) errors.push(`${where}: mesh layout "${v}" isn't in MESH_LAYOUTS (patterns/color-dithered-pattern.js)`);
+  } else for (const v of p.settings?.variants ?? []) {
     const { name, ...values } = v;
     const unknown = Object.keys(values).filter((k) => !(k in (p.settings?.engine ?? {})));
     if (unknown.length) errors.push(`${where}: variant "${name}" sets ${unknown.join(", ")}, which the engine doesn't have`);

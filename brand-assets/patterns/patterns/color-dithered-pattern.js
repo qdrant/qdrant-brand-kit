@@ -9,14 +9,19 @@ import { makeFrame } from "./effects.js";
 
 // Where the light sits, 0 (darkest step) to 1 (lightest step), for a grid point (u, v) in 0..1.
 export const MESH_LAYOUTS = {
-  diagonal: (u, v) => (u + v) / 2, // light toward the bottom right
+  diagonal: (u, v) => (u + v) / 2, // light toward the bottom right (E25)
+  "diagonal-up": (u, v) => (u + 1 - v) / 2, // light toward the top right (E26)
 };
 
 // color = { from, to } token references from the colorway; the family is read from them
 // (color.indigo.975 -> indigo). frame = makeFrame(width, height).
-export function render(canvas, tokens, preset, color, frame = makeFrame()) {
+// options.variant picks one of settings.variants: another approved mesh layout.
+export function render(canvas, tokens, preset, color, frame = makeFrame(), options = {}) {
   const family = color.from.split(".")[1];
-  const { kind, steps, size } = preset.settings.meshLayout;
+  const variant = options.variant == null ? null : preset.settings.variants?.[options.variant];
+  if (options.variant != null && !variant) throw new Error(`${preset.name} has no approved variant #${options.variant}`);
+  const { steps, size } = preset.settings.meshLayout;
+  const kind = variant?.layout ?? preset.settings.meshLayout.kind;
   const layout = MESH_LAYOUTS[kind];
   if (!layout) throw new Error(`${preset.name}: unknown mesh layout "${kind}"`);
   const n = size ?? 11;
