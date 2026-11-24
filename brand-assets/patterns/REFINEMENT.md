@@ -54,3 +54,4 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Color-Dithered-Pattern-A | All, with variants 0 to 3 | On hold, with the mesh patterns | 2026-11-24 |
 | Generative-Pulse-Pattern (new) | Exploration H73 (Hex pulse look, big rings filling the frame) | Approved: new generative pattern in Indigo, Amaranth and Teal (on hold) | 2026-11-24 |
 | Generative-Rings-Pattern (new) | Explorations X1 (reference), X3, X6, X8, X9, X10, X12 to X16 | Approved: new generative pattern from Vanesa's reference, X1 as the base and the others as variants 0 to 9, in Indigo, Amaranth and Teal (on hold) | 2026-11-24 |
+| All patterns | Usage | Rules for agents in guidelines/ section 2a: nothing on hold is used (every teal colorway, mesh patterns, Color-Refracted-A, Color-Dithered-A); color ratio set after the council's approval; new combinations only from approved parts. `isOnHold` and `usableColorways` in patterns/index.js | 2026-11-24 |

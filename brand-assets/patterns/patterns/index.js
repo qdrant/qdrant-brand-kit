@@ -57,6 +57,16 @@ export const loadPatterns = (base = "presets") => loadAllPresets(base);
 export const isMeshPattern = (preset) => Boolean(preset.meshGroup);
 export const isGenerativePattern = (preset) => preset.recipe === "generative-pattern";
 
+// On hold (Vanesa, 2026-11-24): a pattern or colorway marked "onHold" is never used to
+// make a new asset (guidelines/ section 2a). Every teal colorway, the mesh patterns,
+// Color-Refracted-A and Color-Dithered-A are on hold now. Review pages may still draw them.
+export const isOnHold = (preset, colorway) =>
+  Boolean(preset.onHold) || (colorway != null && Boolean(preset.colorways?.[colorway]?.onHold));
+
+// The colorway indexes an agent may use for this pattern: none when the whole pattern is on hold.
+export const usableColorways = (preset) =>
+  preset.onHold ? [] : (preset.colorways ?? []).map((_, i) => i).filter((i) => !isOnHold(preset, i));
+
 // The choices a person can make for a pattern. Color patterns: colorways, and for a
 // colorway with {family}, the families that have its steps. Mesh patterns: none,
 // the mesh comes from the picked library image.

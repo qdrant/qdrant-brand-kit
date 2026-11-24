@@ -1,5 +1,6 @@
 {
   "name": "Color-Refracted-Pattern-A",
+  "onHold": "Under review: Vanesa isn't sure about this pattern yet (2026-11-24). Don't use it in creatives until she decides.",
   "textMask": "none",
   "recipe": "color-refracted-pattern",
   "extends": "shared",

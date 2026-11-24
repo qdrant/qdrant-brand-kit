@@ -18,6 +18,13 @@ Brand patterns written as code, ready to live in Design Lab as primitives. No im
 
 **Color patterns** take a colorway. **Mesh patterns** take a mesh, made once from a library image. The image itself is never kept. **Generative patterns** come from Pattern Studio and take a colorway, like Color patterns.
 
+## What agents may use (2026-11-24)
+
+The rules are in [`guidelines/`](../../guidelines/) section 2a. In short:
+
+- **Never use anything on hold:** every teal colorway, the mesh patterns, Color-Refracted-Pattern-A and Color-Dithered-Pattern-A. Check with `isOnHold(preset, colorway)`, or pick from `usableColorways(preset)`. The color ratio (amaranth, indigo, teal) is set after the council approves the style direction.
+- **New combinations only from approved parts:** colorway × Color-Sliced stripes (`stripes`), letter options or letter variations (`letterOption`, `letters`), Motion Streaks ranges and the approved directions (`streaks`), and generative variants (`variant`). Anything else goes through the Pattern Library review first.
+
 ## Using it in a tool
 
 Everything goes through one file, `patterns/index.js`:

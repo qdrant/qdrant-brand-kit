@@ -43,23 +43,56 @@ Decided by Vanesa on 2026-11-04.
 
 | Tone | Family | Patterns |
 | --- | --- | --- |
-| Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Refracted-Pattern-A, Color-Sliced-Pattern-A, Color-Sliced-Pattern-B |
-| Serious / technical | Mesh and generative patterns | Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A, every Generative pattern (Hexagon, Burst, Dash, Pulse, Rings), in any colorway, and Color-Sliced-Pattern-B |
+| Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Sliced-Pattern-A, Color-Sliced-Pattern-B (Color-Refracted-Pattern-A and Color-Dithered-Pattern-A are on hold) |
+| Serious / technical | Motion Streaks and generative patterns | Motion-Streaks-Pattern-A and B, every Generative pattern (Hexagon, Burst, Dash, Pulse, Rings), and Color-Sliced-Pattern-B (the mesh patterns are on hold) |
 
 Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (decided 2026-11-11).
 
 **Color-Sliced (red and violet): use Color-Sliced-Pattern-B, with the QDRANT letter layer, by default** (about 8 creatives in 10). Color-Sliced-Pattern-A, the slices without letters, only in creatives with headshots, where the letters would compete with the faces (decided 2026-11-11).
 
-**Must: pick by how much text there is** (Vanesa, 2026-11-16). Mesh-Refracted and Mesh-Sliced patterns are only for creatives with **little text** (a title and a button). Posts with a date, a place or other details use a **Color or Generative** pattern. Mesh-Dithered-Pattern-A works as it is.
+**Must: pick by how much text there is** (Vanesa, 2026-11-16). Mesh-Refracted and Mesh-Sliced patterns are only for creatives with **little text** (a title and a button). Posts with a date, a place or other details use a **Color or Generative** pattern. Mesh-Dithered-Pattern-A works as it is. (All mesh patterns are on hold for now, section 2a; this rule applies again if they come back.)
+
+## 2a. Which patterns agents may use, and the combinations they may make
+
+Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits on top of the other pattern rules; when a rule elsewhere is stricter, the stricter one wins.
+
+**Must: never use anything on hold.** A pattern or colorway marked `onHold` is never used to make a new asset, not even when asked for the look, until Vanesa changes its status. Check with `isOnHold(preset, colorway)` from [`patterns/index.js`](../brand-assets/patterns/patterns/index.js), or `usableColorways(preset)`. On hold now, and possibly removed later:
+
+| On hold | Why |
+| --- | --- |
+| Every **teal** colorway, in every pattern | Waiting for the council's approval of the sub-direction. No teal in any asset until the status changes |
+| Every mesh pattern: Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A | Under review |
+| Color-Refracted-Pattern-A | Under review |
+| Color-Dithered-Pattern-A | Under review |
+
+**Color ratio: to be defined.** How often each family (amaranth, indigo, teal) is used gets a ratio after the council approves the style direction. Until then the provisional rule in section 3 applies: indigo by default, amaranth only for impact and only when the person says yes, never teal.
+
+**Approved patterns and what an agent may combine.** Any approved pattern can be used. Agents can make new combinations of it, but only from the approved parts below. A value that isn't listed (a new angle, a new stripe, a new Pattern Studio look) is never invented in an asset: it goes through the Pattern Library review first.
+
+| Pattern | Colorways (not on hold) | What may vary, in any combination |
+| --- | --- | --- |
+| Color-Sliced-Pattern-A | Neutral 950 → Amaranth 600, Neutral 950 → Indigo 600 | Its own slices, or one of the 5 approved stripes (`stripes: 0` to `4`) |
+| Color-Sliced-Pattern-B | Same as A (inherited) | Any Color-Sliced-A base (above) × letters: one of the 4 approved letter options (`letterOption: 0` to `3`), or any letter variation within the letter-layer rules (Pattern Studio terminal look through `fromStudioParams`, or `letters: n`) |
+| Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900 | Length 16–80, density 8–64, softness 32–64, all on the 8 grid; direction 0°, 96°, 104°, 124°, 144°, 160°, 288° or 320° |
+| Motion-Streaks-Pattern-B | Same as A | Everything A allows × letter variations within the letter-layer rules |
+| Generative-Hexagon-Pattern | Background → Indigo 900, Background → Amaranth 900 | As is, or one of its approved variants (`variant: n`) |
+| Generative-Burst-Pattern | Same | As is, or one of its 13 line variants |
+| Generative-Dash-Pattern | Same | As is, or one of its 13 variants |
+| Generative-Pulse-Pattern | Same | As is |
+| Generative-Rings-Pattern | Same | As is, or one of its 10 variants |
+
+- **Must:** every approved pattern renders at any size and shape (section 10), so format is free too.
+- **Must not:** mix parts of two patterns (for example Rings' variant on Hexagon), change a generative pattern's engine values outside its variants, or use a value outside the ranges above.
+- **Must:** generative pattern names have no letter (Generative-Hexagon-Pattern, not Hexagon-B): one pattern per element, its looks are variants.
 
 The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patterns/).
 
 ## 3. Red backgrounds
 
 - **Must: patterns are indigo or amaranth.** Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
-- **On hold: teal.** Teal pattern colorways (Motion Streaks) are allowed in principle but **on hold until the council approves the sub-direction** (Vanesa, 2026-11-24). Until then, never use a colorway marked `onHold`. Other colors stay out of pattern backgrounds.
-- **On hold: mesh patterns, Color-Refracted-Pattern-A and Color-Dithered-Pattern-A.** Every mesh pattern (Mesh-Refracted A to D, Mesh-Sliced-A, Mesh-Dithered-A), both Color-Refracted-A colorways and Color-Dithered-A are on hold while Vanesa reviews them (2026-11-24). A pattern or colorway marked `onHold` is never used in creatives.
-- **Proportions (provisional):** indigo for most creatives, amaranth rarely. These aren't final: they'll be revised after the council approves the direction (Vanesa, 2026-11-24).
+- **On hold: teal.** Every teal colorway, in every pattern, is allowed in principle but **on hold until the council approves the sub-direction** (Vanesa, 2026-11-24). Agents make no asset in teal until the status changes. Other colors stay out of pattern backgrounds.
+- **On hold: mesh patterns, Color-Refracted-Pattern-A and Color-Dithered-Pattern-A** (section 2a). A pattern or colorway marked `onHold` is never used in creatives.
+- **Proportions (provisional):** indigo for most creatives, amaranth rarely, no teal. A ratio for each family (amaranth, indigo, teal) will be set after the council approves the style direction (Vanesa, 2026-11-24).
 - **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway) is only for creatives that need to **grab a lot of attention and be more impactful**.
 - **Ask:** never pick amaranth on your own. Offer it, and use it only when the person says yes.
 - Everywhere else, amaranth stays an accent (buttons, highlights), as [`primitives/colors/`](../primitives/colors/) says.
