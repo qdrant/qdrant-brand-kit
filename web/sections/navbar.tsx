@@ -591,19 +591,13 @@ function Highlight({
     return (
       <Plate
         as="div"
-        className="group/tile relative flex min-h-11 flex-1 items-start overflow-hidden rounded-lg"
+        className="group/tile relative isolate flex min-h-11 flex-1 overflow-hidden rounded-lg"
       >
-        {/* The pattern fills the right side, past the label, and fades toward it. It's mirrored so its dense side (it
-            gathers toward the lower left) sits at the tile's edge, and a little stronger than in a card. */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 w-[58%] -scale-x-100 [mask-image:linear-gradient(to_left,transparent,black_55%)] [&_.web-generative]:opacity-85"
-        >
-          <Drift />
-        </span>
+        {/* The whole tile is the link, with the menu's links' hover; its label sits at the top, in line with the
+            column's rows. */}
         <NavigationMenuLink
           href={item.href}
-          className="relative gap-1.5 p-3 text-sm font-medium text-foreground hover:bg-transparent hover:text-(--web-link)"
+          className="z-0 w-full items-start gap-1.5 rounded-lg p-3 text-sm font-medium text-foreground"
         >
           {item.label}
           <ArrowUpRight
@@ -611,6 +605,15 @@ function Highlight({
             aria-hidden
           />
         </NavigationMenuLink>
+        {/* The pattern fills the right side, past the label, and fades toward it, above the hover's fill. It's
+            mirrored so its dense side (it gathers toward the lower left) sits at the tile's edge, and a little
+            stronger than in a card. */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[58%] -scale-x-100 [mask-image:linear-gradient(to_left,transparent,black_55%)] [&_.web-generative]:opacity-85"
+        >
+          <Drift />
+        </span>
       </Plate>
     )
   }
