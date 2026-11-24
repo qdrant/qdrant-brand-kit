@@ -85,8 +85,8 @@ Rules:
   | `textMask` | Patterns | What to do |
   | --- | --- | --- |
   | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Neutral 950 → Indigo 600) | Mask, 40% behind the text |
-  | `none` | Color-Refracted-Pattern-A, Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Neutral 950 → Indigo 600) | No mask: text sits straight on the pattern |
-  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Neutral 950 → Indigo 900), Generative-Glyph-Pattern-B (Indigo 600 → Indigo 400), Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
+  | `none` | Color-Refracted-Pattern-A, Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600) | No mask: text sits straight on the pattern |
+  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Neutral 950 → Indigo 900), Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
   | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.

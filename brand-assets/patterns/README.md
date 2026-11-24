@@ -158,8 +158,8 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | `textMask` | Meaning | Presets |
 | --- | --- | --- |
 | `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Neutral 950 → Indigo 600) |
-| `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways), Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Neutral 950 → Indigo 600) |
-| `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Neutral 950 → Indigo 900), Generative-Glyph-Pattern-B (Indigo 600 → Indigo 400), Mesh-Dithered-Pattern-A |
+| `"none"` | No mask, text sits straight on the pattern | Color-Refracted-Pattern-A (both colorways), Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600) |
+| `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Neutral 950 → Indigo 900), Mesh-Dithered-Pattern-A |
 | not set | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick | every other preset or colorway |
 
 - When the answer differs by colorway (Burst-A, Glyph-B), `textMask` sits on the colorway instead of the preset.
@@ -190,8 +190,6 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | Generative-Burst-Pattern-A | Neutral 950 → Indigo 900, Neutral 950 → Indigo 600, Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600 | Pattern Studio export | 1,100 short lines bursting out from the center. Pixel-identical to the tool at 1620 × 1080 (Neutral 950 → Indigo 600 within 2/255: the tool's #090E1A isn't a token, so it uses neutral.950) |
 | Generative-Dash-Pattern-A | Neutral 950 → Indigo 900 | Pattern Studio export | Short horizontal dashes on a 64 px grid, thinned by a twisted noise field. Pixel-identical to the tool at 1620 × 1080 |
 | Generative-Dash-Pattern-B | Neutral 950 → Amaranth 600 | Pattern Studio export | Like Dash-A, on a finer 48 px grid with 40 px padding. Pixel-identical to the tool at 1620 × 1080 |
-| Generative-Glyph-Pattern-A | Neutral 950 → Indigo 900, Neutral 950 → Amaranth 600 | Pattern Studio export | Letters of QDRANT in Mona Sans Mono on a 32 px grid, in soft noisy patches. Same as the tool at 1620 × 1080 except the letter shapes: the export used Geist Mono, which the brand replaced on 2026-11-17 (under 0.6% of pixels differ). Needs `loadPatternFonts` first |
-| Generative-Glyph-Pattern-B | Indigo 600 → Indigo 400 (neutral 50 letters), Neutral 950 → Indigo 600 | Pattern Studio export | Like Glyph-A with outline shaping, in white letters. Same as the tool at 1620 × 1080 except the letter shapes (Mona Sans Mono, like Glyph-A). Needs `loadPatternFonts` first |
 | Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Bayer 16×16, darker grade, no noise. Dithers lightness only |
 
 ## Known limits
