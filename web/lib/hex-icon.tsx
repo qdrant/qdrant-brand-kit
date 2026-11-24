@@ -48,14 +48,15 @@ export const marks: Record<string, { name: string; shapes: React.ReactNode }> = 
   },
   cloud: {
     name: "Managed Cloud",
-    // A cloud of three circles on a flat base; its base shaded.
+    // A cloud: a tall dome between two lower lobes that stick out as shoulders, on a flat base, so the silhouette reads
+    // on the matrix's coarse grid (13 across); its base shaded in the tones style.
     shapes: (
       <>
-        <circle cx="7" cy="15" r="4.5" />
-        <circle cx="12.5" cy="9.5" r="6.5" />
-        <circle cx="18" cy="14" r="5" />
-        <rect x="7" y="14" width="11" height="5.5" />
-        <rect data-shade x="0" y="15" width="24" height="9" />
+        <circle cx="6.4" cy="14.6" r="4.2" />
+        <circle cx="12.8" cy="10.4" r="5.4" />
+        <circle cx="18.3" cy="14.4" r="3.9" />
+        <rect x="6.4" y="14" width="11.9" height="4.8" />
+        <rect data-shade x="0" y="15.6" width="24" height="9" />
       </>
     ),
   },
