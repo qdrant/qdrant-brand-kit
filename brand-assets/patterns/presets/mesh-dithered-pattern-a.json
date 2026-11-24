@@ -1,5 +1,6 @@
 {
   "name": "Mesh-Dithered-Pattern-A",
+  "onHold": "On hold for now (Vanesa, 2026-11-24). Don't use mesh patterns in creatives until she takes them off hold.",
   "textMask": "both",
   "recipe": "mesh-dithered-pattern",
   "extends": "mesh-dithered-pattern.shared",

@@ -1,5 +1,6 @@
 {
   "name": "Mesh-Refracted-Pattern-A",
+  "onHold": "On hold for now (Vanesa, 2026-11-24). Don't use mesh patterns in creatives until she takes them off hold.",
   "recipe": "mesh-refracted-pattern",
   "extends": "mesh-pattern.shared",
   "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574",
