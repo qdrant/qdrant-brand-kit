@@ -63,9 +63,10 @@ function CanvasFrame({
           title="Copy this section for an agent: its files, preview, docs and props"
           onPointerDown={(e) => e.stopPropagation()}
           onClick={copy}
-          className="ml-auto size-14 self-center rounded-lg text-muted-foreground [&_svg:not([class*='size-'])]:size-7"
+          className="ml-auto h-14 gap-3 self-center rounded-lg px-4 text-[22px] font-normal text-muted-foreground [&_svg:not([class*='size-'])]:size-6"
         >
           {copied ? <Check /> : <Copy />}
+          {copied ? "Copied" : "Copy"}
         </Button>
       </figcaption>
       {proposal && <p className="-mt-2 max-w-[1440px] text-[22px] text-muted-foreground">{proposal}</p>}
