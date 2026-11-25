@@ -1,6 +1,7 @@
 {
   "name": "Color-Sliced-Pattern-B",
   "textMask": "mask",
+  "textMaskByColorway": { "Neutral 1000 → Neutral 800": "none" },
   "recipe": "color-sliced-pattern",
   "extends": "color-sliced-pattern-a",
   "$description": "Two layers, each from its own source (Vanesa, 2026-11-24). Base: Color-Sliced-Pattern-A, inherited whole (every colorway, the approved stripes, its slices), so A's changes reach B. Letters on top: generative-glyph-layer-a, varied with the Pattern Studio connector's terminal look through fromStudioParams(). An agent makes a B by picking an A colorway (and stripes) and a terminal-look letter variation: renderPattern(canvas, tokens, B, { colorway, stripes, letters }).",

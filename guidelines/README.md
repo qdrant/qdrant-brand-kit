@@ -35,7 +35,7 @@ Decided by Vanesa on 2026-11-04.
 | Red background | Never on your own: only when the person asks for it (section 3). |
 | Same creative in other sizes or channels | The same pattern and colorway (section 10). |
 
-**Where a rule offers options** (a `both` or unset `textMask`, the small display units), make every option and show them together on the contact sheet, the recommended one marked in its label. The person picks.
+**Where a rule offers options** (the card in light or dark mode, the small display units), make every option and show them together on the contact sheet, the recommended one marked in its label where the rule names one. The person picks. The pattern mask is not an option: the contrast score decides it (section 4).
 
 ## 2. Pick the pattern by tone
 
@@ -110,28 +110,41 @@ Use one of these three. Patterns always bleed off the canvas edges they touch. T
 
 | Layout | What it looks like | Text goes | Example |
 | --- | --- | --- | --- |
-| **Full bleed + light card** | Pattern covers the whole canvas. A light card sits on it. | On the card (`.qd-book`, on Color-Sliced-Pattern-B) | [Get-the-Guide ad, dark](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18921-37171) and [pastel](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18935-39510) |
+| **Full bleed + card** | Pattern covers the whole canvas. A card, in light or dark mode, sits on it. | On the card (`.qd-book`, on any approved pattern) | [Get-the-Guide ad, dark](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18921-37171) and [pastel](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18935-39510) |
 | **Full bleed, text on top** | Pattern covers the whole canvas. When the pattern's small details would cross the text, the pattern is masked: 100% where the visual sits, fading softly behind the text. | On the pattern when it's calm, or on the masked part | |
 | **Product screen** | Pattern covers the whole canvas behind a framed screen. | Outside the screen, on a calm area or a card | [Qdrant Cloud screen](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18841-20954) |
 
 Rules:
 
-- **Must:** text never sits on a busy part of a pattern. If no area is calm enough, mask the pattern or use the light card.
-- **Must: mask only when the pattern needs it** (decided 2026-11-11, strength 2026-11-16). Not every pattern needs a mask. Mask it only when its small details (letters, dashes, small marks) cross the text and make it hard to read. **The mask leaves 40% of the pattern behind the text** (it replaced 4% and 10% on 2026-11-16: those made creatives too dark and hid the pattern). Each pattern's preset says what to do in `textMask`:
+- **Must:** text never sits on a busy part of a pattern. If no area is calm enough, mask the pattern or use the card.
+- **Must: the contrast score decides the mask** (visual designer, 2026-11-25; it replaces "mask only when the pattern needs it", 2026-11-11). Masks are named by how much they darken the pattern behind the text:
+
+  | Mask | Darkens the pattern behind the text | Class |
+  | --- | --- | --- |
+  | No mask | 0% | none |
+  | Light mask | 30% (70% of the pattern stays) | `.qd-pattern-mask.qd-pattern-mask--light` |
+  | Standard mask | 60% (40% of the pattern stays) | `.qd-pattern-mask` |
+
+  1. Render with **no mask** first.
+  2. `review/check.py` scores every text block against the pattern pixels behind it (its existing **Contrast** check: WCAG AA, 4.5:1 for body text, 3:1 from 24 px, at the 5th-percentile pixel). It uses the render you already have, so a creative that passes costs no extra render.
+  3. If any block fails, render again with the **light mask**; if that fails too, with the **standard mask**. Use the first that passes. Never go darker than the standard mask: if it still fails, change the layout or the colorway.
+  4. Remember what passed for each pattern and colorway, and start there next time.
+
+  A preset's `textMask` overrides the score only where a look was decided by eye:
 
   | `textMask` | Patterns | What to do |
   | --- | --- | --- |
-  | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern | Mask, 40% behind the text |
-  | `none` | None right now | No mask: text sits straight on the pattern |
-  | `both` | Generative-Pulse-Pattern, Generative-Rings-Pattern, Generative-Hexagon-Pattern, Generative-Burst-Pattern | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
-  | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
+  | `mask` | Color-Sliced-Pattern-A; Color-Sliced-Pattern-B except dark neutral; Generative-Dash-Pattern (every variant, the busiest included) | Always the standard mask |
+  | `none` | Motion-Streaks-Pattern-B (every colorway); Color-Sliced-Pattern-B in dark neutral | Never a mask: text sits straight on the pattern |
+  | `both` or not set | Every other pattern or colorway | The contrast score decides, as above. No need to show both |
 
-  When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
+  When the answer differs by colorway, `textMask` sits on the colorway, or in the preset's `textMaskByColorway` when the colorways are inherited (Color-Sliced-Pattern-B).
+- **Text on a card never needs a mask.** Any approved pattern and variant can go behind the card (`.qd-book`), busy ones included (visual designer, 2026-11-25).
 
 - **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (a colorway marked `textColor: "dark"`; none is approved right now), use **dark text and the Light logo**, no mask (Vanesa, 2026-11-16).
-- **Must: a contrast fail is a hard stop.** A creative whose text fails the contrast check is never shown, recommended or delivered. On a `none` pattern, mask it at 40% if the pattern is dark enough not to turn grey; otherwise pick another colorway or pattern (Vanesa, 2026-11-16).
+- **Must: a contrast fail is a hard stop.** A creative whose text fails the contrast check is never shown, recommended or delivered. On a `none` pattern, use the light or standard mask if the pattern is dark enough not to turn grey; otherwise pick another colorway or pattern (visual designer, 2026-11-16).
 
-- **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to 40% behind the text, with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). The LinkedIn profile cover has its heading on the right, so its fade runs from the right (`.qd-pattern-mask--from-right`, [`guidelines/layout/`](layout/)). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`guidelines/layout/`](layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself. **On every shape the mask is one smooth, continuous gradient across the whole canvas: it starts gently on the text side and builds to full strength on the far side. You must not be able to tell the mask and the pattern are two layers: never a hold-then-fade, a visible edge or a cut** (decided 2026-11-11). If the pattern is calm enough for the text, use no mask at all.
+- **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to the mask's strength behind the text (70% of the pattern with the light mask, 40% with the standard mask), with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). The LinkedIn profile cover has its heading on the right, so its fade runs from the right (`.qd-pattern-mask--from-right`, [`guidelines/layout/`](layout/)). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`guidelines/layout/`](layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself. **On every shape the mask is one smooth, continuous gradient across the whole canvas: it starts gently on the text side and builds to full strength on the far side. You must not be able to tell the mask and the pattern are two layers: never a hold-then-fade, a visible edge or a cut** (decided 2026-11-11). If the pattern is calm enough for the text, use no mask at all.
 - **Must:** with the mask, the logo sits on the plain neutral, so it's the **Dark** logo on a dark creative and the **Light** logo on a light one (section 8). Without the mask it's the **White** logo on the pattern, except on a light pattern (`textColor: "dark"`), where it's the **Light** logo.
 - **Must:** the light card only sits on a full-bleed pattern. On a dark creative it's the only light piece.
 - **Must: the light card always sits on Color-Sliced-Pattern-B**, red or violet, with its QDRANT letter layer. Never Color-Sliced-Pattern-A or another pattern behind the book or a Get-the-Guide ad (decided 2026-11-11).
@@ -282,7 +295,7 @@ There are no fixed post templates. An agent lays out each creative itself, from 
     4. **Ask** the person to cut copy, or drop the date line on a display ad (see [`guidelines/layout/`](layout/), "Display ads").
 
     **The button never changes size to make room.** Never shrink text below the type scale.
-12. **Must: icons follow [`brand-assets/icons/`](../brand-assets/icons/).** Lucide only, outline, one color: a 400 on dark, a 600 on light, white on a pattern (masked at 40% or not), 3:1 or more (white on the 40% mask: Vanesa, 2026-11-16). **Suggest: several detail lines on wide** (a roadshow's city and date lines): run them **across, in one row**, when they fit in the text block; otherwise in **two rows**. Widen the text block to 7 or 8 columns if it needs room (Qbot gets smaller), instead of stacking every line (Vanesa, 2026-11-16). **Suggest: put one before each date, time and place line by default** (calendar, clock, map pin; decided 2026-11-11). Next to supporting text (mostly the date / time / place row), the same height as that text, a `tight` gap away. Never in buttons, under any circumstance. Icons don't count as a text size (decided 2026-11-11).
+12. **Must: icons follow [`brand-assets/icons/`](../brand-assets/icons/).** Lucide only, outline, one color: a 400 on dark, a 600 on light, white on a pattern (masked or not), 3:1 or more (white on the standard mask: visual designer, 2026-11-16). **Suggest: several detail lines on wide** (a roadshow's city and date lines): run them **across, in one row**, when they fit in the text block; otherwise in **two rows**. Widen the text block to 7 or 8 columns if it needs room (Qbot gets smaller), instead of stacking every line (visual designer, 2026-11-16). **Suggest: put one before each date, time and place line by default** (calendar, clock, map pin; decided 2026-11-11). Next to supporting text (mostly the date / time / place row), the same height as that text, a `tight` gap away. Never in buttons, under any circumstance. Icons don't count as a text size (decided 2026-11-11).
 
 ## Changing these rules
 

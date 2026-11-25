@@ -127,18 +127,18 @@ python3 -m http.server 5190
 
 ## Text on a pattern: `textMask`
 
-A preset can say whether text on it needs the pattern mask from [`guidelines/layout/`](../../guidelines/layout/) (rules in [`guidelines/`](../../guidelines/) section 4). It's only a setting for the layout: it never changes how the pattern renders. One mask strength, **40% of the pattern behind the text**, replaced `soft-1` (4%) and `soft-2` (10%) on 2026-11-16: those made creatives too dark and hid the pattern (Vanesa).
+A preset can say whether text on it needs the pattern mask from [`guidelines/layout/`](../../guidelines/layout/) (rules in [`guidelines/`](../../guidelines/) section 4). It's only a setting for the layout: it never changes how the pattern renders. **By default the contrast score decides** (2026-11-25): no mask first, then the **light mask** (darkens the pattern 30% behind the text), then the **standard mask** (darkens it 60%), the first that passes `review/check.py`'s Contrast check. `textMask` overrides the score only where a look was decided by eye. The standard mask replaced `soft-1` (4%) and `soft-2` (10%) on 2026-11-16: those made creatives too dark and hid the pattern.
 
 | `textMask` | Meaning | Presets |
 | --- | --- | --- |
-| `"mask"` | Mask, 40% behind the text | Color-Sliced-Pattern-A and B (every colorway), Generative-Dash-Pattern |
-| `"both"` | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick | Generative-Pulse-Pattern, Generative-Rings-Pattern, Generative-Hexagon-Pattern, Generative-Burst-Pattern |
-| not set | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick | every other preset or colorway |
+| `"mask"` | Always the standard mask | Color-Sliced-Pattern-A (every colorway), Color-Sliced-Pattern-B (every colorway but dark neutral), Generative-Dash-Pattern |
+| `"none"` | Never a mask: text sits straight on the pattern | Motion-Streaks-Pattern-B (every colorway), Color-Sliced-Pattern-B in dark neutral (`textMaskByColorway`) |
+| `"both"` or not set | The contrast score decides | Generative-Pulse-Pattern, Generative-Rings-Pattern, Generative-Hexagon-Pattern, Generative-Burst-Pattern, every other preset or colorway |
 
-- When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
+- When the answer differs by colorway, `textMask` sits on the colorway instead of the preset. A preset whose colorways are inherited (`extends`) lists them in `textMaskByColorway`, by colorway name.
 - **Never mask a light-colored pattern:** the mask turns its light colors grey (Vanesa, 2026-11-16).
 - **`textColor: "dark"`** on a colorway means the pattern is light: dark text, the Light logo, no mask. Never the monochrome Black logo. No approved colorway is light right now.
-- The old values `"soft-1"` and `"soft-2"` mean `"mask"`, and their classes now give 40%, so older files still work.
+- The old values `"soft-1"` and `"soft-2"` mean `"mask"`, and their classes now give the standard mask, so older files still work.
 
 ## Patterns (V1)
 

@@ -48,3 +48,15 @@
    with the light text tokens (Vanesa, 2026-11-04). */
 .qd-box--light-card .qd-headshot-circle__name { color: var(--qd-color-text-on-light); }
 .qd-box--light-card .qd-headshot-circle__role { color: var(--qd-color-text-body-on-light); }
+
+/* Photo background in the pattern's color family (visual designer, 2026-11-25): the same family as the
+   pattern, darker at the top and lighter at the bottom, never another family (no indigo photo backgrounds
+   on an amaranth pattern). Put data-pattern-family="indigo | amaranth | teal | neutral" on the canvas.
+   Without it, the photo keeps the indigo headshot gradient. */
+[data-pattern-family="indigo"]   { --qd-headshot-bg-top: var(--qd-color-indigo-975);   --qd-headshot-bg-bottom: var(--qd-color-indigo-700); }
+[data-pattern-family="amaranth"] { --qd-headshot-bg-top: var(--qd-color-amaranth-975); --qd-headshot-bg-bottom: var(--qd-color-amaranth-700); }
+[data-pattern-family="teal"]     { --qd-headshot-bg-top: var(--qd-color-teal-975);     --qd-headshot-bg-bottom: var(--qd-color-teal-700); }
+[data-pattern-family="neutral"]  { --qd-headshot-bg-top: var(--qd-color-neutral-1000); --qd-headshot-bg-bottom: var(--qd-color-neutral-800); }
+[data-pattern-family] .qd-headshot-circle__photo {
+  background: linear-gradient(180deg, var(--qd-headshot-bg-top) 7.6%, var(--qd-headshot-bg-bottom) 100%);
+}

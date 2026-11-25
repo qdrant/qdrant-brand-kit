@@ -279,7 +279,7 @@ def check_one(m, rules):
             "checks.md, Contrast")
 
     if m.get("books"):
-        # The light card (book): its own sizes, from guidelines/layout/README "Light card layout".
+        # The card (book): its own sizes, from guidelines/layout/README "Card layout".
         bk = m["books"][0]["rect"]
         wide = shape == "wide"
         biss = []
@@ -288,9 +288,20 @@ def check_one(m, rules):
         ratio = bk["w"] / bk["h"]
         slide = wide and m["books"][0].get("slide")
         want_ratio = (1.6 if slide else 1.25) if wide else 794.4 / 979.2  # .qd-book--slide is 16:10
-        if abs(ratio - want_ratio) > 0.02:
-            biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
-        Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
+        # The card hugs its content (2026-11-25): W comes from the canvas; the card may grow wider (speakers on
+        # one line) and taller (content), but never below its 4:5 (wide 5:4) size, and stays inside the margins.
+        ref = {"wide": (1920, 1080), "square": (1080, 1080), "portrait": (1080, 1350), "story": (1080, 1920)}.get(shape)
+        share = {"wide": 0.3286, "square": 0.55, "portrait": 0.65, "story": 0.75}.get(shape, 0.55)
+        if ref and not slide:
+            u = min(W / ref[0], H / ref[1])
+            Wb = share * ref[0] * u
+            min_w, min_h = (Wb * 979.2 / 794.4 * 1.25 if wide else Wb), Wb * 979.2 / 794.4
+            if bk["w"] < min_w - 2 or bk["h"] < min_h - 2:
+                biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f}, smaller than its minimum {min_w:.0f}×{min_h:.0f}")
+        else:
+            if abs(ratio - want_ratio) > 0.02:
+                biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
+            Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
         k = 1.6  # title: 1.6x the Figma share on every shape, in Mona Sans Display (Vanesa, 2026-11-19; wide was 1.95x)
         btexts = [t for t in texts if t["role"] == "book"]
         if btexts:
@@ -300,8 +311,8 @@ def check_one(m, rules):
         blogo = [l for l in m["logos"] if l.get("inBook")]
         if blogo and abs(blogo[0]["rect"]["h"] - 0.0967 * Wb) > 1.5:
             biss.append(f"logo {blogo[0]['rect']['h']:.0f} px, wanted {0.0967 * Wb:.0f}")
-        add("Light card", not biss, "; ".join(biss) or f"card {bk['w']:.0f}×{bk['h']:.0f}, sizes match W={Wb:.0f}",
-            "layout README, Light card layout")
+        add("Card", not biss, "; ".join(biss) or f"card {bk['w']:.0f}×{bk['h']:.0f}, sizes match W={Wb:.0f}",
+            "layout README, Card layout")
     if not m["logos"]:
         add("Logo", False, "no Qdrant logo found", "guidelines §8")
     else:
@@ -309,7 +320,7 @@ def check_one(m, rules):
         r = lg["rect"]
         want = max(24, logo_h.get(shape, 0) * u)
         if lg.get("inBook"):
-            want = 24  # the light card has its own, smaller logo (checked under "Light card")
+            want = 24  # the light card has its own, smaller logo (checked under "Card")
         issues = []
         if "brand-assets/logo/" not in lg["src"]:
             issues.append("not a file from brand-assets/logo/")

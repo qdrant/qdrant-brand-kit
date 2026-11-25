@@ -1,5 +1,6 @@
 {
   "name": "Motion-Streaks-Pattern-B",
+  "textMask": "none",
   "recipe": "motion-streaks-pattern",
   "$description": "Motion-Streaks-Pattern-A with a layer of random QDRANT letters on top, in matching colors. The letter grid grows from 24 px (short side 1080 or less) to 40 px (4K).",
   "figma": "https://www.figma.com/design/2u6KfDsYjibQuf9ji6lFBR/Qdrant-Brand-Design?node-id=23789-66977",

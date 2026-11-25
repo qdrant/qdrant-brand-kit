@@ -47,6 +47,10 @@
 .qd-box--light-card .qd-icon           { --qd-icon-color: var(--qd-color-neutral-600); }
 .qd-box--light-card .qd-icon--amaranth { --qd-icon-color: var(--qd-color-amaranth-600); }
 .qd-box--light-card .qd-icon--indigo   { --qd-icon-color: var(--qd-color-indigo-600); }
+/* On the dark card (.qd-book--dark): back to the dark-surface colors, the 400s (2026-11-25). */
+.qd-book--dark .qd-box--light-card .qd-icon           { --qd-icon-color: var(--qd-color-neutral-400); }
+.qd-book--dark .qd-box--light-card .qd-icon--amaranth { --qd-icon-color: var(--qd-color-amaranth-400); }
+.qd-book--dark .qd-box--light-card .qd-icon--indigo   { --qd-icon-color: var(--qd-color-indigo-400); }
 .qd-box--light-card .qd-icon--blue   { --qd-icon-color: var(--qd-color-blue-600); }
 .qd-box--light-card .qd-icon--purple { --qd-icon-color: var(--qd-color-purple-600); }
 .qd-box--light-card .qd-icon--red    { --qd-icon-color: var(--qd-color-red-600); }
