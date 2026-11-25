@@ -1,0 +1,9 @@
+# Netlify builds the studio from the repo root (the pnpm workspace) and deploys it with the Next.js runtime.
+# Project qdrant-brand-studio, connected to this repo through Netlify's GitHub app: production on merge to
+# main, a deploy preview for each pull request to main.
+[build]
+  command = "pnpm --filter studio... run build"
+  publish = "studio/.next"
+
+[build.environment]
+  NODE_VERSION = "24"
