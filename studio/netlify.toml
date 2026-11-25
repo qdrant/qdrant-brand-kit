@@ -7,3 +7,8 @@
 
 [build.environment]
   NODE_VERSION = "24"
+
+# Netlify's Git builds don't detect Next.js in this monorepo, so name the runtime here. Without it the build
+# publishes the raw .next folder and every page is a 404.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
