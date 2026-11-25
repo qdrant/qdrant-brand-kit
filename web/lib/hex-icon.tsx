@@ -108,17 +108,6 @@ export const marks: Record<string, { name: string; shapes: React.ReactNode }> = 
       </>
     ),
   },
-  docs: {
-    name: "Documentation",
-    // An open book: two solid pages rising from the spine, with a gap for it; the right page shaded.
-    shapes: (
-      <>
-        <polygon points="1,3.5 10.8,6.5 10.8,21.5 1,18.5" />
-        <polygon points="13.2,6.5 23,3.5 23,18.5 13.2,21.5" />
-        <rect data-shade x="12" y="0" width="12" height="24" />
-      </>
-    ),
-  },
   serverless: {
     name: "Serverless",
     // A lightning bolt; its lower half shaded.

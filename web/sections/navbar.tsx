@@ -28,8 +28,7 @@ import {
 } from "@qdrant/design-system/components/ui/sheet"
 import { cn } from "@qdrant/design-system/lib/utils"
 
-import type { Link, Menu, MenuGroup, MenuHighlight } from "../content/site"
-import { ArrowLink } from "../lib/arrow-link"
+import type { Link, Menu, MenuGroup } from "../content/site"
 import { generativePattern } from "../patterns/explorations/generative"
 import { HexIcon, type HexStyle } from "../lib/hex-icon"
 import { Icon } from "../lib/icon"
@@ -52,10 +51,6 @@ export type NavbarProps = SectionProps & {
   sticky?: boolean
   // How the products' marks are drawn in the menu's special section (exploring; matrix, design lead, 2026-11-24).
   markStyle?: HexStyle
-  // How a menu's highlight (the Developers menu's Documentation) takes its own space (exploring, design lead,
-  // 2026-11-24): card, a feature card at the panel's side; band, a band across the top; hub, a column of its own
-  // with its quickstarts and client libraries.
-  highlightStyle?: "card" | "band" | "hub" | "tile"
   // A menu open from the start, for previews (the studio's canvas and docs).
   openMenu?: string
 }
@@ -73,7 +68,6 @@ export function Navbar({
   featured,
   sticky,
   markStyle = "matrix",
-  highlightStyle = "card",
   openMenu,
   theme,
   surface,
@@ -140,7 +134,6 @@ export function Navbar({
                       featured={i === 0 ? featured : undefined}
                       markStyle={markStyle}
                       highlight={menu.highlight}
-                      highlightStyle={highlightStyle}
                     />
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -261,17 +254,13 @@ function MegaPanel({
   featured,
   markStyle,
   highlight,
-  highlightStyle = "card",
 }: {
   groups: MenuGroup[]
   featured?: NavbarProps["featured"]
   markStyle: HexStyle
-  highlight?: MenuHighlight
-  highlightStyle?: NavbarProps["highlightStyle"]
+  highlight?: Link
 }) {
-  // The highlighted item has its own space, so it leaves its group's list. The tile sits in that group, at the top of
-  // its column; the other layouts sit at the panel's start or top.
-  const tile = highlight && highlightStyle === "tile"
+  // The highlighted item becomes a tile at the top of its group's column, so it leaves the group's list.
   const homeGroup = highlight
     ? allGroups.find((group) =>
         group.items.some((item) => item.href === highlight.href)
@@ -283,21 +272,8 @@ function MegaPanel({
         items: group.items.filter((item) => item.href !== highlight.href),
       }))
     : allGroups
-  const band = highlight && highlightStyle === "band"
   return (
-    <div
-      className={cn(
-        "flex h-full gap-2 rounded-xl border border-(--web-line) bg-popover p-2",
-        band && "flex-col"
-      )}
-    >
-      {highlight && !tile && (
-        <Highlight
-          item={highlight}
-          variant={highlightStyle}
-          markStyle={markStyle}
-        />
-      )}
+    <div className="flex h-full gap-2 rounded-xl border border-(--web-line) bg-popover p-2">
       <div className="flex gap-2">
         <div className="flex divide-x divide-(--web-line,var(--border))">
           {groups.map((group, i) => (
@@ -312,12 +288,8 @@ function MegaPanel({
                   {group.title}
                 </p>
               )}
-              {tile && highlight && homeGroup?.title === group.title && (
-                <Highlight
-                  item={highlight}
-                  variant="tile"
-                  markStyle={markStyle}
-                />
+              {highlight && homeGroup?.title === group.title && (
+                <HighlightTile item={highlight} />
               )}
               {group.feature ? (
                 // One grid, filled column by column, so the rows line up across columns however long a description is.
@@ -527,182 +499,45 @@ const docsDrift = generativePattern({
   },
 })
 
-// A menu's highlight (design lead, 2026-11-24, exploring), one item given its own space, in four layouts:
-// - card: a feature card at the panel's start, its big mark, title, description, Getting Started links and Read
-//   the Docs (after Lululemon's and Hers' menus, whose side card carries a large visual).
-// - band: a band across the top of the panel, the mark, title and description on the left and its links as chips on
-//   the right, the menu's groups below it (after Slack API's docs menu, which opens with a header row).
-// - hub: a column of its own on a tray, with its Getting Started links and a grid of the client libraries (after
-//   Codecademy's Docs, which opens its own space with a chip per language).
-// - tile: only the main link, as a compact card at the top of its group's column (above its other links), with
-//   Pixel drift moving quietly on its right side (after the design lead's reference: dark resource tiles with a pixel accent in a corner).
-function Highlight({
-  item,
-  variant = "card",
-  markStyle,
-}: {
-  item: MenuHighlight
-  variant?: NavbarProps["highlightStyle"]
-  markStyle: HexStyle
-}) {
-  const mark = (size: "md" | "lg") => (
-    <span
-      className={cn(
-        "web-icon-tile web-tone-indigo grid shrink-0 place-items-center overflow-hidden",
-        size === "lg" ? "size-16 rounded-2xl" : "size-14 rounded-xl"
-      )}
-    >
-      <HexIcon
-        mark={item.mark}
-        variant={markStyle}
-        className={size === "lg" ? "size-12" : "size-10"}
-      />
-    </span>
-  )
-  const title = (
-    <NavigationMenuLink
-      href={item.href}
-      className="w-fit p-0 text-[17px] leading-snug font-medium text-foreground hover:bg-transparent hover:text-(--web-link)"
-    >
-      {item.label}
-    </NavigationMenuLink>
-  )
-  const description = (
-    <p className="text-[13px] leading-snug text-muted-foreground">
-      {item.description}
-    </p>
-  )
-  const label = (text: string) => (
-    <p className="font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
-      {text}
-    </p>
-  )
-  const quickLinks = (
-    <ul className="flex flex-col gap-0.5">
-      {item.start.map((link) => (
-        <li key={link.label}>
-          <NavigationMenuLink href={link.href} className="px-2 py-1.5 text-sm">
-            {link.label}
-          </NavigationMenuLink>
-        </li>
-      ))}
-    </ul>
-  )
-
-  if (variant === "tile") {
-    const Drift = docsDrift.Layer
-    return (
-      // A simple plate (no inner top light) with a much quieter edge than a card's: the text color at 6%
-      // (design lead, 2026-11-24).
-      <Plate
-        as="div"
-        simple
-        className="group/tile relative isolate flex h-11 shrink-0 overflow-hidden rounded-lg"
-        style={{
-          borderColor: "color-mix(in oklab, var(--foreground) 6%, transparent)",
-        }}
-      >
-        {/* The whole tile is the link, with the menu's links' hover; its label and arrow turn indigo on hover, and the arrow is
-            as heavy as the label (2.75 on Lucide's grid, Mona Sans Medium's stem, like ArrowLink; design lead, 2026-11-24). The label sits at the top, in line with the column's rows. */}
-        <NavigationMenuLink
-          href={item.href}
-          className="group/doc z-0 w-full items-center gap-1.5 rounded-lg p-3 text-sm font-medium text-foreground hover:text-(--web-link) focus-visible:text-(--web-link)"
-        >
-          {item.label}
-          <ArrowUpRight
-            strokeWidth={2.75}
-            className="web-icon-text size-[1em] shrink-0 text-muted-foreground transition-colors group-hover/doc:text-(--web-link) group-focus-visible/doc:text-(--web-link)"
-            aria-hidden
-          />
-        </NavigationMenuLink>
-        {/* The pattern fills the right side, past the label, and fades toward it, above the hover's fill. It's
-            mirrored so its dense side (it gathers toward the lower left) sits at the tile's edge, and a little
-            stronger than in a card. */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[58%] -scale-x-100 [mask-image:linear-gradient(to_left,transparent,black_55%)] [&_.web-generative]:opacity-85"
-        >
-          <Drift />
-        </span>
-      </Plate>
-    )
-  }
-
-  if (variant === "band") {
-    return (
-      <div className="web-tray flex items-center gap-5 rounded-lg p-4">
-        {mark("md")}
-        <div className="flex max-w-md min-w-0 flex-col gap-1">
-          {title}
-          {description}
-        </div>
-        <ul className="ml-auto flex max-w-sm flex-wrap justify-end gap-1.5">
-          {[...item.start, ...item.sections].map((link) => (
-            <li key={link.label}>
-              <NavigationMenuLink
-                href={link.href}
-                className="rounded-md border border-(--web-line) bg-popover px-2.5 py-1 text-xs whitespace-nowrap"
-              >
-                {link.label}
-              </NavigationMenuLink>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
-  }
-
-  if (variant === "hub") {
-    return (
-      <div className="web-tray flex w-80 shrink-0 flex-col gap-4 rounded-lg p-4">
-        <div className="flex items-center gap-4">
-          {mark("md")}
-          {title}
-        </div>
-        {description}
-        <div className="flex flex-col gap-1.5">
-          {label("Getting Started")}
-          {quickLinks}
-        </div>
-        <div className="flex flex-col gap-2">
-          {label("Client Libraries")}
-          <ul className="grid grid-cols-3 gap-1.5">
-            {item.libraries.map((lib) => (
-              <li key={lib.label}>
-                <NavigationMenuLink
-                  href={lib.href}
-                  className="justify-center rounded-md border border-(--web-line) bg-popover px-2 py-1.5 font-mono text-xs"
-                >
-                  {lib.label}
-                </NavigationMenuLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <ArrowLink href={item.action.href} className="text-sm">
-          {item.action.label}
-        </ArrowLink>
-      </div>
-    )
-  }
-
+// A menu's highlight (design lead, 2026-11-24; kept 2026-11-25 over a feature card, a top band and a hub column):
+// the item as a compact tile at the top of its group's column, above its other links, only its main link, with
+// Pixel drift moving quietly on its right side (after the design lead's reference: dark resource tiles with a pixel
+// accent in a corner).
+function HighlightTile({ item }: { item: Link }) {
+  const Drift = docsDrift.Layer
   return (
+    // A simple plate (no inner top light) with a much quieter edge than a card's: the text color at 6%
+    // (design lead, 2026-11-24).
     <Plate
       as="div"
-      className="flex w-72 shrink-0 flex-col gap-4 rounded-lg p-5"
+      simple
+      className="group/tile relative isolate flex h-11 shrink-0 overflow-hidden rounded-lg"
+      style={{
+        borderColor: "color-mix(in oklab, var(--foreground) 6%, transparent)",
+      }}
     >
-      {mark("lg")}
-      <div className="flex flex-col gap-1.5">
-        {title}
-        {description}
-      </div>
-      <div className="flex flex-col gap-1.5">
-        {label("Getting Started")}
-        {quickLinks}
-      </div>
-      <ArrowLink href={item.action.href} className="mt-auto text-sm">
-        {item.action.label}
-      </ArrowLink>
+      {/* The whole tile is the link, with the menu's links' hover; its label and arrow turn indigo on hover, and the arrow is
+          as heavy as the label (2.75 on Lucide's grid, Mona Sans Medium's stem, like ArrowLink; design lead, 2026-11-24). The label sits at the top, in line with the column's rows. */}
+      <NavigationMenuLink
+        href={item.href}
+        className="group/doc z-0 w-full items-center gap-1.5 rounded-lg p-3 text-sm font-medium text-foreground hover:text-(--web-link) focus-visible:text-(--web-link)"
+      >
+        {item.label}
+        <ArrowUpRight
+          strokeWidth={2.75}
+          className="web-icon-text size-[1em] shrink-0 text-muted-foreground transition-colors group-hover/doc:text-(--web-link) group-focus-visible/doc:text-(--web-link)"
+          aria-hidden
+        />
+      </NavigationMenuLink>
+      {/* The pattern fills the right side, past the label, and fades toward it, above the hover's fill. It's
+          mirrored so its dense side (it gathers toward the lower left) sits at the tile's edge, and a little
+          stronger than in a card. */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[58%] -scale-x-100 [mask-image:linear-gradient(to_left,transparent,black_55%)] [&_.web-generative]:opacity-85"
+      >
+        <Drift />
+      </span>
     </Plate>
   )
 }
