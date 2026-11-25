@@ -39,32 +39,28 @@ Decided by Vanesa on 2026-11-04.
 
 ## 2. Pick the pattern by tone
 
-**Suggest:** the tone points to a pattern family. There's no hard restriction: any pattern can be used for any tone, but community themes use more playful language, so they lean to the playful Color patterns, and serious themes lean to Mesh and Generative (decided 2026-11-04). Inside a family, any pattern and colorway can be used.
+**Suggest:** the tone points to a pattern family. There's no hard restriction: any pattern can be used for any tone, but community themes use more playful language, so they lean to the playful Color patterns, and serious themes lean to Motion Streaks and Generative (decided 2026-11-04). Inside a family, any pattern and colorway can be used.
 
 | Tone | Family | Patterns |
 | --- | --- | --- |
-| Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Sliced-Pattern-A, Color-Sliced-Pattern-B (Color-Refracted-Pattern-A and Color-Dithered-Pattern-A are on hold) |
-| Serious / technical | Motion Streaks and generative patterns | Motion-Streaks-Pattern-A and B, every Generative pattern (Hexagon, Burst, Dash, Pulse, Rings), and Color-Sliced-Pattern-B (the mesh patterns are on hold) |
+| Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Sliced-Pattern-A, Color-Sliced-Pattern-B |
+| Serious / technical | Motion Streaks and generative patterns | Motion-Streaks-Pattern-A and B, every Generative pattern (Hexagon, Burst, Dash, Pulse, Rings), and Color-Sliced-Pattern-B |
 
 Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (decided 2026-11-11).
 
 **Color-Sliced (red and violet): use Color-Sliced-Pattern-B, with the QDRANT letter layer, by default** (about 8 creatives in 10). Color-Sliced-Pattern-A, the slices without letters, only in creatives with headshots, where the letters would compete with the faces (decided 2026-11-11).
 
-**Must: pick by how much text there is** (Vanesa, 2026-11-16). Mesh-Refracted and Mesh-Sliced patterns are only for creatives with **little text** (a title and a button). Posts with a date, a place or other details use a **Color or Generative** pattern. Mesh-Dithered-Pattern-A works as it is. (All mesh patterns are on hold for now, section 2a; this rule applies again if they come back.)
-
 ## 2a. Which patterns agents may use, and the combinations they may make
 
 Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits on top of the other pattern rules; when a rule elsewhere is stricter, the stricter one wins.
 
-**Must: never use anything on hold.** A pattern or colorway marked `onHold` is never used to make a new asset, not even when asked for the look, until Vanesa changes its status. Check with `isOnHold(preset, colorway)` from [`patterns/index.js`](../brand-assets/patterns/patterns/index.js), or `usableColorways(preset)`. On hold now, and possibly removed later:
+**Must: never use anything on hold.** A pattern or colorway marked `onHold` is never used to make a new asset, not even when asked for the look, until Vanesa changes its status. Check with `isOnHold(preset, colorway)` from [`patterns/index.js`](../brand-assets/patterns/patterns/index.js), or `usableColorways(preset)`. On hold now:
 
 | On hold | Why |
 | --- | --- |
 | Every **teal** colorway, in every pattern | Waiting for the council's approval of the sub-direction. No teal in any asset until the status changes |
-| Every mesh pattern: Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A | Under review |
-| Every **light neutral** colorway (Neutral 25 → 300, Neutral 0 → 200), in every pattern | Decided 2026-11-24; may be removed later |
-| Color-Refracted-Pattern-A | Under review |
-| Color-Dithered-Pattern-A | Under review |
+
+**Removed from the repo** (Vanesa, 2026-11-25), so agents can't use them at all: the mesh patterns (Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A), Color-Refracted-Pattern-A, Color-Dithered-Pattern-A and every light-neutral colorway. They stay in the Pattern Library artifact on Claude. Add one back only when Vanesa asks for it.
 
 **Color ratio: to be defined.** How often each family (amaranth, indigo, teal, neutral) is used gets a ratio after the council approves the style direction. Until then the provisional rule in section 3 applies: indigo by default, amaranth only for impact and only when the person says yes, never teal.
 
@@ -77,23 +73,28 @@ Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits
 | Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Neutral 800 | Length 16–80, density 8–64, softness 32–64, all on the 8 grid; direction 0°, 124°, 144°, 160°, 288° or 320° |
 | Motion-Streaks-Pattern-B | Same as A | Everything A allows × letter variations within the letter-layer rules |
 | Generative-Hexagon-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Neutral 800 | As is, or one of its approved variants (`variant: n`) |
-| Generative-Burst-Pattern | Same | As is, or one of its 13 line variants |
-| Generative-Dash-Pattern | Same | As is, or one of its 13 variants |
-| Generative-Pulse-Pattern | Same | As is |
-| Generative-Rings-Pattern | Same | As is, or one of its 10 variants |
+| Generative-Burst-Pattern | Same | As is, one of its 13 line variants, or a new variation of its open look (hyperspace) |
+| Generative-Dash-Pattern | Same | As is, one of its 13 variants, or a new variation of its open look (data bars) |
+| Generative-Pulse-Pattern | Same | As is, or a new variation of its open look (hex pulse: noise only) |
+| Generative-Rings-Pattern | Same | As is, one of its 10 variants, or a new variation of its open look (hex pulse) |
 
 - **Must:** every approved pattern renders at any size and shape (section 10), so format is free too.
 - **Must: the top layer blends with the gradient** (Vanesa, 2026-11-25). Letters (Color-Sliced-B, Motion-Streaks-B) are the family's 800, 700, 600: never lighter than the 600, never white. Generative elements are never lighter than the 500 step (Hexagon 800, 700, 600, its filled variants 800 and 700; Burst, Dash, Pulse and Rings 800, 700, 500). Only Motion-Streaks-B's letter variation 1 keeps 800, 600, 200. The validator checks this.
-- **Must not:** mix parts of two patterns (for example Rings' variant on Hexagon), change a generative pattern's engine values outside its variants, or use a value outside the ranges above.
+- **Open looks: agents may make new patterns of their own** (Vanesa, 2026-11-25). Three Pattern Studio looks are approved as open: **data bars** (Generative-Dash-Pattern), **hyperspace** (Generative-Burst-Pattern) and **hex pulse** (Generative-Pulse-Pattern and Generative-Rings-Pattern). An agent can make new variations of them without the Pattern Studio connector, since the repo has the same engine: `renderPattern(canvas, tokens, preset, { colorway, look: n })` for variation n, or `{ look: { ... } }` with the values. Rules:
+  - only the values in the preset's `settings.look.ranges` change, each inside its range. The ranges span the pattern as approved and its approved variants; `lookProblems` and the validator check them;
+  - colors always come from the colorway and the color rules above (top layer, on hold, ratio): a look variation never changes a color;
+  - cell sizes on the 8 grid; the pattern still fills the frame and never looks like a technical illustration;
+  - Generative-Hexagon-Pattern and every other look in Pattern Studio (orbit, bloom, terminal for anything but letters, and so on) are not open: only their approved presets and variants.
+- **Should:** when an agent makes a new look variation for a creative, it shows it next to the pattern as approved, so the person can pick.
+- **Must not:** mix parts of two patterns (for example Rings' variant on Hexagon), change a generative pattern's engine values outside its variants or its open-look ranges, or use a value outside the ranges above.
 - **Must:** generative pattern names have no letter (Generative-Hexagon-Pattern, not Hexagon-B): one pattern per element, its looks are variants.
 
 The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patterns/).
 
 ## 3. Red backgrounds
 
-- **Must: patterns are indigo, amaranth or dark neutral** (dark neutral added 2026-11-24; light neutral is on hold). Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
+- **Must: patterns are indigo, amaranth or dark neutral** (dark neutral added 2026-11-24; light neutral was removed on 2026-11-25). Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
 - **On hold: teal.** Every teal colorway, in every pattern, is allowed in principle but **on hold until the council approves the sub-direction** (Vanesa, 2026-11-24). Agents make no asset in teal until the status changes. Other colors stay out of pattern backgrounds.
-- **On hold: mesh patterns, Color-Refracted-Pattern-A and Color-Dithered-Pattern-A** (section 2a). A pattern or colorway marked `onHold` is never used in creatives.
 - **Proportions (provisional):** indigo for most creatives, amaranth rarely, no teal. A ratio for each family (amaranth, indigo, teal) will be set after the council approves the style direction (Vanesa, 2026-11-24).
 - **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway) is only for creatives that need to **grab a lot of attention and be more impactful**.
 - **Ask:** never pick amaranth on your own. Offer it, and use it only when the person says yes.
@@ -121,13 +122,13 @@ Rules:
   | `textMask` | Patterns | What to do |
   | --- | --- | --- |
   | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern | Mask, 40% behind the text |
-  | `none` | Color-Refracted-Pattern-A | No mask: text sits straight on the pattern |
-  | `both` | Color-Dithered-Pattern-A, Generative-Pulse-Pattern, Generative-Rings-Pattern, Generative-Hexagon-Pattern, Generative-Burst-Pattern, Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
+  | `none` | None right now | No mask: text sits straight on the pattern |
+  | `both` | Generative-Pulse-Pattern, Generative-Rings-Pattern, Generative-Hexagon-Pattern, Generative-Burst-Pattern | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
   | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
 
   When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
 
-- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (Color-Refracted-Pattern-A, Amaranth 200 → Indigo 400, marked `textColor: "dark"`), use **dark text and the Light logo**, no mask (Vanesa, 2026-11-16).
+- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (a colorway marked `textColor: "dark"`; none is approved right now), use **dark text and the Light logo**, no mask (Vanesa, 2026-11-16).
 - **Must: a contrast fail is a hard stop.** A creative whose text fails the contrast check is never shown, recommended or delivered. On a `none` pattern, mask it at 40% if the pattern is dark enough not to turn grey; otherwise pick another colorway or pattern (Vanesa, 2026-11-16).
 
 - **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to 40% behind the text, with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). The LinkedIn profile cover has its heading on the right, so its fade runs from the right (`.qd-pattern-mask--from-right`, [`guidelines/layout/`](layout/)). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`guidelines/layout/`](layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself. **On every shape the mask is one smooth, continuous gradient across the whole canvas: it starts gently on the text side and builds to full strength on the far side. You must not be able to tell the mask and the pattern are two layers: never a hold-then-fade, a visible edge or a cut** (decided 2026-11-11). If the pattern is calm enough for the text, use no mask at all.

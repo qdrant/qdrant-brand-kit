@@ -40,15 +40,6 @@
         "{color.neutral.600}"
       ],
       "backdrop": null
-    },
-    {
-      "name": "Neutral light",
-      "colors": [
-        "{color.neutral.0}",
-        "{color.neutral.0}",
-        "{color.neutral.0}"
-      ],
-      "backdrop": null
     }
   ],
   "settings": {
@@ -92,5 +83,5 @@
       ]
     }
   },
-  "$colors": "Letters in the family's 800, 700, 600: the lightest letter is the 600, never lighter, so the letters blend with the background (Vanesa, 2026-11-25). The light-neutral colorway (on hold) has white letters."
+  "$colors": "Letters in the family's 800, 700, 600: the lightest letter is the 600, never lighter, so the letters blend with the background (Vanesa, 2026-11-25)."
 }

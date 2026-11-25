@@ -3,11 +3,11 @@
 //   node scripts/validate.mjs
 //
 // Errors (exit code 1): a preset that can't render, like a missing recipe, a token
-// that doesn't exist, or a missing mesh. Warnings: values off the 8 grid.
+// that doesn't exist. Warnings: values off the 8 grid.
 
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { letterLayerProblems, fromStudioParams } from "../patterns/letter-variations.js";
-import { MESH_LAYOUTS } from "../patterns/color-dithered-pattern.js";
+import { lookProblems } from "../patterns/look-variations.js";
 
 const read = (path) => JSON.parse(readFileSync(path, "utf8"));
 const errors = [];
@@ -15,13 +15,11 @@ const warnings = [];
 
 const tokens = read("tokens/placeholder.tokens.json");
 // The pattern tokens are named like the color primitives. primary, secondary,
-// neutral.white and neutral.black are legacy aliases for meshes stored in Design Lab only.
-const LEGACY = /color\.(primary|secondary)\.|color\.neutral\.(white|black)\b|^(primary|secondary|neutral\.white|neutral\.black)$/;
-for (const file of [...readdirSync("presets").map((f) => `presets/${f}`), ...readdirSync("meshes").map((f) => `meshes/${f}`)]) {
+// neutral.white and neutral.black are legacy aliases: presets never use them.
+for (const file of readdirSync("presets").map((f) => `presets/${f}`)) {
   if (!file.endsWith(".json")) continue;
   const text = readFileSync(file, "utf8");
-  const json = JSON.parse(text);
-  const legacy = text.match(/color\.(primary|secondary)\.[a-z0-9]+|color\.neutral\.(white|black)\b/) ?? (json.settings?.mesh?.palette ?? []).find((e) => LEGACY.test(e));
+  const legacy = text.match(/color\.(primary|secondary)\.[a-z0-9]+|color\.neutral\.(white|black)\b/);
   if (legacy) errors.push(`${file}: uses the legacy name ${legacy[0] ?? legacy}; use the color primitive's name (e.g. color.indigo.600)`);
 }
 const tokenExists = (path) => path.split(".").slice(1).reduce((node, key) => node?.[key], tokens.color)?.$value !== undefined;
@@ -33,13 +31,8 @@ for (const recipe of recipes) if (!existsSync(`patterns/${recipe}.js`)) errors.p
 
 // The settings each recipe needs, besides size.
 const needs = {
-  "color-refracted-pattern": ["gradient", "refraction", "noise"],
   "color-sliced-pattern": ["gradient", "slice", "noise"],
-  "color-dithered-pattern": ["meshLayout", "grade", "contrast", "mesh", "dither"],
   "motion-streaks-pattern": ["gradient", "streaks"],
-  "mesh-refracted-pattern": ["grade", "blur", "contrast", "mesh", "refraction", "noise"],
-  "mesh-sliced-pattern": ["grade", "blur", "contrast", "mesh", "slice", "noise"],
-  "mesh-dithered-pattern": ["grade", "blur", "contrast", "mesh", "dither"],
   "generative-pattern": ["designSize", "background", "engine", "tone"],
 };
 
@@ -67,10 +60,10 @@ for (const id of ids) {
   }
   const where = p.name ?? id;
 
-  // Name and file agree: Color-Refracted-Pattern-A <-> color-refracted-pattern-a.json.
+  // Name and file agree: Color-Sliced-Pattern-A <-> color-sliced-pattern-a.json.
   // Generative patterns have no letter: one pattern per element, looks as variants (Vanesa, 2026-11-24).
-  const named = p.recipe === "generative-pattern" ? /^Generative-[A-Z][a-z]+-Pattern$/ : /^(Color|Mesh|Motion)-[A-Z][a-z]+-Pattern-[A-Z]$/;
-  if (!named.test(p.name ?? "")) errors.push(`${where}: name should look like ${p.recipe === "generative-pattern" ? "Generative-Burst-Pattern" : "Color-Refracted-Pattern-A"}`);
+  const named = p.recipe === "generative-pattern" ? /^Generative-[A-Z][a-z]+-Pattern$/ : /^(Color|Motion)-[A-Z][a-z]+-Pattern-[A-Z]$/;
+  if (!named.test(p.name ?? "")) errors.push(`${where}: name should look like ${p.recipe === "generative-pattern" ? "Generative-Burst-Pattern" : "Color-Sliced-Pattern-A"}`);
   else if (p.name.toLowerCase() !== id) errors.push(`${where}: file should be presets/${p.name.toLowerCase()}.json`);
 
   if (!recipes.includes(p.recipe)) errors.push(`${where}: recipe "${p.recipe}" isn't registered in patterns/index.js`);
@@ -94,19 +87,6 @@ for (const id of ids) {
     for (const ref of [...refs, p.settings?.background]) {
       if (typeof ref !== "string" || !/^\{.+\}$/.test(ref)) errors.push(`${where}: color ${ref} should be a token like {color.indigo.600}`);
       else if (!tokenExists(ref.slice(1, -1))) errors.push(`${where}: token ${ref} doesn't exist`);
-    }
-  } else if (p.meshGroup) {
-    // Mesh pattern: every example has a mesh for this group, made of existing tokens.
-    if (!p.examples?.length) errors.push(`${where}: no example meshes`);
-    for (const example of p.examples ?? []) {
-      const file = `meshes/${example.id}.${p.meshGroup}.json`;
-      if (!existsSync(file)) {
-        errors.push(`${where}: ${file} is missing`);
-        continue;
-      }
-      const mesh = read(file);
-      if (mesh.colors.length !== mesh.size * mesh.size) errors.push(`${file}: expected ${mesh.size * mesh.size} points, found ${mesh.colors.length}`);
-      for (const ref of new Set(mesh.colors)) if (!tokenExists(ref.slice(1, -1))) errors.push(`${file}: token ${ref} doesn't exist`);
     }
   } else {
     // Color pattern: every colorway points at tokens that exist.
@@ -135,15 +115,23 @@ for (const id of ids) {
   }
 
   // Approved variants (generative): only engine settings the pattern already has.
-  // Color-Dithered variants name another mesh layout.
-  if (p.recipe === "color-dithered-pattern") {
-    for (const v of [p.settings?.meshLayout?.kind, ...(p.settings?.variants ?? []).map((x) => x.layout)])
-      if (!(v in MESH_LAYOUTS)) errors.push(`${where}: mesh layout "${v}" isn't in MESH_LAYOUTS (patterns/color-dithered-pattern.js)`);
-  } else for (const v of p.settings?.variants ?? []) {
+  for (const v of p.settings?.variants ?? []) {
     const { name, colorSteps, ...values } = v;
     if (colorSteps && !(Array.isArray(colorSteps) && colorSteps.every((x) => x >= 500))) errors.push(`${where}: variant "${name}" colorSteps must be steps of 500 or darker`);
     const unknown = Object.keys(values).filter((k) => !(k in (p.settings?.engine ?? {})));
     if (unknown.length) errors.push(`${where}: variant "${name}" sets ${unknown.join(", ")}, which the engine doesn't have`);
+  }
+
+  // Open looks: the ranges hold the pattern as approved and every approved variant, every
+  // key is an engine setting, and cell bounds sit on the 8 grid (Vanesa, 2026-11-25).
+  const ranges = p.settings?.look?.ranges;
+  if (ranges) {
+    const engine = p.settings.engine ?? {};
+    for (const key of Object.keys(ranges)) if (!(key in engine)) errors.push(`${where}: look range "${key}" isn't an engine setting`);
+    if (ranges.cell && ranges.cell.some((c) => c % 8 !== 0)) errors.push(`${where}: look range cell ${ranges.cell.join("–")} isn't on the 8 grid`);
+    const pick = (values) => Object.fromEntries(Object.keys(ranges).filter((k) => k in values).map((k) => [k, values[k]]));
+    for (const problem of lookProblems(p, pick(engine))) errors.push(`${where}: as approved, ${problem}`);
+    for (const v of p.settings?.variants ?? []) for (const problem of lookProblems(p, pick(v))) errors.push(`${where}: variant "${v.name}": ${problem}`);
   }
 
   // Approved letter options: only the settings a letter variation may change.
@@ -188,7 +176,7 @@ for (const id of ids) {
   }
 
   // Effect values on the 8 grid (90° and Figma-only values like 130.68% are allowed).
-  for (const [effect, keys] of [["refraction", ["smoothness", "dispersion", "r", "a"]], ["slice", ["r", "a"]]]) {
+  for (const [effect, keys] of [["slice", ["r", "a"]]]) {
     for (const key of keys) {
       const v = p.settings?.[effect]?.[key];
       if (v !== undefined && !onGrid(Math.abs(v)) && Math.abs(v) !== 90 && v !== 100) warnings.push(`${where}: ${effect}.${key} = ${v} isn't on the 8 grid`);

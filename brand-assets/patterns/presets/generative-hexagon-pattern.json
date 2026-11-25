@@ -78,25 +78,6 @@
           "at": 1.1667
         }
       ]
-    },
-    {
-      "name": "Neutral 0 → Neutral 200",
-      "colors": [
-        "{color.neutral.300}",
-        "{color.neutral.500}",
-        "{color.neutral.800}"
-      ],
-      "backdrop": [
-        {
-          "token": "{color.neutral.0}",
-          "at": 0.0559
-        },
-        {
-          "token": "{color.neutral.200}",
-          "at": 1.1667
-        }
-      ],
-      "onHold": "Light neutral: on hold (Vanesa, 2026-11-24). Don't use it in creatives yet."
     }
   ],
   "settings": {
@@ -271,5 +252,5 @@
       }
     ]
   },
-  "$colors": "Elements in the family's 800, 700, 600: the lightest is never below 600 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24; light neutral on hold. Filled-hexagon variants 1, 2 and 9 use only 800 and 700 (colorSteps)."
+  "$colors": "Elements in the family's 800, 700, 600: the lightest is never below 600 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24. Filled-hexagon variants 1, 2 and 9 use only 800 and 700 (colorSteps)."
 }

@@ -78,25 +78,6 @@
           "at": 1.1667
         }
       ]
-    },
-    {
-      "name": "Neutral 0 → Neutral 200",
-      "colors": [
-        "{color.neutral.300}",
-        "{color.neutral.500}",
-        "{color.neutral.800}"
-      ],
-      "backdrop": [
-        {
-          "token": "{color.neutral.0}",
-          "at": 0.0559
-        },
-        {
-          "token": "{color.neutral.200}",
-          "at": 1.1667
-        }
-      ],
-      "onHold": "Light neutral: on hold (Vanesa, 2026-11-24). Don't use it in creatives yet."
     }
   ],
   "settings": {
@@ -121,7 +102,29 @@
       "seed": 13,
       "warp": 0.29,
       "drift": 0.4
+    },
+    "$look": "Open look (Vanesa, 2026-11-25): agents may make new variations of this pattern without the Pattern Studio connector, with renderPattern(..., { look: n }) or { look: { ... } }. Only the engine values in look.ranges change, and each stays inside its range (numbers: [min, max]; words: the listed choices; cell: on the 8 grid). Colors always come from the colorway. Pulse has no approved variants yet, so only its noise changes, a little.",
+    "look": {
+      "source": "Pattern Studio look hex-pulse",
+      "ranges": {
+        "seed": [
+          1,
+          999
+        ],
+        "noiseScale": [
+          2.5,
+          4.5
+        ],
+        "warp": [
+          0.15,
+          0.35
+        ],
+        "drift": [
+          0.3,
+          0.6
+        ]
+      }
     }
   },
-  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24; light neutral on hold."
+  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24."
 }

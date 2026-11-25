@@ -23,9 +23,6 @@
     pre { margin: 0; font-size: 11px; color: var(--muted); max-height: 220px; overflow: auto; }
     code { font-size: 12px; color: #b3b8ff; }
     .token { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; }
-    .check { margin: 10px 0 0; padding: 8px 10px; border-radius: 6px; font-weight: 600; }
-    .check.pass { background: #0f3d2e; color: #7ee2b8; }
-    .check.fail { background: #4a1220; color: #ff8792; }
     button { margin-top: 16px; width: 100%; padding: 10px; border: 0; border-radius: 6px; background: #6047ff; color: #fff; font: inherit; cursor: pointer; }
     .size { display: grid; grid-template-columns: 1fr auto 1fr; gap: 6px; align-items: center; margin-top: 8px; color: var(--muted); }
     .size input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; }
@@ -64,7 +61,7 @@
 
   <script type="module">
     // Uses only the public entry point, patterns/index.js, the same way a tool would.
-    import { loadTokens, resolveToken, loadPatterns, isMeshPattern, isGenerativePattern, choicesFor, renderPattern, loadPatternFonts } from "./patterns/index.js";
+    import { loadTokens, resolveToken, loadPatterns, isGenerativePattern, choicesFor, renderPattern, loadPatternFonts } from "./patterns/index.js";
     import { colorwayTokens } from "./patterns/tokens.js";
 
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
@@ -93,7 +90,7 @@
     formats.forEach(([name, w, h], i) => formatSelect.add(new Option(w ? `${name} · ${w} × ${h}` : name, i)));
     const size = () => ({ width: Math.max(1, Number(widthInput.value) || 1080), height: Math.max(1, Number(heightInput.value) || 1080) });
 
-    let preset, mesh;
+    let preset;
     const swatch = (ref) => {
       const hex = resolveToken(tokens, ref);
       return `<div class="token"><code>${ref.slice(1, -1)}</code><span><i style="background:${hex}"></i>${hex}</span></div>`;
@@ -107,30 +104,16 @@
         document.getElementById("tokens").innerHTML = [...look.colors, ...(look.backdrop ?? [])].map((ref) => swatch(ref.token ?? ref)).join("");
         return;
       }
-      if (isMeshPattern(preset)) {
-        const check = renderPattern(canvas, tokens, preset, { mesh, ...size() });
-        document.getElementById("tokens").innerHTML =
-          preset.settings.grade.anchors.map(swatch).join("") +
-          `<p class="check ${check.pass ? "pass" : "fail"}">Brand check: ${check.pass ? "Pass" : "Fail"} · ${check.offBrand}% off-palette</p>`;
-        return;
-      }
       const colorway = Number(colorwaySelect.value);
       const family = familyRow.hidden ? undefined : familySelect.value;
       renderPattern(canvas, tokens, preset, { colorway, family, ...size() });
       document.getElementById("tokens").innerHTML = Object.values(colorwayTokens(preset.colorways[colorway], family)).map(swatch).join("");
     };
 
-    // Mesh patterns list example meshes. Color patterns list colorways.
+    // Every pattern lists its colorways.
     const chooseOption = async () => {
       if (isGenerativePattern(preset)) {
         familyRow.hidden = true;
-        draw();
-        return;
-      }
-      if (isMeshPattern(preset)) {
-        const example = preset.examples[colorwaySelect.value];
-        familyRow.hidden = true;
-        mesh = await fetch(`meshes/${example.id}.${preset.meshGroup}.json`).then((r) => r.json());
         draw();
         return;
       }
@@ -148,9 +131,9 @@
       preset = presets[presetSelect.value];
       document.getElementById("settings").textContent = JSON.stringify(preset.settings, null, 2);
       document.getElementById("figma").href = preset.figma ?? "";
-      document.getElementById("option-label").textContent = isMeshPattern(preset) ? "Example mesh" : "Colorway";
+      document.getElementById("option-label").textContent = "Colorway";
       colorwaySelect.innerHTML = "";
-      (isMeshPattern(preset) ? preset.examples : preset.colorways).forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
+      preset.colorways.forEach((c, i) => colorwaySelect.add(new Option(c.name, i)));
       chooseOption();
     };
 
