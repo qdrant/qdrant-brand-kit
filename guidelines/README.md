@@ -62,26 +62,28 @@ Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits
 | --- | --- |
 | Every **teal** colorway, in every pattern | Waiting for the council's approval of the sub-direction. No teal in any asset until the status changes |
 | Every mesh pattern: Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A | Under review |
+| Every **light neutral** colorway (Neutral 25 → 300, Neutral 0 → 200), in every pattern | Decided 2026-11-24; may be removed later |
 | Color-Refracted-Pattern-A | Under review |
 | Color-Dithered-Pattern-A | Under review |
 
-**Color ratio: to be defined.** How often each family (amaranth, indigo, teal) is used gets a ratio after the council approves the style direction. Until then the provisional rule in section 3 applies: indigo by default, amaranth only for impact and only when the person says yes, never teal.
+**Color ratio: to be defined.** How often each family (amaranth, indigo, teal, neutral) is used gets a ratio after the council approves the style direction. Until then the provisional rule in section 3 applies: indigo by default, amaranth only for impact and only when the person says yes, never teal.
 
 **Approved patterns and what an agent may combine.** Any approved pattern can be used. Agents can make new combinations of it, but only from the approved parts below. A value that isn't listed (a new angle, a new stripe, a new Pattern Studio look) is never invented in an asset: it goes through the Pattern Library review first.
 
 | Pattern | Colorways (not on hold) | What may vary, in any combination |
 | --- | --- | --- |
-| Color-Sliced-Pattern-A | Amaranth 975 → Amaranth 700, Indigo 975 → Indigo 700 | Its own slices, or one of the 5 approved stripes (`stripes: 0` to `4`) |
+| Color-Sliced-Pattern-A | Amaranth 975 → Amaranth 700, Indigo 975 → Indigo 700, Neutral 1000 → Neutral 800 | Its own slices, or one of the 5 approved stripes (`stripes: 0` to `4`) |
 | Color-Sliced-Pattern-B | Same as A (inherited) | Any Color-Sliced-A base (above) × letters: one of the 4 approved letter options (`letterOption: 0` to `3`), or any letter variation within the letter-layer rules (Pattern Studio terminal look through `fromStudioParams`, or `letters: n`) |
-| Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900 | Length 16–80, density 8–64, softness 32–64, all on the 8 grid; direction 0°, 124°, 144°, 160°, 288° or 320° |
+| Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Neutral 800 | Length 16–80, density 8–64, softness 32–64, all on the 8 grid; direction 0°, 124°, 144°, 160°, 288° or 320° |
 | Motion-Streaks-Pattern-B | Same as A | Everything A allows × letter variations within the letter-layer rules |
-| Generative-Hexagon-Pattern | Background → Indigo 900, Background → Amaranth 900 | As is, or one of its approved variants (`variant: n`) |
+| Generative-Hexagon-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Neutral 800 | As is, or one of its approved variants (`variant: n`) |
 | Generative-Burst-Pattern | Same | As is, or one of its 13 line variants |
 | Generative-Dash-Pattern | Same | As is, or one of its 13 variants |
 | Generative-Pulse-Pattern | Same | As is |
 | Generative-Rings-Pattern | Same | As is, or one of its 10 variants |
 
 - **Must:** every approved pattern renders at any size and shape (section 10), so format is free too.
+- **Must: the top layer blends with the gradient** (Vanesa, 2026-11-25). Letters (Color-Sliced-B, Motion-Streaks-B) are the family's 800, 700, 600: never lighter than the 600, never white. Generative elements are never lighter than the 500 step (Hexagon 800, 700, 600, its filled variants 800 and 700; Burst, Dash, Pulse and Rings 800, 700, 500). Only Motion-Streaks-B's letter variation 1 keeps 800, 600, 200. The validator checks this.
 - **Must not:** mix parts of two patterns (for example Rings' variant on Hexagon), change a generative pattern's engine values outside its variants, or use a value outside the ranges above.
 - **Must:** generative pattern names have no letter (Generative-Hexagon-Pattern, not Hexagon-B): one pattern per element, its looks are variants.
 
@@ -89,7 +91,7 @@ The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patter
 
 ## 3. Red backgrounds
 
-- **Must: patterns are indigo or amaranth.** Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
+- **Must: patterns are indigo, amaranth or dark neutral** (dark neutral added 2026-11-24; light neutral is on hold). Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
 - **On hold: teal.** Every teal colorway, in every pattern, is allowed in principle but **on hold until the council approves the sub-direction** (Vanesa, 2026-11-24). Agents make no asset in teal until the status changes. Other colors stay out of pattern backgrounds.
 - **On hold: mesh patterns, Color-Refracted-Pattern-A and Color-Dithered-Pattern-A** (section 2a). A pattern or colorway marked `onHold` is never used in creatives.
 - **Proportions (provisional):** indigo for most creatives, amaranth rarely, no teal. A ratio for each family (amaranth, indigo, teal) will be set after the council approves the style direction (Vanesa, 2026-11-24).

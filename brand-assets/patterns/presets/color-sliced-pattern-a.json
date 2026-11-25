@@ -4,7 +4,7 @@
   "textMask": "mask",
   "recipe": "color-sliced-pattern",
   "extends": "shared",
-  "$colorways": "Each colorway runs from its family's 975 to its 700, for a softer contrast between dark and light areas (Vanesa, 2026-11-24, proposal S6). It replaced Neutral 950 → the family's 600. Teal stays on hold.",
+  "$colorways": "Each colorway runs from its family's 975 to its 700, for a softer contrast between dark and light areas (Vanesa, 2026-11-24, proposal S6). It replaced Neutral 950 → the family's 600. Teal stays on hold. Dark neutral (Neutral 1000 → 800) added 2026-11-24; light neutral (Neutral 25 → 300) is on hold.",
   "colorways": [
     {
       "name": "Amaranth 975 → Amaranth 700",
@@ -23,6 +23,17 @@
       "from": "color.teal.975",
       "to": "color.teal.700",
       "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
+    },
+    {
+      "name": "Neutral 1000 → Neutral 800",
+      "from": "color.neutral.1000",
+      "to": "color.neutral.800"
+    },
+    {
+      "name": "Neutral 25 → Neutral 300",
+      "from": "color.neutral.25",
+      "to": "color.neutral.300",
+      "onHold": "Light neutral: on hold (Vanesa, 2026-11-24). Don't use it in creatives yet."
     }
   ],
   "settings": {

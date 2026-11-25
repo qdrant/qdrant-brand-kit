@@ -83,6 +83,12 @@ for (const id of ids) {
     const looks = p.colorways ?? [];
     if (!looks.length) errors.push(`${where}: no colorways`);
     for (const look of looks) if (!look.name || !look.colors?.length || !look.backdrop) errors.push(`${where}: every colorway needs a name, colors and a backdrop`);
+    // Elements are never lighter than the 500 step, so they blend with the gradient
+    // (Vanesa, 2026-11-25). Colorways on hold (light neutral) are exempt.
+    for (const look of looks) if (!look.onHold) for (const ref of look.colors ?? []) {
+      const step = Number(String(ref).match(/\.([0-9]+)\}$/)?.[1]);
+      if (step < 500) errors.push(`${where} / ${look.name}: element color ${ref} is lighter than the 500 step`);
+    }
     if (!p.settings?.tones?.[p.settings?.tone]) errors.push(`${where}: tone curve "${p.settings?.tone}" isn't in settings.tones`);
     const refs = looks.flatMap((look) => [...(look.colors ?? []), ...(look.backdrop ?? []).map((stop) => stop?.token ?? stop)]);
     for (const ref of [...refs, p.settings?.background]) {
@@ -134,7 +140,8 @@ for (const id of ids) {
     for (const v of [p.settings?.meshLayout?.kind, ...(p.settings?.variants ?? []).map((x) => x.layout)])
       if (!(v in MESH_LAYOUTS)) errors.push(`${where}: mesh layout "${v}" isn't in MESH_LAYOUTS (patterns/color-dithered-pattern.js)`);
   } else for (const v of p.settings?.variants ?? []) {
-    const { name, ...values } = v;
+    const { name, colorSteps, ...values } = v;
+    if (colorSteps && !(Array.isArray(colorSteps) && colorSteps.every((x) => x >= 500))) errors.push(`${where}: variant "${name}" colorSteps must be steps of 500 or darker`);
     const unknown = Object.keys(values).filter((k) => !(k in (p.settings?.engine ?? {})));
     if (unknown.length) errors.push(`${where}: variant "${name}" sets ${unknown.join(", ")}, which the engine doesn't have`);
   }
@@ -168,7 +175,12 @@ for (const id of ids) {
     if (layer.settings?.engine?.element === "ascii") for (const problem of letterLayerProblems(layer.settings.engine)) errors.push(`${where}: letter layer ${id} ${problem}`);
     if ((layer.colorways?.length ?? 0) !== (p.colorways?.length ?? 0)) errors.push(`${where}: layer ${id} needs one colorway per pattern colorway (${p.colorways?.length}), in the same order`);
     if (!layer.settings?.tones?.[layer.settings?.tone]) errors.push(`${where}: layer ${id} tone curve "${layer.settings?.tone}" isn't in settings.tones`);
-    for (const look of layer.colorways ?? []) {
+    for (const [i, look] of (layer.colorways ?? []).entries()) {
+      // Letters: the lightest is the 600 step (Vanesa, 2026-11-25), unless the pattern's colorway is on hold.
+      if (!p.colorways?.[i]?.onHold) for (const ref of look.colors ?? []) {
+        const step = Number(String(ref).match(/\.([0-9]+)\}$/)?.[1]);
+        if (step < 600) errors.push(`${where}: layer ${id} / ${look.name}: letter color ${ref} is lighter than the 600 step`);
+      }
       for (const ref of [...(look.colors ?? []), ...(look.backdrop ?? []).map((s) => s?.token ?? s)]) {
         if (!tokenExists(ref.slice(1, -1))) errors.push(`${where}: layer ${id} token ${ref} doesn't exist`);
       }

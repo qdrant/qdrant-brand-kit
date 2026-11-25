@@ -10,8 +10,8 @@
       "name": "Background → Indigo 900",
       "colors": [
         "{color.indigo.800}",
-        "{color.indigo.600}",
-        "{color.indigo.200}"
+        "{color.indigo.700}",
+        "{color.indigo.500}"
       ],
       "backdrop": [
         {
@@ -28,8 +28,8 @@
       "name": "Background → Amaranth 900",
       "colors": [
         "{color.amaranth.800}",
-        "{color.amaranth.600}",
-        "{color.amaranth.200}"
+        "{color.amaranth.700}",
+        "{color.amaranth.500}"
       ],
       "backdrop": [
         {
@@ -46,8 +46,8 @@
       "name": "Background → Teal 900",
       "colors": [
         "{color.teal.800}",
-        "{color.teal.600}",
-        "{color.teal.200}"
+        "{color.teal.700}",
+        "{color.teal.500}"
       ],
       "backdrop": [
         {
@@ -60,6 +60,43 @@
         }
       ],
       "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
+    },
+    {
+      "name": "Background → Neutral 800",
+      "colors": [
+        "{color.neutral.800}",
+        "{color.neutral.700}",
+        "{color.neutral.500}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.800}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Neutral 0 → Neutral 200",
+      "colors": [
+        "{color.neutral.300}",
+        "{color.neutral.500}",
+        "{color.neutral.800}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.neutral.0}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.200}",
+          "at": 1.1667
+        }
+      ],
+      "onHold": "Light neutral: on hold (Vanesa, 2026-11-24). Don't use it in creatives yet."
     }
   ],
   "settings": {
@@ -221,5 +258,6 @@
         "warp": 0.3
       }
     ]
-  }
+  },
+  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24; light neutral on hold."
 }

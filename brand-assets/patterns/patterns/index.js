@@ -100,8 +100,12 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
   const option = options.letterOption == null ? null : preset.settings?.letterOptions?.[options.letterOption];
   if (options.letterOption != null && !option) throw new Error(`${preset.name} has no approved letter option #${options.letterOption}`);
   const letters = option ? (({ name, source, ...values }) => values)(option) : typeof options.letters === "number" ? letterVariation(options.letters) : options.letters;
+  // settings.letterColorSteps: a letter variation that keeps other color steps than the
+  // layer's own (Motion-Streaks-B: variation 1 keeps 800, 600, 200; Vanesa, 2026-11-25).
+  const letterSteps = typeof options.letters === "number" ? preset.settings?.letterColorSteps?.[options.letters] : null;
   for (const base of preset.layers ?? []) {
-    const layer = letters && isLetterLayer(base) ? varyLetterLayer(base, letters) : base;
+    let layer = letters && isLetterLayer(base) ? varyLetterLayer(base, letters) : base;
+    if (letterSteps && isLetterLayer(base)) layer = withColorSteps(layer, letterSteps);
     const top = document.createElement("canvas");
     renderBase(top, tokens, layer, { width: canvas.width, height: canvas.height, phase: options.phase, colorway: options.colorway });
     canvas.getContext("2d").drawImage(top, 0, 0);
@@ -121,8 +125,11 @@ function renderBase(canvas, tokens, preset, options) {
     const variant = options.variant == null ? null : preset.settings.variants?.[options.variant];
     if (options.variant != null && !variant) throw new Error(`${preset.name} has no approved variant #${options.variant}`);
     if (variant) {
-      const { name, ...engine } = variant;
+      // colorSteps: the variant draws its elements in other steps of the same family
+      // (Generative-Hexagon's filled variants: 800, 800, 700; Vanesa, 2026-11-25).
+      const { name, colorSteps, ...engine } = variant;
       preset = { ...preset, settings: { ...preset.settings, engine: { ...preset.settings.engine, ...engine } } };
+      if (colorSteps) preset = withColorSteps(preset, colorSteps);
     }
     return recipe.render(canvas, tokens, preset, null, frame, { phase: options.phase, colorway: options.colorway });
   }
@@ -133,6 +140,18 @@ function renderBase(canvas, tokens, preset, options) {
   const colorway = preset.colorways[options.colorway ?? 0];
   const family = options.family ?? colorway.defaultFamily;
   return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame, options);
+}
+
+// Same colorways, other steps of each colorway's family: {color.indigo.200} with step 600
+// becomes {color.indigo.600}. steps[i] replaces the step of colors[i].
+function withColorSteps(preset, steps) {
+  return {
+    ...preset,
+    colorways: preset.colorways.map((look) => ({
+      ...look,
+      colors: look.colors.map((ref, i) => (steps[i] == null ? ref : ref.replace(/\.[0-9]+\}$/, `.${steps[i]}}`))),
+    })),
+  };
 }
 
 // Generative patterns that draw letters need their fonts loaded first, or the browser
