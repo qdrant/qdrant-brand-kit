@@ -2,8 +2,7 @@
 
 import * as React from "react"
 import { useTheme } from "next-themes"
-import { Hand, Maximize, Minus, MousePointer2, Plus } from "lucide-react"
-
+import { Check, Copy, Hand, Maximize, Minus, MousePointer2, Plus } from "lucide-react"
 
 import { Button } from "@qdrant/design-system/components/ui/button"
 import { cn } from "@qdrant/design-system/lib/utils"
@@ -11,6 +10,7 @@ import { sectionsByCategory } from "@qdrant/web/registry"
 
 import { defaultStyle, styleQuery, styleSwitches, type Style } from "./blocks"
 import { frameSrc, useFrameHeight, useFrameKey } from "./frame-view"
+import { sectionBrief } from "./section-brief"
 
 type Mode = "dark" | "light" | "both"
 // Which layouts the canvas shows: all, only the proposals (with each section's current layouts beside them, so
@@ -37,6 +37,14 @@ function CanvasFrame({
 }) {
   const key = useFrameKey()
   const height = useFrameHeight(key, 700)
+  const [copied, setCopied] = React.useState(false)
+  const copy = () =>
+    navigator.clipboard
+      ?.writeText(sectionBrief({ section, variant, theme, query, origin: window.location.origin }))
+      .then(() => {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      })
   return (
     <figure className="flex w-[1440px] shrink-0 flex-col gap-4">
       <figcaption className="flex items-baseline gap-4 text-[28px] text-muted-foreground">
@@ -47,6 +55,18 @@ function CanvasFrame({
             Proposal
           </span>
         )}
+        {/* Copies this section for an agent, to design or build it: its files, preview, docs and exact props
+            (design lead, 2026-11-25). Stops the pointer so the canvas doesn't start a pan. */}
+        <Button
+          variant="ghost"
+          aria-label={copied ? "Copied" : `Copy ${label} (${theme}) for an agent`}
+          title="Copy this section for an agent: its files, preview, docs and props"
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={copy}
+          className="ml-auto size-14 self-center rounded-lg text-muted-foreground [&_svg:not([class*='size-'])]:size-7"
+        >
+          {copied ? <Check /> : <Copy />}
+        </Button>
       </figcaption>
       {proposal && <p className="-mt-2 max-w-[1440px] text-[22px] text-muted-foreground">{proposal}</p>}
       <iframe
