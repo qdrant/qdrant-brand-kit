@@ -59,8 +59,9 @@ export function CopySnippet({
 
   if (forAgents) {
     return (
-      // Tight (design lead, 2026-11-26): the agents' marks close together, less padding all round.
-      <div className={cn("web-plate inline-flex max-w-full items-center gap-2 rounded-lg py-0.5 pr-0.5 pl-2.5", className)}>
+      // Tight (design lead, 2026-11-26): the agents' marks close together, less padding all round. No fill, only a
+      // hairline, so it doesn't compete with the secondary buttons (design lead, 2026-11-26).
+      <div className={cn("inline-flex max-w-full items-center gap-2 rounded-lg border border-(--web-line) py-0.5 pr-0.5 pl-2.5", className)}>
         <span className="flex items-center gap-1.5 text-muted-foreground">
           {agentIds.map((id) => (
             <MonoImage key={id} src={agents[id].src} label={agents[id].name} className="size-4" />
