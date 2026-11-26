@@ -4,7 +4,7 @@ The other folders say how each piece is built. This one says **which pieces to p
 
 The layout rules for creatives (Canvas, Grid, Stack, Box and the checks) are in [`layout/`](layout/), moved here from `primitives/` on 2026-11-12 because layout is a rule, not a token.
 
-Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). [`print/`](print/) is the only place for the print rules; this page only links to it (Vanesa, 2026-11-26).
+Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). [`print/`](print/) is the only place for the print rules; this page only links to it (visual designer, 2026-11-26).
 
 Three kinds of rule:
 

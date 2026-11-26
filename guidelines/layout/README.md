@@ -196,7 +196,7 @@ These styles come from recent Qdrant web sections in Figma (customer stat cards,
 
 ## Print
 
-The print rules, layout included, are in [`guidelines/print/`](../print/), the only place for them (Vanesa, 2026-11-26).
+The print rules, layout included, are in [`guidelines/print/`](../print/), the only place for them (visual designer, 2026-11-26).
 
 ## To decide later
 

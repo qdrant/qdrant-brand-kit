@@ -15,7 +15,7 @@ It writes, in OUT_DIR:
   <name>-rgb.pdf      the same before CMYK conversion (screen colors), for review. Not for the printer
   <name>-proof.png    what the printed piece looks like after cutting, folds dashed, for review
   <name>-full.png     the full render with bleed, and <name>-full.json, its measurements for review/check.py
-  <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, patterns,
+  <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, patterns, vector only,
                       QR codes, image resolution, fonts, color
 
 Margins are the format's margin (8% of the short side, never under 1.5 × the safe area), from the
@@ -79,10 +79,10 @@ def main():
     ap.add_argument("--safe", type=float, help="mm inside the trim (from the spec)")
     ap.add_argument("--panels", help="panel widths in mm, left to right, laid out flat (brochures)")
     ap.add_argument("--min-dpi", type=float, help="lowest image resolution at the printed size, from the vendor's "
-                    "spec: overrides the format's minDpi, the vendor wins (Vanesa, 2026-11-26)")
+                    "spec: overrides the format's minDpi, the vendor wins (visual designer, 2026-11-26)")
     ap.add_argument("--hidden-bottom", type=float, help="mm at the bottom that won't be seen (roll-up base)")
     ap.add_argument("--icc", help="the printer's CMYK profile (.icc), from the spec")
-    ap.add_argument("--pdfx", default=None, help="PDF/X version from the vendor's spec: 4 or 1a. No brand default (Vanesa, 2026-11-26); falls back to 4 and the checks flag it")
+    ap.add_argument("--pdfx", default=None, help="PDF/X version from the vendor's spec: 4 or 1a. No brand default (visual designer, 2026-11-26); falls back to 4 and the checks flag it")
     ap.add_argument("--print-scale", choices=["normal", "small"], default="normal",
                     help="small: the smaller text sizes (titleMin, supportingMin), to keep text in the calm sky")
     ap.add_argument("--root", default=None, help="folder served at / (default: the page's folder)")
@@ -99,7 +99,7 @@ def main():
     panels = [float(x) for x in a.panels.split(",")] if a.panels else fmt.get("panels")
     if a.panels: from_spec.append("panels")
     hidden = a.hidden_bottom if a.hidden_bottom is not None else fmt.get("hiddenBottom", 0)
-    # 300 dpi up close, 100 to 150 for large formats (the preset's minDpi), or the vendor's value (Vanesa, 2026-11-26).
+    # 300 dpi up close, 100 to 150 for large formats (the preset's minDpi), or the vendor's value (visual designer, 2026-11-26).
     min_dpi = a.min_dpi if a.min_dpi else fmt.get("minDpi", defaults["minDpi"])
     if a.min_dpi: from_spec.append("resolution")
     qr_min = fmt.get("qrMin", defaults["qrMin"])
@@ -189,8 +189,9 @@ def main():
                        "hiddenBottomMm": hidden, "marginMm": margin, "marginPx": m_px, "uPx": u, "dpi": DPI, "type": type_pt})
     json.dump(meas, open(os.path.join(a.out, f"{name}-full.json"), "w"), indent=1)
 
-    # 2. The PDF: trim + bleed + crop marks, at real size, text vector. The backdrop (canvas color,
-    #    patterns, faded images) goes in as one 300 dpi image, because Chrome's PDF export loses CSS masks.
+    # 2. The PDF: trim + bleed + crop marks, at real size, text vector. Print is vector only (visual designer,
+    #    2026-11-26), so a plain backdrop stays vector. Only when there's a pattern canvas, a mask or an image
+    #    fade does the backdrop go in as one 300 dpi image, because Chrome's PDF export loses CSS masks.
     rgb_pdf = os.path.join(a.out, f"{name}-rgb.pdf")
     backdrop = Image.open(backdrop_png).convert("RGB")
     # Grain on image fades, print only, so large fades don't band in CMYK (guidelines/print/ section 3).
@@ -202,8 +203,9 @@ def main():
             backdrop.paste(ImageChops.add(region, noise, 1.0, -128), box)
     backdrop.save(os.path.join(layer_dir, "backdrop-grain.png"))
     srv.extra = {"/qd-layer/": layer_dir}
+    raster_backdrop = bool(pinfo["masks"] or pinfo["canvases"] or pinfo.get("fades"))
     render.chrome(["--no-pdf-header-footer", f"--print-to-pdf={rgb_pdf}",
-                   url + "&qd-pdf=1&qd-backdrop=/qd-layer/backdrop-grain.png"])
+                   url + "&qd-pdf=1" + ("&qd-backdrop=/qd-layer/backdrop-grain.png" if raster_backdrop else "")])
     if not os.path.exists(rgb_pdf):
         sys.exit("Chrome made no PDF")
     final_pdf = os.path.join(a.out, f"{name}.pdf")
@@ -248,7 +250,7 @@ def main():
     def row(check, ok, detail):
         rows.append((check, "pass" if ok is True else ("fail" if ok is False else ok), detail))
     defaults_used = [x for x in ("finished size", "bleed", "safe area", "file format") if x not in from_spec]
-    if fmt.get("status") == "in-progress":  # large format (guidelines/print/, Vanesa 2026-11-20)
+    if fmt.get("status") == "in-progress":  # large format (guidelines/print/, visual designer, 2026-11-20)
         row("Format", "look", f"{fmt['name']} is in progress: large-format rules aren't settled. Treat this as a test and have a designer check it")
     row("Printer's spec", True if not defaults_used else "look",
         "all from the spec" if not defaults_used else
@@ -294,7 +296,7 @@ def main():
         if behind >= 0.5:
             continue
         pt = t["fontSize"] * PT_PER_PX
-        if pt < 10 or (t.get("weight") or 400) < 400:  # 10 pt out of rich black (Vanesa, 2026-11-26)
+        if pt < 10 or (t.get("weight") or 400) < 400:  # 10 pt out of rich black (visual designer, 2026-11-26)
             rev.append(f"\"{t['text'][:20]}\" {pt:.1f} pt, weight {t.get('weight')}")
     # Text on a busy background: detail (edge density) behind each text box, in the backdrop (canvas color
     # and images only, so cards and buttons don't count).
@@ -343,9 +345,9 @@ def main():
     if pinfo["canvases"]: pat.append(f"{pinfo['canvases']} pattern canvas")
     if pinfo["patternFiles"] and not pat: pat.append("files from brand-assets/patterns/")
     row("Patterns", True if not pat else "look", "no pattern" if not pat else
-        ", ".join(pat) + ": allowed in print (Vanesa, 2026-11-26). Check the proof for fringing on fine lines and moiré on dithered patterns; ask before using the pattern mask (guidelines/print/ section 3)")
+        ", ".join(pat) + ": allowed in print (visual designer, 2026-11-26). Check the proof for fringing on fine lines and moiré on dithered patterns; ask before using the pattern mask (guidelines/print/ section 3)")
     row("No button", not meas["buttons"], "no button" if not meas["buttons"] else
-        "a button on a print piece: a QR code replaces it (Vanesa, 2026-11-26)")
+        "a button on a print piece: a QR code replaces it (visual designer, 2026-11-26)")
     if pinfo["qr"]:
         bad = []
         for q in pinfo["qr"]:
@@ -357,6 +359,24 @@ def main():
             if side < qr_min: bad.append(f"{side:.1f} mm (needs {qr_min:g} mm)")
             if not dark_on_light: bad.append("not dark on light")
         row("QR codes", not bad, f"{qr_min:g} mm or more, dark on light. Test-scan it from the proof" if not bad else "; ".join(bad))
+    # Vector only (visual designer, 2026-11-26): Qbot is the one raster image allowed, without its glow. Headshots and
+    # pattern canvases are raster too: both are open questions for the visual designer, so they get a 👀, not a pass.
+    is_qbot = lambda i: "qd-mascot" in (i.get("cls") or "") or "brand-assets/mascot/" in (i.get("src") or "")
+    raster = [i for i in meas["images"] if i not in meas["logos"] and not (i.get("src") or "").lower().endswith(".svg")]
+    vec_bad, vec_look = [], []
+    for i in raster:
+        nm = os.path.basename(i.get("src") or "image")
+        if is_qbot(i):
+            if "qd-mascot--glow" in (i.get("cls") or ""): vec_bad.append(f"Qbot has its glow ({nm}): no drop shadow in print")
+        elif i.get("cls") == "headshot":
+            vec_look.append(f"a headshot ({nm}): raster; whether headshots go on print is to decide")
+        else:
+            vec_bad.append(f"a raster image ({nm})")
+    if pinfo["canvases"]:
+        vec_look.append(f"{pinfo['canvases']} pattern canvas (raster); how patterns fit vector only is to decide")
+    row("Vector only", False if vec_bad else ("look" if vec_look else True),
+        "; ".join(vec_bad + vec_look) if vec_bad or vec_look else
+        "everything vector" + (", Qbot the only raster image" if raster else "") + " (guidelines/print/ sections 3 and 5)")
     low = []
     for img in meas["images"]:
         if img in meas["logos"] or img.get("src", "").endswith(".svg") or not img.get("naturalWidth"):

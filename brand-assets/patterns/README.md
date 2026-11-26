@@ -196,7 +196,7 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 
 ## In print
 
-**Patterns may be used as backgrounds on printed pieces** (Vanesa, 2026-11-26), from a business card to a booth backdrop. It replaces "no patterns in print" (Vanesa, 2026-11-20). The same patterns, presets and colorways as on screen, with the same rules ([`guidelines/`](../../guidelines/) sections 2 to 4). Whether the pattern mask is allowed in print is still to decide. Render them at the print size so they stay sharp: [`review/print.py`](../../review/README.md#print) renders the backdrop, patterns included, at 300 dpi. The print rules are in [`guidelines/print/`](../../guidelines/print/).
+**Patterns may be used as backgrounds on printed pieces** (visual designer, 2026-11-26), from a business card to a booth backdrop. It replaces "no patterns in print" (visual designer, 2026-11-20). The same patterns, presets and colorways as on screen, with the same rules ([`guidelines/`](../../guidelines/) sections 2 to 4). Whether the pattern mask is allowed in print is still to decide. Render them at the print size so they stay sharp: [`review/print.py`](../../review/README.md#print) renders the backdrop, patterns included, at 300 dpi. The print rules are in [`guidelines/print/`](../../guidelines/print/).
 
 ## Known limits
 
