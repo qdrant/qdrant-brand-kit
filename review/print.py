@@ -15,7 +15,7 @@ It writes, in OUT_DIR:
   <name>-rgb.pdf      the same before CMYK conversion (screen colors), for review. Not for the printer
   <name>-proof.png    what the printed piece looks like after cutting, folds dashed, for review
   <name>-full.png     the full render with bleed, and <name>-full.json, its measurements for review/check.py
-  <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, no patterns,
+  <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, patterns,
                       QR codes, image resolution, fonts, color
 
 Margins are the format's margin (8% of the short side, never under 1.5 × the safe area), from the
@@ -335,8 +335,8 @@ def main():
     if pinfo["masks"]: pat.append(f"{pinfo['masks']} pattern mask")
     if pinfo["canvases"]: pat.append(f"{pinfo['canvases']} pattern canvas")
     if pinfo["patternFiles"] and not pat: pat.append("files from brand-assets/patterns/")
-    row("No patterns", not pat, "no pattern, no pattern mask" if not pat else
-        ", ".join(pat) + ": no patterns in print (guidelines/print/ section 3)")
+    row("Patterns", True if not pat else "look", "no pattern" if not pat else
+        ", ".join(pat) + ": allowed in print (Vanesa, 2026-11-26). Check the proof for fringing on fine lines and moiré on dithered patterns; ask before using the pattern mask (guidelines/print/ section 3)")
     if pinfo["qr"]:
         bad = []
         for q in pinfo["qr"]:

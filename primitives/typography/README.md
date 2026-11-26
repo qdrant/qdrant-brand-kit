@@ -115,6 +115,8 @@ From Brand Guide 2.0. Tokens under `semantic.channels`.
 | Slides | Title / section / heading / subheading / body / caption / footnote | 44 / 36 / 28 / 22 / 18 / 14 / 12pt |
 | Documents | Title / H1 / H2 / H3 / body / caption | 28 / 22 / 18 / 14 / 11 / 9pt |
 
+The three Print rows are confirmed as they are (Vanesa, 2026-11-26). The sizes per print format are in [`guidelines/print/`](../../guidelines/print/) section 4.
+
 ## Hierarchy
 
 Body text scales with its heading: keep body copy between **20% and 40%** of the heading size. For example, H2 at 56px takes body text from 14px (Text SM) to 20px (Text XL).

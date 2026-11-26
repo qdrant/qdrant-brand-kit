@@ -194,6 +194,10 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | Generative-Glyph-Pattern-B | Indigo 600 → Indigo 400 (neutral 50 letters), Neutral 950 → Indigo 600 | Pattern Studio export | Like Glyph-A with outline shaping, in white letters. Same as the tool at 1620 × 1080 except the letter shapes (Mona Sans Mono, like Glyph-A). Needs `loadPatternFonts` first |
 | Mesh-Dithered-Pattern-A | Any library image | [Luma-Background-7](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-34128) | Bayer 16×16, darker grade, no noise. Dithers lightness only |
 
+## In print
+
+**Patterns may be used as backgrounds on printed pieces** (Vanesa, 2026-11-26), from a business card to a booth backdrop. It replaces "no patterns in print" (Vanesa, 2026-11-20). The same patterns, presets and colorways as on screen, with the same rules ([`guidelines/`](../../guidelines/) sections 2 to 4). Whether the pattern mask is allowed in print is still to decide. Render them at the print size so they stay sharp: [`review/print.py`](../../review/README.md#print) renders the backdrop, patterns included, at 300 dpi. The print rules are in [`guidelines/print/`](../../guidelines/print/).
+
 ## Known limits
 
 - **Browser only.** Rendering and `createMesh` use a canvas, so they run in a browser. A server would need a canvas library.

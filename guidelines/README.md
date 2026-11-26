@@ -4,7 +4,7 @@ The other folders say how each piece is built. This one says **which pieces to p
 
 The layout rules for creatives (Canvas, Grid, Stack, Box and the checks) are in [`layout/`](layout/), moved here from `primitives/` on 2026-11-12 because layout is a rule, not a token.
 
-Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). Print differs in a few places: no patterns, a choice between space imagery and a plain look, wider margins, text sizes in pt (visual designer, 2026-11-20).
+Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). Print differs in a few places: a choice between space imagery and a plain look, wider margins, text sizes in pt (Vanesa, 2026-11-20). Print uses the light or the dark theme, and the patterns in sections 2 to 4 may be used as print backgrounds (Vanesa, 2026-11-26).
 
 Three kinds of rule:
 
@@ -53,6 +53,8 @@ Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (de
 **Must: pick by how much text there is** (visual designer, 2026-11-16). Mesh-Refracted and Mesh-Sliced patterns are only for creatives with **little text** (a title and a button). Posts with a date, a place or other details use a **Color or Generative** pattern. Mesh-Dithered-Pattern-A works as it is.
 
 The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patterns/).
+
+**Patterns are for print too** (Vanesa, 2026-11-26): this section and sections 3 and 4 hold for printed pieces as well as for screens, except the pattern mask, which is still to decide for print ([`print/`](print/) section 3). It replaces "no patterns in print" (2026-11-20). The print rules are in [`print/`](print/).
 
 ## 3. Red backgrounds
 

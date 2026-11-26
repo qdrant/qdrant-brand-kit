@@ -196,7 +196,18 @@ These styles come from recent Qdrant web sections in Figma (customer stat cards,
 
 ## Print
 
-In [`guidelines/print/`](../print/) (2026-11-20): the printer's spec, format presets, bleed, safe area, folds, text in pt, color conversion and export. Print uses the same Canvas, Grid, Stack and Box as above, at the finished size.
+The layout rules for printed pieces. They hold at every size, from a business card to a booth backdrop, because each one is a proportion of the piece or comes from the printer's spec. The details (the printer's spec, format presets, bleed, safe area, text in pt, color conversion and export) are in [`guidelines/print/`](../print/).
+
+- **Same system** (Vanesa, 2026-11-20). Print uses the same Canvas, Grid, Stack and Box as above, at the finished size.
+- **The printer's spec first** (Vanesa, 2026-11-20). The finished size, bleed, safe area and folds come from the printer's spec sheet. The presets in [`print.tokens.json`](../print/print.tokens.json) are only starting points.
+- **Shape from the finished size** (Vanesa, 2026-11-20). The shape is the trim width ÷ height, without the bleed ("Shapes" above), so the grid and gap roles are the same as on social, scaled to the piece.
+- **Margins: 8% of the short side** (Vanesa, 2026-11-20). Text, logo, button, QR code and headshots sit at least 8% of the finished piece's short side inside the trim, and never less than 1.5 × the printer's safe area. The margin grows and shrinks with the piece: A6 8.4 mm, A4 17 mm, A2 34 mm, a roll-up 68 mm.
+- **Bleed** (Vanesa, 2026-11-20). Backgrounds (solid color, image or pattern) run past the trim to the bleed edge on every side. Nothing else does.
+- **Folds** (Vanesa, 2026-11-20). Each panel is laid out as its own area, with the margin on both sides of every fold. Nothing important crosses a fold.
+- **Light or dark** (Vanesa, 2026-11-26). A printed piece uses the light or the dark theme. Space imagery is always dark (Vanesa, 2026-11-20).
+- **Patterns** (Vanesa, 2026-11-26). Patterns from [`brand-assets/patterns/`](../../brand-assets/patterns/) may be used as backgrounds, with the same rules as on screen ([`guidelines/`](../) sections 2 to 4). Whether the pattern mask is allowed in print is still to decide ([`guidelines/print/`](../print/) section 3).
+- **Text sizes in pt** (Vanesa, 2026-11-20). Each format has its sizes in [`guidelines/print/`](../print/) section 4. The Print rows in [`primitives/typography/`](../../primitives/typography/), "Sizes per channel", are confirmed (Vanesa, 2026-11-26).
+- **Large format is in progress** (Vanesa, 2026-11-20). Booths, roll-ups, backdrops and posters A2 and bigger: work from the vendor's spec and treat the result as a test.
 
 ## To decide later
 
