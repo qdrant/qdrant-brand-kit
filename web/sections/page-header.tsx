@@ -1,10 +1,8 @@
-import { Search } from "lucide-react"
-
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@qdrant/design-system/components/ui/input-group"
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Link } from "../content/site"
 import { LinkButton } from "../lib/link-button"
+import { SearchField } from "../lib/search-field"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
 
@@ -51,14 +49,7 @@ export function PageHeader({
     ) : undefined
 
   const searchEl = search ? (
-    <form role="search" action={search.action} className={cn("w-full max-w-xl", centered && "mx-auto")}>
-      <InputGroup className="h-12 bg-card">
-        <InputGroupAddon>
-          <Search className="size-4" aria-hidden />
-        </InputGroupAddon>
-        <InputGroupInput name="q" type="search" placeholder={search.placeholder} aria-label={search.placeholder} />
-      </InputGroup>
-    </form>
+    <SearchField placeholder={search.placeholder} action={search.action} className={cn(centered && "mx-auto")} />
   ) : null
 
   return (

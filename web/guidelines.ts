@@ -215,10 +215,10 @@ export const guidelines: GuidelineGroup[] = [
         source: "web/sections/navbar.tsx",
       },
       {
-        title: "No breadcrumbs or pagination",
-        text: "The website has neither. The navbar's menus place a page, so an inner page opens with its header, not a trail of links. A directory shows every result on one page, narrowed by its filters and search.",
-        decided: "Design lead, 2026-11-24",
-        source: "web/sections/page-header.tsx, web/sections/filterable-index.tsx",
+        title: "No breadcrumbs; pagination only on the blog",
+        text: "The navbar's menus place a page, so an inner page opens with its header, not a trail of links. A directory shows every result on one page, narrowed by its filters and search. The blog is the one long listing that pages: its pages follow the last post, with Previous and Next, the first pages, the current one and the last, linked as the site's /blog/page/N/ (2026-11-26; until then the website had no pagination).",
+        decided: "Design lead, 2026-11-24 and 2026-11-26",
+        source: "web/sections/blog-grid.tsx",
       },
       {
         title: "A prompt for agents shows the agents, not the prompt",
@@ -250,6 +250,12 @@ export const guidelines: GuidelineGroup[] = [
         text: "In a grid of customer logos, every logo turns to the text color on hover. A logo with a case study is a link: the whole cell is clickable with the hand cursor, and on hover an arrow appears in its top-right corner and a subtle indigo light rises from the bottom (the arrow only on hover, and no label, since 2026-11-26). The grid's last cell is its action (See more customers), not a link floating above. Result cards show the customer's logo, not its name, and link to the case study.",
         decided: "Design lead, 2026-11-26",
         source: "web/sections/logo-cloud.tsx, web/sections/stats.tsx",
+      },
+      {
+        title: "The blog opens on its posts",
+        text: "The blog has no header or hero: it opens on its posts, under its H1 (Qdrant Features and News) at a section's size, with the search field to its right, so the content shows first. No newsletter band either: the footer has the sign-up.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/pages/blog.tsx",
       },
       {
         title: "The hero has no rails, and its proof row is plain",

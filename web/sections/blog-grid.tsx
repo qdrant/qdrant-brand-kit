@@ -1,10 +1,20 @@
 import * as React from "react"
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@qdrant/design-system/components/ui/pagination"
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Post } from "../content/listings"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
+import { SearchField } from "../lib/search-field"
 import { Plate } from "../lib/plate"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
@@ -20,6 +30,13 @@ export type BlogGridProps = SectionProps & {
   posts: Post[]
   // Show the image slot on each card.
   images?: boolean
+  // For a page that opens on its posts (the blog, 2026-11-26): the heading as the page's H1, at a section's size, and a
+  // search field to its right.
+  titleAs?: "h1" | "h2"
+  search?: { placeholder: string; action?: string }
+  // Pages after the posts: the current one and how many there are, linked as `${base}` for the first and
+  // `${base}page/N/` for the rest, like the site (2026-11-26).
+  pagination?: { current: number; total: number; base: string }
 }
 
 // Text with `code` and **bold** marked, as the content files keep it. Shared with the article and legal sections.
@@ -94,6 +111,45 @@ function PostCard({ post, images, size = "md", className }: { post: Post; images
   )
 }
 
+// The pages of a long listing: Previous, the first pages, the current one with its neighbors, the last, and Next,
+// with an ellipsis where pages are skipped (design lead, 2026-11-26, the blog's 22 pages).
+function Pages({ current, total, base }: { current: number; total: number; base: string }) {
+  const href = (n: number) => (n === 1 ? base : `${base}page/${n}/`)
+  const shown = [...new Set([1, 2, 3, current - 1, current, current + 1, total])]
+    .filter((n) => n >= 1 && n <= total)
+    .sort((a, b) => a - b)
+  return (
+    <Pagination>
+      <PaginationContent>
+        {current > 1 && (
+          <PaginationItem>
+            <PaginationPrevious href={href(current - 1)} />
+          </PaginationItem>
+        )}
+        {shown.map((n, i) => (
+          <React.Fragment key={n}>
+            {i > 0 && n - shown[i - 1]! > 1 && (
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+            )}
+            <PaginationItem>
+              <PaginationLink href={href(n)} isActive={n === current}>
+                {n}
+              </PaginationLink>
+            </PaginationItem>
+          </React.Fragment>
+        ))}
+        {current < total && (
+          <PaginationItem>
+            <PaginationNext href={href(current + 1)} />
+          </PaginationItem>
+        )}
+      </PaginationContent>
+    </Pagination>
+  )
+}
+
 // Blog posts (2026-11-21): cards with an image slot, an optional tag in mono, the title, a line and who wrote it
 // when. Featured puts the newest post large beside the next ones, for the top of the blog; grid lists the rest.
 export function BlogGrid({
@@ -102,6 +158,9 @@ export function BlogGrid({
   featured,
   posts,
   images = true,
+  titleAs,
+  search,
+  pagination,
   theme,
   surface,
   pattern,
@@ -109,7 +168,9 @@ export function BlogGrid({
   id,
   className,
 }: BlogGridProps) {
-  const action = header?.action ? (
+  const action = search ? (
+    <SearchField placeholder={search.placeholder} action={search.action} className="md:w-80 lg:w-96" />
+  ) : header?.action ? (
     <LinkButton href={header.action.href} variant="secondary">
       {header.action.label}
     </LinkButton>
@@ -132,6 +193,8 @@ export function BlogGrid({
           title={header.title}
           description={header.description}
           actions={action}
+          as={titleAs}
+          titleSize={titleAs === "h1" ? "section" : undefined}
         />
       )}
       {layout === "featured" && featured ? (
@@ -154,6 +217,7 @@ export function BlogGrid({
           ))}
         </ul>
       )}
+      {pagination && pagination.total > 1 && <Pages {...pagination} />}
     </Section>
   )
 }

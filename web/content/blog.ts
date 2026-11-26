@@ -11,8 +11,9 @@ import type { Post, ProseBlock } from "./listings"
 const img = (name: string) => `${ASSETS}/blog/${name}.jpg`
 
 export const blogPage = {
-  title: "Qdrant Blog",
-  heading: "Features and News",
+  // The page opens on its posts under this heading, the page's H1, with the search beside it (design lead, 2026-11-26;
+  // the site's "Qdrant Blog" header and its line are gone).
+  heading: "Qdrant Features and News",
   search: { placeholder: "What are you Looking for?" },
   featured: {
     title: "Qdrant 1.20 - Full-Text Search Improvements",
@@ -133,6 +134,8 @@ export const blogPage = {
       image: img("lightspeed-cockpit"),
     },
   ] as Post[],
+  // The site's 22 pages of posts, linked as /blog/page/N/.
+  pagination: { current: 1, total: 22, base: "/blog/" },
   cta: {
     title: "Get Started with Qdrant Free",
     primary: {
