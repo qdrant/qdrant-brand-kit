@@ -18,7 +18,6 @@ export function SectionHeader({
   align = "left",
   layout = "stacked",
   as: Heading = "h2",
-  titleSize,
   className,
 }: {
   kicker?: React.ReactNode
@@ -28,12 +27,9 @@ export function SectionHeader({
   align?: "left" | "center"
   layout?: "stacked" | "split" | "action"
   as?: "h1" | "h2" | "h3"
-  // The title's size, when it differs from its level: an H1 at a section's size for a page that opens on its content
-  // (the blog, 2026-11-26). By default an H1 is page-sized and the rest section-sized.
-  titleSize?: "page" | "section"
   className?: string
 }) {
-  const titleClass = cn((titleSize ?? (Heading === "h1" ? "page" : "section")) === "page" ? heading.page : heading.section, "text-balance")
+  const titleClass = cn(Heading === "h1" ? heading.page : heading.section, "text-balance")
   // The kicker starts with a node, the same hexagon as where the page's lines meet (web.css), centered on the
   // kicker's first line, however many lines it takes (design lead, 2026-11-24).
   const kickerEl = kicker ? (

@@ -30,8 +30,8 @@ export type BlogGridProps = SectionProps & {
   posts: Post[]
   // Show the image slot on each card.
   images?: boolean
-  // For a page that opens on its posts (the blog, 2026-11-26): the heading as the page's H1, at a section's size, and a
-  // search field to its right.
+  // For a page that opens on its posts (the blog, 2026-11-26): the heading as the page's H1, at its size, and a search
+  // field to its right.
   titleAs?: "h1" | "h2"
   search?: { placeholder: string; action?: string }
   // Pages after the posts: the current one and how many there are, linked as `${base}` for the first and
@@ -194,7 +194,6 @@ export function BlogGrid({
           description={header.description}
           actions={action}
           as={titleAs}
-          titleSize={titleAs === "h1" ? "section" : undefined}
         />
       )}
       {layout === "featured" && featured ? (

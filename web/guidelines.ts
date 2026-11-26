@@ -253,7 +253,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "The blog opens on its posts",
-        text: "The blog has no header or hero: it opens on its posts, under its H1 (Qdrant Features and News) at a section's size, with the search field to its right, so the content shows first. No newsletter band either: the footer has the sign-up.",
+        text: "The blog has no header or hero: it opens on its posts, under its H1 (Qdrant Features and News) at the page heading's size, with the search field to its right, so the content shows first. No newsletter band either: the footer has the sign-up.",
         decided: "Design lead, 2026-11-26",
         source: "web/pages/blog.tsx",
       },
