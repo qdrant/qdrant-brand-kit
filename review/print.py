@@ -40,8 +40,7 @@ PX_PER_MM = DPI / 25.4
 PT_PER_PX = 72 / DPI
 BUSY = 0.06      # share of detailed pixels behind a text box that counts as busy (tuned 2026-11-20)
 BUSY_STD = 25    # or a spread of brightness (0-255) that means a subject or ground behind the text
-TOPAZ = ("To decide (visual designer): the Topaz Labs upscale API is proposed (needs approval). A 4× upscale "
-         "(4096 × 6144) would cover A4 and A3 at 300 dpi. Until then, offer the plain, solid version.")
+TOPAZ = ("No upscaler is approved for now (visual designer, 2026-11-26). Offer the plain, solid version instead.")
 GS_INSTALL = ("Ghostscript isn't installed, so the PDF is still in screen colors (RGB) and isn't print-ready.\n"
               "Install it once: on a Mac with Homebrew, `brew install ghostscript` (no Homebrew: install it from\n"
               "https://brew.sh first, or use Ghostscript's own installer); on Linux, `apt install ghostscript`.\n"
