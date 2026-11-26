@@ -115,7 +115,7 @@ From Brand Guide 2.0. Tokens under `semantic.channels`.
 | Slides | Title / section / heading / subheading / body / caption / footnote | 44 / 36 / 28 / 22 / 18 / 14 / 12pt |
 | Documents | Title / H1 / H2 / H3 / body / caption | 28 / 22 / 18 / 14 / 11 / 9pt |
 
-The three Print rows are confirmed as they are (visual designer, 2026-11-26). The sizes per print format are in [`guidelines/print/`](../../guidelines/print/) section 4.
+The three Print rows are the Brand Guide's general ranges. For a printed piece, the sizes per format, chosen for good legibility at the printed size, are in [`guidelines/print/`](../../guidelines/print/) section 4, and those win (visual designer, 2026-11-26).
 
 ## Hierarchy
 

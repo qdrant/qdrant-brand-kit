@@ -10,7 +10,7 @@ The format preset comes from guidelines/print/print.tokens.json. Everything the 
 (--trim, --bleed, --safe, --panels, --hidden-bottom, --min-dpi, --icc) overrides the preset: the spec always wins.
 
 It writes, in OUT_DIR:
-  <name>.pdf          the print file: trim + bleed + crop marks, fonts embedded, converted to the printer's
+  <name>.pdf          the print file: trim + bleed + crop marks, all text outlined, converted to the printer's
                       CMYK profile (PDF/X as the vendor asks, --pdfx). Only with --icc and Ghostscript
   <name>-rgb.pdf      the same before CMYK conversion (screen colors), for review. Not for the printer
   <name>-proof.png    what the printed piece looks like after cutting, folds dashed, for review
@@ -223,7 +223,8 @@ def main():
     else:
         cmd = [gs, "-dSAFER", "-dBATCH", "-dNOPAUSE", "-sDEVICE=pdfwrite", "-dPDFSETTINGS=/prepress",
                "-sColorConversionStrategy=CMYK", "-sProcessColorModel=DeviceCMYK",
-               f"-sOutputICCProfile={os.path.abspath(a.icc)}", "-dEmbedAllFonts=true",
+               f"-sOutputICCProfile={os.path.abspath(a.icc)}",
+               "-dNoOutputFonts",  # outline all text: the design system's fonts, unchanged, as shapes (visual designer, 2026-11-26)
                f"-dPDFX={'4' if a.pdfx == '4' else 'true'}", f"-sOutputFile={final_pdf}", rgb_pdf]
         r = subprocess.run(cmd, capture_output=True, text=True)
         if r.returncode != 0 or not os.path.exists(final_pdf):
@@ -359,8 +360,8 @@ def main():
             if side < qr_min: bad.append(f"{side:.1f} mm (needs {qr_min:g} mm)")
             if not dark_on_light: bad.append("not dark on light")
         row("QR codes", not bad, f"{qr_min:g} mm or more, dark on light. Test-scan it from the proof" if not bad else "; ".join(bad))
-    # Images: only what's in the brand kit (visual designer, 2026-11-26). Qbot is allowed, without its glow;
-    # headshots get a 👀 while they're to decide; any other image fails. Patterns are painted at the printed size.
+    # Images: only what's in the brand kit (visual designer, 2026-11-26). Qbot (without its glow) and headshots are
+    # allowed, at the resolution below; any other image fails. Patterns are painted at the printed size.
     is_qbot = lambda i: "qd-mascot" in (i.get("cls") or "") or "brand-assets/mascot/" in (i.get("src") or "")
     pics = [i for i in meas["images"] if i not in meas["logos"] and not (i.get("src") or "").lower().endswith(".svg")]
     img_bad, img_look = [], []
@@ -369,14 +370,14 @@ def main():
         if is_qbot(i):
             if "qd-mascot--glow" in (i.get("cls") or ""): img_bad.append(f"Qbot has its glow ({nm}): no glow in print")
         elif i.get("cls") == "headshot":
-            img_look.append(f"a headshot ({nm}): whether headshots go on print is to decide")
+            pass  # allowed when very large and sharp: the resolution check below (visual designer, 2026-11-26)
         else:
             img_bad.append(f"an image that isn't from the brand kit ({nm})")
     if a.min_dpi and a.min_dpi > DPI and pinfo["canvases"]:
         img_look.append(f"the vendor asks {a.min_dpi:g} dpi; patterns are painted at {DPI} dpi")
     row("Images", False if img_bad else ("look" if img_look else True),
         "; ".join(img_bad + img_look) if img_bad or img_look else
-        ("only Qbot, from the brand kit" if pics else "no images") + " (guidelines/print/ sections 3 and 5)")
+        ("only Qbot and headshots, from the brand kit" if pics else "no images") + " (guidelines/print/ sections 3 and 5)")
     low = []
     for img in meas["images"]:
         if img in meas["logos"] or img.get("src", "").endswith(".svg") or not img.get("naturalWidth"):
@@ -388,18 +389,16 @@ def main():
             low.append(f"the image is {dpi:.0f} dpi ({os.path.basename(img['src'])})")
     row("Image resolution", not low, f"every image {min_dpi:g} dpi or more" if not low else
         "Not doable for now: " + "; ".join(low[:3]) + f", the piece needs {min_dpi:g}. No plain resize")
-    # Fonts: Chrome can export variable fonts as Type 3, which some prepress workflows reject.
-    pdf_for_fonts = final_pdf if os.path.exists(final_pdf) else rgb_pdf
-    kinds = []
-    if shutil.which("pdffonts"):
-        out = subprocess.run(["pdffonts", pdf_for_fonts], capture_output=True, text=True).stdout.splitlines()[2:]
-        kinds = ["Type 3" if "Type 3" in ln else "other" for ln in out]
+    # Fonts: all text is outlined before print (visual designer, 2026-11-26), so the printer's file has no fonts left.
+    def font_count(pdf):
+        if shutil.which("pdffonts"):
+            return len(subprocess.run(["pdffonts", pdf], capture_output=True, text=True).stdout.splitlines()[2:])
+        return len(re.findall(rb"/Type\s*/Font\b", open(pdf, "rb").read()))
+    if os.path.exists(final_pdf) and not rgb_only:
+        n = font_count(final_pdf)
+        row("Fonts", n == 0, "all text outlined" if n == 0 else f"{n} fonts left in the print file: outline all text")
     else:
-        raw_pdf = open(pdf_for_fonts, "rb").read()
-        kinds = ["Type 3" if k == b"Type3" else "other" for k in re.findall(rb"/Subtype\s*/(Type3|Type1C?|TrueType|Type0|CIDFontType[02]|OpenType)", raw_pdf)]
-    t3 = kinds.count("Type 3")
-    row("Fonts", True if not t3 else "look", "no Type 3 fonts" if not t3 else
-        f"{t3} Type 3 fonts: some printers reject them; check with the printer or outline text")
+        row("Fonts", "look", "text is outlined in the CMYK conversion, which didn't run (see Color)")
     no_profile = not rgb_only and not a.icc
     # Color is always checked (visual designer, 2026-11-20): without the printer's profile the piece isn't deliverable.
     row("Color", True if (rgb_only or "Converted" in color_note) else False,
