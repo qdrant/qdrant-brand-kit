@@ -52,7 +52,7 @@ export const logoCloud = defineSection<LogoCloudProps>({
     ],
     props: [
       { name: "layout", type: '"row" | "grid" | "wall" | "marquee"', note: "Row, cell grid, wall or marquee (the last two proposed)." },
-      { name: "logos", type: "{ name, logo?, src? }[]", note: "Company names, with their id in the customer logo library." },
+      { name: "logos", type: "{ name, logo?, src?, href? }[]", note: "Company names, with their id in the customer logo library. In the grid, its columns follow the number of cells (with the action), so the last row is full from lg: 10 in rows of 5, 18 in rows of 6, 14 in rows of 7." },
       { name: "label, action", type: "string, { label, href }", note: "Optional." },
     ],
   },

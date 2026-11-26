@@ -4,6 +4,7 @@ import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
 import type { HeaderProps } from "../lib/section-props"
 import { heading, type } from "../lib/type"
+import { LinkButton } from "../lib/link-button"
 import { Node } from "../lib/node"
 import { Plate } from "../lib/plate"
 
@@ -20,11 +21,17 @@ export type StepsProps = SectionProps & {
 // meet. Each step has a mono label (Step 01), an optional title and its text.
 export function Steps({ header, steps, layout = "row", theme, surface, pattern, cardPattern, id, className }: StepsProps) {
   const label = (s: StepsProps["steps"][number], i: number) => s.label ?? `Step ${String(i + 1).padStart(2, "0")}`
+  // The heading's action, a button beside or under the text (2026-11-26).
+  const actions = header.action ? (
+    <LinkButton href={header.action.href} variant="secondary">
+      {header.action.label}
+    </LinkButton>
+  ) : undefined
 
   if (layout === "list") {
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="grid gap-12 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
-        <SectionHeader kicker={header.kicker} title={header.title} description={header.description} className="lg:sticky lg:top-24 lg:self-start" />
+        <SectionHeader kicker={header.kicker} title={header.title} description={header.description} actions={actions} className="lg:sticky lg:top-24 lg:self-start" />
         <ol className="flex flex-col border-l border-(--web-line)">
           {steps.map((s, i) => (
             <li key={i} className="relative flex flex-col gap-2 pb-10 pl-8 last:pb-0">
@@ -44,14 +51,15 @@ export function Steps({ header, steps, layout = "row", theme, surface, pattern, 
   if (layout === "cells") {
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
-        <SectionHeader kicker={header.kicker} title={header.title} description={header.description} layout="split" />
+        <SectionHeader kicker={header.kicker} title={header.title} description={header.description} actions={actions} layout="split" />
         <ol className={cn("web-grid grid-cols-1", cols)}>
           {steps.map((s, i) => (
             <li key={i} className="flex flex-col gap-3 px-6 pt-8 pb-10">
               <span className="font-mono text-6xl tracking-tight text-muted-foreground/45 tabular-nums">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="mt-6 font-mono text-xs text-muted-foreground uppercase">{label(s, i)}</span>
+              {/* The big number is the step's label; a label of its own shows only when the step has one (2026-11-26). */}
+              {s.label && <span className="mt-6 font-mono text-xs text-muted-foreground uppercase">{s.label}</span>}
               {s.title && <h3 className={heading.card}>{s.title}</h3>}
               <p className={cn(type.body, !s.title && "text-foreground")}>{s.text}</p>
             </li>
@@ -64,7 +72,7 @@ export function Steps({ header, steps, layout = "row", theme, surface, pattern, 
   if (layout === "pipeline") {
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
-        <SectionHeader kicker={header.kicker} title={header.title} description={header.description} align="center" className="mx-auto" />
+        <SectionHeader kicker={header.kicker} title={header.title} description={header.description} actions={actions} align="center" className="mx-auto" />
         <ol className={cn("grid gap-10 md:gap-12", cols)}>
           {steps.map((s, i) => (
             <li key={i} className="relative flex">
@@ -94,7 +102,7 @@ export function Steps({ header, steps, layout = "row", theme, surface, pattern, 
 
   return (
     <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
-      <SectionHeader kicker={header.kicker} title={header.title} description={header.description} />
+      <SectionHeader kicker={header.kicker} title={header.title} description={header.description} actions={actions} />
       <ol className={cn("grid gap-10 md:gap-(--web-card-gap)", steps.length === 4 ? "md:grid-cols-4" : "md:grid-cols-3")}>
         {steps.map((s, i) => (
           <li key={i} className="relative flex flex-col gap-3 border-t border-(--web-line) pt-8">

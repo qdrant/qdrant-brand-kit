@@ -109,7 +109,7 @@ export const hero = defineSection<HeroProps>({
       { name: "trust", type: "{ label, icon? }[]", note: "Proof points, each with a Lucide icon name." },
       { name: "media", type: '"none" | "code" | "image"', note: "What fills the media slot." },
       { name: "visual", type: "ReactNode", note: "A real image or product screen for the media slot (web/visuals), instead of the placeholder." },
-      { name: "note", type: "{ text, link, after? }", note: "One small line under the buttons, with a link in it." },
+      { name: "note", type: "{ text, link?, after? }", note: "One small line under the buttons, with an optional link in it (the Edge page's beta notice has none)." },
     ],
   },
   fields: [

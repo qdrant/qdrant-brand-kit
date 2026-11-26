@@ -80,6 +80,8 @@ export const telekomResult = {
 
 export type CaseStudy = {
   company: string
+  // Its id in the customer logo library: a result card shows the logo, not the name (design lead, 2026-11-26).
+  logo?: string
   // The headline figure and the words after it ("2-3x" "Revenue Lift").
   metric: string
   metricLabel?: string
@@ -96,6 +98,7 @@ export const cloudCustomers = {
   items: [
     {
       company: "Tripadvisor",
+      logo: "tripadvisor",
       metric: "2-3x",
       metricLabel: "Revenue Lift",
       text: "Travelers using the generative AI experience show 2-3x more revenue than those using traditional search.",
@@ -105,6 +108,7 @@ export const cloudCustomers = {
     },
     {
       company: "Deutsche Telekom",
+      logo: "telekom",
       metric: "7x Faster",
       metricLabel: "Production Time",
       text: "After replacing their vector stack with Qdrant, Deutsche Telekom cut AI agent development from 15 days to 2 days.",
@@ -114,6 +118,7 @@ export const cloudCustomers = {
     },
     {
       company: "FAZ",
+      logo: "faz",
       metric: "<1s",
       metricLabel: "Filtered query response on 14M vectors",
       text: "Sub-second response times on complex, highly filtered semantic queries across an indexed archive of more than 14 million vectors.",

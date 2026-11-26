@@ -13,7 +13,9 @@ import { IconTile, type Tone } from "../lib/tone"
 import { heading, type } from "../lib/type"
 
 export type FeatureRowsProps = SectionProps & {
-  header: HeaderProps
+  // Optional (2026-11-26): without it, each row's title is the section's heading (an h2), and a single row is the
+  // whole section: its tag as the kicker, its title at section size, its points, and its link as a button.
+  header?: HeaderProps
   rows: Feature[]
   // Which side the first row's media is on; the rows alternate from there.
   start?: "media-right" | "media-left"
@@ -25,24 +27,38 @@ export type FeatureRowsProps = SectionProps & {
 export function FeatureRows({ header, rows, start = "media-right", theme, surface, pattern, cardPattern, id, className }: FeatureRowsProps) {
   return (
     <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
-      <SectionHeader
-        layout="split"
-        kicker={header.kicker}
-        title={header.title}
-        description={header.description}
-        actions={
-          header.action ? (
-            <LinkButton href={header.action.href} variant="secondary">
-              {header.action.label}
-            </LinkButton>
-          ) : undefined
-        }
-      />
+      {header && (
+        <SectionHeader
+          layout="split"
+          kicker={header.kicker}
+          title={header.title}
+          description={header.description}
+          actions={
+            header.action ? (
+              <LinkButton href={header.action.href} variant="secondary">
+                {header.action.label}
+              </LinkButton>
+            ) : undefined
+          }
+        />
+      )}
       <div className="flex flex-col gap-16 lg:gap-24">
         {rows.map((row, i) => {
           const mediaLeft = (i % 2 === 0) === (start === "media-left")
+          const single = !header && rows.length === 1
           return (
             <div key={row.title} id={row.id} className="grid scroll-mt-24 grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
+              {single ? (
+                <div className={cn("flex flex-col items-start gap-8 lg:max-w-lg", mediaLeft ? "lg:order-2 lg:justify-self-end" : "")}>
+                  <SectionHeader kicker={row.tag} title={row.title} description={row.text} />
+                  <FeaturePoints points={row.points} className="w-full" />
+                  {row.link && (
+                    <LinkButton href={row.link.href} variant="secondary">
+                      {row.link.label}
+                    </LinkButton>
+                  )}
+                </div>
+              ) : (
               <div className={cn("flex flex-col items-start gap-4 lg:max-w-md", mediaLeft ? "lg:order-2 lg:justify-self-end" : "")}>
                 {row.icon ? (
                   <IconTile name={row.icon} tone={(row.tone as Tone) ?? "indigo"} />
@@ -50,7 +66,7 @@ export function FeatureRows({ header, rows, start = "media-right", theme, surfac
                   <span className="font-mono text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
                 )}
                 <FeatureTag tag={row.tag} />
-                <h3 className={heading.card}>{row.title}</h3>
+                {header ? <h3 className={heading.card}>{row.title}</h3> : <h2 className={heading.card}>{row.title}</h2>}
                 {row.text && <p className={type.body}>{row.text}</p>}
                 <FeaturePoints points={row.points} className="w-full" />
                 {row.link && (
@@ -59,6 +75,7 @@ export function FeatureRows({ header, rows, start = "media-right", theme, surfac
                   </ArrowLink>
                 )}
               </div>
+              )}
               {row.visual && row.visualFrame === "none" ? (
                 <div className={cn("w-fit max-w-full justify-self-center", mediaLeft ? "lg:order-1 lg:justify-self-start" : "lg:justify-self-end")}>
                   {row.visual}

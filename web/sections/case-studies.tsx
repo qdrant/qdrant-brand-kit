@@ -6,6 +6,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import type { CaseStudy, Quote } from "../content/conversion"
 import type { Link } from "../content/site"
 import { ArrowLink } from "../lib/arrow-link"
+import { CustomerLogo } from "../lib/customer-logo"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
 import { Plate } from "../lib/plate"
@@ -114,9 +115,15 @@ export function CaseStudies({ layout = "cards", header, items = [], story, theme
           {items.map((item) => (
             <Plate as="li" key={item.company} className="flex flex-col rounded-xl">
               <div className="flex flex-1 flex-col gap-6 p-6">
-                <CompanyMark name={item.company} />
+                {item.logo ? (
+                  <CustomerLogo id={item.logo} version="mono" className="h-7 w-auto max-w-36 self-start text-muted-foreground" />
+                ) : (
+                  <CompanyMark name={item.company} />
+                )}
                 <div className="flex flex-col gap-1">
-                  <span className="font-mono text-4xl tracking-tight text-foreground tabular-nums">{item.metric}</span>
+                  {/* The figure in the sans, like a heading: mono is for eyebrows and plain numbers, and a figure
+                      like "7x Faster" carries words (design lead, 2026-11-26). */}
+                  <span className="font-display text-4xl font-medium tracking-tight text-foreground tabular-nums">{item.metric}</span>
                   {item.metricLabel && <h3 className={heading.card}>{item.metricLabel}</h3>}
                 </div>
                 <p className={cn(type.small, "flex-1")}>{item.text}</p>

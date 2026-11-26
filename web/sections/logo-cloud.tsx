@@ -77,6 +77,12 @@ function Logo({ name, logo, src, hoverColor }: { name: string; logo?: string; sr
   )
 }
 
+function gridColumns(cells: number) {
+  if (cells % 6 === 0) return "md:grid-cols-3 lg:grid-cols-6"
+  if (cells % 5 === 0) return "md:grid-cols-5"
+  return "md:grid-cols-4 lg:grid-cols-7"
+}
+
 // Customer or partner logos (2026-11-21). A logo is never redrawn; it's shown in one color (the customer logo
 // library's mono version) or in its own colors.
 export function LogoCloud({ layout = "row", label, logos, action, theme, surface, pattern, cardPattern, id, className }: LogoCloudProps) {
@@ -96,7 +102,9 @@ export function LogoCloud({ layout = "row", label, logos, action, theme, surface
         // Every logo turns to the text color on hover. A logo with a case study is a link: the whole cell, with an
         // arrow in its corner and a subtle indigo light from the bottom on hover. The action is
         // the grid's last cell (design lead, 2026-11-26).
-        <ul className="web-grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
+        // Columns follow the number of cells (2026-11-26), so the last row is full from lg: 14 cells in rows of 7, 10 in
+        // rows of 5, 18 in rows of 6 (3 on tablets).
+        <ul className={cn("web-grid grid-cols-2", gridColumns(logos.length + (action ? 1 : 0)))}>
           {logos.map((logo) => (
             <li key={logo.name} className="group/cell relative grid h-24 place-items-center px-6">
               {logo.href ? (

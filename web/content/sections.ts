@@ -21,6 +21,12 @@ export type Feature = {
   points?: { label?: string; text: string; icon?: string }[]
   // In a grid, take the whole row (a closing card under the others).
   wide?: boolean
+  // The title itself links here, for a card the site links by its title alone, with no link text (2026-11-26).
+  href?: string
+  // More than one link, in a row under the text (a demo's Live Demo, GitHub and post, 2026-11-26).
+  links?: Link[]
+  // A drawing on top of a card, edge to edge in a hairline frame (a demo's cover, 2026-11-26); it sets its own size.
+  cover?: ReactNode
   // A real image, product screen or diagram for the feature's media (web/visuals), instead of a placeholder. It sits
   // in a frame (a plate in a tray) that hugs it, on the outer side of the row when there's room; "none" shows it
   // bare, for a visual with its own look (the globe).
@@ -177,9 +183,9 @@ export const hybridSteps = {
   title: "Set Up Your Hybrid Cluster in a Few Steps From the Console",
   description: "Contact Sales to enable Hybrid Cloud, then connect your Kubernetes environment from the console.",
   steps: [
-    { label: "Step 01", text: "Open the Qdrant Cloud Console and start the Hybrid Cloud setup." },
-    { label: "Step 02", text: "Run the generated install command to deploy the Qdrant Operator and Cloud Agent into your cluster." },
-    { label: "Step 03", text: "Create a Qdrant cluster and select your Hybrid Cloud environment as the target." },
+    { text: "Open the Qdrant Cloud Console and start the Hybrid Cloud setup." },
+    { text: "Run the generated install command to deploy the Qdrant Operator and Cloud Agent into your cluster." },
+    { text: "Create a Qdrant cluster and select your Hybrid Cloud environment as the target." },
   ],
 }
 
