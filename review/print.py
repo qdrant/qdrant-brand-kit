@@ -3,11 +3,11 @@
 
 Usage:
   python3 review/print.py page.html --format flyer-a4 --out OUT_DIR [--name flyer]
-         [--trim 210x297] [--bleed 3] [--safe 5] [--panels 100,100,97] [--hidden-bottom 100]
+         [--trim 210x297] [--bleed 3] [--safe 5] [--panels 100,100,97] [--hidden-bottom 100] [--min-dpi 150]
          [--icc printer-profile.icc] [--pdfx 4] [--print-scale small] [--root FOLDER]
 
 The format preset comes from guidelines/print/print.tokens.json. Everything the printer's spec gives
-(--trim, --bleed, --safe, --panels, --hidden-bottom, --icc) overrides the preset: the spec always wins.
+(--trim, --bleed, --safe, --panels, --hidden-bottom, --min-dpi, --icc) overrides the preset: the spec always wins.
 
 It writes, in OUT_DIR:
   <name>.pdf          the print file: trim + bleed + crop marks, fonts embedded, converted to the printer's
@@ -78,6 +78,8 @@ def main():
     ap.add_argument("--bleed", type=float, help="mm per side (from the spec)")
     ap.add_argument("--safe", type=float, help="mm inside the trim (from the spec)")
     ap.add_argument("--panels", help="panel widths in mm, left to right, laid out flat (brochures)")
+    ap.add_argument("--min-dpi", type=float, help="lowest image resolution at the printed size, from the vendor's "
+                    "spec: overrides the format's minDpi, the vendor wins (Vanesa, 2026-11-26)")
     ap.add_argument("--hidden-bottom", type=float, help="mm at the bottom that won't be seen (roll-up base)")
     ap.add_argument("--icc", help="the printer's CMYK profile (.icc), from the spec")
     ap.add_argument("--pdfx", default=None, help="PDF/X version from the vendor's spec: 4 or 1a. No brand default (Vanesa, 2026-11-26); falls back to 4 and the checks flag it")
@@ -97,7 +99,9 @@ def main():
     panels = [float(x) for x in a.panels.split(",")] if a.panels else fmt.get("panels")
     if a.panels: from_spec.append("panels")
     hidden = a.hidden_bottom if a.hidden_bottom is not None else fmt.get("hiddenBottom", 0)
-    min_dpi = fmt.get("minDpi", defaults["minDpi"])
+    # 300 dpi up close, 100 to 150 for large formats (the preset's minDpi), or the vendor's value (Vanesa, 2026-11-26).
+    min_dpi = a.min_dpi if a.min_dpi else fmt.get("minDpi", defaults["minDpi"])
+    if a.min_dpi: from_spec.append("resolution")
     qr_min = fmt.get("qrMin", defaults["qrMin"])
     if a.pdfx: from_spec.append("file format")
     a.pdfx = a.pdfx or "4"
@@ -362,8 +366,8 @@ def main():
         dpi = src_w / (shown["w"] / PX_PER_MM / 25.4) if shown["w"] else 0
         if dpi < min_dpi:
             low.append(f"the image is {dpi:.0f} dpi ({os.path.basename(img['src'])})")
-    row("Image resolution", not low, f"every image {min_dpi} dpi or more" if not low else
-        "Not doable for now: " + "; ".join(low[:3]) + f", the format needs {min_dpi}. No plain resize")
+    row("Image resolution", not low, f"every image {min_dpi:g} dpi or more" if not low else
+        "Not doable for now: " + "; ".join(low[:3]) + f", the piece needs {min_dpi:g}. No plain resize")
     # Fonts: Chrome can export variable fonts as Type 3, which some prepress workflows reject.
     pdf_for_fonts = final_pdf if os.path.exists(final_pdf) else rgb_pdf
     kinds = []

@@ -4,7 +4,7 @@ The other folders say how each piece is built. This one says **which pieces to p
 
 The layout rules for creatives (Canvas, Grid, Stack, Box and the checks) are in [`layout/`](layout/), moved here from `primitives/` on 2026-11-12 because layout is a rule, not a token.
 
-Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). Print differs in a few places: a choice between space imagery and a plain look, wider margins, text sizes in pt (Vanesa, 2026-11-20). Print uses the light or the dark theme, and the patterns in sections 2 to 4 may be used as print backgrounds (Vanesa, 2026-11-26).
+Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). [`print/`](print/) is the only place for the print rules; this page only links to it (Vanesa, 2026-11-26).
 
 Three kinds of rule:
 
@@ -25,10 +25,7 @@ Decided by the visual designer on 2026-11-04.
 | **Pattern only** | Sales, and guide or docs downloads (with the light card) |
 | **Headshots** | Speaker announcements (webinar, talk, panel) |
 
-**Print: ask first** (Vanesa, 2026-11-26). For a printed piece, also ask before building, unless the request already says ([`print/`](print/) section 1):
-
-- **The vendor's spec:** finished size, bleed (some vendors want none), safe area and file format.
-- **Large formats:** where the piece will hang or stand (hung from the ceiling or on the floor), and what might cover part of it (counters, furniture, people).
+**Print** asks different questions (the vendor's spec, and for large formats where the piece hangs or stands and what covers it): see [`print/`](print/) section 1.
 
 **Don't ask design questions.** Take these from the rules (Vanesa, 2026-11-20):
 
@@ -59,7 +56,7 @@ Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (de
 
 The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patterns/).
 
-**Patterns are for print too** (Vanesa, 2026-11-26): this section and sections 3 and 4 hold for printed pieces as well as for screens, except the pattern mask, which is still to decide for print ([`print/`](print/) section 3). It replaces "no patterns in print" (2026-11-20). The print rules are in [`print/`](print/).
+**Print:** patterns may be a print background, never pattern only; see [`print/`](print/) section 3.
 
 ## 3. Red backgrounds
 
