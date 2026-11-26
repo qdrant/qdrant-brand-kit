@@ -1,5 +1,9 @@
 import type { PatternDefinition, PatternNote } from "../types"
+import { cosmosPatterns } from "./cosmos"
+import { depthHazeVivid, depthHazeVividBackground } from "./depth-haze-vivid"
 import { generativePattern } from "./generative"
+import { qbotPeek } from "./qbot"
+import { referencePatterns } from "./references"
 import { spacePatterns } from "./space"
 
 // Patterns being explored, not approved: they show only in the studio's Patterns tab, marked Exploring, and not in
@@ -23,6 +27,56 @@ const STEPPED: PatternNote = {
   source: "web/guidelines.ts, Nodes",
   text: "Its motion is a smooth, continuous pulse. The website's model for alive motion is the nodes' hard step to 25% and back every 2 seconds.",
 }
+
+// The footer's band patterns (2026-11-25), each in the room the exploration adds under the footer's content, like
+// Terminal, footer. A word stands in for the wordmark; a horizon has no word.
+const FOOTER_ROOM: PatternNote = {
+  rule: "A pattern fills its section",
+  source: "web/AGENTS.md, Adding a pattern",
+  text: "It needs room between the footer's content and its legal bar: the exploration adds it there (the frame's room) and lifts the band over the legal bar. Keeping it means the footer section gets that room, for Juan to decide.",
+}
+
+const FOOTER_WORD: PatternNote = {
+  rule: "Never redraw the logo",
+  source: "AGENTS.md, Never",
+  text: "QDRANT is meant to be read, so it stands in for the wordmark: Mona Sans ExtraBold, not the logo from brand-assets/logo, and the footer already shows the logo above it.",
+}
+
+// The word's field, as in Terminal, footer: a 280px unit and size 1.43, so QDRANT is 1200px wide, the content
+// container's width, in a 320px band.
+const FOOTER_WORD_FIELD = { unitPx: 280, shape: "text", text: "QDRANT", size: 1.43, seed: 7 } as const
+
+// A horizon is for any section with room under its content (a footer, a hero, a page header), so its note says
+// where the room goes.
+const HORIZON_ROOM: PatternNote = {
+  rule: "A pattern fills its section",
+  source: "web/AGENTS.md, Adding a pattern",
+  text: "It needs room under the section's content: the exploration adds it (in a footer, above the legal bar; in a hero or a page header, at the bottom of the section). Keeping it means the section gets that room, for Juan to decide.",
+}
+
+// A side pattern is for a split hero: it stays on the media's side, away from the text.
+const SIDE_ONLY: PatternNote = {
+  rule: "A pattern fills its section",
+  source: "web/AGENTS.md, Adding a pattern",
+  text: "It covers only the right half of the section, faded in at its edge, so it doesn't fill the section. It's meant for a split hero, where the text is on the left.",
+}
+
+// A horizon's field: a soft gradient turned to rise toward the bottom of the band (rotation 90 points the
+// gradient's lit side down), broken up by the noise.
+const HORIZON_FIELD = {
+  unitPx: 280,
+  shape: "gradient",
+  size: 1,
+  rotation: 90,
+  shaping: "fill",
+  softness: 0.35,
+  noiseAmount: 0.4,
+  blend: "mix",
+  noiseScale: 3,
+  octaves: 2,
+  drift: 0.4,
+  seed: 7,
+} as const
 
 export const explorations: PatternDefinition[] = [
   // Recreated from a screenshot (2026-11-23) with what the repo already has: Hex pulse's rings of hexagons on a hex
@@ -142,7 +196,8 @@ export const explorations: PatternDefinition[] = [
     id: "hex-rings",
     name: "Hex rings",
     kind: "surface",
-    description: "Small hexagons scattered on a hex grid, gathering in wide hexagonal rings that move out from the center.",
+    description:
+      "Small hexagons scattered on a hex grid, gathering in wide hexagonal rings that move out from the center.",
     // From: Pattern Studio, Deploy Card, "Your pattern" (the hex rings pasted into it).
     notes: [LOOPS, STEPPED],
     // The card's violet lights as light on the marks, as in Hex pulse.
@@ -286,7 +341,8 @@ export const explorations: PatternDefinition[] = [
     name: "Terminal",
     kind: "background",
     fade: false,
-    description: "QDRANT spelled in ASCII characters across the section, from dots at the edges of each letter to dense marks inside.",
+    description:
+      "QDRANT spelled in ASCII characters across the section, from dots at the edges of each letter to dense marks inside.",
     // From: Pattern Studio, Deploy Card, 7. A card surface there; a background here (2026-11-23).
     notes: [
       {
@@ -331,6 +387,318 @@ export const explorations: PatternDefinition[] = [
       sizeByValue: false,
       scale: 1,
       threshold: 0.12,
+      seed: 7,
+    },
+  }),
+  // Terminal for a footer (2026-11-24): Terminal as it is, with only the word made larger. Every setting is
+  // Terminal's, the Deploy Card's values (Pattern Studio's defaults, the "terminal" look, then cell 10, size 0.62,
+  // seed 7): the same 10px characters, noise 0.45, warp 0.03, edge and threshold, and the same strength. The field's
+  // unit is fixed at 280px, what Terminal gets on the Patterns tab's 1440 by 561 preview, so the noise and the
+  // character texture match it pixel for pixel. Only the size grows, 0.62 to 1.43, so QDRANT is 3 x 1.43 x 280 =
+  // 1200px wide, the content container's width, in a 320px band along the bottom, under the footer's content.
+  generativePattern({
+    id: "terminal-footer",
+    name: "Terminal, footer",
+    kind: "background",
+    fade: false,
+    band: 320,
+    description: "QDRANT in ASCII characters along the bottom of a footer, under its content, large enough to read.",
+    // From: Terminal (Pattern Studio, Deploy Card, 7), placed for the footer.
+    notes: [
+      {
+        rule: "Never redraw the logo",
+        source: "AGENTS.md, Never",
+        text: "Here QDRANT is meant to be read, so it stands in for the wordmark more than Terminal does: Mona Sans ExtraBold, not the logo from brand-assets/logo, and the footer already shows the logo above it.",
+      },
+      {
+        rule: "A pattern fills its section",
+        source: "web/AGENTS.md, Adding a pattern",
+        text: "It needs room between the footer's content and its legal bar: the exploration adds 320px there (the frame's room) and lifts the band over the legal bar. Keeping it means the footer section gets that room, for Juan to decide.",
+      },
+      {
+        rule: "No twinkling stars behind data",
+        source: "design-system/DESIGN.md, References: Space, subtly",
+        text: "As in Terminal, the noise drifts through the letters, so each character keeps changing. Here it's under the footer's content, not behind it.",
+      },
+      {
+        rule: "Mona Sans Mono replaced Geist Mono",
+        source: "primitives/typography/README.md (Juan, 2026-11-17)",
+        text: "Pattern Studio draws the characters in Geist Mono, the brand's old mono. Here they're in Mona Sans Mono, Medium.",
+      },
+      LOOPS,
+    ],
+    params: {
+      layout: "grid",
+      cell: 10,
+      unitPx: 280,
+      shape: "text",
+      text: "QDRANT",
+      size: 1.43,
+      shaping: "fill",
+      softness: 0.04,
+      noiseAmount: 0.45,
+      blend: "mix",
+      noiseScale: 3,
+      warp: 0.03,
+      element: "ascii",
+      sizeByValue: false,
+      scale: 1,
+      threshold: 0.12,
+      seed: 7,
+    },
+  }),
+  // QDRANT in halftone dots: Terminal, footer's word, with dots sized by the value instead of characters.
+  generativePattern({
+    id: "footer-halftone-word",
+    name: "Halftone word, footer",
+    kind: "background",
+    fade: false,
+    band: 320,
+    description: "QDRANT in halftone dots along the bottom of a footer, under its content.",
+    notes: [FOOTER_WORD, FOOTER_ROOM, LOOPS],
+    params: {
+      ...FOOTER_WORD_FIELD,
+      layout: "grid",
+      cell: 9,
+      shaping: "fill",
+      softness: 0.06,
+      noiseAmount: 0.35,
+      blend: "mix",
+      noiseScale: 3,
+      warp: 0.03,
+      element: "circle",
+      scale: 0.9,
+      sizeByValue: true,
+      minSize: 0,
+      threshold: 0.24,
+    },
+  }),
+  // QDRANT in outlined hexagons on a hex grid, like Hex field's marks.
+  generativePattern({
+    id: "footer-hex-word",
+    name: "Hex word, footer",
+    kind: "background",
+    fade: false,
+    band: 320,
+    description: "QDRANT in small outlined hexagons on a hex grid along the bottom of a footer, under its content.",
+    notes: [FOOTER_WORD, FOOTER_ROOM, LOOPS],
+    params: {
+      ...FOOTER_WORD_FIELD,
+      layout: "hex",
+      cell: 11,
+      shaping: "fill",
+      softness: 0.05,
+      noiseAmount: 0.3,
+      blend: "mix",
+      noiseScale: 3,
+      warp: 0.02,
+      element: "hexagon",
+      paint: "stroke",
+      strokeWidth: 1,
+      orientation: "fixed",
+      elementRotation: 30,
+      scale: 0.85,
+      sizeByValue: true,
+      minSize: 0.35,
+      threshold: 0.26,
+    },
+  }),
+  // QDRANT as an outline, drawn in short strokes along its edges, like Q monogram.
+  generativePattern({
+    id: "footer-contour-word",
+    name: "Contour word, footer",
+    kind: "background",
+    fade: false,
+    band: 320,
+    description: "QDRANT's outline in short strokes that follow its edges, along the bottom of a footer.",
+    notes: [FOOTER_WORD, FOOTER_ROOM, LOOPS],
+    params: {
+      ...FOOTER_WORD_FIELD,
+      layout: "grid",
+      cell: 6,
+      shaping: "outline",
+      outlineWidth: 0.012,
+      softness: 0.02,
+      noiseAmount: 0.15,
+      blend: "multiply",
+      warp: 0.01,
+      element: "line",
+      orientation: "contour",
+      lineLength: 1.3,
+      lineWidth: 1.25,
+      scale: 1,
+      sizeByValue: true,
+      minSize: 0.2,
+      threshold: 0.1,
+    },
+  }),
+  // Horizons (2026-11-25): no word, marks that grow toward the bottom of a 240px band under a section's content.
+  // Made for the footer, then used on heroes and page headers too, so they're named without a section.
+  generativePattern({
+    id: "dot-horizon",
+    name: "Dot horizon",
+    kind: "background",
+    fade: false,
+    band: 240,
+    description: "Dots that grow toward the bottom of a section, in a band under its content, drifting slowly.",
+    notes: [HORIZON_ROOM, LOOPS],
+    params: {
+      ...HORIZON_FIELD,
+      layout: "grid",
+      cell: 10,
+      element: "circle",
+      scale: 0.85,
+      sizeByValue: true,
+      minSize: 0,
+      threshold: 0.08,
+    },
+  }),
+  generativePattern({
+    id: "hex-horizon",
+    name: "Hex horizon",
+    kind: "background",
+    fade: false,
+    band: 240,
+    description: "Outlined hexagons that grow toward the bottom of a section, in a band under its content.",
+    notes: [HORIZON_ROOM, LOOPS],
+    params: {
+      ...HORIZON_FIELD,
+      layout: "hex",
+      cell: 14,
+      element: "hexagon",
+      paint: "stroke",
+      strokeWidth: 1,
+      orientation: "fixed",
+      elementRotation: 30,
+      scale: 0.85,
+      sizeByValue: true,
+      minSize: 0.2,
+      threshold: 0.1,
+    },
+  }),
+  generativePattern({
+    id: "terminal-horizon",
+    name: "Terminal horizon",
+    kind: "background",
+    fade: false,
+    band: 240,
+    description: "Terminal's characters, denser toward the bottom of a section, in a band under its content.",
+    notes: [
+      HORIZON_ROOM,
+      {
+        rule: "Mona Sans Mono replaced Geist Mono",
+        source: "primitives/typography/README.md (Juan, 2026-11-17)",
+        text: "Pattern Studio draws the characters in Geist Mono, the brand's old mono. Here they're in Mona Sans Mono, Medium.",
+      },
+      LOOPS,
+    ],
+    params: {
+      ...HORIZON_FIELD,
+      layout: "grid",
+      cell: 10,
+      element: "ascii",
+      sizeByValue: false,
+      scale: 1,
+      threshold: 0.12,
+    },
+  }),
+  // Side patterns (2026-11-25): a look on the right half of a split hero only, around its image or code, faded in
+  // at its left edge so the text side stays clear.
+  generativePattern({
+    id: "dot-field-side",
+    name: "Dot field, side",
+    kind: "background",
+    fade: false,
+    side: 0.5,
+    color: "star",
+    loop: 24,
+    strength: "web-field",
+    description: "Dot field's drifting dots on the right half of a section only, around a split hero's media.",
+    notes: [SIDE_ONLY],
+    params: {
+      layout: "grid",
+      cell: 12,
+      shape: "none",
+      noiseScale: 1.4,
+      octaves: 1,
+      drift: 0.4,
+      warp: 0.1,
+      element: "circle",
+      scale: 0.3,
+      sizeByValue: true,
+      minSize: 0.45,
+      alphaByValue: true,
+      minAlpha: 0.2,
+      threshold: 0,
+      density: "continuous",
+      seed: 7,
+    },
+  }),
+  generativePattern({
+    id: "hex-field-side",
+    name: "Hex field, side",
+    kind: "background",
+    fade: false,
+    side: 0.5,
+    loop: 24,
+    strength: "web-field",
+    description:
+      "Hex field's outlined hexagons in rings on the right half of a section only, around a split hero's media.",
+    notes: [SIDE_ONLY, STEPPED],
+    params: {
+      layout: "hex",
+      cell: 16,
+      shape: "hexagon",
+      size: 0.55,
+      shaping: "rings",
+      ringFrequency: 4,
+      ringSpeed: 1,
+      ringFade: 0.5,
+      noiseAmount: 0.15,
+      element: "hexagon",
+      paint: "stroke",
+      strokeWidth: 1,
+      orientation: "fixed",
+      elementRotation: 30,
+      scale: 0.75,
+      sizeByValue: true,
+      minSize: 0.15,
+      alphaByValue: true,
+      minAlpha: 0.2,
+      threshold: 0,
+      seed: 7,
+    },
+  }),
+  generativePattern({
+    id: "terminal-side",
+    name: "Terminal, side",
+    kind: "background",
+    fade: false,
+    side: 0.5,
+    description:
+      "Terminal's characters drifting with the noise on the right half of a section only, around a split hero's media.",
+    notes: [
+      SIDE_ONLY,
+      {
+        rule: "Mona Sans Mono replaced Geist Mono",
+        source: "primitives/typography/README.md (Juan, 2026-11-17)",
+        text: "Pattern Studio draws the characters in Geist Mono, the brand's old mono. Here they're in Mona Sans Mono, Medium.",
+      },
+      LOOPS,
+    ],
+    params: {
+      layout: "grid",
+      cell: 10,
+      unitPx: 280,
+      shape: "none",
+      noiseScale: 2,
+      octaves: 2,
+      drift: 0.4,
+      warp: 0.05,
+      element: "ascii",
+      sizeByValue: false,
+      scale: 1,
+      threshold: 0.5,
       seed: 7,
     },
   }),
@@ -410,4 +778,13 @@ export const explorations: PatternDefinition[] = [
   }),
   // The simplest options from the studio's Space page, polished (space.tsx).
   ...spacePatterns,
+  // The space set: hexagons, planets, orbits, a rocket and noise, each with a hover moment (cosmos.tsx).
+  ...cosmosPatterns,
+  // From the references the team shared (references.tsx).
+  ...referencePatterns,
+  // An easter egg for a hero: Qbot peeks over the heading on the first hover (qbot.tsx).
+  qbotPeek,
+  // Depth haze with stars in more contrast and more movement, as a surface and a background (depth-haze-vivid.tsx).
+  depthHazeVivid,
+  depthHazeVividBackground,
 ]
