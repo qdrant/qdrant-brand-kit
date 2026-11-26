@@ -112,10 +112,15 @@ export function LogoCloud({ layout = "row", label, logos, action, theme, surface
           ))}
           {action && (
             <li className="group/cell relative">
-              <a href={action.href} className="absolute inset-0 grid place-items-center px-6 text-sm text-muted-foreground transition-colors group-hover/cell:text-foreground">
-                <span className="flex items-center gap-1.5">
-                  {action.label}
-                  <ArrowRight aria-hidden className="size-4" />
+              {/* The label centered, its arrow kept with the last word, so it follows the text when it wraps
+                  (design lead, 2026-11-26). */}
+              <a href={action.href} className="absolute inset-0 grid place-items-center px-4 text-center text-sm text-muted-foreground transition-colors group-hover/cell:text-foreground">
+                <span className="text-balance">
+                  {action.label.split(" ").slice(0, -1).join(" ")}{" "}
+                  <span className="whitespace-nowrap">
+                    {action.label.split(" ").at(-1)}
+                    <ArrowRight aria-hidden className="ml-1 inline size-4 align-[-3px]" />
+                  </span>
                 </span>
               </a>
             </li>
