@@ -68,9 +68,9 @@ Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits
 
 | Pattern | Colorways (not on hold) | What may vary, in any combination |
 | --- | --- | --- |
-| Color-Sliced-Pattern-A | Amaranth 975 → Amaranth 700, Indigo 975 → Indigo 700, Neutral 1000 → Neutral 800 | Its own slices, or one of the 5 approved stripes (`stripes: 0` to `4`) |
+| Color-Sliced-Pattern-A | Amaranth 975 → Amaranth 700, Indigo 975 → Indigo 700, Neutral 1000 → Neutral 800 | Its own slices, or one of the 3 approved stripes (`stripes: 0` to `2`), always at -160° |
 | Color-Sliced-Pattern-B | Same as A (inherited) | Any Color-Sliced-A base (above) × letters: one of the 4 approved letter options (`letterOption: 0` to `3`), or any letter variation within the letter-layer rules (Pattern Studio terminal look through `fromStudioParams`, or `letters: n`) |
-| Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Neutral 800 | Length 16–80, density 8–64, softness 32–64, all on the 8 grid; direction 0°, 124°, 144°, 160°, 288° or 320° |
+| Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Neutral 800 | Length 16–80, density 8–64, softness 32–64, all on the 8 grid; direction fixed at 110° |
 | Motion-Streaks-Pattern-B | Same as A | Everything A allows × letter variations within the letter-layer rules |
 | Generative-Hexagon-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Neutral 800 | As is, or one of its approved variants (`variant: n`) |
 | Generative-Burst-Pattern | Same | As is, one of its 13 line variants, or a new variation of its open look (hyperspace) |
@@ -79,6 +79,7 @@ Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits
 | Generative-Rings-Pattern | Same | As is, one of its 10 variants, or a new variation of its open look (hex pulse) |
 
 - **Must:** every approved pattern renders at any size and shape (section 10), so format is free too.
+- **Must: one fixed angle for lines** (Vanesa, 2026-11-26). Color-Sliced stripes always run at -160° and Motion Streaks at 110°: both are 70° from horizontal, leaning right, as in Color-Sliced-A's thick stripes. No other angle or direction.
 - **Must: the top layer blends with the gradient** (Vanesa, 2026-11-25). Letters (Color-Sliced-B, Motion-Streaks-B) are the family's 800, 700, 600: never lighter than the 600, never white. Generative elements are never lighter than the 500 step (Hexagon 800, 700, 600, its filled variants 800 and 700; Burst, Dash, Pulse and Rings 800, 700, 500). Only Motion-Streaks-B's letter variation 1 keeps 800, 600, 200. The validator checks this.
 - **Open looks: agents may make new patterns of their own** (Vanesa, 2026-11-25). Three Pattern Studio looks are approved as open: **data bars** (Generative-Dash-Pattern), **hyperspace** (Generative-Burst-Pattern) and **hex pulse** (Generative-Pulse-Pattern and Generative-Rings-Pattern). An agent can make new variations of them without the Pattern Studio connector, since the repo has the same engine: `renderPattern(canvas, tokens, preset, { colorway, look: n })` for variation n, or `{ look: { ... } }` with the values. Rules:
   - only the values in the preset's `settings.look.ranges` change, each inside its range. The ranges span the pattern as approved and its approved variants; `lookProblems` and the validator check them;

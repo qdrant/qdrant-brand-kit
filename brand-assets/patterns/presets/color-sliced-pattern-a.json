@@ -47,7 +47,7 @@
       "a": -160
     },
     "noise": null,
-    "$stripes": "Approved stripe options besides the preset's own slices (thickness 80, -160°), picked in the Pattern Library review (Vanesa, 2026-11-24). Render one with renderPattern(..., { stripes: index }). Thickness in px at 1080, on the 8 grid.",
+    "$stripes": "Approved stripe options besides the preset's own slices (thickness 80, -160°), picked in the Pattern Library review (Vanesa, 2026-11-24). Render one with renderPattern(..., { stripes: index }). Thickness in px at 1080, on the 8 grid. Fixed angle since 2026-11-26 (Vanesa): every stripe runs at -160° (70° from horizontal); the flatter (-152°) and steeper (-168°) options were removed.",
     "stripes": [
       {
         "name": "Thin",
@@ -63,16 +63,6 @@
         "name": "Thinnest",
         "thickness": 24,
         "angle": -160
-      },
-      {
-        "name": "Thin, flatter",
-        "thickness": 40,
-        "angle": -152
-      },
-      {
-        "name": "Thin, steeper",
-        "thickness": 40,
-        "angle": -168
       }
     ]
   }
