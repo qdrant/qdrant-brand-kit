@@ -164,8 +164,8 @@ export function Hero({
         lines={false}
         spacing={visualFrame === "none" ? "none" : undefined}
         id={id}
-        className={cn(visualFrame === "none" && "pt-12 pb-8", className)}
-        innerClassName={cn("flex flex-col items-center", visualFrame === "none" ? "gap-8" : "gap-10")}
+        className={cn(visualFrame === "none" && "pt-16 pb-12 lg:pt-24 lg:pb-16", className)}
+        innerClassName={cn("flex flex-col items-center", visualFrame === "none" ? "gap-12" : "gap-10")}
       >
         {snippetEl && <div className="flex justify-center">{snippetEl}</div>}
         <SectionHeader as="h1" align="center" kicker={kicker} title={title} description={description} actions={actions} />
