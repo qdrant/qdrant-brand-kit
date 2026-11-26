@@ -28,6 +28,14 @@ export const cta = defineSection<CtaProps>({
       description: "One slim line between sections, between two hairlines.",
       props: { layout: "band", ...closingCta },
     },
+    {
+      id: "command",
+      name: "Command",
+      description: "The title as a command at a prompt, in a terminal window, with a blinking caret.",
+      props: { layout: "command", ...closingCta, secondary: navActions.contact },
+      proposal:
+        "The closing line already speaks like a console (\"Awaiting Your Command\"), so the CTA becomes one: a window bar, a prompt, the title with a caret that blinks in steps like the nodes, the description as a comment. The terminal is the developer's home; Bird's and Supabase's pages put code at the close, this puts the call itself there.",
+    },
   ],
   docs: {
     use: [
@@ -44,7 +52,7 @@ export const cta = defineSection<CtaProps>({
       { part: "Actions", note: "Primary, then an optional secondary button." },
     ],
     props: [
-      { name: "layout", type: '"centered" | "panel" | "band"', note: "Closing, framed, or slim." },
+      { name: "layout", type: '"centered" | "panel" | "band"', note: "Closing, framed, slim, or a command in a terminal (proposed)." },
       { name: "title, description", type: "string", note: "title is required." },
       { name: "primary, secondary", type: "{ label, href }", note: "primary is required." },
     ],
@@ -58,6 +66,7 @@ export const cta = defineSection<CtaProps>({
         { value: "centered", label: "Centered" },
         { value: "panel", label: "Panel" },
         { value: "band", label: "Band" },
+        { value: "command", label: "Command" },
       ],
     },
     { prop: "title", label: "Heading", kind: "textarea" },

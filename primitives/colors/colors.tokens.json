@@ -2555,7 +2555,8 @@
           },
           "text": {
             "$type": "color",
-            "$value": "{color.indigo.800}"
+            "$value": "{color.indigo.700}",
+            "$description": "indigo-700 since 2026-11-24 (design lead), one step lighter than indigo-800: 8.1:1 on white"
           }
         },
         "border": {

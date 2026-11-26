@@ -22,7 +22,9 @@ export type WithWithoutProps = SectionProps & {
   note?: string
   action?: Link
   // columns: the two lists side by side, each on a plate.
-  layout?: "columns"
+  // Proposal (2026-11-24): diff, both lists in one code window read as a diff, each list's title a hunk header,
+  // the cases for it as added lines (+, teal) and the cases against it as removed ones (-, orange).
+  layout?: "columns" | "diff"
 }
 
 function FitColumn({ column, kind }: { column: Column; kind: "use" | "avoid" }) {
@@ -55,6 +57,7 @@ export function WithWithout({
   avoid,
   note,
   action,
+  layout = "columns",
   theme,
   surface,
   pattern,
@@ -73,10 +76,51 @@ export function WithWithout({
       innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)"
     >
       <SectionHeader kicker={header.kicker} title={header.title} description={header.description} />
-      <div className="grid gap-(--qd-layout-column-gap) md:grid-cols-2">
-        <FitColumn column={use} kind="use" />
-        <FitColumn column={avoid} kind="avoid" />
-      </div>
+      {layout === "diff" ? (
+        <div className="web-tray rounded-[calc(var(--radius-xl)+6px)]">
+          <Plate as="div" className="overflow-hidden rounded-xl font-mono text-sm">
+            <div className="flex items-center gap-2 border-b border-(--web-line) px-4 py-3">
+              {[0, 1, 2].map((i) => (
+                <span key={i} aria-hidden className="web-window-dot size-2.5 rounded-full" />
+              ))}
+            </div>
+            {([
+              [use, "use"],
+              [avoid, "avoid"],
+            ] as const).map(([column, kind]) => (
+              <div key={kind}>
+                <p className="border-b border-(--web-line) bg-(--web-tray) px-5 py-2.5 text-xs text-muted-foreground">
+                  <span className="text-(--web-indigo-text)">@@</span> {column.title}{" "}
+                  <span className="text-(--web-indigo-text)">@@</span>
+                  {column.description && <span className="ml-3 font-sans">{column.description}</span>}
+                </p>
+                <ul>
+                  {column.items.map((item) => (
+                    <li
+                      key={item.title}
+                      className={cn(
+                        "grid grid-cols-[2rem_minmax(0,1fr)] border-b border-(--web-line) px-3 py-4 md:grid-cols-[2rem_minmax(0,2fr)_minmax(0,3fr)] md:gap-6",
+                        kind === "use" ? "bg-(--web-tone-teal-bg)/40" : "bg-(--web-tone-orange-bg)/40"
+                      )}
+                    >
+                      <span aria-label={kind === "use" ? "For" : "Against"} className={cn("text-center", kind === "use" ? "text-(--web-tone-teal-fg)" : "text-(--web-tone-orange-fg)")}>
+                        {kind === "use" ? "+" : "-"}
+                      </span>
+                      <span className="font-sans font-medium text-foreground">{item.title}</span>
+                      <span className="col-start-2 font-sans text-muted-foreground md:col-start-3">{item.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </Plate>
+        </div>
+      ) : (
+        <div className="grid gap-(--qd-layout-column-gap) md:grid-cols-2">
+          <FitColumn column={use} kind="use" />
+          <FitColumn column={avoid} kind="avoid" />
+        </div>
+      )}
       {(note || action) && (
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           {note && (

@@ -24,7 +24,7 @@ export const getPattern = (id: string) =>
 export const backgroundPatterns = () => patterns.filter((p) => p.kind === "background")
 export const surfacePatterns = () => patterns.filter((p) => p.kind === "surface")
 
-// One or more patterns as layers filling their parent. Hidden when data-web-patterns="off".
+// One or more patterns as layers filling their parent.
 export function PatternLayers({ ids }: { ids?: string[] | string }) {
   const list = (Array.isArray(ids) ? ids : ids ? [ids] : []).map(getPattern).filter(Boolean) as PatternDefinition[]
   if (!list.length) return null

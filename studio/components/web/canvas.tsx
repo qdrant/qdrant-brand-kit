@@ -2,8 +2,7 @@
 
 import * as React from "react"
 import { useTheme } from "next-themes"
-import { Hand, Maximize, Minus, MousePointer2, Plus } from "lucide-react"
-
+import { Check, Copy, Hand, Maximize, Minus, MousePointer2, Plus } from "lucide-react"
 
 import { Button } from "@qdrant/design-system/components/ui/button"
 import { cn } from "@qdrant/design-system/lib/utils"
@@ -11,14 +10,19 @@ import { sectionsByCategory } from "@qdrant/web/registry"
 
 import { defaultStyle, styleQuery, styleSwitches, type Style } from "./blocks"
 import { frameSrc, useFrameHeight, useFrameKey } from "./frame-view"
+import { sectionBrief } from "./section-brief"
 
 type Mode = "dark" | "light" | "both"
+// Which layouts the canvas shows: all, only the proposals (with each section's current layouts beside them, so
+// they can be compared), or only the decided ones.
+type Layouts = "all" | "proposals" | "current"
 
 // One variant at 1440px, as on a Figma page: a label above, the frame below, as tall as its content.
 function CanvasFrame({
   section,
   variant,
   label,
+  proposal,
   theme,
   interact,
   query,
@@ -26,18 +30,46 @@ function CanvasFrame({
   section: string
   variant: string
   label: string
+  proposal?: string
   theme: "dark" | "light"
   interact: boolean
   query: Record<string, string>
 }) {
   const key = useFrameKey()
   const height = useFrameHeight(key, 700)
+  const [copied, setCopied] = React.useState(false)
+  const copy = () =>
+    navigator.clipboard
+      ?.writeText(sectionBrief({ section, variant, theme, query, origin: window.location.origin }))
+      .then(() => {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      })
   return (
     <figure className="flex w-[1440px] shrink-0 flex-col gap-4">
       <figcaption className="flex items-baseline gap-4 text-[28px] text-muted-foreground">
         <span className="font-medium text-foreground">{label}</span>
         <span className="font-mono text-[22px] uppercase">{theme}</span>
+        {proposal && (
+          <span className="rounded-md border-2 border-dashed border-current px-3 font-mono text-[22px] text-(--qd-color-secondary) uppercase">
+            Proposal
+          </span>
+        )}
+        {/* Copies this section for an agent, to design or build it: its files, preview, docs and exact props
+            (design lead, 2026-11-25). Stops the pointer so the canvas doesn't start a pan. */}
+        <Button
+          variant="ghost"
+          aria-label={copied ? "Copied" : `Copy ${label} (${theme}) for an agent`}
+          title="Copy this section for an agent: its files, preview, docs and props"
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={copy}
+          className="ml-auto h-14 gap-3 self-center rounded-lg px-4 text-[22px] font-normal text-muted-foreground [&_svg:not([class*='size-'])]:size-6"
+        >
+          {copied ? <Check /> : <Copy />}
+          {copied ? "Copied" : "Copy"}
+        </Button>
       </figcaption>
+      {proposal && <p className="-mt-2 max-w-[1440px] text-[22px] text-muted-foreground">{proposal}</p>}
       <iframe
         title={`${label} ${theme}`}
         data-frame-key={key}
@@ -73,6 +105,7 @@ export function WebCanvas() {
   const [interact, setInteract] = React.useState(true)
   const [space, setSpace] = React.useState(false)
   const [style, setStyle] = React.useState<Style>(defaultStyle)
+  const [layouts, setLayouts] = React.useState<Layouts>("all")
   const panning = !interact || space
   const drag = React.useRef<{ x: number; y: number } | null>(null)
   const [dragging, setDragging] = React.useState(false)
@@ -182,20 +215,25 @@ export function WebCanvas() {
           className="absolute top-0 left-0 flex w-max origin-top-left flex-col gap-40 p-10"
           style={{ transform: `translate(${view.x}px, ${view.y}px) scale(${view.z})` }}
         >
-          {groups.map((g) => (
+          {groups.map((g) => {
+            const sections =
+              layouts === "proposals" ? g.sections.filter((s) => s.variants.some((v) => v.proposal)) : g.sections
+            if (!sections.length) return null
+            return (
             <div key={g.id} className="flex flex-col gap-24">
               <p className="font-mono text-[40px] tracking-wider text-muted-foreground uppercase">{g.label}</p>
-              {g.sections.map((s) => (
+              {sections.map((s) => (
                 <div key={s.id} className="flex flex-col gap-10">
                   <h2 className="text-[56px] font-semibold">{s.name}</h2>
                   <div className="flex items-start gap-24">
-                    {s.variants.flatMap((v) =>
+                    {s.variants.filter((v) => layouts !== "current" || !v.proposal).flatMap((v) =>
                       themes.map((t) => (
                         <CanvasFrame
                           key={`${v.id}-${t}`}
                           section={s.id}
                           variant={v.id}
                           label={v.name}
+                          proposal={v.proposal}
                           theme={t}
                           interact={!panning}
                           query={styleQuery(style)}
@@ -206,7 +244,8 @@ export function WebCanvas() {
                 </div>
               ))}
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 
@@ -242,16 +281,41 @@ export function WebCanvas() {
           </Button>
         ))}
         <span className="mx-1 h-5 w-px bg-border" />
-        {styleSwitches.map((sw) => (
+        {styleSwitches.map((sw, i) => (
+          <React.Fragment key={sw.key}>
+            {"proposal" in sw && !("proposal" in styleSwitches[i - 1]) && (
+              <span className="mx-1 flex items-center gap-1 border-l pl-2 font-mono text-[10px] text-muted-foreground uppercase">
+                New
+              </span>
+            )}
+            <Button
+              variant={style[sw.key] ? "secondary" : "ghost"}
+              size="sm"
+              aria-pressed={style[sw.key]}
+              title={sw.title}
+              className={cn("proposal" in sw && !style[sw.key] && "text-muted-foreground")}
+              onClick={() => setStyle((s) => ({ ...s, [sw.key]: !s[sw.key] }))}
+            >
+              {sw.label}
+            </Button>
+          </React.Fragment>
+        ))}
+        <span className="mx-1 h-5 w-px bg-border" />
+        {(["all", "proposals", "current"] as const).map((l) => (
           <Button
-            key={sw.key}
-            variant={style[sw.key] ? "secondary" : "ghost"}
+            key={l}
+            variant={layouts === l ? "secondary" : "ghost"}
             size="sm"
-            aria-pressed={style[sw.key]}
-            title={sw.title}
-            onClick={() => setStyle((s) => ({ ...s, [sw.key]: !s[sw.key] }))}
+            title={
+              l === "all"
+                ? "Every layout"
+                : l === "proposals"
+                  ? "Only sections with proposed layouts, beside their current ones"
+                  : "Only the decided layouts"
+            }
+            onClick={() => setLayouts(l)}
           >
-            {sw.label}
+            {l === "all" ? "All layouts" : l === "proposals" ? "Proposed" : "Current"}
           </Button>
         ))}
         <span className="mx-1 h-5 w-px bg-border" />

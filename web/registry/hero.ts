@@ -63,6 +63,22 @@ export const hero = defineSection<HeroProps>({
         secondary: pricingHero.secondary,
       },
     },
+    {
+      id: "wide",
+      name: "Wide with code",
+      description: "The heading on the left, the line and actions on the right, then the quickstart search across the page and the proof points.",
+      props: {
+        layout: "wide",
+        title: homeHero.title,
+        description: homeHero.description,
+        primary: homeHero.primary,
+        secondary: homeHero.secondary,
+        media: "code",
+        trust: homeHero.trust,
+      },
+      proposal:
+        "The title gets the left half at full size while the description and actions hold the right, both ending on the same line; the media then takes the full 1200px, so a product screen or code is shown at a size people can read. From Linear's and Vercel's product heroes, with our proof points as cells under it.",
+    },
   ],
   docs: {
     use: [
@@ -85,10 +101,10 @@ export const hero = defineSection<HeroProps>({
       { part: "Proof points", note: "Optional: a hairline, then facts with icons." },
     ],
     props: [
-      { name: "layout", type: '"centered" | "split"', note: "Split puts the media on the right from lg." },
+      { name: "layout", type: '"centered" | "split" | "wide"', note: "Split puts the media on the right from lg; wide (proposed) puts it across the container under a split heading." },
       { name: "kicker, title, description", type: "string", note: "title is required." },
       { name: "primary, secondary", type: "{ label, href }", note: "The actions." },
-      { name: "snippet", type: "{ label?, text }", note: "One line to copy, like a prompt for an agent." },
+      { name: "snippet", type: "{ label?, text, agents? }", note: "One line to copy. With agents (claude, codex, cursor), a prompt for agents: their marks and the label show, and the text is only copied." },
       { name: "pills", type: "string[]", note: "Short claims." },
       { name: "trust", type: "{ label, icon? }[]", note: "Proof points, each with a Lucide icon name." },
       { name: "media", type: '"none" | "code" | "image"', note: "What fills the media slot." },
@@ -104,6 +120,7 @@ export const hero = defineSection<HeroProps>({
       options: [
         { value: "centered", label: "Centered" },
         { value: "split", label: "Split" },
+        { value: "wide", label: "Wide" },
       ],
     },
     { prop: "kicker", label: "Kicker", kind: "text" },

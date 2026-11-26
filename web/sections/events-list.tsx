@@ -106,8 +106,10 @@ function Group({ title, events, layout }: { title?: string; events: EventItem[];
   return (
     <div className="flex flex-col gap-6">
       {title && (
-        <h2 className={cn(type.kicker, "flex items-center gap-2.5")}>
-          <Node />
+        <h2 className={cn(type.kicker, "flex items-start gap-2.5")}>
+          <span className="flex h-[1lh] shrink-0 items-center">
+            <Node blink filled />
+          </span>
           {title}
           <span className="font-mono tabular-nums">{events.length}</span>
         </h2>

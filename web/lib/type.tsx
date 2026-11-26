@@ -2,9 +2,9 @@
 // font sizes). Headings are SemiBold (Medium in the website's type trial, web/styles/web.css), never Bold, in Mona Sans Display (font-display); body text is Mona Sans and
 // kickers Mona Sans Mono (2026-11-17).
 export const type = {
-  // Mono labels above headings, in capitals.
+  // Mono labels above headings, in capitals: 12px at every size (design lead, 2026-11-24; 14px before).
   kicker:
-    "font-mono text-(length:--qd-font-size-14) leading-(--qd-line-height-150) uppercase tracking-normal text-muted-foreground",
+    "font-mono text-(length:--qd-font-size-12) leading-(--qd-line-height-150) uppercase tracking-normal text-muted-foreground",
   h1: "font-display text-(length:--qd-type-h1-size) leading-(--qd-type-h1-line-height) tracking-(--qd-type-h1-letter-spacing) font-[var(--web-heading-weight,600)] text-foreground",
   h2: "font-display text-(length:--qd-type-h2-size) leading-(--qd-type-h2-line-height) tracking-(--qd-type-h2-letter-spacing) font-[var(--web-heading-weight,600)] text-foreground",
   h3: "font-display text-(length:--qd-type-h3-size) leading-(--qd-type-h3-line-height) tracking-(--qd-type-h3-letter-spacing) font-[var(--web-heading-weight,600)] text-foreground",

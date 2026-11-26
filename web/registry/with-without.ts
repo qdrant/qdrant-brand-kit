@@ -23,6 +23,21 @@ export const withWithout = defineSection<WithWithoutProps>({
         action: serverlessFit.action,
       },
     },
+    {
+      id: "diff",
+      name: "Diff",
+      description: "Both lists in one code window, read as a diff: the cases for it added, the cases against it removed.",
+      props: {
+        layout: "diff",
+        header: serverlessFit.header,
+        use: serverlessFit.use,
+        avoid: serverlessFit.avoid,
+        note: serverlessFit.note,
+        action: serverlessFit.action,
+      },
+      proposal:
+        "Developers read fit the way they read a pull request: a diff with + and - lines, each list's title as a hunk header, teal and orange kept as the line colors. One window instead of two plates, so the two sides read as one decision. Our own take on the code-review view, not from a site.",
+    },
   ],
   docs: {
     use: ["On a product page, so readers can tell quickly whether it fits them and where to go if it doesn't."],
@@ -38,6 +53,7 @@ export const withWithout = defineSection<WithWithoutProps>({
       { part: "Note and action", note: "Optional, under both columns." },
     ],
     props: [
+      { name: "layout", type: '"columns" | "diff"', note: "Two plates, or one code window read as a diff (proposed)." },
       { name: "header", type: "{ kicker?, title, description? }", note: "The heading block." },
       { name: "use, avoid", type: "{ title, description?, items: { title, text }[] }", note: "The two columns." },
       { name: "note, action", type: "string, { label, href }", note: "Optional, under the columns." },

@@ -23,6 +23,9 @@ export type AnchorNavProps = SectionProps & {
 // follows the reader: the part nearest the top of the screen is the active tab (scroll-spy), and a click marks the
 // tab right away. Parts it can't find on the page leave the active tab to clicks. A click scrolls to its part with an
 // ease (lib/smooth-scroll.ts), stopping just under the nav, and the tabs don't follow the scroll on the way there.
+// Its background covers what scrolls under it, so it draws the page's rails itself, without a seam on top: they run
+// through it, sticky or not. The nodes where they meet its bottom line are its own too (seam="bottom"), so its
+// background never covers them (design lead, 2026-11-23).
 export function AnchorNav({
   items,
   label,
@@ -90,7 +93,7 @@ export function AnchorNav({
       pattern={pattern}
       cardPattern={cardPattern}
       spacing="none"
-      lines={false}
+      seam="bottom"
       id={id}
       className={cn("border-b border-(--web-line)", sticky && "sticky top-(--web-sticky-top,0px) z-20", className)}
     >

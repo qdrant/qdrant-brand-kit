@@ -8,7 +8,8 @@ import { type } from "../lib/type"
 
 export type StatsProps = SectionProps & {
   // cells: numbers in a hairline grid. cards: a customer's result on a plate, with its line.
-  layout?: "cells" | "cards"
+  // Proposal (2026-11-24): lead, the first figure large across the width with the rest in cells under it.
+  layout?: "cells" | "cards" | "lead"
   header?: HeaderProps
   items: { value: string; label?: string; company?: string; text?: string; href?: string }[]
 }
@@ -21,7 +22,36 @@ export function Stats({ layout = "cells", header, items, theme, surface, pattern
       {header && (
         <SectionHeader kicker={header.kicker} title={header.title} description={header.description} layout="stacked" />
       )}
-      {layout === "cells" ? (
+      {layout === "lead" ? (
+        <ul className="web-grid grid-cols-1 md:grid-cols-3">
+          {items.map((item, i) => (
+            <li
+              key={item.value + item.label}
+              className={cn(
+                "flex flex-col gap-2 px-6",
+                i === 0 ? "py-12 md:col-span-3 md:flex-row md:items-end md:justify-between md:gap-10 md:py-14" : "py-8"
+              )}
+            >
+              <span
+                className={cn(
+                  "font-mono tracking-tight text-foreground tabular-nums",
+                  i === 0 ? "text-6xl md:text-8xl" : "text-4xl"
+                )}
+              >
+                {item.value}
+              </span>
+              {item.label &&
+                (item.href ? (
+                  <a href={item.href} className={cn(type.small, "web-link-quiet", i === 0 && "md:pb-3 md:text-base")}>
+                    {item.label}
+                  </a>
+                ) : (
+                  <span className={cn(type.small, i === 0 && "md:pb-3 md:text-base")}>{item.label}</span>
+                ))}
+            </li>
+          ))}
+        </ul>
+      ) : layout === "cells" ? (
         <ul className={cn("web-grid", items.length > 3 ? "grid-cols-2 md:grid-cols-4" : "grid-cols-1 md:grid-cols-3")}>
           {items.map((item) => {
             const inner = (

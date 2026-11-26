@@ -35,6 +35,20 @@ export const featureGrid = defineSection<FeatureGridProps>({
       description: "Three reasons, numbered, on plates (Cloud).",
       props: { header: { kicker: offload.kicker, title: offload.title, description: offload.description }, items: offload.items, columns: 3, appearance: "cards", marker: "number" },
     },
+    {
+      id: "index",
+      name: "Index",
+      description: "The heading held on the left, the capabilities as rows of a hairline list on the right (Cloud).",
+      props: {
+        header: { kicker: composableSearch.kicker, title: composableSearch.title, description: composableSearch.description },
+        items: composableSearch.items,
+        appearance: "index",
+        marker: "icon",
+        tones: "mixed",
+      },
+      proposal:
+        "A long list of capabilities reads faster as an index than as a wall of cells: one row each, the title and its line side by side, while the heading stays in view beside them. From Figma's feature list and Mistral's capability rows, on the page's hairlines.",
+    },
   ],
   docs: {
     use: ["Three to eight features of equal weight. For one feature with a visual, use Feature rows; for mixed sizes, Bento."],
@@ -53,11 +67,11 @@ export const featureGrid = defineSection<FeatureGridProps>({
       { name: "header", type: "{ kicker?, title, description?, action? }", note: "The heading block. Left out when the grid continues the section before it." },
       { name: "items", type: "{ title, text?, icon?, tone?, link?, id?, tag?, points?, visual?, visualFrame?, visualPlacement?, wide? }[]", note: "The features: a tag above the title, points (lines with an optional bold label and icon), a visual from web/visuals, an id to jump to, and wide to take the whole row. A wide card shows its visual beside the text, or with visualPlacement \"center\" in the middle, the title above and the points around it, two on each side with their icons." },
       { name: "columns", type: "2 | 3 | 4", note: "From md (4 is two columns at md, four from lg)." },
-      { name: "appearance, marker", type: '"cards" | "cells", "icon" | "number" | "none"', note: "The look." },
+      { name: "appearance, marker", type: '"cards" | "cells" | "index", "icon" | "number" | "none"', note: "The look (index proposed)." },
     ],
   },
   fields: [
-    { prop: "appearance", label: "Appearance", kind: "select", options: [{ value: "cards", label: "Cards" }, { value: "cells", label: "Cells" }] },
+    { prop: "appearance", label: "Appearance", kind: "select", options: [{ value: "cards", label: "Cards" }, { value: "cells", label: "Cells" }, { value: "index", label: "Index" }] },
     { prop: "marker", label: "Marker", kind: "select", options: [{ value: "icon", label: "Icon" }, { value: "number", label: "Number" }, { value: "none", label: "None" }] },
     {
       prop: "tones",

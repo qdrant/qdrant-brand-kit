@@ -3,7 +3,9 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Link } from "../content/site"
 import type { Quote } from "../content/conversion"
+import { customerLogos } from "../content/customer-logos"
 import { ArrowLink } from "../lib/arrow-link"
+import { CustomerLogo } from "../lib/customer-logo"
 import { LinkButton } from "../lib/link-button"
 import { Plate } from "../lib/plate"
 import { Section, type SectionProps } from "../lib/section"
@@ -13,7 +15,8 @@ import { type } from "../lib/type"
 
 export type TestimonialsProps = SectionProps & {
   // single: one large quote, centered. wall: quote cards in columns. metric: a quote beside a result figure.
-  layout?: "single" | "wall" | "metric"
+  // Proposal (2026-11-24): lead, the first quote large on a wide plate and the next three in a row under it.
+  layout?: "single" | "wall" | "metric" | "lead"
   header?: HeaderProps
   quotes: Quote[]
   // The result beside the quote, for the metric layout.
@@ -45,8 +48,11 @@ function Author({ quote, size = "default" }: { quote: Quote; size?: "default" | 
   )
 }
 
-// A company name set as a text logo, until the logo file is exported from the Figma (logo-cloud.tsx does the same).
+// The company's logo from the customer logo library, in one muted color; a company not in the library stands in as
+// its name, set as text.
 function CompanyMark({ name, className }: { name: string; className?: string }) {
+  const logo = customerLogos.find((l) => l.name.toLowerCase() === name.toLowerCase())
+  if (logo) return <CustomerLogo id={logo.id} version="mono" className={cn("h-7 max-w-36 text-muted-foreground", className)} />
   return <span className={cn("font-display text-xl font-medium tracking-tight text-muted-foreground", className)}>{name}</span>
 }
 
@@ -90,6 +96,43 @@ export function Testimonials({ layout = "single", header, quotes, metric, theme,
             </Plate>
           ))}
         </ul>
+      </Section>
+    )
+  }
+
+  if (layout === "lead") {
+    const [first, ...rest] = quotes
+    return (
+      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
+        {headerEl}
+        <div className="flex flex-col gap-(--qd-layout-column-gap)">
+          {first && (
+            <Plate as="figure" className="flex flex-col gap-10 rounded-2xl p-8 md:p-12">
+              <blockquote className={cn(largeQuote, "max-w-4xl text-pretty")}>
+                <span aria-hidden className="mr-1 font-mono text-(--web-indigo-text)">
+                  “
+                </span>
+                {first.quote}
+              </blockquote>
+              <div className="flex flex-wrap items-center justify-between gap-6">
+                <Author quote={first} size="lg" />
+                {first.company && <CompanyMark name={first.company} />}
+              </div>
+            </Plate>
+          )}
+          {rest.length > 0 && (
+            <ul className="grid gap-(--qd-layout-column-gap) md:grid-cols-3">
+              {rest.slice(0, 3).map((q) => (
+                <Plate as="li" key={q.quote} className="rounded-xl p-6">
+                  <figure className="flex h-full flex-col justify-between gap-6">
+                    <blockquote className={cn(type.body, "text-foreground")}>{q.quote}</blockquote>
+                    <Author quote={q} />
+                  </figure>
+                </Plate>
+              ))}
+            </ul>
+          )}
+        </div>
       </Section>
     )
   }
@@ -143,7 +186,7 @@ export function Testimonials({ layout = "single", header, quotes, metric, theme,
           <blockquote className={cn(largeQuote, "-mt-6 text-balance")}>{q.quote}</blockquote>
           <div className="flex flex-col items-center gap-4">
             {q.name && <Author quote={q} size="lg" />}
-            {q.company && <CompanyMark name={q.company} className="text-2xl" />}
+            {q.company && <CompanyMark name={q.company} className="h-8 text-2xl" />}
           </div>
         </figure>
       )}

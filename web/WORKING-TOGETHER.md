@@ -140,7 +140,7 @@ Conflicts happen when two branches change the same lines. Stay in your own files
 
 - **Two kinds.** A pattern is one file in `web/patterns/` exporting `definePattern({ id, name, kind, description, Layer })`. A `"background"` pattern sits behind a section's content, and a `"surface"` pattern sits inside each card of a section.
 - **Registering one.** List it in `web/patterns/index.tsx`. It then shows in the studio's Patterns tab and in the Builder's pattern pickers, and any section can use it through its `pattern` or `cardPattern` prop.
-- **What a Layer is.** It fills its parent (absolute, inset 0) and is purely decorative: `aria-hidden`, no pointer events, never text. The `data-web-patterns="off"` switch on the Canvas hides every pattern at once, so you can compare with and without.
+- **What a Layer is.** It fills its parent (absolute, inset 0) and is purely decorative: `aria-hidden`, no pointer events, never text.
 - **The engine.** Canvas and WebGL scenes run on `web/visuals/scene.tsx`:
   - `SceneCanvas` for 2D canvas scenes;
   - `SceneShader` for WebGL2 fragment shaders, which get `u_res`, `u_time`, `u_pointer`, `u_dpr` and the palette colors you ask for as `u_c0…`;
@@ -166,7 +166,7 @@ The design lead decided these. They're in `web/guidelines.ts` and `design-system
 - **Space comes from light, type and motion, never glow** (`DESIGN.md`, Space theme). Light comes from above. Avoid glows, colored shadows, nebula gradients, literal rockets and planets, and twinkling stars behind data.
 - **Effects belong in sections, never in design-system components.**
 - **A page is all dark or all light** (design lead, 2026-11-22), so a pattern never switches a section's theme.
-- **Nodes blink** (design lead, 2026-11-22). The hexagon nodes where lines meet blink like a live readout: a hard step to 25% and back every 2 seconds, each at its own offset. That's the model for "alive" motion: stepped and quiet, like the telemetry mark on the Space page's Telemetry footer (SF-19).
+- **Kicker nodes blink** (design lead, 2026-11-22; only kickers' since 2026-11-24). The hexagon before a kicker blinks like a live readout: a hard step to 25% and back every 2 seconds, each at its own offset. That's the model for "alive" motion: stepped and quiet, like the telemetry mark on the Space page's Telemetry footer (SF-19).
 
 ## Decisions made so far, for context
 
@@ -188,7 +188,7 @@ All of these are in `web/guidelines.ts` with their dates. A short list, so you k
   - A visual's frame hugs it and sits on the outer side of its row.
   - A wide card's subject (the Multi-AZ globe) can sit in the center, with its points around it.
 - **Motion.** In-page links scroll with an ease-in-out, in 0.6 to 1.1 seconds.
-- **Type.** A trial for headings, from 60px in Medium, with a switch to compare it. It goes into the primitives only with the visual designer's yes.
+- **Type.** A trial for headings, from 56px in Medium, with a switch to compare it. It goes into the primitives only with the visual designer's yes.
 
 ## Never
 

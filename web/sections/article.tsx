@@ -4,19 +4,18 @@ import * as React from "react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
 
-import type { Crumb, ProseBlock } from "../content/listings"
+import type { ProseBlock } from "../content/listings"
 import type { Link } from "../content/site"
 import { ArrowLink } from "../lib/arrow-link"
+import { Code, languageOf } from "../lib/code"
 import { MediaFrame } from "../lib/media-frame"
 import { Section, type SectionProps } from "../lib/section"
 import { heading, type } from "../lib/type"
 import { Inline } from "./blog-grid"
-import { Crumbs } from "./page-header"
 
 export type TocEntry = { id: string; label: string; level?: 2 | 3 | number }
 
 export type ArticleProps = SectionProps & {
-  breadcrumbs?: Crumb[]
   title: string
   authors?: string
   date?: string
@@ -73,7 +72,7 @@ export function Prose({ blocks, className }: { blocks: ProseBlock[]; className?:
                   <figcaption className="border-b border-(--web-line) px-4 py-2.5 font-mono text-xs text-muted-foreground">{block.title}</figcaption>
                 )}
                 <pre className="overflow-x-auto p-5 font-mono text-[13px] leading-relaxed text-foreground">
-                  <code>{block.code}</code>
+                  <Code code={block.code} language={languageOf(block.title)} />
                 </pre>
               </figure>
             )
@@ -165,10 +164,9 @@ function Share({ links, className }: { links: Link[]; className?: string }) {
   )
 }
 
-// A blog post (2026-11-21): breadcrumbs, the title and who wrote it when, a hero image slot, then the prose with
+// A blog post (2026-11-21): the title and who wrote it when, a hero image slot, then the prose with
 // "On this page" beside it from lg, sticky as the reader scrolls, and share links.
 export function Article({
-  breadcrumbs,
   title,
   authors,
   date,
@@ -197,7 +195,6 @@ export function Article({
       innerClassName="flex flex-col gap-10 lg:gap-14"
     >
       <header className="flex max-w-3xl flex-col gap-6">
-        {breadcrumbs && <Crumbs items={breadcrumbs} />}
         <h1 className={cn(type.h5, "text-balance md:text-(length:--qd-type-h4-size) md:leading-(--qd-type-h4-line-height) lg:text-(length:--qd-type-h3-size) lg:leading-(--qd-type-h3-line-height)")}>
           {title}
         </h1>

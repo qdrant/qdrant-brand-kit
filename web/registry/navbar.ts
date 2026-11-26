@@ -13,7 +13,7 @@ export const navbar = defineSection<NavbarProps>({
     {
       id: "full",
       name: "Full",
-      description: "Products, Solutions, Developers and Resources menus, Pricing, and three actions.",
+      description: "Products, Developers and Resources menus (Solutions is hidden for now), Pricing, and three actions.",
       props: { variant: "full", menus, ...navActions },
       frameMinHeight: 480,
     },
@@ -30,6 +30,13 @@ export const navbar = defineSection<NavbarProps>({
       frameMinHeight: 480,
     },
     {
+      id: "developers",
+      name: "Developers menu",
+      description: "As Full, with the Developers menu open: Documentation as a tile at the top of the Build column, above API Reference, GitHub and Blog, with Pixel drift moving quietly on its right.",
+      props: { variant: "full", menus, ...navActions, openMenu: "Developers" },
+      frameMinHeight: 480,
+    },
+    {
       id: "minimal",
       name: "Minimal",
       description: "The logo, Log in and Start Free, for landing pages that keep the reader on one action.",
@@ -42,15 +49,20 @@ export const navbar = defineSection<NavbarProps>({
       "Turn on sticky on long pages, so the menus and Start Free stay in reach.",
     ],
     rules: [
-      "Menus group items by job, each group under a mono label. An item has a Lucide icon and, when needed, one tag (Beta, Waitlist).",
-      "Three actions at most, in this order: Log in (ghost), Contact Us (secondary), Start Free (primary). Only Start Free is primary.",
+      "Menus group items by job, each group under a mono label. An item has a Lucide icon, bare and neutral (no tile), and, when needed, one tag (Beta, Waitlist).",
+      "Every panel opens centered under the bar and has the tray's double border. A column holds up to five links; a group of six or more splits into even columns, so panels grow across, not down.",
+      "Three actions at most, in this order: Log in (ghost), Contact Us (secondary), Start Free (primary), all in the small size with 14px text, like the menus. Only Start Free is primary.",
+      "From lg the menus sit at the center of the page: the logo's and the actions' columns are always the same width.",
+      "A menu with `hidden` stays out of the bar and the sheet, with its copy kept (Solutions, for now).",
+      "A menu's `highlight` (the Developers menu's Documentation) is a tile at the top of its group's column: only its link, with Pixel drift on its right. One per menu at most.",
       "Below lg the menus move into a sheet with one accordion per menu; Log in hides below sm and Contact Us below md.",
       "Item descriptions stay empty until the site has copy for them. Never invent them.",
     ],
     anatomy: [
       { part: "Logo", note: "From brand-assets, the version for the section's theme. Links home." },
-      { part: "Menus", note: "Triggers that open a panel of columns; Pricing is a plain link." },
+      { part: "Menus", note: "Triggers that open a panel of columns, centered under the bar; Pricing is a plain link." },
       { part: "Featured card", note: "Optional, in the first panel: a release or event, on the highlight surface." },
+      { part: "Highlight tile", note: "Optional, one per menu: an item as a tile at the top of its column, with Pixel drift (Documentation)." },
       { part: "Actions", note: "Log in, Contact Us, Start Free." },
       { part: "Mobile sheet", note: "Below lg: the menus as accordions, then the actions." },
     ],
@@ -62,5 +74,8 @@ export const navbar = defineSection<NavbarProps>({
       { name: "sticky", type: "boolean", note: "Keeps it at the top while the page scrolls." },
     ],
   },
-  fields: [{ prop: "sticky", label: "Sticky", kind: "boolean" }],
+  fields: [
+    { prop: "sticky", label: "Sticky", kind: "boolean" },
+    { prop: "markStyle", label: "Product marks", kind: "select", options: [{ value: "halftone", label: "Halftone" }, { value: "tones", label: "Tones" }, { value: "outline", label: "Outline" }, { value: "matrix", label: "Matrix" }] },
+  ],
 })

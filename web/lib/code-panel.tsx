@@ -1,8 +1,10 @@
 import { cn } from "@qdrant/design-system/lib/utils"
 
-// A code sample in a window frame: a title bar with the file or language, then the code in mono. Plain text
-// for now; no syntax colors until the design system has a code style.
-export function CodePanel({ title, code, className }: { title?: string; code: string; className?: string }) {
+import { Code, languageOf, type CodeLanguage } from "./code"
+
+// A code sample in a window frame: a title bar with the file or language, then the code in mono, in the website's
+// syntax colors (lib/code.tsx). The language comes from `language` or the title's file name.
+export function CodePanel({ title, code, language, className }: { title?: string; code: string; language?: CodeLanguage; className?: string }) {
   return (
     <figure className={cn("overflow-hidden rounded-xl border border-border bg-card text-left", className)}>
       {title && (
@@ -16,7 +18,7 @@ export function CodePanel({ title, code, className }: { title?: string; code: st
         </figcaption>
       )}
       <pre className="overflow-x-auto p-5 font-mono text-[13px] leading-relaxed text-foreground">
-        <code>{code}</code>
+        <Code code={code} language={language ?? languageOf(title)} />
       </pre>
     </figure>
   )

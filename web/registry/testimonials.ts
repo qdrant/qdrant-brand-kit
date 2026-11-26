@@ -32,6 +32,18 @@ export const testimonials = defineSection<TestimonialsProps>({
       description: "A customer's quote beside the result it led to, in a hairline grid (Deutsche Telekom).",
       props: { layout: "metric", quotes: [telekomResult.quote], metric: telekomResult.metric },
     },
+    {
+      id: "lead",
+      name: "Lead quote",
+      description: "The first quote large on a wide plate, the next three in a row under it (Community).",
+      props: {
+        layout: "lead",
+        header: { title: communityQuotes.title, action: communityQuotes.action },
+        quotes: communityQuotes.quotes,
+      },
+      proposal:
+        "Between one quote and a wall: one voice leads at a size that carries the section, three more back it up, so the section has a clear first read instead of a grid of equals. From Replit's testimonials, on our plates.",
+    },
   ],
   docs: {
     use: [
@@ -50,7 +62,7 @@ export const testimonials = defineSection<TestimonialsProps>({
       { part: "Result", note: "Quote and result only: the figure in mono, its label, its line and a link." },
     ],
     props: [
-      { name: "layout", type: '"single" | "wall" | "metric"', note: "The arrangement." },
+      { name: "layout", type: '"single" | "wall" | "metric" | "lead"', note: "The arrangement. Lead (proposed): one large quote over three." },
       { name: "quotes", type: "{ quote, name?, role?, company?, handle? }[]", note: "Single and result use the first." },
       { name: "metric", type: "{ value, label, text?, link? }", note: "The result beside the quote." },
       { name: "header", type: "{ kicker?, title, description?, action? }", note: "Optional." },
@@ -65,6 +77,7 @@ export const testimonials = defineSection<TestimonialsProps>({
         { value: "single", label: "Single quote" },
         { value: "wall", label: "Quote wall" },
         { value: "metric", label: "Quote and result" },
+        { value: "lead", label: "Lead quote" },
       ],
     },
   ],

@@ -22,6 +22,14 @@ export const footer = defineSection<FooterProps>({
       description: "The legal bar only, for landing pages with the minimal navbar.",
       props: { variant: "minimal", legal: content.legal, copyright: content.copyright },
     },
+    {
+      id: "signature",
+      name: "Signature",
+      description: "Link columns as hairline cells, then the logo across the whole container, then the legal bar.",
+      props: { variant: "signature", ...content },
+      proposal:
+        "The footer ends the page with the brand as its last word: the logo at the container's full width, as Retool and Linear do, under the link columns set as cells of the page's hairline grid. The newsletter moves out (the Newsletter section can sit above it).",
+    },
   ],
   docs: {
     use: ["Full on every page; minimal with the minimal navbar."],
@@ -38,7 +46,7 @@ export const footer = defineSection<FooterProps>({
       { part: "Legal bar", note: "The copyright and the legal links." },
     ],
     props: [
-      { name: "variant", type: '"full" | "minimal"', note: "Minimal shows the legal bar only." },
+      { name: "variant", type: '"full" | "minimal" | "signature"', note: "Minimal shows the legal bar only; signature (proposed) ends with the logo across the container." },
       { name: "tagline", type: "string", note: "Under the logo." },
       { name: "columns", type: "{ title, links }[]", note: "The link columns." },
       { name: "newsletter", type: "{ title, description? }", note: "The signup block." },

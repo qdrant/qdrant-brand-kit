@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
 
+import { Code, languageOf } from "../lib/code"
 import { LinkButton } from "../lib/link-button"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
@@ -48,7 +49,7 @@ export function CodeShowcase({ header, tabs, result, layout = "split", theme, su
           {tab.file && <span className="ml-auto pr-2 font-mono text-xs text-muted-foreground">{tab.file}</span>}
         </div>
         <pre className="overflow-x-auto p-5 font-mono text-[13px] leading-relaxed text-foreground">
-          <code>{tab.code}</code>
+          <Code code={tab.code} language={languageOf(tab.file) !== "text" ? languageOf(tab.file) : languageOf(tab.label)} />
         </pre>
       </figure>
       {result && (
@@ -57,7 +58,7 @@ export function CodeShowcase({ header, tabs, result, layout = "split", theme, su
             Response
           </figcaption>
           <pre className="flex-1 overflow-x-auto p-5 font-mono text-[13px] leading-relaxed text-foreground">
-            <code>{result.code}</code>
+            <Code code={result.code} language="json" />
           </pre>
           {result.label && <p className={cn(type.xsmall, "border-t border-(--web-line) px-4 py-3")}>{result.label}</p>}
         </figure>

@@ -102,7 +102,7 @@ export function Contact({ title, description, options = [], form, theme, surface
         {options.length > 0 && (
           <ul className="flex flex-col gap-3">
             {options.map((o, i) => (
-              <Plate as="li" key={o.title} className="flex items-start gap-4 rounded-xl p-5">
+              <Plate as="li" simple key={o.title} className="flex items-start gap-4 rounded-xl p-5">
                 <IconTile name={o.icon} tone={toneAt(i)} />
                 <div className="flex flex-col gap-1">
                   <h2 className={heading.card}>{o.title}</h2>

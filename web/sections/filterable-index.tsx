@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ChevronLeft, ChevronRight, LayoutGrid, List, Search } from "lucide-react"
+import { LayoutGrid, List, Search } from "lucide-react"
 
 import { Button } from "@qdrant/design-system/components/ui/button"
 import { Checkbox } from "@qdrant/design-system/components/ui/checkbox"
@@ -25,26 +25,13 @@ export type FilterableIndexProps = SectionProps & {
   countLabel?: string
   emptyText?: string
   items: DirectoryItem[]
-  // Cards per page.
-  pageSize?: number
 }
 
 type Selection = Record<string, string[]>
 
-// The numbers to show in the pagination: the first, the last, and the current page with its neighbors; null for a gap.
-function pageList(current: number, total: number): (number | null)[] {
-  const pages = new Set([1, total, current - 1, current, current + 1].filter((p) => p >= 1 && p <= total))
-  const sorted = [...pages].sort((a, b) => a - b)
-  const out: (number | null)[] = []
-  sorted.forEach((p, i) => {
-    if (i > 0 && p - (sorted[i - 1] ?? p) > 1) out.push(null)
-    out.push(p)
-  })
-  return out
-}
-
 // A directory page's body (2026-11-21): filter groups with checkboxes on the left, then a search field, the result
-// count, a grid or list toggle, the cards and numbered pages. Filtering runs in the browser over the items given:
+// count, a grid or list toggle, and the cards, all on one page (no pagination on the website, design lead,
+// 2026-11-24). Filtering runs in the browser over the items given:
 // options in one group widen the results (any of them), groups narrow them (all groups).
 export function FilterableIndex({
   filterTitle = "Filters",
@@ -54,7 +41,6 @@ export function FilterableIndex({
   countLabel = "results",
   emptyText = "No results",
   items,
-  pageSize = 9,
   theme,
   surface,
   pattern,
@@ -65,7 +51,6 @@ export function FilterableIndex({
   const [selected, setSelected] = React.useState<Selection>({})
   const [query, setQuery] = React.useState("")
   const [view, setView] = React.useState<"grid" | "list">("grid")
-  const [page, setPage] = React.useState(1)
 
   const results = React.useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -77,9 +62,7 @@ export function FilterableIndex({
     })
   }, [items, query, selected])
 
-  const pages = Math.max(1, Math.ceil(results.length / pageSize))
-  const current = Math.min(page, pages)
-  const shown = results.slice((current - 1) * pageSize, current * pageSize)
+  const shown = results
   const active = Object.values(selected).reduce((n, v) => n + v.length, 0)
 
   const toggle = (group: string, option: string, on: boolean) => {
@@ -87,12 +70,10 @@ export function FilterableIndex({
       const list = s[group] ?? []
       return { ...s, [group]: on ? [...list, option] : list.filter((o) => o !== option) }
     })
-    setPage(1)
   }
   const clear = () => {
     setSelected({})
     setQuery("")
-    setPage(1)
   }
 
   return (
@@ -154,7 +135,6 @@ export function FilterableIndex({
               aria-label={searchPlaceholder}
               onChange={(e) => {
                 setQuery(e.target.value)
-                setPage(1)
               }}
             />
           </InputGroup>
@@ -221,34 +201,6 @@ export function FilterableIndex({
           </ul>
         )}
 
-        {pages > 1 && (
-          <nav aria-label="Pages" className="flex items-center justify-center gap-1 pt-4">
-            <Button variant="ghost" size="icon" aria-label="Previous page" disabled={current === 1} onClick={() => setPage(current - 1)}>
-              <ChevronLeft />
-            </Button>
-            {pageList(current, pages).map((p, i) =>
-              p === null ? (
-                <span key={`gap-${i}`} aria-hidden className="w-6 text-center font-mono text-sm text-muted-foreground">
-                  …
-                </span>
-              ) : (
-                <Button
-                  key={p}
-                  variant={p === current ? "outline" : "ghost"}
-                  size="icon"
-                  aria-current={p === current ? "page" : undefined}
-                  onClick={() => setPage(p)}
-                  className={cn("font-mono tabular-nums", p === current && "text-(--web-indigo-text)")}
-                >
-                  {p}
-                </Button>
-              )
-            )}
-            <Button variant="ghost" size="icon" aria-label="Next page" disabled={current === pages} onClick={() => setPage(current + 1)}>
-              <ChevronRight />
-            </Button>
-          </nav>
-        )}
       </div>
     </Section>
   )

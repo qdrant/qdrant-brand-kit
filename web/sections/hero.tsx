@@ -5,7 +5,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Link } from "../content/site"
 import { CodePanel, quickstartQuery } from "../lib/code-panel"
-import { CopySnippet } from "../lib/copy-snippet"
+import { CopySnippet, type AgentId } from "../lib/copy-snippet"
 import { IconTile, toneAt } from "../lib/tone"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
@@ -14,14 +14,16 @@ import { SectionHeader } from "../lib/section-header"
 
 export type HeroProps = SectionProps & {
   // centered: everything on one axis, media below. split: text on the left, media on the right, from lg.
-  layout?: "centered" | "split"
+  // Proposal (2026-11-24): wide, the title on the left and the description and actions on the right on one line,
+  // then the media across the whole container, then the proof points.
+  layout?: "centered" | "split" | "wide"
   kicker?: string
   title: string
   description?: string
   primary?: Link
   secondary?: Link
   // One line to copy under the buttons, like a prompt for an agent.
-  snippet?: { label?: string; text: string }
+  snippet?: { label?: string; text: string; agents?: AgentId[] }
   // Proof points under everything, each with a Lucide icon.
   trust?: { label: string; icon?: string }[]
   // Short claims as pills, under the buttons.
@@ -102,7 +104,7 @@ export function Hero({
           ))}
         </ul>
       )}
-      {snippet && <CopySnippet label={snippet.label} text={snippet.text} />}
+      {snippet && <CopySnippet label={snippet.label} text={snippet.text} agents={snippet.agents} />}
       {note && (
         <p className={cn("text-sm text-muted-foreground", centered && "text-center")}>
           {note.text}{" "}
@@ -126,6 +128,19 @@ export function Hero({
         ))}
       </ul>
     ) : null
+
+  if (layout === "wide") {
+    return (
+      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-12 lg:gap-16">
+        <div className="flex flex-col gap-8">
+          <SectionHeader as="h1" layout="split" kicker={kicker} title={title} description={description} actions={actions} />
+          {(pills || snippet || note) && <div className="flex flex-col items-start gap-6 lg:items-end">{extras}</div>}
+        </div>
+        {mediaEl && <div className="w-full [&>.web-tray]:w-full">{mediaEl}</div>}
+        {trustEl}
+      </Section>
+    )
+  }
 
   if (centered) {
     return (
