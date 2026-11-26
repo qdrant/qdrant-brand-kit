@@ -1,3 +1,4 @@
+import type * as React from "react"
 import { Check } from "lucide-react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
@@ -19,8 +20,9 @@ export type BentoProps = SectionProps & {
   layout?: "checklist" | "cards"
   // The large tile: a title and a checklist.
   list?: { title?: string; items: string[] }
-  // The small tiles: a caption each, over a media slot.
-  tiles?: string[]
+  // The small tiles: a caption each, over a media slot, or over its own visual (web/visuals) when a page gives one
+  // (2026-11-26, the home page's enterprise tiles).
+  tiles?: (string | { title: string; visual?: React.ReactNode })[]
   // Cards for the cards layout: an icon, a title and a line each, 4 to 6 of them.
   cards?: Feature[]
 }
@@ -152,28 +154,38 @@ export function Bento({
               ))}
             </ul>
           </Plate>
-          {tiles.map((tile, i) => (
-            <Plate
-              key={tile}
-              className={cn(
-                "flex flex-col gap-4 rounded-xl p-4",
-                i === 0 && "lg:col-span-2"
-              )}
-            >
-              <MediaFrame
-                label="Image"
-                className="aspect-auto min-h-44 flex-1 rounded-lg border-0 bg-transparent"
-              />
-              <p
+          {tiles.map((entry, i) => {
+            const tile = typeof entry === "string" ? entry : entry.title
+            const visual = typeof entry === "string" ? undefined : entry.visual
+            return (
+              <Plate
+                key={tile}
                 className={cn(
-                  type.small,
-                  "px-2 pb-1 font-medium text-foreground"
+                  "flex flex-col gap-4 rounded-xl p-4",
+                  i === 0 && "lg:col-span-2"
                 )}
               >
-                {tile}
-              </p>
-            </Plate>
-          ))}
+                {visual ? (
+                  <div className="flex min-h-44 flex-1 items-center justify-center">
+                    {visual}
+                  </div>
+                ) : (
+                  <MediaFrame
+                    label="Image"
+                    className="aspect-auto min-h-44 flex-1 rounded-lg border-0 bg-transparent"
+                  />
+                )}
+                <p
+                  className={cn(
+                    type.small,
+                    "px-2 pb-1 font-medium text-foreground"
+                  )}
+                >
+                  {tile}
+                </p>
+              </Plate>
+            )
+          })}
         </div>
       )}
     </Section>

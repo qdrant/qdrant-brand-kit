@@ -47,7 +47,7 @@ export const featureTabs = defineSection<FeatureTabsProps>({
     props: [
       { name: "layout", type: '"vertical" | "top" | "window"', note: "List beside the media, tabs above it, or an app window (the last two proposed)." },
       { name: "header", type: "{ kicker?, title, description? }", note: "The heading block." },
-      { name: "items", type: "{ title, text? }[]", note: "The features." },
+      { name: "items", type: "{ title, text?, link?, visual?, visualFrame? }[]", note: "The features. The active one shows its text and link, and its visual (web/visuals) in a frame that hugs it, or a placeholder until a page gives one (2026-11-26)." },
     ],
   },
   fields: [

@@ -18,7 +18,7 @@ export const stats = defineSection<StatsProps>({
       props: {
         layout: "cards",
         header: { title: applications.title },
-        items: applications.cards.map((c) => ({ company: c.company, value: c.value, text: c.text })),
+        items: applications.cards.map((c) => ({ company: c.company, value: c.value, text: c.text, href: c.href })),
       },
     },
     {

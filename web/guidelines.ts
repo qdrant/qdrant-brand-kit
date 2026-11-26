@@ -316,9 +316,21 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Images come from the Figma or brand assets",
-        text: "Illustrations, logos, social marks and badges are exported as they are (SVG for vectors, PNG for the rest), never redrawn or recolored, except customer logos (below). Ask before adding a photo. The logo, Qbot and patterns follow their own rules in brand-assets.",
-        decided: "Design lead, 2026-11-16",
+        text: "Logos, social marks and badges are exported as they are, as SVG, never redrawn or recolored, except customer logos (below). The logo, Qbot and patterns follow their own rules in brand-assets.",
+        decided: "Design lead, 2026-11-16; SVG only since 2026-11-26",
         source: "brand-assets/",
+      },
+      {
+        title: "No PNG or JPG",
+        text: "The website uses no raster images: no PNG, JPG or WebP, and no photos. A graphic is SVG, HTML or a canvas drawing. Product screens are rebuilt in HTML with the design system's components (web/visuals, data-context=\"product\"), illustrations become diagrams (below), and a raster file found in web/ is replaced or removed (the unused rocket illustration went first).",
+        decided: "Design lead, 2026-11-26",
+        source: "web/visuals",
+      },
+      {
+        title: "Graphics are diagrams, true to the docs",
+        text: "What the site used to show as an illustration is drawn as a diagram in the Space signatures' style (the hybrid search fusion is the reference): mono 12px uppercase labels, result chips on the surface color with a hairline, connectors in indigo, the one key result marked in amaranth, the rest quiet, calm motion that builds up, holds and fades, and the finished state for reduced motion. Every diagram shows how Qdrant really works, checked against the current documentation, and fixes what the old graphic got wrong (for example, RRF uses Qdrant's default k = 2, not 60). Ids and scores can be illustrative; named numbers, versions and limits come from the docs. They live in web/visuals/diagrams, sized by DiagramFrame.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/visuals/diagrams, web/visuals/home.tsx",
       },
       {
         title: "Customer logos come in three versions",

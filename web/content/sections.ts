@@ -52,14 +52,16 @@ export const aboutStats = [
   { value: "100+", label: "employees" },
 ]
 
-// Home: "One Engine, Endless Applications", the customer metric cards.
+// Home: "One Engine, Endless Applications", the customer metric cards, each linking to its case study (read again
+// 2026-11-26). HubSpot's value is the words the site highlights in its line.
 export const applications = {
   title: "One Engine, Endless Applications",
   cards: [
-    { company: "Tripadvisor", value: "2-3x revenue", text: "Powers AI Trip Planner on billions of reviews and images, driving 2-3x revenue." },
-    { company: "Deutsche Telekom", value: "2M+ AI-driven conversations", text: "Powers multi-agent platform with real-time context across 2M+ AI-driven conversations." },
-    { company: "Dust", value: "5,000+ data sources", text: "Powers Dust's AI agents platform with scalable vector search across 5,000+ data sources." },
-    { company: "Lyzr", value: "reducing latency by 90%", text: "Powers Lyzr's AI agents, reducing latency by 90% and increasing throughput by 150%." },
+    { company: "Tripadvisor", value: "2-3x revenue", text: "Powers AI Trip Planner on billions of reviews and images, driving 2-3x revenue.", href: "/blog/case-study-tripadvisor/" },
+    { company: "HubSpot", value: "deep contextual awareness", text: "Powers Breeze AI with real-time, personalized responses and deep contextual awareness.", href: "/blog/case-study-hubspot/" },
+    { company: "Deutsche Telekom", value: "2M+ AI-driven conversations", text: "Powers multi-agent platform with real-time context across 2M+ AI-driven conversations.", href: "/blog/case-study-deutsche-telekom/" },
+    { company: "Dust", value: "5,000+ data sources", text: "Powers Dust's AI agents platform with scalable vector search across 5,000+ data sources.", href: "/blog/case-study-dust-v2/" },
+    { company: "Lyzr", value: "reducing latency by 90%", text: "Powers Lyzr's AI agents, reducing latency by 90% and increasing throughput by 150%.", href: "/blog/case-study-lyzr/" },
   ],
 }
 
@@ -104,15 +106,18 @@ export const offload = {
   ] as Feature[],
 }
 
-// Home: "Why Qdrant?", the feature rows. The links' targets weren't captured from the site, so they're "#".
+// Home: "Why Qdrant?", the feature rows, all five with their links (read again 2026-11-26).
 export const whyQdrant = {
   kicker: "Why Qdrant?",
   title: "Build for Production-Grade AI Search",
   description: "Engineered for real-time retrieval with the speed, accuracy, and scale that modern AI demands.",
+  action: { label: "Start Free in Qdrant Cloud", href: "https://cloud.qdrant.io/signup" },
   rows: [
-    { title: "Expansive Metadata Filters", text: "Store metadata in JSON and use advanced filters, such as `nested`, `text`, `geo`, `has_vector`, and more.", link: { label: "Learn About Metadata Filters", href: "#" } },
-    { title: "Native Hybrid Search (Dense + Sparse)", text: "Blend keyword and vector search in one query – use dense or sparse vectors. Supports BM25, SPLADE++, and miniCOIL.", link: { label: "Explore Hybrid Search", href: "#" } },
-    { title: "Efficient, One-Stage Filtering", text: "Filters are applied during HNSW traversal — no pre- or post-filtering.", link: { label: "See Documentation", href: "#" } },
+    { title: "Expansive Metadata Filters", text: "Store metadata in JSON and use advanced filters, such as `nested`, `text`, `geo`, `has_vector`, and more.", link: { label: "Learn About Metadata Filters", href: "/documentation/manage-data/payload/" } },
+    { title: "Native Hybrid Search (Dense + Sparse)", text: "Blend keyword and vector search in one query – use dense or sparse vectors. Supports BM25, SPLADE++, and miniCOIL.", link: { label: "Explore Hybrid Search", href: "/documentation/search/hybrid-queries/" } },
+    { title: "Built-in Multivector", text: "Set new standards for relevance; make the retrieval layer more expressive, flexible, and multimodal with multiple vectors per object.", link: { label: "See Documentation", href: "/documentation/tutorials-search-engineering/using-multivector-representations/" } },
+    { title: "Efficient, One-Stage Filtering", text: "Filters are applied during HNSW traversal — no pre- or post-filtering. High recall with low latency, even under complex conditions.", link: { label: "See Documentation", href: "/articles/filterable-hnsw/" } },
+    { title: "Full-Spectrum Reranking", text: "Infuse business logic with score boosting, achieve token-level precision with late interaction models (e.g. ColBERT), diversify results with Maximum Marginal Relevance (MMR)", link: { label: "See Documentation", href: "/documentation/tutorials-basics/reranking-hybrid-search/" } },
   ] as Feature[],
 }
 
@@ -131,9 +136,13 @@ export const enterprise = {
   tiles: ["SOC 2 · GDPR-aligned Options", "Prometheus · Grafana · Datadog", "SSO (SAML/OIDC)"],
 }
 
-// Home: "Performance by Design", the vertical tabs.
+// Home: "Performance by Design", the vertical tabs, with its kicker, description and action (read again 2026-11-26).
 export const performance = {
+  kicker: "Architecture for the AI - Not Keyword - Era",
   title: "Performance by Design",
+  description:
+    "We research, engineer, and optimize each component from first principles for the fastest, most scalable, and most customizable AI retrieval and search engine.",
+  action: { label: "Start Free in Qdrant Cloud", href: "https://cloud.qdrant.io/signup" },
   items: [
     { title: "Highest‑Performance Vector Search Engine", text: "Built entirely in Rust with SIMD and a custom storage engine (Gridstore) — no wrappers, no bolt-ons. Just fast, scalable vector search." },
     { title: "Real‑Time Indexing", text: "Index new data instantly without rebuilding the entire index. Your vectors are searchable the moment they're added." },

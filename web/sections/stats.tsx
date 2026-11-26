@@ -74,7 +74,16 @@ export function Stats({ layout = "cells", header, items, theme, surface, pattern
           })}
         </ul>
       ) : (
-        <ul className="grid gap-(--qd-layout-column-gap) sm:grid-cols-2 lg:grid-cols-4">
+        // Five cards sit three over two on six columns, so none is left alone on a row (2026-11-26, the
+        // home page's results).
+        <ul
+          className={cn(
+            "grid gap-(--qd-layout-column-gap) sm:grid-cols-2",
+            items.length === 5
+              ? "lg:grid-cols-6 lg:[&>li:nth-child(-n+3)]:col-span-2 lg:[&>li:nth-child(n+4)]:col-span-3"
+              : "lg:grid-cols-4"
+          )}
+        >
           {items.map((item) => (
             <Plate as="li" key={item.value} className="flex flex-col gap-6 rounded-xl p-6">
               {item.company && <p className={cn(type.small, "font-mono uppercase")}>{item.company}</p>}
