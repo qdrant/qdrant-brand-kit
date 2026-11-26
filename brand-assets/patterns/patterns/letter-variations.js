@@ -1,4 +1,4 @@
-// Letter layers: what can change when a tool makes a variation (Vanesa, 2026-11-24).
+// Letter layers: what can change when a tool makes a variation (visual designer, 2026-11-24).
 //
 //   - Color mapping: any (field value, x, y, radial, random, angle).
 //   - Glyphs: ramp, word or random, but the characters are always the letters QDRANT.

@@ -96,8 +96,8 @@
   --color-background: var(--background);
 }
 
-/* The accent, by context: indigo for product, amaranth for brand and marketing (Juan, 2026-11-15). Product is
-   the default since 2026-11-23 (Juan): the design system is the product's, so its components are indigo. The
+/* The accent, by context: indigo for product, amaranth for brand and marketing (design lead, 2026-11-15). Product is
+   the default since 2026-11-23 (design lead): the design system is the product's, so its components are indigo. The
    website and anything else for brand or marketing put data-context="marketing" on their root (a website page
    has it next to data-web); data-context="product" switches a piece back inside it, like a Console screen on a
    web page. Declared only on :root and the contexts, so a [data-theme] section inside a context keeps that
@@ -157,7 +157,7 @@
 }
 
 /* Surfaces and edges, by theme (DESIGN.md, 2026-11-16).
-   - The surfaces are Hairline's (Juan, 2026-11-16). Dark: the page neutral-975, cards and the sidebar
+   - The surfaces are Hairline's (design lead, 2026-11-16). Dark: the page neutral-975, cards and the sidebar
      neutral-950, popovers neutral-925. Light: all white, apart by their soft borders and shadows.
    - The highlight, shadcn's `secondary` and `muted` (the secondary button, muted items, progress tracks,
      skeletons, calendar ranges, the tabs track): solid, since some of them overlap. Hairline's neutral-900 on
@@ -181,7 +181,7 @@
   --input: var(--qd-color-neutral-800);
   /* Destructive is text, borders and tints, never a solid fill: the soft destructive button, error text and
      invalid fields. red-400 on dark and red-700 on light keep it at 5.4:1 or more on its tint and 6.5:1 on
-     cards (Juan, 2026-11-21; it was the status error color, red-500, at 3.3 to 4.3:1). */
+     cards (design lead, 2026-11-21; it was the status error color, red-500, at 3.3 to 4.3:1). */
   --destructive: var(--qd-color-red-400);
   --sidebar-border: var(--border);
   /* The sidebar's hovered and active item: neutral-900 on the neutral-950 sidebar (dark), neutral-25 on

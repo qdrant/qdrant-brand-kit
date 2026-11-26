@@ -30,7 +30,7 @@ Before 2026-11-12 this was an 8 px scale named by step (`space.1` = 8 px to `spa
 
 ## Web and landing page layout
 
-Designed at a 1440px viewport, content centered in a 1200px container (Juan, 2026-11-21; it was 1110px). The website's sections in [`web/`](../../web/) build on these. For social posts, ads and banners, see [`layout/`](../../guidelines/layout/).
+Designed at a 1440px viewport, content centered in a 1200px container (design lead, 2026-11-21; it was 1110px). The website's sections in [`web/`](../../web/) build on these. For social posts, ads and banners, see [`layout/`](../../guidelines/layout/).
 
 | Token | Value | Note |
 | --- | --- | --- |

@@ -54,7 +54,7 @@ function CanvasFrame({
 const MIN = 0.05
 const MAX = 2
 
-// The Web page's canvas (Juan, 2026-11-21): every section and variant of the library side by side, one row per
+// The Web page's canvas (design lead, 2026-11-21): every section and variant of the library side by side, one row per
 // section, like a Figma page. The sections are live: hover the navbar for its menus, click its buttons. Scroll to
 // pan and Ctrl or Cmd with the wheel (or a pinch) to zoom, anywhere, frames included (they pass the wheel on).
 // Drag an empty area, or hold Space and drag, to pan; the hand tool makes every drag pan.

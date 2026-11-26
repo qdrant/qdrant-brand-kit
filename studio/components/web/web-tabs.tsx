@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 
 import { cn } from "@qdrant/design-system/lib/utils"
 
-// The Web page's views (Juan, 2026-11-21): Canvas, every section side by side like a Figma page; Docs, one
+// The Web page's views (design lead, 2026-11-21): Canvas, every section side by side like a Figma page; Docs, one
 // section at a time with its variants, modes and how to use it; Pages, whole pages; Builder, to put pages
 // together from the sections.
 const tabs = [

@@ -1,4 +1,4 @@
-// In-page links scroll to their part with an ease instead of jumping (Juan, 2026-11-22): a slow start and a slow
+// In-page links scroll to their part with an ease instead of jumping (design lead, 2026-11-22): a slow start and a slow
 // stop (ease-in-out quart), between 600 and 1100 ms by distance. Reduced motion jumps straight there. The reader's
 // own scroll (wheel, touch, keys) stops the animation.
 

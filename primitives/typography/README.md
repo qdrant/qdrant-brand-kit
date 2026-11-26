@@ -1,6 +1,6 @@
 # Typography
 
-Qdrant's typefaces, text styles and type rules as tokens. The text styles are the type set adopted on 2026-11-18 (Juan), which replaced the styles taken from the Qdrant Brand Design System in Figma; the Figma text styles move to it after review. Rules come from Brand Guide 2.0 (Typography, slides 29 to 36) and the qdrant-brand skill ([skills-internal/skills/design](https://github.com/qdrant/skills-internal/blob/main/skills/design/SKILL.md)). Weights and the size, line-height and letter-spacing scales match the Figma file **Qdrant Design System Primitives** (`UUpGTk4Ifmpr0FwNr6pXVg`, checked 2026-11-12). The families are the Mona Sans family (2026-11-17).
+Qdrant's typefaces, text styles and type rules as tokens. The text styles are the type set adopted on 2026-11-18 (design lead), which replaced the styles taken from the Qdrant Brand Design System in Figma; the Figma text styles move to it after review. Rules come from Brand Guide 2.0 (Typography, slides 29 to 36) and the qdrant-brand skill ([skills-internal/skills/design](https://github.com/qdrant/skills-internal/blob/main/skills/design/SKILL.md)). Weights and the size, line-height and letter-spacing scales match the Figma file **Qdrant Design System Primitives** (`UUpGTk4Ifmpr0FwNr6pXVg`, checked 2026-11-12). The families are the Mona Sans family (2026-11-17).
 
 | File | What it is |
 | --- | --- |
@@ -10,7 +10,7 @@ Qdrant's typefaces, text styles and type rules as tokens. The text styles are th
 
 ## Families
 
-One family for the whole brand: Mona Sans, its Display cut and its Mono, from the same release (decided by Juan, 2026-11-17). Mona Sans Mono replaced Geist Mono.
+One family for the whole brand: Mona Sans, its Display cut and its Mono, from the same release (decided by the design lead, 2026-11-17). Mona Sans Mono replaced Geist Mono.
 
 | Family | Variable | Use |
 | --- | --- | --- |
@@ -27,10 +27,10 @@ Mona Sans Display needs a browser that applies `font-variation-settings` inside 
 
 ## Weights
 
-The brand uses three weights: Regular (400), Medium (500) and SemiBold (600). **Bold (700) is retired** (Juan, 2026-11-17): no title, heading or body text uses it, and its uses move to SemiBold. The Figma file still has Bold styles until they're removed. The primitives also have Bold (`--qd-font-weight-bold`). Light (300) was removed on 2026-11-17: nothing used it. Use:
+The brand uses three weights: Regular (400), Medium (500) and SemiBold (600). **Bold (700) is retired** (design lead, 2026-11-17): no title, heading or body text uses it, and its uses move to SemiBold. The Figma file still has Bold styles until they're removed. The primitives also have Bold (`--qd-font-weight-bold`). Light (300) was removed on 2026-11-17: nothing used it. Use:
 
 - **Titles and headings: SemiBold.** Never Bold.
-- **Display styles: SemiBold only**, in Mona Sans Display and in Mona Sans Display Condensed (Juan, 2026-11-17). The Figma file still has Regular, Medium and Bold Display styles until they're removed.
+- **Display styles: SemiBold only**, in Mona Sans Display and in Mona Sans Display Condensed (design lead, 2026-11-17). The Figma file still has Regular, Medium and Bold Display styles until they're removed.
 - **Body text: Regular,** with SemiBold for key terms.
 - Medium exists in the styles but isn't part of the brand rules yet. One exception: speaker names in [`headshot-circle`](../../brand-components/headshot-circle/) use **Medium**, as in the Figma agenda slot (decided 2026-11-11).
 
@@ -38,7 +38,7 @@ The default weight is in each token; `$extensions.qdrant.weights` lists the weig
 
 ## Scales (Figma primitives)
 
-The building blocks of the type set, updated on 2026-11-17 (Juan). The text styles and the creative sizes below use them since 2026-11-18.
+The building blocks of the type set, updated on 2026-11-17 (design lead). The text styles and the creative sizes below use them since 2026-11-18.
 
 | Primitive | Values | Variables |
 | --- | --- | --- |
@@ -51,7 +51,7 @@ The building blocks of the type set, updated on 2026-11-17 (Juan). The text styl
 
 ## Text styles
 
-The type set, adopted on 2026-11-18 (Juan), after comparing it with the old styles in the studio's Typography page. One set for brand, web and marketing, named as in Figma (`Display/2/SemiBold`, `Heading/H4/Mono`, `Text/md/Regular`):
+The type set, adopted on 2026-11-18 (design lead), after comparing it with the old styles in the studio's Typography page. One set for brand, web and marketing, named as in Figma (`Display/2/SemiBold`, `Heading/H4/Mono`, `Text/md/Regular`):
 
 - **Display** 1 to 5 in Mona Sans Display SemiBold, each also **Condensed** (`display-condensed-*`: Mona Sans Display Condensed SemiBold, uppercase). Numbered from the smallest, so larger steps can be added as 6, 7 and on.
 - **Headings** H1 to H6 in Mona Sans Display, Regular, Medium or SemiBold (SemiBold by default), each also in **Mono** (`mono-h1` to `mono-h6`: Mona Sans Mono Regular).
@@ -78,9 +78,9 @@ The type set, adopted on 2026-11-18 (Juan), after comparing it with the old styl
 
 ### Text in creatives (social posts, ads, banners)
 
-Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabNex7sSJ`) and the Vector Space Day banner (Brand-Collateral `2183:41590`). Since 2026-11-18 every size is a step of the type set, with that step's line height and letter spacing 0 (Juan): the square and portrait short title went from 96 to 104, the wide and ultrawide long title from 88 to 80, the story titles from 88 and 72 to 80 and 64, and the supporting text from 36 to 40 on square and portrait. Sizes in px at the reference canvas (see [`layout/`](../../guidelines/layout/)); they scale with the canvas.
+Decided by the visual designer on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabNex7sSJ`) and the Vector Space Day banner (Brand-Collateral `2183:41590`). Since 2026-11-18 every size is a step of the type set, with that step's line height and letter spacing 0 (design lead): the square and portrait short title went from 96 to 104, the wide and ultrawide long title from 88 to 80, the story titles from 88 and 72 to 80 and 64, and the supporting text from 36 to 40 on square and portrait. Sizes in px at the reference canvas (see [`layout/`](../../guidelines/layout/)); they scale with the canvas.
 
-**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception. **On the light card** the title and supporting text have their own two sizes, set by the card's width (title 0.0846 W × 1.6 and supporting 0.0483 W, about 80 and 29 at 1080 square; on wide the supporting text is × 1.5 and the title stays × 1.6 (2026-11-19). Title bigger since 2026-11-16, logo unchanged), from the Get-the-Guide ad ([`layout/`](../../guidelines/layout/) "Light card layout", decided 2026-11-04). Title Case there too, even for long supporting sentences (the Figma reference uses sentence case; Vanesa kept Title Case, 2026-11-04). **Button text doesn't count:** it scales with the [button](../../brand-components/button/) and is independent of these text styles (decided 2026-11-04).
+**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception. **On the light card** the title and supporting text have their own two sizes, set by the card's width (title 0.0846 W × 1.6 and supporting 0.0483 W, about 80 and 29 at 1080 square; on wide the supporting text is × 1.5 and the title stays × 1.6 (2026-11-19). Title bigger since 2026-11-16, logo unchanged), from the Get-the-Guide ad ([`layout/`](../../guidelines/layout/) "Light card layout", decided 2026-11-04). Title Case there too, even for long supporting sentences (the Figma reference uses sentence case; the visual designer kept Title Case, 2026-11-04). **Button text doesn't count:** it scales with the [button](../../brand-components/button/) and is independent of these text styles (decided 2026-11-04).
 
 | | Font | Square, portrait | Wide | Ultrawide | Story |
 | --- | --- | --- | --- | --- | --- |
@@ -90,7 +90,7 @@ Decided by Vanesa on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabN
 | Supporting (body, date, time, place) | Mona Sans Display Regular (H4 Regular) | 40 | 40 | 40 | 40 |
 
 - **Mona Sans titles are always Title Case, never all caps.** Supporting text (date, place, body sentences) stays in normal sentence case (decided 2026-11-11). **Mona Sans Display Condensed is always all caps**, and only for special occasions, when the person asks for it (`display-condensed-*`).
-- **Mona Sans Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans. The creative event label (all caps, guidelines section 11 rule 3) takes **+0.08em**, as the design system's captions (Vanesa, 2026-11-19); every other style keeps 0.
+- **Mona Sans Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans. The creative event label (all caps, guidelines section 11 rule 3) takes **+0.08em**, as the design system's captions (visual designer, 2026-11-19); every other style keeps 0.
 - **Longer titles step down** to the next size by word count, never in between and never below the 11+ size. If it still doesn't fit, ask the person to shorten it.
 - **Wide** follows the Vector Space Day banner (128 on 1920, decided 2026-11-04).
 - **Ultrawide** uses the wide sizes (decided 2026-11-11 from the LinkedIn profile cover, 1584×396: a 128 title reads at LinkedIn's small display size). **Beside Qbot** on the LinkedIn cover, the title steps down one size (128 → 104), so Qbot stays the bigger shape ([`layout/`](../../guidelines/layout/) "LinkedIn profile cover"). Not yet tried on a full 3000×400 banner.

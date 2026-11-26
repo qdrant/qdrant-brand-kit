@@ -56,7 +56,7 @@
     "sad":      { "label": "Sad",      "ref": "sad",      "phrase": "two half-closed droopy eyes, flat on top and curved underneath" },
     "angry":    { "label": "Angry",    "ref": "sad",      "phrase": "two short thick lines slanting down toward the centre, like frowning brows" }
   },
-  "eye_style_note": "References mix two eye styles: smooth solid shapes (happy, friendly, sad) and small square pixels (confused, loving). Phrases follow the reference for each emotion until Vanesa picks one style.",
+  "eye_style_note": "References mix two eye styles: smooth solid shapes (happy, friendly, sad) and small square pixels (confused, loving). Phrases follow the reference for each emotion until the visual designer picks one style.",
 
   "poses": {
     "standing_front": { "label": "Standing front",      "direction": false, "refs": ["happy", "sad"],          "phrase": "standing upright facing the camera, arms relaxed at the sides" },

@@ -12,7 +12,7 @@
 }
 /* The fill, by theme: one neutral step from the cards fields sit on, so it's barely there (DESIGN.md,
    2026-11-16). Cards are neutral-950 on dark and white on light. On dark it's neutral-925, the step right
-   above the card; neutral-900 read too raised (Juan, 2026-11-21). */
+   above the card; neutral-900 read too raised (design lead, 2026-11-21). */
 :root,
 [data-theme="dark"] {
   --qd-ui-input-bg: var(--qd-color-neutral-925);

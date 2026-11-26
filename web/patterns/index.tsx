@@ -8,7 +8,7 @@ import type { PatternDefinition } from "./types"
 
 export * from "./types"
 
-// Every pattern, backgrounds first. Add a new one here. Juan adds them by hand, one at a time (2026-11-22).
+// Every pattern, backgrounds first. Add a new one here. The design lead adds them by hand, one at a time (2026-11-22).
 export const patterns: PatternDefinition[] = [depthHaze]
 
 // The approved patterns, then the ones being explored (web/patterns/explorations), for the studio's Patterns tab.

@@ -10,7 +10,7 @@
 import { resolveToken, hexToRgba } from "./tokens.js";
 import { gradientSampler, makeFrame } from "./effects.js";
 
-// Approved by Vanesa on 2026-11-24. Length, density and softness sit on the 8 grid;
+// Approved by the visual designer on 2026-11-24. Length, density and softness sit on the 8 grid;
 // direction can be any angle (124° is the usual).
 export const STREAK_RANGES = {
   length: [16, 80],

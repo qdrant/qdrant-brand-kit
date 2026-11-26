@@ -6,7 +6,7 @@ import { CardPatternProvider, PatternLayers } from "../patterns"
 import { Node } from "./node"
 
 // What every website section accepts, so pages and the page builder can set them the same way on any section
-// (Juan, 2026-11-21). theme: dark or light, or the page's when left out. surface: the background role,
+// (design lead, 2026-11-21). theme: dark or light, or the page's when left out. surface: the background role,
 // default (background/default) or raised (background/raised, a band one step up); web/styles/web.css maps the
 // design system's colors to them inside the website.
 export type SectionTheme = "dark" | "light"

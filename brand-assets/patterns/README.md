@@ -89,7 +89,7 @@ Patterns made in Pattern Studio (the `qdrant-pattern-studio` repo) are added fro
 
 At its `designSize`, the pattern is pixel-identical to the tool. At any other size, the field and the elements keep their scale by canvas area, so nothing stretches: a wider canvas shows more of the same field. `cellScaling` sets what the elements do on bigger canvases: `"canvas"` (they grow with it, like every other pattern) or `"fixed"` (they keep their px size, so there are more of them). `generative-scaling.html` shows both side by side.
 
-**Letter layers: what a variation may change** (Vanesa, 2026-11-24). Pass `renderPattern(..., { letters: { ... } })`, or call `varyLetterLayer(layer, changes)`. Anything else is refused, and the validator checks every letter layer:
+**Letter layers: what a variation may change** (visual designer, 2026-11-24). Pass `renderPattern(..., { letters: { ... } })`, or call `varyLetterLayer(layer, changes)`. Anything else is refused, and the validator checks every letter layer:
 
 | Setting | Rule |
 | --- | --- |
@@ -153,7 +153,7 @@ python3 -m http.server 5190
 
 ## Text on a pattern: `textMask`
 
-A preset can say whether text on it needs the pattern mask from [`guidelines/layout/`](../../guidelines/layout/) (rules in [`guidelines/`](../../guidelines/) section 4). It's only a setting for the layout: it never changes how the pattern renders. One mask strength, **40% of the pattern behind the text**, replaced `soft-1` (4%) and `soft-2` (10%) on 2026-11-16: those made creatives too dark and hid the pattern (Vanesa).
+A preset can say whether text on it needs the pattern mask from [`guidelines/layout/`](../../guidelines/layout/) (rules in [`guidelines/`](../../guidelines/) section 4). It's only a setting for the layout: it never changes how the pattern renders. One mask strength, **40% of the pattern behind the text**, replaced `soft-1` (4%) and `soft-2` (10%) on 2026-11-16: those made creatives too dark and hid the pattern (visual designer).
 
 | `textMask` | Meaning | Presets |
 | --- | --- | --- |
@@ -163,7 +163,7 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | not set | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick | every other preset or colorway |
 
 - When the answer differs by colorway (Burst-A, Glyph-B), `textMask` sits on the colorway instead of the preset.
-- **Never mask a light-colored pattern:** the mask turns its light colors grey (Vanesa, 2026-11-16).
+- **Never mask a light-colored pattern:** the mask turns its light colors grey (visual designer, 2026-11-16).
 - **`textColor: "dark"`** on a colorway (Color-Refracted-Pattern-A, Amaranth 200 → Indigo 400) means the pattern is light: dark text, the Light logo, no mask. Never the monochrome Black logo.
 - The old values `"soft-1"` and `"soft-2"` mean `"mask"`, and their classes now give 40%, so older files still work.
 
@@ -171,13 +171,13 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 
 **Color-Sliced (red and violet): use Color-Sliced-Pattern-B, with the QDRANT letter layer, by default** (about 8 creatives in 10). Color-Sliced-Pattern-A, the slices without letters, only in creatives with headshots, where the letters would compete with the faces (decided 2026-11-11).
 
-**Mesh-Refracted and Mesh-Sliced patterns: only for creatives with little text** (a title and a button, say). For posts with a date, a place or other details, use a Color or Generative pattern. Mesh-Dithered-Pattern-A works as it is (Vanesa, 2026-11-16; a darker text side for meshes is for V2).
+**Mesh-Refracted and Mesh-Sliced patterns: only for creatives with little text** (a title and a button, say). For posts with a date, a place or other details, use a Color or Generative pattern. Mesh-Dithered-Pattern-A works as it is (visual designer, 2026-11-16; a darker text side for meshes is for V2).
 
 | Pattern | Choices | Figma | Notes |
 | --- | --- | --- | --- |
 | Color-Refracted-Pattern-A | Indigo 600 → 400, or Amaranth 200 → Indigo 400. The amaranth family (600 → 400) and teal were removed on 2026-11-11 | [Luma-Background-10](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-50546) | Refraction tuned by eye against Figma |
-| Color-Sliced-Pattern-A | Neutral 950 → Amaranth 600, or Neutral 950 → Indigo 600 | [Frame 20943:36252](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252) | Exact port of Figma's Slice shift shader. No noise **Not the default:** use Color-Sliced-Pattern-B (with letters); A only behind headshots (Vanesa, 2026-11-11). |
-| Color-Sliced-Pattern-B | Neutral 950 → Amaranth 600 (amaranth 800, 600, 200 letters), Neutral 950 → Indigo 600 (indigo 800, 600, 200 letters) | Pattern Studio export (layer) | Color-Sliced-A with a layer of QDRANT letters on top (`generative-glyph-layer-a`: grid from 24 px at a short side of 1080 to 40 px at 4K, letters 0.55, noise 4.5). The layer matches the tool at 1920 × 1080 except the letter shapes: the letters are Mona Sans Mono, the brand mono font since 2026-11-17, not the export's Geist Mono (about 0.2% of pixels differ, most visibly the Q's tail). Re-approved with Mona Sans Mono by Vanesa on 2026-11-19. Needs `loadPatternFonts` first |
+| Color-Sliced-Pattern-A | Neutral 950 → Amaranth 600, or Neutral 950 → Indigo 600 | [Frame 20943:36252](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252) | Exact port of Figma's Slice shift shader. No noise **Not the default:** use Color-Sliced-Pattern-B (with letters); A only behind headshots (visual designer, 2026-11-11). |
+| Color-Sliced-Pattern-B | Neutral 950 → Amaranth 600 (amaranth 800, 600, 200 letters), Neutral 950 → Indigo 600 (indigo 800, 600, 200 letters) | Pattern Studio export (layer) | Color-Sliced-A with a layer of QDRANT letters on top (`generative-glyph-layer-a`: grid from 24 px at a short side of 1080 to 40 px at 4K, letters 0.55, noise 4.5). The layer matches the tool at 1920 × 1080 except the letter shapes: the letters are Mona Sans Mono, the brand mono font since 2026-11-17, not the export's Geist Mono (about 0.2% of pixels differ, most visibly the Q's tail). Re-approved with Mona Sans Mono by the visual designer on 2026-11-19. Needs `loadPatternFonts` first |
 | Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (teal on hold until the council approves) (streaks in the family's 800) | [Frame 23789:66977](https://www.figma.com/design/2u6KfDsYjibQuf9ji6lFBR/Qdrant-Brand-Design?node-id=23789-66977) | **Draft.** Line-for-line port of Figma's Motion streaks shader, at 24% over the gradient. Defaults on the 8 grid: length 72, density 40, softness 56, direction 124°. Values can change within the approved ranges, rounded to the 8 grid: length 16–80%, density 8–64, softness 32–64, any direction. Same formula as Figma, but streak positions differ (Figma's depend on the graphics card) |
 | Motion-Streaks-Pattern-B | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (teal on hold until the council approves) (letters in the family's 800, 600 and 200) | Pattern Studio export (layer) | **Draft.** Motion-Streaks-A with random QDRANT letters scattered over the whole canvas (`generative-glyph-layer-b`), never a shape in the middle. The letter grid grows from 24 px (short side 1080 or less) to 40 px (4K). Needs `loadPatternFonts` first |
 | Mesh-Refracted-Pattern-A | Any library image | [Luma-Background-9](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20713-31574) | Smoothness 72%, angle -120° |

@@ -20,7 +20,7 @@
   height: calc(80 * var(--qd-canvas-u));
   border-radius: 50%;
   overflow: hidden;
-  /* Gradient on an opaque base, like the card: a pattern never shows through (Vanesa, 2026-11-11). */
+  /* Gradient on an opaque base, like the card: a pattern never shows through (visual designer, 2026-11-11). */
   background: var(--qd-gradient-headshot), var(--qd-color-background-default);
 }
 .qd-headshot-circle__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -41,10 +41,10 @@
    Use .qd-grid with --qd-span (see README). Rows are a section gap apart. */
 
 /* On a pattern: put .qd-on-pattern on the canvas or the row. Roles switch to neutral-300, which
-   keeps 3:1 down to the patterns' violet midtone (indigo-600; text.secondary fails there). Vanesa, 2026-11-04. */
+   keeps 3:1 down to the patterns' violet midtone (indigo-600; text.secondary fails there). Visual designer, 2026-11-04. */
 .qd-on-pattern .qd-headshot-circle__role { color: var(--qd-color-neutral-300); }
 
 /* On the light card: the card's `p` color would make name and role the same. Keep the hierarchy
-   with the light text tokens (Vanesa, 2026-11-04). */
+   with the light text tokens (visual designer, 2026-11-04). */
 .qd-box--light-card .qd-headshot-circle__name { color: var(--qd-color-text-on-light); }
 .qd-box--light-card .qd-headshot-circle__role { color: var(--qd-color-text-body-on-light); }

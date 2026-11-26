@@ -9,10 +9,10 @@
    Values: the approved button (Qdrant Web Design, Figma ubPe8s8pViytom0Mapcno8, node 793-2956), with the
    web states from brand-components/button/README.md. This file is the source for the button: the Brand Design
    System's Figma button (8y0svqBDPZX6caRNF6lddG, node 13872:1092) isn't used, and Figma's buttons follow this
-   repo (Juan, 2026-11-18). */
+   repo (design lead, 2026-11-18). */
 :root {
   /* Fill: flat brand red, no gradient and no inner highlight, like the web button (button-web.css).
-     The creative button took this look on 2026-11-19 (Vanesa); before, it kept a gradient and highlight. */
+     The creative button took this look on 2026-11-19 (visual designer); before, it kept a gradient and highlight. */
   --qd-ui-button-fill: var(--qd-color-amaranth-600);
 
   /* Raised surface, shared by the web and creative buttons: a 1px edge, a faint top light and a short drop
