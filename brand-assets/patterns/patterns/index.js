@@ -123,11 +123,12 @@ function renderBase(canvas, tokens, preset, options) {
 }
 
 // Same colorways, other steps of each colorway's family: {color.indigo.200} with step 600
-// becomes {color.indigo.600}. steps[i] replaces the step of colors[i].
+// becomes {color.indigo.600}. steps[i] replaces the step of colors[i]. A colorway with
+// fixedColors (light mode: all white) keeps its colors (Vanesa, 2026-11-26).
 function withColorSteps(preset, steps) {
   return {
     ...preset,
-    colorways: preset.colorways.map((look) => ({
+    colorways: preset.colorways.map((look) => look.fixedColors ? look : ({
       ...look,
       colors: look.colors.map((ref, i) => (steps[i] == null ? ref : ref.replace(/\.[0-9]+\}$/, `.${steps[i]}}`))),
     })),

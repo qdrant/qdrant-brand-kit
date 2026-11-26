@@ -78,6 +78,28 @@
           "at": 1.1667
         }
       ]
+    },
+    {
+      "name": "Neutral 100 → Neutral 300",
+      "colors": [
+        "{color.neutral.0}",
+        "{color.neutral.0}",
+        "{color.neutral.0}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.neutral.100}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.300}",
+          "at": 1.1667
+        }
+      ],
+      "fixedColors": true,
+      "textColor": "dark",
+      "textMask": "none",
+      "onHold": "Light mode: on hold (Vanesa, 2026-11-26). Don't use it in creatives yet."
     }
   ],
   "settings": {
@@ -282,5 +304,5 @@
       }
     }
   },
-  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24."
+  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24. Light mode (on hold): every element white (Neutral 0) on Neutral 100 → 300, kept white by fixedColors."
 }

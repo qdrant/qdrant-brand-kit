@@ -28,6 +28,14 @@
       "name": "Neutral 1000 → Neutral 800",
       "from": "color.neutral.1000",
       "to": "color.neutral.800"
+    },
+    {
+      "name": "Neutral 100 → Neutral 300",
+      "from": "color.neutral.100",
+      "to": "color.neutral.300",
+      "textColor": "dark",
+      "textMask": "none",
+      "onHold": "Light mode: on hold (Vanesa, 2026-11-26). Don't use it in creatives yet."
     }
   ],
   "settings": {

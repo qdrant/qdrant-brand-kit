@@ -59,8 +59,9 @@ Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits
 | On hold | Why |
 | --- | --- |
 | Every **teal** colorway, in every pattern | Waiting for the council's approval of the sub-direction. No teal in any asset until the status changes |
+| Every **light-mode** colorway (Neutral 100 → Neutral 300), in every pattern | Added on hold (Vanesa, 2026-11-26): no light-pattern creative until it comes off hold |
 
-**Removed from the repo** (Vanesa, 2026-11-25), so agents can't use them at all: the mesh patterns (Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A), Color-Refracted-Pattern-A, Color-Dithered-Pattern-A and every light-neutral colorway. They stay in the Pattern Library artifact on Claude. Add one back only when Vanesa asks for it.
+**Removed from the repo** (Vanesa, 2026-11-25), so agents can't use them at all: the mesh patterns (Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A), Color-Refracted-Pattern-A and Color-Dithered-Pattern-A. They stay in the Pattern Library artifact on Claude. Add one back only when Vanesa asks for it.
 
 **Color ratio: to be defined.** How often each family (amaranth, indigo, teal, neutral) is used gets a ratio after the council approves the style direction. Until then the provisional rule in section 3 applies: indigo by default, amaranth only for impact and only when the person says yes, never teal.
 
@@ -94,7 +95,7 @@ The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patter
 
 ## 3. Red backgrounds
 
-- **Must: patterns are indigo, amaranth or dark neutral** (dark neutral added 2026-11-24; light neutral was removed on 2026-11-25). Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
+- **Must: patterns are indigo, amaranth or dark neutral** (dark neutral added 2026-11-24; light mode is on hold). Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
 - **On hold: teal.** Every teal colorway, in every pattern, is allowed in principle but **on hold until the council approves the sub-direction** (Vanesa, 2026-11-24). Agents make no asset in teal until the status changes. Other colors stay out of pattern backgrounds.
 - **Proportions (provisional):** indigo for most creatives, amaranth rarely, no teal. A ratio for each family (amaranth, indigo, teal) will be set after the council approves the style direction (Vanesa, 2026-11-24).
 - **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway) is only for creatives that need to **grab a lot of attention and be more impactful**.
@@ -153,6 +154,11 @@ Rules:
 - **Suggest:** use the light card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, masked when the text needs it (decided 2026-11-04, mask 2026-11-11).
 - **Must:** never put a big headshot ([`headshot-card`](../brand-components/headshot-card/)) inside the light card. If a light-card creative needs a speaker, use [`headshot-circle`](../brand-components/headshot-circle/) (decided 2026-11-04).
 - **Suggest:** dark is the default. Light creatives (the whole canvas on the light theme) are allowed for some moments, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635) (decided 2026-11-04).
+- **Light-mode patterns (on hold, Vanesa, 2026-11-26).** Every pattern has a light colorway, "Neutral 100 → Neutral 300", marked `onHold`: no agent uses it until it comes off hold. When it does, the rules are:
+  - **Gradient:** always Neutral 100 → Neutral 300, light at the top. Light patterns are neutral only: no light amaranth, indigo or teal.
+  - **Top layer: pure white** (Neutral 0, #FFFFFF): Color-Sliced-B and Motion-Streaks-B letters, Motion Streaks streaks, and every generative element (filled hexagons too). Color-Sliced-A has no top layer.
+  - **What varies:** the same options as the dark versions (stripes, letter options, streak ranges, generative variants and open looks), at the same fixed 70° angle.
+  - **Text:** the colorway is marked `textColor: "dark"` and `textMask: "none"`: dark text, the Light logo, no mask, and the contrast check still has to pass.
 
 ## 5. One hero
 
