@@ -94,7 +94,7 @@ export function LogoCloud({ layout = "row", label, logos, action, theme, surface
       )}
       {layout === "grid" ? (
         // Every logo turns to the text color on hover. A logo with a case study is a link: the whole cell, with an
-        // arrow in its corner, a "Case study" label and a subtle indigo light from the bottom on hover. The action is
+        // arrow in its corner and a subtle indigo light from the bottom on hover. The action is
         // the grid's last cell (design lead, 2026-11-26).
         <ul className="web-grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
           {logos.map((logo) => (
@@ -104,9 +104,6 @@ export function LogoCloud({ layout = "row", label, logos, action, theme, surface
                   <span aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_oklab,var(--web-indigo)_16%,transparent),transparent_75%)] opacity-0 transition-opacity duration-300 group-hover/cell:opacity-100" />
                   <ArrowUpRight aria-hidden className="absolute top-3 right-3 size-3.5 text-(--web-link) opacity-0 transition-opacity duration-300 group-hover/cell:opacity-100" />
                   <span className="relative grid place-items-center"><Logo {...logo} /></span>
-                  <span aria-hidden className="absolute inset-x-0 bottom-2.5 text-center font-mono text-[11px] tracking-wider text-(--web-link) uppercase opacity-0 transition-opacity duration-300 group-hover/cell:opacity-100">
-                    Case study
-                  </span>
                 </a>
               ) : (
                 <Logo {...logo} />

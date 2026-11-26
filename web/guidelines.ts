@@ -241,7 +241,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Logo grids answer the pointer",
-        text: "In a grid of customer logos, every logo turns to the text color on hover. A logo with a case study is a link: the whole cell is clickable with the hand cursor, and on hover an arrow appears in its top-right corner, a subtle indigo light rises from the bottom and a mono \"Case study\" label appears (the arrow only on hover since 2026-11-26). The grid's last cell is its action (See more customers), not a link floating above. Result cards show the customer's logo, not its name, and link to the case study.",
+        text: "In a grid of customer logos, every logo turns to the text color on hover. A logo with a case study is a link: the whole cell is clickable with the hand cursor, and on hover an arrow appears in its top-right corner and a subtle indigo light rises from the bottom (the arrow only on hover, and no label, since 2026-11-26). The grid's last cell is its action (See more customers), not a link floating above. Result cards show the customer's logo, not its name, and link to the case study.",
         decided: "Design lead, 2026-11-26",
         source: "web/sections/logo-cloud.tsx, web/sections/stats.tsx",
       },
