@@ -15,7 +15,7 @@ It writes, in OUT_DIR:
   <name>-rgb.pdf      the same before CMYK conversion (screen colors), for review. Not for the printer
   <name>-proof.png    what the printed piece looks like after cutting, folds dashed, for review
   <name>-full.png     the full render with bleed, and <name>-full.json, its measurements for review/check.py
-  <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, patterns, vector only,
+  <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, patterns, images,
                       QR codes, image resolution, fonts, color
 
 Margins are the format's margin (8% of the short side, never under 1.5 × the safe area), from the
@@ -189,9 +189,9 @@ def main():
                        "hiddenBottomMm": hidden, "marginMm": margin, "marginPx": m_px, "uPx": u, "dpi": DPI, "type": type_pt})
     json.dump(meas, open(os.path.join(a.out, f"{name}-full.json"), "w"), indent=1)
 
-    # 2. The PDF: trim + bleed + crop marks, at real size, text vector. Print is vector only (visual designer,
-    #    2026-11-26), so a plain backdrop stays vector. Only when there's a pattern canvas, a mask or an image
-    #    fade does the backdrop go in as one 300 dpi image, because Chrome's PDF export loses CSS masks.
+    # 2. The PDF: trim + bleed + crop marks, at real size, text sharp at any size. A plain backdrop stays a flat
+    #    color. Only when there's a pattern, a mask or an image fade does the backdrop go in as one image, painted
+    #    at 300 dpi at the printed size, because Chrome's PDF export loses CSS masks.
     rgb_pdf = os.path.join(a.out, f"{name}-rgb.pdf")
     backdrop = Image.open(backdrop_png).convert("RGB")
     # Grain on image fades, print only, so large fades don't band in CMYK (guidelines/print/ section 3).
@@ -203,9 +203,9 @@ def main():
             backdrop.paste(ImageChops.add(region, noise, 1.0, -128), box)
     backdrop.save(os.path.join(layer_dir, "backdrop-grain.png"))
     srv.extra = {"/qd-layer/": layer_dir}
-    raster_backdrop = bool(pinfo["masks"] or pinfo["canvases"] or pinfo.get("fades"))
+    painted_backdrop = bool(pinfo["masks"] or pinfo["canvases"] or pinfo.get("fades"))
     render.chrome(["--no-pdf-header-footer", f"--print-to-pdf={rgb_pdf}",
-                   url + "&qd-pdf=1" + ("&qd-backdrop=/qd-layer/backdrop-grain.png" if raster_backdrop else "")])
+                   url + "&qd-pdf=1" + ("&qd-backdrop=/qd-layer/backdrop-grain.png" if painted_backdrop else "")])
     if not os.path.exists(rgb_pdf):
         sys.exit("Chrome made no PDF")
     final_pdf = os.path.join(a.out, f"{name}.pdf")
@@ -359,24 +359,24 @@ def main():
             if side < qr_min: bad.append(f"{side:.1f} mm (needs {qr_min:g} mm)")
             if not dark_on_light: bad.append("not dark on light")
         row("QR codes", not bad, f"{qr_min:g} mm or more, dark on light. Test-scan it from the proof" if not bad else "; ".join(bad))
-    # Vector only (visual designer, 2026-11-26): Qbot is the one raster image allowed, without its glow. Headshots and
-    # pattern canvases are raster too: both are open questions for the visual designer, so they get a 👀, not a pass.
+    # Images: only what's in the brand kit (visual designer, 2026-11-26). Qbot is allowed, without its glow;
+    # headshots get a 👀 while they're to decide; any other image fails. Patterns are painted at the printed size.
     is_qbot = lambda i: "qd-mascot" in (i.get("cls") or "") or "brand-assets/mascot/" in (i.get("src") or "")
-    raster = [i for i in meas["images"] if i not in meas["logos"] and not (i.get("src") or "").lower().endswith(".svg")]
-    vec_bad, vec_look = [], []
-    for i in raster:
+    pics = [i for i in meas["images"] if i not in meas["logos"] and not (i.get("src") or "").lower().endswith(".svg")]
+    img_bad, img_look = [], []
+    for i in pics:
         nm = os.path.basename(i.get("src") or "image")
         if is_qbot(i):
-            if "qd-mascot--glow" in (i.get("cls") or ""): vec_bad.append(f"Qbot has its glow ({nm}): no drop shadow in print")
+            if "qd-mascot--glow" in (i.get("cls") or ""): img_bad.append(f"Qbot has its glow ({nm}): no glow in print")
         elif i.get("cls") == "headshot":
-            vec_look.append(f"a headshot ({nm}): raster; whether headshots go on print is to decide")
+            img_look.append(f"a headshot ({nm}): whether headshots go on print is to decide")
         else:
-            vec_bad.append(f"a raster image ({nm})")
-    if pinfo["canvases"]:
-        vec_look.append(f"{pinfo['canvases']} pattern canvas (raster); how patterns fit vector only is to decide")
-    row("Vector only", False if vec_bad else ("look" if vec_look else True),
-        "; ".join(vec_bad + vec_look) if vec_bad or vec_look else
-        "everything vector" + (", Qbot the only raster image" if raster else "") + " (guidelines/print/ sections 3 and 5)")
+            img_bad.append(f"an image that isn't from the brand kit ({nm})")
+    if a.min_dpi and a.min_dpi > DPI and pinfo["canvases"]:
+        img_look.append(f"the vendor asks {a.min_dpi:g} dpi; patterns are painted at {DPI} dpi")
+    row("Images", False if img_bad else ("look" if img_look else True),
+        "; ".join(img_bad + img_look) if img_bad or img_look else
+        ("only Qbot, from the brand kit" if pics else "no images") + " (guidelines/print/ sections 3 and 5)")
     low = []
     for img in meas["images"]:
         if img in meas["logos"] or img.get("src", "").endswith(".svg") or not img.get("naturalWidth"):
