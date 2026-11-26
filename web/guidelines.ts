@@ -234,6 +234,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "web/lib/node.tsx",
       },
       {
+        title: "Cells end a section on its line",
+        text: "When a section ends with a horizontal row or grid of cells (the hero's proof points, a logo grid, a row of facts), the cells sit on the section's bottom line, with no padding under them: an empty band below the cells reads as meaningless. The next section's seam is the cells' bottom line, so they don't draw their own. Sections with anything after the cells keep their padding.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/styles/web.css",
+      },
+      {
         title: "A grid's lines are one color, inside and out",
         text: "In a hairline grid of cells, the outer and inner lines are the same hairline as the rails and seams, and the grid's sides sit on the rails. A cell's background never covers a line.",
         decided: "Design lead, 2026-11-22",

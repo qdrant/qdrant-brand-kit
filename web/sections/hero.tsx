@@ -33,6 +33,9 @@ export type HeroProps = SectionProps & {
   mediaLabel?: string
   // The real image or product screen for the media slot (web/visuals), instead of the placeholder.
   visual?: React.ReactNode
+  // "none" shows the visual bare, with no tray or plate, for a visual that is the page's backdrop (2026-11-26, the
+  // home page's planet).
+  visualFrame?: "plate" | "none"
   // One small line under the buttons, with a link in it: "Need more? Talk to our team about Enterprise."
   note?: { text: string; link: Link; after?: string }
 }
@@ -52,6 +55,7 @@ export function Hero({
   media = "none",
   mediaLabel,
   visual,
+  visualFrame = "plate",
   note,
   theme,
   surface, pattern, cardPattern,
@@ -77,7 +81,9 @@ export function Hero({
 
   // Media sits on a plate inside a tray (web.css).
   // A visual's frame hugs it, on the right of a split hero when there's room.
-  const mediaEl = visual ? (
+  const mediaEl = visual && visualFrame === "none" ? (
+    <div className={cn("w-full max-w-full", centered ? "mx-auto [&>*]:mx-auto" : "justify-self-center lg:justify-self-end")}>{visual}</div>
+  ) : visual ? (
     <div className={cn("web-tray w-fit max-w-full rounded-[calc(var(--radius-xl)+6px)]", centered ? "mx-auto" : "justify-self-center lg:justify-self-end")}>
       <div className="web-plate overflow-hidden rounded-xl">{visual}</div>
     </div>
@@ -147,7 +153,7 @@ export function Hero({
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col items-center gap-10">
         <SectionHeader as="h1" align="center" kicker={kicker} title={title} description={description} actions={actions} />
         {(pills || snippet || note) && <div className="flex w-full flex-col items-center gap-6">{extras}</div>}
-        {mediaEl && <div className="w-full max-w-4xl">{mediaEl}</div>}
+        {mediaEl && <div className={cn("w-full", visualFrame === "none" ? "max-w-full" : "max-w-4xl")}>{mediaEl}</div>}
         {trustEl && <div className="w-full">{trustEl}</div>}
       </Section>
     )

@@ -95,7 +95,7 @@ export function HomePage() {
       className="bg-background text-foreground"
     >
       <Navbar variant="full" menus={menus} {...navActions} />
-      <Hero layout="centered" {...homeHero} visual={<HeroPlanet />} />
+      <Hero layout="centered" {...homeHero} visual={<HeroPlanet />} visualFrame="none" />
       <LogoCloud
         layout="grid"
         logos={customers.names.map((name, i) => ({

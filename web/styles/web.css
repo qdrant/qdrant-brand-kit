@@ -242,6 +242,17 @@
 .web-grid > * {
   background: var(--background);
 }
+/* A section that ends in a row or grid of cells sets it on the section's bottom line, with no padding under it, so no
+   empty band is left below the cells (design lead, 2026-11-26). The next section's seam is the cells' bottom line, so
+   the cells drop their own. Cells inside a wrapper count too, when they're its only child (the hero's proof row). */
+.web-seam:has(> div:last-child > :last-child:is(.web-cells, .web-grid)),
+.web-seam:has(> div:last-child > :last-child > :only-child:is(.web-cells, .web-grid)) {
+  padding-bottom: 0;
+}
+.web-seam > div:last-child > :last-child:is(.web-cells, .web-grid),
+.web-seam > div:last-child > :last-child > :only-child:is(.web-cells, .web-grid) {
+  border-bottom-width: 0;
+}
 
 /* Tones (design lead, 2026-11-21): color for icons, in a subtle way. An icon sits on a small tile tinted with its color
    family, with a hairline edge in that family, and the icon itself in a solid color of it: on dark the 975

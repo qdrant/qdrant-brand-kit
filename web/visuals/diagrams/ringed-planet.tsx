@@ -8,7 +8,7 @@ import {
   type CanvasScene,
   type Palette,
 } from "../scene"
-import { TAU, crosshair, ids, labelRow, readout } from "./lib"
+import { TAU, crosshair, ids, isDark, labelRow, readout } from "./lib"
 
 // Ringed planet: a dotted sphere lit from above, turning slowly, inside a ring of 560 points in two bands,
 // a collection in orbit. Inner points orbit faster (Kepler). A query sits on the ring; its 5 nearest ring
@@ -74,7 +74,7 @@ const scene: CanvasScene<State> = {
   },
   draw(ctx, s, t) {
     const { p, w, h } = s
-    const R = Math.min(h * 0.2, w * 0.15)
+    const R = Math.min(h * 0.27, w * 0.17)
     const cx = w * 0.5
     const cy = h * 0.47
     const spin = t * 0.08
@@ -124,6 +124,9 @@ const scene: CanvasScene<State> = {
     ctx.stroke()
     const cs = Math.cos(spin)
     const ss = Math.sin(spin)
+    // The points' spacing on the sphere: about sqrt(4π / DOTS) of the radius.
+    const cell = R * Math.sqrt((4 * Math.PI) / DOTS)
+    const dark = isDark(p)
     for (const [x0, y0, z0] of s.dots) {
       const v = view(x0 * cs + z0 * ss, y0, -x0 * ss + z0 * cs)
       if (v.z < 0) continue
@@ -131,10 +134,25 @@ const scene: CanvasScene<State> = {
         0,
         v.x * LIGHT[0]! + v.y * LIGHT[1]! + v.z * LIGHT[2]!
       )
-      const size = 0.5 + 0.9 * lit
-      ctx.globalAlpha = 0.12 + 0.88 * lit
-      ctx.fillStyle = p.star
-      ctx.fillRect(cx + v.x * R - size / 2, cy - v.y * R - size / 2, size, size)
+      // A halftone of upright hexagons, like the brandmark (design lead, 2026-11-26): each point is a hexagon sized
+      // by its light, large where the light from above falls and small in the shade, and smaller toward the rim.
+      const hr = cell * (0.1 + 0.34 * lit) * (0.6 + 0.4 * v.z)
+      const hx = cx + v.x * R
+      const hy = cy - v.y * R
+      ctx.globalAlpha = 0.35 + 0.65 * lit
+      // On dark the lit side is the text color and the shade indigo; on light it's all indigo, so the light still
+      // reads as light.
+      ctx.fillStyle = dark && lit > 0.55 ? p.star : p.bright
+      ctx.beginPath()
+      for (let k = 0; k < 6; k++) {
+        const a = -Math.PI / 2 + (k * Math.PI) / 3
+        const px = hx + Math.cos(a) * hr
+        const py = hy + Math.sin(a) * hr
+        if (k === 0) ctx.moveTo(px, py)
+        else ctx.lineTo(px, py)
+      }
+      ctx.closePath()
+      ctx.fill()
     }
     ctx.globalAlpha = 1
     drawRing(true)

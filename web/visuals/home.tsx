@@ -28,7 +28,7 @@ import { Storage } from "./diagrams/storage"
 // The hero: a collection in orbit, a query connected to its nearest points (instead of the site's astronaut photo).
 export function HeroPlanet() {
   return (
-    <DiagramFrame width={896} aspect="2 / 1">
+    <DiagramFrame width={1200} aspect="2 / 1">
       <RingedPlanet />
     </DiagramFrame>
   )
@@ -191,13 +191,22 @@ export function AnomalyDiagram() {
 // web/assets/badges, Qdrant's Prometheus metrics endpoint with metric names from the monitoring docs (values are
 // examples), and Enterprise SSO, which signs a team in to the Cloud Console through its identity provider (Premium
 // tier; docs: cloud-account-setup#enterprise-single-sign-on-sso, checked 2026-11-26).
-const chip = "rounded-md border border-(--web-line) bg-card px-3 py-2 font-mono text-xs tracking-wider uppercase"
+const chip =
+  "rounded-md border border-(--web-line) bg-card px-3 py-2 font-mono text-xs tracking-wider uppercase"
 
 export function ComplianceBadges() {
   return (
     <div className="flex items-center gap-8">
-      <MonoImage src={`${ASSETS}/badges/soc-2.svg`} label="SOC 2" className="size-20" />
-      <MonoImage src={`${ASSETS}/badges/gdpr.svg`} label="GDPR" className="size-20" />
+      <MonoImage
+        src={`${ASSETS}/badges/soc-2.svg`}
+        label="SOC 2"
+        className="size-20"
+      />
+      <MonoImage
+        src={`${ASSETS}/badges/gdpr.svg`}
+        label="GDPR"
+        className="size-20"
+      />
     </div>
   )
 }
@@ -210,7 +219,9 @@ export function MetricsSnippet() {
   ]
   return (
     <div className="flex w-full max-w-72 flex-col gap-2 font-mono text-xs">
-      <p className="tracking-wider text-muted-foreground uppercase">GET /metrics</p>
+      <p className="tracking-wider text-muted-foreground uppercase">
+        GET /metrics
+      </p>
       <ul className="flex flex-col gap-1.5 rounded-md border border-(--web-line) bg-card p-3">
         {rows.map(([name, value]) => (
           <li key={name} className="flex justify-between gap-3">
@@ -227,11 +238,18 @@ export function SsoFlow() {
   return (
     <div className="flex flex-col items-center gap-2 text-center">
       <span className={chip}>Your team</span>
-      <ArrowRight aria-hidden className="size-4 rotate-90 text-(--web-indigo)" />
+      <ArrowRight
+        aria-hidden
+        className="size-4 rotate-90 text-(--web-indigo)"
+      />
       <span className={chip}>
-        Identity provider <span className="text-muted-foreground">SAML / OIDC</span>
+        Identity provider{" "}
+        <span className="text-muted-foreground">SAML / OIDC</span>
       </span>
-      <ArrowRight aria-hidden className="size-4 rotate-90 text-(--web-indigo)" />
+      <ArrowRight
+        aria-hidden
+        className="size-4 rotate-90 text-(--web-indigo)"
+      />
       <span className={chip}>Cloud Console</span>
     </div>
   )
