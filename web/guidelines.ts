@@ -77,6 +77,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "design-system/AGENTS.md",
       },
       {
+        title: "A page's H1 is always the page heading",
+        text: "Every page's H1 uses the page heading size (heading.page, the largest heading at each width), whatever opens the page: a hero, a page header, the blog's posts heading, a post's title, the 404. Section titles below it are section-sized.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/lib/type.tsx",
+      },
+      {
         title: "Mono is for eyebrows and numbers",
         text: "Mona Sans Mono sets kickers and labels (eyebrows), numbers, code and data, never a subheading or a phrase: a result card's line (\"2-3x revenue\") is in the sans, like any heading.",
         decided: "Design lead, 2026-11-26",
@@ -370,9 +376,15 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "No PNG or JPG",
-        text: "The website uses no raster images: no PNG, JPG or WebP, and no photos. A graphic is SVG, HTML or a canvas drawing. Product screens are rebuilt in HTML with the design system's components (web/visuals, data-context=\"product\"), illustrations become diagrams (below), and a raster file found in web/ is replaced or removed (the unused rocket illustration went first). The one exception is blog post thumbnails, which are JPGs in web/assets/blog, cut from the Lightspeed concept (Figma: Qdrant Brand Design, Concept 2) and used only on the blog and as a post's hero; a partner post gets the concept's partner card instead, drawn in HTML with both logos (design lead, 2026-11-26).",
+        text: "The website uses no raster images: no PNG, JPG or WebP, and no photos. A graphic is SVG, HTML or a canvas drawing. Product screens are rebuilt in HTML with the design system's components (web/visuals, data-context=\"product\"), illustrations become diagrams (below), and a raster file found in web/ is replaced or removed (the unused rocket illustration went first). The one exception is blog post thumbnails, which are JPGs in web/assets/blog, cut from the Lightspeed concept (Figma: Qdrant Brand Design, Concept 2) and used only on the blog and as a post's hero; a partner post gets the concept's partner card instead, drawn in HTML with both logos (design lead, 2026-11-26). Authors' avatars are the other exception: their GitHub pictures, loaded from GitHub (below).",
         decided: "Design lead, 2026-11-26",
         source: "web/visuals",
+      },
+      {
+        title: "Authors have an avatar",
+        text: "Wherever a post names its authors (blog cards, a post's header), each author has an avatar before the names: their GitHub picture, round, overlapping when there are several, 24px on cards and 32px on a post. The login is checked, never guessed from the name (the qdrant organization, their commits to Qdrant's repos, or their post's code), and listed in web/content/authors.ts; an author without one shows their initials.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/lib/authors.tsx",
       },
       {
         title: "Graphics are diagrams, true to the docs",

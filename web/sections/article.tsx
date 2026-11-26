@@ -8,6 +8,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import type { ProseBlock } from "../content/listings"
 import type { Link } from "../content/site"
 import { ArrowLink } from "../lib/arrow-link"
+import { Authors } from "../lib/authors"
 import { Code, languageOf } from "../lib/code"
 import { MediaFrame } from "../lib/media-frame"
 import { Section, type SectionProps } from "../lib/section"
@@ -223,15 +224,15 @@ export function Article({
       innerClassName="flex flex-col gap-10 lg:gap-14"
     >
       <header className="flex max-w-3xl flex-col gap-6">
-        <h1 className={cn(type.h5, "text-balance md:text-(length:--qd-type-h4-size) md:leading-(--qd-type-h4-line-height) lg:text-(length:--qd-type-h3-size) lg:leading-(--qd-type-h3-line-height)")}>
+        <h1 className={cn(heading.page, "text-balance")}>
           {title}
         </h1>
         {(authors || date) && (
-          <p className={cn(type.small, "flex flex-wrap items-center gap-x-3 gap-y-1")}>
-            {authors && <span className="text-foreground">{authors}</span>}
+          <div className={cn(type.small, "flex flex-wrap items-center gap-x-3 gap-y-1")}>
+            {authors && <Authors authors={authors} size="default" />}
             {authors && date && <span aria-hidden className="size-1 rounded-full bg-(--web-line-strong)" />}
             {date && <time className="font-mono">{date}</time>}
-          </p>
+          </div>
         )}
       </header>
       {hero ? (

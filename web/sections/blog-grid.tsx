@@ -12,6 +12,7 @@ import {
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Post } from "../content/listings"
+import { Authors } from "../lib/authors"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
 import { SearchField } from "../lib/search-field"
@@ -63,11 +64,11 @@ export function Inline({ text }: { text: string }) {
 
 function Meta({ post }: { post: Post }) {
   return (
-    <p className={cn(type.xsmall, "mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-2")}>
-      <span className="text-foreground">{post.authors}</span>
+    <div className={cn(type.xsmall, "mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-2")}>
+      <Authors authors={post.authors} />
       <span aria-hidden className="size-1 rounded-full bg-(--web-line-strong)" />
       <time className="font-mono">{post.date}</time>
-    </p>
+    </div>
   )
 }
 
