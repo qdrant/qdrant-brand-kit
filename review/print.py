@@ -11,7 +11,7 @@ The format preset comes from guidelines/print/print.tokens.json. Everything the 
 
 It writes, in OUT_DIR:
   <name>.pdf          the print file: trim + bleed + crop marks, fonts embedded, converted to the printer's
-                      CMYK profile (PDF/X-4 by default). Only with --icc and Ghostscript
+                      CMYK profile (PDF/X as the vendor asks, --pdfx). Only with --icc and Ghostscript
   <name>-rgb.pdf      the same before CMYK conversion (screen colors), for review. Not for the printer
   <name>-proof.png    what the printed piece looks like after cutting, folds dashed, for review
   <name>-full.png     the full render with bleed, and <name>-full.json, its measurements for review/check.py
@@ -80,7 +80,7 @@ def main():
     ap.add_argument("--panels", help="panel widths in mm, left to right, laid out flat (brochures)")
     ap.add_argument("--hidden-bottom", type=float, help="mm at the bottom that won't be seen (roll-up base)")
     ap.add_argument("--icc", help="the printer's CMYK profile (.icc), from the spec")
-    ap.add_argument("--pdfx", default="4", help="PDF/X version: 4 (default) or 1a, as the printer asks")
+    ap.add_argument("--pdfx", default=None, help="PDF/X version from the vendor's spec: 4 or 1a. No brand default (Vanesa, 2026-11-26); falls back to 4 and the checks flag it")
     ap.add_argument("--print-scale", choices=["normal", "small"], default="normal",
                     help="small: the smaller text sizes (titleMin, supportingMin), to keep text in the calm sky")
     ap.add_argument("--root", default=None, help="folder served at / (default: the page's folder)")
@@ -98,6 +98,9 @@ def main():
     if a.panels: from_spec.append("panels")
     hidden = a.hidden_bottom if a.hidden_bottom is not None else fmt.get("hiddenBottom", 0)
     min_dpi = fmt.get("minDpi", defaults["minDpi"])
+    qr_min = fmt.get("qrMin", defaults["qrMin"])
+    if a.pdfx: from_spec.append("file format")
+    a.pdfx = a.pdfx or "4"
     rgb_only = fmt.get("color") == "rgb"
     if not trim or bleed is None or safe is None:
         sys.exit(f"{fmt['name']} has no default size: take the finished size, bleed and safe area from the "
@@ -240,8 +243,8 @@ def main():
     rows = []
     def row(check, ok, detail):
         rows.append((check, "pass" if ok is True else ("fail" if ok is False else ok), detail))
-    defaults_used = [x for x in ("finished size", "bleed", "safe area") if x not in from_spec]
-    if fmt.get("status") == "in-progress":  # large format (guidelines/print/, visual designer 2026-11-20)
+    defaults_used = [x for x in ("finished size", "bleed", "safe area", "file format") if x not in from_spec]
+    if fmt.get("status") == "in-progress":  # large format (guidelines/print/, Vanesa 2026-11-20)
         row("Format", "look", f"{fmt['name']} is in progress: large-format rules aren't settled. Treat this as a test and have a designer check it")
     row("Printer's spec", True if not defaults_used else "look",
         "all from the spec" if not defaults_used else
@@ -287,7 +290,7 @@ def main():
         if behind >= 0.5:
             continue
         pt = t["fontSize"] * PT_PER_PX
-        if pt < 9 or (t.get("weight") or 400) < 400:
+        if pt < 10 or (t.get("weight") or 400) < 400:  # 10 pt out of rich black (Vanesa, 2026-11-26)
             rev.append(f"\"{t['text'][:20]}\" {pt:.1f} pt, weight {t.get('weight')}")
     # Text on a busy background: detail (edge density) behind each text box, in the backdrop (canvas color
     # and images only, so cards and buttons don't count).
@@ -313,8 +316,8 @@ def main():
             busy.append(f"\"{t['text'][:24]}\"")
     row("Text on a busy background", not busy, "text sits on calm areas" if not busy else
         "; ".join(busy[:4]) + ". Move it to calm sky: tighten gaps, then --print-scale small, then cut copy")
-    row("Reversed text", not rev, "light text on dark is 9 pt or more and Regular or heavier" if not rev else
-        "; ".join(rev[:4]) + " (needs 9 pt, Regular or heavier)")
+    row("Reversed text", not rev, "light text on dark is 10 pt or more and Regular or heavier" if not rev else
+        "; ".join(rev[:4]) + " (needs 10 pt, Regular or heavier)")
     cross = []
     for fx in folds_px:
         lo, hi = fx - margin * PX_PER_MM, fx + margin * PX_PER_MM
@@ -337,6 +340,8 @@ def main():
     if pinfo["patternFiles"] and not pat: pat.append("files from brand-assets/patterns/")
     row("Patterns", True if not pat else "look", "no pattern" if not pat else
         ", ".join(pat) + ": allowed in print (Vanesa, 2026-11-26). Check the proof for fringing on fine lines and moiré on dithered patterns; ask before using the pattern mask (guidelines/print/ section 3)")
+    row("No button", not meas["buttons"], "no button" if not meas["buttons"] else
+        "a button on a print piece: a QR code replaces it (Vanesa, 2026-11-26)")
     if pinfo["qr"]:
         bad = []
         for q in pinfo["qr"]:
@@ -345,9 +350,9 @@ def main():
             px = sorted(lum(p) for p in full_rgb.crop(box).resize((64, 64)).getdata())
             edge = [lum(p) for p in full_rgb.crop((box[0], box[1], box[2], box[1] + 3)).resize((32, 1)).getdata()]
             dark_on_light = px[len(px) // 20] < 0.35 and min(edge) > 0.7
-            if side < 20: bad.append(f"{side:.1f} mm (needs 20 mm)")
+            if side < qr_min: bad.append(f"{side:.1f} mm (needs {qr_min:g} mm)")
             if not dark_on_light: bad.append("not dark on light")
-        row("QR codes", not bad, "20 mm or more, dark on light. Test-scan it from the proof" if not bad else "; ".join(bad))
+        row("QR codes", not bad, f"{qr_min:g} mm or more, dark on light. Test-scan it from the proof" if not bad else "; ".join(bad))
     low = []
     for img in meas["images"]:
         if img in meas["logos"] or img.get("src", "").endswith(".svg") or not img.get("naturalWidth"):

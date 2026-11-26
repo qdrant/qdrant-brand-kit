@@ -1,12 +1,14 @@
 {
-  "$description": "Print format presets (guidelines/print/README.md, visual designer 2026-11-20). margin = the content margin in mm: 8% of the short side of the finished piece (the folded panel for brochures), never less than 1.5 × safe (visual designer, 2026-11-20). title, supporting, titleMin, supportingMin = text in pt for one-page promos; the Min values are the smallest allowed, for space imagery; titleCover is the title on a front that holds only the logo, title and image (proposed, to confirm: visual designer, 2026-11-20). Every text size is a step of the type set read as pt (1 px step = 1 pt): 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64, 80, 104, 128, 160, 200, plus two print-only steps: 10 (body copy on small formats) and 8 (legal text, footers and small print only) (visual designer, 2026-11-20). Starting points only: the printer's spec sheet always overrides them. Sizes in mm. trim = finished size (width, height); bleed and safe are per side; panels are the widths of each panel left to right, laid out flat; minDpi is the lowest image resolution at final size. Default bleed and safe values are common print practice, not from the Brand Guide.",
+  "$description": "Print format presets (guidelines/print/README.md, Vanesa 2026-11-20). margin = the content margin in mm: 8% of the short side of the finished piece (the folded panel for brochures), never less than 1.5 × safe (Vanesa, 2026-11-20). title, supporting, titleMin, supportingMin = text in pt for one-page promos; the Min values are the smallest allowed, for space imagery; titleCover is the title on a front that holds only the logo, title and image (proposed, to confirm: Vanesa, 2026-11-20). Every text size is a step of the type set read as pt (1 px step = 1 pt): 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64, 80, 104, 128, 160, 200, plus two print-only steps: 10 (body copy on small formats) and 8 (legal text, footers and small print only) (Vanesa, 2026-11-20). Starting points only: the printer's spec sheet always overrides them. Sizes in mm. trim = finished size (width, height); bleed and safe are per side; panels are the widths of each panel left to right, laid out flat; minDpi is the lowest image resolution at final size. Default bleed and safe values are common print practice, not from the Brand Guide: bleed and safe area always follow the vendor, and some vendors want no bleed (Vanesa, 2026-11-26). margin is always computed from the 8%, never set as a fixed mm per format (Vanesa, 2026-11-26). qrMin = the smallest QR code side in mm (Vanesa, 2026-11-26).",
   "defaults": {
     "bleed": { "$value": 3, "$description": "mm per side (3.175 for US formats, 1/8 in)" },
     "safe": { "$value": 5, "$description": "mm inside the trim, per side: the printer's cutting tolerance, not the margin" },
-    "margin": { "$value": "8% of the short side, at least 1.5 × safe", "$description": "The content margin (text, logo, button, QR code, headshots), from the trim. Each format has its own value in mm (visual designer, 2026-11-20)" },
+    "margin": { "$value": "8% of the short side, at least 1.5 × safe", "$description": "The content margin (text, logo, QR code, headshots), from the trim. Each format's value in mm is computed from the 8%, never set by hand (Vanesa, 2026-11-20; 2026-11-26)" },
     "minDpi": { "$value": 300, "$description": "Read up close: flyers, brochures, cards" },
-    "fileType": { "$value": "PDF/X-4", "$description": "Unless the printer asks for another" },
-    "color": { "$value": "printer", "$description": "Always the printer's CMYK profile, from the spec. Ask for it" }
+    "fileType": { "$value": "vendor", "$description": "No brand default: the PDF/X version, crop marks and fonts (outlined or embedded) follow each vendor (Vanesa, 2026-11-26)" },
+    "qrMin": { "$value": 25, "$description": "Smallest QR code side in mm: the scanning distance ÷ 10, never under 25 mm. Hand-held pieces read at arm's length (Vanesa, 2026-11-26)" },
+    "color": { "$value": "printer", "$description": "Always CMYK, never RGB, with the printer's profile from the spec. Ask for it. The brand's CMYK values (one set for Europe, one for the US) are still to decide (Vanesa, 2026-11-26)" },
+    "richBlack": { "$value": "C70 M50 Y30 K100", "$description": "Large dark areas: a cool rich black matching neutral-950, 250% total ink. A lower vendor ink limit wins. Dark text and thin lines on light use K100 only (Vanesa, 2026-11-26)" }
   },
   "formats": {
     "flyer-a4": { "name": "Flyer A4", "status": "ready-to-test", "trim": [210, 297], "bleed": 3, "safe": 5, "margin": 16.8, "title": 40, "supporting": 18, "titleMin": 32, "supportingMin": 12, "minDpi": 300 },
@@ -30,19 +32,19 @@
       "trim": [279.4, 215.9], "folded": [93.7, 215.9], "panels": [93.7, 93.7, 92.0], "fold": "vertical",
       "bleed": 3.175, "safe": 6.35, "margin": 9.5, "minDpi": 300
     },
-    "poster-a2": { "name": "Poster A2", "status": "in-progress", "trim": [420, 594], "bleed": 3, "safe": 10, "margin": 33.6, "title": 128, "supporting": 48, "titleMin": 128, "supportingMin": 48, "minDpi": 150 },
-    "poster-a1": { "name": "Poster A1", "status": "in-progress", "trim": [594, 841], "bleed": 3, "safe": 15, "margin": 47.5, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 150 },
+    "poster-a2": { "name": "Poster A2", "status": "in-progress", "trim": [420, 594], "bleed": 3, "safe": 10, "margin": 33.6, "title": 128, "supporting": 48, "titleMin": 128, "supportingMin": 48, "minDpi": 150, "qrMin": 100 },
+    "poster-a1": { "name": "Poster A1", "status": "in-progress", "trim": [594, 841], "bleed": 3, "safe": 15, "margin": 47.5, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 150, "qrMin": 100 },
     "rollup-850x2000": {
       "name": "Roll-up 850 × 2000", "status": "in-progress",
-      "trim": [850, 2000], "bleed": 5, "safe": 25, "margin": 68, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 100, "hiddenBottom": 100,
+      "trim": [850, 2000], "bleed": 5, "safe": 25, "margin": 68, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 100, "qrMin": 100, "hiddenBottom": 100,
       "$description": "hiddenBottom: the part that rolls into the base (vendors use 100 to 200 mm). Nothing important in it; the vendor's spec wins."
     },
     "business-card-eu": { "name": "Business card EU", "status": "ready-to-test", "trim": [85, 55], "bleed": 3, "safe": 4, "margin": 6, "minDpi": 300 },
     "business-card-us": { "name": "Business card US", "status": "ready-to-test", "trim": [88.9, 50.8], "bleed": 3.175, "safe": 3.175, "margin": 4.8, "minDpi": 300 },
     "booth": {
       "name": "Booth graphics", "status": "in-progress",
-      "trim": null, "bleed": null, "safe": null, "minDpi": 100, "specRequired": true,
-      "$description": "In progress, being tested (visual designer, 2026-11-20). No default size: every booth part (backwall, counter, header, banner) comes from the vendor's spec."
+      "trim": null, "bleed": null, "safe": null, "minDpi": 100, "qrMin": 300, "specRequired": true,
+      "$description": "In progress, being tested (Vanesa, 2026-11-20). No default size: every booth part (backwall, counter, header, banner) comes from the vendor's spec."
     },
     "print-pdf": {
       "name": "Print PDF (for screen)", "status": "ready-to-test",

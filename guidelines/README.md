@@ -25,7 +25,12 @@ Decided by the visual designer on 2026-11-04.
 | **Pattern only** | Sales, and guide or docs downloads (with the light card) |
 | **Headshots** | Speaker announcements (webinar, talk, panel) |
 
-**Don't ask design questions.** Take these from the rules (visual designer, 2026-11-20):
+**Print: ask first** (Vanesa, 2026-11-26). For a printed piece, also ask before building, unless the request already says ([`print/`](print/) section 1):
+
+- **The vendor's spec:** finished size, bleed (some vendors want none), safe area and file format.
+- **Large formats:** where the piece will hang or stand (hung from the ceiling or on the floor), and what might cover part of it (counters, furniture, people).
+
+**Don't ask design questions.** Take these from the rules (Vanesa, 2026-11-20):
 
 | Design choice | Where it comes from |
 | --- | --- |

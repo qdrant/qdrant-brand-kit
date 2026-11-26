@@ -15,18 +15,20 @@ How to make a printed creative: a flyer, a brochure, a poster, a roll-up, a busi
 
 Every print job starts from the **spec sheet the printer sends**. It decides the size, bleed, color conversion and file. Colors convert differently for each printer and region (Europe and the US use different profiles), so never guess them.
 
-**Must:** before building, get these from the spec sheet, or ask the person for the ones it doesn't give:
+**Must:** before building, get these from the spec sheet, or ask the person for the ones it doesn't give. **Bleed and safe area always follow the vendor** (Vanesa, 2026-11-26): the presets' values are only a fallback until the person says what the vendor's spec says.
 
 | Ask or read | Why |
 | --- | --- |
 | **Format**: flyer, brochure, poster, roll-up, business card, booth, print PDF | Picks the preset in `print.tokens.json` |
 | **Finished size** (trim), in mm or inches | The size after cutting |
-| **Bleed** | Background that runs past the trim, so no white edge shows after cutting |
-| **Safe area** (or "live area") | The printer's cutting tolerance inside the trim. The content margin is never less than 2 × this (section 2) |
+| **Bleed** | Background that runs past the trim, so no white edge shows after cutting. Some vendors want no bleed: then build without it (Vanesa, 2026-11-26) |
+| **Safe area** (or "live area") | The printer's cutting tolerance inside the trim. The content margin is never less than 1.5 × this (section 2) |
 | **Folds or panels** (brochures), and any hidden area (e.g. a roll-up's base) | Where nothing important may sit |
 | **Color**: the printer's CMYK profile (e.g. FOGRA39, GRACoL), or Pantone colors if the printer asks for them | How the brand colors convert |
-| **File type**: PDF/X-4, PDF/X-1a or what the printer asks | How to export |
+| **File format**: the PDF/X version, crop marks, and fonts outlined or embedded | How to export. Each vendor decides: there's no brand default (Vanesa, 2026-11-26) |
 | **Resolution** for images | Usually 300 dpi at final size; less for large formats seen from far away |
+| **Large formats: where it hangs or stands**: hung from the ceiling or standing on the floor | Where eye level is on the piece (section 2) (Vanesa, 2026-11-26) |
+| **Large formats: what might cover it**: counters, furniture, people | Where nothing important may sit (section 2) (Vanesa, 2026-11-26) |
 
 **When the spec is missing**, in this order:
 
@@ -43,10 +45,11 @@ Every print job starts from the **spec sheet the printer sends**. It decides the
 
 ## 2. The canvas in print
 
-- **Finished size:** the trim size from the spec. Build at that size in mm, with the **bleed outside the trim** on every side. Backgrounds and images run to the bleed edge; nothing else does.
-- **Margins: 8% of the short side** (visual designer, 2026-11-20). One rule for every format, so the margin shrinks with the piece: the content margin (text, logo, button, QR code, headshots) is **8% of the finished piece's short side**, measured from the trim, and **never less than 1.5 × the printer's safe area**. A4: 17 mm, A5: 12 mm, A6: 8.4 mm, A2: 34 mm, roll-up: 68 mm. Brochures use the short side of the folded panel. Why 8%: the visual designer wants 1.5 to 2 cm on A4 (7 to 9.5% of 210 mm), and 8% lands in the middle. The safe area is the printer's cutting tolerance; a bigger safe area in the printer's spec pushes the margin up to 1.5 × that. Each format's `margin` in `print.tokens.json` is computed this way. Replaces "about 12%, at least 2 × safe" (25 mm on A4).
+- **Finished size:** the trim size from the spec. Build at that size in mm, with the **bleed outside the trim** on every side, as wide as the vendor asks (none, if the vendor wants no bleed) (Vanesa, 2026-11-26). Backgrounds and images run to the bleed edge; nothing else does.
+- **Margins: 8% of the short side** (Vanesa, 2026-11-20). **Margins scale with the piece: a share of the short edge, like the social canvases, never a fixed size in mm per format** (Vanesa, 2026-11-26). One rule for every format, so the margin shrinks with the piece: the content margin (text, logo, QR code, headshots; no button in print, section 5) is **8% of the finished piece's short side**, measured from the trim, and **never less than 1.5 × the printer's safe area**. What that gives, for example: A4 17 mm, A5 12 mm, A6 8.4 mm, A2 34 mm, roll-up 68 mm. Brochures use the short side of the folded panel. Why 8%: Vanesa wants 1.5 to 2 cm on A4 (7 to 9.5% of 210 mm), and 8% lands in the middle. The safe area is the printer's cutting tolerance; a bigger safe area in the printer's spec pushes the margin up to 1.5 × that. Each format's `margin` in `print.tokens.json` is computed this way, from the 8%; it's never set by hand. Replaces "about 12%, at least 2 × safe" (25 mm on A4).
 - **Folds:** each panel is laid out as its own area, with the margin on both sides of every fold. Nothing important crosses a fold.
-- **Shape and grid:** the shape comes from the **finished size** (trim width ÷ height, not including the bleed; [`layout/`](../layout/), Shapes), so the grid and gap roles are the same as on social, scaled to the finished size (visual designer, 2026-11-20).
+- **Large formats: main content at eye level** (Vanesa, 2026-11-26). Roll-ups, backdrops and booth walls keep the main content (title, logo, QR code) at eye level. Before building, ask the person whether the piece hangs from the ceiling or stands on the floor, and whether anything will cover part of it (counters, furniture, people). Place the content from the answers: nothing important where it will be covered.
+- **Shape and grid:** the shape comes from the **finished size** (trim width ÷ height, not including the bleed; [`layout/`](../layout/), Shapes), so the grid and gap roles are the same as on social, scaled to the finished size (Vanesa, 2026-11-20).
 
 ## 3. Backgrounds and the look
 
@@ -57,10 +60,12 @@ Every print job starts from the **spec sheet the printer sends**. It decides the
   - **Dark with space imagery:** a generated astronaut or space image on `neutral-950`, following [`brand-assets/imagery/`](../../brand-assets/imagery/). Recommended for commercial pieces handed out at events.
   - **Plain and serious:** a solid brand color, light (paper white or `neutral-25`) or dark (`neutral-950`), the theme the person picks (Vanesa, 2026-11-26). Recommended light for documents (white papers, brochure inside pages).
   - Qbot may be added in some cases, following [`guidelines/`](../) section 6: one hero, never with a generated image.
-- **Must: space imagery is always dark** (visual designer, 2026-11-20). Image fades are dark-only ([`guidelines/`](../) section 5), so a space-imagery print piece is dark.
-- **Must: text never sits on the image's subject or on busy ground** (visual designer, 2026-11-20): not on the astronaut, rocks, the Milky Way or bright stars, the same rule as [`guidelines/`](../) section 5. If the text reaches the subject, first tighten the gaps between groups ([`guidelines/`](../) section 11, rule 11), then use the smaller print sizes (section 4), then ask to cut copy. **Text on a busy background is a hard stop** (visual designer, 2026-11-20): `review/print.py` fails it, and the piece is never shown or delivered until every line sits on calm, legible ground. If no layout keeps the text calm, split the piece over two sides (image and title on the front, details on a plain back), use the plain look, or ask to cut copy.
-- **Rich black** (visual designer, 2026-11-20): large dark areas use the printer's rich black, never black ink alone.
-- **Gradients and image fades** (visual designer, 2026-11-20): slight grain (noise) on large gradients and image fades so they don't band in CMYK. `review/print.js` adds it to `.qd-image-fade` in print renders, so pages don't add it themselves. No tints under 5%: they drop out on paper.
+- **Must: space imagery is always dark** (Vanesa, 2026-11-20). Image fades are dark-only ([`guidelines/`](../) section 5), so a space-imagery print piece is dark.
+- **Must: text never sits on the image's subject or on busy ground** (Vanesa, 2026-11-20): not on the astronaut, rocks, the Milky Way or bright stars, the same rule as [`guidelines/`](../) section 5. If the text reaches the subject, first tighten the gaps between groups ([`guidelines/`](../) section 11, rule 11), then use the smaller print sizes (section 4), then ask to cut copy. **Text on a busy background is a hard stop** (Vanesa, 2026-11-20): `review/print.py` fails it, and the piece is never shown or delivered until every line sits on calm, legible ground. If no layout keeps the text calm, split the piece over two sides (image and title on the front, details on a plain back), use the plain look, or ask to cut copy.
+- **Rich black** (Vanesa, 2026-11-20; values (Vanesa, 2026-11-26)): large dark areas use the brand's rich black, **C70 M50 Y30 K100**: a cool rich black that matches the blue tint of `neutral-950`, 250% total ink. If the vendor sets a lower ink limit, the vendor wins. Dark text and thin lines on light use **K100 only**, never rich black. Never black ink alone for large dark areas.
+- **Color mode: CMYK, never RGB** (Vanesa, 2026-11-26). Files go to the printer in CMYK. Printers are in Europe and in the US, so the brand colors get two sets of CMYK values, one per region's profile.
+  - **CMYK values: to decide (Vanesa, 2026-11-26).** The two sets (Europe, US) aren't decided yet. Until they are, the colors convert with the printer's profile (section 1).
+- **Gradients and image fades** (Vanesa, 2026-11-20): slight grain (noise) on large gradients and image fades so they don't band in CMYK. `review/print.js` adds it to `.qd-image-fade` in print renders, so pages don't add it themselves. No tints under 5%: they drop out on paper.
 
 ## 4. Text in print
 
@@ -85,23 +90,38 @@ Sizes are in pt. Two kinds of printed piece, two type systems (visual designer, 
 
 **Documents (white papers, brochure inside pages, multi-page handouts):** the Brand Guide document scale in [`primitives/typography/`](../../primitives/typography/), "Sizes per channel": title / H1 / H2 / H3 / body / caption = 28 / 22 / 18 / 14 / 11 / 9 pt. Body text at least 9 pt and in full `text.on-light` (never mid-grey), aiming for 7:1 contrast on paper.
 
-- **Must: easily legible when printed** (visual designer, 2026-11-20). Body copy is **10 to 12 pt**. **8 pt is the minimum**, and only for legal text, footers and small print. Nothing under 8 pt, legal text included.
-- **Reversed text** (visual designer, 2026-11-20): white (light) text on a dark background is at least 9 pt and Regular weight or heavier. With the print steps that means 10 pt or more on dark, so 8 pt small print only goes on light backgrounds.
+- **Must: easily legible when printed** (Vanesa, 2026-11-20). Body copy is **10 to 12 pt**. **8 pt is the minimum**, and only for legal text, footers and small print. Nothing under 8 pt, legal text included.
+- **Reversed text** (Vanesa, 2026-11-20; 10 pt on rich black (Vanesa, 2026-11-26)): white (light) text on a dark background is Regular weight or heavier, and light text reversed out of rich black is **at least 10 pt**. So 8 pt small print only goes on light backgrounds.
 - **Event backdrops and booths:** 240–560 pt, logos big enough for camera shots (Brand Guide 2.0).
 - **Logo:** at least 0.84 cm tall (3.1 × 0.84 cm), as [`brand-assets/logo/`](../../brand-assets/logo/) says.
 
 ## 5. Images and QR codes
 
-- **Must: image resolution is a hard stop** (visual designer, 2026-11-20). Every image is at least 300 dpi at final size for anything read up close (A4 is about 2480 × 3508 px), or the format's `minDpi` for pieces seen from far away (posters 150, roll-ups, booths and banners 100). An image under it is **never delivered, and never enlarged** to pass the check, astronaut imagery included. Resolution counts the part of the file that shows: a cropped image (a Qbot crop, `object-fit: cover`) counts only its crop. Until an upscaler is approved, the answer is "This is not doable for now", with the plain, solid version offered instead.
+- **Qbot, headshots and images** (Vanesa, 2026-11-26): allowed in print only when they hold **300 dpi at the printed size** and follow every existing rule: one hero, no Qbot with headshots, no cut face, trimming, margins. If an asset doesn't meet all of them, don't use it.
+  - **To confirm (raised 2026-11-26):** this says 300 dpi for every format, while the `minDpi` below lets posters (150) and roll-ups, booths and banners (100) go lower. `print.tokens.json` and `review/print.py` still use `minDpi` until Vanesa confirms which holds for large formats.
+
+- **Must: image resolution is a hard stop** (Vanesa, 2026-11-20). Every image is at least 300 dpi at final size for anything read up close (A4 is about 2480 × 3508 px), or the format's `minDpi` for pieces seen from far away (posters 150, roll-ups, booths and banners 100). An image under it is **never delivered, and never enlarged** to pass the check, astronaut imagery included. Resolution counts the part of the file that shows: a cropped image (a Qbot crop, `object-fit: cover`) counts only its crop. Until an upscaler is approved, the answer is "This is not doable for now", with the plain, solid version offered instead.
   - Design Lab's largest image is 1024 × 1536 px: sharp enough at 300 dpi only up to about 87 mm wide (business cards). So A5 and A4 space imagery is refused for now.
   - **To decide (visual designer):** the Topaz Labs upscale API is proposed for the workflow (needs approval). A 4× upscale (4096 × 6144 px) would cover A4 and A3 at 300 dpi, and A2, A1 and the roll-up at their `minDpi`.
 - The subject stays clear of the trim and any fold. **One image per piece.**
 - **Headshots** follow [`imagery/headshots/`](../../brand-assets/imagery/headshots/); for print they need the dpi above.
-- **QR codes** (visual designer, 2026-11-20): at least 20 × 20 mm, dark on light only, with a quiet zone of 4 modules around it, the short URL printed under it, and test-scanned from the proof. Mark it with the class `.qd-qr` so the print checks find it.
+- **QR codes replace the button** (Vanesa, 2026-11-26). **No button on print pieces.** Mark the code with the class `.qd-qr` so the print checks find it, and test-scan it from the proof (Vanesa, 2026-11-20).
+  - **Size:** the side is at least the scanning distance ÷ 10, and never under 2.5 cm. It replaces 20 mm (2026-11-20). The minimum per format is `qrMin` in `print.tokens.json`:
+
+    | Read from | Pieces | QR side |
+    | --- | --- | --- |
+    | Arm's length | Hand-held: flyers, cards, brochures, A5 to A4 | at least 2.5 cm |
+    | 1 to 2 m | Posters and roll-ups | 10 to 20 cm, never under 10 cm |
+    | 3 m or more | Booth walls and backdrops | at least 30 cm |
+
+  - **Color:** dark modules on a light square, with a quiet zone of 4 modules on every side, even on a dark piece.
+  - **URL:** a short URL written under it at the supporting size, left-aligned with the code.
+  - **Where:** where the button would sit, inside the margins. On large formats it sits **1.0 to 1.6 m from the floor**, so phones can reach it.
 
 ## 6. Export
 
-- **One PDF** (with the printer's profile) at trim size plus bleed, with crop marks outside the bleed, fonts embedded, converted to the printer's CMYK profile and in the file type the spec asks for (PDF/X-4 by default).
+- **One PDF** (with the printer's profile) at trim size plus bleed, with crop marks outside the bleed, fonts embedded, converted to the printer's CMYK profile, never RGB (Vanesa, 2026-11-26).
+- **File format: each vendor's** (Vanesa, 2026-11-26). The PDF/X version, crop marks, and whether fonts are outlined or embedded follow the vendor's spec. There's no brand default (it replaces "PDF/X-4 by default"). `review/print.py --pdfx` takes the vendor's version; without it, the print checks list the file format as not from the spec.
 - **One proof image** (PNG) of every page, to review before printing.
 - **Without the printer's profile:** only the proof and an RGB PDF for review (`<name>-rgb.pdf`), not for the printer (section 1).
 - **Needs Ghostscript** on the computer of whoever makes print creatives, for the CMYK conversion. The export says how to install it if it's missing.
