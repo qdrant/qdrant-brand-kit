@@ -98,7 +98,7 @@ export function Stats({ layout = "cells", header, items, theme, surface, pattern
                 ) : (
                   item.company && <p className={cn(type.small, "font-mono uppercase")}>{item.company}</p>
                 )}
-                <p className="font-mono text-xl leading-snug tracking-tight text-foreground">{item.value}</p>
+                <p className="text-xl leading-snug font-medium tracking-tight text-foreground">{item.value}</p>
                 {item.text && <p className={type.small}>{item.text}</p>}
               </>
             )

@@ -74,9 +74,9 @@ const scene: CanvasScene<State> = {
   },
   draw(ctx, s, t) {
     const { p, w, h } = s
-    const R = Math.min(h * 0.27, w * 0.17)
+    const R = Math.min(h * 0.4, w * 0.17)
     const cx = w * 0.5
-    const cy = h * 0.47
+    const cy = h * 0.5
     const spin = t * 0.08
     const screen = (v: { x: number; y: number; z: number }) => ({
       x: cx + v.x * R,
@@ -199,12 +199,13 @@ const scene: CanvasScene<State> = {
       ly
     )
 
+    // The readout at the top left of the ring, so it balances the planet (design lead, 2026-11-26).
     readout(
       ctx,
       p,
       [`KNN ${K}`, [`${s.ring.length} POINTS`, p.label]],
-      24,
-      h - 28
+      Math.max(8, cx - R * 2.25),
+      Math.max(16, cy - R - 4)
     )
   },
 }

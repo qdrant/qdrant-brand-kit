@@ -71,6 +71,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "design-system/AGENTS.md",
       },
       {
+        title: "Mono is for eyebrows and numbers",
+        text: "Mona Sans Mono sets kickers and labels (eyebrows), numbers, code and data, never a subheading or a phrase: a result card's line (\"2-3x revenue\") is in the sans, like any heading.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/sections/stats.tsx",
+      },
+      {
         title: "Kickers are 12px, and their node sits on the first line",
         text: "A kicker (the mono label above a heading) is 12px at every size (it was 14px until 2026-11-24). Its hexagon node is centered on the kicker's first line, so a kicker that wraps keeps the node beside its first word, not between the lines.",
         decided: "Design lead, 2026-11-24",
@@ -235,9 +241,21 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "Logo grids answer the pointer",
-        text: "In a grid of customer logos, every logo turns to the text color on hover. A logo with a case study is a link: the whole cell is clickable, an arrow in its top-right corner marks it at rest, and on hover a subtle indigo light rises from the bottom and a mono \"Case study\" label appears. The grid's last cell is its action (See more customers), not a link floating above. Result cards show the customer's logo, not its name, and link to the case study.",
+        text: "In a grid of customer logos, every logo turns to the text color on hover. A logo with a case study is a link: the whole cell is clickable with the hand cursor, and on hover an arrow appears in its top-right corner, a subtle indigo light rises from the bottom and a mono \"Case study\" label appears (the arrow only on hover since 2026-11-26). The grid's last cell is its action (See more customers), not a link floating above. Result cards show the customer's logo, not its name, and link to the case study.",
         decided: "Design lead, 2026-11-26",
         source: "web/sections/logo-cloud.tsx, web/sections/stats.tsx",
+      },
+      {
+        title: "The hero has no rails, and its proof row is plain",
+        text: "The hero draws no rails or seams: it opens the page under the navbar's line. Its proof points (stars, members, compliance) are a plain row of an icon and a label each, in the muted text with an indigo icon, centered under the hero's visual, never cells or tiles. With a bare visual (the home page's planet) the hero is tighter, the visual tucks up under the buttons, and the customers' logos show above the fold.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/sections/hero.tsx",
+      },
+      {
+        title: "Logos are balanced by area",
+        text: "Customer logos are sized so each covers about the same area, about 2,000 px² (a square mark 40px across, Disney and Bazaarvoice at their size), between 16 and 40px tall, so a wide wordmark is shorter than a squarer mark and none looks louder. They're centered in their cells. The case-study arrow shows on hover only.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/sections/logo-cloud.tsx",
       },
       {
         title: "A tall checklist tile ends in a pattern",
@@ -246,8 +264,8 @@ export const guidelines: GuidelineGroup[] = [
         source: "web/sections/bento.tsx",
       },
       {
-        title: "Cells end a section on its line",
-        text: "When a section ends with a horizontal row or grid of cells (the hero's proof points, a logo grid, a row of facts), the cells sit on the section's bottom line, with no padding under them: an empty band below the cells reads as meaningless. The next section's seam is the cells' bottom line, so they don't draw their own. Sections with anything after the cells keep their padding.",
+        title: "Cells sit on a section's lines",
+        text: "When a section ends with a horizontal row or grid of cells (a logo grid, a row of facts), the cells sit on the section's bottom line, with no padding under them: an empty band below the cells reads as meaningless. The same at the top: a section that starts with its cells (the home page's logo grid) sets them on its top line. The seams are the cells' lines there, so they don't draw their own. Sections with anything after or before the cells keep their padding (2026-11-26).",
         decided: "Design lead, 2026-11-26",
         source: "web/styles/web.css",
       },

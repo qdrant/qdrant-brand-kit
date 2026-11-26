@@ -1,3 +1,4 @@
+import type * as React from "react"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
@@ -26,38 +27,46 @@ export type LogoCloudProps = SectionProps & {
 // colors on hover.
 // Logos share an optical size, not a height: a wide wordmark is 28px tall, a squarer mark up to 40px, so a row of
 // them looks even.
-function logoHeight(id: string) {
+function logoSize(id: string): React.CSSProperties {
   const data = customerLogos.find((l) => l.id === id)
   const ratio = data ? data.width / data.height : 4
-  return ratio < 1.6 ? "h-10" : ratio < 2.6 ? "h-9" : ratio < 3.6 ? "h-8" : "h-7"
+  // Optical balance (design lead, 2026-11-26): every logo gets about the same area, the area of a square mark 40px
+  // across and of Disney and Bazaarvoice at their size (about 2,000 px²), so a wide wordmark is shorter than a squarer
+  // mark and none looks louder; between 16 and 40px tall.
+  const height = Math.round(Math.min(40, Math.max(16, Math.sqrt(2000 / ratio))))
+  return { height, width: "auto" }
 }
 
 function Logo({ name, logo, src, hoverColor }: { name: string; logo?: string; src?: string; hoverColor?: boolean }) {
   if (logo) {
-    const h = logoHeight(logo)
+    const size = logoSize(logo)
     return hoverColor ? (
       <span className="relative grid place-items-center">
         <CustomerLogo
           id={logo}
           version="mono"
-          className={cn(h, "max-w-32 text-muted-foreground transition-opacity duration-300 group-hover/logo:opacity-0")}
+          style={size}
+          className={cn("max-w-32 text-muted-foreground transition-opacity duration-300 group-hover/logo:opacity-0")}
         />
         <CustomerLogo
           id={logo}
           version="color"
-          className={cn(h, "absolute hidden max-w-32 opacity-0 transition-opacity duration-300 group-hover/logo:opacity-100 light:block")}
+          style={size}
+          className={cn("absolute hidden max-w-32 opacity-0 transition-opacity duration-300 group-hover/logo:opacity-100 light:block")}
         />
         <CustomerLogo
           id={logo}
           version="light"
-          className={cn(h, "absolute max-w-32 opacity-0 transition-opacity duration-300 group-hover/logo:opacity-100 light:hidden")}
+          style={size}
+          className={cn("absolute max-w-32 opacity-0 transition-opacity duration-300 group-hover/logo:opacity-100 light:hidden")}
         />
       </span>
     ) : (
       <CustomerLogo
         id={logo}
         version="mono"
-        className={cn(h, "max-w-32 text-muted-foreground transition-colors duration-200 group-hover/cell:text-foreground")}
+        style={size}
+        className="block max-w-32 text-muted-foreground transition-colors duration-200 group-hover/cell:text-foreground"
       />
     )
   }
@@ -89,12 +98,12 @@ export function LogoCloud({ layout = "row", label, logos, action, theme, surface
         // the grid's last cell (design lead, 2026-11-26).
         <ul className="web-grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
           {logos.map((logo) => (
-            <li key={logo.name} className="group/cell relative grid h-28 place-items-center px-6">
+            <li key={logo.name} className="group/cell relative grid h-24 place-items-center px-6">
               {logo.href ? (
                 <a href={logo.href} aria-label={`${logo.name} case study`} className="absolute inset-0 grid place-items-center px-6 outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color) focus-visible:ring-inset">
                   <span aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_oklab,var(--web-indigo)_16%,transparent),transparent_75%)] opacity-0 transition-opacity duration-300 group-hover/cell:opacity-100" />
-                  <ArrowUpRight aria-hidden className="absolute top-3 right-3 size-3.5 text-muted-foreground/70 transition-colors group-hover/cell:text-(--web-link)" />
-                  <span className="relative"><Logo {...logo} /></span>
+                  <ArrowUpRight aria-hidden className="absolute top-3 right-3 size-3.5 text-(--web-link) opacity-0 transition-opacity duration-300 group-hover/cell:opacity-100" />
+                  <span className="relative grid place-items-center"><Logo {...logo} /></span>
                   <span aria-hidden className="absolute inset-x-0 bottom-2.5 text-center font-mono text-[11px] tracking-wider text-(--web-link) uppercase opacity-0 transition-opacity duration-300 group-hover/cell:opacity-100">
                     Case study
                   </span>

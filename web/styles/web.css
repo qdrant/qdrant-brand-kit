@@ -249,6 +249,14 @@
 .web-seam:has(> div:last-child > :last-child > :only-child:is(.web-cells, .web-grid)) {
   padding-bottom: 0;
 }
+/* The same at the top: a section that starts with its cells sets them on its top line (2026-11-26, the home page's logo
+   grid), and the seam is their top line. */
+.web-seam:has(> div:last-child > :first-child:is(.web-cells, .web-grid)) {
+  padding-top: 0;
+}
+.web-seam > div:last-child > :first-child:is(.web-cells, .web-grid) {
+  border-top-width: 0;
+}
 .web-seam > div:last-child > :last-child:is(.web-cells, .web-grid),
 .web-seam > div:last-child > :last-child > :only-child:is(.web-cells, .web-grid) {
   border-bottom-width: 0;
