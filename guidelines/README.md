@@ -56,7 +56,7 @@ Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (de
 
 The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patterns/).
 
-**Print:** patterns may be a print background, never pattern only; see [`print/`](print/) section 3.
+**Print:** patterns in print are in [`print/`](print/) section 3.
 
 ## 3. Red backgrounds
 

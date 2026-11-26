@@ -33,7 +33,7 @@ These rules are written for creatives. [`design-system/AGENTS.md`](design-system
 - Change an approved pattern, the logo or an approved part. Never redraw them.
 - Use Bold for titles, right-align text, mix alignments, or use more than two text sizes outside the headshot parts.
 - Put Qbot with headshots or with a generated image, or use two heroes.
-- Put Qbot between text blocks or over text, the logo or the button, or cut its face ([`guidelines/`](guidelines/) section 6). Use `.qd-mascot--glow` from `brand-assets/mascot/3d/mascot.css`, never your own glow.
+- Put Qbot between text blocks or over text, the logo or the button, or cut its face ([`guidelines/`](guidelines/) section 6). Use `.qd-mascot--glow` from `brand-assets/mascot/3d/mascot.css`, never your own glow; in print, no glow at all ([`guidelines/print/`](guidelines/print/) section 5).
 - Use an icon that isn't from Lucide, or put an icon in a button ([`brand-assets/icons/`](brand-assets/icons/)).
 - Use red as a background without the person's yes.
 - Show, recommend or deliver a creative that fails contrast or puts text, the logo, the button or a headshot outside the margins or story safe zones ([`guidelines/layout/checks.md`](guidelines/layout/checks.md)).
