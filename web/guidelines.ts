@@ -216,7 +216,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "A prompt for agents shows the agents, not the prompt",
-        text: "Give this to your agent: the marks of the agents it's for (Claude, Codex, Cursor), one color in the muted text color, then the label and a copy button. The prompt itself isn't shown; the button copies it, and it shows when you hover the button. In a hero it sits above the title, so the buttons under the text stand alone, and it's tight: the agents' marks close together, little padding, with no fill, only a hairline, so it doesn't compete with the secondary buttons (2026-11-26).",
+        text: "Give this to your agent: the marks of the agents it's for (Claude, Codex, Cursor), one color in the muted text color, then the label and a copy button. The prompt itself isn't shown; the button copies it, and it shows when you hover the button. In a hero it sits above the title, so the buttons under the text stand alone, and it's tight: the agents' marks close together, little padding, with no fill, only a hairline, so it doesn't compete with the secondary buttons; its marks and label in the text color, the copy icon evenly between the divider and the outline (2026-11-26).",
         decided: "Design lead, 2026-11-24",
         source: "web/lib/copy-snippet.tsx, web/assets/logos/agents/",
       },
