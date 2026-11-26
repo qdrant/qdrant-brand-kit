@@ -101,6 +101,7 @@ def main():
     hidden = a.hidden_bottom if a.hidden_bottom is not None else fmt.get("hiddenBottom", 0)
     # 300 dpi up close, 100 to 150 for large formats (the preset's minDpi), or the vendor's value (visual designer, 2026-11-26).
     min_dpi = a.min_dpi if a.min_dpi else fmt.get("minDpi", defaults["minDpi"])
+    large = bool(fmt.get("large"))  # posters A2 and bigger, roll-ups, booths (print.tokens.json)
     if a.min_dpi: from_spec.append("resolution")
     qr_min = fmt.get("qrMin", defaults["qrMin"])
     if a.pdfx: from_spec.append("file format")
@@ -360,35 +361,36 @@ def main():
             if side < qr_min: bad.append(f"{side:.1f} mm (needs {qr_min:g} mm)")
             if not dark_on_light: bad.append("not dark on light")
         row("QR codes", not bad, f"{qr_min:g} mm or more, dark on light. Test-scan it from the proof" if not bad else "; ".join(bad))
-    # Images: only what's in the brand kit (visual designer, 2026-11-26). Qbot (without its glow) and headshots are
-    # allowed, at the resolution below; any other image fails. Patterns are painted at the printed size.
+    # Images (visual designer, 2026-11-26): Qbot without its glow; headshots when large and sharp; space imagery
+    # (any other photo or generated image) only on small prints, and always at 300 dpi. Patterns are painted at
+    # the printed size.
     is_qbot = lambda i: "qd-mascot" in (i.get("cls") or "") or "brand-assets/mascot/" in (i.get("src") or "")
     pics = [i for i in meas["images"] if i not in meas["logos"] and not (i.get("src") or "").lower().endswith(".svg")]
+    is_space = lambda i: not is_qbot(i) and i.get("cls") != "headshot"
     img_bad, img_look = [], []
     for i in pics:
         nm = os.path.basename(i.get("src") or "image")
-        if is_qbot(i):
-            if "qd-mascot--glow" in (i.get("cls") or ""): img_bad.append(f"Qbot has its glow ({nm}): no glow in print")
-        elif i.get("cls") == "headshot":
-            pass  # allowed when very large and sharp: the resolution check below (visual designer, 2026-11-26)
-        else:
-            img_bad.append(f"an image that isn't from the brand kit ({nm})")
+        if is_qbot(i) and "qd-mascot--glow" in (i.get("cls") or ""):
+            img_bad.append(f"Qbot has its glow ({nm}): no glow in print")
+        if is_space(i) and large:
+            img_bad.append(f"space imagery on a large format ({nm}): small prints only")
     if a.min_dpi and a.min_dpi > DPI and pinfo["canvases"]:
         img_look.append(f"the vendor asks {a.min_dpi:g} dpi; patterns are painted at {DPI} dpi")
     row("Images", False if img_bad else ("look" if img_look else True),
         "; ".join(img_bad + img_look) if img_bad or img_look else
-        ("only Qbot and headshots, from the brand kit" if pics else "no images") + " (guidelines/print/ sections 3 and 5)")
+        ("images allowed for this piece" if pics else "no images") + " (guidelines/print/ sections 3 and 5)")
     low = []
-    for img in meas["images"]:
-        if img in meas["logos"] or img.get("src", "").endswith(".svg") or not img.get("naturalWidth"):
+    for img in pics:
+        if not img.get("naturalWidth"):
             continue
+        need = max(min_dpi, 300) if is_space(img) else min_dpi  # space imagery is always 300 dpi
         shown = img.get("shown") or img["rect"]
         src_w = img.get("sourceWidth") or img["naturalWidth"]  # the cropped part of the file, not the whole file
         dpi = src_w / (shown["w"] / PX_PER_MM / 25.4) if shown["w"] else 0
-        if dpi < min_dpi:
-            low.append(f"the image is {dpi:.0f} dpi ({os.path.basename(img['src'])})")
-    row("Image resolution", not low, f"every image {min_dpi:g} dpi or more" if not low else
-        "Not doable for now: " + "; ".join(low[:3]) + f", the piece needs {min_dpi:g}. No plain resize")
+        if dpi < need:
+            low.append(f"the image is {dpi:.0f} dpi, needs {need:g} ({os.path.basename(img['src'])})")
+    row("Image resolution", not low, f"every image {min_dpi:g} dpi or more (space imagery 300)" if not low else
+        "Not doable for now: " + "; ".join(low[:3]) + ". No plain resize")
     # Fonts: all text is outlined before print (visual designer, 2026-11-26), so the printer's file has no fonts left.
     def font_count(pdf):
         if shutil.which("pdffonts"):

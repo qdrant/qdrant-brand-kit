@@ -1,5 +1,5 @@
 {
-  "$description": "Print format presets (guidelines/print/README.md, visual designer, 2026-11-20). margin = the content margin in mm: 8% of the short side of the finished piece (the folded panel for brochures), never less than 1.5 × safe (visual designer, 2026-11-20). title, supporting, titleMin, supportingMin = text in pt for one-page promos; the Min values are the smallest allowed, for space imagery; titleCover is the title on a front that holds only the logo, title and image (proposed, to confirm: The visual designer, 2026-11-20). Every text size is a step of the type set read as pt (1 px step = 1 pt): 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64, 80, 104, 128, 160, 200, plus two print-only steps: 10 (body copy on small formats) and 8 (legal text, footers and small print only) (visual designer, 2026-11-20). Starting points only: the printer's spec sheet always overrides them. Sizes in mm. trim = finished size (width, height); bleed and safe are per side; panels are the widths of each panel left to right, laid out flat; minDpi is the lowest image resolution at final size. Default bleed and safe values are common print practice, not from the Brand Guide: bleed and safe area always follow the vendor, and some vendors want no bleed (visual designer, 2026-11-26). margin is always computed from the 8%, never set as a fixed mm per format (visual designer, 2026-11-26). qrMin = the smallest QR code side in mm (visual designer, 2026-11-26).",
+  "$description": "Print format presets (guidelines/print/README.md, visual designer, 2026-11-20). margin = the content margin in mm: 8% of the short side of the finished piece (the folded panel for brochures), never less than 1.5 × safe (visual designer, 2026-11-20). title, supporting, titleMin, supportingMin = text in pt for one-page promos; the Min values are the smallest allowed, for space imagery; titleCover is the title on a front that holds only the logo, title and image (proposed, to confirm: The visual designer, 2026-11-20). Every text size is a step of the type set read as pt (1 px step = 1 pt): 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64, 80, 104, 128, 160, 200, plus two print-only steps: 10 (body copy on small formats) and 8 (legal text, footers and small print only) (visual designer, 2026-11-20). large = a large format (posters A2 and bigger, roll-ups, booths): no space imagery there, small prints only (visual designer, 2026-11-26). Starting points only: the printer's spec sheet always overrides them. Sizes in mm. trim = finished size (width, height); bleed and safe are per side; panels are the widths of each panel left to right, laid out flat; minDpi is the lowest image resolution at final size. Default bleed and safe values are common print practice, not from the Brand Guide: bleed and safe area always follow the vendor, and some vendors want no bleed (visual designer, 2026-11-26). margin is always computed from the 8%, never set as a fixed mm per format (visual designer, 2026-11-26). qrMin = the smallest QR code side in mm (visual designer, 2026-11-26).",
   "defaults": {
     "bleed": { "$value": 3, "$description": "mm per side (3.175 for US formats, 1/8 in)" },
     "safe": { "$value": 5, "$description": "mm inside the trim, per side: the printer's cutting tolerance, not the margin" },
@@ -32,17 +32,17 @@
       "trim": [279.4, 215.9], "folded": [93.7, 215.9], "panels": [93.7, 93.7, 92.0], "fold": "vertical",
       "bleed": 3.175, "safe": 6.35, "margin": 9.5, "minDpi": 300
     },
-    "poster-a2": { "name": "Poster A2", "status": "in-progress", "trim": [420, 594], "bleed": 3, "safe": 10, "margin": 33.6, "title": 128, "supporting": 48, "titleMin": 128, "supportingMin": 48, "minDpi": 150, "qrMin": 100 },
-    "poster-a1": { "name": "Poster A1", "status": "in-progress", "trim": [594, 841], "bleed": 3, "safe": 15, "margin": 47.5, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 150, "qrMin": 100 },
+    "poster-a2": { "name": "Poster A2", "large": true, "status": "in-progress", "trim": [420, 594], "bleed": 3, "safe": 10, "margin": 33.6, "title": 128, "supporting": 48, "titleMin": 128, "supportingMin": 48, "minDpi": 150, "qrMin": 100 },
+    "poster-a1": { "name": "Poster A1", "large": true, "status": "in-progress", "trim": [594, 841], "bleed": 3, "safe": 15, "margin": 47.5, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 150, "qrMin": 100 },
     "rollup-850x2000": {
-      "name": "Roll-up 850 × 2000", "status": "in-progress",
+      "name": "Roll-up 850 × 2000", "large": true, "status": "in-progress",
       "trim": [850, 2000], "bleed": 5, "safe": 25, "margin": 68, "title": 160, "supporting": 64, "titleMin": 160, "supportingMin": 64, "minDpi": 100, "qrMin": 100, "hiddenBottom": 100,
       "$description": "hiddenBottom: the part that rolls into the base (vendors use 100 to 200 mm). Nothing important in it; the vendor's spec wins."
     },
     "business-card-eu": { "name": "Business card EU", "status": "ready-to-test", "trim": [85, 55], "bleed": 3, "safe": 4, "margin": 6, "minDpi": 300 },
     "business-card-us": { "name": "Business card US", "status": "ready-to-test", "trim": [88.9, 50.8], "bleed": 3.175, "safe": 3.175, "margin": 4.8, "minDpi": 300 },
     "booth": {
-      "name": "Booth graphics", "status": "in-progress",
+      "name": "Booth graphics", "large": true, "status": "in-progress",
       "trim": null, "bleed": null, "safe": null, "minDpi": 100, "qrMin": 300, "specRequired": true,
       "$description": "In progress, being tested (visual designer, 2026-11-20). No default size: every booth part (backwall, counter, header, banner) comes from the vendor's spec."
     },
