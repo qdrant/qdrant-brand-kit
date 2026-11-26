@@ -4,24 +4,24 @@
   "textMask": "mask",
   "recipe": "color-sliced-pattern",
   "extends": "shared",
-  "$colorways": "Each colorway runs from its family's 975 to its 700, for a softer contrast between dark and light areas (Vanesa, 2026-11-24, proposal S6). It replaced Neutral 950 → the family's 600. Teal stays on hold. Dark neutral (Neutral 1000 → 800) added 2026-11-24.",
+  "$colorways": "Amaranth, Indigo and Teal each run from Neutral 975 to the family's 800 (Vanesa, 2026-11-26, Lower contrast #8): a near-black start, so the colour reads as the accent. It replaced the family's 975 → 700 (S6, 2026-11-24). Teal stays on hold. Dark neutral (Neutral 1000 → 800) added 2026-11-24. Every render has an ordered dither against banding (2026-11-26).",
   "colorways": [
     {
-      "name": "Amaranth 975 → Amaranth 700",
-      "from": "color.amaranth.975",
-      "to": "color.amaranth.700",
+      "name": "Neutral 975 → Amaranth 800",
+      "from": "color.neutral.975",
+      "to": "color.amaranth.800",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
     },
     {
-      "name": "Indigo 975 → Indigo 700",
-      "from": "color.indigo.975",
-      "to": "color.indigo.700",
+      "name": "Neutral 975 → Indigo 800",
+      "from": "color.neutral.975",
+      "to": "color.indigo.800",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
     },
     {
-      "name": "Teal 975 → Teal 700",
-      "from": "color.teal.975",
-      "to": "color.teal.700",
+      "name": "Neutral 975 → Teal 800",
+      "from": "color.neutral.975",
+      "to": "color.teal.800",
       "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
     },
     {

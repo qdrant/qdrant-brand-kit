@@ -9,6 +9,8 @@
     "generative-glyph-layer-a"
   ],
   "settings": {
+    "$letterSteps": "Letters run in the family's 950, 900, 800 (dark neutral: Neutral 950, 900, 800), in place of the letter layer's own 800, 700, 600 (Vanesa, 2026-11-26). Light mode keeps white letters.",
+    "letterSteps": [950, 900, 800],
     "$letterOptions": "Approved letter variations from the Pattern Studio connector's terminal look (Vanesa, 2026-11-24). Draw one with renderPattern(..., { letterOption: index }); they work on every colorway and stripe.",
     "letterOptions": [
       {

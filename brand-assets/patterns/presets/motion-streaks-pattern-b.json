@@ -57,7 +57,9 @@
       "softness": 56,
       "opacity": 24
     },
-    "$letterColorSteps": "Letters run in the family's 800, 700, 600 (Vanesa, 2026-11-25), except letter variation 1 (renderPattern option letters: 1), which keeps 800, 600, 200.",
+    "$letterSteps": "Letters run in the family's 900, 800, 700 (dark neutral: Neutral 900, 800, 700), in place of the letter layer's own 800, 700, 600 (Vanesa, 2026-11-26). Light mode keeps white letters.",
+    "letterSteps": [900, 800, 700],
+    "$letterColorSteps": "Letter variation 1 (renderPattern option letters: 1) keeps its own 800, 600, 200 (Vanesa, 2026-11-25).",
     "letterColorSteps": {
       "1": [
         800,

@@ -81,9 +81,11 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
   const option = options.letterOption == null ? null : preset.settings?.letterOptions?.[options.letterOption];
   if (options.letterOption != null && !option) throw new Error(`${preset.name} has no approved letter option #${options.letterOption}`);
   const letters = option ? (({ name, source, ...values }) => values)(option) : typeof options.letters === "number" ? letterVariation(options.letters) : options.letters;
-  // settings.letterColorSteps: a letter variation that keeps other color steps than the
-  // layer's own (Motion-Streaks-B: variation 1 keeps 800, 600, 200; Vanesa, 2026-11-25).
-  const letterSteps = typeof options.letters === "number" ? preset.settings?.letterColorSteps?.[options.letters] : null;
+  // settings.letterSteps: the color steps of the pattern's letters, in place of the letter
+  // layer's own (Color-Sliced-B: 950, 900, 800; Motion-Streaks-B: 900, 800, 700; Vanesa,
+  // 2026-11-26). settings.letterColorSteps: a letter variation that keeps other steps
+  // (Motion-Streaks-B: variation 1 keeps 800, 600, 200; Vanesa, 2026-11-25).
+  const letterSteps = (typeof options.letters === "number" ? preset.settings?.letterColorSteps?.[options.letters] : null) ?? preset.settings?.letterSteps;
   for (const base of preset.layers ?? []) {
     let layer = letters && isLetterLayer(base) ? varyLetterLayer(base, letters) : base;
     if (letterSteps && isLetterLayer(base)) layer = withColorSteps(layer, letterSteps);

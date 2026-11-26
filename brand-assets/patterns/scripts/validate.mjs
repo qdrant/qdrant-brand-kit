@@ -143,6 +143,11 @@ for (const id of ids) {
     if (values.scale != null && (values.scale < 0.45 || values.scale > 0.65)) errors.push(`${where}: letter option "${name}" scale ${values.scale} is outside 0.45 to 0.65`);
   }
 
+  // Letter color steps for the whole pattern (settings.letterSteps, Vanesa 2026-11-26):
+  // three steps, the lightest never below 600, so the letters blend with the background.
+  const letterSteps = p.settings?.letterSteps;
+  if (letterSteps != null && !(Array.isArray(letterSteps) && letterSteps.length === 3 && letterSteps.every((x) => Number.isInteger(x) && x >= 600 && x <= 975))) errors.push(`${where}: settings.letterSteps must be three steps between 600 and 975`);
+
   // Approved stripes (Color-Sliced): thickness on the 8 grid, an angle in degrees.
   for (const s of p.settings?.stripes ?? []) {
     if (!(s.thickness > 0) || s.thickness % 8 !== 0) errors.push(`${where}: stripes "${s.name}" thickness ${s.thickness} isn't on the 8 grid`);
