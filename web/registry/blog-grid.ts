@@ -42,8 +42,8 @@ export const blogGrid = defineSection<BlogGridProps>({
     props: [
       { name: "layout", type: '"featured" | "grid"', note: "One large post and rows, or three columns." },
       { name: "featured", type: "Post", note: "The large post, in the featured layout." },
-      { name: "posts", type: "{ title, href, excerpt?, tag?, authors, date }[]", note: "The posts." },
-      { name: "images", type: "boolean", note: "Show the image slot. On by default." },
+      { name: "posts", type: "{ title, href, excerpt?, tag?, authors, date, image?, visual? }[]", note: "The posts. image is the post's JPG thumbnail (web/assets/blog), visual a component drawn in its place (a partner card)." },
+      { name: "images", type: "boolean", note: "Show a placeholder where a post has no thumbnail. On by default; a post's own image or visual always shows." },
       { name: "header", type: "{ kicker?, title, description?, action? }", note: "Optional." },
     ],
   },

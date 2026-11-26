@@ -340,7 +340,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "No PNG or JPG",
-        text: "The website uses no raster images: no PNG, JPG or WebP, and no photos. A graphic is SVG, HTML or a canvas drawing. Product screens are rebuilt in HTML with the design system's components (web/visuals, data-context=\"product\"), illustrations become diagrams (below), and a raster file found in web/ is replaced or removed (the unused rocket illustration went first).",
+        text: "The website uses no raster images: no PNG, JPG or WebP, and no photos. A graphic is SVG, HTML or a canvas drawing. Product screens are rebuilt in HTML with the design system's components (web/visuals, data-context=\"product\"), illustrations become diagrams (below), and a raster file found in web/ is replaced or removed (the unused rocket illustration went first). The one exception is blog post thumbnails, which are JPGs in web/assets/blog, cut from the Lightspeed concept (Figma: Qdrant Brand Design, Concept 2) and used only on the blog and as a post's hero; a partner post gets the concept's partner card instead, drawn in HTML with both logos (design lead, 2026-11-26).",
         decided: "Design lead, 2026-11-26",
         source: "web/visuals",
       },

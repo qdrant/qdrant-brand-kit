@@ -3,4 +3,6 @@
 export const webPages = [
   { href: "/web/pages/home", label: "Home" },
   { href: "/web/pages/resilience", label: "Resilience" },
+  { href: "/web/pages/blog", label: "Blog" },
+  { href: "/web/pages/blog-post", label: "Blog post" },
 ]

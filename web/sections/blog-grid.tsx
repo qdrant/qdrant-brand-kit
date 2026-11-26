@@ -56,14 +56,23 @@ function Meta({ post }: { post: Post }) {
 
 function PostCard({ post, images, size = "md", className }: { post: Post; images: boolean; size?: "md" | "lg" | "row"; className?: string }) {
   const row = size === "row"
+  // A post's own thumbnail (a JPG, the one raster image the website allows, 2026-11-26) or visual, else a placeholder
+  // while images are on.
+  const media = post.visual ?? (post.image ? <img src={post.image} alt="" loading="lazy" className="size-full object-cover" /> : null)
   return (
     <Plate as="article" className={cn("group flex rounded-xl", row ? "flex-row gap-4 p-4" : "flex-col", className)}>
-      {images && (
+      {(media || images) && (
         <div className={cn("shrink-0", row ? "w-28 sm:w-40" : "p-1.5 pb-0")}>
-          <MediaFrame
-            label={row ? "Image" : "Post image"}
-            className={cn(row ? "aspect-[4/3] rounded-lg" : "rounded-[calc(var(--radius-xl)-4px)]", size === "lg" && "aspect-[16/9]")}
-          />
+          {media ? (
+            <div className={cn("overflow-hidden", row ? "aspect-[4/3] rounded-lg" : "aspect-[16/9] rounded-[calc(var(--radius-xl)-4px)]")}>
+              {media}
+            </div>
+          ) : (
+            <MediaFrame
+              label={row ? "Image" : "Post image"}
+              className={cn(row ? "aspect-[4/3] rounded-lg" : "rounded-[calc(var(--radius-xl)-4px)]", size === "lg" && "aspect-[16/9]")}
+            />
+          )}
         </div>
       )}
       <div className={cn("flex flex-1 flex-col gap-2", !row && (size === "lg" ? "p-6 lg:p-8" : "p-6"), row && "min-w-0")}>

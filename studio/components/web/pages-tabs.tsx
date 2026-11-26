@@ -18,7 +18,7 @@ export function PagesTabs() {
       className="flex items-center gap-1 border-b px-6 py-2"
     >
       {webPages.map((page) => {
-        const active = pathname.startsWith(page.href)
+        const active = pathname === page.href || pathname.startsWith(`${page.href}/`)
         return (
           <Link
             key={page.href}

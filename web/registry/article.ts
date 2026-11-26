@@ -44,10 +44,11 @@ export const article = defineSection<ArticleProps>({
     ],
     props: [
       { name: "title, authors, date", type: "string", note: "The post's heading and byline." },
-      { name: "blocks", type: "ProseBlock[]", note: "h2, h3 (with ids), p, list, code, quote, figure. Text marks `code` and **bold**." },
+      { name: "blocks", type: "ProseBlock[]", note: "h2, h3 (with ids), p, list, code, quote, note (a callout with a list), figure (with its visual from web/visuals). Text marks `code` and **bold**." },
       { name: "toc", type: "{ id, label, level? }[]", note: "The contents; from the headings when left out." },
       { name: "share", type: "{ label, href }[]", note: "Share links." },
       { name: "heroImage", type: "boolean", note: "Show the hero slot. On by default." },
+      { name: "hero", type: "string", note: "The hero image: the post's JPG thumbnail (web/assets/blog)." },
     ],
   },
   fields: [
