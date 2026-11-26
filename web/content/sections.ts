@@ -86,7 +86,7 @@ export const composableSearch = {
     { icon: "Search", title: "Hybrid Search", text: "Keyword and semantic search lives in the same engine." },
     { icon: "Layers", title: "Filterable HNSW", text: "Latency stays predictable under filters." },
     { icon: "Braces", title: "Built-in Multivector", text: "More precise multimodal search in one query." },
-    { icon: "ChartScatter", title: "Full-Spectrum Reranking", text: "Apply business logic and token-level precision. Score boosting, ColBERT, and Maximum Marginal Relevance in-engine." },
+    { icon: "ChartScatter", title: "Full-Spectrum Reranking", text: "Apply business logic and token-level precision. Score boosting, ColBERT, and Maximal Marginal Relevance in-engine." },
     { icon: "FileText", title: "Advanced Metadata Filters", text: "Enable more precise and efficient retrieval. Store metadata in JSON and use advanced filters, such as nested, text, geo, has_vector, and more." },
     { icon: "ArrowRightLeft", title: "Ingestion and Updates", text: "Bulk upserts and streaming. Insert, update, and delete on a live index." },
     { icon: "Cpu", title: "Qdrant Cloud Inference", text: "Embed and query in one round trip. Native embedding generation inside a cluster." },
@@ -106,7 +106,8 @@ export const offload = {
   ] as Feature[],
 }
 
-// Home: "Why Qdrant?", the feature rows, all five with their links (read again 2026-11-26).
+// Home: "Why Qdrant?", the feature rows, all five with their links (read again 2026-11-26). "Maximal Marginal
+// Relevance" is the docs' name; the site says "Maximum" (corrected, design lead, 2026-11-26).
 export const whyQdrant = {
   kicker: "Why Qdrant?",
   title: "Build for Production-Grade AI Search",
@@ -117,7 +118,7 @@ export const whyQdrant = {
     { title: "Native Hybrid Search (Dense + Sparse)", text: "Blend keyword and vector search in one query – use dense or sparse vectors. Supports BM25, SPLADE++, and miniCOIL.", link: { label: "Explore Hybrid Search", href: "/documentation/search/hybrid-queries/" } },
     { title: "Built-in Multivector", text: "Set new standards for relevance; make the retrieval layer more expressive, flexible, and multimodal with multiple vectors per object.", link: { label: "See Documentation", href: "/documentation/tutorials-search-engineering/using-multivector-representations/" } },
     { title: "Efficient, One-Stage Filtering", text: "Filters are applied during HNSW traversal — no pre- or post-filtering. High recall with low latency, even under complex conditions.", link: { label: "See Documentation", href: "/articles/filterable-hnsw/" } },
-    { title: "Full-Spectrum Reranking", text: "Infuse business logic with score boosting, achieve token-level precision with late interaction models (e.g. ColBERT), diversify results with Maximum Marginal Relevance (MMR)", link: { label: "See Documentation", href: "/documentation/tutorials-basics/reranking-hybrid-search/" } },
+    { title: "Full-Spectrum Reranking", text: "Infuse business logic with score boosting, achieve token-level precision with late interaction models (e.g. ColBERT), diversify results with Maximal Marginal Relevance (MMR)", link: { label: "See Documentation", href: "/documentation/tutorials-basics/reranking-hybrid-search/" } },
   ] as Feature[],
 }
 
@@ -137,6 +138,9 @@ export const enterprise = {
 }
 
 // Home: "Performance by Design", the vertical tabs, with its kicker, description and action (read again 2026-11-26).
+// Two lines corrected to match the docs (design lead, 2026-11-26): new data is searchable at once and indexed in the
+// background, not "indexed instantly" (docs: ops-optimization/optimizer); and quantization saves up to 32x, binary's
+// ratio, since the site's 64x is product quantization's, which the heading doesn't name (docs: manage-data/quantization).
 export const performance = {
   kicker: "Architecture for the AI - Not Keyword - Era",
   title: "Performance by Design",
@@ -145,9 +149,9 @@ export const performance = {
   action: { label: "Start Free in Qdrant Cloud", href: "https://cloud.qdrant.io/signup" },
   items: [
     { title: "Highest‑Performance Vector Search Engine", text: "Built entirely in Rust with SIMD and a custom storage engine (Gridstore) — no wrappers, no bolt-ons. Just fast, scalable vector search." },
-    { title: "Real‑Time Indexing", text: "Index new data instantly without rebuilding the entire index. Your vectors are searchable the moment they're added." },
+    { title: "Real‑Time Indexing", text: "Search new data instantly, without rebuilding the entire index. Your vectors are searchable the moment they're added, and indexed in the background." },
     { title: "Memory‑Efficient Storage", text: "Store billions of vectors with minimal memory footprint using our optimized storage architecture." },
-    { title: "Asymmetric, Scalar and Binary Quantization", text: "Reduce memory usage by up to 64x while maintaining search quality with advanced quantization techniques." },
+    { title: "Asymmetric, Scalar and Binary Quantization", text: "Reduce memory usage by up to 32x while maintaining search quality with advanced quantization techniques." },
   ] as Feature[],
 }
 
