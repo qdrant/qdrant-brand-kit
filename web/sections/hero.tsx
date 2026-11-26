@@ -129,7 +129,7 @@ export function Hero({
   // 2026-11-26). The text keeps the hero's default spacing; a bare visual gets more room around it, 64px above and below.
   const trustEl =
     trust && trust.length > 0 ? (
-      <ul className={cn("flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted-foreground", centered ? "justify-center" : "justify-start")}>
+      <ul className={cn("flex flex-wrap items-center gap-x-12 gap-y-3 text-sm text-muted-foreground", centered ? "justify-center" : "justify-start")}>
         {trust.map((item) => (
           <li key={item.label} className="flex items-center gap-2">
             <Icon name={item.icon} className="size-4 text-(--web-indigo)" />
