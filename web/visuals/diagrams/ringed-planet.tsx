@@ -8,7 +8,7 @@ import {
   type CanvasScene,
   type Palette,
 } from "../scene"
-import { TAU, crosshair, ids, isDark, labelRow, readout } from "./lib"
+import { TAU, crosshair, ids, labelRow, readout } from "./lib"
 
 // Ringed planet: a dotted sphere lit from above, turning slowly, inside a ring of 560 points in two bands,
 // a collection in orbit. Inner points orbit faster (Kepler). A query sits on the ring; its 5 nearest ring
@@ -120,13 +120,11 @@ const scene: CanvasScene<State> = {
     ctx.fill()
     ctx.fillStyle = tint
     ctx.fill()
-    ctx.strokeStyle = p.line
-    ctx.stroke()
+    // No outline: the hexagons draw the sphere's edge (design lead, 2026-11-26).
     const cs = Math.cos(spin)
     const ss = Math.sin(spin)
     // The points' spacing on the sphere: about sqrt(4π / DOTS) of the radius.
     const cell = R * Math.sqrt((4 * Math.PI) / DOTS)
-    const dark = isDark(p)
     for (const [x0, y0, z0] of s.dots) {
       const v = view(x0 * cs + z0 * ss, y0, -x0 * ss + z0 * cs)
       if (v.z < 0) continue
@@ -140,9 +138,8 @@ const scene: CanvasScene<State> = {
       const hx = cx + v.x * R
       const hy = cy - v.y * R
       ctx.globalAlpha = 0.35 + 0.65 * lit
-      // On dark the lit side is the text color and the shade indigo; on light it's all indigo, so the light still
-      // reads as light.
-      ctx.fillStyle = dark && lit > 0.55 ? p.star : p.bright
+      // All indigo, in both themes (design lead, 2026-11-26); the light reads through size and strength.
+      ctx.fillStyle = p.bright
       ctx.beginPath()
       for (let k = 0; k < 6; k++) {
         const a = -Math.PI / 2 + (k * Math.PI) / 3

@@ -6,6 +6,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
 import { Plate } from "../lib/plate"
+import { PatternLayers } from "../patterns"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
 import type { Feature } from "../content/sections"
@@ -139,9 +140,19 @@ export function Bento({
         </ul>
       ) : (
         <div className="grid gap-(--qd-layout-column-gap) md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
-          <Plate className="flex flex-col gap-6 rounded-xl p-8 lg:row-span-2">
-            {list?.title && <h3 className={heading.card}>{list.title}</h3>}
-            <ul className="flex flex-col gap-4">
+          <Plate className="relative flex flex-col gap-6 rounded-xl p-8 lg:row-span-2">
+            {/* A subtle pattern fills the tall tile's empty bottom: Pixel drift, faded up into the list (design lead,
+                2026-11-26). */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 [mask-image:linear-gradient(to_top,black,transparent)] opacity-70"
+            >
+              <PatternLayers ids="pixel-drift" />
+            </span>
+            {list?.title && (
+              <h3 className={cn(heading.card, "relative")}>{list.title}</h3>
+            )}
+            <ul className="relative flex flex-col gap-4">
               {(list?.items ?? []).map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="web-icon-tile web-tone-indigo mt-0.5 grid size-5 shrink-0 place-items-center rounded-full">

@@ -210,7 +210,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "A prompt for agents shows the agents, not the prompt",
-        text: "Give this to your agent: the marks of the agents it's for (Claude, Codex, Cursor), one color in the muted text color, then the label and a copy button. The prompt itself isn't shown; the button copies it, and it shows when you hover the button.",
+        text: "Give this to your agent: the marks of the agents it's for (Claude, Codex, Cursor), one color in the muted text color, then the label and a copy button. The prompt itself isn't shown; the button copies it, and it shows when you hover the button. In a hero it sits above the title, so the buttons under the text stand alone, and it's tight: the agents' marks close together, little padding (2026-11-26).",
         decided: "Design lead, 2026-11-24",
         source: "web/lib/copy-snippet.tsx, web/assets/logos/agents/",
       },
@@ -232,6 +232,18 @@ export const guidelines: GuidelineGroup[] = [
         text: "Where lines meet inside a section, and before a kicker, a step or an item in a vertical list of tabs, a small hexagon (7 by 8px) stands like the logo's brandmark, a point at the top and the bottom. Hollow, filled with the page's color over a line, and filled with indigo when active. Where a seam meets the rails, at a section's outer edges, the mark is a four-point star instead (design lead, 2026-11-24): each corner the two lines make is filled with a curve in the lines' own color, tangent to both lines, so the lines widen into a sharp star, 11 by 11px, centered exactly on the crossing. A corner is drawn only where both its lines run: under the navbar, where no rail comes from above, only the two lower corners. The star is still. Never a dot or another shape. A kicker's node is a fill in the node color with no outline (2026-11-24), and it's alive: it blinks like a live readout, a hard step to 25% and back every 2s, each at its own offset (design lead, 2026-11-22), and holds still for reduced motion. Every other node is still (design lead, 2026-11-24). Never in a row of tabs, like tabs on a tray: the active tab's plate marks it (design lead, 2026-11-24).",
         decided: "Design lead, 2026-11-22 and 2026-11-24",
         source: "web/lib/node.tsx",
+      },
+      {
+        title: "Logo grids answer the pointer",
+        text: "In a grid of customer logos, every logo turns to the text color on hover. A logo with a case study is a link: the whole cell is clickable, an arrow in its top-right corner marks it at rest, and on hover a subtle indigo light rises from the bottom and a mono \"Case study\" label appears. The grid's last cell is its action (See more customers), not a link floating above. Result cards show the customer's logo, not its name, and link to the case study.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/sections/logo-cloud.tsx, web/sections/stats.tsx",
+      },
+      {
+        title: "A tall checklist tile ends in a pattern",
+        text: "When a bento's checklist tile is taller than its list, Pixel drift fills its bottom half, faded up into the list, so the space isn't empty.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/sections/bento.tsx",
       },
       {
         title: "Cells end a section on its line",

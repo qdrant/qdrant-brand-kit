@@ -1,7 +1,5 @@
 "use client"
 
-import { ArrowRight } from "lucide-react"
-
 import { ASSETS } from "../lib/assets"
 import { CodePanel } from "../lib/code-panel"
 import { MonoImage } from "../lib/mono-image"
@@ -187,13 +185,10 @@ export function AnomalyDiagram() {
   )
 }
 
-// Enterprise-ready tooling, the three tiles (instead of the site's SVG illustrations): the compliance badges from
-// web/assets/badges, Qdrant's Prometheus metrics endpoint with metric names from the monitoring docs (values are
-// examples), and Enterprise SSO, which signs a team in to the Cloud Console through its identity provider (Premium
-// tier; docs: cloud-account-setup#enterprise-single-sign-on-sso, checked 2026-11-26).
-const chip =
-  "rounded-md border border-(--web-line) bg-card px-3 py-2 font-mono text-xs tracking-wider uppercase"
-
+// Enterprise-ready tooling, the three tiles, with the logos the site shows (design lead, 2026-11-26): the compliance
+// badges from web/assets/badges, and the monitoring and sign-in tools as round chips in an arc, their logos taken from
+// qdrant.tech's own tile images (web/assets/logos/integrations) and shown in one color that follows the theme.
+// Microsoft Entra ID and OpenID, the site's other two sign-in logos, are PNGs there, so they wait for vector files.
 export function ComplianceBadges() {
   return (
     <div className="flex items-center gap-8">
@@ -211,46 +206,49 @@ export function ComplianceBadges() {
   )
 }
 
-export function MetricsSnippet() {
-  const rows = [
-    ["collections_total", "4"],
-    ["collections_vector_total", "1203481"],
-    ["cluster_peers_total", "3"],
-  ]
+function LogoChips({ logos }: { logos: { file: string; name: string }[] }) {
   return (
-    <div className="flex w-full max-w-72 flex-col gap-2 font-mono text-xs">
-      <p className="tracking-wider text-muted-foreground uppercase">
-        GET /metrics
-      </p>
-      <ul className="flex flex-col gap-1.5 rounded-md border border-(--web-line) bg-card p-3">
-        {rows.map(([name, value]) => (
-          <li key={name} className="flex justify-between gap-3">
-            <span className="truncate text-foreground">{name}</span>
-            <span className="text-muted-foreground">{value}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="flex items-end gap-5">
+      {logos.map((logo, i) => (
+        <li
+          key={logo.file}
+          // An arc: the middle chips sit higher, like the site's tiles.
+          className={
+            i === 0 || i === logos.length - 1
+              ? "web-plate grid size-14 place-items-center rounded-full"
+              : "web-plate mb-6 grid size-14 place-items-center rounded-full"
+          }
+        >
+          <MonoImage
+            src={`${ASSETS}/logos/integrations/${logo.file}.svg`}
+            label={logo.name}
+            className="size-7 text-foreground"
+          />
+        </li>
+      ))}
+    </ul>
   )
 }
 
-export function SsoFlow() {
+export function MonitoringLogos() {
   return (
-    <div className="flex flex-col items-center gap-2 text-center">
-      <span className={chip}>Your team</span>
-      <ArrowRight
-        aria-hidden
-        className="size-4 rotate-90 text-(--web-indigo)"
-      />
-      <span className={chip}>
-        Identity provider{" "}
-        <span className="text-muted-foreground">SAML / OIDC</span>
-      </span>
-      <ArrowRight
-        aria-hidden
-        className="size-4 rotate-90 text-(--web-indigo)"
-      />
-      <span className={chip}>Cloud Console</span>
-    </div>
+    <LogoChips
+      logos={[
+        { file: "prometheus", name: "Prometheus" },
+        { file: "grafana", name: "Grafana" },
+        { file: "datadog", name: "Datadog" },
+      ]}
+    />
+  )
+}
+
+export function SsoLogos() {
+  return (
+    <LogoChips
+      logos={[
+        { file: "okta", name: "Okta" },
+        { file: "google", name: "Google" },
+      ]}
+    />
   )
 }

@@ -1,5 +1,6 @@
 import { cn } from "@qdrant/design-system/lib/utils"
 
+import { CustomerLogo } from "../lib/customer-logo"
 import { Plate } from "../lib/plate"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
@@ -11,7 +12,8 @@ export type StatsProps = SectionProps & {
   // Proposal (2026-11-24): lead, the first figure large across the width with the rest in cells under it.
   layout?: "cells" | "cards" | "lead"
   header?: HeaderProps
-  items: { value: string; label?: string; company?: string; text?: string; href?: string }[]
+  // logo: the company's id in the customer logo library, shown instead of its name (2026-11-26, the home page).
+  items: { value: string; label?: string; company?: string; logo?: string; text?: string; href?: string }[]
 }
 
 // Numbers that prove a claim (2026-11-21): figures in mono, so they read as data, each with its label or source.
@@ -84,13 +86,34 @@ export function Stats({ layout = "cells", header, items, theme, surface, pattern
               : "lg:grid-cols-4"
           )}
         >
-          {items.map((item) => (
-            <Plate as="li" key={item.value} className="flex flex-col gap-6 rounded-xl p-6">
-              {item.company && <p className={cn(type.small, "font-mono uppercase")}>{item.company}</p>}
-              <p className="font-mono text-xl leading-snug tracking-tight text-foreground">{item.value}</p>
-              {item.text && <p className={type.small}>{item.text}</p>}
-            </Plate>
-          ))}
+          {items.map((item) => {
+            const body = (
+              <>
+                {item.logo ? (
+                  <CustomerLogo
+                    id={item.logo}
+                    version="mono"
+                    className="h-7 w-auto max-w-36 self-start text-muted-foreground transition-colors group-hover/card:text-foreground"
+                  />
+                ) : (
+                  item.company && <p className={cn(type.small, "font-mono uppercase")}>{item.company}</p>
+                )}
+                <p className="font-mono text-xl leading-snug tracking-tight text-foreground">{item.value}</p>
+                {item.text && <p className={type.small}>{item.text}</p>}
+              </>
+            )
+            return (
+              <Plate as="li" key={item.value} className="group/card rounded-xl">
+                {item.href ? (
+                  <a href={item.href} aria-label={item.company} className="flex h-full flex-col gap-6 p-6 outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color)">
+                    {body}
+                  </a>
+                ) : (
+                  <div className="flex h-full flex-col gap-6 p-6">{body}</div>
+                )}
+              </Plate>
+            )
+          })}
         </ul>
       )}
     </Section>

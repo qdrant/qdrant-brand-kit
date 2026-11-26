@@ -42,6 +42,22 @@ export const customers = {
     "discord", "perplexity", "cognizant", "dailymotion", "zscaler", "servicenow", "voiceflow", "deloitte",
   ],
   action: { label: "See more customers", href: "/customers/" },
+  // The home page's logos in the site's order (read 2026-11-26): thirteen, eight of them with a case study.
+  home: [
+    { name: "Disney", logo: "disney" },
+    { name: "ServiceNow", logo: "servicenow" },
+    { name: "HubSpot", logo: "hubspot", href: "/blog/case-study-hubspot/" },
+    { name: "Discord", logo: "discord" },
+    { name: "Canva", logo: "canva" },
+    { name: "Zscaler", logo: "zscaler" },
+    { name: "Bayer", logo: "bayer", href: "/blog/case-study-bayer/" },
+    { name: "Tripadvisor", logo: "tripadvisor", href: "/blog/case-study-tripadvisor/" },
+    { name: "OpenTable", logo: "opentable", href: "/blog/case-study-opentable/" },
+    { name: "Bazaarvoice", logo: "bazaarvoice", href: "/blog/case-study-bazaarvoice/" },
+    { name: "Flipkart", logo: "flipkart", href: "/blog/case-study-flipkart/" },
+    { name: "Sprinklr", logo: "sprinklr", href: "/blog/case-study-sprinklr/" },
+    { name: "Deutsche Telekom", logo: "telekom", href: "/blog/case-study-deutsche-telekom/" },
+  ],
 }
 
 // About: the stats row.
@@ -57,11 +73,11 @@ export const aboutStats = [
 export const applications = {
   title: "One Engine, Endless Applications",
   cards: [
-    { company: "Tripadvisor", value: "2-3x revenue", text: "Powers AI Trip Planner on billions of reviews and images, driving 2-3x revenue.", href: "/blog/case-study-tripadvisor/" },
-    { company: "HubSpot", value: "deep contextual awareness", text: "Powers Breeze AI with real-time, personalized responses and deep contextual awareness.", href: "/blog/case-study-hubspot/" },
-    { company: "Deutsche Telekom", value: "2M+ AI-driven conversations", text: "Powers multi-agent platform with real-time context across 2M+ AI-driven conversations.", href: "/blog/case-study-deutsche-telekom/" },
-    { company: "Dust", value: "5,000+ data sources", text: "Powers Dust's AI agents platform with scalable vector search across 5,000+ data sources.", href: "/blog/case-study-dust-v2/" },
-    { company: "Lyzr", value: "reducing latency by 90%", text: "Powers Lyzr's AI agents, reducing latency by 90% and increasing throughput by 150%.", href: "/blog/case-study-lyzr/" },
+    { company: "Tripadvisor", logo: "tripadvisor", value: "2-3x revenue", text: "Powers AI Trip Planner on billions of reviews and images, driving 2-3x revenue.", href: "/blog/case-study-tripadvisor/" },
+    { company: "HubSpot", logo: "hubspot", value: "deep contextual awareness", text: "Powers Breeze AI with real-time, personalized responses and deep contextual awareness.", href: "/blog/case-study-hubspot/" },
+    { company: "Deutsche Telekom", logo: "telekom", value: "2M+ AI-driven conversations", text: "Powers multi-agent platform with real-time context across 2M+ AI-driven conversations.", href: "/blog/case-study-deutsche-telekom/" },
+    { company: "Dust", logo: "dust", value: "5,000+ data sources", text: "Powers Dust's AI agents platform with scalable vector search across 5,000+ data sources.", href: "/blog/case-study-dust-v2/" },
+    { company: "Lyzr", logo: "lyzr", value: "reducing latency by 90%", text: "Powers Lyzr's AI agents, reducing latency by 90% and increasing throughput by 150%.", href: "/blog/case-study-lyzr/" },
   ],
 }
 

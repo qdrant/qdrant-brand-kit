@@ -39,14 +39,14 @@ import {
   IndexingDiagram,
   InferenceDiagram,
   MetadataFilterCode,
-  MetricsSnippet,
+  MonitoringLogos,
   MultivectorDiagram,
   QuantizationDiagram,
   RagDiagram,
   RecommendDiagram,
   RerankDiagram,
   SemanticSearchDiagram,
-  SsoFlow,
+  SsoLogos,
   StorageDiagram,
 } from "../visuals/home"
 import { WebUi } from "../visuals/web-ui"
@@ -95,13 +95,15 @@ export function HomePage() {
       className="bg-background text-foreground"
     >
       <Navbar variant="full" menus={menus} {...navActions} />
-      <Hero layout="centered" {...homeHero} visual={<HeroPlanet />} visualFrame="none" />
+      <Hero
+        layout="centered"
+        {...homeHero}
+        visual={<HeroPlanet />}
+        visualFrame="none"
+      />
       <LogoCloud
         layout="grid"
-        logos={customers.names.map((name, i) => ({
-          name,
-          logo: customers.logos[i],
-        }))}
+        logos={customers.home}
         action={customers.action}
       />
       <FeatureRows
@@ -121,6 +123,7 @@ export function HomePage() {
         header={{ title: applications.title }}
         items={applications.cards.map((c) => ({
           company: c.company,
+          logo: c.logo,
           value: c.value,
           text: c.text,
           href: c.href,
@@ -143,7 +146,11 @@ export function HomePage() {
         list={{ items: enterprise.list }}
         tiles={enterprise.tiles.map((title, i) => ({
           title,
-          visual: [<ComplianceBadges key="compliance" />, <MetricsSnippet key="metrics" />, <SsoFlow key="sso" />][i],
+          visual: [
+            <ComplianceBadges key="compliance" />,
+            <MonitoringLogos key="monitoring" />,
+            <SsoLogos key="sso" />,
+          ][i],
         }))}
       />
       <Testimonials layout="single" quotes={[canvaQuote]} />

@@ -110,7 +110,6 @@ export function Hero({
           ))}
         </ul>
       )}
-      {snippet && <CopySnippet label={snippet.label} text={snippet.text} agents={snippet.agents} />}
       {note && (
         <p className={cn("text-sm text-muted-foreground", centered && "text-center")}>
           {note.text}{" "}
@@ -122,6 +121,9 @@ export function Hero({
       )}
     </>
   )
+
+  // The prompt for agents sits above the title, so the buttons under the text stand alone (design lead, 2026-11-26).
+  const snippetEl = snippet ? <CopySnippet label={snippet.label} text={snippet.text} agents={snippet.agents} /> : null
 
   const trustEl =
     trust && trust.length > 0 ? (
@@ -139,8 +141,9 @@ export function Hero({
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-12 lg:gap-16">
         <div className="flex flex-col gap-8">
+          {snippetEl && <div className="flex">{snippetEl}</div>}
           <SectionHeader as="h1" layout="split" kicker={kicker} title={title} description={description} actions={actions} />
-          {(pills || snippet || note) && <div className="flex flex-col items-start gap-6 lg:items-end">{extras}</div>}
+          {(pills || note) && <div className="flex flex-col items-start gap-6 lg:items-end">{extras}</div>}
         </div>
         {mediaEl && <div className="w-full [&>.web-tray]:w-full">{mediaEl}</div>}
         {trustEl}
@@ -151,8 +154,9 @@ export function Hero({
   if (centered) {
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col items-center gap-10">
+        {snippetEl && <div className="-mb-2 flex justify-center">{snippetEl}</div>}
         <SectionHeader as="h1" align="center" kicker={kicker} title={title} description={description} actions={actions} />
-        {(pills || snippet || note) && <div className="flex w-full flex-col items-center gap-6">{extras}</div>}
+        {(pills || note) && <div className="flex w-full flex-col items-center gap-6">{extras}</div>}
         {mediaEl && <div className={cn("w-full", visualFrame === "none" ? "max-w-full" : "max-w-4xl")}>{mediaEl}</div>}
         {trustEl && <div className="w-full">{trustEl}</div>}
       </Section>
@@ -163,6 +167,7 @@ export function Hero({
     <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-12">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
         <div className="flex flex-col items-start gap-6">
+          {snippetEl}
           <SectionHeader as="h1" kicker={kicker} title={title} description={description} actions={actions} />
           {extras}
         </div>

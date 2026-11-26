@@ -1,3 +1,5 @@
+import { ArrowRight, ArrowUpRight } from "lucide-react"
+
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { Link } from "../content/site"
@@ -14,8 +16,9 @@ export type LogoCloudProps = SectionProps & {
   layout?: "row" | "grid" | "wall" | "marquee"
   label?: string
   // Each logo: its company name and its id in the customer logo library (content/customer-logos.ts), or a file
-  // in web/assets/logos. With neither, the name stands in, set as text.
-  logos: { name: string; logo?: string; src?: string }[]
+  // in web/assets/logos. With neither, the name stands in, set as text. href: the customer's case study; in the
+  // grid its cell is a link, marked with an arrow (design lead, 2026-11-26).
+  logos: { name: string; logo?: string; src?: string; href?: string }[]
   action?: Link
 }
 
@@ -51,7 +54,11 @@ function Logo({ name, logo, src, hoverColor }: { name: string; logo?: string; sr
         />
       </span>
     ) : (
-      <CustomerLogo id={logo} version="mono" className={cn(h, "max-w-32 text-muted-foreground")} />
+      <CustomerLogo
+        id={logo}
+        version="mono"
+        className={cn(h, "max-w-32 text-muted-foreground transition-colors duration-200 group-hover/cell:text-foreground")}
+      />
     )
   }
   return src ? (
@@ -66,10 +73,10 @@ function Logo({ name, logo, src, hoverColor }: { name: string; logo?: string; sr
 export function LogoCloud({ layout = "row", label, logos, action, theme, surface, pattern, cardPattern, id, className }: LogoCloudProps) {
   return (
     <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} spacing="compact" id={id} className={className} innerClassName="flex flex-col gap-10">
-      {(label || action) && (
+      {(label || (action && layout !== "grid")) && (
         <div className="flex flex-wrap items-center justify-between gap-4">
           {label && <p className={cn(type.small, "font-mono uppercase")}>{label}</p>}
-          {action && (
+          {action && layout !== "grid" && (
             <ArrowLink href={action.href} className="text-sm">
               {action.label}
             </ArrowLink>
@@ -77,12 +84,36 @@ export function LogoCloud({ layout = "row", label, logos, action, theme, surface
         </div>
       )}
       {layout === "grid" ? (
-        <ul className="web-grid grid-cols-2 md:grid-cols-4">
+        // Every logo turns to the text color on hover. A logo with a case study is a link: the whole cell, with an
+        // arrow in its corner, a "Case study" label and a subtle indigo light from the bottom on hover. The action is
+        // the grid's last cell (design lead, 2026-11-26).
+        <ul className="web-grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
           {logos.map((logo) => (
-            <li key={logo.name} className="grid h-28 place-items-center px-6">
-              <Logo {...logo} />
+            <li key={logo.name} className="group/cell relative grid h-28 place-items-center px-6">
+              {logo.href ? (
+                <a href={logo.href} aria-label={`${logo.name} case study`} className="absolute inset-0 grid place-items-center px-6 outline-none focus-visible:ring-(length:--qd-ui-focus-width) focus-visible:ring-(--qd-ui-focus-color) focus-visible:ring-inset">
+                  <span aria-hidden className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_oklab,var(--web-indigo)_16%,transparent),transparent_75%)] opacity-0 transition-opacity duration-300 group-hover/cell:opacity-100" />
+                  <ArrowUpRight aria-hidden className="absolute top-3 right-3 size-3.5 text-muted-foreground/70 transition-colors group-hover/cell:text-(--web-link)" />
+                  <span className="relative"><Logo {...logo} /></span>
+                  <span aria-hidden className="absolute inset-x-0 bottom-2.5 text-center font-mono text-[11px] tracking-wider text-(--web-link) uppercase opacity-0 transition-opacity duration-300 group-hover/cell:opacity-100">
+                    Case study
+                  </span>
+                </a>
+              ) : (
+                <Logo {...logo} />
+              )}
             </li>
           ))}
+          {action && (
+            <li className="group/cell relative">
+              <a href={action.href} className="absolute inset-0 grid place-items-center px-6 text-sm text-muted-foreground transition-colors group-hover/cell:text-foreground">
+                <span className="flex items-center gap-1.5">
+                  {action.label}
+                  <ArrowRight aria-hidden className="size-4" />
+                </span>
+              </a>
+            </li>
+          )}
         </ul>
       ) : layout === "wall" ? (
         <ul className="web-grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">

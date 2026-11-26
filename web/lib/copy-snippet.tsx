@@ -59,14 +59,15 @@ export function CopySnippet({
 
   if (forAgents) {
     return (
-      <div className={cn("web-plate inline-flex max-w-full items-center gap-2.5 rounded-lg py-1 pr-1 pl-3", className)}>
-        <span className="flex items-center gap-2.5 text-muted-foreground">
+      // Tight (design lead, 2026-11-26): the agents' marks close together, less padding all round.
+      <div className={cn("web-plate inline-flex max-w-full items-center gap-2 rounded-lg py-0.5 pr-0.5 pl-2.5", className)}>
+        <span className="flex items-center gap-1.5 text-muted-foreground">
           {agentIds.map((id) => (
             <MonoImage key={id} src={agents[id].src} label={agents[id].name} className="size-4" />
           ))}
         </span>
         {label && <span className="text-sm text-muted-foreground">{label}</span>}
-        <span aria-hidden className="h-5 w-px bg-(--web-line)" />
+        <span aria-hidden className="h-4 w-px bg-(--web-line)" />
         {button}
       </div>
     )
