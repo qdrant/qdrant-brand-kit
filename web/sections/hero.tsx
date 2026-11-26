@@ -126,7 +126,8 @@ export function Hero({
   const snippetEl = snippet ? <CopySnippet label={snippet.label} text={snippet.text} agents={snippet.agents} /> : null
 
   // Proof points as a plain row of an icon and a label each, no cells or tiles, under the hero's visual (design lead,
-  // 2026-11-26), so the hero stays short and the customers' logos show above the fold.
+  // 2026-11-26), so the hero stays short and the customers' logos peek above the fold. Every element keeps its space:
+  // nothing overlaps.
   const trustEl =
     trust && trust.length > 0 ? (
       <ul className={cn("flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted-foreground", centered ? "justify-center" : "justify-start")}>
@@ -163,13 +164,13 @@ export function Hero({
         lines={false}
         spacing={visualFrame === "none" ? "none" : undefined}
         id={id}
-        className={cn(visualFrame === "none" && "pt-8 pb-5 lg:pt-10", className)}
-        innerClassName="flex flex-col items-center gap-10"
+        className={cn(visualFrame === "none" && "pt-12 pb-8", className)}
+        innerClassName={cn("flex flex-col items-center", visualFrame === "none" ? "gap-8" : "gap-10")}
       >
-        {snippetEl && <div className="-mb-4 flex justify-center">{snippetEl}</div>}
+        {snippetEl && <div className="flex justify-center">{snippetEl}</div>}
         <SectionHeader as="h1" align="center" kicker={kicker} title={title} description={description} actions={actions} />
         {(pills || note) && <div className="flex w-full flex-col items-center gap-6">{extras}</div>}
-        {mediaEl && <div className={cn("w-full", visualFrame === "none" ? "pointer-events-none -mt-12 -mb-10 max-w-full" : "max-w-4xl")}>{mediaEl}</div>}
+        {mediaEl && <div className={cn("w-full", visualFrame === "none" ? "pointer-events-none max-w-full" : "max-w-4xl")}>{mediaEl}</div>}
         {trustEl && <div className="w-full">{trustEl}</div>}
       </Section>
     )

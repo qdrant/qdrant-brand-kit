@@ -74,7 +74,7 @@ const scene: CanvasScene<State> = {
   },
   draw(ctx, s, t) {
     const { p, w, h } = s
-    const R = Math.min(h * 0.4, w * 0.17)
+    const R = Math.min(h * 0.42, w * 0.17)
     const cx = w * 0.5
     const cy = h * 0.5
     const spin = t * 0.08

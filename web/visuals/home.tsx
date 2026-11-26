@@ -26,7 +26,7 @@ import { Storage } from "./diagrams/storage"
 // The hero: a collection in orbit, a query connected to its nearest points (instead of the site's astronaut photo).
 export function HeroPlanet() {
   return (
-    <DiagramFrame width={1200} aspect="15 / 4">
+    <DiagramFrame width={1200} aspect="4 / 1">
       <RingedPlanet />
     </DiagramFrame>
   )

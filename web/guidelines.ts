@@ -247,7 +247,7 @@ export const guidelines: GuidelineGroup[] = [
       },
       {
         title: "The hero has no rails, and its proof row is plain",
-        text: "The hero draws no rails or seams: it opens the page under the navbar's line. Its proof points (stars, members, compliance) are a plain row of an icon and a label each, in the muted text with an indigo icon, centered under the hero's visual, never cells or tiles. With a bare visual (the home page's planet) the hero is tighter, the visual tucks up under the buttons, and the customers' logos show above the fold.",
+        text: "The hero draws no rails or seams: it opens the page under the navbar's line. Its proof points (stars, members, compliance) are a plain row of an icon and a label each, in the muted text with an indigo icon, centered under the hero's visual, never cells or tiles. With a bare visual (the home page's planet) the visual is short, so the customers' logos peek above the fold; the elements keep their full spacing, never overlapping or crowding to get there (2026-11-26).",
         decided: "Design lead, 2026-11-26",
         source: "web/sections/hero.tsx",
       },
