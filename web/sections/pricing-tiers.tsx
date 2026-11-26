@@ -120,7 +120,7 @@ export function PricingTiers({ layout = "grid", header, groups, calculator, them
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
         {headerEl}
-        <ul className="grid gap-(--qd-layout-column-gap) lg:grid-cols-2">
+        <ul className="grid gap-(--web-card-gap) lg:grid-cols-2">
           {tiers.map((tier) => (
             <Plate as="li" key={tier.name} className="flex flex-col gap-8 rounded-xl p-6 md:p-8">
               <div className="flex flex-col gap-3">

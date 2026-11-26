@@ -110,7 +110,7 @@ export function CaseStudies({ layout = "cards", header, items = [], story, theme
           </div>
         </Plate>
       ) : (
-        <ul className="grid gap-(--qd-layout-column-gap) md:grid-cols-3">
+        <ul className="grid gap-(--web-card-gap) md:grid-cols-3">
           {items.map((item) => (
             <Plate as="li" key={item.company} className="flex flex-col rounded-xl">
               <div className="flex flex-1 flex-col gap-6 p-6">

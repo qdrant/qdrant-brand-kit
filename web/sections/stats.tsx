@@ -80,7 +80,7 @@ export function Stats({ layout = "cells", header, items, theme, surface, pattern
         // home page's results).
         <ul
           className={cn(
-            "grid gap-(--qd-layout-column-gap) sm:grid-cols-2",
+            "grid gap-(--web-card-gap) sm:grid-cols-2",
             items.length === 5
               ? "lg:grid-cols-6 lg:[&>li:nth-child(-n+3)]:col-span-2 lg:[&>li:nth-child(n+4)]:col-span-3"
               : "lg:grid-cols-4"

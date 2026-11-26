@@ -135,9 +135,9 @@ export function BlogGrid({
         />
       )}
       {layout === "featured" && featured ? (
-        <div className="grid gap-(--qd-layout-column-gap) lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+        <div className="grid gap-(--web-card-gap) lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <PostCard post={featured} images={images} size="lg" />
-          <ul className="flex flex-col gap-(--qd-layout-column-gap)">
+          <ul className="flex flex-col gap-(--web-card-gap)">
             {posts.map((post) => (
               <li key={post.href} className="flex flex-1">
                 <PostCard post={post} images={images} size="row" className="flex-1" />
@@ -146,7 +146,7 @@ export function BlogGrid({
           </ul>
         </div>
       ) : (
-        <ul className="grid gap-(--qd-layout-column-gap) md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-(--web-card-gap) md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <li key={post.href} className="flex">
               <PostCard post={post} images={images} className="flex-1" />

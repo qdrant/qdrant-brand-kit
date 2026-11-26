@@ -82,7 +82,7 @@ export function ResourceCards({ layout = "grid", header, items, theme, surface, 
         />
       )}
       {layout === "grid" ? (
-        <ul className="grid gap-(--qd-layout-column-gap) md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-(--web-card-gap) md:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => {
             const kind = kinds[item.type] ?? { icon: "File", tone: "indigo" as Tone }
             return (

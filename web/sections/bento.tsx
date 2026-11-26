@@ -99,7 +99,7 @@ export function Bento({
         }
       />
       {layout === "cards" ? (
-        <ul className="grid gap-(--qd-layout-column-gap) md:grid-cols-2 lg:grid-cols-6">
+        <ul className="grid gap-(--web-card-gap) md:grid-cols-2 lg:grid-cols-6">
           {cards.map((card, i) => {
             const place = arrangements[cards.length]?.[i] ?? {
               span: "lg:col-span-2",
@@ -139,7 +139,7 @@ export function Bento({
           })}
         </ul>
       ) : (
-        <div className="grid gap-(--qd-layout-column-gap) md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
+        <div className="grid gap-(--web-card-gap) md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
           <Plate className="relative flex flex-col gap-6 rounded-xl p-8 lg:row-span-2">
             {/* A subtle pattern fills the tall tile's empty bottom: Pixel drift, faded up into the list (design lead,
                 2026-11-26). */}

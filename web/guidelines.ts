@@ -36,6 +36,12 @@ export const guidelines: GuidelineGroup[] = [
         source: "primitives/spacing/",
       },
       {
+        title: "Cards sit one step closer than columns",
+        text: "Cards side by side or stacked (bento tiles, card grids, result cards, steps) are 16px apart, one step under the layout's 24px column gap; small stacked option cards are 8px apart. Columns of a layout, like text beside media, keep 24px (--qd-layout-column-gap). Use --web-card-gap for any new grid of cards.",
+        decided: "Design lead, 2026-11-26",
+        source: "web/styles/web.css",
+      },
+      {
         title: "Pages are built from the library",
         text: "A page is made of the library's sections, with its copy in a content file and real visuals (product screens, diagrams) passed to the sections' visual slot. If a page needs something a section can't do, add it to the section as a prop or a slot, so every page gets it. Never a page-only section.",
         decided: "Design lead, 2026-11-22",

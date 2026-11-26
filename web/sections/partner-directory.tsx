@@ -74,7 +74,7 @@ export function PartnerDirectory({ header, groups, layout = "grouped", theme, su
                 <h3 className={heading.card}>{group.title}</h3>
                 <p className={type.small}>{group.text}</p>
               </div>
-              <ul className="grid grid-cols-1 gap-(--qd-layout-column-gap) md:grid-cols-2 lg:col-span-2">
+              <ul className="grid grid-cols-1 gap-(--web-card-gap) md:grid-cols-2 lg:col-span-2">
                 {group.partners.map((partner) => (
                   <Plate as="li" key={partner.name} className="flex flex-col gap-3 rounded-xl p-6">
                     <PartnerBody partner={partner} />

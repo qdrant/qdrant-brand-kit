@@ -84,6 +84,13 @@
   --web-tray: color-mix(in oklab, var(--foreground) 2.5%, transparent);
 }
 
+/* The gap between cards side by side or stacked (bento tiles, card grids, result cards): one step under the layout's
+   column gap, 16px instead of 24px (design lead, 2026-11-26). Columns of a layout (text beside media) keep
+   --qd-layout-column-gap. */
+:root {
+  --web-card-gap: var(--qd-spacing-16);
+}
+
 .web-seam {
   border-top: 1px solid var(--web-line);
 }

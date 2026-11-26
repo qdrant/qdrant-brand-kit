@@ -56,7 +56,7 @@ export function Values({ header, items, layout = "numbered", tones = "mixed", th
           ))}
         </ol>
       ) : (
-        <ul className={cn("grid grid-cols-1 gap-(--qd-layout-column-gap)", cols(items.length))}>
+        <ul className={cn("grid grid-cols-1 gap-(--web-card-gap)", cols(items.length))}>
           {items.map((item, i) => (
             <Plate as="li" simple key={item.title} className="flex flex-col gap-4 rounded-xl p-6">
               <IconTile name={item.icon} tone={tones === "mixed" ? toneAt(i) : tones} />
