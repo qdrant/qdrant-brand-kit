@@ -18,7 +18,7 @@ import { definePattern, type PatternNote } from "../types"
 const ASSET: PatternNote = {
   rule: "Qbot is reused, never redrawn",
   source: "design-system/AGENTS.md and brand-assets/mascot",
-  text: "The head is a vector drawing the team shared (qbot-front-head.svg), not one of the mascot's approved 3D or 2D renders in brand-assets/mascot. It needs Vanesa's yes before it goes beyond an exploration.",
+  text: "The head is a vector drawing the team shared (qbot-front-head.svg), not one of the mascot's approved 3D or 2D renders in brand-assets/mascot. It needs the visual designer's yes before it goes beyond an exploration.",
 }
 const CROP: PatternNote = {
   rule: "Never cut Qbot at the face",
