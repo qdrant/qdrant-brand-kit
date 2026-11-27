@@ -365,7 +365,9 @@ def main():
     # the printed size.
     is_qbot = lambda i: "qd-mascot" in (i.get("cls") or "") or "brand-assets/mascot/" in (i.get("src") or "")
     pics = [i for i in meas["images"] if i not in meas["logos"] and not (i.get("src") or "").lower().endswith(".svg")]
-    is_space = lambda i: not is_qbot(i) and i.get("cls") != "headshot"
+    # A QR code (.qd-qr) or a partner's logo (.qd-partner-lockup) can be a PNG, but it isn't imagery.
+    not_imagery = lambda i: i.get("inQr") or i.get("inLockup") or "qd-qr" in (i.get("cls") or "")
+    is_space = lambda i: not is_qbot(i) and i.get("cls") != "headshot" and not not_imagery(i)
     img_bad, img_look = [], []
     for i in pics:
         nm = os.path.basename(i.get("src") or "image")

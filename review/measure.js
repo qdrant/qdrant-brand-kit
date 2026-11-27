@@ -71,7 +71,8 @@
           // A headshot is cropped by its card or circle: measure what's visible, not the whole photo.
           var info = { src: src(el), rect: rect(holder || el), loaded: el.complete && el.naturalWidth > 0,
                        naturalWidth: el.naturalWidth, naturalHeight: el.naturalHeight, shown: rect(el),
-                       cls: holder ? "headshot" : (el.className || ""), inBook: !!el.closest(".qd-book") };
+                       cls: holder ? "headshot" : (el.className || ""), inBook: !!el.closest(".qd-book"),
+                       inQr: !!el.closest(".qd-qr"), inLockup: !!el.closest(".qd-partner-lockup") };
           // Source pixels across the shown width, for the print resolution check: an object-view-box crop
           // (Qbot) or object-fit: cover shows only part of the file (visual designer, 2026-11-20).
           var st = getComputedStyle(el), srcW = el.naturalWidth, srcH = el.naturalHeight;

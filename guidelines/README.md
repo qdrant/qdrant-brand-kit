@@ -27,7 +27,7 @@ Decided by the visual designer on 2026-11-04.
 
 **Print** asks different questions (the vendor's spec, and for large formats where the piece hangs or stands and what covers it): see [`print/`](print/) section 1.
 
-**Don't ask design questions.** Take these from the rules (Vanesa, 2026-11-20):
+**Don't ask design questions.** Take these from the rules (visual designer, 2026-11-20):
 
 | Design choice | Where it comes from |
 | --- | --- |
