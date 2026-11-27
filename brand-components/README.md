@@ -6,7 +6,7 @@ Ready-made pieces for Qdrant creatives, built only from [`primitives/`](../primi
 
 A part is one piece used inside a creative: a button, a speaker card, the partner lockup, a stat card, or the badge (still to come).
 
-**The design system's web components are not for creatives** (visual designer, 2026-11-19). `design-system/components/ui/` has parts with similar names, built for web pages: **Badge** (a red pill: creatives use the event label, guidelines section 11 rule 3), **Card** (its fill is the same dark as a creative's background, so it disappears: creatives use `.qd-box--card`, [`guidelines/layout/`](../guidelines/layout/)) and **Avatar** (falls back to initials: creatives use [`headshot-circle`](headshot-circle/) with the speaker's real photo). Creatives take their values from the design system's primitives, never its web components.
+**The design system's web components are not for creatives** (visual designer, 2026-11-19). `design-system/components/ui/` has parts with similar names, built for web pages: **Badge** (a red pill: creatives use the event label, guidelines section 11 rule 3), **Card** (its fill is the same dark as a creative's background, so it disappears: creatives use `.qd-box--card`, [`guidelines/layout/`](../guidelines/layout/)) and **Avatar** (falls back to initials: creatives use [`headshot-circle`](headshot-circle/) with the speaker's real photo). Creatives take their values from the design system's primitives, never its web components. **The exception is the [code block](code-block/)** (visual designer, 2026-11-25): code is drawn exactly like the design system's CodeBlock, with rules on top for creatives.
 
 ## Adding one
 
@@ -26,3 +26,4 @@ Add a row here when it's approved:
 | [`headshot-card`](headshot-card/) | Part | Featured speakers: cutout on the headshot gradient, name and role below | Wide, square, portrait, story | Visual designer, 2026-11-04 |
 | [`headshot-circle`](headshot-circle/) | Part | Small or many speakers, agenda slots, quieter posts | All | Visual designer, 2026-11-04 |
 | [`partner-lockup`](partner-lockup/) | Part | Qdrant logo + partner logo: plus for collaborations and case studies, divider for regular co-branding | All | Visual designer, 2026-11-04 |
+| [`code-block`](code-block/) | Part | Code: the design system's CodeBlock, open on calm patterns (up to 6 lines) or in a code window | All | Visual designer, 2026-11-25 (draft) |

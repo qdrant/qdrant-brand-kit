@@ -173,7 +173,7 @@ Rules:
 
 | Background | Hero allowed |
 | --- | --- |
-| A pattern | Qbot **or** a product screen, or nothing |
+| A pattern | Qbot **or** a product screen **or** a code block, or nothing |
 | A generated image | Nothing extra. Images are never combined with Qbot ([`brand-assets/imagery/`](../brand-assets/imagery/)) |
 
 Never allowed:
@@ -259,6 +259,7 @@ Every crop is editorial, never accidental.
 - **Suggest:** let it bleed off the bottom edge, like the [Qdrant Cloud example](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18841-20954).
 - When the whole screen needs to be seen, it can sit fully inside the canvas instead.
 - **Must:** use real product screens. Never redraw or fake the UI.
+- **Code window:** code in a solid framed window is a product screen too: the design system's CodeBlock, drawn from its own values, hugging the code ([`brand-components/code-block/`](../brand-components/code-block/), visual designer 2026-11-25). It sits fully inside the canvas.
 
 ## 8. Logo
 

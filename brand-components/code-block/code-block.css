@@ -1,0 +1,90 @@
+/* Code block for creatives: the design system's CodeBlock (design-system/components/ui/code-block.tsx),
+   with the same values, as plain CSS sized for the canvas. Creatives don't load the design system's
+   globals.css, so its roles are written here with the primitives they point to (globals.css, dark and light):
+     input            neutral-800 (dark) / neutral-300 (light)   the block's edge and, at 30%, its dark fill
+     muted            neutral-900 (dark) / background.highlight  highlighted and added lines
+     foreground       text.primary                               the code
+     muted-foreground text.secondary                             file name icon, line numbers, the + mark
+     destructive      red-400 (dark) / red-700 (light)           removed lines
+   When code-block.tsx or those roles change, change this file to match. Rules: README.md. */
+
+.qd-canvas {
+  /* The UI's px values, scaled as one piece with the canvas: 2× at the reference canvas for the open block,
+     1.4× inside a code window, where the code reads as a screenshot of the UI. */
+  --qd-code-u: calc(2 * var(--qd-canvas-u));
+  --qd-code-input: var(--qd-color-neutral-800);
+  --qd-code-muted: var(--qd-color-neutral-900);
+  --qd-code-fg: var(--qd-color-text-primary);
+  --qd-code-muted-fg: var(--qd-color-text-secondary);
+  --qd-code-destructive: var(--qd-color-red-400);
+}
+.qd-canvas[data-theme="light"] {
+  --qd-code-input: var(--qd-color-neutral-300);
+  --qd-code-muted: var(--qd-color-background-highlight);
+  --qd-code-destructive: var(--qd-color-red-700);
+}
+
+/* CodeBlock: rounded-md, 1px border-input, dark:bg-input/30, text-sm (14/20). */
+.qd-code-block {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; flex: none;
+  width: 100%; min-width: 0; overflow: hidden;
+  border-radius: calc(8 * var(--qd-code-u));
+  border: calc(1 * var(--qd-code-u)) solid var(--qd-code-input);
+  color: var(--qd-code-fg);
+  font-size: calc(14 * var(--qd-code-u)); line-height: calc(20 * var(--qd-code-u));
+}
+.qd-canvas:not([data-theme="light"]) .qd-code-block { background: color-mix(in oklab, var(--qd-code-input) 30%, transparent); }
+
+/* CodeBlockHeader + CodeBlockTitle: px-3 pt-3 gap-2, the title text-xs medium with a 14px icon. */
+.qd-code-block__header {
+  display: flex; align-items: center; gap: calc(8 * var(--qd-code-u));
+  padding: calc(12 * var(--qd-code-u)) calc(12 * var(--qd-code-u)) 0; color: var(--qd-code-muted-fg);
+}
+.qd-code-block__title {
+  display: flex; align-items: center; gap: calc(8 * var(--qd-code-u)); min-width: 0;
+  font-family: var(--qd-font-family-sans); font-size: calc(12 * var(--qd-code-u)); line-height: calc(16 * var(--qd-code-u));
+  font-weight: var(--qd-font-weight-medium); color: var(--qd-code-fg);
+}
+.qd-code-block__title svg { width: calc(14 * var(--qd-code-u)); height: calc(14 * var(--qd-code-u)); flex: none; }
+
+/* CodeBlockContent: px-3 py-3 (pt-2 after a header), font-mono, leading-relaxed. The UI scrolls long lines
+   sideways with a fade at the cut edge; a still image can't scroll, so long lines are cut with that fade.
+   Never wrap (README). */
+.qd-code-block__content {
+  margin: 0; min-width: 0; overflow: hidden; white-space: pre;
+  padding: calc(12 * var(--qd-code-u));
+  font-family: var(--qd-font-family-mono); line-height: 1.625;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32 * var(--qd-code-u)), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 32 * var(--qd-code-u)), transparent);
+}
+.qd-code-block__header + .qd-code-block__content { padding-top: calc(8 * var(--qd-code-u)); }
+.qd-code-block__content code { display: grid; font: inherit; }
+
+/* CodeBlockLine and lineNumbers: the gutter is min-w-6, right-aligned, muted, gap-x-3. Numbers come from
+   data-n, so an excerpt keeps the lines' real numbers. */
+.qd-code-block__line { display: block; position: relative; margin: 0 calc(-12 * var(--qd-code-u)); padding: 0 calc(12 * var(--qd-code-u)); }
+.qd-code-block--numbered code { grid-template-columns: auto 1fr; }
+.qd-code-block--numbered .qd-code-block__line { grid-column: span 2; display: grid; grid-template-columns: subgrid; column-gap: calc(12 * var(--qd-code-u)); }
+.qd-code-block--numbered .qd-code-block__line::before { content: attr(data-n); min-width: calc(24 * var(--qd-code-u)); text-align: end; color: var(--qd-code-muted-fg); }
+.qd-code-block__line--highlighted, .qd-code-block__line--added { background: var(--qd-code-muted); }
+.qd-code-block__line--added::after { content: "+"; position: absolute; left: calc(4 * var(--qd-code-u)); top: 0; color: var(--qd-code-muted-fg); }
+.qd-code-block__line--removed { background: color-mix(in oklab, var(--qd-code-destructive) 10%, transparent); }
+.qd-code-block__line--removed::after { content: "\2212"; position: absolute; left: calc(4 * var(--qd-code-u)); top: 0; color: var(--qd-code-destructive); }
+
+/* Code window: long code as a product screen (guidelines section 7). A solid frame that hugs the code
+   block: rounded corners, a thin border, nothing behind it shows through. Dark only for now. */
+.qd-code-window {
+  --qd-code-u: calc(1.4 * var(--qd-canvas-u));
+  position: relative; z-index: 1; flex: none; align-self: stretch; min-width: 0;
+  border-radius: calc(24 * var(--qd-canvas-u));
+  padding: calc(12 * var(--qd-canvas-u));
+  background: color-mix(in oklab, var(--qd-color-neutral-50) 10%, var(--qd-color-neutral-950));
+  border: var(--qd-box-border-width) solid color-mix(in oklab, var(--qd-color-neutral-50) 14%, transparent);
+}
+.qd-code-window__screen {
+  min-width: 0; overflow: hidden;
+  border-radius: calc(14 * var(--qd-canvas-u));
+  background: var(--qd-color-neutral-950); /* the design system's card surface (--qd-ui-card, dark) */
+  padding: calc(24 * var(--qd-canvas-u));
+}

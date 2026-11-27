@@ -44,7 +44,7 @@
   }
   function run() {
     var canvas = document.querySelector(".qd-canvas");
-    var out = { canvas: null, texts: [], images: [], logos: [], buttons: [], cards: [], circles: [], icons: [], books: [], blocks: [], fonts: {} };
+    var out = { canvas: null, texts: [], images: [], logos: [], buttons: [], cards: [], circles: [], icons: [], books: [], blocks: [], code: [], fonts: {} };
     if (canvas) {
       out.canvas = rect(canvas);
       out.canvas.shape = canvas.dataset.shape || null;
@@ -61,6 +61,7 @@
             role: role(el), rect: tr, box: rect(el),
             nested: !!(el.parentElement && el.parentElement.closest("p, h1, h2, h3, h4, h5, h6, li, span, a, strong, em") && el.parentElement.closest(".qd-canvas")),
             inBox: !!el.closest(".qd-box--card, .qd-box--outline"),
+            inCode: !!el.closest(".qd-code-block"), // code: checked as one block (brand-components/code-block)
             fontSize: parseFloat(s.fontSize), family: s.fontFamily.split(",")[0].replace(/["']/g, "").trim(),
             weight: +s.fontWeight, stretch: s.fontStretch, transform: s.textTransform, align: s.textAlign,
             color: s.color, letterSpacing: s.letterSpacing, lineHeight: s.lineHeight
@@ -111,9 +112,13 @@
             viewBox: el.getAttribute("viewBox"), strokeWidth: el.getAttribute("stroke-width"),
             stroke: s2.stroke, color: s2.color, filled: filled, nonScaling: nonScaling,
             transform: s2.transform, filter: s2.filter, boxShadow: s2.boxShadow,
-            inButton: !!el.closest(".qd-button"), onLightCard: !!el.closest(".qd-box--light-card"), textSize: near
+            inButton: !!el.closest(".qd-button"), onLightCard: !!el.closest(".qd-box--light-card"), textSize: near,
+            inCode: !!el.closest(".qd-code-block")
           });
         }
+        // A code window, or a code block outside one: the piece checked for margins and the grid.
+        if (el.classList.contains("qd-code-window") || (el.classList.contains("qd-code-block") && !el.closest(".qd-code-window")))
+          out.code.push({ rect: rect(el), window: el.classList.contains("qd-code-window"), clip: rect(el.closest(".qd-code-window") ? el.closest(".qd-code-window") : el) });
         if (el.classList.contains("qd-headshot-card__photo")) out.cards.push({ rect: rect(el) });
         if (el.classList.contains("qd-headshot-circle__photo")) out.circles.push({ rect: rect(el) });
       });

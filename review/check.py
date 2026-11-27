@@ -126,7 +126,11 @@ def check_one(m, rules):
     cs = (m.get("canvas") or {}).get("shape")
     add("Shape", cs == shape, f"data-shape={cs}, ratio says {shape}", "layout README, Shapes")
 
-    texts = [t for t in m["texts"]]
+    # Code in a code block is checked as one piece: the block (or its window) for margins and the grid, and
+    # each line only for contrast. It keeps the component's own sizes and font (brand-components/code-block).
+    code_texts = [t for t in m["texts"] if t.get("inCode")]
+    texts = [t for t in m["texts"] if not t.get("inCode")]
+    code = m.get("code", [])
     main = [t for t in texts if t["role"] == "text"]
     L, T, R, B = S["mx"] * u, S["mt"] * u, W - S["mx"] * u, H - S["mb"] * u
     pr = m.get("print")
@@ -134,7 +138,7 @@ def check_one(m, rules):
         L, T, R, B = pr["marginPx"]["x"], pr["marginPx"]["top"], W - pr["marginPx"]["x"], H - pr["marginPx"]["bottom"]
     out = []
     for kind, items in (("text", [t["box"] for t in texts]), ("logo", [l["rect"] for l in m["logos"]]),
-                        ("button", [b["rect"] for b in m["buttons"]])):
+                        ("button", [b["rect"] for b in m["buttons"]]), ("code block", [k["rect"] for k in code])):
         for r in items:
             if r["x"] < L - 1 or r["y"] < T - 1 or r["x"] + r["w"] > R + 1 or r["y"] + r["h"] > B + 1:
                 out.append(f"{kind} at {round(r['x'])},{round(r['y'])} {round(r['w'])}×{round(r['h'])}")
@@ -150,7 +154,7 @@ def check_one(m, rules):
     off = []
     # Text inside a card sits on the card's padding, not on a column line: check the card, not its text.
     lefts = [("text", t["box"]) for t in main if not t.get("inBox")] + [("logo", l["rect"]) for l in m["logos"] if not l.get("inBook")] + \
-            [("card", c["rect"]) for c in m["cards"]]
+            [("card", c["rect"]) for c in m["cards"]] + [("code block", k["rect"]) for k in code]
     # Text after an icon on the same row starts after the icon and a tight gap; the icon is what sits on the grid.
     icon_ends = [(i["rect"]["x"] + i["rect"]["w"], i["rect"]["y"], i["rect"]["h"]) for i in m.get("icons", [])]
     def after_icon(r):
@@ -176,7 +180,7 @@ def check_one(m, rules):
     for kind, r in lefts:
         if kind == "text" and after_icon(r):
             continue
-        if kind in ("text", "card") and beside_logo(r):
+        if kind in ("text", "card", "code block") and beside_logo(r):
             continue
         if min(abs(r["x"] - s) for s in starts) > 2:
             off.append(f"{kind} left edge {round(r['x'])}")
@@ -263,8 +267,18 @@ def check_one(m, rules):
         add("Contrast", "not measured", "no background render", "checks.md, Contrast")
     else:
         lows = []
-        for t in texts:
+        def clip(t):  # a cut code line only shows inside its block
             r = t["rect"]
+            if not t.get("inCode"):
+                return r
+            k = next((k["clip"] for k in code if k["clip"]["x"] <= r["x"] + 1 and k["clip"]["y"] <= r["y"] + 1
+                      and r["y"] < k["clip"]["y"] + k["clip"]["h"]), None)
+            if not k:
+                return r
+            x1, y1 = max(r["x"], k["x"]), max(r["y"], k["y"])
+            return {"x": x1, "y": y1, "w": min(r["x"] + r["w"], k["x"] + k["w"]) - x1, "h": min(r["y"] + r["h"], k["y"] + k["h"]) - y1}
+        for t in texts + code_texts:
+            r = clip(t)
             box = (max(0, int(r["x"])), max(0, int(r["y"])), min(W, int(r["x"] + r["w"])), min(H, int(r["y"] + r["h"])))
             if box[2] <= box[0] or box[3] <= box[1]:
                 continue
@@ -378,6 +392,8 @@ def check_one(m, rules):
         palettes = icon_colors()
         probs = []
         for ic in m["icons"]:
+            if ic.get("inCode"):
+                continue  # the code block's file icon is part of the UI component
             r = ic["rect"]
             light = ic.get("onLightCard") or (m["canvas"] or {}).get("theme") == "light"
             allowed = palettes["light" if light else "dark"]
