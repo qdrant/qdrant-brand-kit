@@ -94,7 +94,8 @@
         }
         if (el.classList.contains("qd-button")) out.buttons.push({ rect: rect(el), cls: el.className, text: el.textContent.trim(), inBook: !!el.closest(".qd-book") });
         if (el.classList.contains("qd-book__card")) out.books.push({ rect: rect(el), slide: !!el.closest(".qd-book--slide") });
-        if (el.tagName.toLowerCase() === "svg" && el.closest(".qd-canvas") === canvas && !el.closest("svg:not(:scope)")) {
+        // The booth look (svg.qd-booth-look) is a pattern, not an icon (guidelines/print/booths.md section 3).
+        if (el.tagName.toLowerCase() === "svg" && el.closest(".qd-canvas") === canvas && !el.closest("svg:not(:scope)") && !el.classList.contains("qd-booth-look")) {
           // Every inline SVG that isn't inside another one: icons should be svg.qd-icon (brand-assets/icons/).
           var s2 = getComputedStyle(el), shapes = el.querySelectorAll("path, circle, rect, line, polyline, polygon, ellipse");
           var filled = Array.prototype.some.call(shapes, function (p) {

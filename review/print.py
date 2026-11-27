@@ -85,9 +85,33 @@ def main():
     ap.add_argument("--print-scale", choices=["normal", "small"], default="normal",
                     help="small: the smaller text sizes (titleMin, supportingMin), to keep text in the calm sky")
     ap.add_argument("--root", default=None, help="folder served at / (default: the page's folder)")
+    ap.add_argument("--dpi", type=float, default=None,
+                    help="layout and check resolution in dpi (default 300). Booths: 10 for drafts, 20 for the final "
+                         "(guidelines/print/booths.md); text and the logo stay vector in the PDF at any value")
+    ap.add_argument("--pattern-dpi", type=float, default=None,
+                    help="resolution of the background (pattern) layer in the PDF, while layout and checks run at --dpi. "
+                         "Booths: the vendor's dpi, capped at 100 (guidelines/print/booths.tokens.json background.maxDpi)")
+    ap.add_argument("--paint-dpi", type=float, default=None,
+                    help="paint the background at this dpi, then enlarge it smoothly to --pattern-dpi. Booths: about 25 "
+                         "(background.paintDpi); the gradient and streaks have no detail, so a little blur is wanted")
     a = ap.parse_args()
+    global DPI, PX_PER_MM, PT_PER_PX
+    if a.dpi:
+        DPI = a.dpi
+        PX_PER_MM = DPI / 25.4
+        PT_PER_PX = 72 / DPI
 
     defaults, fmt = load_format(a.format)
+    # Booths (guidelines/print/booths.md section 6, visual designer, 2026-11-27): the background is one raster
+    # image, never over background.maxDpi (100) even when the vendor asks for more, painted small at
+    # background.paintDpi (25) and enlarged smoothly. It's exempt from the vendor's dpi: that minimum is for
+    # artwork with detail. The look is vector (review/booth/booth.js), so nothing is painted at full size.
+    booth = None
+    if a.format == "booth":
+        booth = json.load(open(os.path.join(REPO, "guidelines", "print", "booths.tokens.json")))
+        bg = booth["background"]
+        a.pattern_dpi = min(a.pattern_dpi or bg["maxDpi"]["$value"], bg["maxDpi"]["$value"])
+        a.paint_dpi = a.paint_dpi or bg["paintDpi"]["$value"]
     from_spec = []
     trim = mm_pair(a.trim) if a.trim else fmt.get("trim")
     if a.trim: from_spec.append("finished size")
@@ -161,6 +185,19 @@ def main():
     rel = os.path.relpath(page, root).replace(os.sep, "/")
     from urllib.parse import quote
     url = f"http://127.0.0.1:{srv.server_address[1]}/{rel}?w={W}&h={H}&qd-print={quote(json.dumps(params))}"
+    # The background layer: delivered at --pattern-dpi, painted at --paint-dpi (same layout in mm, every px
+    # value scaled) and enlarged smoothly to the delivered size.
+    s_bg = (a.pattern_dpi / DPI) if a.pattern_dpi else 1
+    W_bg, H_bg = round(W * s_bg), round(H * s_bg)
+    s_paint = (a.paint_dpi / DPI) if a.paint_dpi else s_bg
+    W_paint, H_paint = round(W * s_paint), round(H * s_paint)
+    params_bg = dict(params)
+    for k in ("w", "h", "dpi", "pxPerMm", "bleedPx", "slugPx", "markLenPx", "markGapPx", "markWeightPx", "u"):
+        params_bg[k] = params[k] * s_paint
+    params_bg["w"], params_bg["h"] = W_paint, H_paint
+    if "type" in params:
+        params_bg["type"] = {k: v * s_paint for k, v in params["type"].items()}
+    url_bg = f"http://127.0.0.1:{srv.server_address[1]}/{rel}?w={W_paint}&h={H_paint}&qd-print={quote(json.dumps(params_bg))}"
     from PIL import Image, ImageChops, ImageDraw
     Image.MAX_IMAGE_PIXELS = None
 
@@ -170,12 +207,16 @@ def main():
     backdrop_png = os.path.join(layer_dir, "backdrop.png")
     with tempfile.TemporaryDirectory() as tmp:
         raw = os.path.join(tmp, "raw.png")
-        for target, extra in ((full_png, ""), (full_png[:-4] + ".bg.png", "&qd-bg=1"),
-                              (backdrop_png, "&qd-layer=backdrop")):
-            render.chrome([f"--window-size={W},{H + render.EXTRA_H}", f"--screenshot={raw}", url + extra])
+        for target, extra, ww, hh, u0 in ((full_png, "", W, H, url), (full_png[:-4] + ".bg.png", "&qd-bg=1", W, H, url),
+                              (backdrop_png, "&qd-layer=backdrop", W_paint, H_paint, url_bg)):
+            render.chrome([f"--window-size={ww},{hh + render.EXTRA_H}", f"--screenshot={raw}", u0 + extra])
             if not os.path.exists(raw):
                 sys.exit("Chrome made no screenshot")
-            Image.open(raw).crop((0, 0, W, H)).save(target)
+            Image.open(raw).crop((0, 0, ww, hh)).save(target)
+    if (W_paint, H_paint) != (W_bg, H_bg):  # painted small: enlarge smoothly to the delivered size
+        Image.open(backdrop_png).convert("RGB").resize((W_bg, H_bg), Image.BICUBIC).save(backdrop_png)
+    backdrop_check_png = backdrop_png[:-4] + "-check.png"   # the backdrop at the layout's dpi, for the checks
+    Image.open(backdrop_png).resize((W, H)).save(backdrop_check_png)
     dom = render.chrome([f"--window-size={W},{H + render.EXTRA_H}", "--dump-dom", url]).stdout
     mm = re.search(r'<script type="application/json" id="qd-measure">(.*?)</script>', dom, re.S)
     if not mm:
@@ -195,8 +236,13 @@ def main():
     rgb_pdf = os.path.join(a.out, f"{name}-rgb.pdf")
     backdrop = Image.open(backdrop_png).convert("RGB")
     # Grain on image fades, print only, so large fades don't band in CMYK (guidelines/print/ section 3).
+    # Grain over the whole pattern layer, so its gradients and glows don't band in CMYK, like the image fades
+    # below (guidelines/print/booths.md section 3).
+    if pinfo["canvases"]:
+        noise = Image.effect_noise(backdrop.size, 4).convert("RGB")
+        backdrop = ImageChops.add(backdrop, noise, 1.0, -128)
     for f in pinfo.get("fades", []):
-        box = (max(0, int(f["x"])), max(0, int(f["y"])), min(W, int(f["x"] + f["w"])), min(H, int(f["y"] + f["h"])))
+        box = (max(0, int(f["x"] * s_bg)), max(0, int(f["y"] * s_bg)), min(W_bg, int((f["x"] + f["w"]) * s_bg)), min(H_bg, int((f["y"] + f["h"]) * s_bg)))
         if box[2] > box[0] and box[3] > box[1]:
             region = backdrop.crop(box)
             noise = Image.effect_noise(region.size, 4).convert("RGB")  # about ±4 levels around 128
@@ -302,7 +348,7 @@ def main():
     # Text on a busy background: detail (edge density) behind each text box, in the backdrop (canvas color
     # and images only, so cards and buttons don't count).
     from PIL import ImageFilter
-    back_img = Image.open(backdrop_png).convert("RGB")
+    back_img = Image.open(backdrop_check_png).convert("RGB")
     busy = []
     from PIL import ImageStat
     for t in texts:
@@ -375,8 +421,10 @@ def main():
             img_bad.append(f"Qbot has its glow ({nm}): no glow in print")
         if is_space(i) and large:
             img_bad.append(f"space imagery on a large format ({nm}): small prints only")
-    if a.min_dpi and a.min_dpi > DPI and pinfo["canvases"]:
-        img_look.append(f"the vendor asks {a.min_dpi:g} dpi; patterns are painted at {DPI} dpi")
+    pat_dpi = a.pattern_dpi or DPI
+    # Booth backgrounds are exempt from the vendor's dpi (booths.md section 6): no warning for them.
+    if not booth and a.min_dpi and a.min_dpi > pat_dpi and pinfo["canvases"]:
+        img_look.append(f"the vendor asks {a.min_dpi:g} dpi; patterns are painted at {pat_dpi:g} dpi")
     row("Images", False if img_bad else ("look" if img_look else True),
         "; ".join(img_bad + img_look) if img_bad or img_look else
         ("images allowed for this piece" if pics else "no images") + " (guidelines/print/ sections 3 and 5)")
@@ -390,7 +438,8 @@ def main():
         dpi = src_w / (shown["w"] / PX_PER_MM / 25.4) if shown["w"] else 0
         if dpi < need:
             low.append(f"the image is {dpi:.0f} dpi, needs {need:g} ({os.path.basename(img['src'])})")
-    row("Image resolution", not low, f"every image {min_dpi:g} dpi or more (space imagery 300)" if not low else
+    exempt = f"; the background ({pat_dpi:g} dpi) is exempt (guidelines/print/booths.md section 6)" if booth else ""
+    row("Image resolution", not low, f"every image {min_dpi:g} dpi or more (space imagery 300){exempt}" if not low else
         "Not doable for now: " + "; ".join(low[:3]) + ". No plain resize")
     # Fonts: all text is outlined before print (visual designer, 2026-11-26), so the printer's file has no fonts left.
     def font_count(pdf):

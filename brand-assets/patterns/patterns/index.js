@@ -104,6 +104,27 @@ function renderBase(canvas, tokens, preset, options) {
   if (!(width >= 1 && height >= 1)) throw new Error(`Width and height must be at least 1 px, got ${width} x ${height}`);
   const frame = makeFrame(width, height);
   if (isGenerativePattern(preset)) {
+    preset = generativeOptions(preset, options);
+    return recipe.render(canvas, tokens, preset, null, frame, { phase: options.phase, colorway: options.colorway, layer: options.layer });
+  }
+  const colorway = preset.colorways[options.colorway ?? 0];
+  const family = options.family ?? colorway.defaultFamily;
+  return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame, options);
+}
+
+// A generative pattern as vector shapes in an <svg> (sharp at any print size): the same preset, colorway,
+// variant and look options as renderPattern. options.layer: no background at all, to draw it on top of
+// another pattern; options.offsetX / offsetY: where its frame's top left sits in the svg.
+export function renderPatternSvg(svg, tokens, preset, options = {}) {
+  if (!isGenerativePattern(preset)) throw new Error(`${preset.name} isn't a generative pattern: only those have vector output`);
+  const width = Math.round(options.width ?? 1080), height = Math.round(options.height ?? 1080);
+  return generative.renderSvg(svg, tokens, generativeOptions(preset, options), makeFrame(width, height),
+    { phase: options.phase, colorway: options.colorway, layer: options.layer, offsetX: options.offsetX, offsetY: options.offsetY });
+}
+
+// A generative preset with options.variant and options.look applied.
+function generativeOptions(preset, options) {
+  {
     // options.variant picks one of the preset's approved variants (settings.variants): engine values on top of its own.
     const variant = options.variant == null ? null : preset.settings.variants?.[options.variant];
     if (options.variant != null && !variant) throw new Error(`${preset.name} has no approved variant #${options.variant}`);
@@ -117,11 +138,8 @@ function renderBase(canvas, tokens, preset, options) {
     // options.look: a new variation of an open look (Dash, Burst, Pulse, Rings), checked
     // against the look's ranges. A number picks variation n; an object sets the values.
     if (options.look != null) preset = varyLook(preset, typeof options.look === "number" ? lookVariation(preset, options.look) : options.look);
-    return recipe.render(canvas, tokens, preset, null, frame, { phase: options.phase, colorway: options.colorway });
   }
-  const colorway = preset.colorways[options.colorway ?? 0];
-  const family = options.family ?? colorway.defaultFamily;
-  return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame, options);
+  return preset;
 }
 
 // Same colorways, other steps of each colorway's family: {color.indigo.200} with step 600

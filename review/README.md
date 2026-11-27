@@ -73,6 +73,19 @@ python3 review/sticker/sticker.py shape space.png --shape circle --size 70 --out
 - Needs Python with `numpy`, `opencv-python-headless`, `Pillow`, `pikepdf`, `svgelements` and `potracer` (`pip install numpy opencv-python-headless Pillow pikepdf svgelements potracer`); `rembg[cpu]` for shapes without `--subject`; `pdftoppm` and Ghostscript for the proof.
 - Not built yet: sheets of several stickers (A4, A5), and cutting out a freshly generated image (stickers.md section 8).
 
+## Booths
+
+For booths, read [`guidelines/print/booths.md`](../guidelines/print/booths.md) first. The same `print.py`, with two options:
+
+- **Drafts:** `--dpi 10`, a few seconds each. Three per wall, with the guides drawn on the preview.
+- **Final:** `--dpi 20`: layout and checks at 20 dpi. The look is vector (`review/booth/booth.js`), and the background is painted at 25 dpi (`--paint-dpi`) and enlarged smoothly to the vendor's dpi, capped at 100 (`--pattern-dpi`). Nothing is painted at full size, so it takes seconds. The image check skips the background.
+
+```bash
+python3 review/print.py wall.html --format booth --trim 2976.6x2417.8 --bleed 0 --safe 51 --dpi 20 --icc printer.icc --pdfx 4 --out out/ --name wall
+```
+
+`check.py`'s grid and title-length checks are for social posts and don't apply to booths.
+
 ## What the checks can't judge
 
 `check.py` ends with a short list to review by eye: hierarchy and calm, top and bottom spread, crops, text on a calm part of a pattern, the logo version for the background, one hero, no eyebrow or made-up content. Look at every render before showing it.
