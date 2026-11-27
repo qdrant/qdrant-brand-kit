@@ -1,3 +1,4 @@
+import type * as React from "react"
 import { Check } from "lucide-react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
@@ -5,6 +6,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
 import { Plate } from "../lib/plate"
+import { PatternLayers } from "../patterns"
 import { Section, type SectionProps } from "../lib/section"
 import { SectionHeader } from "../lib/section-header"
 import type { Feature } from "../content/sections"
@@ -19,8 +21,9 @@ export type BentoProps = SectionProps & {
   layout?: "checklist" | "cards"
   // The large tile: a title and a checklist.
   list?: { title?: string; items: string[] }
-  // The small tiles: a caption each, over a media slot.
-  tiles?: string[]
+  // The small tiles: a caption each, over a media slot, or over its own visual (web/visuals) when a page gives one
+  // (2026-11-26, the home page's enterprise tiles).
+  tiles?: (string | { title: string; visual?: React.ReactNode })[]
   // Cards for the cards layout: an icon, a title and a line each, 4 to 6 of them.
   cards?: Feature[]
 }
@@ -96,7 +99,7 @@ export function Bento({
         }
       />
       {layout === "cards" ? (
-        <ul className="grid gap-(--qd-layout-column-gap) md:grid-cols-2 lg:grid-cols-6">
+        <ul className="grid gap-(--web-card-gap) md:grid-cols-2 lg:grid-cols-6">
           {cards.map((card, i) => {
             const place = arrangements[cards.length]?.[i] ?? {
               span: "lg:col-span-2",
@@ -136,10 +139,20 @@ export function Bento({
           })}
         </ul>
       ) : (
-        <div className="grid gap-(--qd-layout-column-gap) md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
-          <Plate className="flex flex-col gap-6 rounded-xl p-8 lg:row-span-2">
-            {list?.title && <h3 className={heading.card}>{list.title}</h3>}
-            <ul className="flex flex-col gap-4">
+        <div className="grid gap-(--web-card-gap) md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
+          <Plate className="relative flex flex-col gap-6 rounded-xl p-8 lg:row-span-2">
+            {/* A subtle pattern fills the tall tile's empty bottom: Pixel drift, faded up into the list (design lead,
+                2026-11-26). */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 [mask-image:linear-gradient(to_top,black,transparent)] opacity-70"
+            >
+              <PatternLayers ids="pixel-drift" />
+            </span>
+            {list?.title && (
+              <h3 className={cn(heading.card, "relative")}>{list.title}</h3>
+            )}
+            <ul className="relative flex flex-col gap-4">
               {(list?.items ?? []).map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="web-icon-tile web-tone-indigo mt-0.5 grid size-5 shrink-0 place-items-center rounded-full">
@@ -152,28 +165,38 @@ export function Bento({
               ))}
             </ul>
           </Plate>
-          {tiles.map((tile, i) => (
-            <Plate
-              key={tile}
-              className={cn(
-                "flex flex-col gap-4 rounded-xl p-4",
-                i === 0 && "lg:col-span-2"
-              )}
-            >
-              <MediaFrame
-                label="Image"
-                className="aspect-auto min-h-44 flex-1 rounded-lg border-0 bg-transparent"
-              />
-              <p
+          {tiles.map((entry, i) => {
+            const tile = typeof entry === "string" ? entry : entry.title
+            const visual = typeof entry === "string" ? undefined : entry.visual
+            return (
+              <Plate
+                key={tile}
                 className={cn(
-                  type.small,
-                  "px-2 pb-1 font-medium text-foreground"
+                  "flex flex-col gap-4 rounded-xl p-4",
+                  i === 0 && "lg:col-span-2"
                 )}
               >
-                {tile}
-              </p>
-            </Plate>
-          ))}
+                {visual ? (
+                  <div className="flex min-h-44 flex-1 items-center justify-center">
+                    {visual}
+                  </div>
+                ) : (
+                  <MediaFrame
+                    label="Image"
+                    className="aspect-auto min-h-44 flex-1 rounded-lg border-0 bg-transparent"
+                  />
+                )}
+                <p
+                  className={cn(
+                    type.small,
+                    "px-2 pb-1 font-medium text-foreground"
+                  )}
+                >
+                  {tile}
+                </p>
+              </Plate>
+            )
+          })}
         </div>
       )}
     </Section>

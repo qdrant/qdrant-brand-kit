@@ -137,8 +137,9 @@ export const navActions = {
 
 export const homeHero = {
   title: "High-Performance Vector Search at Scale",
-  // The site's second sentence wasn't captured word for word, so only the first is used.
-  description: "Qdrant helps you build the AI retrieval you want.",
+  // Both sentences, word for word (read again 2026-11-26).
+  description:
+    "Qdrant helps you build the AI retrieval you want. Ship high performance, full-feature vector search at any scale and with any deployment model.",
   primary: { label: "Start Free in Qdrant Cloud", href: "https://cloud.qdrant.io/signup" },
   secondary: { label: "See How It Works", href: "/qdrant-vector-database/" },
   // The prompt is copied, not shown; the marks are the agents it's for (design lead, 2026-11-24).

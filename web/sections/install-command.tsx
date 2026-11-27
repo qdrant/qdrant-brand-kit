@@ -135,7 +135,7 @@ export function InstallCommand({
             </div>
           )}
         </div>
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-2">
           {lines.map((line) => (
             <Plate as="li" key={line.command} className="rounded-xl py-4 pr-3 pl-5">
               <CommandLine line={line} />

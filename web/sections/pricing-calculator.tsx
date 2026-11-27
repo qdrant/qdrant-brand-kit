@@ -167,7 +167,7 @@ export function PricingCalculator({ layout = "aside", header, source, defaults, 
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
         <SectionHeader layout={action ? "action" : "stacked"} kicker={header.kicker} title={header.title} description={header.description} actions={action} />
-        <div className="grid gap-(--qd-layout-column-gap) lg:grid-cols-2">
+        <div className="grid gap-(--web-card-gap) lg:grid-cols-2">
           {form}
           {output}
         </div>

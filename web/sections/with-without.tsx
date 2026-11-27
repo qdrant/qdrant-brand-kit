@@ -116,7 +116,7 @@ export function WithWithout({
           </Plate>
         </div>
       ) : (
-        <div className="grid gap-(--qd-layout-column-gap) md:grid-cols-2">
+        <div className="grid gap-(--web-card-gap) md:grid-cols-2">
           <FitColumn column={use} kind="use" />
           <FitColumn column={avoid} kind="avoid" />
         </div>

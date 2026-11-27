@@ -1,12 +1,14 @@
 "use client"
 
 import * as React from "react"
+import { Info } from "lucide-react"
 
 import { cn } from "@qdrant/design-system/lib/utils"
 
 import type { ProseBlock } from "../content/listings"
 import type { Link } from "../content/site"
 import { ArrowLink } from "../lib/arrow-link"
+import { Authors } from "../lib/authors"
 import { Code, languageOf } from "../lib/code"
 import { MediaFrame } from "../lib/media-frame"
 import { Section, type SectionProps } from "../lib/section"
@@ -21,6 +23,8 @@ export type ArticleProps = SectionProps & {
   date?: string
   // Show the hero image slot under the title.
   heroImage?: boolean
+  // The hero image itself: the post's thumbnail, a JPG in web/assets/blog (2026-11-26).
+  hero?: string
   // The "On this page" list, from lg; its title.
   toc?: TocEntry[]
   tocTitle?: string
@@ -85,11 +89,35 @@ export function Prose({ blocks, className }: { blocks: ProseBlock[]; className?:
                 {block.cite && <footer className={cn(type.small, "mt-3 font-mono")}>{block.cite}</footer>}
               </blockquote>
             )
+          case "note":
+            return (
+              <aside key={i} className="web-plate my-2 flex gap-4 rounded-xl p-5">
+                <Info aria-hidden className="mt-0.5 size-5 shrink-0 text-(--web-indigo)" />
+                <div className="flex flex-col gap-3">
+                  <p className={cn(type.body, "text-foreground")}>
+                    <Inline text={block.text} />
+                  </p>
+                  {block.items && (
+                    <ul className={cn(type.body, "flex list-disc flex-col gap-2 pl-5 marker:text-muted-foreground")}>
+                      {block.items.map((item) => (
+                        <li key={item} className="pl-1">
+                          <Inline text={item} />
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </aside>
+            )
           case "figure":
             return (
               <figure key={i} className="my-2 flex flex-col gap-3">
                 <div className="web-tray rounded-[calc(var(--radius-xl)+6px)]">
-                  <MediaFrame label={block.label ?? "Image"} className="web-plate" />
+                  {block.visual ? (
+                    <div className="web-plate overflow-hidden rounded-xl p-4 md:p-6">{block.visual}</div>
+                  ) : (
+                    <MediaFrame label={block.label ?? "Image"} className="web-plate" />
+                  )}
                 </div>
                 {block.caption && <figcaption className={cn(type.small, "text-center")}>{block.caption}</figcaption>}
               </figure>
@@ -171,6 +199,7 @@ export function Article({
   authors,
   date,
   heroImage = true,
+  hero,
   toc,
   tocTitle = "On this page",
   blocks,
@@ -195,21 +224,29 @@ export function Article({
       innerClassName="flex flex-col gap-10 lg:gap-14"
     >
       <header className="flex max-w-3xl flex-col gap-6">
-        <h1 className={cn(type.h5, "text-balance md:text-(length:--qd-type-h4-size) md:leading-(--qd-type-h4-line-height) lg:text-(length:--qd-type-h3-size) lg:leading-(--qd-type-h3-line-height)")}>
+        <h1 className={cn(heading.page, "text-balance")}>
           {title}
         </h1>
         {(authors || date) && (
-          <p className={cn(type.small, "flex flex-wrap items-center gap-x-3 gap-y-1")}>
-            {authors && <span className="text-foreground">{authors}</span>}
+          <div className={cn(type.small, "flex flex-wrap items-center gap-x-3 gap-y-1")}>
+            {authors && <Authors authors={authors} size="default" />}
             {authors && date && <span aria-hidden className="size-1 rounded-full bg-(--web-line-strong)" />}
             {date && <time className="font-mono">{date}</time>}
-          </p>
+          </div>
         )}
       </header>
-      {heroImage && (
+      {hero ? (
         <div className="web-tray rounded-[calc(var(--radius-xl)+6px)]">
-          <MediaFrame label="Hero image" className="web-plate aspect-[21/9]" />
+          <div className="web-plate aspect-[21/9] overflow-hidden rounded-xl">
+            <img src={hero} alt="" className="size-full object-cover" />
+          </div>
         </div>
+      ) : (
+        heroImage && (
+          <div className="web-tray rounded-[calc(var(--radius-xl)+6px)]">
+            <MediaFrame label="Hero image" className="web-plate aspect-[21/9]" />
+          </div>
+        )
       )}
       <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16">
         <article className="flex max-w-3xl min-w-0 flex-col gap-10">

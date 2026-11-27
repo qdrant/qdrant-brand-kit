@@ -114,7 +114,7 @@ export function FeatureGrid({
       )}
       <ul
         className={cn(
-          appearance === "cells" ? "web-grid grid-cols-1" : "grid grid-cols-1 gap-(--qd-layout-column-gap)",
+          appearance === "cells" ? "web-grid grid-cols-1" : "grid grid-cols-1 gap-(--web-card-gap)",
           cols[columns]
         )}
       >
