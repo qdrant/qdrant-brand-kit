@@ -126,7 +126,11 @@ def check_one(m, rules):
     cs = (m.get("canvas") or {}).get("shape")
     add("Shape", cs == shape, f"data-shape={cs}, ratio says {shape}", "layout README, Shapes")
 
-    texts = [t for t in m["texts"]]
+    # Code in a code block is checked as one piece: the block (or its window) for margins and the grid, and
+    # each line only for contrast. It keeps the component's own sizes and font (brand-components/code-block).
+    code_texts = [t for t in m["texts"] if t.get("inCode")]
+    texts = [t for t in m["texts"] if not t.get("inCode")]
+    code = m.get("code", [])
     main = [t for t in texts if t["role"] == "text"]
     L, T, R, B = S["mx"] * u, S["mt"] * u, W - S["mx"] * u, H - S["mb"] * u
     pr = m.get("print")
@@ -134,7 +138,7 @@ def check_one(m, rules):
         L, T, R, B = pr["marginPx"]["x"], pr["marginPx"]["top"], W - pr["marginPx"]["x"], H - pr["marginPx"]["bottom"]
     out = []
     for kind, items in (("text", [t["box"] for t in texts]), ("logo", [l["rect"] for l in m["logos"]]),
-                        ("button", [b["rect"] for b in m["buttons"]])):
+                        ("button", [b["rect"] for b in m["buttons"]]), ("code block", [k["rect"] for k in code])):
         for r in items:
             if r["x"] < L - 1 or r["y"] < T - 1 or r["x"] + r["w"] > R + 1 or r["y"] + r["h"] > B + 1:
                 out.append(f"{kind} at {round(r['x'])},{round(r['y'])} {round(r['w'])}×{round(r['h'])}")
@@ -150,7 +154,7 @@ def check_one(m, rules):
     off = []
     # Text inside a card sits on the card's padding, not on a column line: check the card, not its text.
     lefts = [("text", t["box"]) for t in main if not t.get("inBox")] + [("logo", l["rect"]) for l in m["logos"] if not l.get("inBook")] + \
-            [("card", c["rect"]) for c in m["cards"]]
+            [("card", c["rect"]) for c in m["cards"]] + [("code block", k["rect"]) for k in code]
     # Text after an icon on the same row starts after the icon and a tight gap; the icon is what sits on the grid.
     icon_ends = [(i["rect"]["x"] + i["rect"]["w"], i["rect"]["y"], i["rect"]["h"]) for i in m.get("icons", [])]
     def after_icon(r):
@@ -176,7 +180,7 @@ def check_one(m, rules):
     for kind, r in lefts:
         if kind == "text" and after_icon(r):
             continue
-        if kind in ("text", "card") and beside_logo(r):
+        if kind in ("text", "card", "code block") and beside_logo(r):
             continue
         if min(abs(r["x"] - s) for s in starts) > 2:
             off.append(f"{kind} left edge {round(r['x'])}")
@@ -263,8 +267,18 @@ def check_one(m, rules):
         add("Contrast", "not measured", "no background render", "checks.md, Contrast")
     else:
         lows = []
-        for t in texts:
+        def clip(t):  # a cut code line only shows inside its block
             r = t["rect"]
+            if not t.get("inCode"):
+                return r
+            k = next((k["clip"] for k in code if k["clip"]["x"] <= r["x"] + 1 and k["clip"]["y"] <= r["y"] + 1
+                      and r["y"] < k["clip"]["y"] + k["clip"]["h"]), None)
+            if not k:
+                return r
+            x1, y1 = max(r["x"], k["x"]), max(r["y"], k["y"])
+            return {"x": x1, "y": y1, "w": min(r["x"] + r["w"], k["x"] + k["w"]) - x1, "h": min(r["y"] + r["h"], k["y"] + k["h"]) - y1}
+        for t in texts + code_texts:
+            r = clip(t)
             box = (max(0, int(r["x"])), max(0, int(r["y"])), min(W, int(r["x"] + r["w"])), min(H, int(r["y"] + r["h"])))
             if box[2] <= box[0] or box[3] <= box[1]:
                 continue
@@ -279,7 +293,7 @@ def check_one(m, rules):
             "checks.md, Contrast")
 
     if m.get("books"):
-        # The light card (book): its own sizes, from guidelines/layout/README "Light card layout".
+        # The card (book): its own sizes, from guidelines/layout/README "Card layout".
         bk = m["books"][0]["rect"]
         wide = shape == "wide"
         biss = []
@@ -288,9 +302,20 @@ def check_one(m, rules):
         ratio = bk["w"] / bk["h"]
         slide = wide and m["books"][0].get("slide")
         want_ratio = (1.6 if slide else 1.25) if wide else 794.4 / 979.2  # .qd-book--slide is 16:10
-        if abs(ratio - want_ratio) > 0.02:
-            biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
-        Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
+        # The card hugs its content (2026-11-25): W comes from the canvas; the card may grow wider (speakers on
+        # one line) and taller (content), but never below its 4:5 (wide 5:4) size, and stays inside the margins.
+        ref = {"wide": (1920, 1080), "square": (1080, 1080), "portrait": (1080, 1350), "story": (1080, 1920)}.get(shape)
+        share = {"wide": 0.3286, "square": 0.55, "portrait": 0.65, "story": 0.75}.get(shape, 0.55)
+        if ref and not slide:
+            card_u = min(W / ref[0], H / ref[1])  # its own scale: u stays the print-aware one used below
+            Wb = share * ref[0] * card_u
+            min_w, min_h = (Wb * 979.2 / 794.4 * 1.25 if wide else Wb), Wb * 979.2 / 794.4
+            if bk["w"] < min_w - 2 or bk["h"] < min_h - 2:
+                biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f}, smaller than its minimum {min_w:.0f}×{min_h:.0f}")
+        else:
+            if abs(ratio - want_ratio) > 0.02:
+                biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
+            Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
         k = 1.6  # title: 1.6x the Figma share on every shape, in Mona Sans Display (visual designer, 2026-11-19; wide was 1.95x)
         btexts = [t for t in texts if t["role"] == "book"]
         if btexts:
@@ -300,8 +325,8 @@ def check_one(m, rules):
         blogo = [l for l in m["logos"] if l.get("inBook")]
         if blogo and abs(blogo[0]["rect"]["h"] - 0.0967 * Wb) > 1.5:
             biss.append(f"logo {blogo[0]['rect']['h']:.0f} px, wanted {0.0967 * Wb:.0f}")
-        add("Light card", not biss, "; ".join(biss) or f"card {bk['w']:.0f}×{bk['h']:.0f}, sizes match W={Wb:.0f}",
-            "layout README, Light card layout")
+        add("Card", not biss, "; ".join(biss) or f"card {bk['w']:.0f}×{bk['h']:.0f}, sizes match W={Wb:.0f}",
+            "layout README, Card layout")
     if not m["logos"]:
         add("Logo", False, "no Qdrant logo found", "guidelines §8")
     else:
@@ -309,7 +334,7 @@ def check_one(m, rules):
         r = lg["rect"]
         want = max(24, logo_h.get(shape, 0) * u)
         if lg.get("inBook"):
-            want = 24  # the light card has its own, smaller logo (checked under "Light card")
+            want = 24  # the light card has its own, smaller logo (checked under "Card")
         issues = []
         if "brand-assets/logo/" not in lg["src"]:
             issues.append("not a file from brand-assets/logo/")
@@ -367,6 +392,8 @@ def check_one(m, rules):
         palettes = icon_colors()
         probs = []
         for ic in m["icons"]:
+            if ic.get("inCode"):
+                continue  # the code block's file icon is part of the UI component
             r = ic["rect"]
             light = ic.get("onLightCard") or (m["canvas"] or {}).get("theme") == "light"
             allowed = palettes["light" if light else "dark"]

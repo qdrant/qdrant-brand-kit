@@ -4,7 +4,7 @@ The other folders say how each piece is built. This one says **which pieces to p
 
 The layout rules for creatives (Canvas, Grid, Stack, Box and the checks) are in [`layout/`](layout/), moved here from `primitives/` on 2026-11-12 because layout is a rule, not a token.
 
-Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). Print differs in a few places: no patterns, a choice between space imagery and a plain look, wider margins, text sizes in pt (visual designer, 2026-11-20).
+Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). [`print/`](print/) is the only place for the print rules; this page only links to it (visual designer, 2026-11-26).
 
 Three kinds of rule:
 
@@ -25,6 +25,8 @@ Decided by the visual designer on 2026-11-04.
 | **Pattern only** | Sales, and guide or docs downloads (with the light card) |
 | **Headshots** | Speaker announcements (webinar, talk, panel) |
 
+**Print** asks different questions (the vendor's spec, and for large formats where the piece hangs or stands and what covers it): see [`print/`](print/) section 1.
+
 **Don't ask design questions.** Take these from the rules (visual designer, 2026-11-20):
 
 | Design choice | Where it comes from |
@@ -35,31 +37,74 @@ Decided by the visual designer on 2026-11-04.
 | Red background | Never on your own: only when the person asks for it (section 3). |
 | Same creative in other sizes or channels | The same pattern and colorway (section 10). |
 
-**Where a rule offers options** (a `both` or unset `textMask`, the small display units), make every option and show them together on the contact sheet, the recommended one marked in its label. The person picks.
+**Where a rule offers options** (the card in light or dark mode, the small display units), make every option and show them together on the contact sheet, the recommended one marked in its label where the rule names one. The person picks. The pattern mask is not an option: the contrast score decides it (section 4).
 
 ## 2. Pick the pattern by tone
 
-**Suggest:** the tone points to a pattern family. There's no hard restriction: any pattern can be used for any tone, but community themes use more playful language, so they lean to the playful Color patterns, and serious themes lean to Mesh and Generative (decided 2026-11-04). Inside a family, any pattern and colorway can be used.
+**Suggest:** the tone points to a pattern family. There's no hard restriction: any pattern can be used for any tone, but community themes use more playful language, so they lean to the playful Color patterns, and serious themes lean to Motion Streaks and Generative (decided 2026-11-04). Inside a family, any pattern and colorway can be used.
 
 | Tone | Family | Patterns |
 | --- | --- | --- |
-| Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Refracted-Pattern-A, Color-Sliced-Pattern-A, Color-Sliced-Pattern-B |
-| Serious / technical | Mesh and generative patterns | Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A, every Generative pattern (Hexagon, Burst, Dash, Glyph), in any colorway, and Color-Sliced-Pattern-B |
+| Community / playful | Color patterns: token gradients with refraction or slice shift | Color-Sliced-Pattern-A, Color-Sliced-Pattern-B |
+| Serious / technical | Motion Streaks and generative patterns | Motion-Streaks-Pattern-A and B, every Generative pattern (Hexagon, Burst, Dash, Pulse, Rings), and Color-Sliced-Pattern-B |
 
 Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (decided 2026-11-11).
 
 **Color-Sliced (red and violet): use Color-Sliced-Pattern-B, with the QDRANT letter layer, by default** (about 8 creatives in 10). Color-Sliced-Pattern-A, the slices without letters, only in creatives with headshots, where the letters would compete with the faces (decided 2026-11-11).
 
-**Must: pick by how much text there is** (visual designer, 2026-11-16). Mesh-Refracted and Mesh-Sliced patterns are only for creatives with **little text** (a title and a button). Posts with a date, a place or other details use a **Color or Generative** pattern. Mesh-Dithered-Pattern-A works as it is.
+## 2a. Which patterns agents may use, and the combinations they may make
+
+Decided in the Pattern Library review (visual designer, 2026-11-24). Everything here sits on top of the other pattern rules; when a rule elsewhere is stricter, the stricter one wins.
+
+**Must: never use anything on hold.** A pattern or colorway marked `onHold` is never used to make a new asset, not even when asked for the look, until the visual designer changes its status. Check with `isOnHold(preset, colorway)` from [`patterns/index.js`](../brand-assets/patterns/patterns/index.js), or `usableColorways(preset)`. On hold now:
+
+| On hold | Why |
+| --- | --- |
+| Every **teal** colorway, in every pattern | Waiting for the council's approval of the sub-direction. No teal in any asset until the status changes |
+| Every **light-mode** colorway (Neutral 100 → Neutral 300), in every pattern | Added on hold (visual designer, 2026-11-26): no light-pattern creative until it comes off hold |
+
+**Removed from the repo** (visual designer, 2026-11-25), so agents can't use them at all: the mesh patterns (Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A), Color-Refracted-Pattern-A and Color-Dithered-Pattern-A. They stay in the Pattern Library artifact on Claude. Add one back only when the visual designer asks for it.
+
+**Color ratio: to be defined.** How often each family (amaranth, indigo, teal, neutral) is used gets a ratio after the council approves the style direction. Until then the provisional rule in section 3 applies: indigo by default, amaranth only for impact and only when the person says yes, never teal.
+
+**Approved patterns and what an agent may combine.** Any approved pattern can be used. Agents can make new combinations of it, but only from the approved parts below. A value that isn't listed (a new angle, a new stripe, a new Pattern Studio look) is never invented in an asset: it goes through the Pattern Library review first.
+
+| Pattern | Colorways (not on hold) | What may vary, in any combination |
+| --- | --- | --- |
+| Color-Sliced-Pattern-A | Neutral 975 → Amaranth 800, Neutral 975 → Indigo 800, Neutral 1000 → Neutral 800 | Its own slices, or one of the 3 approved stripes (`stripes: 0` to `2`), always at -160° |
+| Color-Sliced-Pattern-B | Same as A (inherited); letters in the family's 950, 900, 800 | Any Color-Sliced-A base (above) × letters: one of the 4 approved letter options (`letterOption: 0` to `3`), or any letter variation within the letter-layer rules (Pattern Studio terminal look through `fromStudioParams`, or `letters: n`) |
+| Motion-Streaks-Pattern-A | Background → Indigo 900, Background → Amaranth 900, Background → Neutral 800 | Length 16–80, density 8–64, softness 32–64, all on the 8 grid; direction fixed at 110° |
+| Motion-Streaks-Pattern-B | Same as A; letters in the family's 900, 800, 700 | Everything A allows × letter variations within the letter-layer rules |
+| Generative-Hexagon-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Neutral 800 | As is, or one of its approved variants (`variant: n`) |
+| Generative-Burst-Pattern | Same | As is, one of its 13 line variants, or a new variation of its open look (hyperspace) |
+| Generative-Dash-Pattern | Same | As is, one of its 13 variants, or a new variation of its open look (data bars) |
+| Generative-Pulse-Pattern | Same | As is, or a new variation of its open look (hex pulse: noise only) |
+| Generative-Rings-Pattern | Same | As is, one of its 10 variants, or a new variation of its open look (hex pulse) |
+
+- **Must:** every approved pattern renders at any size and shape (section 10), so format is free too.
+- **Must: Color-Sliced colours start from near-black** (visual designer, 2026-11-26). Amaranth, Indigo and Teal run from Neutral 975 to the family's 800, so the colour reads as the accent. Dark neutral stays Neutral 1000 → 800.
+- **Must: no banding.** Color-Sliced renders with an ordered dither built into the engine (2026-11-26). Export creatives as PNG, or JPG/WebP at top quality: heavy compression brings the bands back.
+- **Must: one fixed angle for lines** (visual designer, 2026-11-26). Color-Sliced stripes always run at -160° and Motion Streaks at 110°: both are 70° from horizontal, leaning right, as in Color-Sliced-A's thick stripes. No other angle or direction.
+- **Must: the top layer blends with the gradient** (visual designer, 2026-11-25). Letters are never lighter than the 600 and never white: Color-Sliced-B uses the family's 950, 900, 800 and Motion-Streaks-B 900, 800, 700 (visual designer, 2026-11-26; `settings.letterSteps`). Generative elements are never lighter than the 500 step (Hexagon 800, 700, 600, its filled variants 800 and 700; Burst, Dash, Pulse and Rings 800, 700, 500). Only Motion-Streaks-B's letter variation 1 keeps 800, 600, 200. The validator checks this.
+- **Open looks: agents may make new patterns of their own** (visual designer, 2026-11-25). Three Pattern Studio looks are approved as open: **data bars** (Generative-Dash-Pattern), **hyperspace** (Generative-Burst-Pattern) and **hex pulse** (Generative-Pulse-Pattern and Generative-Rings-Pattern). An agent can make new variations of them without the Pattern Studio connector, since the repo has the same engine: `renderPattern(canvas, tokens, preset, { colorway, look: n })` for variation n, or `{ look: { ... } }` with the values. Rules:
+  - only the values in the preset's `settings.look.ranges` change, each inside its range. The ranges span the pattern as approved and its approved variants; `lookProblems` and the validator check them;
+  - colors always come from the colorway and the color rules above (top layer, on hold, ratio): a look variation never changes a color;
+  - cell sizes on the 8 grid; the pattern still fills the frame and never looks like a technical illustration;
+  - Generative-Hexagon-Pattern and every other look in Pattern Studio (orbit, bloom, terminal for anything but letters, and so on) are not open: only their approved presets and variants.
+- **Should:** when an agent makes a new look variation for a creative, it shows it next to the pattern as approved, so the person can pick.
+- **Must not:** mix parts of two patterns (for example Rings' variant on Hexagon), change a generative pattern's engine values outside its variants or its open-look ranges, or use a value outside the ranges above.
+- **Must:** generative pattern names have no letter (Generative-Hexagon-Pattern, not Hexagon-B): one pattern per element, its looks are variants.
 
 The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patterns/).
 
+**Print:** patterns in print are in [`print/`](print/) section 3.
+
 ## 3. Red backgrounds
 
-- **Must: patterns are indigo or amaranth.** Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
-- **On hold: teal.** Teal pattern colorways (Motion Streaks) are allowed in principle but **on hold until the council approves the sub-direction** (visual designer, 2026-11-24). Until then, never use a colorway marked `onHold`. Other colors stay out of pattern backgrounds.
-- **Proportions (provisional):** indigo for most creatives, amaranth rarely. These aren't final: they'll be revised after the council approves the direction (visual designer, 2026-11-24).
-- **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway, Hexagon-B, Dash-B) is only for creatives that need to **grab a lot of attention and be more impactful**.
+- **Must: patterns are indigo, amaranth or dark neutral** (dark neutral added 2026-11-24; light mode is on hold). Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
+- **On hold: teal.** Every teal colorway, in every pattern, is allowed in principle but **on hold until the council approves the sub-direction** (visual designer, 2026-11-24). Agents make no asset in teal until the status changes. Other colors stay out of pattern backgrounds.
+- **Proportions (provisional):** indigo for most creatives, amaranth rarely, no teal. A ratio for each family (amaranth, indigo, teal) will be set after the council approves the style direction (visual designer, 2026-11-24).
+- **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway) is only for creatives that need to **grab a lot of attention and be more impactful**.
 - **Ask:** never pick amaranth on your own. Offer it, and use it only when the person says yes.
 - Everywhere else, amaranth stays an accent (buttons, highlights), as [`primitives/colors/`](../primitives/colors/) says.
 - **Must: never amaranth on amaranth** (visual designer, 2026-11-16). On an amaranth pattern:
@@ -73,35 +118,54 @@ Use one of these three. Patterns always bleed off the canvas edges they touch. T
 
 | Layout | What it looks like | Text goes | Example |
 | --- | --- | --- | --- |
-| **Full bleed + light card** | Pattern covers the whole canvas. A light card sits on it. | On the card (`.qd-book`, on Color-Sliced-Pattern-B) | [Get-the-Guide ad, dark](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18921-37171) and [pastel](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18935-39510) |
+| **Full bleed + card** | Pattern covers the whole canvas. A card, in light or dark mode, sits on it. | On the card (`.qd-book`, on any approved pattern) | [Get-the-Guide ad, dark](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18921-37171) and [pastel](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18935-39510) |
 | **Full bleed, text on top** | Pattern covers the whole canvas. When the pattern's small details would cross the text, the pattern is masked: 100% where the visual sits, fading softly behind the text. | On the pattern when it's calm, or on the masked part | |
 | **Product screen** | Pattern covers the whole canvas behind a framed screen. | Outside the screen, on a calm area or a card | [Qdrant Cloud screen](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18841-20954) |
 
 Rules:
 
-- **Must:** text never sits on a busy part of a pattern. If no area is calm enough, mask the pattern or use the light card.
-- **Must: mask only when the pattern needs it** (decided 2026-11-11, strength 2026-11-16). Not every pattern needs a mask. Mask it only when its small details (letters, dashes, small marks) cross the text and make it hard to read. **The mask leaves 40% of the pattern behind the text** (it replaced 4% and 10% on 2026-11-16: those made creatives too dark and hid the pattern). Each pattern's preset says what to do in `textMask`:
+- **Must:** text never sits on a busy part of a pattern. If no area is calm enough, mask the pattern or use the card.
+- **Must: the contrast score decides the mask** (visual designer, 2026-11-25; it replaces "mask only when the pattern needs it", 2026-11-11). Masks are named by how much they darken the pattern behind the text:
+
+  | Mask | Darkens the pattern behind the text | Class |
+  | --- | --- | --- |
+  | No mask | 0% | none |
+  | Light mask | 30% (70% of the pattern stays) | `.qd-pattern-mask.qd-pattern-mask--light` |
+  | Standard mask | 60% (40% of the pattern stays) | `.qd-pattern-mask` |
+
+  1. Render with **no mask** first.
+  2. `review/check.py` scores every text block against the pattern pixels behind it (its existing **Contrast** check: WCAG AA, 4.5:1 for body text, 3:1 from 24 px, at the 5th-percentile pixel). It uses the render you already have, so a creative that passes costs no extra render.
+  3. If any block fails, render again with the **light mask**; if that fails too, with the **standard mask**. Use the first that passes. Never go darker than the standard mask: if it still fails, change the layout or the colorway.
+  4. Remember what passed for each pattern and colorway, and start there next time.
+
+  A preset's `textMask` overrides the score only where a look was decided by eye:
 
   | `textMask` | Patterns | What to do |
   | --- | --- | --- |
-  | `mask` | Color-Sliced-Pattern-A and B, Generative-Dash-Pattern-A, Generative-Dash-Pattern-B, Generative-Burst-Pattern-A (Neutral 950 → Indigo 600) | Mask, 40% behind the text |
-  | `none` | Color-Refracted-Pattern-A, Generative-Hexagon-Pattern-B, Generative-Burst-Pattern-A (Indigo 600 → Indigo 400, Neutral 950 → Amaranth 600), Generative-Glyph-Pattern-A, Generative-Glyph-Pattern-B (Neutral 950 → Indigo 600) | No mask: text sits straight on the pattern |
-  | `both` | Generative-Hexagon-Pattern-C, Generative-Burst-Pattern-A (Neutral 950 → Indigo 900), Generative-Glyph-Pattern-B (Indigo 600 → Indigo 400), Mesh-Dithered-Pattern-A | Both work: make the 40% mask and no mask, show both together with the recommended one marked, and let the person pick |
-  | not set | Every other pattern or colorway | Not decided yet: render it with and without the mask, show both with the recommended one marked, and let the person pick |
+  | `mask` | Color-Sliced-Pattern-A; Color-Sliced-Pattern-B except dark neutral; Generative-Dash-Pattern (every variant, the busiest included) | Always the standard mask |
+  | `none` | Motion-Streaks-Pattern-B (every colorway); Color-Sliced-Pattern-B in dark neutral | Never a mask: text sits straight on the pattern |
+  | `both` or not set | Every other pattern or colorway | The contrast score decides, as above. No need to show both |
 
-  When the answer differs by colorway, `textMask` sits on the colorway instead of the preset.
+  When the answer differs by colorway, `textMask` sits on the colorway, or in the preset's `textMaskByColorway` when the colorways are inherited (Color-Sliced-Pattern-B).
+- **Text on a card never needs a mask.** Any approved pattern and variant can go behind the card (`.qd-book`), busy ones included (visual designer, 2026-11-25).
 
-- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (Color-Refracted-Pattern-A, Amaranth 200 → Indigo 400, marked `textColor: "dark"`), use **dark text and the Light logo**, no mask (visual designer, 2026-11-16).
-- **Must: a contrast fail is a hard stop.** A creative whose text fails the contrast check is never shown, recommended or delivered. On a `none` pattern, mask it at 40% if the pattern is dark enough not to turn grey; otherwise pick another colorway or pattern (visual designer, 2026-11-16).
+- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (a colorway marked `textColor: "dark"`; none is approved right now), use **dark text and the Light logo**, no mask (visual designer, 2026-11-16).
+- **Must: a contrast fail is a hard stop.** A creative whose text fails the contrast check is never shown, recommended or delivered. On a `none` pattern, use the light or standard mask if the pattern is dark enough not to turn grey; otherwise pick another colorway or pattern (visual designer, 2026-11-16).
 
-- **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to 40% behind the text, with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). The LinkedIn profile cover has its heading on the right, so its fade runs from the right (`.qd-pattern-mask--from-right`, [`guidelines/layout/`](layout/)). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`guidelines/layout/`](layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself. **On every shape the mask is one smooth, continuous gradient across the whole canvas: it starts gently on the text side and builds to full strength on the far side. You must not be able to tell the mask and the pattern are two layers: never a hold-then-fade, a visible edge or a cut** (decided 2026-11-11). If the pattern is calm enough for the text, use no mask at all.
+- **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to the mask's strength behind the text (70% of the pattern with the light mask, 40% with the standard mask), with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). The LinkedIn profile cover has its heading on the right, so its fade runs from the right (`.qd-pattern-mask--from-right`, [`guidelines/layout/`](layout/)). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`guidelines/layout/`](layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself. **On every shape the mask is one smooth, continuous gradient across the whole canvas: it starts gently on the text side and builds to full strength on the far side. You must not be able to tell the mask and the pattern are two layers: never a hold-then-fade, a visible edge or a cut** (decided 2026-11-11). If the pattern is calm enough for the text, use no mask at all.
 - **Must:** with the mask, the logo sits on the plain neutral, so it's the **Dark** logo on a dark creative and the **Light** logo on a light one (section 8). Without the mask it's the **White** logo on the pattern, except on a light pattern (`textColor: "dark"`), where it's the **Light** logo.
-- **Must:** the light card only sits on a full-bleed pattern. On a dark creative it's the only light piece.
-- **Must: the light card always sits on Color-Sliced-Pattern-B**, red or violet, with its QDRANT letter layer. Never Color-Sliced-Pattern-A or another pattern behind the book or a Get-the-Guide ad (decided 2026-11-11).
-- **Must: the light card is a book.** A vertical card shaped like a guide or a document (0.81, about 4:5), centered on a full-bleed pattern, with the pattern showing on every side. It never fills the frame. Width: **55%** of the canvas on square, **65%** on portrait, **75%** on story. On **wide** it turns landscape (5:4, 72% of the height, larger text); on **ultrawide** there's no light card (decided 2026-11-11, see [`guidelines/layout/`](layout/)). The button sits **outside the card, centered below it**. Use `.qd-book` from [`guidelines/layout/`](layout/), built from the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (decided 2026-11-04).
-- **Suggest:** use the light card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, masked when the text needs it (decided 2026-11-04, mask 2026-11-11).
-- **Must:** never put a big headshot ([`headshot-card`](../brand-components/headshot-card/)) inside the light card. If a light-card creative needs a speaker, use [`headshot-circle`](../brand-components/headshot-circle/) (decided 2026-11-04).
+- **Must:** the card only sits on a full-bleed pattern. On a dark creative the light card is the only light piece.
+- **Must: the card is the design system's Card, in light or dark mode** (visual designer, 2026-11-25). Make both and let the person pick (section 1). Light mode: neutral-0 surface and the Light logo. Dark mode (`.qd-book--dark`): neutral-950 surface and the Dark logo; on a dark neutral pattern it's raised to neutral-850 so it doesn't merge with the pattern. Put `data-pattern-family` on the canvas so the card follows the pattern.
+- **Must: any approved pattern and variant can go behind the card**, busy ones included, with no mask (visual designer, 2026-11-25; it used to be only Color-Sliced-Pattern-B).
+- **Must: the card is a book that hugs its content.** A vertical card like a guide or a document, centered on a full-bleed pattern, with the pattern showing on every side. It never fills the frame. Width: **55%** of the canvas on square, **65%** on portrait, **75%** on story; never shorter than 4:5. It grows taller with its content and wider so speakers stay on one line, never past the side margins (visual designer, 2026-11-25). On **wide** it turns landscape (at least 5:4, 72% of the height, larger text); on **ultrawide** there's no card (decided 2026-11-11). The button sits **outside the card, centered below it**. Use `.qd-book` and `fitBook()` from [`guidelines/layout/`](layout/), built from the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (decided 2026-11-04).
+- **Suggest:** use the card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, masked when the text needs it (decided 2026-11-04, mask 2026-11-11).
+- **Must:** never put a big headshot ([`headshot-card`](../brand-components/headshot-card/)) inside the card. If a card creative needs a speaker, use [`headshot-circle`](../brand-components/headshot-circle/) (decided 2026-11-04).
 - **Suggest:** dark is the default. Light creatives (the whole canvas on the light theme) are allowed for some moments, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635) (decided 2026-11-04).
+- **Light-mode patterns (on hold, visual designer, 2026-11-26).** Every pattern has a light colorway, "Neutral 100 → Neutral 300", marked `onHold`: no agent uses it until it comes off hold. When it does, the rules are:
+  - **Gradient:** always Neutral 100 → Neutral 300, light at the top. Light patterns are neutral only: no light amaranth, indigo or teal.
+  - **Top layer: pure white** (Neutral 0, #FFFFFF): Color-Sliced-B and Motion-Streaks-B letters, Motion Streaks streaks, and every generative element (filled hexagons too). Color-Sliced-A has no top layer.
+  - **What varies:** the same options as the dark versions (stripes, letter options, streak ranges, generative variants and open looks), at the same fixed 70° angle.
+  - **Text:** the colorway is marked `textColor: "dark"` and `textMask: "none"`: dark text, the Light logo, no mask, and the contrast check still has to pass.
 
 ## 5. One hero
 
@@ -109,7 +173,7 @@ Rules:
 
 | Background | Hero allowed |
 | --- | --- |
-| A pattern | Qbot **or** a product screen, or nothing |
+| A pattern | Qbot **or** a product screen **or** a code block, or nothing |
 | A generated image | Nothing extra. Images are never combined with Qbot ([`brand-assets/imagery/`](../brand-assets/imagery/)) |
 
 Never allowed:
@@ -195,13 +259,14 @@ Every crop is editorial, never accidental.
 - **Suggest:** let it bleed off the bottom edge, like the [Qdrant Cloud example](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=18841-20954).
 - When the whole screen needs to be seen, it can sit fully inside the canvas instead.
 - **Must:** use real product screens. Never redraw or fake the UI.
+- **Code window:** code in a solid framed window is a product screen too: the design system's CodeBlock, drawn from its own values, hugging the code ([`brand-components/code-block/`](../brand-components/code-block/), visual designer 2026-11-25). It sits fully inside the canvas.
 
 ## 8. Logo
 
 - **Must:** the Qdrant logo leads the content, at its **top-left**:
   - on the canvas, inside the margins, when text sits on the canvas;
-  - on the card, inside its padding, when text sits on a light card.
-- **Must:** the right version for the background: **Dark** on plain dark, dark images and the masked part of a dark creative, **White** on any pattern at full strength, **Light** on the light card, on a light canvas and on the masked part of a light creative. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
+  - on the card, inside its padding, when text sits on a card.
+- **Must:** the right version for the background: **Dark** on plain dark, dark images and the masked part of a dark creative, **White** on any pattern at full strength, **Dark** on the dark card, **Light** on the light card, on a light canvas and on the masked part of a light creative. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
 - **Must: never the monochrome Black logo** in a creative. On a light pattern or light background it's the **Light** logo (visual designer, 2026-11-16).
 - **Suggest: logo and title letters about the same size** (visual designer, 2026-11-16). The logo's wordmark letters and the title's capitals should look about as big as each other. On small display ads, where the logo is held at its 24 px minimum, the title goes up to match it, even above its size on the title scale.
 - When it can't sit top-left (no room, a busy area, the visual must lead), the agent moves it following the Brand Guide's placement rules and says where and why.
@@ -245,7 +310,7 @@ There are no fixed post templates. An agent lays out each creative itself, from 
     4. **Ask** the person to cut copy, or drop the date line on a display ad (see [`guidelines/layout/`](layout/), "Display ads").
 
     **The button never changes size to make room.** Never shrink text below the type scale.
-12. **Must: icons follow [`brand-assets/icons/`](../brand-assets/icons/).** Lucide only, outline, one color: a 400 on dark, a 600 on light, white on a pattern (masked at 40% or not), 3:1 or more (white on the 40% mask: visual designer, 2026-11-16). **Suggest: several detail lines on wide** (a roadshow's city and date lines): run them **across, in one row**, when they fit in the text block; otherwise in **two rows**. Widen the text block to 7 or 8 columns if it needs room (Qbot gets smaller), instead of stacking every line (visual designer, 2026-11-16). **Suggest: put one before each date, time and place line by default** (calendar, clock, map pin; decided 2026-11-11). Next to supporting text (mostly the date / time / place row), the same height as that text, a `tight` gap away. Never in buttons, under any circumstance. Icons don't count as a text size (decided 2026-11-11).
+12. **Must: icons follow [`brand-assets/icons/`](../brand-assets/icons/).** Lucide only, outline, one color: a 400 on dark, a 600 on light, white on a pattern (masked or not), 3:1 or more (white on the standard mask: visual designer, 2026-11-16). **Suggest: several detail lines on wide** (a roadshow's city and date lines): run them **across, in one row**, when they fit in the text block; otherwise in **two rows**. Widen the text block to 7 or 8 columns if it needs room (Qbot gets smaller), instead of stacking every line (visual designer, 2026-11-16). **Suggest: put one before each date, time and place line by default** (calendar, clock, map pin; decided 2026-11-11). Next to supporting text (mostly the date / time / place row), the same height as that text, a `tight` gap away. Never in buttons, under any circumstance. Icons don't count as a text size (decided 2026-11-11).
 
 ## Changing these rules
 

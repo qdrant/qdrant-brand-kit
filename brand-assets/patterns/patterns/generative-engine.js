@@ -684,8 +684,8 @@ function createPatternEngine() {
     if (backdrop) {
       context.globalAlpha = opacity;
       const gradient = context.createLinearGradient(0, 0, 0, params.height);
-      gradient.addColorStop(0, backdrop[0]);
-      gradient.addColorStop(1, backdrop[1]);
+      // Stops are colors at 0 and 1, or { color, offset } for a gradient that starts inside the frame.
+      backdrop.forEach((stop, index) => gradient.addColorStop(stop.offset ?? index, stop.color ?? stop));
       context.fillStyle = gradient;
       context.fillRect(0, 0, params.width, params.height);
     }
@@ -768,8 +768,8 @@ function createPatternEngine() {
       gradient.setAttribute("y2", "1");
       backdrop.forEach((color, index) => {
         const stop = doc.createElementNS(NS, "stop");
-        stop.setAttribute("offset", String(index));
-        stop.setAttribute("stop-color", color);
+        stop.setAttribute("offset", String(color.offset ?? index));
+        stop.setAttribute("stop-color", color.color ?? color);
         gradient.append(stop);
       });
       defs.append(gradient);

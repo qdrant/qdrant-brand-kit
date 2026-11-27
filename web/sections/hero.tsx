@@ -6,7 +6,7 @@ import { cn } from "@qdrant/design-system/lib/utils"
 import type { Link } from "../content/site"
 import { CodePanel, quickstartQuery } from "../lib/code-panel"
 import { CopySnippet, type AgentId } from "../lib/copy-snippet"
-import { IconTile, toneAt } from "../lib/tone"
+import { Icon } from "../lib/icon"
 import { LinkButton } from "../lib/link-button"
 import { MediaFrame } from "../lib/media-frame"
 import { Section, type SectionProps } from "../lib/section"
@@ -33,6 +33,9 @@ export type HeroProps = SectionProps & {
   mediaLabel?: string
   // The real image or product screen for the media slot (web/visuals), instead of the placeholder.
   visual?: React.ReactNode
+  // "none" shows the visual bare, with no tray or plate, for a visual that is the page's backdrop (2026-11-26, the
+  // home page's planet).
+  visualFrame?: "plate" | "none"
   // One small line under the buttons, with a link in it: "Need more? Talk to our team about Enterprise."
   note?: { text: string; link: Link; after?: string }
 }
@@ -52,6 +55,7 @@ export function Hero({
   media = "none",
   mediaLabel,
   visual,
+  visualFrame = "plate",
   note,
   theme,
   surface, pattern, cardPattern,
@@ -77,7 +81,9 @@ export function Hero({
 
   // Media sits on a plate inside a tray (web.css).
   // A visual's frame hugs it, on the right of a split hero when there's room.
-  const mediaEl = visual ? (
+  const mediaEl = visual && visualFrame === "none" ? (
+    <div className={cn("w-full max-w-full", centered ? "mx-auto [&>*]:mx-auto" : "justify-self-center lg:justify-self-end")}>{visual}</div>
+  ) : visual ? (
     <div className={cn("web-tray w-fit max-w-full rounded-[calc(var(--radius-xl)+6px)]", centered ? "mx-auto" : "justify-self-center lg:justify-self-end")}>
       <div className="web-plate overflow-hidden rounded-xl">{visual}</div>
     </div>
@@ -104,7 +110,6 @@ export function Hero({
           ))}
         </ul>
       )}
-      {snippet && <CopySnippet label={snippet.label} text={snippet.text} agents={snippet.agents} />}
       {note && (
         <p className={cn("text-sm text-muted-foreground", centered && "text-center")}>
           {note.text}{" "}
@@ -117,12 +122,17 @@ export function Hero({
     </>
   )
 
+  // The prompt for agents sits above the title, so the buttons under the text stand alone (design lead, 2026-11-26).
+  const snippetEl = snippet ? <CopySnippet label={snippet.label} text={snippet.text} agents={snippet.agents} /> : null
+
+  // Proof points as a plain row of an icon and a label each, no cells or tiles, under the hero's visual (design lead,
+  // 2026-11-26). The text keeps the hero's default spacing; a bare visual gets more room around it, 64px above and below.
   const trustEl =
     trust && trust.length > 0 ? (
-      <ul className="web-cells web-bleed grid grid-cols-2 text-sm text-muted-foreground md:grid-cols-4">
-        {trust.map((item, i) => (
-          <li key={item.label} className="flex items-center justify-center gap-3 px-4 py-5 text-center">
-            <IconTile name={item.icon} tone={toneAt(i)} size="sm" />
+      <ul className={cn("flex flex-wrap items-center gap-x-12 gap-y-3 text-sm text-muted-foreground", centered ? "justify-center" : "justify-start")}>
+        {trust.map((item) => (
+          <li key={item.label} className="flex items-center gap-2">
+            <Icon name={item.icon} className="size-4 text-(--web-indigo)" />
             {item.label}
           </li>
         ))}
@@ -131,10 +141,11 @@ export function Hero({
 
   if (layout === "wide") {
     return (
-      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-12 lg:gap-16">
+      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} lines={false} id={id} className={className} innerClassName="flex flex-col gap-12 lg:gap-16">
         <div className="flex flex-col gap-8">
+          {snippetEl && <div className="flex">{snippetEl}</div>}
           <SectionHeader as="h1" layout="split" kicker={kicker} title={title} description={description} actions={actions} />
-          {(pills || snippet || note) && <div className="flex flex-col items-start gap-6 lg:items-end">{extras}</div>}
+          {(pills || note) && <div className="flex flex-col items-start gap-6 lg:items-end">{extras}</div>}
         </div>
         {mediaEl && <div className="w-full [&>.web-tray]:w-full">{mediaEl}</div>}
         {trustEl}
@@ -144,19 +155,31 @@ export function Hero({
 
   if (centered) {
     return (
-      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col items-center gap-10">
+      <Section
+        theme={theme}
+        surface={surface}
+        pattern={pattern}
+        cardPattern={cardPattern}
+        lines={false}
+        id={id}
+        className={className}
+        innerClassName="flex flex-col items-center gap-10"
+      >
+        {/* The prompt reads like an eyebrow, so it sits close to the title: 16px (design lead, 2026-11-26). */}
+        {snippetEl && <div className="-mb-6 flex justify-center">{snippetEl}</div>}
         <SectionHeader as="h1" align="center" kicker={kicker} title={title} description={description} actions={actions} />
-        {(pills || snippet || note) && <div className="flex w-full flex-col items-center gap-6">{extras}</div>}
-        {mediaEl && <div className="w-full max-w-4xl">{mediaEl}</div>}
+        {(pills || note) && <div className="flex w-full flex-col items-center gap-6">{extras}</div>}
+        {mediaEl && <div className={cn("w-full", visualFrame === "none" ? "pointer-events-none my-6 max-w-full" : "max-w-4xl")}>{mediaEl}</div>}
         {trustEl && <div className="w-full">{trustEl}</div>}
       </Section>
     )
   }
 
   return (
-    <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-12">
+    <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} lines={false} id={id} className={className} innerClassName="flex flex-col gap-12">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
         <div className="flex flex-col items-start gap-6">
+          {snippetEl}
           <SectionHeader as="h1" kicker={kicker} title={title} description={description} actions={actions} />
           {extras}
         </div>

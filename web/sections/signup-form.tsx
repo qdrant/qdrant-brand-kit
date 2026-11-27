@@ -37,7 +37,7 @@ export function SignupForm({ layout = "application", header, benefitsTitle, bene
             </div>
           )}
           {layout === "application" ? (
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-2">
               {benefits.map((b, i) => (
                 <Plate as="li" simple key={b.title} className="flex items-start gap-4 rounded-xl p-5">
                   {b.icon && <IconTile name={b.icon} tone={toneAt(i)} />}

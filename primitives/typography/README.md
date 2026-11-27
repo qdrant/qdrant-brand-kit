@@ -80,7 +80,7 @@ The type set, adopted on 2026-11-18 (design lead), after comparing it with the o
 
 Decided by the visual designer on 2026-11-04, from the Campaigns ads (Figma `EXDtNCOBfmPCWabNex7sSJ`) and the Vector Space Day banner (Brand-Collateral `2183:41590`). Since 2026-11-18 every size is a step of the type set, with that step's line height and letter spacing 0 (design lead): the square and portrait short title went from 96 to 104, the wide and ultrawide long title from 88 to 80, the story titles from 88 and 72 to 80 and 64, and the supporting text from 36 to 40 on square and portrait. Sizes in px at the reference canvas (see [`layout/`](../../guidelines/layout/)); they scale with the canvas.
 
-**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts are the only exception. **On the light card** the title and supporting text have their own two sizes, set by the card's width (title 0.0846 W × 1.6 and supporting 0.0483 W, about 80 and 29 at 1080 square; on wide the supporting text is × 1.5 and the title stays × 1.6 (2026-11-19). Title bigger since 2026-11-16, logo unchanged), from the Get-the-Guide ad ([`layout/`](../../guidelines/layout/) "Light card layout", decided 2026-11-04). Title Case there too, even for long supporting sentences (the Figma reference uses sentence case; the visual designer kept Title Case, 2026-11-04). **Button text doesn't count:** it scales with the [button](../../brand-components/button/) and is independent of these text styles (decided 2026-11-04).
+**Two sizes only:** one title and one supporting size. Speaker names and roles inside the headshot parts, and code in the [code block](../../brand-components/code-block/) (code, line numbers, file name; 2026-11-25), are the only exceptions. **On the light card** the title and supporting text have their own two sizes, set by the card's width (title 0.0846 W × 1.6 and supporting 0.0483 W, about 80 and 29 at 1080 square; on wide the supporting text is × 1.5 and the title stays × 1.6 (2026-11-19). Title bigger since 2026-11-16, logo unchanged), from the Get-the-Guide ad ([`layout/`](../../guidelines/layout/) "Card layout", decided 2026-11-04). Title Case there too, even for long supporting sentences (the Figma reference uses sentence case; the visual designer kept Title Case, 2026-11-04). **Button text doesn't count:** it scales with the [button](../../brand-components/button/) and is independent of these text styles (decided 2026-11-04).
 
 | | Font | Square, portrait | Wide | Ultrawide | Story |
 | --- | --- | --- | --- | --- | --- |
@@ -90,7 +90,7 @@ Decided by the visual designer on 2026-11-04, from the Campaigns ads (Figma `EXD
 | Supporting (body, date, time, place) | Mona Sans Display Regular (H4 Regular) | 40 | 40 | 40 | 40 |
 
 - **Mona Sans titles are always Title Case, never all caps.** Supporting text (date, place, body sentences) stays in normal sentence case (decided 2026-11-11). **Mona Sans Display Condensed is always all caps**, and only for special occasions, when the person asks for it (`display-condensed-*`).
-- **Mona Sans Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans. The creative event label (all caps, guidelines section 11 rule 3) takes **+0.08em**, as the design system's captions (visual designer, 2026-11-19); every other style keeps 0.
+- **Mona Sans Mono only for very short labels:** one or two words each, like "JUNE 11", "BERLIN" or "SPEAKERS", at the supporting size. Anything longer is Mona Sans, except code in the [code block](../../brand-components/code-block/) (2026-11-25). The creative event label (all caps, guidelines section 11 rule 3) takes **+0.08em**, as the design system's captions (visual designer, 2026-11-19); every other style keeps 0.
 - **Longer titles step down** to the next size by word count, never in between and never below the 11+ size. If it still doesn't fit, ask the person to shorten it.
 - **Wide** follows the Vector Space Day banner (128 on 1920, decided 2026-11-04).
 - **Ultrawide** uses the wide sizes (decided 2026-11-11 from the LinkedIn profile cover, 1584×396: a 128 title reads at LinkedIn's small display size). **Beside Qbot** on the LinkedIn cover, the title steps down one size (128 → 104), so Qbot stays the bigger shape ([`layout/`](../../guidelines/layout/) "LinkedIn profile cover"). Not yet tried on a full 3000×400 banner.
@@ -115,6 +115,8 @@ From Brand Guide 2.0. Tokens under `semantic.channels`.
 | Slides | Title / section / heading / subheading / body / caption / footnote | 44 / 36 / 28 / 22 / 18 / 14 / 12pt |
 | Documents | Title / H1 / H2 / H3 / body / caption | 28 / 22 / 18 / 14 / 11 / 9pt |
 
+The three Print rows are the Brand Guide's general ranges. For a printed piece, the sizes per format, chosen for good legibility at the printed size, are in [`guidelines/print/`](../../guidelines/print/) section 4, and those win (visual designer, 2026-11-26).
+
 ## Hierarchy
 
 Body text scales with its heading: keep body copy between **20% and 40%** of the heading size. For example, H2 at 56px takes body text from 14px (Text SM) to 20px (Text XL).
@@ -122,7 +124,7 @@ Body text scales with its heading: keep body copy between **20% and 40%** of the
 ## Alignment and spacing
 
 - **Left-aligned or centered. Never right-aligned.**
-- Watch the rag (the uneven right edge) and avoid orphans and widows: single words or lines left alone at the end or start of a paragraph.
+- Watch the rag (the uneven right edge) and avoid orphans and widows: single words or lines left alone at the end or start of a paragraph. In code, titles and short text (up to about 4 lines) use `text-wrap: balance`; longer paragraphs use `text-wrap: pretty` (2026-11-25).
 - Use as few styles as needed. Keep it clear, calm and confident.
 - Gaps between paragraphs and padding inside frames follow the 8px grid. Brand Guide examples: 64px or 56px side padding with a 24px gap, or 56px with a 16px gap.
 

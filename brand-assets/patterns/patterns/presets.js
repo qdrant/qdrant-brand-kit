@@ -1,5 +1,5 @@
 // Loads a preset from presets/. A preset with "extends" starts from that shared file
-// (for example mesh-pattern.shared.json) and adds its own settings on top. Generative
+// (for example shared.json) and adds its own settings on top. Generative
 // presets list only the Pattern Studio settings they change, so "engine" is merged
 // key by key too. A preset with "layers" also loads those presets, drawn on top.
 

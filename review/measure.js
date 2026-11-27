@@ -44,7 +44,7 @@
   }
   function run() {
     var canvas = document.querySelector(".qd-canvas");
-    var out = { canvas: null, texts: [], images: [], logos: [], buttons: [], cards: [], circles: [], icons: [], books: [], blocks: [], fonts: {} };
+    var out = { canvas: null, texts: [], images: [], logos: [], buttons: [], cards: [], circles: [], icons: [], books: [], blocks: [], code: [], fonts: {} };
     if (canvas) {
       out.canvas = rect(canvas);
       out.canvas.shape = canvas.dataset.shape || null;
@@ -61,6 +61,7 @@
             role: role(el), rect: tr, box: rect(el),
             nested: !!(el.parentElement && el.parentElement.closest("p, h1, h2, h3, h4, h5, h6, li, span, a, strong, em") && el.parentElement.closest(".qd-canvas")),
             inBox: !!el.closest(".qd-box--card, .qd-box--outline"),
+            inCode: !!el.closest(".qd-code-block"), // code: checked as one block (brand-components/code-block)
             fontSize: parseFloat(s.fontSize), family: s.fontFamily.split(",")[0].replace(/["']/g, "").trim(),
             weight: +s.fontWeight, stretch: s.fontStretch, transform: s.textTransform, align: s.textAlign,
             color: s.color, letterSpacing: s.letterSpacing, lineHeight: s.lineHeight
@@ -71,7 +72,8 @@
           // A headshot is cropped by its card or circle: measure what's visible, not the whole photo.
           var info = { src: src(el), rect: rect(holder || el), loaded: el.complete && el.naturalWidth > 0,
                        naturalWidth: el.naturalWidth, naturalHeight: el.naturalHeight, shown: rect(el),
-                       cls: holder ? "headshot" : (el.className || ""), inBook: !!el.closest(".qd-book") };
+                       cls: holder ? "headshot" : (el.className || ""), inBook: !!el.closest(".qd-book"),
+                       inQr: !!el.closest(".qd-qr"), inLockup: !!el.closest(".qd-partner-lockup") };
           // Source pixels across the shown width, for the print resolution check: an object-view-box crop
           // (Qbot) or object-fit: cover shows only part of the file (visual designer, 2026-11-20).
           var st = getComputedStyle(el), srcW = el.naturalWidth, srcH = el.naturalHeight;
@@ -110,9 +112,13 @@
             viewBox: el.getAttribute("viewBox"), strokeWidth: el.getAttribute("stroke-width"),
             stroke: s2.stroke, color: s2.color, filled: filled, nonScaling: nonScaling,
             transform: s2.transform, filter: s2.filter, boxShadow: s2.boxShadow,
-            inButton: !!el.closest(".qd-button"), onLightCard: !!el.closest(".qd-box--light-card"), textSize: near
+            inButton: !!el.closest(".qd-button"), onLightCard: !!el.closest(".qd-box--light-card"), textSize: near,
+            inCode: !!el.closest(".qd-code-block")
           });
         }
+        // A code window, or a code block outside one: the piece checked for margins and the grid.
+        if (el.classList.contains("qd-code-window") || (el.classList.contains("qd-code-block") && !el.closest(".qd-code-window")))
+          out.code.push({ rect: rect(el), window: el.classList.contains("qd-code-window"), clip: rect(el.closest(".qd-code-window") ? el.closest(".qd-code-window") : el) });
         if (el.classList.contains("qd-headshot-card__photo")) out.cards.push({ rect: rect(el) });
         if (el.classList.contains("qd-headshot-circle__photo")) out.circles.push({ rect: rect(el) });
       });
@@ -132,6 +138,15 @@
     tag.textContent = JSON.stringify(out).replace(/</g, "\\u003c");
     document.body.appendChild(tag);
   }
-  function start() { document.fonts.ready.then(function () { setTimeout(run, 1500); }); }
+  // A page that sizes its layout in script (guidelines/layout/book.js) sets data-qd-layout="pending" on <html>
+  // and "done" when it finishes: wait for it, up to 10 s, so the measurement never runs mid-layout.
+  function whenLaid(fn) {
+    var t0 = Date.now();
+    (function poll() {
+      if (document.documentElement.dataset.qdLayout !== "pending" || Date.now() - t0 > 10000) fn();
+      else setTimeout(poll, 100);
+    })();
+  }
+  function start() { document.fonts.ready.then(function () { setTimeout(function () { whenLaid(run); }, 1500); }); }
   if (document.readyState === "complete") start(); else window.addEventListener("load", start);
 })();

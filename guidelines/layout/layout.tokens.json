@@ -391,6 +391,6 @@
     }
   },
   "print": {
-    "$description": "Not defined yet. Print sizes, bleed and safe area come here once the social side is approved."
+    "$description": "Print sizes, bleed and safe area are in guidelines/print/print.tokens.json, the only place for the print rules (visual designer, 2026-11-26)."
   }
 }

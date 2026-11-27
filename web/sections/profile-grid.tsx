@@ -43,7 +43,7 @@ export function ProfileGrid({ header, profiles, badge = "Distinguished", columns
         description={header.description}
         actions={header.action ? <ArrowLink href={header.action.href}>{header.action.label}</ArrowLink> : undefined}
       />
-      <ul className={cn("grid grid-cols-1 gap-(--qd-layout-column-gap)", cols[columns])}>
+      <ul className={cn("grid grid-cols-1 gap-(--web-card-gap)", cols[columns])}>
         {profiles.map((profile) => (
           <Plate as="li" key={profile.name} className="flex flex-col gap-5 rounded-xl p-6">
             <div className="flex items-start justify-between gap-4">

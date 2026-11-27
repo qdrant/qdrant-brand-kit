@@ -7,6 +7,8 @@
 // used, never a paraphrase. Inline code is marked with backticks and bold with **, as on the pages. Labels the site
 // has no copy for (a result count, an empty state, a placeholder quote) are marked as placeholders where they're set.
 
+import type { ReactNode } from "react"
+
 import type { Link } from "./site"
 
 // A block of long-form text, for the article and legal sections. Text can mark `code` and **bold**.
@@ -16,7 +18,10 @@ export type ProseBlock =
   | { type: "list"; items: string[]; ordered?: boolean }
   | { type: "code"; code: string; title?: string }
   | { type: "quote"; text: string; cite?: string }
-  | { type: "figure"; label?: string; caption?: string }
+  // A note: a callout with an optional list, like the upgrade notes in a release post (2026-11-26).
+  | { type: "note"; text: string; items?: string[] }
+  // A figure: its visual (a diagram from web/visuals, given by the page) or a placeholder; `alt` describes it.
+  | { type: "figure"; id?: string; label?: string; caption?: string; alt?: string; visual?: ReactNode }
 
 // ---------------------------------------------------------------------------------------------------------------
 // Page headers
@@ -56,6 +61,10 @@ export type Post = {
   tag?: string
   authors: string
   date: string
+  // Its thumbnail: a JPG in web/assets/blog (blog thumbnails are the website's one raster image, 2026-11-26), or a
+  // visual from web/visuals drawn in its place.
+  image?: string
+  visual?: ReactNode
 }
 
 export const blogFeatured = {

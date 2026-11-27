@@ -84,6 +84,13 @@
   --web-tray: color-mix(in oklab, var(--foreground) 2.5%, transparent);
 }
 
+/* The gap between cards side by side or stacked (bento tiles, card grids, result cards): one step under the layout's
+   column gap, 16px instead of 24px (design lead, 2026-11-26). Columns of a layout (text beside media) keep
+   --qd-layout-column-gap. */
+:root {
+  --web-card-gap: var(--qd-spacing-16);
+}
+
 .web-seam {
   border-top: 1px solid var(--web-line);
 }
@@ -241,6 +248,25 @@
 }
 .web-grid > * {
   background: var(--background);
+}
+/* A section that ends in a row or grid of cells sets it on the section's bottom line, with no padding under it, so no
+   empty band is left below the cells (design lead, 2026-11-26). The next section's seam is the cells' bottom line, so
+   the cells drop their own. Cells inside a wrapper count too, when they're its only child (the hero's proof row). */
+.web-seam:has(> div:last-child > :last-child:is(.web-cells, .web-grid)),
+.web-seam:has(> div:last-child > :last-child > :only-child:is(.web-cells, .web-grid)) {
+  padding-bottom: 0;
+}
+/* The same at the top: a section that starts with its cells sets them on its top line (2026-11-26, the home page's logo
+   grid), and the seam is their top line. */
+.web-seam:has(> div:last-child > :first-child:is(.web-cells, .web-grid)) {
+  padding-top: 0;
+}
+.web-seam > div:last-child > :first-child:is(.web-cells, .web-grid) {
+  border-top-width: 0;
+}
+.web-seam > div:last-child > :last-child:is(.web-cells, .web-grid),
+.web-seam > div:last-child > :last-child > :only-child:is(.web-cells, .web-grid) {
+  border-bottom-width: 0;
 }
 
 /* Tones (design lead, 2026-11-21): color for icons, in a subtle way. An icon sits on a small tile tinted with its color
@@ -795,4 +821,126 @@
   .web-caret {
     animation: none;
   }
+}
+
+/* Pattern color, Primary or Secondary (2026-11-24, exploring: a choice the studio's Patterns tab offers, not a
+   decision). Secondary is the patterns as they are, in indigo (secondary.secondary). Primary turns their colored
+   steps to the same steps of amaranth (primary.primary); the neutral ones (stars, lines, grid) stay. Set
+   data-web-pattern-tone="primary" on the element that carries data-theme. */
+[data-web-pattern-tone="primary"] .web-pattern {
+  --web-scene-haze: var(--qd-color-amaranth-950);
+  --web-scene-violet: var(--qd-color-amaranth-900);
+  --web-scene-glow: var(--qd-color-amaranth-400);
+  --web-scene-bright: var(--qd-color-amaranth-300);
+  --web-scene-plum: var(--qd-color-amaranth-800);
+  --web-scene-ramp-1: var(--qd-color-amaranth-950);
+  --web-scene-ramp-2: var(--qd-color-amaranth-900);
+  --web-scene-ramp-3: var(--qd-color-amaranth-800);
+  --web-scene-ramp-4: var(--qd-color-amaranth-600);
+}
+[data-web-pattern-tone="primary"][data-theme="light"] .web-pattern {
+  --web-scene-haze: var(--qd-color-amaranth-50);
+  --web-scene-violet: var(--qd-color-amaranth-100);
+  --web-scene-glow: var(--qd-color-amaranth-500);
+  --web-scene-bright: var(--qd-color-amaranth-600);
+  --web-scene-plum: var(--qd-color-amaranth-200);
+  --web-scene-ramp-1: var(--qd-color-neutral-50);
+  --web-scene-ramp-2: var(--qd-color-amaranth-50);
+  --web-scene-ramp-3: var(--qd-color-amaranth-100);
+  --web-scene-ramp-4: var(--qd-color-amaranth-200);
+}
+[data-web-pattern-tone="primary"][data-theme="light"] .web-depth-haze {
+  --web-scene-star: var(--qd-color-amaranth-500);
+  --web-scene-dim: var(--qd-color-amaranth-300);
+  --web-scene-haze: var(--qd-color-amaranth-100);
+  --web-scene-violet: var(--qd-color-amaranth-200);
+  --web-scene-plum: var(--qd-color-amaranth-100);
+}
+
+/* Qbot peek (web/patterns/explorations/qbot.tsx, 2026-11-26, exploring): the head rises from behind the heading on
+   the website's weightless motion (an expo ease-out over 0.9s, never a bounce), untilting as it comes, then blinks
+   once and floats on a slow breath; 4 seconds after it settles it sinks back out of sight. With reduced motion it
+   only fades in and out. */
+.web-qbot-peek {
+  opacity: 0;
+  transform: translateY(var(--qbot-hidden, 100%)) rotate(-5deg);
+  transform-origin: 50% 100%;
+  transition:
+    transform 900ms cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 400ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.web-qbot-peek.is-shown {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+/* Gone: it sinks back behind the heading on an ease-in that mirrors the rise, and fades as it goes. */
+.web-qbot-peek.is-gone {
+  opacity: 0;
+  transform: translateY(var(--qbot-hidden, 100%)) rotate(-3deg);
+  transition:
+    transform 1200ms cubic-bezier(0.7, 0, 0.84, 0),
+    opacity 700ms ease-in 500ms;
+}
+.web-qbot-peek.is-shown .web-qbot-float {
+  animation: web-qbot-float 7s ease-in-out 0.9s infinite;
+}
+.web-qbot-peek.is-shown .web-qbot-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: web-qbot-blink 520ms ease-in-out 1.1s 1;
+}
+@keyframes web-qbot-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes web-qbot-blink {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  45% {
+    transform: scaleY(0.08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .web-qbot-peek,
+  .web-qbot-peek.is-shown,
+  .web-qbot-peek.is-gone {
+    transform: none;
+    transition: opacity 400ms ease-out;
+  }
+  .web-qbot-peek.is-shown .web-qbot-float,
+  .web-qbot-peek.is-shown .web-qbot-eyes {
+    animation: none;
+  }
+}
+
+/* Depth haze, vivid (web/patterns/explorations/depth-haze-vivid.tsx, 2026-11-26, exploring): Depth haze with stars in
+   more contrast and more movement. Stronger than the approved one (75% on dark, from 50%; 90% on light, from 80%),
+   with the same colors on light as the light exploration above (indigo stars, the haze a step deeper). Its text
+   guard is a mask set on the layer (depth-haze-vivid.tsx). */
+.web-depth-haze-vivid {
+  opacity: 0.75;
+}
+[data-web][data-theme="light"] .web-depth-haze-vivid,
+[data-web] [data-theme="light"] .web-depth-haze-vivid,
+[data-theme="light"] [data-web] .web-depth-haze-vivid {
+  --web-scene-star: var(--qd-color-indigo-600);
+  --web-scene-dim: var(--qd-color-indigo-400);
+  --web-scene-haze: var(--qd-color-indigo-100);
+  --web-scene-violet: var(--qd-color-indigo-200);
+  --web-scene-plum: var(--qd-color-purple-100);
+  opacity: 0.9;
+}
+[data-web-pattern-tone="primary"][data-theme="light"] .web-depth-haze-vivid {
+  --web-scene-star: var(--qd-color-amaranth-600);
+  --web-scene-dim: var(--qd-color-amaranth-400);
+  --web-scene-haze: var(--qd-color-amaranth-100);
+  --web-scene-violet: var(--qd-color-amaranth-200);
+  --web-scene-plum: var(--qd-color-amaranth-100);
 }

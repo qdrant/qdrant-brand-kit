@@ -42,6 +42,22 @@ export const customers = {
     "discord", "perplexity", "cognizant", "dailymotion", "zscaler", "servicenow", "voiceflow", "deloitte",
   ],
   action: { label: "See more customers", href: "/customers/" },
+  // The home page's logos in the site's order (read 2026-11-26): thirteen, eight of them with a case study.
+  home: [
+    { name: "Disney", logo: "disney" },
+    { name: "ServiceNow", logo: "servicenow" },
+    { name: "HubSpot", logo: "hubspot", href: "/blog/case-study-hubspot/" },
+    { name: "Discord", logo: "discord" },
+    { name: "Canva", logo: "canva" },
+    { name: "Zscaler", logo: "zscaler" },
+    { name: "Bayer", logo: "bayer", href: "/blog/case-study-bayer/" },
+    { name: "Tripadvisor", logo: "tripadvisor", href: "/blog/case-study-tripadvisor/" },
+    { name: "OpenTable", logo: "opentable", href: "/blog/case-study-opentable/" },
+    { name: "Bazaarvoice", logo: "bazaarvoice", href: "/blog/case-study-bazaarvoice/" },
+    { name: "Flipkart", logo: "flipkart", href: "/blog/case-study-flipkart/" },
+    { name: "Sprinklr", logo: "sprinklr", href: "/blog/case-study-sprinklr/" },
+    { name: "Deutsche Telekom", logo: "telekom", href: "/blog/case-study-deutsche-telekom/" },
+  ],
 }
 
 // About: the stats row.
@@ -52,14 +68,16 @@ export const aboutStats = [
   { value: "100+", label: "employees" },
 ]
 
-// Home: "One Engine, Endless Applications", the customer metric cards.
+// Home: "One Engine, Endless Applications", the customer metric cards, each linking to its case study (read again
+// 2026-11-26). HubSpot's value is the words the site highlights in its line.
 export const applications = {
   title: "One Engine, Endless Applications",
   cards: [
-    { company: "Tripadvisor", value: "2-3x revenue", text: "Powers AI Trip Planner on billions of reviews and images, driving 2-3x revenue." },
-    { company: "Deutsche Telekom", value: "2M+ AI-driven conversations", text: "Powers multi-agent platform with real-time context across 2M+ AI-driven conversations." },
-    { company: "Dust", value: "5,000+ data sources", text: "Powers Dust's AI agents platform with scalable vector search across 5,000+ data sources." },
-    { company: "Lyzr", value: "reducing latency by 90%", text: "Powers Lyzr's AI agents, reducing latency by 90% and increasing throughput by 150%." },
+    { company: "Tripadvisor", logo: "tripadvisor", value: "2-3x revenue", text: "Powers AI Trip Planner on billions of reviews and images, driving 2-3x revenue.", href: "/blog/case-study-tripadvisor/" },
+    { company: "HubSpot", logo: "hubspot", value: "deep contextual awareness", text: "Powers Breeze AI with real-time, personalized responses and deep contextual awareness.", href: "/blog/case-study-hubspot/" },
+    { company: "Deutsche Telekom", logo: "telekom", value: "2M+ AI-driven conversations", text: "Powers multi-agent platform with real-time context across 2M+ AI-driven conversations.", href: "/blog/case-study-deutsche-telekom/" },
+    { company: "Dust", logo: "dust", value: "5,000+ data sources", text: "Powers Dust's AI agents platform with scalable vector search across 5,000+ data sources.", href: "/blog/case-study-dust-v2/" },
+    { company: "Lyzr", logo: "lyzr", value: "reducing latency by 90%", text: "Powers Lyzr's AI agents, reducing latency by 90% and increasing throughput by 150%.", href: "/blog/case-study-lyzr/" },
   ],
 }
 
@@ -84,7 +102,7 @@ export const composableSearch = {
     { icon: "Search", title: "Hybrid Search", text: "Keyword and semantic search lives in the same engine." },
     { icon: "Layers", title: "Filterable HNSW", text: "Latency stays predictable under filters." },
     { icon: "Braces", title: "Built-in Multivector", text: "More precise multimodal search in one query." },
-    { icon: "ChartScatter", title: "Full-Spectrum Reranking", text: "Apply business logic and token-level precision. Score boosting, ColBERT, and Maximum Marginal Relevance in-engine." },
+    { icon: "ChartScatter", title: "Full-Spectrum Reranking", text: "Apply business logic and token-level precision. Score boosting, ColBERT, and Maximal Marginal Relevance in-engine." },
     { icon: "FileText", title: "Advanced Metadata Filters", text: "Enable more precise and efficient retrieval. Store metadata in JSON and use advanced filters, such as nested, text, geo, has_vector, and more." },
     { icon: "ArrowRightLeft", title: "Ingestion and Updates", text: "Bulk upserts and streaming. Insert, update, and delete on a live index." },
     { icon: "Cpu", title: "Qdrant Cloud Inference", text: "Embed and query in one round trip. Native embedding generation inside a cluster." },
@@ -104,15 +122,19 @@ export const offload = {
   ] as Feature[],
 }
 
-// Home: "Why Qdrant?", the feature rows. The links' targets weren't captured from the site, so they're "#".
+// Home: "Why Qdrant?", the feature rows, all five with their links (read again 2026-11-26). "Maximal Marginal
+// Relevance" is the docs' name; the site says "Maximum" (corrected, design lead, 2026-11-26).
 export const whyQdrant = {
   kicker: "Why Qdrant?",
   title: "Build for Production-Grade AI Search",
   description: "Engineered for real-time retrieval with the speed, accuracy, and scale that modern AI demands.",
+  action: { label: "Start Free in Qdrant Cloud", href: "https://cloud.qdrant.io/signup" },
   rows: [
-    { title: "Expansive Metadata Filters", text: "Store metadata in JSON and use advanced filters, such as `nested`, `text`, `geo`, `has_vector`, and more.", link: { label: "Learn About Metadata Filters", href: "#" } },
-    { title: "Native Hybrid Search (Dense + Sparse)", text: "Blend keyword and vector search in one query – use dense or sparse vectors. Supports BM25, SPLADE++, and miniCOIL.", link: { label: "Explore Hybrid Search", href: "#" } },
-    { title: "Efficient, One-Stage Filtering", text: "Filters are applied during HNSW traversal — no pre- or post-filtering.", link: { label: "See Documentation", href: "#" } },
+    { title: "Expansive Metadata Filters", text: "Store metadata in JSON and use advanced filters, such as `nested`, `text`, `geo`, `has_vector`, and more.", link: { label: "Learn About Metadata Filters", href: "/documentation/manage-data/payload/" } },
+    { title: "Native Hybrid Search (Dense + Sparse)", text: "Blend keyword and vector search in one query – use dense or sparse vectors. Supports BM25, SPLADE++, and miniCOIL.", link: { label: "Explore Hybrid Search", href: "/documentation/search/hybrid-queries/" } },
+    { title: "Built-in Multivector", text: "Set new standards for relevance; make the retrieval layer more expressive, flexible, and multimodal with multiple vectors per object.", link: { label: "See Documentation", href: "/documentation/tutorials-search-engineering/using-multivector-representations/" } },
+    { title: "Efficient, One-Stage Filtering", text: "Filters are applied during HNSW traversal — no pre- or post-filtering. High recall with low latency, even under complex conditions.", link: { label: "See Documentation", href: "/articles/filterable-hnsw/" } },
+    { title: "Full-Spectrum Reranking", text: "Infuse business logic with score boosting, achieve token-level precision with late interaction models (e.g. ColBERT), diversify results with Maximal Marginal Relevance (MMR)", link: { label: "See Documentation", href: "/documentation/tutorials-basics/reranking-hybrid-search/" } },
   ] as Feature[],
 }
 
@@ -131,14 +153,21 @@ export const enterprise = {
   tiles: ["SOC 2 · GDPR-aligned Options", "Prometheus · Grafana · Datadog", "SSO (SAML/OIDC)"],
 }
 
-// Home: "Performance by Design", the vertical tabs.
+// Home: "Performance by Design", the vertical tabs, with its kicker, description and action (read again 2026-11-26).
+// Two lines corrected to match the docs (design lead, 2026-11-26): new data is searchable at once and indexed in the
+// background, not "indexed instantly" (docs: ops-optimization/optimizer); and quantization saves up to 32x, binary's
+// ratio, since the site's 64x is product quantization's, which the heading doesn't name (docs: manage-data/quantization).
 export const performance = {
+  kicker: "Architecture for the AI - Not Keyword - Era",
   title: "Performance by Design",
+  description:
+    "We research, engineer, and optimize each component from first principles for the fastest, most scalable, and most customizable AI retrieval and search engine.",
+  action: { label: "Start Free in Qdrant Cloud", href: "https://cloud.qdrant.io/signup" },
   items: [
     { title: "Highest‑Performance Vector Search Engine", text: "Built entirely in Rust with SIMD and a custom storage engine (Gridstore) — no wrappers, no bolt-ons. Just fast, scalable vector search." },
-    { title: "Real‑Time Indexing", text: "Index new data instantly without rebuilding the entire index. Your vectors are searchable the moment they're added." },
+    { title: "Real‑Time Indexing", text: "Search new data instantly, without rebuilding the entire index. Your vectors are searchable the moment they're added, and indexed in the background." },
     { title: "Memory‑Efficient Storage", text: "Store billions of vectors with minimal memory footprint using our optimized storage architecture." },
-    { title: "Asymmetric, Scalar and Binary Quantization", text: "Reduce memory usage by up to 64x while maintaining search quality with advanced quantization techniques." },
+    { title: "Asymmetric, Scalar and Binary Quantization", text: "Reduce memory usage by up to 32x while maintaining search quality with advanced quantization techniques." },
   ] as Feature[],
 }
 

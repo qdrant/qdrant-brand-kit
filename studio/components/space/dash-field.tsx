@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState } from "react"
 
-// Dash field: the brand's Generative-Dash-Pattern-A (brand-assets/patterns), drawn by the pattern library
+// Dash field: the brand's Generative-Dash-Pattern (brand-assets/patterns), drawn by the pattern library
 // itself, never redrawn here, used as a section's star field. It fades out where the copy sits. The
 // pattern is a grid of its own, so no other grid goes on top. Patterns render slowly, so it renders once
 // per size (web/AGENTS.md).
 
 const PATTERNS = "/repo/brand-assets/patterns"
-const PRESET = "generative-dash-pattern-a"
+const PRESET = "generative-dash-pattern"
 
 type Library = {
   loadTokens: (url: string) => Promise<unknown>
@@ -76,7 +76,7 @@ export function DashField() {
         style={{ opacity: ready ? 1 : 0 }}
       />
       <span className="sp-readout pointer-events-none absolute right-4 bottom-4">
-        Generative-Dash-Pattern-A
+        Generative-Dash-Pattern
       </span>
     </>
   )

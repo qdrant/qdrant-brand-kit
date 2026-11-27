@@ -35,7 +35,7 @@ export function NotFound({ code = "404", title, help, primary, secondary, theme,
         {code}
       </p>
       <div className="flex flex-col items-center gap-4">
-        <h1 className={cn(heading.section, "max-w-2xl text-balance")}>{title}</h1>
+        <h1 className={cn(heading.page, "max-w-2xl text-balance")}>{title}</h1>
         {help && help.length > 0 && (
           <p className={cn(type.lead, "max-w-xl text-pretty")}>
             {help.map((part, i) =>

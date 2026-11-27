@@ -86,7 +86,7 @@ export function Testimonials({ layout = "single", header, quotes, metric, theme,
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
         {headerEl}
-        <ul className="columns-1 gap-(--qd-layout-column-gap) md:columns-2 lg:columns-3">
+        <ul className="columns-1 gap-(--web-card-gap) md:columns-2 lg:columns-3">
           {quotes.map((q) => (
             <Plate as="li" key={q.quote} className="mb-(--qd-layout-column-gap) break-inside-avoid rounded-xl p-6">
               <figure className="flex flex-col gap-6">
@@ -105,7 +105,7 @@ export function Testimonials({ layout = "single", header, quotes, metric, theme,
     return (
       <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
         {headerEl}
-        <div className="flex flex-col gap-(--qd-layout-column-gap)">
+        <div className="flex flex-col gap-(--web-card-gap)">
           {first && (
             <Plate as="figure" className="flex flex-col gap-10 rounded-2xl p-8 md:p-12">
               <blockquote className={cn(largeQuote, "max-w-4xl text-pretty")}>
@@ -121,7 +121,7 @@ export function Testimonials({ layout = "single", header, quotes, metric, theme,
             </Plate>
           )}
           {rest.length > 0 && (
-            <ul className="grid gap-(--qd-layout-column-gap) md:grid-cols-3">
+            <ul className="grid gap-(--web-card-gap) md:grid-cols-3">
               {rest.slice(0, 3).map((q) => (
                 <Plate as="li" key={q.quote} className="rounded-xl p-6">
                   <figure className="flex h-full flex-col justify-between gap-6">

@@ -1,0 +1,278 @@
+{
+  "name": "Generative-Hexagon-Pattern",
+  "textMask": "both",
+  "recipe": "generative-pattern",
+  "extends": "generative-pattern.shared",
+  "source": "Pattern Studio export, 1620 x 1080",
+  "$description": "Pattern Studio's hexagons on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%, top to bottom), hexagons in the family's 800, 600 and 200, like every generative pattern. The old Hexagon-B and Hexagon-C were merged into it on 2026-11-24 (the only difference was the color mapping), so it has two approved looks: colored top to bottom (as is) and from the center out (renderPattern option variant: 0). Variants 1 to 9 are bigger, flat hexagons from the Pattern Studio connector, approved in the Pattern Library review (2026-11-24).",
+  "colorways": [
+    {
+      "name": "Background → Indigo 900",
+      "colors": [
+        "{color.indigo.800}",
+        "{color.indigo.700}",
+        "{color.indigo.600}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.indigo.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Amaranth 900",
+      "colors": [
+        "{color.amaranth.800}",
+        "{color.amaranth.700}",
+        "{color.amaranth.600}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.amaranth.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Teal 900",
+      "colors": [
+        "{color.teal.800}",
+        "{color.teal.700}",
+        "{color.teal.600}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.teal.900}",
+          "at": 1.1667
+        }
+      ],
+      "onHold": "Waiting for the council's approval of the sub-direction (visual designer, 2026-11-24). Don't use it in creatives yet."
+    },
+    {
+      "name": "Background → Neutral 800",
+      "colors": [
+        "{color.neutral.800}",
+        "{color.neutral.700}",
+        "{color.neutral.600}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.800}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Neutral 100 → Neutral 300",
+      "colors": [
+        "{color.neutral.0}",
+        "{color.neutral.0}",
+        "{color.neutral.0}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.neutral.100}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.300}",
+          "at": 1.1667
+        }
+      ],
+      "fixedColors": true,
+      "textColor": "dark",
+      "textMask": "none",
+      "onHold": "Light mode: on hold (visual designer, 2026-11-26). Don't use it in creatives yet."
+    }
+  ],
+  "settings": {
+    "engine": {
+      "cell": 56,
+      "padding": 8,
+      "shape": "box",
+      "size": 0.05,
+      "outlineWidth": 0,
+      "repeat": 12,
+      "noiseAmount": 1,
+      "noiseScale": 2,
+      "zoom": 0.55,
+      "threshold": 0.05,
+      "density": "stochastic",
+      "element": "hexagon",
+      "scale": 0.15,
+      "sizeByValue": true,
+      "minSize": 0.4,
+      "strokeWidth": 2,
+      "paint": "stroke",
+      "elementRotation": -154,
+      "colorMap": "y",
+      "alphaByValue": true,
+      "minAlpha": 0
+    },
+    "variants": [
+      {
+        "name": "From the center out (was Hexagon-C)",
+        "colorMap": "radial"
+      },
+      {
+        "name": "Big filled hexagons, 24 px grid (was proposal P15)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "fill",
+        "cell": 24,
+        "scale": 0.4,
+        "threshold": 0.04,
+        "noiseAmount": 0.25,
+        "noiseScale": 4.7,
+        "seed": 47,
+        "warp": 0.2,
+        "colorSteps": [
+          800,
+          800,
+          700
+        ]
+      },
+      {
+        "name": "Big filled hexagons, 32 px grid (was proposal P18)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "fill",
+        "cell": 32,
+        "scale": 0.4,
+        "threshold": 0.04,
+        "noiseAmount": 0.25,
+        "noiseScale": 4.7,
+        "seed": 47,
+        "warp": 0.2,
+        "colorSteps": [
+          800,
+          800,
+          700
+        ]
+      },
+      {
+        "name": "Big outlined hexagons, 32 px grid (was proposal P27)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "stroke",
+        "cell": 32,
+        "scale": 0.45,
+        "threshold": 0.13,
+        "noiseAmount": 0.46,
+        "noiseScale": 3.8,
+        "seed": 10,
+        "warp": 0.17
+      },
+      {
+        "name": "Big outlined hexagons, 64 px grid (was proposal P36)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "stroke",
+        "cell": 64,
+        "scale": 0.6,
+        "threshold": 0.13,
+        "noiseAmount": 0.46,
+        "noiseScale": 3.8,
+        "seed": 10,
+        "warp": 0.17
+      },
+      {
+        "name": "Outlined hexagons, 64 px grid, smaller (was proposal P35)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "stroke",
+        "cell": 64,
+        "scale": 0.45,
+        "threshold": 0.13,
+        "noiseAmount": 0.46,
+        "noiseScale": 3.8,
+        "seed": 10,
+        "warp": 0.17
+      },
+      {
+        "name": "Outlined hexagons, 56 px grid (was proposal P34)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "stroke",
+        "cell": 56,
+        "scale": 0.5,
+        "threshold": 0.13,
+        "noiseAmount": 0.46,
+        "noiseScale": 3.8,
+        "seed": 10,
+        "warp": 0.17
+      },
+      {
+        "name": "Outlined hexagons, 48 px grid (was proposal P33)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "stroke",
+        "cell": 48,
+        "scale": 0.65,
+        "threshold": 0.13,
+        "noiseAmount": 0.46,
+        "noiseScale": 3.8,
+        "seed": 10,
+        "warp": 0.17
+      },
+      {
+        "name": "Outlined hexagons, 32 px grid, bigger (was proposal P28)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "stroke",
+        "cell": 32,
+        "scale": 0.6,
+        "threshold": 0.13,
+        "noiseAmount": 0.46,
+        "noiseScale": 3.8,
+        "seed": 10,
+        "warp": 0.17
+      },
+      {
+        "name": "Filled hexagons, 40 px grid (was proposal P21)",
+        "element": "hexagon",
+        "shape": "none",
+        "elementRotation": 30,
+        "paint": "fill",
+        "cell": 40,
+        "scale": 0.45,
+        "threshold": 0.04,
+        "noiseAmount": 0.25,
+        "noiseScale": 4.7,
+        "seed": 47,
+        "warp": 0.2,
+        "colorSteps": [
+          800,
+          800,
+          700
+        ]
+      }
+    ]
+  },
+  "$colors": "Elements in the family's 800, 700, 600: the lightest is never below 600 (visual designer, 2026-11-25). Dark neutral added 2026-11-24. Filled-hexagon variants 1, 2 and 9 use only 800 and 700 (colorSteps). Light mode (on hold): every element white (Neutral 0) on Neutral 100 → 300, kept white by fixedColors."
+}

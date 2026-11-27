@@ -30,9 +30,23 @@ const PIXEL_SIZES = ["cell", "padding", "lineWidth", "strokeWidth", "graphWidth"
 
 // The backdrop colors at the top and bottom of the frame. A stop past the bottom
 // ("at" > 1) gives the color the gradient has reached at the bottom edge.
+// When the first stop is also { token, at }, the gradient starts inside the frame,
+// like Motion Streaks' 5.59% -> 116.67%, and the stops come back with their offsets.
 function backdropColors(tokens, stops) {
-  const top = resolveToken(tokens, stops[0]);
-  const end = stops[1];
+  const [first, end] = stops;
+  if (typeof first !== "string") {
+    const a = hexToRgba(resolveToken(tokens, first.token));
+    const b = hexToRgba(resolveToken(tokens, end.token ?? end));
+    const from = first.at ?? 0;
+    const to = end.at ?? 1;
+    const colorAt = (at) => {
+      const t = Math.min(1, Math.max(0, (at - from) / (to - from)));
+      const hex = (i) => Math.round((a[i] + (b[i] - a[i]) * t) * 255).toString(16).padStart(2, "0");
+      return `#${hex(0)}${hex(1)}${hex(2)}`.toUpperCase();
+    };
+    return [{ color: colorAt(from), offset: from }, { color: colorAt(Math.min(to, 1)), offset: Math.min(to, 1) }];
+  }
+  const top = resolveToken(tokens, first);
   if (typeof end === "string") return [top, resolveToken(tokens, end)];
   const a = hexToRgba(top);
   const b = hexToRgba(resolveToken(tokens, end.token));
