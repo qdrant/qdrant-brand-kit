@@ -4,6 +4,8 @@ This repo is the Qdrant brand system: the rules and materials for **creatives** 
 
 ## Making a creative
 
+**Stickers?** Read only [`guidelines/print/stickers.md`](guidelines/print/stickers.md), its `stickers.tokens.json` and what it links to, and build with [`review/sticker/`](review/sticker/). Nothing else on this page applies, and none of its questions are asked (visual designer, 2026-11-27).
+
 **Printed?** If the person asks for something printed (flyer, brochure, poster, roll-up, business card, booth, print PDF), also read [`guidelines/print/`](guidelines/print/) first: it starts with the printer's spec and adds the print rules on top of everything below (2026-11-20). In print: no patterns; instead of the main-visual question, ask for dark with space imagery or plain and serious (light or dark), with the recommendation from the print rules; margins 8% of the short side, so they shrink with the format (visual designer, 2026-11-20). Large-format print (booths, roll-ups and retractable banners, backdrops, posters A2 and bigger) is in progress: treat it as a test (visual designer, 2026-11-20).
 
 1. **Ask only for the main visual.** Unless the request says, ask whether the creative has space imagery (astronaut), Qbot, a pattern only, or headshots (speaker announcements), with the recommended one marked ([`guidelines/`](guidelines/) section 1). Don't ask design questions (tone, pattern, layout, mask, other sizes): take them from the rules. Where a rule offers options, make each one and show them together, with the recommended one marked; the person picks (visual designer, 2026-11-20).
