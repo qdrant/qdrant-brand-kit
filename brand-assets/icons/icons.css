@@ -4,7 +4,7 @@
    Paste the Lucide SVG inline and add .qd-icon. Keep Lucide's viewBox="0 0 24 24", fill="none",
    stroke="currentColor" and stroke-width="2": the stroke then scales with the icon (slide 39).
 
-   In a creative the icon is the same height as the supporting text beside it (Vanesa, 2026-11-11).
+   In a creative the icon is the same height as the supporting text beside it (visual designer, 2026-11-11).
    Colors: a 400 on dark backgrounds, a 600 on light ones, always 3:1 or more (README). */
 
 .qd-icon {
@@ -31,7 +31,7 @@
 .qd-icon--amaranth { --qd-icon-color: var(--qd-color-amaranth-400); }
 .qd-icon--indigo   { --qd-icon-color: var(--qd-color-indigo-400); }
 /* On a pattern that isn't masked (violet or red mid-tones), the 400s disappear: use white, the text color
-   beside it (Vanesa, 2026-11-11). Still 3:1 or more. */
+   beside it (visual designer, 2026-11-11). Still 3:1 or more. */
 .qd-icon--on-pattern { --qd-icon-color: var(--qd-color-text-primary); }
 
 [data-theme="light"] .qd-icon           { --qd-icon-color: var(--qd-color-neutral-600); }

@@ -10,7 +10,7 @@ import { ContourField, DitherHaze } from "./shaders"
 import { GlassCard } from "./surfaces"
 
 // A few options put together on real sections: the web layout (Section), the type set and the design
-// system's buttons. The heading is the studio's sample sentence (Juan, 2026-11-17); the rest is placeholder.
+// system's buttons. The heading is the studio's sample sentence (design lead, 2026-11-17); the rest is placeholder.
 export const SAMPLE = "High-Performance Vector Search at Scale"
 
 // A full-bleed background behind a Section. The scene fills this wrapper; the Section sits on top.

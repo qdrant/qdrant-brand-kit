@@ -99,7 +99,7 @@ Use `.qd-grid`. Rows are a `section` gap apart.
 
 ## Approved by / date
 
-Vanesa, 2026-11-04.
+Visual designer, 2026-11-04.
 
 ## Photo background in the pattern's color family
 

@@ -59,7 +59,7 @@
           "at": 1.1667
         }
       ],
-      "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
+      "onHold": "Waiting for the council's approval of the sub-direction (visual designer, 2026-11-24). Don't use it in creatives yet."
     },
     {
       "name": "Background → Neutral 800",
@@ -99,7 +99,7 @@
       "fixedColors": true,
       "textColor": "dark",
       "textMask": "none",
-      "onHold": "Light mode: on hold (Vanesa, 2026-11-26). Don't use it in creatives yet."
+      "onHold": "Light mode: on hold (visual designer, 2026-11-26). Don't use it in creatives yet."
     }
   ],
   "settings": {
@@ -261,7 +261,7 @@
         "warp": 0.3
       }
     ],
-    "$look": "Open look (Vanesa, 2026-11-25): agents may make new variations of this pattern without the Pattern Studio connector, with renderPattern(..., { look: n }) or { look: { ... } }. Only the engine values in look.ranges change, and each stays inside its range (numbers: [min, max]; words: the listed choices; cell: on the 8 grid). Colors always come from the colorway. The ranges span the pattern as approved and its approved variants.",
+    "$look": "Open look (visual designer, 2026-11-25): agents may make new variations of this pattern without the Pattern Studio connector, with renderPattern(..., { look: n }) or { look: { ... } }. Only the engine values in look.ranges change, and each stays inside its range (numbers: [min, max]; words: the listed choices; cell: on the 8 grid). Colors always come from the colorway. The ranges span the pattern as approved and its approved variants.",
     "look": {
       "source": "Pattern Studio look data-bars",
       "ranges": {
@@ -304,5 +304,5 @@
       }
     }
   },
-  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24. Light mode (on hold): every element white (Neutral 0) on Neutral 100 → 300, kept white by fixedColors."
+  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (visual designer, 2026-11-25). Dark neutral added 2026-11-24. Light mode (on hold): every element white (Neutral 0) on Neutral 100 → 300, kept white by fixedColors."
 }

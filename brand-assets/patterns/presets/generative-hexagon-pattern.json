@@ -59,7 +59,7 @@
           "at": 1.1667
         }
       ],
-      "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
+      "onHold": "Waiting for the council's approval of the sub-direction (visual designer, 2026-11-24). Don't use it in creatives yet."
     },
     {
       "name": "Background → Neutral 800",
@@ -99,7 +99,7 @@
       "fixedColors": true,
       "textColor": "dark",
       "textMask": "none",
-      "onHold": "Light mode: on hold (Vanesa, 2026-11-26). Don't use it in creatives yet."
+      "onHold": "Light mode: on hold (visual designer, 2026-11-26). Don't use it in creatives yet."
     }
   ],
   "settings": {
@@ -274,5 +274,5 @@
       }
     ]
   },
-  "$colors": "Elements in the family's 800, 700, 600: the lightest is never below 600 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24. Filled-hexagon variants 1, 2 and 9 use only 800 and 700 (colorSteps). Light mode (on hold): every element white (Neutral 0) on Neutral 100 → 300, kept white by fixedColors."
+  "$colors": "Elements in the family's 800, 700, 600: the lightest is never below 600 (visual designer, 2026-11-25). Dark neutral added 2026-11-24. Filled-hexagon variants 1, 2 and 9 use only 800 and 700 (colorSteps). Light mode (on hold): every element white (Neutral 0) on Neutral 100 → 300, kept white by fixedColors."
 }

@@ -1,4 +1,4 @@
-// Open looks: generative patterns agents may vary on their own (Vanesa, 2026-11-25).
+// Open looks: generative patterns agents may vary on their own (visual designer, 2026-11-25).
 //
 // Approved looks: data bars (Generative-Dash-Pattern), hyperspace (Generative-Burst-Pattern)
 // and hex pulse (Generative-Pulse-Pattern, Generative-Rings-Pattern). The Pattern Studio

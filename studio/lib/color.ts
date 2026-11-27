@@ -1,10 +1,10 @@
 // The Color page (/color): the palette (10 steps per color that keep their job in light and dark, built from the
 // primitives), one tab per group of Figma's Color collection with its tokens and how to use them, and example
-// assets that follow the semantic tokens (Juan, 2026-11-19; the groups as in Figma on 2026-11-21). The tokens
+// assets that follow the semantic tokens (design lead, 2026-11-19; the groups as in Figma on 2026-11-21). The tokens
 // here are the Color collection of the Figma file "Qdrant Brand Design" (2u6KfDsYjibQuf9ji6lFBR), read on
 // 2026-11-21: text, primary, secondary, status, background, border, palette, dataviz and static. Read them again
 // from Figma when the file changes. Nothing here is a token in the repo until it moves into primitives/colors
-// (colors.tokens.json) with Vanesa's yes.
+// (colors.tokens.json) with the visual designer's yes.
 //
 // No file access here, so client components can use it too. The primitives' hex values come from
 // lib/color-primitives.ts (server) and are passed down.
@@ -115,7 +115,7 @@ export const stepGroups = [
 ] as const
 
 // Every palette step is a primitive. A ramp has six tints lighter than its 600 but only four shades darker, so each
-// color got a 975 for dark backgrounds, like neutral-975 (Juan, 2026-11-19), and its 950 covers two steps.
+// color got a 975 for dark backgrounds, like neutral-975 (design lead, 2026-11-19), and its 950 covers two steps.
 
 // Colors. Light runs down the ramp from 50 to 950, skipping 900. Dark runs back up: 975, then 950 for the soft and
 // active backgrounds, then 900 to 400, and 200 for text. Step 10 in dark was 100 until 2026-11-19; 200 is a trial, to keep the light
@@ -218,12 +218,12 @@ export const surfaces = [
 // ---- The semantic tokens: Figma's Color collection, by group ----
 
 // A semantic token points at a primitive in each theme, never at a palette step, so changing the palette never moves
-// a token (Juan, 2026-11-19). The same rule holds in Figma, where every variable of the Color collection aliases the
+// a token (design lead, 2026-11-19). The same rule holds in Figma, where every variable of the Color collection aliases the
 // Primitives library. A token that doesn't change with the theme has the same primitive in both.
 export type Mapping = { light: string; dark: string }
 
 // The groups of Figma's Color collection, in its order (the palette group has its own tab). Figma groups the brand
-// accents as primary/* and secondary/* (Juan, 2026-11-21).
+// accents as primary/* and secondary/* (design lead, 2026-11-21).
 export const semanticGroups = [
   { id: "text", label: "Text" },
   { id: "primary", label: "Primary" },
@@ -345,7 +345,8 @@ export const semanticTokens: SemanticToken[] = [
     name: "secondary/text",
     group: "secondary",
     use: "Text and icons on its soft fill",
-    default: pair("indigo-800", "indigo-400"),
+    // Light indigo-700 since 2026-11-24 (design lead), in Figma and the repo; it was indigo-800.
+    default: pair("indigo-700", "indigo-400"),
     cssVar: css("secondary-text"),
     contrast: { target: 4.5, on: "secondary-subtle" },
   },
@@ -526,7 +527,7 @@ export const groupGuides: Record<GroupId, GroupGuide> = {
       },
       {
         lead: "The product's accent.",
-        text: "Product UI sets data-context=\"product\" on its root, and its buttons, links and focus take indigo where marketing takes amaranth.",
+        text: "The design system's components are the product's, so their buttons, links and focus are indigo. The website and other marketing set data-context=\"marketing\" on their root, where they take amaranth.",
       },
     ],
   },

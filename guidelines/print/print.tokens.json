@@ -1,9 +1,9 @@
 {
-  "$description": "Print format presets (guidelines/print/README.md, Vanesa 2026-11-20). margin = the content margin in mm: 8% of the short side of the finished piece (the folded panel for brochures), never less than 1.5 × safe (Vanesa, 2026-11-20). title, supporting, titleMin, supportingMin = text in pt for one-page promos; the Min values are the smallest allowed, for space imagery; titleCover is the title on a front that holds only the logo, title and image (proposed, to confirm: Vanesa, 2026-11-20). Every text size is a step of the type set read as pt (1 px step = 1 pt): 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64, 80, 104, 128, 160, 200, plus two print-only steps: 10 (body copy on small formats) and 8 (legal text, footers and small print only) (Vanesa, 2026-11-20). Starting points only: the printer's spec sheet always overrides them. Sizes in mm. trim = finished size (width, height); bleed and safe are per side; panels are the widths of each panel left to right, laid out flat; minDpi is the lowest image resolution at final size. Default bleed and safe values are common print practice, not from the Brand Guide.",
+  "$description": "Print format presets (guidelines/print/README.md, visual designer 2026-11-20). margin = the content margin in mm: 8% of the short side of the finished piece (the folded panel for brochures), never less than 1.5 × safe (visual designer, 2026-11-20). title, supporting, titleMin, supportingMin = text in pt for one-page promos; the Min values are the smallest allowed, for space imagery; titleCover is the title on a front that holds only the logo, title and image (proposed, to confirm: visual designer, 2026-11-20). Every text size is a step of the type set read as pt (1 px step = 1 pt): 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64, 80, 104, 128, 160, 200, plus two print-only steps: 10 (body copy on small formats) and 8 (legal text, footers and small print only) (visual designer, 2026-11-20). Starting points only: the printer's spec sheet always overrides them. Sizes in mm. trim = finished size (width, height); bleed and safe are per side; panels are the widths of each panel left to right, laid out flat; minDpi is the lowest image resolution at final size. Default bleed and safe values are common print practice, not from the Brand Guide.",
   "defaults": {
     "bleed": { "$value": 3, "$description": "mm per side (3.175 for US formats, 1/8 in)" },
     "safe": { "$value": 5, "$description": "mm inside the trim, per side: the printer's cutting tolerance, not the margin" },
-    "margin": { "$value": "8% of the short side, at least 1.5 × safe", "$description": "The content margin (text, logo, button, QR code, headshots), from the trim. Each format has its own value in mm (Vanesa, 2026-11-20)" },
+    "margin": { "$value": "8% of the short side, at least 1.5 × safe", "$description": "The content margin (text, logo, button, QR code, headshots), from the trim. Each format has its own value in mm (visual designer, 2026-11-20)" },
     "minDpi": { "$value": 300, "$description": "Read up close: flyers, brochures, cards" },
     "fileType": { "$value": "PDF/X-4", "$description": "Unless the printer asks for another" },
     "color": { "$value": "printer", "$description": "Always the printer's CMYK profile, from the spec. Ask for it" }
@@ -11,7 +11,7 @@
   "formats": {
     "flyer-a4": { "name": "Flyer A4", "status": "ready-to-test", "trim": [210, 297], "bleed": 3, "safe": 5, "margin": 16.8, "title": 40, "supporting": 18, "titleMin": 32, "supportingMin": 12, "minDpi": 300 },
     "flyer-a5": { "name": "Flyer A5", "status": "ready-to-test", "trim": [148, 210], "bleed": 3, "safe": 5, "margin": 11.8, "title": 32, "supporting": 14, "titleMin": 24, "supportingMin": 10, "minDpi": 300 },
-    "flyer-a6": { "name": "Flyer A6", "status": "ready-to-test", "$description": "Added by Vanesa, 2026-11-20. titleCover: the title on a front that holds only the logo, title and image (two-sided pieces), about 1.45 × title. Body copy uses the print-only 10 pt step.", "trim": [105, 148], "bleed": 3, "safe": 5, "margin": 8.4, "title": 24, "supporting": 10, "titleMin": 24, "supportingMin": 10, "titleCover": 32, "minDpi": 300 },
+    "flyer-a6": { "name": "Flyer A6", "status": "ready-to-test", "$description": "Added by the visual designer, 2026-11-20. titleCover: the title on a front that holds only the logo, title and image (two-sided pieces), about 1.45 × title. Body copy uses the print-only 10 pt step.", "trim": [105, 148], "bleed": 3, "safe": 5, "margin": 8.4, "title": 24, "supporting": 10, "titleMin": 24, "supportingMin": 10, "titleCover": 32, "minDpi": 300 },
     "flyer-letter": { "name": "Flyer US Letter", "status": "ready-to-test", "trim": [215.9, 279.4], "bleed": 3.175, "safe": 6.35, "margin": 17.3, "title": 40, "supporting": 18, "titleMin": 32, "supportingMin": 12, "minDpi": 300 },
     "brochure-a4-bifold": {
       "name": "Brochure A4 bi-fold", "status": "ready-to-test",
@@ -42,7 +42,7 @@
     "booth": {
       "name": "Booth graphics", "status": "in-progress",
       "trim": null, "bleed": null, "safe": null, "minDpi": 100, "specRequired": true,
-      "$description": "In progress, being tested (Vanesa, 2026-11-20). No default size: every booth part (backwall, counter, header, banner) comes from the vendor's spec."
+      "$description": "In progress, being tested (visual designer, 2026-11-20). No default size: every booth part (backwall, counter, header, banner) comes from the vendor's spec."
     },
     "print-pdf": {
       "name": "Print PDF (for screen)", "status": "ready-to-test",

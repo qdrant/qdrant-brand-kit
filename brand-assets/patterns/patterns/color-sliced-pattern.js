@@ -25,7 +25,7 @@ export function render(canvas, tokens, preset, color, frame = makeFrame(), optio
   const to = hexToRgba(resolveToken(tokens, color.to));
   const source = gradientSampler(from, to, gradient.angle, frame, gradient.fromStop, gradient.toStop);
   // Slices are worked out in full precision, then turned into 8-bit color with an ordered
-  // dither, so the long dark gradients don't band (Vanesa, 2026-11-26).
+  // dither, so the long dark gradients don't band (visual designer, 2026-11-26).
   const exact = new Float32Array(frame.width * frame.height * 4);
   sliceShift(exact, frame, slice, source);
   orderedDither(exact, image.data, frame.width);

@@ -12,7 +12,7 @@
    --qd-canvas-u, so the button works at any size.
 
    Based on the Qdrant Web Design button (Figma ubPe8s8pViytom0Mapcno8, node 793-2956). The Brand Design
-   System's Figma button isn't used: Figma's buttons follow this repo (Juan, 2026-11-18). */
+   System's Figma button isn't used: Figma's buttons follow this repo (design lead, 2026-11-18). */
 
 /* Text size per shape. Height, padding and radius follow the text size
    (2.25×, 1.25× and 0.5×, rounded to the 8px grid). */
@@ -22,7 +22,7 @@
 .qd-canvas[data-shape="portrait"]  { --qd-button-text: 36; --qd-button-height: 80;  --qd-button-pad: 48; --qd-button-radius: 16; }
 .qd-canvas[data-shape="story"]     { --qd-button-text: 48; --qd-button-height: 112; --qd-button-pad: 64; --qd-button-radius: 24; }
 
-/* Top-right, level with the logo: same height as the logo, never taller (Vanesa, 2026-11-04).
+/* Top-right, level with the logo: same height as the logo, never taller (visual designer, 2026-11-04).
    Text, padding and corners keep the 2.25 / 1.25 / 0.5 proportions. Needs brand-assets/logo/logo.css. */
 .qd-button.qd-button--beside-logo {
   --qd-button-h: var(--qd-logo-height);

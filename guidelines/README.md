@@ -4,7 +4,7 @@ The other folders say how each piece is built. This one says **which pieces to p
 
 The layout rules for creatives (Canvas, Grid, Stack, Box and the checks) are in [`layout/`](layout/), moved here from `primitives/` on 2026-11-12 because layout is a rule, not a token.
 
-Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). Print differs in a few places: no patterns, a choice between space imagery and a plain look, wider margins, text sizes in pt (Vanesa, 2026-11-20).
+Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). Print differs in a few places: no patterns, a choice between space imagery and a plain look, wider margins, text sizes in pt (visual designer, 2026-11-20).
 
 Three kinds of rule:
 
@@ -12,11 +12,11 @@ Three kinds of rule:
 - **Suggest:** the default. The person can choose otherwise.
 - **Ask:** don't decide for the person. Ask, then do what they pick.
 
-Decided by Vanesa on 2026-11-04.
+Decided by the visual designer on 2026-11-04.
 
 ## 1. Ask about the main visual, take the design from the rules
 
-**Ask:** unless the request already says, ask one question: which **main visual**? Put the recommended one first and mark it (Vanesa, 2026-11-20).
+**Ask:** unless the request already says, ask one question: which **main visual**? Put the recommended one first and mark it (visual designer, 2026-11-20).
 
 | Main visual | Recommend it for |
 | --- | --- |
@@ -25,7 +25,7 @@ Decided by Vanesa on 2026-11-04.
 | **Pattern only** | Sales, and guide or docs downloads (with the light card) |
 | **Headshots** | Speaker announcements (webinar, talk, panel) |
 
-**Don't ask design questions.** Take these from the rules (Vanesa, 2026-11-20):
+**Don't ask design questions.** Take these from the rules (visual designer, 2026-11-20):
 
 | Design choice | Where it comes from |
 | --- | --- |
@@ -52,16 +52,16 @@ Color-Sliced-Pattern-B (slices with QDRANT letters) works for **both tones** (de
 
 ## 2a. Which patterns agents may use, and the combinations they may make
 
-Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits on top of the other pattern rules; when a rule elsewhere is stricter, the stricter one wins.
+Decided in the Pattern Library review (visual designer, 2026-11-24). Everything here sits on top of the other pattern rules; when a rule elsewhere is stricter, the stricter one wins.
 
-**Must: never use anything on hold.** A pattern or colorway marked `onHold` is never used to make a new asset, not even when asked for the look, until Vanesa changes its status. Check with `isOnHold(preset, colorway)` from [`patterns/index.js`](../brand-assets/patterns/patterns/index.js), or `usableColorways(preset)`. On hold now:
+**Must: never use anything on hold.** A pattern or colorway marked `onHold` is never used to make a new asset, not even when asked for the look, until the visual designer changes its status. Check with `isOnHold(preset, colorway)` from [`patterns/index.js`](../brand-assets/patterns/patterns/index.js), or `usableColorways(preset)`. On hold now:
 
 | On hold | Why |
 | --- | --- |
 | Every **teal** colorway, in every pattern | Waiting for the council's approval of the sub-direction. No teal in any asset until the status changes |
-| Every **light-mode** colorway (Neutral 100 → Neutral 300), in every pattern | Added on hold (Vanesa, 2026-11-26): no light-pattern creative until it comes off hold |
+| Every **light-mode** colorway (Neutral 100 → Neutral 300), in every pattern | Added on hold (visual designer, 2026-11-26): no light-pattern creative until it comes off hold |
 
-**Removed from the repo** (Vanesa, 2026-11-25), so agents can't use them at all: the mesh patterns (Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A), Color-Refracted-Pattern-A and Color-Dithered-Pattern-A. They stay in the Pattern Library artifact on Claude. Add one back only when Vanesa asks for it.
+**Removed from the repo** (visual designer, 2026-11-25), so agents can't use them at all: the mesh patterns (Mesh-Refracted-Pattern-A to D, Mesh-Sliced-Pattern-A, Mesh-Dithered-Pattern-A), Color-Refracted-Pattern-A and Color-Dithered-Pattern-A. They stay in the Pattern Library artifact on Claude. Add one back only when the visual designer asks for it.
 
 **Color ratio: to be defined.** How often each family (amaranth, indigo, teal, neutral) is used gets a ratio after the council approves the style direction. Until then the provisional rule in section 3 applies: indigo by default, amaranth only for impact and only when the person says yes, never teal.
 
@@ -80,11 +80,11 @@ Decided in the Pattern Library review (Vanesa, 2026-11-24). Everything here sits
 | Generative-Rings-Pattern | Same | As is, one of its 10 variants, or a new variation of its open look (hex pulse) |
 
 - **Must:** every approved pattern renders at any size and shape (section 10), so format is free too.
-- **Must: Color-Sliced colours start from near-black** (Vanesa, 2026-11-26). Amaranth, Indigo and Teal run from Neutral 975 to the family's 800, so the colour reads as the accent. Dark neutral stays Neutral 1000 → 800.
+- **Must: Color-Sliced colours start from near-black** (visual designer, 2026-11-26). Amaranth, Indigo and Teal run from Neutral 975 to the family's 800, so the colour reads as the accent. Dark neutral stays Neutral 1000 → 800.
 - **Must: no banding.** Color-Sliced renders with an ordered dither built into the engine (2026-11-26). Export creatives as PNG, or JPG/WebP at top quality: heavy compression brings the bands back.
-- **Must: one fixed angle for lines** (Vanesa, 2026-11-26). Color-Sliced stripes always run at -160° and Motion Streaks at 110°: both are 70° from horizontal, leaning right, as in Color-Sliced-A's thick stripes. No other angle or direction.
-- **Must: the top layer blends with the gradient** (Vanesa, 2026-11-25). Letters are never lighter than the 600 and never white: Color-Sliced-B uses the family's 950, 900, 800 and Motion-Streaks-B 900, 800, 700 (Vanesa, 2026-11-26; `settings.letterSteps`). Generative elements are never lighter than the 500 step (Hexagon 800, 700, 600, its filled variants 800 and 700; Burst, Dash, Pulse and Rings 800, 700, 500). Only Motion-Streaks-B's letter variation 1 keeps 800, 600, 200. The validator checks this.
-- **Open looks: agents may make new patterns of their own** (Vanesa, 2026-11-25). Three Pattern Studio looks are approved as open: **data bars** (Generative-Dash-Pattern), **hyperspace** (Generative-Burst-Pattern) and **hex pulse** (Generative-Pulse-Pattern and Generative-Rings-Pattern). An agent can make new variations of them without the Pattern Studio connector, since the repo has the same engine: `renderPattern(canvas, tokens, preset, { colorway, look: n })` for variation n, or `{ look: { ... } }` with the values. Rules:
+- **Must: one fixed angle for lines** (visual designer, 2026-11-26). Color-Sliced stripes always run at -160° and Motion Streaks at 110°: both are 70° from horizontal, leaning right, as in Color-Sliced-A's thick stripes. No other angle or direction.
+- **Must: the top layer blends with the gradient** (visual designer, 2026-11-25). Letters are never lighter than the 600 and never white: Color-Sliced-B uses the family's 950, 900, 800 and Motion-Streaks-B 900, 800, 700 (visual designer, 2026-11-26; `settings.letterSteps`). Generative elements are never lighter than the 500 step (Hexagon 800, 700, 600, its filled variants 800 and 700; Burst, Dash, Pulse and Rings 800, 700, 500). Only Motion-Streaks-B's letter variation 1 keeps 800, 600, 200. The validator checks this.
+- **Open looks: agents may make new patterns of their own** (visual designer, 2026-11-25). Three Pattern Studio looks are approved as open: **data bars** (Generative-Dash-Pattern), **hyperspace** (Generative-Burst-Pattern) and **hex pulse** (Generative-Pulse-Pattern and Generative-Rings-Pattern). An agent can make new variations of them without the Pattern Studio connector, since the repo has the same engine: `renderPattern(canvas, tokens, preset, { colorway, look: n })` for variation n, or `{ look: { ... } }` with the values. Rules:
   - only the values in the preset's `settings.look.ranges` change, each inside its range. The ranges span the pattern as approved and its approved variants; `lookProblems` and the validator check them;
   - colors always come from the colorway and the color rules above (top layer, on hold, ratio): a look variation never changes a color;
   - cell sizes on the 8 grid; the pattern still fills the frame and never looks like a technical illustration;
@@ -98,19 +98,19 @@ The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patter
 ## 3. Red backgrounds
 
 - **Must: patterns are indigo, amaranth or dark neutral** (dark neutral added 2026-11-24; light mode is on hold). Amaranth only in its approved presets and colorways. Pattern colors and colorways use the color primitives' names (2026-11-24).
-- **On hold: teal.** Every teal colorway, in every pattern, is allowed in principle but **on hold until the council approves the sub-direction** (Vanesa, 2026-11-24). Agents make no asset in teal until the status changes. Other colors stay out of pattern backgrounds.
-- **Proportions (provisional):** indigo for most creatives, amaranth rarely, no teal. A ratio for each family (amaranth, indigo, teal) will be set after the council approves the style direction (Vanesa, 2026-11-24).
+- **On hold: teal.** Every teal colorway, in every pattern, is allowed in principle but **on hold until the council approves the sub-direction** (visual designer, 2026-11-24). Agents make no asset in teal until the status changes. Other colors stay out of pattern backgrounds.
+- **Proportions (provisional):** indigo for most creatives, amaranth rarely, no teal. A ratio for each family (amaranth, indigo, teal) will be set after the council approves the style direction (visual designer, 2026-11-24).
 - **Must:** indigo is the default. An amaranth pattern background (an amaranth colorway) is only for creatives that need to **grab a lot of attention and be more impactful**.
 - **Ask:** never pick amaranth on your own. Offer it, and use it only when the person says yes.
 - Everywhere else, amaranth stays an accent (buttons, highlights), as [`primitives/colors/`](../primitives/colors/) says.
-- **Must: never amaranth on amaranth** (Vanesa, 2026-11-16). On an amaranth pattern:
+- **Must: never amaranth on amaranth** (visual designer, 2026-11-16). On an amaranth pattern:
   - where the logo sits on amaranth, it's the **White** logo, never the red brandmark. On the masked part of an amaranth pattern the logo sits on near-black neutral, so the usual **Dark** logo is fine there;
   - the button goes **top-right, beside the logo** and at its height, on the dark part of the pattern, and Qbot (if any) sits below the text, cut by the bottom edge (section 6);
   - the button keeps **3:1 or more against what's around it**. If it can't, choose another pattern. This 3:1 rule is for amaranth patterns only: on indigo patterns and the light card the button stays as it is.
 
 ## 4. How the pattern covers the canvas
 
-Use one of these three. Patterns always bleed off the canvas edges they touch. The Zone layout (pattern in one zone, plain background in the rest) is no longer an option: use the pattern mask instead (Vanesa, 2026-11-11).
+Use one of these three. Patterns always bleed off the canvas edges they touch. The Zone layout (pattern in one zone, plain background in the rest) is no longer an option: use the pattern mask instead (visual designer, 2026-11-11).
 
 | Layout | What it looks like | Text goes | Example |
 | --- | --- | --- | --- |
@@ -145,18 +145,19 @@ Rules:
   When the answer differs by colorway, `textMask` sits on the colorway, or in the preset's `textMaskByColorway` when the colorways are inherited (Color-Sliced-Pattern-B).
 - **Text on a card never needs a mask.** Any approved pattern and variant can go behind the card (`.qd-book`), busy ones included (visual designer, 2026-11-25).
 
-- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (a colorway marked `textColor: "dark"`; none is approved right now), use **dark text and the Light logo**, no mask (Vanesa, 2026-11-16).
+- **Must: never mask a light-colored pattern.** The mask turns light colors grey. On a light pattern (a colorway marked `textColor: "dark"`; none is approved right now), use **dark text and the Light logo**, no mask (visual designer, 2026-11-16).
 - **Must: a contrast fail is a hard stop.** A creative whose text fails the contrast check is never shown, recommended or delivered. On a `none` pattern, use the light or standard mask if the pattern is dark enough not to turn grey; otherwise pick another colorway or pattern (visual designer, 2026-11-16).
 
 - **Must: how the mask looks.** The pattern keeps covering the whole canvas and is masked with a soft, eased gradient: 100% where the visual sits, fading to the mask's strength behind the text (70% of the pattern with the light mask, 40% with the standard mask), with no visible edge between the two. A solid neutral shows through: **neutral 950** on a dark creative, **neutral 100** on a light one. The fade runs top to bottom on square, portrait and story (text at the top) and left to right on wide and ultra-wide (text on the left). The LinkedIn profile cover has its heading on the right, so its fade runs from the right (`.qd-pattern-mask--from-right`, [`guidelines/layout/`](layout/)). Use `.qd-canvas--masked` and `.qd-pattern-mask` from [`guidelines/layout/`](layout/). Never lay a dark or light gradient over the pattern instead: mask the pattern itself. **On every shape the mask is one smooth, continuous gradient across the whole canvas: it starts gently on the text side and builds to full strength on the far side. You must not be able to tell the mask and the pattern are two layers: never a hold-then-fade, a visible edge or a cut** (decided 2026-11-11). If the pattern is calm enough for the text, use no mask at all.
 - **Must:** with the mask, the logo sits on the plain neutral, so it's the **Dark** logo on a dark creative and the **Light** logo on a light one (section 8). Without the mask it's the **White** logo on the pattern, except on a light pattern (`textColor: "dark"`), where it's the **Light** logo.
-- **Must:** the light card only sits on a full-bleed pattern. On a dark creative it's the only light piece.
-- **Must: the light card always sits on Color-Sliced-Pattern-B**, red or violet, with its QDRANT letter layer. Never Color-Sliced-Pattern-A or another pattern behind the book or a Get-the-Guide ad (decided 2026-11-11).
-- **Must: the light card is a book.** A vertical card shaped like a guide or a document (0.81, about 4:5), centered on a full-bleed pattern, with the pattern showing on every side. It never fills the frame. Width: **55%** of the canvas on square, **65%** on portrait, **75%** on story. On **wide** it turns landscape (5:4, 72% of the height, larger text); on **ultrawide** there's no light card (decided 2026-11-11, see [`guidelines/layout/`](layout/)). The button sits **outside the card, centered below it**. Use `.qd-book` from [`guidelines/layout/`](layout/), built from the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (decided 2026-11-04).
-- **Suggest:** use the light card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, masked when the text needs it (decided 2026-11-04, mask 2026-11-11).
-- **Must:** never put a big headshot ([`headshot-card`](../brand-components/headshot-card/)) inside the light card. If a light-card creative needs a speaker, use [`headshot-circle`](../brand-components/headshot-circle/) (decided 2026-11-04).
+- **Must:** the card only sits on a full-bleed pattern. On a dark creative the light card is the only light piece.
+- **Must: the card is the design system's Card, in light or dark mode** (visual designer, 2026-11-25). Make both and let the person pick (section 1). Light mode: neutral-0 surface and the Light logo. Dark mode (`.qd-book--dark`): neutral-950 surface and the Dark logo; on a dark neutral pattern it's raised to neutral-850 so it doesn't merge with the pattern. Put `data-pattern-family` on the canvas so the card follows the pattern.
+- **Must: any approved pattern and variant can go behind the card**, busy ones included, with no mask (visual designer, 2026-11-25; it used to be only Color-Sliced-Pattern-B).
+- **Must: the card is a book that hugs its content.** A vertical card like a guide or a document, centered on a full-bleed pattern, with the pattern showing on every side. It never fills the frame. Width: **55%** of the canvas on square, **65%** on portrait, **75%** on story; never shorter than 4:5. It grows taller with its content and wider so speakers stay on one line, never past the side margins (visual designer, 2026-11-25). On **wide** it turns landscape (at least 5:4, 72% of the height, larger text); on **ultrawide** there's no card (decided 2026-11-11). The button sits **outside the card, centered below it**. Use `.qd-book` and `fitBook()` from [`guidelines/layout/`](layout/), built from the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (decided 2026-11-04).
+- **Suggest:** use the card mostly for guide downloads and documentation promotions, where the ad sends people to a resource (like the Get-the-Guide ads). For events and speaker posts, prefer full bleed with text on top, masked when the text needs it (decided 2026-11-04, mask 2026-11-11).
+- **Must:** never put a big headshot ([`headshot-card`](../brand-components/headshot-card/)) inside the card. If a card creative needs a speaker, use [`headshot-circle`](../brand-components/headshot-circle/) (decided 2026-11-04).
 - **Suggest:** dark is the default. Light creatives (the whole canvas on the light theme) are allowed for some moments, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635) (decided 2026-11-04).
-- **Light-mode patterns (on hold, Vanesa, 2026-11-26).** Every pattern has a light colorway, "Neutral 100 → Neutral 300", marked `onHold`: no agent uses it until it comes off hold. When it does, the rules are:
+- **Light-mode patterns (on hold, visual designer, 2026-11-26).** Every pattern has a light colorway, "Neutral 100 → Neutral 300", marked `onHold`: no agent uses it until it comes off hold. When it does, the rules are:
   - **Gradient:** always Neutral 100 → Neutral 300, light at the top. Light patterns are neutral only: no light amaranth, indigo or teal.
   - **Top layer: pure white** (Neutral 0, #FFFFFF): Color-Sliced-B and Motion-Streaks-B letters, Motion Streaks streaks, and every generative element (filled hexagons too). Color-Sliced-A has no top layer.
   - **What varies:** the same options as the dark versions (stripes, letter options, streak ranges, generative variants and open looks), at the same fixed 70° angle.
@@ -182,7 +183,7 @@ Never allowed:
 
 - **Must: text never sits on the image's subject** (`title_never_over_subject` in [`imagery/`](../brand-assets/imagery/)). Text goes on calm, dark sky or ground and passes the contrast check. If no crop keeps the text off the subject, pick another image.
 - **Must: logo and text at the top, the image below or beside them.** On square, portrait and story the image sits under the text and fades in from it; on wide and slides the text sits on the left (on neutral 950) and the image on the right, fading in from the left. Never flip the layout (image on top, logo at the bottom), and never shrink an image into a floating patch with soft edges: if the image can't cover its area, pick another image (decided 2026-11-11).
-- **Must: full width, never trimmed** (Vanesa, 2026-11-16). On square, portrait and wide the image spans the full width at its own ratio, anchored to the bottom (`.qd-image-fade`). On **story** it covers the whole canvas, 30% at the top and 100% from halfway down (`.qd-image-fade--cover`), so there's no bare dark top. Both are in [`guidelines/layout/`](layout/). Text still sits on calm sky or ground, never on the subject: if the button would land on the subject, tighten the gaps first (section 11, rule 11).
+- **Must: full width, never trimmed** (visual designer, 2026-11-16). On square, portrait and wide the image spans the full width at its own ratio, anchored to the bottom (`.qd-image-fade`). On **story** it covers the whole canvas, 30% at the top and 100% from halfway down (`.qd-image-fade--cover`), so there's no bare dark top. Both are in [`guidelines/layout/`](layout/). Text still sits on calm sky or ground, never on the subject: if the button would land on the subject, tighten the gaps first (section 11, rule 11).
 - **Must: a long, soft fade.** Where the image meets the plain neutral, it fades with the pattern mask's eased curve, from the image's edge to just before its subject, with no visible band, block or edge. Never a dark block or a short, hard fade over the image. Dark creatives only: images on a light neutral read as a grey band (decided 2026-11-11).
 - **Must: one image across the whole campaign.** When a direction uses imagery, every placement in it uses the same image (cropped per size), never a pattern in some sizes and an image in others, or a different image per size (decided 2026-11-11).
 - **Must: choose (or generate) images that leave room for the text.** The subject sits in the lower half or on the side away from the text, with about 40% empty sky on the text side. Images whose subject fills the top of the frame don't work on social sizes; a small subject or one that sits low works best (decided 2026-11-11).
@@ -190,7 +191,7 @@ Never allowed:
 
 ## 6. Qbot in a creative
 
-Qbot is one hero (section 5). It works on **any** pattern, in any family or colorway, or on the plain background. One Qbot per creative; 3D and 2D are never mixed ([`brand-assets/mascot/`](../brand-assets/mascot/)). Decided by Vanesa on 2026-11-04, from the examples in the [Brand Design System, Mascot section](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18151) (examples 1 to 5, left to right).
+Qbot is one hero (section 5). It works on **any** pattern, in any family or colorway, or on the plain background. One Qbot per creative; 3D and 2D are never mixed ([`brand-assets/mascot/`](../brand-assets/mascot/)). Decided by the visual designer on 2026-11-04, from the examples in the [Brand Design System, Mascot section](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18151) (examples 1 to 5, left to right).
 
 ### Where it sits
 
@@ -205,7 +206,7 @@ Qbot is one hero (section 5). It works on **any** pattern, in any family or colo
 
 - **Must: place Qbot by its outline, not by its image box** (decided 2026-11-11). Every pose's PNG has empty margins that differ from pose to pose. Crop to the pose's outline (the table in [`mascot/3d/`](../brand-assets/mascot/3d/), "Pose outlines") so the top of the helmet and the feet are the edges you place.
 - **Must: equal gaps.** A full figure keeps the **same gap to the top, the right and the bottom** of the canvas: the canvas side margin. On tall shapes, where the text sits above it, the gap to the right and the bottom is the side margin. A Peek keeps the same gap to the top and the right, and only the bottom edge cuts it. Qbot never looks dropped in at random.
-- **Must: Qbot fills the empty space** (Vanesa, 2026-11-16). Place it in the biggest free area: below the text, or beside the lower part of the text block (to the right of the date lines and button), never above the bottom of the heading. Make it as big as that area allows and let the bottom edge (and the right edge in the bottom-right corner) cut it, with the face whole and the chest logo whole (except in the Peek crop). A small Qbot floating in empty space is a fail.
+- **Must: Qbot fills the empty space** (visual designer, 2026-11-16). Place it in the biggest free area: below the text, or beside the lower part of the text block (to the right of the date lines and button), never above the bottom of the heading. Make it as big as that area allows and let the bottom edge (and the right edge in the bottom-right corner) cut it, with the face whole and the chest logo whole (except in the Peek crop). A small Qbot floating in empty space is a fail.
 - **Must: Qbot fills the free space below the text** (on wide, the right half). The space starts one `section` gap under the lowest text, logo or button and runs to the canvas edge that trims Qbot. A longer title means a smaller Qbot. The crop names what shows; the size always follows the free space.
 
 ### Crops
@@ -259,10 +260,10 @@ Every crop is editorial, never accidental.
 
 - **Must:** the Qdrant logo leads the content, at its **top-left**:
   - on the canvas, inside the margins, when text sits on the canvas;
-  - on the card, inside its padding, when text sits on a light card.
-- **Must:** the right version for the background: **Dark** on plain dark, dark images and the masked part of a dark creative, **White** on any pattern at full strength, **Light** on the light card, on a light canvas and on the masked part of a light creative. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
-- **Must: never the monochrome Black logo** in a creative. On a light pattern or light background it's the **Light** logo (Vanesa, 2026-11-16).
-- **Suggest: logo and title letters about the same size** (Vanesa, 2026-11-16). The logo's wordmark letters and the title's capitals should look about as big as each other. On small display ads, where the logo is held at its 24 px minimum, the title goes up to match it, even above its size on the title scale.
+  - on the card, inside its padding, when text sits on a card.
+- **Must:** the right version for the background: **Dark** on plain dark, dark images and the masked part of a dark creative, **White** on any pattern at full strength, **Dark** on the dark card, **Light** on the light card, on a light canvas and on the masked part of a light creative. Files, sizes per shape and clear space are in [`brand-assets/logo/`](../brand-assets/logo/).
+- **Must: never the monochrome Black logo** in a creative. On a light pattern or light background it's the **Light** logo (visual designer, 2026-11-16).
+- **Suggest: logo and title letters about the same size** (visual designer, 2026-11-16). The logo's wordmark letters and the title's capitals should look about as big as each other. On small display ads, where the logo is held at its 24 px minimum, the title goes up to match it, even above its size on the title scale.
 - When it can't sit top-left (no room, a busy area, the visual must lead), the agent moves it following the Brand Guide's placement rules and says where and why.
 - With a partner, the [partner lockup](../brand-components/partner-lockup/) takes the logo's place. When the lockup is the **only content** (e.g. a partner blog hero), it's the hero: centered both ways, 8 of 12 columns wide (decided 2026-11-04).
 - The logo checks are in [`guidelines/layout/checks.md`](layout/checks.md).
@@ -279,12 +280,12 @@ Every crop is editorial, never accidental.
 
 ## 11. Composition
 
-There are no fixed post templates. An agent lays out each creative itself, from the content it's given, following these rules and using only the approved parts in [`brand-components/`](../brand-components/). Decided by Vanesa on 2026-11-04.
+There are no fixed post templates. An agent lays out each creative itself, from the content it's given, following these rules and using only the approved parts in [`brand-components/`](../brand-components/). Decided by the visual designer on 2026-11-04.
 
 1. **Must: never make up content.** Use only the copy, dates, speakers and links the person gives. Write copy only when asked.
 2. **Suggest: reading order.** Logo → title → supporting line → date, time and place → speakers → button. On tall sizes it runs top to bottom. On wide sizes, text is on the left and the visual on the right, except the LinkedIn profile cover, where the heading sits on the right ([`guidelines/layout/`](layout/), "LinkedIn profile cover").
 3. **Suggest: avoid eyebrows** (the small label above the title). They make creatives look AI-generated. Don't suggest one; use one only when the person asks for it (decided 2026-11-04).
-   **Must: the event type** ("Hands-On Workshop", "Webinar") or series is **left out by default**; that's cleaner and preferred. If the content needs it, it's a **label with the heading**, directly above the title: Mona Sans Mono, all caps, letter spacing **+0.08em** (as the design system's captions, `--qd-ui-caption-tracking`, Vanesa 2026-11-19), at the supporting size, `text.secondary` on dark or `text.body-on-light` on the light card, a `tight` gap to the title. **Never** in the date / time / place list. Until the badge component exists, this is the only allowed form (decided 2026-11-11). The design system's Badge (`design-system/components/ui/badge.tsx`, a small red pill) is for web, never for creatives (Vanesa, 2026-11-19).
+   **Must: the event type** ("Hands-On Workshop", "Webinar") or series is **left out by default**; that's cleaner and preferred. If the content needs it, it's a **label with the heading**, directly above the title: Mona Sans Mono, all caps, letter spacing **+0.08em** (as the design system's captions, `--qd-ui-caption-tracking`, visual designer 2026-11-19), at the supporting size, `text.secondary` on dark or `text.body-on-light` on the light card, a `tight` gap to the title. **Never** in the date / time / place list. Until the badge component exists, this is the only allowed form (decided 2026-11-11). The design system's Badge (`design-system/components/ui/badge.tsx`, a small red pill) is for web, never for creatives (visual designer, 2026-11-19).
 4. **Suggest: left-aligned by default.** Centered is fine when the whole composition is symmetric and nothing sits beside the text, e.g. a title with the date and time under it, or a story with one centered hero. The agent decides.
 5. **Must: never mix alignments, never right-align.** All the text in a creative is either left-aligned or centered. Left-aligned items share the same left edge.
 6. **Must: two text sizes.** One title in Mona Sans Display SemiBold, Title Case, sized by its length, and one supporting size for everything else (body, date, time, place), in Mona Sans Display Regular. Both are steps of the type set (2026-11-18). Names and roles inside the headshot parts are the only exception. Sizes and the Mona Sans Mono rule (one or two words only) are in [`primitives/typography/`](../primitives/typography/), "Text in creatives". Mona Sans titles are always Title Case (supporting text stays in sentence case); Mona Sans Display Condensed is always all caps and only for special occasions, when asked.
@@ -294,11 +295,11 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 10. **Must: the button goes in one of three places,** at its own size, never full width ([`brand-components/button/`](../brand-components/button/)):
    - last in the text block, aligned with the text;
    - top-right, level with the logo and **the same height as the logo** (never taller), when there isn't room at the bottom or the visual needs it, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635); or
-   - **bottom-left or bottom-right**, on the bottom margin, when the details run in a row along the bottom (e.g. a long heading on the left with the details below it); bottom-right when the bottom-left holds the details (Vanesa, 2026-11-16).
+   - **bottom-left or bottom-right**, on the bottom margin, when the details run in a row along the bottom (e.g. a long heading on the left with the details below it); bottom-right when the bottom-left holds the details (visual designer, 2026-11-16).
 
-   **Must: the button always sits in a corner, never in the middle of the layout:** bottom-left, top-right or bottom-right, never in a column in the middle of the canvas (Vanesa, 2026-11-16). Top-right beside the logo only when the text block spans the full width, so the button lands on the right margin, or on a red pattern (section 3). When the text block takes only part of the width (e.g. wide and ultra-wide with Qbot or a visual in the right half), the button goes **last in the text block, after the supporting text**, so logo, title, supporting text and button read as one vertical, left-aligned column (decided 2026-11-11).
-11. **Must: nothing outside the margins or safe zones** (Vanesa, 2026-11-16). Any text, logo, button or headshot across a margin or a story safe zone is a hard stop, never shown. **When the content doesn't fit, in this order:**
-    1. tighten the gaps between groups, on the 8 px grid, down to 1 × `section` (never closer than the largest gap inside a group). **Exception, story with headshot cards:** make the cards smaller first and keep the bigger gaps (Vanesa, 2026-11-16);
+   **Must: the button always sits in a corner, never in the middle of the layout:** bottom-left, top-right or bottom-right, never in a column in the middle of the canvas (visual designer, 2026-11-16). Top-right beside the logo only when the text block spans the full width, so the button lands on the right margin, or on a red pattern (section 3). When the text block takes only part of the width (e.g. wide and ultra-wide with Qbot or a visual in the right half), the button goes **last in the text block, after the supporting text**, so logo, title, supporting text and button read as one vertical, left-aligned column (decided 2026-11-11).
+11. **Must: nothing outside the margins or safe zones** (visual designer, 2026-11-16). Any text, logo, button or headshot across a margin or a story safe zone is a hard stop, never shown. **When the content doesn't fit, in this order:**
+    1. tighten the gaps between groups, on the 8 px grid, down to 1 × `section` (never closer than the largest gap inside a group). **Exception, story with headshot cards:** make the cards smaller first and keep the bigger gaps (visual designer, 2026-11-16);
     2. make the headshot cards smaller (they stay 5:7);
     3. switch to [`headshot-circle`](../brand-components/headshot-circle/);
     4. **Ask** the person to cut copy, or drop the date line on a display ad (see [`guidelines/layout/`](layout/), "Display ads").
@@ -308,4 +309,4 @@ There are no fixed post templates. An agent lays out each creative itself, from 
 
 ## Changing these rules
 
-Ask Vanesa first. Add the date and what changed next to the rule.
+Ask the visual designer first. Add the date and what changed next to the rule.

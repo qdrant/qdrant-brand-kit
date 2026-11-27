@@ -10,8 +10,8 @@
 import { resolveToken, hexToRgba } from "./tokens.js";
 import { gradientSampler, makeFrame } from "./effects.js";
 
-// Approved by Vanesa on 2026-11-24. Length, density and softness sit on the 8 grid.
-// Direction: one fixed angle, 110° (Vanesa, 2026-11-26): on screen it's the same 70° from
+// Approved by the visual designer on 2026-11-24. Length, density and softness sit on the 8 grid.
+// Direction: one fixed angle, 110° (visual designer, 2026-11-26): on screen it's the same 70° from
 // horizontal as Color-Sliced's stripes (-160°). Any other angle snaps to it.
 export const STREAK_RANGES = {
   length: [16, 80],

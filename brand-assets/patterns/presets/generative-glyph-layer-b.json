@@ -3,7 +3,7 @@
   "recipe": "generative-pattern",
   "extends": "generative-pattern.shared",
   "$description": "A transparent layer of random QDRANT letters scattered over the whole canvas, with no shape in the middle. Drawn on top of Motion-Streaks-Pattern-B; its colorways pair with the pattern's by position. Not a pattern on its own, so it's not in index.json.",
-  "source": "Pattern Studio export, 1920 x 1080, transparent background (Vanesa's good example, 2026-11-24)",
+  "source": "Pattern Studio export, 1920 x 1080, transparent background (the visual designer's good example, 2026-11-24)",
   "colorways": [
     {
       "name": "Indigo",
@@ -88,5 +88,5 @@
       "backdrop": "none"
     }
   },
-  "$colors": "Letters in the family's 800, 700, 600: the lightest letter is the 600, never lighter, so the letters blend with the background (Vanesa, 2026-11-25). Light mode (on hold): white letters (Neutral 0), kept white by fixedColors."
+  "$colors": "Letters in the family's 800, 700, 600: the lightest letter is the 600, never lighter, so the letters blend with the background (visual designer, 2026-11-25). Light mode (on hold): white letters (Neutral 0), kept white by fixedColors."
 }

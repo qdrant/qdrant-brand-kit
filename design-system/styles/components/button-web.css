@@ -37,11 +37,11 @@
 
   /* The primary's flat fill: the context's accent (globals.css), amaranth for marketing and indigo for product.
      It has no inner highlight on the web (2026-11-15), so hover changes the fill to the accent's 700. Disabled
-     is the accent's 400, and focus a 2px ring in the accent at 40%, as in the approved button (button.css). */
+     is the accent's 400, and focus a 2px ring at 40% in indigo (`--ring`, design lead, 2026-11-24), on the website too. */
   --qd-ui-button-web-fill: var(--primary);
   --qd-ui-button-web-fill-hover: var(--qd-ui-accent-hover);
   --qd-ui-button-web-fill-disabled: var(--qd-ui-accent-muted);
-  --qd-ui-button-web-focus-ring: color-mix(in srgb, var(--qd-ui-accent) 40%, transparent);
+  --qd-ui-button-web-focus-ring: color-mix(in srgb, var(--ring) 40%, transparent);
 
   /* Raised surface (primary and secondary): a drop shadow and edges, from the theme blocks below. */
   --qd-ui-button-raised:
@@ -57,4 +57,14 @@
 [data-theme="dark"],
 [data-theme="light"] {
   --qd-ui-button-drop: 0 1px 3px 0 var(--qd-ui-button-drop-color);
+}
+/* The secondary button's fill, by theme (design lead, 2026-11-21): on dark it's the highlight surface (shadcn's
+   `secondary`); on light it's white, so it stands up from the page like a raised surface, with the raised edge
+   and drop shadow above. Badges, tracks and muted items that use `secondary` don't change. */
+:root,
+[data-theme="dark"] {
+  --qd-ui-button-secondary-fill: var(--secondary);
+}
+[data-theme="light"] {
+  --qd-ui-button-secondary-fill: var(--qd-color-neutral-0);
 }

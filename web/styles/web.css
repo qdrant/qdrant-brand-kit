@@ -1,0 +1,798 @@
+/* The website's surfaces (design lead, 2026-11-21). Inside the website ([data-web], on a page's root), the design
+   system's page, card, popover and highlight colors come from the background roles, so a section only sets its
+   theme (data-theme) and its surface (data-surface), and every design-system component in it follows:
+   - default: the page is background/default, cards background/raised, menus background/overlay.
+   - raised: a raised band. The page is background/raised and cards step up one.
+   On dark the website is quieter than the roles (design lead, 2026-11-21): menus sit on neutral-925, cards a touch darker
+   (2026-11-22), the
+   highlight and hovers on neutral-900, and a raised band's cards on neutral-900, so nothing floats too bright.
+   Light: default neutral-25, raised and overlay white, highlight neutral-50, as the roles. The --web-surface-*
+   values are set per theme below (the last dark selector covers menus that open on <body> under a dark <html>); the roles flip with data-theme by themselves (primitives/colors). Load this
+   file after the design system's globals.css. Outside [data-web], the studio keeps the design system's own
+   neutrals. */
+[data-web],
+[data-web] [data-theme] {
+  --web-surface-page: var(--qd-color-background-default);
+  --web-surface-card: var(--qd-color-background-raised);
+  --web-surface-popover: var(--qd-color-background-overlay);
+  --web-surface-highlight: var(--qd-color-background-highlight);
+  --web-surface-raised: var(--qd-color-background-raised);
+  --web-surface-raised-card: var(--qd-color-background-overlay);
+}
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  /* Cards a touch darker than neutral-925, 40% of the way to the page's neutral-950, for a quieter, more modern
+     site (design lead, 2026-11-22). The palette has no step between them, so it's a mix of the two. */
+  --web-surface-card: color-mix(in oklab, var(--qd-color-neutral-925) 60%, var(--qd-color-neutral-950));
+  --web-surface-popover: var(--qd-color-neutral-925);
+  --web-surface-highlight: var(--qd-color-neutral-900);
+  --web-surface-raised-card: var(--qd-color-neutral-900);
+}
+[data-web],
+[data-web] [data-theme],
+[data-web] [data-surface] {
+  --qd-ui-page: var(--web-surface-page);
+  --qd-ui-card: var(--web-surface-card);
+  --qd-ui-popover: var(--web-surface-popover);
+  --qd-ui-highlight: var(--web-surface-highlight);
+  --background: var(--qd-ui-page);
+  --card: var(--qd-ui-card);
+  --popover: var(--qd-ui-popover);
+  --secondary: var(--qd-ui-highlight);
+  --muted: var(--qd-ui-highlight);
+  --sidebar: var(--qd-ui-card);
+}
+[data-web][data-surface="raised"],
+[data-web] [data-surface="raised"] {
+  --qd-ui-page: var(--web-surface-raised);
+  --qd-ui-card: var(--web-surface-raised-card);
+}
+
+/* The website's lines and material (design lead, 2026-11-21): a subtle, shared structure every section draws on, before
+   any pattern or shader. Both are always on, on every page (design lead, 2026-11-24, when their switches were
+   removed).
+   - Lines: rails, a hairline down each side of the page, 24px outside the 1200px container, so content never
+     touches them; seams, a hairline
+     between sections; nodes, small hollow hexagons where a seam meets a rail, upright like the logo's brandmark (design lead,
+     2026-11-22; lib/node.tsx).
+   - Material: plates, a card whose fill is a touch lighter at the top, with a 1px inner highlight; trays, a framed
+     holder around media (code, a screenshot); cells, hairline grids for rows of facts. */
+[data-web],
+[data-web] [data-theme] {
+  --web-line-mix: 8%;
+  --web-line: color-mix(in oklab, var(--foreground) 8%, transparent);
+  --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
+  /* Cards' edge (design lead, 2026-11-24): one step under the strong line, about neutral-850 over a card. */
+  --web-plate-edge: color-mix(in oklab, var(--foreground) 11%, transparent);
+  --web-plate-top: color-mix(in oklab, var(--foreground) 2%, var(--card));
+  --web-highlight: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --web-plate-shadow: 0 0 0 0 transparent;
+  --web-tray: color-mix(in oklab, var(--foreground) 2.5%, transparent);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-line-mix: 9%;
+  --web-line: color-mix(in oklab, var(--foreground) 9%, transparent);
+  --web-line-strong: color-mix(in oklab, var(--foreground) 14%, transparent);
+  /* About neutral-100 over a white card, one step under the strong line's neutral-200. */
+  --web-plate-edge: color-mix(in oklab, var(--foreground) 10%, transparent);
+  --web-plate-top: var(--card);
+  --web-highlight: rgb(255 255 255 / 0.9);
+  --web-plate-shadow: 0 1px 2px rgb(7 11 17 / 0.04), 0 4px 12px -4px rgb(7 11 17 / 0.05);
+  --web-tray: color-mix(in oklab, var(--foreground) 2.5%, transparent);
+}
+
+.web-seam {
+  border-top: 1px solid var(--web-line);
+}
+/* No seam on a page's first section, nor right under the navbar, which draws its own line. */
+.web-seam:first-child,
+.web-navbar + .web-seam {
+  border-top-color: transparent;
+}
+.web-rails {
+  border-inline: 1px solid var(--web-line);
+}
+.web-node {
+  position: absolute;
+  top: -6px;
+  /* Nodes are always on top of the lines and of what's next to them (design lead, 2026-11-23). */
+  z-index: 1;
+}
+/* On a section's bottom line (Section seam="bottom", the sticky anchor nav), so they move and stay on top with it.
+   The section after it draws no seam of its own: the line and its nodes are already there. */
+.web-node-bottom {
+  top: auto;
+  bottom: -6px;
+}
+.web-seam-bottom + .web-seam {
+  border-top-color: transparent;
+}
+.web-seam-bottom + .web-seam > .web-rails > .web-node {
+  display: none;
+}
+/* Where a seam meets the rails (Junction in lib/node.tsx, design lead, 2026-11-24): the corners filled in the lines'
+   color, so they read as one four-point star. Under the navbar the line is the navbar's own bottom border, 1px
+   higher than a seam, and no rail comes down from above: the rails start 1px higher to meet it, and the star keeps
+   only its lower corners.
+   The same where any section above has no rails, and on a bottom seam with no rails below it. */
+.web-star path {
+  fill: var(--web-line);
+}
+.web-navbar + .web-seam > .web-rails {
+  top: -1px;
+}
+:not(:has(> .web-rails)) + .web-seam > .web-rails > .web-star .web-star-up {
+  display: none;
+}
+.web-seam-bottom:is(:last-child, :has(+ :not(:has(> .web-rails)))) > .web-rails > .web-star .web-star-down {
+  display: none;
+}
+.web-hex polygon {
+  fill: transparent;
+  stroke: var(--web-node, var(--web-line-strong));
+  stroke-width: 1;
+  transition: fill 150ms, stroke 150ms;
+}
+.web-hex-solid polygon {
+  fill: var(--background);
+}
+/* A filled node (a kicker's, design lead, 2026-11-24): a fill in the node color and no outline; its points reach the
+   full 7 by 8px (Node draws them), so it's the same size as an outlined node. */
+.web-hex-filled polygon {
+  fill: var(--web-node, var(--web-line-strong));
+  stroke: none;
+}
+.web-hex-active polygon {
+  fill: var(--web-indigo);
+  stroke: var(--web-indigo);
+}
+/* A kicker's node is alive (design lead, 2026-11-22; only the kicker's since 2026-11-24, the rest are still): it
+   blinks like the telemetry mark on the Space page, a hard step to 25% and back every 2s, each at its own offset
+   (--web-node-delay, set by Node). Still for reduced motion. */
+@keyframes web-node-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+.web-hex-blink {
+  animation: web-node-blink 2s step-end infinite;
+  animation-delay: var(--web-node-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .web-hex-blink {
+    animation: none;
+  }
+}
+.web-cells {
+  border-block: 1px solid var(--web-line);
+}
+/* A horizontal line inside a section reaches the rails, 24px out on each side of the container, so the lines meet
+   (design lead, 2026-11-21). Put it on a cell row, a divider or a band. */
+.web-bleed {
+  margin-inline: -24px;
+  padding-inline: 24px;
+}
+.web-rule {
+  border-top: 1px solid var(--web-line);
+}
+.web-cells > * + * {
+  border-inline-start: 1px solid var(--web-line);
+}
+
+.web-plate {
+  background: linear-gradient(to bottom, var(--web-plate-top), var(--card) 70%);
+  border: 1px solid var(--web-plate-edge);
+  box-shadow: inset 0 1px 0 var(--web-highlight), var(--web-plate-shadow);
+}
+.web-tray {
+  padding: 6px;
+  border: 1px solid var(--web-line);
+  background: var(--web-tray);
+}
+/* A simple card (Plate simple: an icon, a title and a line of text) has no inner top light (design lead, 2026-11-24). */
+.web-plate-simple {
+  box-shadow: var(--web-plate-shadow);
+}
+/* A section alone (in a frame) or first on a page has no seam above it, so no nodes either. */
+.web-seam:first-child .web-node {
+  display: none;
+}
+
+/* Trial type for the website (design lead, 2026-11-21; sizes from 56px since 2026-11-24): headings from 56px instead of
+   64px, in steps of 8 down to 24, then 20 for H6; line heights on the curve the trial had at 60px, 1 + k / size^p
+   (through 22px at 1.3 and 60px at 1.1), rounded to two decimals; and headings in Medium instead of SemiBold. On by
+   default inside the website; data-web-type="current" shows the type set as it is (the studio's Trial type switch).
+   It changes nothing outside the website, and the primitives stay as they are until the trial is kept.
+   H1 56 / 1.11, H2 48 / 1.13, H3 40 / 1.16, H4 32 / 1.2, H5 24 / 1.27, H6 20 / 1.33. Before 2026-11-24:
+   60, 52, 44, 38, 30, 22. */
+[data-web]:not([data-web-type="current"]) {
+  --qd-type-h1-size: 56px;
+  --qd-type-h1-line-height: 1.11;
+  --qd-type-h2-size: 48px;
+  --qd-type-h2-line-height: 1.13;
+  --qd-type-h3-size: 40px;
+  --qd-type-h3-line-height: 1.16;
+  --qd-type-h4-size: 32px;
+  --qd-type-h4-line-height: 1.2;
+  --qd-type-h5-size: 24px;
+  --qd-type-h5-line-height: 1.27;
+  --qd-type-h6-size: 20px;
+  --qd-type-h6-line-height: 1.33;
+  --web-heading-weight: 500;
+}
+
+/* A grid of cells with hairlines between them and around it, reaching the rails (logo walls, stats). Cells take
+   the section's background, so the 1px gaps show the line. */
+/* A hairline grid of cells (design lead, 2026-11-22): the lines show through 1px gaps between cells that carry the
+   section's background, so every line, inside and out, is one solid color: a hairline over the background, the
+   same as the rails and seams look. The grid reaches the rails and draws its own sides on them, so the cells never
+   cover the rails and the outer and inner lines match. */
+.web-grid {
+  --web-grid-line: color-mix(in srgb, var(--foreground) var(--web-line-mix, 8%), var(--background));
+  display: grid;
+  gap: 1px;
+  margin-inline: -24px;
+  background: var(--web-grid-line);
+  background-clip: padding-box;
+  border: 1px solid var(--web-grid-line);
+}
+.web-grid > * {
+  background: var(--background);
+}
+
+/* Tones (design lead, 2026-11-21): color for icons, in a subtle way. An icon sits on a small tile tinted with its color
+   family, with a hairline edge in that family, and the icon itself in a solid color of it: on dark the 975
+   (mixed into the surface) with a 400 icon, on light the 50 with a 600 icon, the icon contrast steps in
+   primitives/colors. Families: indigo (the default), teal, blue, purple, cyan, green and orange. Never amaranth
+   for icons; red stays for errors. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-tone-indigo-bg: color-mix(in oklab, var(--qd-color-indigo-975) 70%, var(--background));
+  --web-tone-indigo-edge: color-mix(in oklab, var(--qd-color-indigo-900) 70%, transparent);
+  --web-tone-indigo-fg: var(--qd-color-indigo-400);
+  --web-tone-teal-bg: color-mix(in oklab, var(--qd-color-teal-975) 70%, var(--background));
+  --web-tone-teal-edge: color-mix(in oklab, var(--qd-color-teal-900) 70%, transparent);
+  --web-tone-teal-fg: var(--qd-color-teal-400);
+  --web-tone-blue-bg: color-mix(in oklab, var(--qd-color-blue-975) 70%, var(--background));
+  --web-tone-blue-edge: color-mix(in oklab, var(--qd-color-blue-900) 70%, transparent);
+  --web-tone-blue-fg: var(--qd-color-blue-400);
+  --web-tone-purple-bg: color-mix(in oklab, var(--qd-color-purple-975) 70%, var(--background));
+  --web-tone-purple-edge: color-mix(in oklab, var(--qd-color-purple-900) 70%, transparent);
+  --web-tone-purple-fg: var(--qd-color-purple-400);
+  --web-tone-cyan-bg: color-mix(in oklab, var(--qd-color-cyan-975) 70%, var(--background));
+  --web-tone-cyan-edge: color-mix(in oklab, var(--qd-color-cyan-900) 70%, transparent);
+  --web-tone-cyan-fg: var(--qd-color-cyan-400);
+  --web-tone-green-bg: color-mix(in oklab, var(--qd-color-green-975) 70%, var(--background));
+  --web-tone-green-edge: color-mix(in oklab, var(--qd-color-green-900) 70%, transparent);
+  --web-tone-green-fg: var(--qd-color-green-400);
+  --web-tone-orange-bg: color-mix(in oklab, var(--qd-color-orange-975) 70%, var(--background));
+  --web-tone-orange-edge: color-mix(in oklab, var(--qd-color-orange-900) 70%, transparent);
+  --web-tone-orange-fg: var(--qd-color-orange-400);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-tone-indigo-bg: var(--qd-color-indigo-50);
+  --web-tone-indigo-edge: var(--qd-color-indigo-200);
+  --web-tone-indigo-fg: var(--qd-color-indigo-600);
+  --web-tone-teal-bg: var(--qd-color-teal-50);
+  --web-tone-teal-edge: var(--qd-color-teal-200);
+  --web-tone-teal-fg: var(--qd-color-teal-600);
+  --web-tone-blue-bg: var(--qd-color-blue-50);
+  --web-tone-blue-edge: var(--qd-color-blue-200);
+  --web-tone-blue-fg: var(--qd-color-blue-600);
+  --web-tone-purple-bg: var(--qd-color-purple-50);
+  --web-tone-purple-edge: var(--qd-color-purple-200);
+  --web-tone-purple-fg: var(--qd-color-purple-600);
+  --web-tone-cyan-bg: var(--qd-color-cyan-50);
+  --web-tone-cyan-edge: var(--qd-color-cyan-200);
+  --web-tone-cyan-fg: var(--qd-color-cyan-600);
+  --web-tone-green-bg: var(--qd-color-green-50);
+  --web-tone-green-edge: var(--qd-color-green-200);
+  --web-tone-green-fg: var(--qd-color-green-600);
+  --web-tone-orange-bg: var(--qd-color-orange-50);
+  --web-tone-orange-edge: var(--qd-color-orange-200);
+  --web-tone-orange-fg: var(--qd-color-orange-600);
+}
+.web-tone-indigo {
+  --tone-bg: var(--web-tone-indigo-bg);
+  --tone-edge: var(--web-tone-indigo-edge);
+  --tone-fg: var(--web-tone-indigo-fg);
+}
+.web-tone-teal {
+  --tone-bg: var(--web-tone-teal-bg);
+  --tone-edge: var(--web-tone-teal-edge);
+  --tone-fg: var(--web-tone-teal-fg);
+}
+.web-tone-blue {
+  --tone-bg: var(--web-tone-blue-bg);
+  --tone-edge: var(--web-tone-blue-edge);
+  --tone-fg: var(--web-tone-blue-fg);
+}
+.web-tone-purple {
+  --tone-bg: var(--web-tone-purple-bg);
+  --tone-edge: var(--web-tone-purple-edge);
+  --tone-fg: var(--web-tone-purple-fg);
+}
+.web-tone-cyan {
+  --tone-bg: var(--web-tone-cyan-bg);
+  --tone-edge: var(--web-tone-cyan-edge);
+  --tone-fg: var(--web-tone-cyan-fg);
+}
+.web-tone-green {
+  --tone-bg: var(--web-tone-green-bg);
+  --tone-edge: var(--web-tone-green-edge);
+  --tone-fg: var(--web-tone-green-fg);
+}
+.web-tone-orange {
+  --tone-bg: var(--web-tone-orange-bg);
+  --tone-edge: var(--web-tone-orange-edge);
+  --tone-fg: var(--web-tone-orange-fg);
+}
+/* Icon lines are pixel perfect (design lead, 2026-11-22): a Lucide icon's line is always 1px, 1.5px or 2px, by the icon's
+   size: 1px up to 18px (12, 14, 16, 18), 1.5px from 20 to 32px (20, 24, 32), 2px from 40px. The icon is a size
+   container, so the width follows whatever size a section gives it, and the stroke doesn't scale with the
+   drawing. */
+[data-web] svg.lucide {
+  container-type: size;
+}
+[data-web] svg.lucide * {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 2px;
+}
+@container (max-width: 36px) {
+  [data-web] svg.lucide * {
+    stroke-width: 1.5px;
+  }
+}
+@container (max-width: 19px) {
+  [data-web] svg.lucide * {
+    stroke-width: 1px;
+  }
+}
+/* An icon set in a line of text (.web-icon-text, like the Documentation tile's arrow) follows the text instead: its
+   stroke scales with it, at the weight its own stroke-width gives (design lead, 2026-11-24). */
+[data-web] svg.lucide.web-icon-text * {
+  vector-effect: none;
+  stroke-width: inherit;
+}
+
+.web-icon-tile {
+  background: var(--tone-bg);
+  box-shadow: inset 0 0 0 1px var(--tone-edge);
+  color: var(--tone-fg);
+}
+
+/* Indigo (design lead, 2026-11-21): the second brand color as a thread through the website, never a fill behind text. It
+   follows the color guidelines' contrast steps (primitives/colors), so it's lighter on dark than on light
+   (design lead, 2026-11-22):
+   - --web-indigo, for marks: icons, nodes, active borders and pattern accents. indigo-400 on dark, 600 on light.
+   - --web-indigo-text, for text: the secondary.text role, indigo-400 on dark and 700 on light (800 until
+     2026-11-24; text on white needs 700 or darker).
+   - --web-link, for text links (design lead, 2026-11-22): --web-indigo-text. A link is .web-link (ArrowLink sets it).
+   - --web-link-hover (design lead, 2026-11-24): one step lighter on hover, so it visibly answers the pointer:
+     indigo-300 on dark (10:1), indigo-600 on light (4.9:1 or more on the light surfaces).
+   The nodes where lines meet take an indigo ring and the active one fills with it. Indigo is always on: the website
+   carries the secondary color strongly (design lead, 2026-11-24, when its switch was removed). */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-indigo: var(--qd-color-indigo-400);
+  --web-indigo-text: var(--qd-color-secondary-text);
+  --web-link: var(--web-indigo-text);
+  --web-link-hover: var(--qd-color-indigo-300);
+  --web-node: color-mix(in oklab, var(--web-indigo) 60%, var(--web-line-strong));
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-indigo: var(--qd-color-indigo-600);
+  --web-indigo-text: var(--qd-color-secondary-text);
+  --web-link: var(--web-indigo-text);
+  --web-link-hover: var(--qd-color-indigo-600);
+  --web-node: color-mix(in oklab, var(--web-indigo) 55%, var(--web-line-strong));
+}
+/* The selected pill in a row of tabs or a toggle (a code panel's language, a chart's option, grid or list), design lead,
+   2026-11-22: a clear fill that stands out on a card, neutral-800 on dark and neutral-100 on light, with the text
+   color. Unselected pills have no fill. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-selected: var(--qd-color-neutral-800);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-selected: var(--qd-color-neutral-100);
+}
+.web-selected {
+  background: var(--web-selected);
+  color: var(--foreground);
+}
+
+/* The three dots in a code panel's or terminal's top bar (design lead, 2026-11-22): lighter than the bar, neutral-800 on
+   dark and neutral-200 on light, so they read without drawing the eye. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-window-dot: var(--qd-color-neutral-800);
+  --web-window-dot-top: color-mix(in oklab, var(--qd-color-neutral-0) 10%, var(--web-window-dot));
+  --web-window-dot-shine: color-mix(in oklab, var(--qd-color-neutral-0) 16%, transparent);
+  --web-window-dot-rim: inset 0 0 0 0.5px color-mix(in oklab, var(--qd-color-neutral-0) 6%, transparent);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-window-dot: var(--qd-color-neutral-200);
+  --web-window-dot-top: color-mix(in oklab, var(--qd-color-neutral-0) 45%, var(--web-window-dot));
+  --web-window-dot-shine: color-mix(in oklab, var(--qd-color-neutral-0) 70%, transparent);
+  --web-window-dot-rim: inset 0 -0.5px 0 color-mix(in oklab, var(--qd-color-neutral-1000) 6%, transparent);
+}
+/* With a very subtle glass (design lead, 2026-11-22): a touch lighter at the top, a hairline highlight along the top edge
+   and a faint rim (on light, a faint shade at the bottom), in the palette's white and black. */
+.web-window-dot {
+  background: linear-gradient(to bottom, var(--web-window-dot-top), var(--web-window-dot) 70%);
+  box-shadow: inset 0 0.5px 0 var(--web-window-dot-shine), var(--web-window-dot-rim);
+}
+
+/* Syntax colors for code (web/lib/code.tsx, design lead, 2026-11-24): VS Code's Dark+ and Light+ roles in the
+   palette, 300 on dark and 700 on light, each at 5:1 or more on a code panel. Comments take the muted text color;
+   names, operators and brackets keep the text color. Never amaranth or red. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-code-keyword: var(--qd-color-purple-300);
+  --web-code-function: var(--qd-color-blue-300);
+  --web-code-type: var(--qd-color-teal-300);
+  --web-code-string: var(--qd-color-orange-300);
+  --web-code-number: var(--qd-color-green-300);
+  --web-code-constant: var(--qd-color-indigo-300);
+  --web-code-property: var(--qd-color-cyan-300);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-code-keyword: var(--qd-color-purple-700);
+  --web-code-function: var(--qd-color-blue-700);
+  --web-code-type: var(--qd-color-teal-700);
+  --web-code-string: var(--qd-color-orange-700);
+  --web-code-number: var(--qd-color-green-700);
+  --web-code-constant: var(--qd-color-indigo-700);
+  --web-code-property: var(--qd-color-cyan-700);
+}
+.web-tok-keyword { color: var(--web-code-keyword); }
+.web-tok-function { color: var(--web-code-function); }
+.web-tok-type { color: var(--web-code-type); }
+.web-tok-string { color: var(--web-code-string); }
+.web-tok-number { color: var(--web-code-number); }
+.web-tok-constant { color: var(--web-code-constant); }
+.web-tok-property { color: var(--web-code-property); }
+.web-tok-comment { color: var(--muted-foreground); }
+
+/* A text link: indigo, underlined on hover. A title that is a link but reads as text (a card's title) is
+   .web-link-quiet: the text color, indigo on hover. */
+.web-link {
+  color: var(--web-link);
+}
+.web-link:hover {
+  color: var(--web-link-hover);
+  text-decoration-line: underline;
+}
+/* ArrowLink's chevron becomes an arrow on hover and keyboard focus (design lead, 2026-11-24): the chevron slides 3
+   units right on its 24-unit grid and a shaft fades in and grows from its tip. 200ms, easing out; for reduced motion
+   it changes without moving. */
+.web-arrow-head,
+.web-arrow-shaft {
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.web-arrow-shaft {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: 17.5px 12px;
+}
+.web-arrow-link:is(:hover, :focus-visible) .web-arrow-head {
+  transform: translateX(3px);
+}
+.web-arrow-link:is(:hover, :focus-visible) .web-arrow-shaft {
+  opacity: 1;
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .web-arrow-head,
+  .web-arrow-shaft {
+    transition: none;
+  }
+}
+.web-link-quiet:hover {
+  color: var(--web-link);
+}
+
+/* The website's scene colors (design lead, 2026-11-22), for the canvas and WebGL visuals in web/visuals (the globe) and
+   web/patterns (the depth haze): the Space page's palette, read by visuals/scene.tsx as --web-scene-<key>. */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-scene-bg: var(--card);
+  --web-scene-surface: var(--card);
+  --web-scene-star: var(--qd-color-neutral-50);
+  --web-scene-dim: var(--qd-color-neutral-500);
+  --web-scene-grid: var(--qd-color-neutral-850);
+  --web-scene-line: var(--qd-color-neutral-700);
+  --web-scene-label: var(--qd-color-neutral-400);
+  --web-scene-haze: var(--qd-color-indigo-950);
+  --web-scene-violet: var(--qd-color-indigo-900);
+  --web-scene-glow: var(--qd-color-indigo-400);
+  --web-scene-bright: var(--qd-color-indigo-300);
+  --web-scene-accent: var(--qd-color-amaranth-500);
+  --web-scene-plum: var(--qd-color-purple-800);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-scene-star: var(--qd-color-neutral-700);
+  --web-scene-dim: var(--qd-color-neutral-400);
+  --web-scene-grid: var(--qd-color-neutral-100);
+  --web-scene-line: var(--qd-color-neutral-300);
+  --web-scene-label: var(--qd-color-neutral-600);
+  --web-scene-haze: var(--qd-color-indigo-50);
+  --web-scene-violet: var(--qd-color-indigo-100);
+  --web-scene-glow: var(--qd-color-indigo-500);
+  --web-scene-bright: var(--qd-color-indigo-600);
+  --web-scene-accent: var(--qd-color-amaranth-600);
+  --web-scene-plum: var(--qd-color-purple-200);
+}
+/* The depth haze, subtle (design lead, 2026-11-22): the shader at half strength (40% on light) over the card's fill. */
+.web-depth-haze {
+  opacity: 0.5;
+}
+[data-web][data-theme="light"] .web-depth-haze,
+[data-theme="light"] [data-web] .web-depth-haze {
+  opacity: 0.4;
+}
+
+/* Patterns being explored (web/patterns/explorations, 2026-11-23, not approved): the Pattern Studio looks, at a
+   low strength over the card's fill like the depth haze, softer on light. */
+.web-generative {
+  opacity: 0.5;
+}
+[data-web][data-theme="light"] .web-generative,
+[data-theme="light"] [data-web] .web-generative {
+  opacity: 0.4;
+}
+/* Background explorations (Hex field, Dot field): stronger than a card surface's, with the violet wash under the
+   marks at half strength, softer on light. */
+.web-field {
+  opacity: 0.7;
+}
+[data-web] .web-pattern-backdrop {
+  opacity: 0.5;
+}
+[data-web][data-theme="light"] .web-field,
+[data-theme="light"] [data-web] .web-field {
+  opacity: 0.6;
+}
+[data-web][data-theme="light"] .web-pattern-backdrop,
+[data-theme="light"] [data-web] .web-pattern-backdrop {
+  opacity: 0.6;
+}
+
+/* Surfaces from the Space page (web/patterns/explorations/space.tsx, 2026-11-23, exploring), in the scene
+   colors. Each fades out before a card's copy, at the bottom. */
+
+/* SF-05 Halftone corner: five layers of dots on one 8px grid, each smaller and reaching further from the top
+   right, so the dots shrink with distance. */
+.web-sp-halftone {
+  opacity: 0.6;
+  mask-image: linear-gradient(to bottom, black 25%, transparent 62%);
+}
+[data-web][data-theme="light"] .web-sp-halftone,
+[data-theme="light"] [data-web] .web-sp-halftone {
+  opacity: 0.5;
+}
+.web-sp-halftone__dots {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 4px 4px, var(--web-scene-glow) var(--web-sp-r), transparent calc(var(--web-sp-r) + 0.6px))
+    100% 0 / 8px 8px;
+  mask-image: radial-gradient(circle at 100% 0, black calc(var(--web-sp-at) - 40px), transparent var(--web-sp-at));
+}
+.web-sp-halftone__dots--1 { --web-sp-r: 3.2px; --web-sp-at: 80px; }
+.web-sp-halftone__dots--2 { --web-sp-r: 2.5px; --web-sp-at: 128px; }
+.web-sp-halftone__dots--3 { --web-sp-r: 1.8px; --web-sp-at: 176px; }
+.web-sp-halftone__dots--4 { --web-sp-r: 1.2px; --web-sp-at: 224px; }
+.web-sp-halftone__dots--5 { --web-sp-r: 0.7px; --web-sp-at: 272px; }
+
+/* SF-09 Blueprint: dashed lines every 8px, stronger every 32px. */
+.web-sp-blueprint {
+  mask-image: linear-gradient(to bottom, black 20%, transparent 72%);
+}
+.web-sp-blueprint::before,
+.web-sp-blueprint::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.web-sp-blueprint::before {
+  background:
+    linear-gradient(to right, color-mix(in oklab, var(--web-scene-line) 80%, transparent) 1px, transparent 1px) 0 0 / 32px 100%,
+    linear-gradient(to right, color-mix(in oklab, var(--web-scene-line) 40%, transparent) 1px, transparent 1px) 0 0 / 8px 100%;
+  mask-image: repeating-linear-gradient(to bottom, black 0 2px, transparent 2px 4px);
+}
+.web-sp-blueprint::after {
+  background:
+    linear-gradient(to bottom, color-mix(in oklab, var(--web-scene-line) 80%, transparent) 1px, transparent 1px) 0 0 / 100% 32px,
+    linear-gradient(to bottom, color-mix(in oklab, var(--web-scene-line) 40%, transparent) 1px, transparent 1px) 0 0 / 100% 8px;
+  mask-image: repeating-linear-gradient(to right, black 0 2px, transparent 2px 4px);
+}
+
+/* SH-01 Dither haze (exploring): the violet ramp it dithers into, from the Space page's --sp-ramp-1 to 4 (its
+   ramp-0 is the section's own background here). */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-scene-ramp-1: var(--qd-color-indigo-950);
+  --web-scene-ramp-2: var(--qd-color-indigo-900);
+  --web-scene-ramp-3: var(--qd-color-indigo-800);
+  --web-scene-ramp-4: var(--qd-color-indigo-600);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-scene-ramp-1: var(--qd-color-neutral-50);
+  --web-scene-ramp-2: var(--qd-color-indigo-50);
+  --web-scene-ramp-3: var(--qd-color-indigo-100);
+  --web-scene-ramp-4: var(--qd-color-indigo-200);
+}
+.web-sp-dither {
+  --web-scene-bg: var(--background);
+}
+
+/* Depth haze on light (2026-11-23, exploring: it changes the design lead's approved pattern, so it needs his yes). On white,
+   the stars in neutral 700 and 400 read as specks of dust, and indigo 50 and 100 at 40% as smudges. Here the stars
+   are indigo, like the other patterns' marks on light, the haze a step deeper, and the layer at 80% (from 40%), so
+   it reads as soft light falling from the top, as clearly as on dark. Scoped to the depth haze: --web-scene-star
+   and --web-scene-dim also color the globe. The middle selector is the studio's previews (data-web outside, the
+   theme inside), which got the 50% strength of dark. */
+[data-web][data-theme="light"] .web-depth-haze,
+[data-web] [data-theme="light"] .web-depth-haze,
+[data-theme="light"] [data-web] .web-depth-haze {
+  --web-scene-star: var(--qd-color-indigo-500);
+  --web-scene-dim: var(--qd-color-indigo-300);
+  --web-scene-haze: var(--qd-color-indigo-100);
+  --web-scene-violet: var(--qd-color-indigo-200);
+  --web-scene-plum: var(--qd-color-purple-100);
+  opacity: 0.8;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------
+   Proposals (2026-11-24): visual enhancements to review, each behind its own switch in the studio's bottom bar
+   (studio/components/web/blocks.tsx), off by default. They take the space, developer-tool and instrument themes
+   further through light from above, structure and type, never glow (DESIGN.md, Space theme). To keep one, move its
+   rules out of the attribute selector so they apply by default, and remove its switch; to drop one, delete its rules
+   and its switch.
+   --------------------------------------------------------------------------------------------------------------- */
+[data-web],
+[data-web] [data-theme],
+[data-web][data-theme="dark"],
+[data-web] [data-theme="dark"],
+[data-theme="dark"] [data-web] {
+  --web-lit: color-mix(in oklab, var(--foreground) 32%, transparent);
+  --web-lit-soft: color-mix(in oklab, var(--foreground) 4%, transparent);
+}
+[data-web][data-theme="light"],
+[data-web] [data-theme="light"],
+[data-theme="light"] [data-web] {
+  --web-lit: rgb(255 255 255 / 1);
+  --web-lit-soft: color-mix(in oklab, var(--qd-color-indigo-100) 35%, transparent);
+}
+
+/* Top light: light from above. Cards and trays get a lit top edge, brightest in the middle and fading to the corners,
+   with a soft wash of light under it; the seam between sections gets the same lit stretch in its middle. */
+[data-web-top-light="on"] .web-plate,
+[data-web-top-light="on"] .web-tray {
+  position: relative;
+  isolation: isolate;
+}
+[data-web-top-light="on"] .web-plate::after,
+[data-web-top-light="on"] .web-tray::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent 8%, var(--web-lit) 50%, transparent 92%) top / 100% 1px no-repeat,
+    radial-gradient(70% 55% at 50% 0%, var(--web-lit-soft), transparent 70%);
+}
+[data-web-top-light="on"] .web-seam {
+  background-image: linear-gradient(90deg, transparent 15%, var(--web-lit) 50%, transparent 85%);
+  background-size: min(100%, 1200px) 1px;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+}
+[data-web-top-light="on"] .web-seam:first-child,
+[data-web-top-light="on"] .web-navbar + .web-seam,
+[data-web-top-light="on"] .web-seam-bottom + .web-seam {
+  background-image: none;
+}
+
+/* Bevel: cards and trays get cut corners instead of round ones, at the angle of the hexagon nodes and the logo's
+   brandmark, so the material reads as machined. Uses corner-shape (Chromium); other browsers keep round corners. */
+[data-web-bevel="on"] .web-plate,
+[data-web-bevel="on"] .web-tray,
+[data-web-bevel="on"] .web-plate::after,
+[data-web-bevel="on"] .web-tray::after {
+  corner-shape: bevel;
+}
+/* A cut reads better a step larger than a round corner: cards 14px, trays 20px. */
+[data-web-bevel="on"] .web-plate[class*="rounded-xl"],
+[data-web-bevel="on"] .web-plate[class*="rounded-2xl"] {
+  border-radius: 14px;
+}
+[data-web-bevel="on"] .web-tray[class*="radius-xl"] {
+  border-radius: 20px;
+}
+[data-web-bevel="on"] .web-tray[class*="radius-xl"] > * {
+  corner-shape: bevel;
+  border-radius: 14px;
+}
+
+/* A marquee of logos (logo cloud, proposal 2026-11-24): the row drifts left, 60s a lap, and holds still on hover and
+   for reduced motion; both ends fade into the page. The list is drawn twice, so a lap ends where it began. */
+.web-marquee {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.web-marquee-track {
+  animation: web-marquee 60s linear infinite;
+}
+.web-marquee:hover .web-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes web-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .web-marquee-track {
+    animation: none;
+  }
+}
+
+/* A caret that blinks like the nodes, a hard step on and off every second (the CTA's command layout, proposal
+   2026-11-24). Still for reduced motion. */
+@keyframes web-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.web-caret {
+  animation: web-caret-blink 1s step-end infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .web-caret {
+    animation: none;
+  }
+}

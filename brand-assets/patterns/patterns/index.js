@@ -39,10 +39,10 @@ export const loadPatterns = (base = "presets") => loadAllPresets(base);
 // or more colorways to pick from.
 export const isGenerativePattern = (preset) => preset.recipe === "generative-pattern";
 
-// On hold (Vanesa, 2026-11-24): a pattern or colorway marked "onHold" is never used to
+// On hold (visual designer, 2026-11-24): a pattern or colorway marked "onHold" is never used to
 // make a new asset (guidelines/ section 2a). Every teal colorway is on hold now. The other
 // patterns that were on hold were removed from the repo on 2026-11-25; they live in the
-// Pattern Library artifact until Vanesa asks to add one back.
+// Pattern Library artifact until the visual designer asks to add one back.
 export const isOnHold = (preset, colorway) =>
   Boolean(preset.onHold) || (colorway != null && Boolean(preset.colorways?.[colorway]?.onHold));
 
@@ -82,9 +82,9 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
   if (options.letterOption != null && !option) throw new Error(`${preset.name} has no approved letter option #${options.letterOption}`);
   const letters = option ? (({ name, source, ...values }) => values)(option) : typeof options.letters === "number" ? letterVariation(options.letters) : options.letters;
   // settings.letterSteps: the color steps of the pattern's letters, in place of the letter
-  // layer's own (Color-Sliced-B: 950, 900, 800; Motion-Streaks-B: 900, 800, 700; Vanesa,
+  // layer's own (Color-Sliced-B: 950, 900, 800; Motion-Streaks-B: 900, 800, 700; visual designer,
   // 2026-11-26). settings.letterColorSteps: a letter variation that keeps other steps
-  // (Motion-Streaks-B: variation 1 keeps 800, 600, 200; Vanesa, 2026-11-25).
+  // (Motion-Streaks-B: variation 1 keeps 800, 600, 200; visual designer, 2026-11-25).
   const letterSteps = (typeof options.letters === "number" ? preset.settings?.letterColorSteps?.[options.letters] : null) ?? preset.settings?.letterSteps;
   for (const base of preset.layers ?? []) {
     let layer = letters && isLetterLayer(base) ? varyLetterLayer(base, letters) : base;
@@ -109,7 +109,7 @@ function renderBase(canvas, tokens, preset, options) {
     if (options.variant != null && !variant) throw new Error(`${preset.name} has no approved variant #${options.variant}`);
     if (variant) {
       // colorSteps: the variant draws its elements in other steps of the same family
-      // (Generative-Hexagon's filled variants: 800, 800, 700; Vanesa, 2026-11-25).
+      // (Generative-Hexagon's filled variants: 800, 800, 700; visual designer, 2026-11-25).
       const { name, colorSteps, ...engine } = variant;
       preset = { ...preset, settings: { ...preset.settings, engine: { ...preset.settings.engine, ...engine } } };
       if (colorSteps) preset = withColorSteps(preset, colorSteps);
@@ -126,7 +126,7 @@ function renderBase(canvas, tokens, preset, options) {
 
 // Same colorways, other steps of each colorway's family: {color.indigo.200} with step 600
 // becomes {color.indigo.600}. steps[i] replaces the step of colors[i]. A colorway with
-// fixedColors (light mode: all white) keeps its colors (Vanesa, 2026-11-26).
+// fixedColors (light mode: all white) keeps its colors (visual designer, 2026-11-26).
 function withColorSteps(preset, steps) {
   return {
     ...preset,

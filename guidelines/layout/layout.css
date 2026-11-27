@@ -102,7 +102,7 @@
 [data-theme="light"] .qd-box--card,
 [data-theme="light"] .qd-box--outline { border-color: var(--qd-color-border-on-light); }
 .qd-box--light-card {
-  /* At least the logo's clear space, since the logo sits on the card (Vanesa, 2026-11-04). */
+  /* At least the logo's clear space, since the logo sits on the card (visual designer, 2026-11-04). */
   padding: max(var(--qd-gap-group), var(--qd-logo-clear, 0px));
   background: var(--qd-color-background-light-surface);
   color: var(--qd-color-text-on-light);
@@ -118,7 +118,7 @@
 
 
 /* Light card layout ("book"). From the Get-the-Guide ad, Figma 8y0svqBDPZX6caRNF6lddG node 20958:18153
-   (card 794.4 × 979.2 in a 1440 frame), approved by Vanesa 2026-11-04. A vertical card like a guide or a
+   (card 794.4 × 979.2 in a 1440 frame), approved by the visual designer 2026-11-04. A vertical card like a guide or a
    document, centered on a full-bleed pattern, with the button centered below it. Every size is a share of
    the card width W, so the card scales with the canvas.
    Markup: .qd-book > .qd-box--light-card.qd-book__card (> .qd-book__top [logo, .qd-book__title] +
@@ -128,7 +128,7 @@
 .qd-canvas[data-shape="story"]    { --qd-book-share: 0.75; }
 /* Wide: a landscape card, 5:4, 72% of the canvas height (the largest that fits with the button inside the
    margins). W stays the portrait card's width for that height, so every size below keeps its share of W;
-   only the card's width changes, and the text is 1.5x larger (Vanesa, 2026-11-11). The title is 1.6x, as on square (2026-11-19: 1.95x no longer fit in Mona Sans Display).
+   only the card's width changes, and the text is 1.5x larger (visual designer, 2026-11-11). The title is 1.6x, as on square (2026-11-19: 1.95x no longer fit in Mona Sans Display).
    Ultrawide: no light card. */
 .qd-canvas[data-shape="wide"]     { --qd-book-share: 0.3286; }
 .qd-canvas {
@@ -142,7 +142,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  /* Card and button centered together inside the margins, on every shape (Vanesa, 2026-11-11). */
+  /* Card and button centered together inside the margins, on every shape (visual designer, 2026-11-11). */
   top: calc((var(--qd-canvas-margin-top) * var(--qd-canvas-u))
     + (var(--qd-canvas-height) * 1px - (var(--qd-canvas-margin-top) + var(--qd-canvas-margin-bottom)) * var(--qd-canvas-u)
        - (var(--qd-book-h) + var(--qd-book-gap) + var(--qd-book-cta)) * var(--qd-canvas-u)) / 2);
@@ -171,7 +171,7 @@
 }
 .qd-book__top { display: flex; flex-direction: column; align-items: flex-start; gap: calc(var(--qd-book-w) * 0.0604 * var(--qd-canvas-u)); }
 .qd-book__card .qd-book__title, .qd-book__card .qd-book__text { margin: 0; font-family: var(--qd-font-family-display); font-feature-settings: var(--qd-font-features); color: var(--qd-color-text-on-light); letter-spacing: 0; }
-/* Title 1.6x the Figma share, so the card doesn't look empty; the logo keeps its size (Vanesa, 2026-11-16). */
+/* Title 1.6x the Figma share, so the card doesn't look empty; the logo keeps its size (visual designer, 2026-11-16). */
 .qd-book__title { font-weight: var(--qd-font-weight-semibold); font-size: calc(var(--qd-book-w) * 0.0846 * 1.6 * var(--qd-canvas-u)); line-height: var(--qd-type-display-1-line-height); }
 .qd-book__bottom { border-top: var(--qd-box-border-width) solid var(--qd-color-border-on-light); padding-top: calc(var(--qd-book-w) * 0.0846 * var(--qd-canvas-u)); }
 .qd-book__text { font-weight: var(--qd-font-weight-regular); font-size: calc(var(--qd-book-w) * 0.0483 * var(--qd-canvas-u)); line-height: var(--qd-type-h4-line-height); }
@@ -226,7 +226,7 @@
 .qd-canvas[data-shape="wide"] .qd-book__title { font-size: calc(var(--qd-book-w) * 0.0846 * 1.6 * var(--qd-canvas-u)); } /* 1.6x, as square, so Mona Sans Display fits (2026-11-19) */
 .qd-canvas[data-shape="wide"] .qd-book__text  { font-size: calc(var(--qd-book-w) * 0.0483 * 1.5 * var(--qd-canvas-u)); }
 /* Slide on wide (no button): add .qd-book--slide to .qd-book. The card is centered on its own and
-   may be 16:10, wider than 5:4, when it holds speakers or an info list (Vanesa, 2026-11-11). */
+   may be 16:10, wider than 5:4, when it holds speakers or an info list (visual designer, 2026-11-11). */
 .qd-canvas[data-shape="wide"] .qd-book--slide .qd-book__card {
   width: calc(var(--qd-book-h) * 1.6 * var(--qd-canvas-u));
   top: calc(var(--qd-canvas-height) * 0.5px - var(--qd-book-h) / 2 * var(--qd-canvas-u));
@@ -261,7 +261,7 @@
     + (var(--qd-book-h) + var(--qd-book-gap)) * var(--qd-canvas-u));
 }
 
-/* Pattern mask (Vanesa, 2026-11-11). Replaces the Zone layout. Only for patterns whose small
+/* Pattern mask (visual designer, 2026-11-11). Replaces the Zone layout. Only for patterns whose small
    details (letters, dashes) would cross the text: the preset's "textMask" says which strength.
    The pattern covers the whole canvas at 100% where the visual sits and fades softly (an eased
    curve, no visible edge) to a low opacity behind the text, over a solid neutral:
@@ -310,7 +310,7 @@
    the standard mask above darkens it 60% (40% of the pattern stays), the light mask darkens it 30%
    (70% stays). The contrast score picks the softest one that passes (guidelines/ section 4). */
 .qd-pattern-mask.qd-pattern-mask--light { --qd-mask-low: 0.70; }
-/* Text on the right (LinkedIn profile cover): the fade runs from the right edge (Vanesa, 2026-11-11). */
+/* Text on the right (LinkedIn profile cover): the fade runs from the right edge (visual designer, 2026-11-11). */
 .qd-canvas[data-shape] .qd-pattern-mask.qd-pattern-mask--from-right { --qd-mask-direction: to left; }
 .qd-canvas[data-shape="wide"] .qd-pattern-mask,
 .qd-canvas[data-shape="ultrawide"] .qd-pattern-mask { --qd-mask-direction: to right; }
@@ -318,7 +318,7 @@
    (quadratic) start: the pattern begins as a whisper on the text side and builds to full strength at
    95% of the way across, in the mask's direction (down on tall shapes, right on wide, left with
    --from-right). No step, no visible edge: you can't tell the mask and the pattern are two layers
-   (Vanesa: wide 2026-11-11, extended to every shape the same day). --qd-mask-low sets the strength on
+   (the visual designer: wide 2026-11-11, extended to every shape the same day). --qd-mask-low sets the strength on
    the text side; --qd-mask-edge isn't used. */
 .qd-canvas[data-shape] .qd-pattern-mask {
   -webkit-mask-image: linear-gradient(var(--qd-mask-direction),
@@ -367,7 +367,7 @@
     rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 1.0000)) 95.00%);
 }
 
-/* Generated image as the background (guidelines section 5, Vanesa 2026-11-11 and 2026-11-16).
+/* Generated image as the background (guidelines section 5, visual designer 2026-11-11 and 2026-11-16).
    Put .qd-canvas--masked on the canvas and one of these on the <img>. Both fade with an eased
    (smoothstep) curve over neutral 950, so there's never a visible band or edge.
    .qd-image-fade         full width at the image's own ratio, anchored to the bottom, fading in from

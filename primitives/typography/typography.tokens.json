@@ -213,7 +213,7 @@
   },
   "semantic": {
     "type": {
-      "$description": "The type set, adopted on 2026-11-18 (Juan; proposed 2026-11-17). Display 1 to 5 (80 to 200px) in Mona Sans Display SemiBold, each also Condensed (display-condensed-*: 75% width, uppercase). Headings H1 to H6 (64 to 24px) in Mona Sans Display, Regular, Medium or SemiBold, each also in Mono (mono-h1 to mono-h6). Text XL to XS (20 to 12px) in Mona Sans, also in Mono (mono-xl to mono-xs). Headings and Display take their line height from one curve, 1 + k / size^p through H6 (1.3) and H1 (1.1); text uses 1.5. Letter spacing is 0 everywhere. qdrant.weights lists the weights a style comes in, and $value holds its default; Bold is retired. The social and Luma styles became steps of this set (typography README, Text styles).",
+      "$description": "The type set, adopted on 2026-11-18 (design lead; proposed 2026-11-17). Display 1 to 5 (80 to 200px) in Mona Sans Display SemiBold, each also Condensed (display-condensed-*: 75% width, uppercase). Headings H1 to H6 (64 to 24px) in Mona Sans Display, Regular, Medium or SemiBold, each also in Mono (mono-h1 to mono-h6). Text XL to XS (20 to 12px) in Mona Sans, also in Mono (mono-xl to mono-xs). Headings and Display take their line height from one curve, 1 + k / size^p through H6 (1.3) and H1 (1.1); text uses 1.5. Letter spacing is 0 everywhere. qdrant.weights lists the weights a style comes in, and $value holds its default; Bold is retired. The social and Luma styles became steps of this set (typography README, Text styles).",
       "display-5": {
         "$type": "typography",
         "$value": {
@@ -826,7 +826,7 @@
       }
     },
     "creative": {
-      "$description": "Text in creatives (social posts, ads, banners). Two sizes only: one title, one supporting size. px at the shape's reference canvas, scaled with the canvas. $value is square and portrait; $extensions.qdrant.story, .wide and .ultrawide are those shapes. Every size is a step of the type set (semantic.type), with that step's line height and letter spacing 0 (Juan, 2026-11-18). Decided by Vanesa 2026-11-04; ultrawide like wide since 2026-11-11.",
+      "$description": "Text in creatives (social posts, ads, banners). Two sizes only: one title, one supporting size. px at the shape's reference canvas, scaled with the canvas. $value is square and portrait; $extensions.qdrant.story, .wide and .ultrawide are those shapes. Every size is a step of the type set (semantic.type), with that step's line height and letter spacing 0 (design lead, 2026-11-18). Decided by visual designer 2026-11-04; ultrawide like wide since 2026-11-11.",
       "title-short": {
         "$type": "dimension",
         "$value": "104px",

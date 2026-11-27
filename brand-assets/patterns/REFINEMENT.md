@@ -1,10 +1,10 @@
 # Pattern refinement (2026-11)
 
-Vanesa is reviewing every pattern in this folder and every combination it can make (colorways, letter variants, example meshes, streak values) to decide what to keep, what to change and what to take out.
+The visual designer is reviewing every pattern in this folder and every combination it can make (colorways, letter variants, example meshes, streak values) to decide what to keep, what to change and what to take out.
 
-- **Where the review happens:** the [Pattern Library](https://claude.ai/artifact/HSo1QSTBTRrZ3abenyoJz3) canvas on Claude (private for now). Every pattern is a row of numbered 16:9 tiles, one per combination, rendered at 1280×720 from this branch's code on 2026-11-24. Vanesa comments on a tile by its number, like `Color-Sliced-B #3`.
+- **Where the review happens:** the [Pattern Library](https://claude.ai/artifact/HSo1QSTBTRrZ3abenyoJz3) canvas on Claude (private for now). Every pattern is a row of numbered 16:9 tiles, one per combination, rendered at 1280×720 from this branch's code on 2026-11-24. The visual designer comments on a tile by its number, like `Color-Sliced-B #3`.
 - **What it shows:** 18 patterns, 71 tiles. Every colorway (and color family where a pattern has them), the 4 example meshes for mesh patterns, 2 letter variants per colorway for letter-layer patterns, and the two ends of each streak range for Motion Streaks. Where a pattern has more combinations than that, the row's note says how many and what was picked.
-- **Where the changes land:** this branch, `pattern-refinement`, one commit per decision. Nothing merges until Vanesa marks the pull request ready.
+- **Where the changes land:** this branch, `pattern-refinement`, one commit per decision. Nothing merges until the visual designer marks the pull request ready.
 
 ## Decisions
 
@@ -53,7 +53,7 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Dithered explorations | Remaining (E28, E29, E30, E33, E34, E35, E36) | Not approved; the Explorations column is closed | 2026-11-24 |
 | Color-Dithered-Pattern-A | All, with variants 0 to 3 | On hold, with the mesh patterns | 2026-11-24 |
 | Generative-Pulse-Pattern (new) | Exploration H73 (Hex pulse look, big rings filling the frame) | Approved: new generative pattern in Indigo, Amaranth and Teal (on hold) | 2026-11-24 |
-| Generative-Rings-Pattern (new) | Explorations X1 (reference), X3, X6, X8, X9, X10, X12 to X16 | Approved: new generative pattern from Vanesa's reference, X1 as the base and the others as variants 0 to 9, in Indigo, Amaranth and Teal (on hold) | 2026-11-24 |
+| Generative-Rings-Pattern (new) | Explorations X1 (reference), X3, X6, X8, X9, X10, X12 to X16 | Approved: new generative pattern from the visual designer's reference, X1 as the base and the others as variants 0 to 9, in Indigo, Amaranth and Teal (on hold) | 2026-11-24 |
 | All patterns | Usage | Rules for agents in guidelines/ section 2a: nothing on hold is used (every teal colorway, mesh patterns, Color-Refracted-A, Color-Dithered-A); color ratio set after the council's approval; new combinations only from approved parts. `isOnHold` and `usableColorways` in patterns/index.js | 2026-11-24 |
 | Color-Sliced-A (and B, which inherits it) | Softer-contrast proposals S1 to S8; S6 approved | Every colorway now runs from its family's 975 to its 700 (Amaranth, Indigo, Teal on hold), replacing Neutral 950 → the family's 600. The other proposals were dropped | 2026-11-24 |
 | Motion-Streaks-A, B | Direction 104° | Removed from every colorway; the approved directions are now 0°, 96°, 124°, 144°, 160°, 288° and 320° (104° snaps to 96°) | 2026-11-24 |
@@ -62,7 +62,7 @@ Vanesa is reviewing every pattern in this folder and every combination it can ma
 | Color-Sliced-B, Motion-Streaks-B | Letter colors | Letters in the family's 800, 700, 600 instead of 800, 600, 200, so they blend with the background. Motion-Streaks-B letter variation 1 (#7, #21, #35) keeps 800, 600, 200 (`letterColorSteps`). Light neutral letters are white | 2026-11-25 |
 | Generative-Hexagon | Element colors | Hexagons in 800, 700, 600; filled variants 1, 2, 9 in 800 and 700 only (variant `colorSteps`) | 2026-11-25 |
 | Generative Burst, Dash, Pulse, Rings | Element colors | Elements in 800, 700, 500: never lighter than 500 | 2026-11-25 |
-| Mesh patterns, Color-Refracted-A, Color-Dithered-A, light neutrals | Everything on hold except teal | Removed from the repo (presets, recipes, meshes, library flow, sheet.html), kept only in the Pattern Library artifact until Vanesa asks to add one back. Teal stays, on hold | 2026-11-25 |
+| Mesh patterns, Color-Refracted-A, Color-Dithered-A, light neutrals | Everything on hold except teal | Removed from the repo (presets, recipes, meshes, library flow, sheet.html), kept only in the Pattern Library artifact until the visual designer asks to add one back. Teal stays, on hold | 2026-11-25 |
 | Generative Dash, Burst, Pulse, Rings | Pattern Studio looks data bars, hyperspace and hex pulse | Approved as open looks: agents make new variations with `look` inside ranges taken from the approved variants (Pulse: noise only). Generative-Hexagon stays fixed | 2026-11-25 |
 | Color-Sliced-A/B, Motion-Streaks-A/B | Line angle | One fixed angle, 70° from horizontal (as Color-Sliced-A #15): stripes at -160° (the -152° and -168° stripe options removed, so `stripes` is now 0 to 2), Motion Streaks direction 110° only (0°, 124°, 144°, 160°, 288°, 320° removed) | 2026-11-26 |
 | Every approved pattern | Light mode | Added back on hold: colorway Neutral 100 → Neutral 300 with the whole top layer white (Neutral 0), `textColor: "dark"`, `textMask: "none"`; `fixedColors` keeps it white through letter and variant color steps | 2026-11-26 |

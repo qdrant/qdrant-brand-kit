@@ -103,7 +103,7 @@ const wrap = (v, size) => ((v % size) + size) % size;
 // Ordered dither (8 x 8 Bayer): turns color values from 0 to 255 (any precision) into
 // 8-bit pixels, nudging each by less than one level in a fixed pattern. Smooth gradients
 // stay smooth instead of breaking into bands, the pattern is invisible at normal size, and
-// it survives image compression better than random grain (Vanesa, 2026-11-26).
+// it survives image compression better than random grain (visual designer, 2026-11-26).
 const BAYER_8 = [
   0, 32, 8, 40, 2, 34, 10, 42, 48, 16, 56, 24, 50, 18, 58, 26,
   12, 44, 4, 36, 14, 46, 6, 38, 60, 28, 52, 20, 62, 30, 54, 22,

@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation"
 
-// The Web link opens the page straight away (Juan, 2026-11-16): the Resilience page, the only one so far.
-// With more pages, add a way to switch between them on the page, like Variations.
+// The Web link opens the canvas, every section at once.
 export default function Web() {
-  redirect("/web/resilience")
+  redirect("/web/canvas")
 }

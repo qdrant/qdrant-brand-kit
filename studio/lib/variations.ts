@@ -107,7 +107,7 @@ const brackets = `.qd-ui-button { position: relative; }
 
 // Hairline's neutrals: a pure black page with near-black cards in dark, all white in light. Plated Black
 // uses them as they are; Hairline itself puts its page on neutral-975 and keeps the default's soft border
-// (Juan, 2026-11-16).
+// (design lead, 2026-11-16).
 const hairlineNeutrals = { dark: surfaces(1000, 950, 925, 900, 850), light: surfaces(0, 0, 0, 50, 100) }
 // The same, without their border steps, so the default's soft border (globals.css) shows through.
 const withoutBorders = (vars: Vars): Vars =>
@@ -164,7 +164,7 @@ export const variations: Variation[] = [
       "--qd-ui-overlay": black(40),
       "--qd-ui-overlay-blur": "0px",
     },
-    // Its lines are the default's soft border, like Deep's (Juan, 2026-11-16): they were the text color at 12% on
+    // Its lines are the default's soft border, like Deep's (design lead, 2026-11-16): they were the text color at 12% on
     // cards, menus and buttons (8% on light cards) and neutral-850 (100 on light) on dividers and the sidebar.
     dark: { ...withoutBorders(hairlineNeutrals.dark), "--qd-ui-page": n(975), "--qd-ui-menu-shadow": floating(30) },
     light: { ...withoutBorders(hairlineNeutrals.light), "--qd-ui-menu-shadow": floating(4) },
@@ -391,7 +391,7 @@ ${lineGrid(32, 5)}`,
     dark: { ...surfaces(1000, 950, 925, 900, 850), "--qd-ui-top-light": white(16) },
     light: { ...surfaces(0, 0, 0, 50, 100), "--qd-ui-top-light": black(12) },
   },
-  // Plated's look on Hairline's neutrals (Juan, 2026-11-15).
+  // Plated's look on Hairline's neutrals (design lead, 2026-11-15).
   {
     ...plated,
     id: "plated-black",
@@ -402,10 +402,10 @@ ${lineGrid(32, 5)}`,
     dark: { ...plated.dark, ...hairlineNeutrals.dark },
     light: { ...plated.light, ...hairlineNeutrals.light },
   },
-  // The default look on a deeper page, toward Hairline but short of black (Juan, 2026-11-16). On dark the page
+  // The default look on a deeper page, toward Hairline but short of black (design lead, 2026-11-16). On dark the page
   // and the cards and sidebar (background-raised) each go one step down; menus, fields and edges keep the
   // default's steps, so they stand out more, like Hairline's surfaces. Every other token stays the default's.
-  // (Juan tried every surface one step deeper, then only the page, the same day.)
+  // (The design lead tried every surface one step deeper, then only the page, the same day.)
   {
     id: "deep",
     name: "Deep",

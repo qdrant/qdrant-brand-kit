@@ -293,8 +293,8 @@ def check_one(m, rules):
         ref = {"wide": (1920, 1080), "square": (1080, 1080), "portrait": (1080, 1350), "story": (1080, 1920)}.get(shape)
         share = {"wide": 0.3286, "square": 0.55, "portrait": 0.65, "story": 0.75}.get(shape, 0.55)
         if ref and not slide:
-            u = min(W / ref[0], H / ref[1])
-            Wb = share * ref[0] * u
+            card_u = min(W / ref[0], H / ref[1])  # its own scale: u stays the print-aware one used below
+            Wb = share * ref[0] * card_u
             min_w, min_h = (Wb * 979.2 / 794.4 * 1.25 if wide else Wb), Wb * 979.2 / 794.4
             if bk["w"] < min_w - 2 or bk["h"] < min_h - 2:
                 biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f}, smaller than its minimum {min_w:.0f}×{min_h:.0f}")
@@ -302,7 +302,7 @@ def check_one(m, rules):
             if abs(ratio - want_ratio) > 0.02:
                 biss.append(f"card {bk['w']:.0f}×{bk['h']:.0f} ({ratio:.2f}), wanted {want_ratio:.2f}")
             Wb = bk["h"] * 794.4 / 979.2 if wide else bk["w"]
-        k = 1.6  # title: 1.6x the Figma share on every shape, in Mona Sans Display (Vanesa, 2026-11-19; wide was 1.95x)
+        k = 1.6  # title: 1.6x the Figma share on every shape, in Mona Sans Display (visual designer, 2026-11-19; wide was 1.95x)
         btexts = [t for t in texts if t["role"] == "book"]
         if btexts:
             top = max(t["fontSize"] for t in btexts)
