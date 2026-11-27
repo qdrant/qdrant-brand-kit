@@ -89,8 +89,11 @@ def main():
                     help="layout and check resolution in dpi (default 300). Booths: 10 for drafts, 20 for the final "
                          "(guidelines/print/booths.md); text and the logo stay vector in the PDF at any value")
     ap.add_argument("--pattern-dpi", type=float, default=None,
-                    help="paint the background (pattern) layer at this dpi, the vendor's, while layout and checks run "
-                         "at --dpi. Booths: about 2 minutes for a 10 ft wall instead of 7 at 100 dpi throughout")
+                    help="resolution of the background (pattern) layer in the PDF, while layout and checks run at --dpi. "
+                         "Booths: the vendor's dpi, capped at 100 (guidelines/print/booths.tokens.json background.maxDpi)")
+    ap.add_argument("--paint-dpi", type=float, default=None,
+                    help="paint the background at this dpi, then enlarge it smoothly to --pattern-dpi. Booths: about 25 "
+                         "(background.paintDpi); the gradient and streaks have no detail, so a little blur is wanted")
     a = ap.parse_args()
     global DPI, PX_PER_MM, PT_PER_PX
     if a.dpi:
@@ -99,6 +102,16 @@ def main():
         PT_PER_PX = 72 / DPI
 
     defaults, fmt = load_format(a.format)
+    # Booths (guidelines/print/booths.md section 6, visual designer, 2026-11-27): the background is one raster
+    # image, never over background.maxDpi (100) even when the vendor asks for more, painted small at
+    # background.paintDpi (25) and enlarged smoothly. It's exempt from the vendor's dpi: that minimum is for
+    # artwork with detail. The look is vector (review/booth/booth.js), so nothing is painted at full size.
+    booth = None
+    if a.format == "booth":
+        booth = json.load(open(os.path.join(REPO, "guidelines", "print", "booths.tokens.json")))
+        bg = booth["background"]
+        a.pattern_dpi = min(a.pattern_dpi or bg["maxDpi"]["$value"], bg["maxDpi"]["$value"])
+        a.paint_dpi = a.paint_dpi or bg["paintDpi"]["$value"]
     from_spec = []
     trim = mm_pair(a.trim) if a.trim else fmt.get("trim")
     if a.trim: from_spec.append("finished size")
@@ -172,16 +185,19 @@ def main():
     rel = os.path.relpath(page, root).replace(os.sep, "/")
     from urllib.parse import quote
     url = f"http://127.0.0.1:{srv.server_address[1]}/{rel}?w={W}&h={H}&qd-print={quote(json.dumps(params))}"
-    # The background layer at its own dpi (--pattern-dpi). Same layout in mm, every px value scaled.
+    # The background layer: delivered at --pattern-dpi, painted at --paint-dpi (same layout in mm, every px
+    # value scaled) and enlarged smoothly to the delivered size.
     s_bg = (a.pattern_dpi / DPI) if a.pattern_dpi else 1
     W_bg, H_bg = round(W * s_bg), round(H * s_bg)
+    s_paint = (a.paint_dpi / DPI) if a.paint_dpi else s_bg
+    W_paint, H_paint = round(W * s_paint), round(H * s_paint)
     params_bg = dict(params)
     for k in ("w", "h", "dpi", "pxPerMm", "bleedPx", "slugPx", "markLenPx", "markGapPx", "markWeightPx", "u"):
-        params_bg[k] = params[k] * s_bg
-    params_bg["w"], params_bg["h"] = W_bg, H_bg
+        params_bg[k] = params[k] * s_paint
+    params_bg["w"], params_bg["h"] = W_paint, H_paint
     if "type" in params:
-        params_bg["type"] = {k: v * s_bg for k, v in params["type"].items()}
-    url_bg = f"http://127.0.0.1:{srv.server_address[1]}/{rel}?w={W_bg}&h={H_bg}&qd-print={quote(json.dumps(params_bg))}"
+        params_bg["type"] = {k: v * s_paint for k, v in params["type"].items()}
+    url_bg = f"http://127.0.0.1:{srv.server_address[1]}/{rel}?w={W_paint}&h={H_paint}&qd-print={quote(json.dumps(params_bg))}"
     from PIL import Image, ImageChops, ImageDraw
     Image.MAX_IMAGE_PIXELS = None
 
@@ -192,11 +208,13 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         raw = os.path.join(tmp, "raw.png")
         for target, extra, ww, hh, u0 in ((full_png, "", W, H, url), (full_png[:-4] + ".bg.png", "&qd-bg=1", W, H, url),
-                              (backdrop_png, "&qd-layer=backdrop", W_bg, H_bg, url_bg)):
+                              (backdrop_png, "&qd-layer=backdrop", W_paint, H_paint, url_bg)):
             render.chrome([f"--window-size={ww},{hh + render.EXTRA_H}", f"--screenshot={raw}", u0 + extra])
             if not os.path.exists(raw):
                 sys.exit("Chrome made no screenshot")
             Image.open(raw).crop((0, 0, ww, hh)).save(target)
+    if (W_paint, H_paint) != (W_bg, H_bg):  # painted small: enlarge smoothly to the delivered size
+        Image.open(backdrop_png).convert("RGB").resize((W_bg, H_bg), Image.BICUBIC).save(backdrop_png)
     backdrop_check_png = backdrop_png[:-4] + "-check.png"   # the backdrop at the layout's dpi, for the checks
     Image.open(backdrop_png).resize((W, H)).save(backdrop_check_png)
     dom = render.chrome([f"--window-size={W},{H + render.EXTRA_H}", "--dump-dom", url]).stdout
@@ -404,7 +422,8 @@ def main():
         if is_space(i) and large:
             img_bad.append(f"space imagery on a large format ({nm}): small prints only")
     pat_dpi = a.pattern_dpi or DPI
-    if a.min_dpi and a.min_dpi > pat_dpi and pinfo["canvases"]:
+    # Booth backgrounds are exempt from the vendor's dpi (booths.md section 6): no warning for them.
+    if not booth and a.min_dpi and a.min_dpi > pat_dpi and pinfo["canvases"]:
         img_look.append(f"the vendor asks {a.min_dpi:g} dpi; patterns are painted at {pat_dpi:g} dpi")
     row("Images", False if img_bad else ("look" if img_look else True),
         "; ".join(img_bad + img_look) if img_bad or img_look else
@@ -419,7 +438,8 @@ def main():
         dpi = src_w / (shown["w"] / PX_PER_MM / 25.4) if shown["w"] else 0
         if dpi < need:
             low.append(f"the image is {dpi:.0f} dpi, needs {need:g} ({os.path.basename(img['src'])})")
-    row("Image resolution", not low, f"every image {min_dpi:g} dpi or more (space imagery 300)" if not low else
+    exempt = f"; the background ({pat_dpi:g} dpi) is exempt (guidelines/print/booths.md section 6)" if booth else ""
+    row("Image resolution", not low, f"every image {min_dpi:g} dpi or more (space imagery 300){exempt}" if not low else
         "Not doable for now: " + "; ".join(low[:3]) + ". No plain resize")
     # Fonts: all text is outlined before print (visual designer, 2026-11-26), so the printer's file has no fonts left.
     def font_count(pdf):

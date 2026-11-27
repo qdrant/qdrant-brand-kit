@@ -37,17 +37,17 @@ Every booth is built from scratch from these rules: there is no master booth des
 
 ## 3. The background: always two layers
 
-Never a flat color (visual designer, 2026-11-27). Both layers are one image in the PDF, painted at the vendor's dpi (section 6).
+Never a flat color (visual designer, 2026-11-27). The base is one raster image and the look is vector (section 6). [`review/booth/booth.js`](../../review/booth/booth.js) draws both.
 
 | Layer | What | What may change per event |
 | --- | --- | --- |
 | **Base** | [`Motion-Streaks-Pattern-A`](../../brand-assets/patterns/README.md): its colorway holds the gradient and the streaks, so there's no separate gradient layer. Indigo in most cases | Colorway; streak length, density and softness within the preset's ranges. The direction is fixed at 110° |
-| **Look** | One approved generative pattern (Rings, Pulse, Hexagon, Burst, Dash), drawn as a layer: **no background at all**, its gradient and the engine's backdrop off, on top of the base | Which pattern, its approved `variant`, or an open `look` within its ranges ([patterns README](../../brand-assets/patterns/README.md)). Never new values outside them |
+| **Look** | One approved generative pattern (Rings, Pulse, Hexagon, Burst, Dash), **generated as SVG by the pattern engine** (`renderPatternSvg`, the engine's own `appendSvg`), so it's vector in the PDF with no dpi. **No background at all**, on top of the base | Which pattern, its approved `variant`, or an open `look` within its ranges ([patterns README](../../brand-assets/patterns/README.md)). Never new values outside them |
 
-- **Where the look goes:** the content is placed first. The look fills the space without text, so the wall never looks empty, and fades out around every content block: the logo, heading, supporting text, partner logos and the footer row (`look.clear`, `look.fade`). It never sits behind text.
+- **Where the look goes:** the content is placed first. The look fills the space without text, so the wall never looks empty, and fades out around every content block: the logo, heading, supporting text, partner logos and the footer row (`look.clear`, `look.fade`). **The fade is each shape's own opacity**, so the look stays vector. It never sits behind text.
 - **It fills the full height of the piece.** Its rings or burst are centered in the open area, drawn on a canvas wide enough to cover the piece, never moved in a way that leaves a cut edge. Ring fade and softness stay at values that let the pattern run to the edges.
 - **Mask:** the contrast score decides ([`guidelines/`](../README.md) section 4). Because the look never sits behind text, no mask is the usual result.
-- **Grain** on the whole background image after it's painted, so its gradients don't band in CMYK.
+- **Grain** on the base image after it's enlarged, so the gradient doesn't band in CMYK.
 - Picking an approved pattern, variant or colorway is not making a pattern. Anything outside the approved ranges goes through the Pattern Library review first.
 
 ## 4. Content layers
@@ -78,9 +78,16 @@ Proposed from common exhibit guidance (1 in of capital height per 10 ft of viewi
 
 ## 6. The final file
 
-- **Vector** logo, text and QR code. The text is outlined in the CMYK step, so the vendor needs no fonts.
-- **One image:** the background, at the vendor's dpi (`dpi.default` 100 when the spec gives none; never over `dpi.max`).
-- **Fast export:** layout and checks at `final.layoutDpi` (20 dpi), only the background at the vendor's dpi (`print.py --dpi 20 --pattern-dpi <vendor dpi>`). A 10 ft wall takes about 2 minutes.
+- **Vector:** the logo, text, QR code and the look. The text is outlined in the CMYK step, so the vendor needs no fonts.
+- **One background image** (gradient + streaks), decided by the visual designer on 2026-11-27:
+  - **never more than 100 dpi** (`background.maxDpi`), even when the vendor's spec asks for 150;
+  - **painted small**, at about 25 dpi (`background.paintDpi`, seconds), and **enlarged smoothly** to the delivered size. A little blur is wanted: it's a background with no detail;
+  - **light grain** on top, so the gradient doesn't band in CMYK;
+  - **exempt from the vendor's dpi** (`background.vendorDpiExempt`): the vendor's minimum, often 150, is meant for artwork with detail, not this layer. No 👀 or warning for it.
+- **The image check** skips the background and checks only other raster images, such as a partner logo that exists only as an image, against the vendor's dpi.
+- **Why:** nothing is rendered at full size and high resolution, so the export takes seconds and the file stays small. A full-size render was the slow step that hung a 40-minute cloud run.
+- **Not chosen:** a fully vector gradient and streaks. The streaks are a port of a Figma shader with no clean SVG equivalent, a redraw would need re-approval, and a vector gradient can't carry grain, so it risks banding on large walls.
+- **Export:** `print.py --format booth --dpi 20`: layout and checks at `final.layoutDpi`, the background painted at 25 dpi and delivered at the vendor's dpi up to 100.
 - **Walls over 5.08 m** (the largest PDF page Acrobat opens): at the scale the vendor asks for.
 - **Color:** CMYK with the vendor's profile, rich black for large dark areas ([`README.md`](README.md) section 3).
 

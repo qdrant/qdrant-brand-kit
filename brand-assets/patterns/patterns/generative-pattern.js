@@ -55,14 +55,12 @@ function backdropColors(tokens, stops) {
   return [top, `#${hex(0)}${hex(1)}${hex(2)}`.toUpperCase()];
 }
 
-// frame = makeFrame(width, height). options = { phase, colorway }.
-export function render(canvas, tokens, preset, _input, frame = makeFrame(), options = {}) {
+// The engine's params for this preset at this size: the same for the canvas and the SVG.
+// options.layer: no background and no backdrop at all, to draw it on top of another pattern.
+function engineParams(tokens, preset, frame, options) {
   const s = preset.settings;
   const look = preset.colorways[options.colorway ?? 0];
   const { width, height } = frame;
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext("2d");
 
   // How much bigger this canvas is than the one the pattern was designed at, by area.
   const scale = Math.sqrt((width * height) / (s.designSize.width * s.designSize.height));
@@ -89,13 +87,39 @@ export function render(canvas, tokens, preset, _input, frame = makeFrame(), opti
     for (const key of PIXEL_SIZES) params[key] = s.engine[key] * scale;
   }
 
-  // A layer drawn on top of another pattern has no background.
-  if (s.background) {
-    ctx.fillStyle = resolveToken(tokens, s.background);
-    ctx.fillRect(0, 0, width, height);
-  }
+  if (options.layer) { params.backdropColors = null; params.backdrop = "none"; }
   const curve = s.tones[s.tone];
   const tone = (v) => curve[Math.max(0, Math.min(curve.length - 1, Math.round(v * (curve.length - 1))))];
   const phase = options.phase ?? s.phase ?? 0;
+  const background = options.layer ? null : s.background;
+  return { params, tone, phase, background };
+}
+
+// frame = makeFrame(width, height). options = { phase, colorway, layer }.
+export function render(canvas, tokens, preset, _input, frame = makeFrame(), options = {}) {
+  const { params, tone, phase, background } = engineParams(tokens, preset, frame, options);
+  canvas.width = frame.width;
+  canvas.height = frame.height;
+  const ctx = canvas.getContext("2d");
+  // A layer drawn on top of another pattern has no background.
+  if (background) {
+    ctx.fillStyle = resolveToken(tokens, background);
+    ctx.fillRect(0, 0, frame.width, frame.height);
+  }
   engine.drawCanvas(ctx, params, engine.compute(params, engine.createState(), phase, tone));
+}
+
+// The same pattern as vector shapes in an <svg>, through the engine's own SVG output: sharp at any print
+// size and fast to make, for large print (guidelines/print/booths.md). Returns the <g> it added.
+export function renderSvg(svg, tokens, preset, frame = makeFrame(), options = {}) {
+  const { params, tone, phase, background } = engineParams(tokens, preset, frame, options);
+  const NS = "http://www.w3.org/2000/svg";
+  if (background) {
+    const rect = svg.ownerDocument.createElementNS(NS, "rect");
+    rect.setAttribute("width", frame.width); rect.setAttribute("height", frame.height);
+    rect.setAttribute("fill", resolveToken(tokens, background));
+    svg.append(rect);
+  }
+  engine.appendSvg(svg, params, engine.compute(params, engine.createState(), phase, tone), options.offsetX ?? 0, options.offsetY ?? 0);
+  return svg.lastElementChild;
 }

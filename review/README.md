@@ -78,10 +78,10 @@ python3 review/sticker/sticker.py shape space.png --shape circle --size 70 --out
 For booths, read [`guidelines/print/booths.md`](../guidelines/print/booths.md) first. The same `print.py`, with two options:
 
 - **Drafts:** `--dpi 10`, a few seconds each. Three per wall, with the guides drawn on the preview.
-- **Final:** `--dpi 20 --pattern-dpi <vendor dpi>`: layout and checks at 20 dpi, only the background painted at the vendor's dpi. The PDF is the same as rendering everything at the vendor's dpi, about 3.5 times faster (2 minutes instead of 7 for a 10 ft wall).
+- **Final:** `--dpi 20`: layout and checks at 20 dpi. The look is vector (`review/booth/booth.js`), and the background is painted at 25 dpi (`--paint-dpi`) and enlarged smoothly to the vendor's dpi, capped at 100 (`--pattern-dpi`). Nothing is painted at full size, so it takes seconds. The image check skips the background.
 
 ```bash
-python3 review/print.py wall.html --format booth --trim 2976.6x2417.8 --bleed 0 --safe 51 --dpi 20 --pattern-dpi 100 --icc printer.icc --pdfx 4 --out out/ --name wall
+python3 review/print.py wall.html --format booth --trim 2976.6x2417.8 --bleed 0 --safe 51 --dpi 20 --icc printer.icc --pdfx 4 --out out/ --name wall
 ```
 
 `check.py`'s grid and title-length checks are for social posts and don't apply to booths.
