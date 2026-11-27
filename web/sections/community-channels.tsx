@@ -57,7 +57,7 @@ export function CommunityChannels({ header, items, layout = "cards", tones = "mi
         actions={header.action ? <LinkButton href={header.action.href}>{header.action.label}</LinkButton> : undefined}
       />
       {layout === "cards" ? (
-        <ul className="grid grid-cols-1 gap-(--qd-layout-column-gap) md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-(--web-card-gap) md:grid-cols-2 lg:grid-cols-3">
           {items.map((item, i) => (
             <Plate as="li" simple key={item.title} className="flex flex-col gap-4 rounded-xl p-6">
               <ChannelTile item={item} tone={toneFor(i)} />

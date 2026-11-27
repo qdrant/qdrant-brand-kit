@@ -3,19 +3,19 @@
 
 Usage:
   python3 review/print.py page.html --format flyer-a4 --out OUT_DIR [--name flyer]
-         [--trim 210x297] [--bleed 3] [--safe 5] [--panels 100,100,97] [--hidden-bottom 100]
+         [--trim 210x297] [--bleed 3] [--safe 5] [--panels 100,100,97] [--hidden-bottom 100] [--min-dpi 150]
          [--icc printer-profile.icc] [--pdfx 4] [--print-scale small] [--root FOLDER]
 
 The format preset comes from guidelines/print/print.tokens.json. Everything the printer's spec gives
-(--trim, --bleed, --safe, --panels, --hidden-bottom, --icc) overrides the preset: the spec always wins.
+(--trim, --bleed, --safe, --panels, --hidden-bottom, --min-dpi, --icc) overrides the preset: the spec always wins.
 
 It writes, in OUT_DIR:
-  <name>.pdf          the print file: trim + bleed + crop marks, fonts embedded, converted to the printer's
-                      CMYK profile (PDF/X-4 by default). Only with --icc and Ghostscript
+  <name>.pdf          the print file: trim + bleed + crop marks, all text outlined, converted to the printer's
+                      CMYK profile (PDF/X as the vendor asks, --pdfx). Only with --icc and Ghostscript
   <name>-rgb.pdf      the same before CMYK conversion (screen colors), for review. Not for the printer
   <name>-proof.png    what the printed piece looks like after cutting, folds dashed, for review
   <name>-full.png     the full render with bleed, and <name>-full.json, its measurements for review/check.py
-  <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, no patterns,
+  <name>-print.md     the print checks: spec, margin, text size, reversed text, folds, logo size, patterns, images,
                       QR codes, image resolution, fonts, color
 
 Margins are the format's margin (8% of the short side, never under 1.5 × the safe area), from the
@@ -40,8 +40,7 @@ PX_PER_MM = DPI / 25.4
 PT_PER_PX = 72 / DPI
 BUSY = 0.06      # share of detailed pixels behind a text box that counts as busy (tuned 2026-11-20)
 BUSY_STD = 25    # or a spread of brightness (0-255) that means a subject or ground behind the text
-TOPAZ = ("To decide (visual designer): the Topaz Labs upscale API is proposed (needs approval). A 4× upscale "
-         "(4096 × 6144) would cover A4 and A3 at 300 dpi. Until then, offer the plain, solid version.")
+TOPAZ = ("No upscaler is approved for now (visual designer, 2026-11-26). Offer the plain, solid version instead.")
 GS_INSTALL = ("Ghostscript isn't installed, so the PDF is still in screen colors (RGB) and isn't print-ready.\n"
               "Install it once: on a Mac with Homebrew, `brew install ghostscript` (no Homebrew: install it from\n"
               "https://brew.sh first, or use Ghostscript's own installer); on Linux, `apt install ghostscript`.\n"
@@ -78,9 +77,11 @@ def main():
     ap.add_argument("--bleed", type=float, help="mm per side (from the spec)")
     ap.add_argument("--safe", type=float, help="mm inside the trim (from the spec)")
     ap.add_argument("--panels", help="panel widths in mm, left to right, laid out flat (brochures)")
+    ap.add_argument("--min-dpi", type=float, help="lowest image resolution at the printed size, from the vendor's "
+                    "spec: overrides the format's minDpi, the vendor wins (visual designer, 2026-11-26)")
     ap.add_argument("--hidden-bottom", type=float, help="mm at the bottom that won't be seen (roll-up base)")
     ap.add_argument("--icc", help="the printer's CMYK profile (.icc), from the spec")
-    ap.add_argument("--pdfx", default="4", help="PDF/X version: 4 (default) or 1a, as the printer asks")
+    ap.add_argument("--pdfx", default=None, help="PDF/X version from the vendor's spec: 4 or 1a. No brand default (visual designer, 2026-11-26); falls back to 4 and the checks flag it")
     ap.add_argument("--print-scale", choices=["normal", "small"], default="normal",
                     help="small: the smaller text sizes (titleMin, supportingMin), to keep text in the calm sky")
     ap.add_argument("--root", default=None, help="folder served at / (default: the page's folder)")
@@ -97,7 +98,13 @@ def main():
     panels = [float(x) for x in a.panels.split(",")] if a.panels else fmt.get("panels")
     if a.panels: from_spec.append("panels")
     hidden = a.hidden_bottom if a.hidden_bottom is not None else fmt.get("hiddenBottom", 0)
-    min_dpi = fmt.get("minDpi", defaults["minDpi"])
+    # 300 dpi up close, 100 to 150 for large formats (the preset's minDpi), or the vendor's value (visual designer, 2026-11-26).
+    min_dpi = a.min_dpi if a.min_dpi else fmt.get("minDpi", defaults["minDpi"])
+    large = bool(fmt.get("large"))  # posters A2 and bigger, roll-ups, booths (print.tokens.json)
+    if a.min_dpi: from_spec.append("resolution")
+    qr_min = fmt.get("qrMin", defaults["qrMin"])
+    if a.pdfx: from_spec.append("file format")
+    a.pdfx = a.pdfx or "4"
     rgb_only = fmt.get("color") == "rgb"
     if not trim or bleed is None or safe is None:
         sys.exit(f"{fmt['name']} has no default size: take the finished size, bleed and safe area from the "
@@ -182,8 +189,9 @@ def main():
                        "hiddenBottomMm": hidden, "marginMm": margin, "marginPx": m_px, "uPx": u, "dpi": DPI, "type": type_pt})
     json.dump(meas, open(os.path.join(a.out, f"{name}-full.json"), "w"), indent=1)
 
-    # 2. The PDF: trim + bleed + crop marks, at real size, text vector. The backdrop (canvas color,
-    #    patterns, faded images) goes in as one 300 dpi image, because Chrome's PDF export loses CSS masks.
+    # 2. The PDF: trim + bleed + crop marks, at real size, text sharp at any size. A plain backdrop stays a flat
+    #    color. Only when there's a pattern, a mask or an image fade does the backdrop go in as one image, painted
+    #    at 300 dpi at the printed size, because Chrome's PDF export loses CSS masks.
     rgb_pdf = os.path.join(a.out, f"{name}-rgb.pdf")
     backdrop = Image.open(backdrop_png).convert("RGB")
     # Grain on image fades, print only, so large fades don't band in CMYK (guidelines/print/ section 3).
@@ -195,8 +203,9 @@ def main():
             backdrop.paste(ImageChops.add(region, noise, 1.0, -128), box)
     backdrop.save(os.path.join(layer_dir, "backdrop-grain.png"))
     srv.extra = {"/qd-layer/": layer_dir}
+    painted_backdrop = bool(pinfo["masks"] or pinfo["canvases"] or pinfo.get("fades"))
     render.chrome(["--no-pdf-header-footer", f"--print-to-pdf={rgb_pdf}",
-                   url + "&qd-pdf=1&qd-backdrop=/qd-layer/backdrop-grain.png"])
+                   url + "&qd-pdf=1" + ("&qd-backdrop=/qd-layer/backdrop-grain.png" if painted_backdrop else "")])
     if not os.path.exists(rgb_pdf):
         sys.exit("Chrome made no PDF")
     final_pdf = os.path.join(a.out, f"{name}.pdf")
@@ -214,7 +223,8 @@ def main():
     else:
         cmd = [gs, "-dSAFER", "-dBATCH", "-dNOPAUSE", "-sDEVICE=pdfwrite", "-dPDFSETTINGS=/prepress",
                "-sColorConversionStrategy=CMYK", "-sProcessColorModel=DeviceCMYK",
-               f"-sOutputICCProfile={os.path.abspath(a.icc)}", "-dEmbedAllFonts=true",
+               f"-sOutputICCProfile={os.path.abspath(a.icc)}",
+               "-dNoOutputFonts",  # outline all text: the design system's fonts, unchanged, as shapes (visual designer, 2026-11-26)
                f"-dPDFX={'4' if a.pdfx == '4' else 'true'}", f"-sOutputFile={final_pdf}", rgb_pdf]
         r = subprocess.run(cmd, capture_output=True, text=True)
         if r.returncode != 0 or not os.path.exists(final_pdf):
@@ -240,8 +250,8 @@ def main():
     rows = []
     def row(check, ok, detail):
         rows.append((check, "pass" if ok is True else ("fail" if ok is False else ok), detail))
-    defaults_used = [x for x in ("finished size", "bleed", "safe area") if x not in from_spec]
-    if fmt.get("status") == "in-progress":  # large format (guidelines/print/, visual designer 2026-11-20)
+    defaults_used = [x for x in ("finished size", "bleed", "safe area", "file format") if x not in from_spec]
+    if fmt.get("status") == "in-progress":  # large format (guidelines/print/, visual designer, 2026-11-20)
         row("Format", "look", f"{fmt['name']} is in progress: large-format rules aren't settled. Treat this as a test and have a designer check it")
     row("Printer's spec", True if not defaults_used else "look",
         "all from the spec" if not defaults_used else
@@ -287,7 +297,7 @@ def main():
         if behind >= 0.5:
             continue
         pt = t["fontSize"] * PT_PER_PX
-        if pt < 9 or (t.get("weight") or 400) < 400:
+        if pt < 10 or (t.get("weight") or 400) < 400:  # 10 pt out of rich black (visual designer, 2026-11-26)
             rev.append(f"\"{t['text'][:20]}\" {pt:.1f} pt, weight {t.get('weight')}")
     # Text on a busy background: detail (edge density) behind each text box, in the backdrop (canvas color
     # and images only, so cards and buttons don't count).
@@ -313,8 +323,8 @@ def main():
             busy.append(f"\"{t['text'][:24]}\"")
     row("Text on a busy background", not busy, "text sits on calm areas" if not busy else
         "; ".join(busy[:4]) + ". Move it to calm sky: tighten gaps, then --print-scale small, then cut copy")
-    row("Reversed text", not rev, "light text on dark is 9 pt or more and Regular or heavier" if not rev else
-        "; ".join(rev[:4]) + " (needs 9 pt, Regular or heavier)")
+    row("Reversed text", not rev, "light text on dark is 10 pt or more and Regular or heavier" if not rev else
+        "; ".join(rev[:4]) + " (needs 10 pt, Regular or heavier)")
     cross = []
     for fx in folds_px:
         lo, hi = fx - margin * PX_PER_MM, fx + margin * PX_PER_MM
@@ -335,8 +345,10 @@ def main():
     if pinfo["masks"]: pat.append(f"{pinfo['masks']} pattern mask")
     if pinfo["canvases"]: pat.append(f"{pinfo['canvases']} pattern canvas")
     if pinfo["patternFiles"] and not pat: pat.append("files from brand-assets/patterns/")
-    row("No patterns", not pat, "no pattern, no pattern mask" if not pat else
-        ", ".join(pat) + ": no patterns in print (guidelines/print/ section 3)")
+    row("Patterns", True if not pat else "look", "no pattern" if not pat else
+        ", ".join(pat) + ": allowed in print (visual designer, 2026-11-26). Check the proof for fringing on fine lines and moiré on dithered patterns; ask before using the pattern mask (guidelines/print/ section 3)")
+    row("No button", not meas["buttons"], "no button" if not meas["buttons"] else
+        "a button on a print piece: a QR code replaces it (visual designer, 2026-11-26)")
     if pinfo["qr"]:
         bad = []
         for q in pinfo["qr"]:
@@ -345,32 +357,51 @@ def main():
             px = sorted(lum(p) for p in full_rgb.crop(box).resize((64, 64)).getdata())
             edge = [lum(p) for p in full_rgb.crop((box[0], box[1], box[2], box[1] + 3)).resize((32, 1)).getdata()]
             dark_on_light = px[len(px) // 20] < 0.35 and min(edge) > 0.7
-            if side < 20: bad.append(f"{side:.1f} mm (needs 20 mm)")
+            if side < qr_min: bad.append(f"{side:.1f} mm (needs {qr_min:g} mm)")
             if not dark_on_light: bad.append("not dark on light")
-        row("QR codes", not bad, "20 mm or more, dark on light. Test-scan it from the proof" if not bad else "; ".join(bad))
+        row("QR codes", not bad, f"{qr_min:g} mm or more, dark on light. Test-scan it from the proof" if not bad else "; ".join(bad))
+    # Images (visual designer, 2026-11-26): Qbot without its glow; headshots when large and sharp; space imagery
+    # (any other photo or generated image) only on small prints, and always at 300 dpi. Patterns are painted at
+    # the printed size.
+    is_qbot = lambda i: "qd-mascot" in (i.get("cls") or "") or "brand-assets/mascot/" in (i.get("src") or "")
+    pics = [i for i in meas["images"] if i not in meas["logos"] and not (i.get("src") or "").lower().endswith(".svg")]
+    # A QR code (.qd-qr) or a partner's logo (.qd-partner-lockup) can be a PNG, but it isn't imagery.
+    not_imagery = lambda i: i.get("inQr") or i.get("inLockup") or "qd-qr" in (i.get("cls") or "")
+    is_space = lambda i: not is_qbot(i) and i.get("cls") != "headshot" and not not_imagery(i)
+    img_bad, img_look = [], []
+    for i in pics:
+        nm = os.path.basename(i.get("src") or "image")
+        if is_qbot(i) and "qd-mascot--glow" in (i.get("cls") or ""):
+            img_bad.append(f"Qbot has its glow ({nm}): no glow in print")
+        if is_space(i) and large:
+            img_bad.append(f"space imagery on a large format ({nm}): small prints only")
+    if a.min_dpi and a.min_dpi > DPI and pinfo["canvases"]:
+        img_look.append(f"the vendor asks {a.min_dpi:g} dpi; patterns are painted at {DPI} dpi")
+    row("Images", False if img_bad else ("look" if img_look else True),
+        "; ".join(img_bad + img_look) if img_bad or img_look else
+        ("images allowed for this piece" if pics else "no images") + " (guidelines/print/ sections 3 and 5)")
     low = []
-    for img in meas["images"]:
-        if img in meas["logos"] or img.get("src", "").endswith(".svg") or not img.get("naturalWidth"):
+    for img in pics:
+        if not img.get("naturalWidth"):
             continue
+        need = max(min_dpi, 300) if is_space(img) else min_dpi  # space imagery is always 300 dpi
         shown = img.get("shown") or img["rect"]
         src_w = img.get("sourceWidth") or img["naturalWidth"]  # the cropped part of the file, not the whole file
         dpi = src_w / (shown["w"] / PX_PER_MM / 25.4) if shown["w"] else 0
-        if dpi < min_dpi:
-            low.append(f"the image is {dpi:.0f} dpi ({os.path.basename(img['src'])})")
-    row("Image resolution", not low, f"every image {min_dpi} dpi or more" if not low else
-        "Not doable for now: " + "; ".join(low[:3]) + f", the format needs {min_dpi}. No plain resize")
-    # Fonts: Chrome can export variable fonts as Type 3, which some prepress workflows reject.
-    pdf_for_fonts = final_pdf if os.path.exists(final_pdf) else rgb_pdf
-    kinds = []
-    if shutil.which("pdffonts"):
-        out = subprocess.run(["pdffonts", pdf_for_fonts], capture_output=True, text=True).stdout.splitlines()[2:]
-        kinds = ["Type 3" if "Type 3" in ln else "other" for ln in out]
+        if dpi < need:
+            low.append(f"the image is {dpi:.0f} dpi, needs {need:g} ({os.path.basename(img['src'])})")
+    row("Image resolution", not low, f"every image {min_dpi:g} dpi or more (space imagery 300)" if not low else
+        "Not doable for now: " + "; ".join(low[:3]) + ". No plain resize")
+    # Fonts: all text is outlined before print (visual designer, 2026-11-26), so the printer's file has no fonts left.
+    def font_count(pdf):
+        if shutil.which("pdffonts"):
+            return len(subprocess.run(["pdffonts", pdf], capture_output=True, text=True).stdout.splitlines()[2:])
+        return len(re.findall(rb"/Type\s*/Font\b", open(pdf, "rb").read()))
+    if os.path.exists(final_pdf) and not rgb_only:
+        n = font_count(final_pdf)
+        row("Fonts", n == 0, "all text outlined" if n == 0 else f"{n} fonts left in the print file: outline all text")
     else:
-        raw_pdf = open(pdf_for_fonts, "rb").read()
-        kinds = ["Type 3" if k == b"Type3" else "other" for k in re.findall(rb"/Subtype\s*/(Type3|Type1C?|TrueType|Type0|CIDFontType[02]|OpenType)", raw_pdf)]
-    t3 = kinds.count("Type 3")
-    row("Fonts", True if not t3 else "look", "no Type 3 fonts" if not t3 else
-        f"{t3} Type 3 fonts: some printers reject them; check with the printer or outline text")
+        row("Fonts", "look", "text is outlined in the CMYK conversion, which didn't run (see Color)")
     no_profile = not rgb_only and not a.icc
     # Color is always checked (visual designer, 2026-11-20): without the printer's profile the piece isn't deliverable.
     row("Color", True if (rgb_only or "Converted" in color_note) else False,

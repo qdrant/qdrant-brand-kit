@@ -100,7 +100,7 @@ export function Contact({ title, description, options = [], form, theme, surface
       <div className="flex flex-col gap-10">
         <SectionHeader as="h1" title={title} description={description} />
         {options.length > 0 && (
-          <ul className="flex flex-col gap-3">
+          <ul className="flex flex-col gap-2">
             {options.map((o, i) => (
               <Plate as="li" simple key={o.title} className="flex items-start gap-4 rounded-xl p-5">
                 <IconTile name={o.icon} tone={toneAt(i)} />

@@ -44,7 +44,7 @@ export function TeamGrid({ header, people, layout = "grid", theme, surface, patt
         }
       />
       {layout === "grid" ? (
-        <ul className="grid grid-cols-1 gap-(--qd-layout-column-gap) sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-(--web-card-gap) sm:grid-cols-2 lg:grid-cols-4">
           {people.map((person) => (
             <Plate as="li" key={person.name} className="flex flex-col gap-5 rounded-xl p-2 pb-6">
               <div

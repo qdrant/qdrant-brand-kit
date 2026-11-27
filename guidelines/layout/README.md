@@ -209,7 +209,7 @@ These styles come from recent Qdrant web sections in Figma (customer stat cards,
 
 ## Print
 
-In [`guidelines/print/`](../print/) (2026-11-20): the printer's spec, format presets, bleed, safe area, folds, text in pt, color conversion and export. Print uses the same Canvas, Grid, Stack and Box as above, at the finished size.
+The print rules, layout included, are in [`guidelines/print/`](../print/), the only place for them (visual designer, 2026-11-26).
 
 ## To decide later
 

@@ -44,7 +44,7 @@ export function CommunityWall({ header, quotes, theme, surface, pattern, cardPat
           ) : undefined
         }
       />
-      <ul className="columns-1 gap-(--qd-layout-column-gap) md:columns-2 lg:columns-3">
+      <ul className="columns-1 gap-(--web-card-gap) md:columns-2 lg:columns-3">
         {quotes.map((item) => (
           <Plate
             as="li"

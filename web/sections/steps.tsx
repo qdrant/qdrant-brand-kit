@@ -95,7 +95,7 @@ export function Steps({ header, steps, layout = "row", theme, surface, pattern, 
   return (
     <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
       <SectionHeader kicker={header.kicker} title={header.title} description={header.description} />
-      <ol className={cn("grid gap-10 md:gap-(--qd-layout-column-gap)", steps.length === 4 ? "md:grid-cols-4" : "md:grid-cols-3")}>
+      <ol className={cn("grid gap-10 md:gap-(--web-card-gap)", steps.length === 4 ? "md:grid-cols-4" : "md:grid-cols-3")}>
         {steps.map((s, i) => (
           <li key={i} className="relative flex flex-col gap-3 border-t border-(--web-line) pt-8">
             <Node solid className="absolute -top-[4.5px] left-0" />

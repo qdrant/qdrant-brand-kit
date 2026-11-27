@@ -44,6 +44,9 @@ export function CopySnippet({
     <Button
       variant="ghost"
       size="icon-sm"
+      // Beside the agents' divider the icon sits evenly between the line and the outline, 10px each side (design
+      // lead, 2026-11-26).
+      className={forAgents ? "-ml-1.5" : undefined}
       aria-label={copied ? "Copied" : forAgents ? `Copy: ${text}` : "Copy"}
       title={forAgents ? text : undefined}
       onClick={() => {
@@ -59,14 +62,17 @@ export function CopySnippet({
 
   if (forAgents) {
     return (
-      <div className={cn("web-plate inline-flex max-w-full items-center gap-2.5 rounded-lg py-1 pr-1 pl-3", className)}>
-        <span className="flex items-center gap-2.5 text-muted-foreground">
+      // Tight (design lead, 2026-11-26): the agents' marks close together, less padding all round. No fill, only a
+      // hairline, so it doesn't compete with the secondary buttons (design lead, 2026-11-26).
+      <div className={cn("inline-flex max-w-full items-center gap-2 rounded-lg border border-(--web-line) py-0.5 pr-0.5 pl-2.5", className)}>
+        {/* The marks and the label in the text color (design lead, 2026-11-26). */}
+        <span className="flex items-center gap-1.5 text-foreground">
           {agentIds.map((id) => (
             <MonoImage key={id} src={agents[id].src} label={agents[id].name} className="size-4" />
           ))}
         </span>
-        {label && <span className="text-sm text-muted-foreground">{label}</span>}
-        <span aria-hidden className="h-5 w-px bg-(--web-line)" />
+        {label && <span className="text-sm text-foreground">{label}</span>}
+        <span aria-hidden className="h-4 w-px bg-(--web-line)" />
         {button}
       </div>
     )

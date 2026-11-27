@@ -42,7 +42,7 @@ export function FeatureRows({ header, rows, start = "media-right", theme, surfac
         {rows.map((row, i) => {
           const mediaLeft = (i % 2 === 0) === (start === "media-left")
           return (
-            <div key={row.title} id={row.id} className="grid scroll-mt-24 items-center gap-8 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
+            <div key={row.title} id={row.id} className="grid scroll-mt-24 grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
               <div className={cn("flex flex-col items-start gap-4 lg:max-w-md", mediaLeft ? "lg:order-2 lg:justify-self-end" : "")}>
                 {row.icon ? (
                   <IconTile name={row.icon} tone={(row.tone as Tone) ?? "indigo"} />

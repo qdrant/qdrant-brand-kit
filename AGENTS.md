@@ -4,7 +4,7 @@ This repo is the Qdrant brand system: the rules and materials for **creatives** 
 
 ## Making a creative
 
-**Printed?** If the person asks for something printed (flyer, brochure, poster, roll-up, business card, booth, print PDF), also read [`guidelines/print/`](guidelines/print/) first: it starts with the printer's spec and adds the print rules on top of everything below (2026-11-20). In print: no patterns; instead of the main-visual question, ask for dark with space imagery or plain and serious (light or dark), with the recommendation from the print rules; margins 8% of the short side, so they shrink with the format (visual designer, 2026-11-20). Large-format print (booths, roll-ups and retractable banners, backdrops, posters A2 and bigger) is in progress: treat it as a test (visual designer, 2026-11-20).
+**Printed?** If the person asks for something printed (flyer, brochure, poster, roll-up, business card, booth, print PDF), also read [`guidelines/print/`](guidelines/print/) first: it's the only place for the print rules and adds them on top of everything below. In short: the vendor's spec first; Qbot without its glow; space imagery only on small prints, at 300 dpi; instead of the main-visual question, ask for space imagery (small prints) or plain (light or dark), with or without a pattern, never pattern only; a QR code replaces the button; CMYK, never RGB; large format is in progress, so treat it as a test (visual designer, 2026-11-20 and 2026-11-26).
 
 1. **Ask only for the main visual.** Unless the request says, ask whether the creative has space imagery (astronaut), Qbot, a pattern only, or headshots (speaker announcements), with the recommended one marked ([`guidelines/`](guidelines/) section 1). Don't ask design questions (tone, pattern, layout, mask, other sizes): take them from the rules. Where a rule offers options, make each one and show them together, with the recommended one marked; the person picks (visual designer, 2026-11-20).
 2. **Read, in this order:**
@@ -33,7 +33,7 @@ These rules are written for creatives. [`design-system/AGENTS.md`](design-system
 - Change an approved pattern, the logo or an approved part. Never redraw them.
 - Use Bold for titles, right-align text, mix alignments, or use more than two text sizes outside the headshot parts.
 - Put Qbot with headshots or with a generated image, or use two heroes.
-- Put Qbot between text blocks or over text, the logo or the button, or cut its face ([`guidelines/`](guidelines/) section 6). Use `.qd-mascot--glow` from `brand-assets/mascot/3d/mascot.css`, never your own glow.
+- Put Qbot between text blocks or over text, the logo or the button, or cut its face ([`guidelines/`](guidelines/) section 6). Use `.qd-mascot--glow` from `brand-assets/mascot/3d/mascot.css`, never your own glow; in print, no glow at all ([`guidelines/print/`](guidelines/print/) section 5).
 - Use an icon that isn't from Lucide, or put an icon in a button ([`brand-assets/icons/`](brand-assets/icons/)).
 - Use red as a background without the person's yes.
 - Show, recommend or deliver a creative that fails contrast or puts text, the logo, the button or a headshot outside the margins or story safe zones ([`guidelines/layout/checks.md`](guidelines/layout/checks.md)).

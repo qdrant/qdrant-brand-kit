@@ -26,7 +26,7 @@ function Pair({ vision, mission }: { vision?: Statement; mission?: Statement }) 
   const items = [vision, mission].filter((item): item is Statement => Boolean(item))
   if (!items.length) return null
   return (
-    <ul className="grid grid-cols-1 gap-(--qd-layout-column-gap) md:grid-cols-2">
+    <ul className="grid grid-cols-1 gap-(--web-card-gap) md:grid-cols-2">
       {items.map((item) => (
         <Plate as="li" key={item.title} className="flex flex-col gap-4 rounded-xl p-8">
           <h3 className={heading.card}>{item.title}</h3>

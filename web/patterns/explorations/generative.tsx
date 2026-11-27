@@ -24,7 +24,15 @@ export type Light = { at: [number, number]; reach: number; colors: PaletteKey[] 
 
 type Scene = { params: Params; state: State; color: string; light: string[] }
 
-function makeScene(params: Params, color: PaletteKey, loop: number, fade: boolean, light?: Light): CanvasScene<Scene> {
+function makeScene(
+  params: Params,
+  color: PaletteKey,
+  loop: number,
+  fade: boolean,
+  light?: Light,
+  band?: number,
+  side?: number
+): CanvasScene<Scene> {
   return {
     setup: (_size, palette) => ({
       params,
@@ -35,7 +43,28 @@ function makeScene(params: Params, color: PaletteKey, loop: number, fade: boolea
     draw(ctx, { params, state, color, light: colors }, t, _pointer, { width, height }) {
       ctx.clearRect(0, 0, width, height)
       const phase = Math.PI * 2 * ((t % loop) / loop)
-      draw(ctx, params, compute(params, state, width, height, phase), color)
+      if (band) {
+        // The field in a band along the bottom: measured on the band, drawn below the rest of the layer.
+        const h = Math.min(band, height)
+        ctx.save()
+        ctx.translate(0, height - h)
+        draw(ctx, params, compute(params, state, width, h, phase), color)
+        ctx.restore()
+      } else if (side) {
+        // The field on the right side only: measured on that side, faded in over its first fifth.
+        const w = Math.min(width, width * side)
+        ctx.save()
+        ctx.translate(width - w, 0)
+        draw(ctx, params, compute(params, state, w, height, phase), color)
+        ctx.restore()
+        const edge = ctx.createLinearGradient(width - w, 0, width - w * 0.8, 0)
+        edge.addColorStop(0, "rgb(0 0 0 / 0)")
+        edge.addColorStop(1, "rgb(0 0 0 / 1)")
+        ctx.globalCompositeOperation = "destination-in"
+        ctx.fillStyle = edge
+        ctx.fillRect(width - w, 0, w, height)
+        ctx.globalCompositeOperation = "source-over"
+      } else draw(ctx, params, compute(params, state, width, height, phase), color)
       if (light && colors.length > 0) {
         const x = light.at[0] * width
         const y = light.at[1] * height
@@ -73,6 +102,13 @@ type Look = Omit<PatternDefinition, "Layer" | "status"> & {
   strength?: string
   // Colors the marks with light from a point instead of one color.
   light?: Light
+  // Draws only in a band this many px tall along the bottom of the layer, and leaves the rest empty (2026-11-24,
+  // for a word under a footer's content). The field is measured on the band, so the look keeps its size. The
+  // canvas still fills the layer, so it starts drawing whenever the section is on screen.
+  band?: number
+  // Draws only on the right side, this fraction of the layer's width, faded in at its left edge (2026-11-25, for
+  // a split hero's media side, away from its text).
+  side?: number
 }
 
 export function generativePattern({
@@ -83,9 +119,11 @@ export function generativePattern({
   backdrop,
   strength = "web-generative",
   light,
+  band,
+  side,
   ...rest
 }: Look) {
-  const scene = makeScene({ ...BASE, ...params }, color, loop, fade, light)
+  const scene = makeScene({ ...BASE, ...params }, color, loop, fade, light, band, side)
   return definePattern({
     ...rest,
     status: "exploring",
@@ -97,7 +135,11 @@ export function generativePattern({
             style={{ background: `linear-gradient(to bottom, transparent, var(--web-scene-${backdrop}))` }}
           />
         )}
-        <div className={`${strength} absolute inset-0`}>
+        {/* A band can be lifted off the bottom by --pattern-band-bottom, over a row that stays under it. */}
+        <div
+          className={`${strength} absolute inset-x-0 top-0`}
+          style={{ bottom: band ? "var(--pattern-band-bottom, 0px)" : 0 }}
+        >
           <SceneCanvas scene={scene} />
         </div>
       </div>

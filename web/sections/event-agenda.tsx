@@ -107,7 +107,7 @@ export function EventAgenda({
           ))}
         </ol>
       ) : (
-        <ol className={cn("grid gap-(--qd-layout-column-gap) sm:grid-cols-2", tracks.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3")}>
+        <ol className={cn("grid gap-(--web-card-gap) sm:grid-cols-2", tracks.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3")}>
           {tracks.map((t, i) => (
             <Plate as="li" key={t.title} className="flex min-h-48 flex-col justify-between gap-8 rounded-xl p-6">
               <div className="flex items-center justify-between">
