@@ -52,7 +52,7 @@ export const signupForm = defineSection<SignupFormProps>({
     props: [
       { name: "layout", type: '"application" | "waitlist"', note: "Plates with icons or a numbered list." },
       { name: "header", type: "{ kicker?, title, description? }", note: "The heading block." },
-      { name: "benefits", type: "{ title, text?, icon? }[]", note: "What joining gets you." },
+      { name: "benefits", type: "{ title, text?, icon? }[]", note: "What joining gets you. Optional: without benefits, the heading sits beside the form." },
       { name: "benefitsTitle, benefitsDescription, aside", type: "string", note: "Text around the benefits." },
       { name: "form", type: "{ title?, fields, submit, note? }", note: "The form, as in Contact." },
     ],

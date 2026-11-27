@@ -77,7 +77,15 @@ export function FeatureGrid({
                   ) : (
                     <span className="font-mono text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
                   )}
-                  <h3 className={heading.card}>{item.title}</h3>
+                  <h3 className={heading.card}>
+                    {item.href ? (
+                      <a href={item.href} className="web-link-quiet">
+                        {item.title}
+                      </a>
+                    ) : (
+                      item.title
+                    )}
+                  </h3>
                 </div>
                 <div className="flex flex-col items-start gap-3">
                   {item.text && <p className={type.small}>{item.text}</p>}
@@ -133,14 +141,35 @@ export function FeatureGrid({
           const textEl = (
             <div className="flex flex-1 flex-col items-start gap-2">
               <FeatureTag tag={item.tag} className="mb-2" />
-              <h3 className={heading.card}>{item.title}</h3>
+              <h3 className={heading.card}>
+                {item.href ? (
+                  <a href={item.href} className="web-link-quiet">
+                    {item.title}
+                  </a>
+                ) : (
+                  item.title
+                )}
+              </h3>
               {item.text && <p className={type.small}>{item.text}</p>}
             </div>
           )
-          const linkEl = item.link && (
-            <ArrowLink href={item.link.href} className="text-sm">
-              {item.link.label}
-            </ArrowLink>
+          const linkEl = item.links?.length ? (
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              {item.links.map((l) => (
+                <ArrowLink key={l.href} href={l.href} className="text-sm">
+                  {l.label}
+                </ArrowLink>
+              ))}
+            </div>
+          ) : (
+            item.link && (
+              <ArrowLink href={item.link.href} className="text-sm">
+                {item.link.label}
+              </ArrowLink>
+            )
+          )
+          const coverEl = item.cover && (
+            <div className="-mx-2 -mt-2 mb-2 overflow-hidden rounded-lg border border-(--web-line)">{item.cover}</div>
           )
           const points = item.points ?? []
           const half = Math.ceil(points.length / 2)
@@ -183,6 +212,7 @@ export function FeatureGrid({
               </div>
             ) : (
               <>
+                {coverEl}
                 {markerEl}
                 {textEl}
                 {item.visual && <div className="py-4">{item.visual}</div>}

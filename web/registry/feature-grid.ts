@@ -65,7 +65,7 @@ export const featureGrid = defineSection<FeatureGridProps>({
     ],
     props: [
       { name: "header", type: "{ kicker?, title, description?, action? }", note: "The heading block. Left out when the grid continues the section before it." },
-      { name: "items", type: "{ title, text?, icon?, tone?, link?, id?, tag?, points?, visual?, visualFrame?, visualPlacement?, wide? }[]", note: "The features: a tag above the title, points (lines with an optional bold label and icon), a visual from web/visuals, an id to jump to, and wide to take the whole row. A wide card shows its visual beside the text, or with visualPlacement \"center\" in the middle, the title above and the points around it, two on each side with their icons." },
+      { name: "items", type: "{ title, text?, icon?, tone?, link?, id?, tag?, points?, visual?, visualFrame?, visualPlacement?, wide?, href?, links?, cover? }[]", note: "The features: href makes the title the link (a card the site links by its title, with no link text), links puts several links in a row, and cover is a drawing on top of a card, edge to edge in a hairline frame (a demo's cover). a tag above the title, points (lines with an optional bold label and icon), a visual from web/visuals, an id to jump to, and wide to take the whole row. A wide card shows its visual beside the text, or with visualPlacement \"center\" in the middle, the title above and the points around it, two on each side with their icons." },
       { name: "columns", type: "2 | 3 | 4", note: "From md (4 is two columns at md, four from lg)." },
       { name: "appearance, marker", type: '"cards" | "cells" | "index", "icon" | "number" | "none"', note: "The look (index proposed)." },
     ],

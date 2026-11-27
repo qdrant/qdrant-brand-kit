@@ -37,7 +37,8 @@ export type HeroProps = SectionProps & {
   // home page's planet).
   visualFrame?: "plate" | "none"
   // One small line under the buttons, with a link in it: "Need more? Talk to our team about Enterprise."
-  note?: { text: string; link: Link; after?: string }
+  // A quiet line under the actions; its link is optional (2026-11-26: the Edge page's beta notice has none).
+  note?: { text: string; link?: Link; after?: string }
 }
 
 // The opening section of a page (2026-11-21): the page's H1 and its main actions, and optionally a media slot,
@@ -112,10 +113,15 @@ export function Hero({
       )}
       {note && (
         <p className={cn("text-sm text-muted-foreground", centered && "text-center")}>
-          {note.text}{" "}
-          <a href={note.link.href} className="web-link underline underline-offset-4">
-            {note.link.label}
-          </a>
+          {note.text}
+          {note.link && (
+            <>
+              {" "}
+              <a href={note.link.href} className="web-link underline underline-offset-4">
+                {note.link.label}
+              </a>
+            </>
+          )}
           {note.after && ` ${note.after}`}
         </p>
       )}
@@ -177,7 +183,7 @@ export function Hero({
 
   return (
     <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} lines={false} id={id} className={className} innerClassName="flex flex-col gap-12">
-      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap)">
+      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-(--qd-layout-column-gap) *:min-w-0">
         <div className="flex flex-col items-start gap-6">
           {snippetEl}
           <SectionHeader as="h1" kicker={kicker} title={title} description={description} actions={actions} />

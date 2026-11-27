@@ -16,7 +16,9 @@ export type SignupFormProps = SectionProps & {
   header: HeaderProps
   benefitsTitle?: string
   benefitsDescription?: string
-  benefits: { title: string; text?: string; icon?: string }[]
+  // Optional (2026-11-26): without benefits, the heading takes the left column beside the form, as on the Serverless
+  // page, where the reasons to join are the section above.
+  benefits?: { title: string; text?: string; icon?: string }[]
   // A closing line under the benefits.
   aside?: string
   form: FormSpec
@@ -24,7 +26,15 @@ export type SignupFormProps = SectionProps & {
 
 // An application or a waitlist (2026-11-21): what joining gets you on the left, the site's form on the right. The
 // form isn't wired: a page connects it.
-export function SignupForm({ layout = "application", header, benefitsTitle, benefitsDescription, benefits, aside, form, theme, surface, pattern, cardPattern, id, className }: SignupFormProps) {
+export function SignupForm({ layout = "application", header, benefitsTitle, benefitsDescription, benefits = [], aside, form, theme, surface, pattern, cardPattern, id, className }: SignupFormProps) {
+  if (!benefits.length && !benefitsTitle && !benefitsDescription && !aside) {
+    return (
+      <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="grid items-start gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-(--qd-layout-column-gap)">
+        <SectionHeader kicker={header.kicker} title={header.title} description={header.description} className="lg:sticky lg:top-24" />
+        <SiteForm form={form} />
+      </Section>
+    )
+  }
   return (
     <Section theme={theme} surface={surface} pattern={pattern} cardPattern={cardPattern} id={id} className={className} innerClassName="flex flex-col gap-(--qd-layout-heading-to-content-min) lg:gap-(--qd-layout-heading-to-content-max)">
       <SectionHeader kicker={header.kicker} title={header.title} description={header.description} />
