@@ -8,7 +8,17 @@ import { Plate } from "@qdrant/web/lib/plate"
 import { Section } from "@qdrant/web/lib/section"
 import { getPattern } from "@qdrant/web/patterns"
 
-import { RenderBlock, defaultStyle, styleAttributes, styleFromQuery, styleSwitches, type Block, type Style, type WebPage } from "./blocks"
+import { decodeMix, getPageExploration, getWorld, worldPage, worlds } from "./page-explorations"
+import {
+  RenderBlock,
+  defaultStyle,
+  styleAttributes,
+  styleFromQuery,
+  styleSwitches,
+  type Block,
+  type Style,
+  type WebPage,
+} from "./blocks"
 
 // The inside of a frame (app/web/frame). Query: section, variant, theme and surface for one section, or
 // page=builder for the page the builder sends by postMessage. It keeps <html> on the frame's theme (menus and
@@ -110,7 +120,14 @@ export function WebFrame() {
 
   if (isBuilder) {
     return (
-      <div ref={root} data-web data-context="marketing" data-theme={pageTheme} {...styleAttrs} className="min-h-svh bg-background text-foreground">
+      <div
+        ref={root}
+        data-web
+        data-context="marketing"
+        data-theme={pageTheme}
+        {...styleAttrs}
+        className="min-h-svh bg-background text-foreground"
+      >
         {page?.blocks.length ? (
           page.blocks.map((block: Block) => (
             <div
@@ -136,22 +153,66 @@ export function WebFrame() {
     )
   }
 
+  // A whole page from the Patterns tab's Pages Explorations (2026-11-26): its sections stacked, as on the website,
+  // all in the page's theme (set on the root, never per section).
+  // Or a page mixed in the Randomize panel: page-world is the page (the home when it's missing) and page-mix its
+  // patterns per section (page-explorations.ts).
+  const pageId = params.get("page-exploration")
+  const pageMix = params.get("page-mix")
+  if (pageId || pageMix !== null) {
+    const world = getWorld(params.get("page-world") ?? "home") ?? worlds[0]
+    const page = pageId ? getPageExploration(pageId) : { blocks: worldPage(world, decodeMix(pageMix)) }
+    return (
+      <div
+        ref={root}
+        data-web
+        data-context="marketing"
+        data-theme={theme}
+        data-web-pattern-tone={params.get("pattern-tone") ?? undefined}
+        {...styleAttrs}
+        className="bg-background text-foreground"
+      >
+        {page?.blocks.map((block, i) => (
+          <RenderBlock key={i} block={{ ...block, uid: `page-${i}` }} />
+        ))}
+      </div>
+    )
+  }
+
   // A pattern on its own, for the Patterns tab: a background behind an empty section, or a surface in three cards.
+  // pattern-tone=primary shows it in amaranth (web.css, Pattern color), and fill=1 makes a background fill the
+  // frame, for the tab's detail view (2026-11-24).
   const previewId = params.get("pattern-preview")
   if (previewId) {
     const def = getPattern(previewId)
+    const fill = params.get("fill") === "1"
     return (
-      <div ref={root} data-web data-context="marketing" data-theme={theme} {...styleAttrs} className="bg-background text-foreground">
+      <div
+        ref={root}
+        data-web
+        data-context="marketing"
+        data-theme={theme}
+        data-web-pattern-tone={params.get("pattern-tone") ?? undefined}
+        {...styleAttrs}
+        className={cn("bg-background text-foreground", fill && "min-h-svh")}
+      >
         {def?.kind === "surface" ? (
           <Section cardPattern={previewId} spacing="compact" innerClassName="grid gap-6 md:grid-cols-3">
             {["Plate", "Plate", "Plate"].map((label, i) => (
-              <Plate key={i} className="flex h-48 items-end rounded-xl p-6 font-mono text-xs text-muted-foreground uppercase">
+              <Plate
+                key={i}
+                className="flex h-48 items-end rounded-xl p-6 font-mono text-xs text-muted-foreground uppercase"
+              >
                 {def.name}
               </Plate>
             ))}
           </Section>
         ) : (
-          <Section pattern={[previewId]} innerClassName="grid min-h-80 place-items-center">
+          <Section
+            pattern={[previewId]}
+            className={cn(fill && "min-h-svh")}
+            innerClassName="grid min-h-80 place-items-center"
+          >
             <p className="font-mono text-xs text-muted-foreground uppercase">{def?.name ?? previewId}</p>
           </Section>
         )}
@@ -165,17 +226,39 @@ export function WebFrame() {
     variant: params.get("variant") ?? "",
     theme,
     surface: (params.get("surface") as Block["surface"]) ?? undefined,
+    // A section's patterns from the query, for the Patterns tab's Explorations (2026-11-24): pattern is a
+    // comma-separated list, card-pattern one id ("" for none), and pattern-tone=primary turns them amaranth.
+    ...(params.has("pattern") ? { pattern: (params.get("pattern") ?? "").split(",").filter(Boolean) } : {}),
+    ...(params.has("card-pattern") ? { cardPattern: params.get("card-pattern") ?? "" } : {}),
   }
   const min = Number(params.get("min") ?? 0)
+  // room adds px above the section's last row (the footer's legal bar), for a pattern drawn in a band there, and
+  // band-bottom lifts that band off the bottom by the last row's height (Explorations, the footer's bands).
+  const room = Number(params.get("room") ?? 0)
+  const bandBottom = Number(params.get("band-bottom") ?? 0)
+  // pad sets the section's bottom padding in px, for a band under a hero's or a header's content (2026-11-25).
+  const pad = Number(params.get("pad") ?? 0)
   return (
     <div
       ref={root}
       data-web
       data-context="marketing"
       data-theme={theme}
+      data-web-pattern-tone={params.get("pattern-tone") ?? undefined}
       {...styleAttrs}
-      className="bg-background text-foreground"
-      style={{ minHeight: min || undefined }}
+      className={cn(
+        "bg-background text-foreground",
+        room > 0 && "[&_section:has(>.web-pattern)_.web-rule:last-child]:mt-(--pattern-room)",
+        pad > 0 && "[&_section:has(>.web-pattern)]:pb-(--pattern-pad)!"
+      )}
+      style={
+        {
+          minHeight: min || undefined,
+          ...(room > 0 ? { "--pattern-room": `${room}px` } : {}),
+          ...(bandBottom > 0 ? { "--pattern-band-bottom": `${bandBottom}px` } : {}),
+          ...(pad > 0 ? { "--pattern-pad": `${pad}px` } : {}),
+        } as React.CSSProperties
+      }
     >
       <RenderBlock block={block} />
     </div>
