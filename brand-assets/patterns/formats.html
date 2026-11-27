@@ -23,7 +23,7 @@
   <div id="sheet"></div>
 
   <script type="module">
-    import { loadTokens, loadPatterns, isMeshPattern, renderPattern, loadPatternFonts } from "./patterns/index.js";
+    import { loadTokens, loadPatterns, renderPattern, loadPatternFonts } from "./patterns/index.js";
 
     // Real output sizes, shown scaled down.
     const formats = [
@@ -40,14 +40,10 @@
     await loadPatternFonts(patterns);
     const sheet = document.getElementById("sheet");
     let done = 0;
-    let passed = 0;
-    let checks = 0;
     for (const preset of patterns) {
       sheet.insertAdjacentHTML("beforeend", `<h2>${preset.name}</h2><div class="row"></div>`);
       const row = sheet.lastElementChild;
-      const options = isMeshPattern(preset)
-        ? { mesh: await fetch(`meshes/${preset.examples[0].id}.${preset.meshGroup}.json`).then((r) => r.json()) }
-        : { colorway: 0 };
+      const options = { colorway: 0 };
       for (const format of formats) {
         const figure = document.createElement("figure");
         const canvas = document.createElement("canvas");
@@ -55,16 +51,12 @@
         figure.append(canvas);
         row.append(figure);
         await new Promise((r) => setTimeout(r)); // let the page paint between renders
-        const check = renderPattern(canvas, tokens, preset, { ...options, width: format.width, height: format.height });
-        if (check) {
-          checks++;
-          passed += check.pass;
-        }
-        figure.insertAdjacentHTML("beforeend", `<figcaption>${format.name} · ${format.width} × ${format.height}${check ? (check.pass ? " · pass" : " · FAIL") : ""}</figcaption>`);
+        renderPattern(canvas, tokens, preset, { ...options, width: format.width, height: format.height });
+        figure.insertAdjacentHTML("beforeend", `<figcaption>${format.name} · ${format.width} × ${format.height}</figcaption>`);
         document.getElementById("status").textContent = `Rendering ${++done} of ${patterns.length * formats.length}…`;
       }
     }
-    document.getElementById("status").textContent = `${done} renders in ${formats.length} formats. Brand check: ${passed} of ${checks} mesh renders pass.`;
+    document.getElementById("status").textContent = `${done} renders in ${formats.length} formats.`;
   </script>
 </body>
 </html>

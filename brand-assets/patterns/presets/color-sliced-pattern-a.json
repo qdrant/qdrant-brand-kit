@@ -4,18 +4,38 @@
   "textMask": "mask",
   "recipe": "color-sliced-pattern",
   "extends": "shared",
+  "$colorways": "Amaranth, Indigo and Teal each run from Neutral 975 to the family's 800 (visual designer, 2026-11-26, Lower contrast #8): a near-black start, so the colour reads as the accent. It replaced the family's 975 → 700 (S6, 2026-11-24). Teal stays on hold. Dark neutral (Neutral 1000 → 800) added 2026-11-24. Every render has an ordered dither against banding (2026-11-26).",
   "colorways": [
     {
-      "name": "Neutral 950 → Amaranth 600",
-      "from": "color.neutral.950",
-      "to": "color.amaranth.600",
+      "name": "Neutral 975 → Amaranth 800",
+      "from": "color.neutral.975",
+      "to": "color.amaranth.800",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
     },
     {
-      "name": "Neutral 950 → Indigo 600",
-      "from": "color.neutral.950",
-      "to": "color.indigo.600",
+      "name": "Neutral 975 → Indigo 800",
+      "from": "color.neutral.975",
+      "to": "color.indigo.800",
       "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
+    },
+    {
+      "name": "Neutral 975 → Teal 800",
+      "from": "color.neutral.975",
+      "to": "color.teal.800",
+      "onHold": "Waiting for the council's approval of the sub-direction (visual designer, 2026-11-24). Don't use it in creatives yet."
+    },
+    {
+      "name": "Neutral 1000 → Neutral 800",
+      "from": "color.neutral.1000",
+      "to": "color.neutral.800"
+    },
+    {
+      "name": "Neutral 100 → Neutral 300",
+      "from": "color.neutral.100",
+      "to": "color.neutral.300",
+      "textColor": "dark",
+      "textMask": "none",
+      "onHold": "Light mode: on hold (visual designer, 2026-11-26). Don't use it in creatives yet."
     }
   ],
   "settings": {
@@ -34,6 +54,24 @@
       "r": 80,
       "a": -160
     },
-    "noise": null
+    "noise": null,
+    "$stripes": "Approved stripe options besides the preset's own slices (thickness 80, -160°), picked in the Pattern Library review (visual designer, 2026-11-24). Render one with renderPattern(..., { stripes: index }). Thickness in px at 1080, on the 8 grid. Fixed angle since 2026-11-26 (visual designer): every stripe runs at -160° (70° from horizontal); the flatter (-152°) and steeper (-168°) options were removed.",
+    "stripes": [
+      {
+        "name": "Thin",
+        "thickness": 40,
+        "angle": -160
+      },
+      {
+        "name": "Thick",
+        "thickness": 160,
+        "angle": -160
+      },
+      {
+        "name": "Thinnest",
+        "thickness": 24,
+        "angle": -160
+      }
+    ]
   }
 }

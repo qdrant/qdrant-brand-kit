@@ -1,0 +1,369 @@
+{
+  "name": "Generative-Burst-Pattern",
+  "recipe": "generative-pattern",
+  "extends": "generative-pattern.shared",
+  "source": "Pattern Studio export, 1620 x 1080",
+  "$description": "Pattern Studio's burst of short lines on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%, top to bottom), in the family's 800, 600 and 200, like Motion-Streaks-Pattern-B's letters (visual designer, 2026-11-24). Thirteen approved line variants from the Pattern Library review (Pattern Studio connector, lines only): renderPattern(..., { variant: n }), n = 0 to 12.",
+  "colorways": [
+    {
+      "name": "Background → Indigo 900",
+      "colors": [
+        "{color.indigo.800}",
+        "{color.indigo.700}",
+        "{color.indigo.500}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.indigo.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Amaranth 900",
+      "colors": [
+        "{color.amaranth.800}",
+        "{color.amaranth.700}",
+        "{color.amaranth.500}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.amaranth.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Teal 900",
+      "colors": [
+        "{color.teal.800}",
+        "{color.teal.700}",
+        "{color.teal.500}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.teal.900}",
+          "at": 1.1667
+        }
+      ],
+      "onHold": "Waiting for the council's approval of the sub-direction (visual designer, 2026-11-24). Don't use it in creatives yet."
+    },
+    {
+      "name": "Background → Neutral 800",
+      "colors": [
+        "{color.neutral.800}",
+        "{color.neutral.700}",
+        "{color.neutral.500}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.800}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Neutral 100 → Neutral 300",
+      "colors": [
+        "{color.neutral.0}",
+        "{color.neutral.0}",
+        "{color.neutral.0}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.neutral.100}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.300}",
+          "at": 1.1667
+        }
+      ],
+      "fixedColors": true,
+      "textColor": "dark",
+      "textMask": "none",
+      "onHold": "Light mode: on hold (visual designer, 2026-11-26). Don't use it in creatives yet."
+    }
+  ],
+  "settings": {
+    "engine": {
+      "layout": "burst",
+      "cell": 8,
+      "count": 1100,
+      "depthShade": 0.7,
+      "shaping": "rings",
+      "softness": 0.05,
+      "noiseAmount": 0,
+      "noiseScale": 2,
+      "zoom": 1,
+      "rotation": 0,
+      "threshold": 0.02,
+      "scale": 0.6,
+      "lineLength": 0.75,
+      "lineWidth": 1.75,
+      "alphaByValue": true,
+      "minAlpha": 0
+    },
+    "variants": [
+      {
+        "name": "Lines along the contours (was proposal P7)",
+        "count": 1400,
+        "scale": 1.09,
+        "threshold": 0.28,
+        "element": "line",
+        "lineLength": 1.15,
+        "lineWidth": 2,
+        "orientation": "contour",
+        "noiseAmount": 0.56,
+        "noiseScale": 4.35,
+        "seed": 97,
+        "warp": 0.01,
+        "drift": 0.71
+      },
+      {
+        "name": "Lines, length 0.5, width 1 (was proposal P19)",
+        "element": "line",
+        "shape": "none",
+        "count": 1400,
+        "scale": 1.08,
+        "threshold": 0.28,
+        "noiseAmount": 0.38,
+        "noiseScale": 4.5,
+        "seed": 26,
+        "warp": 0.34,
+        "drift": 0.6,
+        "lineLength": 0.5,
+        "lineWidth": 1
+      },
+      {
+        "name": "Lines, length 1, width 1.5 (was proposal P20)",
+        "element": "line",
+        "shape": "none",
+        "count": 1600,
+        "scale": 0.5,
+        "threshold": 0.05,
+        "noiseAmount": 0.66,
+        "noiseScale": 1.4,
+        "seed": 19,
+        "warp": 0.03,
+        "drift": 0.99,
+        "lineLength": 1,
+        "lineWidth": 1.5
+      },
+      {
+        "name": "Lines, length 1.5, width 2 (was proposal P21)",
+        "element": "line",
+        "shape": "none",
+        "count": 1000,
+        "scale": 0.94,
+        "threshold": 0.22,
+        "noiseAmount": 0.28,
+        "noiseScale": 4.45,
+        "seed": 44,
+        "warp": 0.26,
+        "drift": 0.52,
+        "lineLength": 1.5,
+        "lineWidth": 2
+      },
+      {
+        "name": "Lines, length 2, width 1 (was proposal P22)",
+        "element": "line",
+        "shape": "none",
+        "count": 900,
+        "scale": 0.7,
+        "threshold": 0.11,
+        "noiseAmount": 0.59,
+        "noiseScale": 4.5,
+        "seed": 48,
+        "warp": 0.1,
+        "drift": 0.94,
+        "lineLength": 2,
+        "lineWidth": 1
+      },
+      {
+        "name": "Lines, length 3, width 1.5 (was proposal P23)",
+        "element": "line",
+        "shape": "none",
+        "count": 1100,
+        "scale": 0.74,
+        "threshold": 0.13,
+        "noiseAmount": 0.26,
+        "noiseScale": 2.3,
+        "seed": 55,
+        "warp": 0.21,
+        "drift": 0.92,
+        "lineLength": 3,
+        "lineWidth": 1.5
+      },
+      {
+        "name": "Lines, length 0.75, width 3 (was proposal P24)",
+        "element": "line",
+        "shape": "none",
+        "count": 700,
+        "scale": 0.62,
+        "threshold": 0,
+        "noiseAmount": 0.11,
+        "noiseScale": 3.35,
+        "seed": 58,
+        "warp": 0.28,
+        "drift": 0.2,
+        "lineLength": 0.75,
+        "lineWidth": 3
+      },
+      {
+        "name": "Lines, length 2.5, width 1 (was proposal P25)",
+        "element": "line",
+        "shape": "none",
+        "count": 1200,
+        "scale": 1.06,
+        "threshold": 0.02,
+        "noiseAmount": 0.4,
+        "noiseScale": 1.35,
+        "seed": 88,
+        "warp": 0.22,
+        "drift": 0.82,
+        "lineLength": 2.5,
+        "lineWidth": 1
+      },
+      {
+        "name": "Lines, length 1.25, width 2 (was proposal P26)",
+        "element": "line",
+        "shape": "none",
+        "count": 700,
+        "scale": 0.79,
+        "threshold": 0.01,
+        "noiseAmount": 0.38,
+        "noiseScale": 1.6,
+        "seed": 33,
+        "warp": 0.33,
+        "drift": 0.33,
+        "lineLength": 1.25,
+        "lineWidth": 2
+      },
+      {
+        "name": "Lines, length 3, width 2.5 (was proposal P27)",
+        "element": "line",
+        "shape": "none",
+        "count": 800,
+        "scale": 0.76,
+        "threshold": 0.1,
+        "noiseAmount": 0.49,
+        "noiseScale": 2.5,
+        "seed": 22,
+        "warp": 0.29,
+        "drift": 0.94,
+        "lineLength": 3,
+        "lineWidth": 2.5
+      },
+      {
+        "name": "Lines, length 0.6, width 2 (was proposal P28)",
+        "element": "line",
+        "shape": "none",
+        "count": 1200,
+        "scale": 0.96,
+        "threshold": 0.15,
+        "noiseAmount": 0.42,
+        "noiseScale": 4.3,
+        "seed": 77,
+        "warp": 0.07,
+        "drift": 0.9,
+        "lineLength": 0.6,
+        "lineWidth": 2
+      },
+      {
+        "name": "Lines, length 2, width 1.25 (was proposal P29)",
+        "element": "line",
+        "shape": "none",
+        "count": 900,
+        "scale": 0.78,
+        "threshold": 0.01,
+        "noiseAmount": 0.3,
+        "noiseScale": 4.5,
+        "seed": 16,
+        "warp": 0.06,
+        "drift": 0.93,
+        "lineLength": 2,
+        "lineWidth": 1.25
+      },
+      {
+        "name": "Lines, length 1.75, width 1 (was proposal P30)",
+        "element": "line",
+        "shape": "none",
+        "count": 1000,
+        "scale": 0.8,
+        "threshold": 0.07,
+        "noiseAmount": 0.57,
+        "noiseScale": 4.9,
+        "seed": 16,
+        "warp": 0.24,
+        "drift": 0.46,
+        "lineLength": 1.75,
+        "lineWidth": 1
+      }
+    ],
+    "$look": "Open look (visual designer, 2026-11-25): agents may make new variations of this pattern without the Pattern Studio connector, with renderPattern(..., { look: n }) or { look: { ... } }. Only the engine values in look.ranges change, and each stays inside its range (numbers: [min, max]; words: the listed choices; cell: on the 8 grid). Colors always come from the colorway. The ranges span the pattern as approved and its approved variants.",
+    "look": {
+      "source": "Pattern Studio look hyperspace",
+      "ranges": {
+        "count": [
+          700,
+          1600
+        ],
+        "scale": [
+          0.5,
+          1.09
+        ],
+        "threshold": [
+          0,
+          0.28
+        ],
+        "lineLength": [
+          0.5,
+          3
+        ],
+        "lineWidth": [
+          1,
+          3
+        ],
+        "noiseAmount": [
+          0,
+          0.66
+        ],
+        "noiseScale": [
+          1.35,
+          4.9
+        ],
+        "seed": [
+          1,
+          999
+        ],
+        "warp": [
+          0.01,
+          0.34
+        ],
+        "drift": [
+          0.2,
+          0.99
+        ]
+      }
+    }
+  },
+  "textMask": "both",
+  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (visual designer, 2026-11-25). Dark neutral added 2026-11-24. Light mode (on hold): every element white (Neutral 0) on Neutral 100 → 300, kept white by fixedColors."
+}

@@ -1,6 +1,6 @@
 // Pattern primitives: the one place a tool (like Design Lab) needs to import.
 //
-//   import { loadTokens, loadPatterns, renderPattern, createMesh } from "./patterns/index.js";
+//   import { loadTokens, loadPatterns, renderPattern } from "./patterns/index.js";
 //
 //   const tokens = await loadTokens("tokens/placeholder.tokens.json");
 //   const patterns = await loadPatterns();             // every preset in presets/index.json
@@ -9,40 +9,25 @@
 //   // at any size: here a wide banner.
 //   renderPattern(canvas, tokens, patterns[0], { colorway: 0, family: "secondary", width: 1500, height: 500 });
 //
-//   // A mesh pattern: when a library image is approved, check it and make its meshes
-//   // once (see library.js), then render with the mesh for the pattern's meshGroup.
-//   if (canUseImage(info, patterns[2].source).allowed) saveWithImage(meshesForImage(image, tokens, patterns));
-//   const mesh = createMesh(image, tokens, patterns[2]); // or one mesh for one pattern
-//   const check = renderPattern(canvas, tokens, patterns[2], { mesh });
-//   if (!check.pass) { /* off-brand: pick another image */ }
-//
 // To add a recipe, write patterns/<recipe>.js with a render() and register it below.
 
-import * as colorRefracted from "./color-refracted-pattern.js";
 import * as colorSliced from "./color-sliced-pattern.js";
-import * as meshRefracted from "./mesh-refracted-pattern.js";
-import * as meshSliced from "./mesh-sliced-pattern.js";
-import * as meshDithered from "./mesh-dithered-pattern.js";
 import * as generative from "./generative-pattern.js";
 import * as motionStreaks from "./motion-streaks-pattern.js";
 import { colorwayTokens, familiesFor } from "./tokens.js";
-import { imageToMesh } from "./mesh-source.js";
 import { loadAllPresets, loadPreset } from "./presets.js";
 import { makeFrame } from "./effects.js";
 
 export { loadTokens, resolveToken } from "./tokens.js";
-export { canUseImage, meshesForImage } from "./library.js";
 export { varyLetterLayer, letterLayerProblems, isLetterLayer, letterVariation, fromStudioParams } from "./letter-variations.js";
 import { varyLetterLayer, isLetterLayer, letterVariation } from "./letter-variations.js";
+export { isOpenLook, lookProblems, varyLook, lookVariation } from "./look-variations.js";
+import { varyLook, lookVariation } from "./look-variations.js";
 export { loadPreset };
 
 // Recipe name (the "recipe" field in a preset) to its code.
 export const recipes = {
-  "color-refracted-pattern": colorRefracted,
   "color-sliced-pattern": colorSliced,
-  "mesh-refracted-pattern": meshRefracted,
-  "mesh-sliced-pattern": meshSliced,
-  "mesh-dithered-pattern": meshDithered,
   "generative-pattern": generative,
   "motion-streaks-pattern": motionStreaks,
 };
@@ -50,16 +35,24 @@ export const recipes = {
 // Every preset listed in presets/index.json, with its shared settings merged in.
 export const loadPatterns = (base = "presets") => loadAllPresets(base);
 
-// Color patterns take a colorway. Mesh patterns take a mesh. Generative patterns
-// (from Pattern Studio) have one or more colorways to pick from.
-export const isMeshPattern = (preset) => Boolean(preset.meshGroup);
+// Color patterns take a colorway. Generative patterns (from Pattern Studio) have one
+// or more colorways to pick from.
 export const isGenerativePattern = (preset) => preset.recipe === "generative-pattern";
 
+// On hold (visual designer, 2026-11-24): a pattern or colorway marked "onHold" is never used to
+// make a new asset (guidelines/ section 2a). Every teal colorway is on hold now. The other
+// patterns that were on hold were removed from the repo on 2026-11-25; they live in the
+// Pattern Library artifact until the visual designer asks to add one back.
+export const isOnHold = (preset, colorway) =>
+  Boolean(preset.onHold) || (colorway != null && Boolean(preset.colorways?.[colorway]?.onHold));
+
+// The colorway indexes an agent may use for this pattern: none when the whole pattern is on hold.
+export const usableColorways = (preset) =>
+  preset.onHold ? [] : (preset.colorways ?? []).map((_, i) => i).filter((i) => !isOnHold(preset, i));
+
 // The choices a person can make for a pattern. Color patterns: colorways, and for a
-// colorway with {family}, the families that have its steps. Mesh patterns: none,
-// the mesh comes from the picked library image.
+// colorway with {family}, the families that have its steps.
 export function choicesFor(preset, tokens) {
-  if (isMeshPattern(preset)) return { colorways: [] };
   if (isGenerativePattern(preset)) return { colorways: preset.colorways.map(({ name }) => ({ name, families: [] })) };
   return {
     colorways: preset.colorways.map((colorway) => ({
@@ -72,10 +65,11 @@ export function choicesFor(preset, tokens) {
 
 // Draws a pattern on a canvas at any size and shape: { width, height } in px,
 // 1080 x 1080 when left out. A wide banner, a tall story or a 4K poster all work.
-// options: { colorway: index, family } for color patterns, { mesh } for mesh patterns,
-// { colorway } for generative patterns (optional { phase } to draw
-// another moment of the loop, for animation later). Mesh patterns return the brand check:
-// { pass, offBrand: % of off-palette pixels }.
+// options: { colorway: index, family, stripes } for color patterns (stripes: an index into
+// the preset's approved stripes, Color-Sliced-A),
+// { colorway, variant, look } for generative patterns (variant: an index into settings.variants; look: a new
+// variation of an open look, a number n or the values themselves, see look-variations.js; optional { phase } to draw
+// another moment of the loop, for animation later).
 export function renderPattern(canvas, tokens, preset, options = {}) {
   const result = renderBase(canvas, tokens, preset, options);
   // Layers (transparent generative patterns) are drawn on top, in order. A layer's
@@ -83,9 +77,18 @@ export function renderPattern(canvas, tokens, preset, options = {}) {
   // colorway 1 of the layer. options.letters makes a variation of every letter layer,
   // within the rules in letter-variations.js: a number picks variant n (0 = as approved),
   // an object sets the allowed values directly.
-  const letters = typeof options.letters === "number" ? letterVariation(options.letters) : options.letters;
+  // options.letterOption picks one of the preset's approved letter options (settings.letterOptions).
+  const option = options.letterOption == null ? null : preset.settings?.letterOptions?.[options.letterOption];
+  if (options.letterOption != null && !option) throw new Error(`${preset.name} has no approved letter option #${options.letterOption}`);
+  const letters = option ? (({ name, source, ...values }) => values)(option) : typeof options.letters === "number" ? letterVariation(options.letters) : options.letters;
+  // settings.letterSteps: the color steps of the pattern's letters, in place of the letter
+  // layer's own (Color-Sliced-B: 950, 900, 800; Motion-Streaks-B: 900, 800, 700; visual designer,
+  // 2026-11-26). settings.letterColorSteps: a letter variation that keeps other steps
+  // (Motion-Streaks-B: variation 1 keeps 800, 600, 200; visual designer, 2026-11-25).
+  const letterSteps = (typeof options.letters === "number" ? preset.settings?.letterColorSteps?.[options.letters] : null) ?? preset.settings?.letterSteps;
   for (const base of preset.layers ?? []) {
-    const layer = letters && isLetterLayer(base) ? varyLetterLayer(base, letters) : base;
+    let layer = letters && isLetterLayer(base) ? varyLetterLayer(base, letters) : base;
+    if (letterSteps && isLetterLayer(base)) layer = withColorSteps(layer, letterSteps);
     const top = document.createElement("canvas");
     renderBase(top, tokens, layer, { width: canvas.width, height: canvas.height, phase: options.phase, colorway: options.colorway });
     canvas.getContext("2d").drawImage(top, 0, 0);
@@ -100,14 +103,38 @@ function renderBase(canvas, tokens, preset, options) {
   const height = Math.round(options.height ?? 1080);
   if (!(width >= 1 && height >= 1)) throw new Error(`Width and height must be at least 1 px, got ${width} x ${height}`);
   const frame = makeFrame(width, height);
-  if (isGenerativePattern(preset)) return recipe.render(canvas, tokens, preset, null, frame, { phase: options.phase, colorway: options.colorway });
-  if (isMeshPattern(preset)) {
-    if (!options.mesh) throw new Error(`${preset.name} needs a mesh: createMesh(image, tokens, preset)`);
-    return recipe.render(canvas, tokens, preset, options.mesh, frame);
+  if (isGenerativePattern(preset)) {
+    // options.variant picks one of the preset's approved variants (settings.variants): engine values on top of its own.
+    const variant = options.variant == null ? null : preset.settings.variants?.[options.variant];
+    if (options.variant != null && !variant) throw new Error(`${preset.name} has no approved variant #${options.variant}`);
+    if (variant) {
+      // colorSteps: the variant draws its elements in other steps of the same family
+      // (Generative-Hexagon's filled variants: 800, 800, 700; visual designer, 2026-11-25).
+      const { name, colorSteps, ...engine } = variant;
+      preset = { ...preset, settings: { ...preset.settings, engine: { ...preset.settings.engine, ...engine } } };
+      if (colorSteps) preset = withColorSteps(preset, colorSteps);
+    }
+    // options.look: a new variation of an open look (Dash, Burst, Pulse, Rings), checked
+    // against the look's ranges. A number picks variation n; an object sets the values.
+    if (options.look != null) preset = varyLook(preset, typeof options.look === "number" ? lookVariation(preset, options.look) : options.look);
+    return recipe.render(canvas, tokens, preset, null, frame, { phase: options.phase, colorway: options.colorway });
   }
   const colorway = preset.colorways[options.colorway ?? 0];
   const family = options.family ?? colorway.defaultFamily;
   return recipe.render(canvas, tokens, preset, colorwayTokens(colorway, family), frame, options);
+}
+
+// Same colorways, other steps of each colorway's family: {color.indigo.200} with step 600
+// becomes {color.indigo.600}. steps[i] replaces the step of colors[i]. A colorway with
+// fixedColors (light mode: all white) keeps its colors (visual designer, 2026-11-26).
+function withColorSteps(preset, steps) {
+  return {
+    ...preset,
+    colorways: preset.colorways.map((look) => look.fixedColors ? look : ({
+      ...look,
+      colors: look.colors.map((ref, i) => (steps[i] == null ? ref : ref.replace(/\.[0-9]+\}$/, `.${steps[i]}}`))),
+    })),
+  };
 }
 
 // Generative patterns that draw letters need their fonts loaded first, or the browser
@@ -133,13 +160,6 @@ export async function loadPatternFonts(patterns) {
     document.fonts.load(`500 32px ${engine.glyphFont}`),
     document.fonts.load(`800 200px ${engine.textFont}`),
   ]));
-}
-
-// Turns a library image into a mesh for a mesh pattern: an 11 x 11 grid of brand
-// color tokens. Store the result (about 3.5 KB of JSON) and drop the image. Meshes
-// are shared by every pattern with the same meshGroup.
-export function createMesh(image, tokens, preset) {
-  return { group: preset.meshGroup, ...imageToMesh(image, tokens, preset.settings) };
 }
 
 const hasFamily = (colorway) => colorway.from.includes("{family}") || colorway.to.includes("{family}");

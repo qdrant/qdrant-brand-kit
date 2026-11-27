@@ -9,8 +9,8 @@
       "name": "Indigo",
       "colors": [
         "{color.indigo.800}",
-        "{color.indigo.600}",
-        "{color.indigo.200}"
+        "{color.indigo.700}",
+        "{color.indigo.600}"
       ],
       "backdrop": null
     },
@@ -18,8 +18,8 @@
       "name": "Amaranth",
       "colors": [
         "{color.amaranth.800}",
-        "{color.amaranth.600}",
-        "{color.amaranth.200}"
+        "{color.amaranth.700}",
+        "{color.amaranth.600}"
       ],
       "backdrop": null
     },
@@ -27,10 +27,29 @@
       "name": "Teal",
       "colors": [
         "{color.teal.800}",
-        "{color.teal.600}",
-        "{color.teal.200}"
+        "{color.teal.700}",
+        "{color.teal.600}"
       ],
       "backdrop": null
+    },
+    {
+      "name": "Neutral",
+      "colors": [
+        "{color.neutral.800}",
+        "{color.neutral.700}",
+        "{color.neutral.600}"
+      ],
+      "backdrop": null
+    },
+    {
+      "name": "Neutral light",
+      "colors": [
+        "{color.neutral.0}",
+        "{color.neutral.0}",
+        "{color.neutral.0}"
+      ],
+      "backdrop": null,
+      "fixedColors": true
     }
   ],
   "settings": {
@@ -68,5 +87,6 @@
       "colorMap": "random",
       "backdrop": "none"
     }
-  }
+  },
+  "$colors": "Letters in the family's 800, 700, 600: the lightest letter is the 600, never lighter, so the letters blend with the background (visual designer, 2026-11-25). Light mode (on hold): white letters (Neutral 0), kept white by fixedColors."
 }

@@ -11,7 +11,7 @@ Exported as SVG from the Qdrant Brand Design System file (`8y0svqBDPZX6caRNF6ldd
 | File | Figma variant | What it is | Use it on |
 | --- | --- | --- | --- |
 | `qdrant-logo-dark.svg` | Qdrant-Logo `Color=Dark` (`13655:221`) | Red brandmark + white wordmark | Plain dark backgrounds and dark images |
-| `qdrant-logo-white.svg` | Qdrant-Logo `Color=White` (`13655:371`) | All white | Patterns: violet, red and busy ones (mesh and generative) |
+| `qdrant-logo-white.svg` | Qdrant-Logo `Color=White` (`13655:371`) | All white | Patterns: violet, red and busy ones (generative) |
 | `qdrant-logo-light.svg` | Qdrant-Logo `Color=Color4` (`13655:219`) | Red brandmark + dark wordmark. The Brand Guide calls it "Light"; Figma still says Color4 | The light card (`.qd-box--light-card`) and other light backgrounds |
 | `qdrant-logo-black.svg` | Qdrant-Logo `Color=Black` (`13655:267`) | All dark (`neutral.950`) | Not for creatives (never the monochrome Black logo, visual designer 2026-11-16) |
 | `qdrant-brandmark-primary.svg` | Qdrant-Brandmark `Color=Primary` (`13655:129`) | Red brandmark, 3 tones | Not in creatives (see below) |
@@ -27,7 +27,7 @@ Exported as SVG from the Qdrant Brand Design System file (`8y0svqBDPZX6caRNF6ldd
 | Background | Version |
 | --- | --- |
 | Plain dark canvas, dark Box, dark image, the masked part of a dark creative | **Dark** |
-| Any pattern at full strength: violet, red, mesh, generative (except a light pattern with `textColor: "dark"`: **Light**) | **White** |
+| Any pattern at full strength: violet, red, generative (except a light pattern with `textColor: "dark"`: **Light**) | **White** |
 | Light card, light background, the masked part of a light creative | **Light**. Never the Black logo in a creative (2026-11-16) |
 
 - Never the Dark logo on red: the red brandmark disappears.
@@ -54,7 +54,7 @@ Equal to the brandmark's **inner cube** on all four sides: 0.375 × the logo hei
 
 ## Placement
 
-- **Default: top-left**, leading the content. On the canvas inside the margins when text sits on the canvas; on the light card inside its padding when text sits on the card ([guidelines/](../../guidelines/) section 8). On the light card the logo is smaller: 0.0967 × the card width, about 57 px on a 1080 square ([`layout/`](../../guidelines/layout/) "Light card layout", decided 2026-11-04).
+- **Default: top-left**, leading the content. On the canvas inside the margins when text sits on the canvas; on the light card inside its padding when text sits on the card ([guidelines/](../../guidelines/) section 8). On the card the logo is smaller (Light logo on the light card, Dark logo on the dark card): 0.0967 × the card width, about 57 px on a 1080 square ([`layout/`](../../guidelines/layout/) "Card layout", decided 2026-11-04).
 - **When it has to move** (no room, a busy or low-contrast area, or the visual must lead), the agent picks the spot that makes sense, following the Brand Guide (slide 19), and says where and why:
   - **Top:** upper left preferred, upper right allowed. For functional layouts.
   - **Bottom:** lower left preferred, lower right allowed. When other elements or the visual must take priority.

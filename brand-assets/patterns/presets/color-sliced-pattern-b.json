@@ -1,42 +1,66 @@
 {
   "name": "Color-Sliced-Pattern-B",
   "textMask": "mask",
+  "textMaskByColorway": { "Neutral 1000 → Neutral 800": "none" },
   "recipe": "color-sliced-pattern",
-  "extends": "shared",
-  "$description": "Color-Sliced-Pattern-A's slices with a layer of QDRANT letters on top, in matching colors: red letters on the red slices, violet on the violet.",
-  "colorways": [
-    {
-      "name": "Neutral 950 → Amaranth 600",
-      "from": "color.neutral.950",
-      "to": "color.amaranth.600",
-      "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
-    },
-    {
-      "name": "Neutral 950 → Indigo 600",
-      "from": "color.neutral.950",
-      "to": "color.indigo.600",
-      "figma": "https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20943-36252"
-    }
-  ],
+  "extends": "color-sliced-pattern-a",
+  "$description": "Two layers, each from its own source (visual designer, 2026-11-24). Base: Color-Sliced-Pattern-A, inherited whole (every colorway, the approved stripes, its slices), so A's changes reach B. Letters on top: generative-glyph-layer-a, varied with the Pattern Studio connector's terminal look through fromStudioParams(). An agent makes a B by picking an A colorway (and stripes) and a terminal-look letter variation: renderPattern(canvas, tokens, B, { colorway, stripes, letters }).",
   "layers": [
     "generative-glyph-layer-a"
   ],
   "settings": {
-    "size": 1080,
-    "gradient": {
-      "angle": 180,
-      "fromStop": 0,
-      "toStop": 130.68
-    },
-    "slice": {
-      "shift": 200,
-      "softness": 0,
-      "randomOffset": 500,
-      "x": 50,
-      "y": 50,
-      "r": 80,
-      "a": -160
-    },
-    "noise": null
+    "$letterSteps": "Letters run in the family's 950, 900, 800 (dark neutral: Neutral 950, 900, 800), in place of the letter layer's own 800, 700, 600 (visual designer, 2026-11-26). Light mode keeps white letters.",
+    "letterSteps": [950, 900, 800],
+    "$letterOptions": "Approved letter variations from the Pattern Studio connector's terminal look (visual designer, 2026-11-24). Draw one with renderPattern(..., { letterOption: index }); they work on every colorway and stripe.",
+    "letterOptions": [
+      {
+        "name": "Terminal v8",
+        "source": "pattern_variations look terminal, 2026-11-24",
+        "glyphs": "word",
+        "colorMap": "x",
+        "scale": 0.65,
+        "noiseAmount": 0.44,
+        "noiseScale": 4.7,
+        "seed": 8,
+        "warp": 0.18,
+        "drift": 0.85
+      },
+      {
+        "name": "Terminal v9",
+        "source": "pattern_variations look terminal, 2026-11-24",
+        "glyphs": "random",
+        "colorMap": "y",
+        "scale": 0.65,
+        "noiseAmount": 0.68,
+        "noiseScale": 4.45,
+        "seed": 35,
+        "warp": 0.03,
+        "drift": 0.41
+      },
+      {
+        "name": "Terminal v10",
+        "source": "pattern_variations look terminal, 2026-11-24",
+        "glyphs": "ramp",
+        "colorMap": "radial",
+        "scale": 0.65,
+        "noiseAmount": 0.62,
+        "noiseScale": 2.4,
+        "seed": 86,
+        "warp": 0.33,
+        "drift": 0.53
+      },
+      {
+        "name": "Terminal v4",
+        "source": "pattern_variations look terminal, 2026-11-24",
+        "glyphs": "ramp",
+        "colorMap": "radial",
+        "scale": 0.63,
+        "noiseAmount": 0.49,
+        "noiseScale": 2.25,
+        "seed": 46,
+        "warp": 0.2,
+        "drift": 0.85
+      }
+    ]
   }
 }

@@ -175,6 +175,54 @@
 .qd-book__title { font-weight: var(--qd-font-weight-semibold); font-size: calc(var(--qd-book-w) * 0.0846 * 1.6 * var(--qd-canvas-u)); line-height: var(--qd-type-display-1-line-height); }
 .qd-book__bottom { border-top: var(--qd-box-border-width) solid var(--qd-color-border-on-light); padding-top: calc(var(--qd-book-w) * 0.0846 * var(--qd-canvas-u)); }
 .qd-book__text { font-weight: var(--qd-font-weight-regular); font-size: calc(var(--qd-book-w) * 0.0483 * var(--qd-canvas-u)); line-height: var(--qd-type-h4-line-height); }
+/* Card hugs its content (visual designer, 2026-11-25): one padding on all four sides (0.0846 W) and one gap
+   (0.0604 W) between every layer: logo, title, divider, text, speakers. Line boxes are trimmed to the
+   letters (cap height to baseline), so each gap measures letter to letter, like auto layout. The card is
+   never shorter than its 4:5 (wide: 5:4) size: book.js spreads any extra height equally over the gaps,
+   widens the card so speakers stay on one line, and centers card and button inside the margins. */
+.qd-book__card {
+  --qd-book-g: calc(var(--qd-book-w) * 0.0604 * var(--qd-canvas-u));
+  --qd-book-p: calc(var(--qd-book-w) * 0.0846 * var(--qd-canvas-u));
+  height: auto; justify-content: flex-start; gap: var(--qd-book-g); padding: var(--qd-book-p);
+}
+.qd-book__card .qd-book__top { gap: var(--qd-book-g); }
+.qd-book__card .qd-book__bottom { display: flex; flex-direction: column; gap: var(--qd-book-g); padding-top: var(--qd-book-g); }
+.qd-book__card .qd-book__title, .qd-book__card .qd-book__text { text-box: trim-both cap alphabetic; text-wrap: balance; }
+/* Speakers on the card: headshot-circle, stacked; side by side on wide. */
+.qd-book__people { display: flex; flex-direction: column; gap: calc(var(--qd-book-w) * 0.03 * var(--qd-canvas-u)); }
+.qd-canvas[data-shape="wide"] .qd-book__people { flex-direction: row; gap: calc(var(--qd-book-w) * 0.08 * var(--qd-canvas-u)); }
+.qd-book__people .qd-headshot-circle { flex: none; }
+.qd-book__people .qd-headshot-circle__photo { width: calc(var(--qd-book-w) * 0.11 * var(--qd-canvas-u)); height: calc(var(--qd-book-w) * 0.11 * var(--qd-canvas-u)); }
+.qd-book__people .qd-headshot-circle__name, .qd-book__people .qd-headshot-circle__role { font-size: calc(var(--qd-book-w) * 0.0483 * 0.85 * var(--qd-canvas-u)); white-space: nowrap; }
+.qd-canvas[data-shape="wide"] .qd-book__people .qd-headshot-circle__name, .qd-canvas[data-shape="wide"] .qd-book__people .qd-headshot-circle__role { font-size: calc(var(--qd-book-w) * 0.0483 * 1.2 * var(--qd-canvas-u)); }
+/* Card look: the design system's Card component (design-system/styles/components/card.css), in light and
+   dark mode (visual designer, 2026-11-25). Flat: no shadow. Corners are radius.sm (8 px at the reference canvas),
+   the edge is the soft border: the text color at 10% (light) or 9% (dark), as a 1 px ring. */
+.qd-book .qd-book__card {
+  background: var(--qd-color-neutral-0);
+  border-radius: calc(8 * var(--qd-canvas-u)); /* radius.sm */
+  box-shadow: 0 0 0 var(--qd-box-border-width) color-mix(in oklab, var(--qd-color-neutral-900) 10%, transparent);
+}
+.qd-book .qd-book__card .qd-book__bottom { border-top-color: color-mix(in oklab, var(--qd-color-neutral-900) 10%, transparent); }
+/* Dark mode: add .qd-book--dark to .qd-book and use the Dark logo on the card. The surface is neutral-950
+   (the Card's dark surface). */
+.qd-book--dark .qd-book__card {
+  background: var(--qd-color-neutral-950);
+  box-shadow: 0 0 0 var(--qd-box-border-width) color-mix(in oklab, var(--qd-color-neutral-50) 9%, transparent);
+}
+.qd-book--dark .qd-book__card .qd-book__title,
+.qd-book--dark .qd-book__card .qd-book__text,
+.qd-book--dark .qd-book__card .qd-headshot-circle__name { color: var(--qd-color-neutral-50); }
+.qd-book--dark .qd-book__card .qd-headshot-circle__role { color: var(--qd-color-neutral-500); }
+.qd-book--dark .qd-book__card .qd-book__bottom { border-top-color: color-mix(in oklab, var(--qd-color-neutral-50) 9%, transparent); }
+/* Dark mode on a dark neutral pattern: the card is raised, so it doesn't merge with the pattern. The surface
+   is neutral-850 (paper elevation 8, primitives/elevation) with the light from above: a 1 px line of white at
+   6% along the top edge, as on the web's menus and dialogs. */
+[data-pattern-family="neutral"] .qd-book--dark .qd-book__card {
+  background: var(--qd-color-neutral-850);
+  box-shadow: 0 0 0 var(--qd-box-border-width) color-mix(in oklab, var(--qd-color-neutral-50) 9%, transparent),
+    inset 0 var(--qd-box-border-width) 0 color-mix(in oklab, var(--qd-color-neutral-0) 6%, transparent);
+}
 .qd-canvas[data-shape="wide"] .qd-book__title { font-size: calc(var(--qd-book-w) * 0.0846 * 1.6 * var(--qd-canvas-u)); } /* 1.6x, as square, so Mona Sans Display fits (2026-11-19) */
 .qd-canvas[data-shape="wide"] .qd-book__text  { font-size: calc(var(--qd-book-w) * 0.0483 * 1.5 * var(--qd-canvas-u)); }
 /* Slide on wide (no button): add .qd-book--slide to .qd-book. The card is centered on its own and
@@ -252,12 +300,16 @@
     rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 0.972)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 0.9),
     rgb(0 0 0 / calc(var(--qd-mask-low) + (1 - var(--qd-mask-low)) * 1.0)) calc(var(--qd-mask-hold) + (var(--qd-mask-full) - var(--qd-mask-hold)) * 1.0));
 }
-/* One strength: 40% of the pattern behind the text (visual designer, 2026-11-16). It replaces soft-1 (4%)
+/* The standard mask darkens the pattern 60%, so 40% stays behind the text (visual designer, 2026-11-16). It replaces soft-1 (4%)
    and soft-2 (10%), which made creatives too dark and hid the pattern. The old class names still
-   work and now give 40%, so existing files don't break. Presets with textMask "mask" or "both". */
+   work and now give the standard mask, so existing files don't break. */
 .qd-pattern-mask,
 .qd-pattern-mask.qd-pattern-mask--soft-1,
 .qd-pattern-mask.qd-pattern-mask--soft-2 { --qd-mask-low: 0.40; --qd-mask-hold-k: 1; --qd-mask-full-gaps: 4; }
+/* Two strengths, named by how much they darken the pattern behind the text (visual designer, 2026-11-25):
+   the standard mask above darkens it 60% (40% of the pattern stays), the light mask darkens it 30%
+   (70% stays). The contrast score picks the softest one that passes (guidelines/ section 4). */
+.qd-pattern-mask.qd-pattern-mask--light { --qd-mask-low: 0.70; }
 /* Text on the right (LinkedIn profile cover): the fade runs from the right edge (visual designer, 2026-11-11). */
 .qd-canvas[data-shape] .qd-pattern-mask.qd-pattern-mask--from-right { --qd-mask-direction: to left; }
 .qd-canvas[data-shape="wide"] .qd-pattern-mask,

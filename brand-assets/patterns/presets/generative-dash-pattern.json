@@ -1,0 +1,308 @@
+{
+  "name": "Generative-Dash-Pattern",
+  "textMask": "mask",
+  "recipe": "generative-pattern",
+  "extends": "generative-pattern.shared",
+  "source": "Pattern Studio export, 1620 x 1080",
+  "$description": "Pattern Studio's dashes on the Motion Streaks gradient without the streaks: background.default → the family's 900 (5.59% → 116.67%, top to bottom), in the family's 800, 600 and 200, like every generative pattern. The old Dash-A and Dash-B were merged into it on 2026-11-24 as variant 0 (finer 48 px grid). Variants 1 to 12 are the dash looks approved in the Pattern Library review (from the Pattern Studio connector). Draw one with renderPattern(..., { variant: n }).",
+  "colorways": [
+    {
+      "name": "Background → Indigo 900",
+      "colors": [
+        "{color.indigo.800}",
+        "{color.indigo.700}",
+        "{color.indigo.500}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.indigo.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Amaranth 900",
+      "colors": [
+        "{color.amaranth.800}",
+        "{color.amaranth.700}",
+        "{color.amaranth.500}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.amaranth.900}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Background → Teal 900",
+      "colors": [
+        "{color.teal.800}",
+        "{color.teal.700}",
+        "{color.teal.500}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.teal.900}",
+          "at": 1.1667
+        }
+      ],
+      "onHold": "Waiting for the council's approval of the sub-direction (visual designer, 2026-11-24). Don't use it in creatives yet."
+    },
+    {
+      "name": "Background → Neutral 800",
+      "colors": [
+        "{color.neutral.800}",
+        "{color.neutral.700}",
+        "{color.neutral.500}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.background.default}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.800}",
+          "at": 1.1667
+        }
+      ]
+    },
+    {
+      "name": "Neutral 100 → Neutral 300",
+      "colors": [
+        "{color.neutral.0}",
+        "{color.neutral.0}",
+        "{color.neutral.0}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.neutral.100}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.300}",
+          "at": 1.1667
+        }
+      ],
+      "fixedColors": true,
+      "textColor": "dark",
+      "textMask": "none",
+      "onHold": "Light mode: on hold (visual designer, 2026-11-26). Don't use it in creatives yet."
+    }
+  ],
+  "settings": {
+    "background": "{color.neutral.1000}",
+    "tone": "sharp",
+    "engine": {
+      "cell": 64,
+      "shaping": "rings",
+      "softness": 0.05,
+      "octaves": 2,
+      "drift": 0.9,
+      "warp": 0,
+      "twist": 8,
+      "lineLength": 1.45,
+      "lineWidth": 3,
+      "orientation": "fixed",
+      "elementRotation": -180
+    },
+    "variants": [
+      {
+        "name": "Finer grid (was Dash-B)",
+        "cell": 48,
+        "padding": 40
+      },
+      {
+        "name": "Dense, patchy (was proposal P1)",
+        "shape": "none",
+        "cell": 32,
+        "scale": 1.04,
+        "threshold": 0.15,
+        "noiseAmount": 0.64,
+        "noiseScale": 3.35,
+        "seed": 10,
+        "warp": 0.06
+      },
+      {
+        "name": "Sparser, larger dashes (was proposal P2)",
+        "shape": "none",
+        "cell": 40,
+        "scale": 0.97,
+        "threshold": 0.29,
+        "noiseAmount": 0.32,
+        "noiseScale": 2.1,
+        "seed": 36,
+        "warp": 0.04
+      },
+      {
+        "name": "Fine grid, even (was proposal P3)",
+        "shape": "none",
+        "cell": 24,
+        "scale": 0.66,
+        "threshold": 0.02,
+        "noiseAmount": 0.04,
+        "noiseScale": 2.75,
+        "seed": 39,
+        "warp": 0.28
+      },
+      {
+        "name": "Wide grid, patchy and warped (was proposal P4)",
+        "shape": "none",
+        "cell": 48,
+        "scale": 0.93,
+        "threshold": 0.04,
+        "noiseAmount": 0.69,
+        "noiseScale": 4.05,
+        "seed": 8,
+        "warp": 0.32
+      },
+      {
+        "name": "Dense, short dashes (was proposal P5)",
+        "shape": "none",
+        "cell": 32,
+        "scale": 0.52,
+        "threshold": 0.03,
+        "noiseAmount": 0.65,
+        "noiseScale": 4.05,
+        "seed": 27,
+        "warp": 0.34
+      },
+      {
+        "name": "Even spread (was proposal P6)",
+        "shape": "none",
+        "cell": 40,
+        "scale": 0.67,
+        "threshold": 0.08,
+        "noiseAmount": 0.29,
+        "noiseScale": 4.1,
+        "seed": 91,
+        "warp": 0.27
+      },
+      {
+        "name": "Fine grid, warped (was proposal P7)",
+        "shape": "none",
+        "cell": 24,
+        "scale": 0.69,
+        "threshold": 0.07,
+        "noiseAmount": 0.28,
+        "noiseScale": 2.4,
+        "seed": 24,
+        "warp": 0.32
+      },
+      {
+        "name": "Wide grid, short dashes (was proposal P8)",
+        "shape": "none",
+        "cell": 48,
+        "scale": 0.51,
+        "threshold": 0.05,
+        "noiseAmount": 0.56,
+        "noiseScale": 2.55,
+        "seed": 20,
+        "warp": 0.02
+      },
+      {
+        "name": "Long thin dashes, faint (was proposal P9)",
+        "shape": "none",
+        "cell": 32,
+        "scale": 0.75,
+        "threshold": 0.01,
+        "lineLength": 1.6,
+        "lineWidth": 1,
+        "noiseAmount": 0.14,
+        "noiseScale": 1.6,
+        "seed": 83,
+        "warp": 0.04
+      },
+      {
+        "name": "Even, large dashes (was proposal P10)",
+        "shape": "none",
+        "cell": 40,
+        "scale": 0.85,
+        "threshold": 0.2,
+        "noiseAmount": 0.04,
+        "noiseScale": 2.4,
+        "seed": 92,
+        "warp": 0.27
+      },
+      {
+        "name": "Short thin dashes, faint (was proposal P11)",
+        "shape": "none",
+        "cell": 32,
+        "scale": 0.85,
+        "threshold": 0.19,
+        "lineLength": 0.85,
+        "lineWidth": 1,
+        "noiseAmount": 0.28,
+        "noiseScale": 2.8,
+        "seed": 67,
+        "warp": 0.26
+      },
+      {
+        "name": "Wide grid, medium (was proposal P12)",
+        "shape": "none",
+        "cell": 48,
+        "scale": 0.6,
+        "threshold": 0.1,
+        "noiseAmount": 0.33,
+        "noiseScale": 3,
+        "seed": 47,
+        "warp": 0.3
+      }
+    ],
+    "$look": "Open look (visual designer, 2026-11-25): agents may make new variations of this pattern without the Pattern Studio connector, with renderPattern(..., { look: n }) or { look: { ... } }. Only the engine values in look.ranges change, and each stays inside its range (numbers: [min, max]; words: the listed choices; cell: on the 8 grid). Colors always come from the colorway. The ranges span the pattern as approved and its approved variants.",
+    "look": {
+      "source": "Pattern Studio look data-bars",
+      "ranges": {
+        "cell": [
+          24,
+          64
+        ],
+        "scale": [
+          0.51,
+          1.04
+        ],
+        "threshold": [
+          0.01,
+          0.55
+        ],
+        "noiseAmount": [
+          0.04,
+          0.69
+        ],
+        "noiseScale": [
+          1.6,
+          4.1
+        ],
+        "seed": [
+          1,
+          999
+        ],
+        "warp": [
+          0,
+          0.34
+        ],
+        "lineLength": [
+          0.85,
+          1.6
+        ],
+        "lineWidth": [
+          1,
+          3
+        ]
+      }
+    }
+  },
+  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (visual designer, 2026-11-25). Dark neutral added 2026-11-24. Light mode (on hold): every element white (Neutral 0) on Neutral 100 → 300, kept white by fixedColors."
+}

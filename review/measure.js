@@ -132,6 +132,15 @@
     tag.textContent = JSON.stringify(out).replace(/</g, "\\u003c");
     document.body.appendChild(tag);
   }
-  function start() { document.fonts.ready.then(function () { setTimeout(run, 1500); }); }
+  // A page that sizes its layout in script (guidelines/layout/book.js) sets data-qd-layout="pending" on <html>
+  // and "done" when it finishes: wait for it, up to 10 s, so the measurement never runs mid-layout.
+  function whenLaid(fn) {
+    var t0 = Date.now();
+    (function poll() {
+      if (document.documentElement.dataset.qdLayout !== "pending" || Date.now() - t0 > 10000) fn();
+      else setTimeout(poll, 100);
+    })();
+  }
+  function start() { document.fonts.ready.then(function () { setTimeout(function () { whenLaid(run); }, 1500); }); }
   if (document.readyState === "complete") start(); else window.addEventListener("load", start);
 })();

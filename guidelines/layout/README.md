@@ -148,48 +148,61 @@ Rules:
 - The light card is mostly for guide downloads and documentation promotions, and never holds a big headshot ([`guidelines/`](../) section 4).
 - Padding is the shape's `group` gap (the light card: at least the logo's clear space). Corners are `radius.sm` (8 px at the reference canvas). The light card in a creative uses the book layout below instead.
 
-### Light card layout (`.qd-book`)
+### Card layout (`.qd-book`)
 
-From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (card 794.4 × 979.2 in a 1440 frame), approved by the visual designer on 2026-11-04. A vertical card like a guide or a document, on a full-bleed pattern. Every value is a share of the card width **W**, so it scales with the canvas.
+From the [Get-the-Guide ad](https://www.figma.com/design/8y0svqBDPZX6caRNF6lddG/Qdrant-Brand-Design-System?node-id=20958-18153) (card 794.4 × 979.2 in a 1440 frame), approved on 2026-11-04. A vertical card like a guide or a document, on a full-bleed pattern. Every value is a share of the card width **W**, so it scales with the canvas.
 
 | | Value | At 1080 square (W 594) |
 | --- | --- | --- |
 | Card width | 55% of the canvas on square, 65% on portrait, 75% on story. **Wide:** a landscape card, see below. **Ultrawide:** no light card | 594 |
-| Card shape | 0.81 (794.4 : 979.2), about 4:5, vertical | 594 × 737 |
+| Card shape | At least 0.81 (794.4 : 979.2), about 4:5, vertical; grows with its content (2026-11-25) | 594 × 737 minimum |
 | Position | Card and button centered together inside the margins (the safe area on story), on every shape (2026-11-11) | |
-| Padding | 0.0846 W left and right, 0.0967 W top and bottom | 50 / 57 |
-| Corners | 0.0242 W | 14 |
-| Fill | `background.light-surface`, text `text.on-light` | |
-| Logo | Light logo, 0.0967 W tall (smaller than the canvas logo) | 57 |
+| Padding | 0.0846 W on all four sides (2026-11-25) | 50 |
+| Corners | radius.sm: 8 px at the reference canvas, scaled with it (Card component, 2026-11-25) | 8 |
+| Fill | Light mode: neutral-0, text `text.on-light`. Dark mode: neutral-950, text neutral-50, roles neutral-500; on a dark neutral pattern neutral-850 with the light from above (see below) | |
+| Logo | Light logo on the light card, Dark logo on the dark card, 0.0967 W tall (smaller than the canvas logo) | 57 |
 | Logo to title | 0.0604 W | 36 |
-| Title | Mona Sans Display SemiBold, 0.0846 W × 1.6 (2026-11-16: bigger, so the card doesn't look empty; the logo keeps its size), Display 1 line height, letter spacing 0 (the design lead's type set, 2026-11-19) | 80 |
-| Divider | `border-on-light`, 1 px, between the top block (logo + title) and the bottom block | |
-| Divider to text | 0.0846 W | 50 |
-| Supporting text | Mona Sans Display Regular, 0.0483 W, H4 line height, letter spacing 0 (the design lead's type set, 2026-11-19), at the card's bottom padding | 29 |
+| Title | Mona Sans Display SemiBold, 0.0846 W × 1.6 (2026-11-16: bigger, so the card doesn't look empty; the logo keeps its size), Display 1 line height, letter spacing 0 (design lead's type set, 2026-11-19) | 80 |
+| Divider | The soft border (text color at 10% light, 9% dark), 1 px, between the top block (logo + title) and the bottom block | |
+| Gaps | 0.0604 W between every layer, divider included, measured letter to letter (2026-11-25) | 36 |
+| Supporting text | Mona Sans Display Regular, 0.0483 W, H4 line height, letter spacing 0 (design lead's type set, 2026-11-19), at the card's bottom padding | 29 |
 | Button | Outside the card, centered below it, 0.0544 W gap. Height 0.157 W; text, padding and corners keep the button's proportions | gap 32, height 93 |
 
-- The top block sits at the top padding and the bottom block at the bottom padding; the space between stays empty.
+- **Card look: the design system's Card component, in light and dark mode** (visual designer, 2026-11-25). Flat (no shadow), radius.sm corners and a 1 px soft border. **Light mode**: neutral-0 surface, Light logo. **Dark mode** (`.qd-book--dark`): neutral-950 surface, neutral-50 text, neutral-500 roles, Dark logo. **Dark mode on a dark neutral pattern**: the card is raised so it doesn't merge with the pattern: neutral-850 surface (paper elevation 8) plus the light from above, a 1 px line of white at 6% along the top edge. Put `data-pattern-family` (`indigo`, `amaranth`, `teal`, `neutral`) on the canvas so the card and the speakers' photos follow the pattern.
+- **Light or dark: the person picks.** Make both, show them together on the contact sheet, and let the person choose.
+- **The card hugs its content, like auto layout** (visual designer, 2026-11-25). One padding on all four sides (0.0846 W) and one gap (0.0604 W) between every layer: logo, title, divider, text, speakers. Title and text line boxes are trimmed to the letters (`text-box: trim-both cap alphabetic`), so every gap measures letter to letter. Title and text use balanced line breaks (`text-wrap: balance`): no orphans or widows.
+- **Size:** the card is never shorter than its 4:5 (wide: 5:4) size; extra height goes equally into the gaps. It grows taller when the content needs it, and wider so speakers stay on one line, never past the side margins. Card and button stay centered together inside the margins. Load `guidelines/layout/book.js` and call `fitBook(canvas)` after the pattern is drawn; it does the sizing and centering. Put `data-qd-layout="pending"` on `<html>` so `review/render.py` waits until the card is sized.
+- **Speakers on the card:** `.qd-book__people` with `headshot-circle`s, stacked; side by side on wide. Circle 0.11 W, name and role at 0.85 × the text size (1.2 × on wide), on one line each.
 - **Wide (1920×1080): a landscape card** (decided 2026-11-11). The card is 5:4 and 72% of the canvas height (973 × 778 at 1920×1080), the largest that fits with the button inside the margins. Card and button are centered together. Every value above stays a share of W, where W is the portrait card's width at that height (631), except the title and supporting text, which are **1.5×** (46 px supporting) so the card doesn't look empty. The title is **1.6×** (104 px; 1.5 × 1.3, 2026-11-16).
 - **Slides on wide (no button): `.qd-book--slide`** (decided 2026-11-11). The card is centered on its own, both ways, and is **16:10** (1244 × 778 at 1920×1080) so speakers or an info list fit beside each other. The pattern still shows on every side.
-- **Info list on the card:** one Lucide icon per line (map-pin = place, calendar = date, clock = time), at the card's text size (the CSS sets it), `neutral-600` (`.qd-icon` on the light card), a `tight` gap. Speakers as `headshot-circle`, beside the list. The event type is never in this list ([`guidelines/`](../) section 11, rule 3).
+- **Info list on the card:** one Lucide icon per line (map-pin = place, calendar = date, clock = time), at the card's text size (the CSS sets it), `neutral-600` on the light card and `neutral-400` on the dark card (`.qd-icon`), a `tight` gap. Speakers as `headshot-circle`, beside the list. The event type is never in this list ([`guidelines/`](../) section 11, rule 3).
 - **Ultrawide: no light card.** There's no use case for it (decided 2026-11-11).
 - The card is centered, so it isn't tied to grid columns. Text inside it aligns to the card's padding.
-- Only on **Color-Sliced-Pattern-B**, red or violet, with its letter layer (decided 2026-11-11). Never with a big headshot; use `headshot-circle` if a speaker is needed.
+- **Any approved pattern and variant can go behind the card**, busy ones included, with no mask: text never touches the pattern (visual designer, 2026-11-25; it was only Color-Sliced-Pattern-B). Never with a big headshot; use `headshot-circle` if a speaker is needed.
 
 ```html
-<div class="qd-canvas">
+<html data-qd-layout="pending">
+<div class="qd-canvas" data-pattern-family="indigo">
   <!-- full-bleed pattern behind -->
-  <div class="qd-book">
+  <div class="qd-book">  <!-- add qd-book--dark for dark mode, with the Dark logo -->
     <div class="qd-box--light-card qd-book__card">
       <div class="qd-book__top">
         <img class="qd-logo" src="brand-assets/logo/qdrant-logo-light.svg" alt="Qdrant">
         <p class="qd-book__title">…</p>
       </div>
-      <div class="qd-book__bottom"><p class="qd-book__text">…</p></div>
+      <div class="qd-book__bottom">
+        <p class="qd-book__text">…</p>
+        <div class="qd-book__people"><!-- headshot-circle, one per speaker --></div>
+      </div>
     </div>
     <span class="qd-button qd-book__cta">Get the Guide</span>
   </div>
 </div>
+<script type="module">
+  import { fitBook } from "guidelines/layout/book.js";
+  // after the pattern is drawn:
+  await fitBook(document.querySelector(".qd-canvas"));
+</script>
 ```
 
 These styles come from recent Qdrant web sections in Figma (customer stat cards, the cluster bento grid, the hero). Box uses role names only, so it follows the Figma neutrals in [`colors/`](../../primitives/colors/) (since 2026-11-12).

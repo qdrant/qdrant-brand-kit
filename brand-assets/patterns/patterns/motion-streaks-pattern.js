@@ -10,13 +10,15 @@
 import { resolveToken, hexToRgba } from "./tokens.js";
 import { gradientSampler, makeFrame } from "./effects.js";
 
-// Approved by the visual designer on 2026-11-24. Length, density and softness sit on the 8 grid;
-// direction can be any angle (124° is the usual).
+// Approved by the visual designer on 2026-11-24. Length, density and softness sit on the 8 grid.
+// Direction: one fixed angle, 110° (visual designer, 2026-11-26): on screen it's the same 70° from
+// horizontal as Color-Sliced's stripes (-160°). Any other angle snaps to it.
 export const STREAK_RANGES = {
   length: [16, 80],
   density: [8, 64],
   softness: [32, 64],
 };
+export const STREAK_DIRECTIONS = [110];
 const ON_GRID = ["length", "density", "softness"];
 
 // The shader's hash, in 32-bit floats like the GPU.
@@ -33,14 +35,16 @@ const smoothstep = (a, b, x) => {
 };
 
 // Rounds length, density and softness to the 8 grid and keeps them in the approved
-// ranges. Direction can be any angle.
+// ranges. Direction snaps to the nearest approved angle.
 export function streakSettings(base, overrides = {}) {
   const s = { ...base, ...overrides };
   for (const key of ON_GRID) {
     const [lo, hi] = STREAK_RANGES[key];
     s[key] = clamp(Math.round(Number(s[key]) / 8) * 8, lo, hi);
   }
-  s.direction = Number(s.direction);
+  const wanted = ((Number(s.direction) % 360) + 360) % 360;
+  const gap = (d) => Math.min(Math.abs(d - wanted), 360 - Math.abs(d - wanted));
+  s.direction = STREAK_DIRECTIONS.reduce((best, d) => (gap(d) < gap(best) ? d : best));
   return s;
 }
 

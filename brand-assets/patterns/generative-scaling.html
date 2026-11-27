@@ -19,7 +19,7 @@
   </style>
 </head>
 <body>
-  <h1>Generative-Hexagon-Pattern-C: what should the hexagons do on bigger canvases?</h1>
+  <h1>Generative-Hexagon-Pattern: what should the hexagons do on bigger canvases?</h1>
   <p>Each row is one option, drawn at real sizes and shown scaled down to fit. The last image in each row is a 1:1 crop of the 4K version at real pixels, so you can see the actual hexagon size.</p>
   <div id="sheet"></div>
 
@@ -69,7 +69,7 @@
     }
 
     const tokens = await loadTokens("tokens/placeholder.tokens.json");
-    const base = (await loadPatterns()).find((p) => p.name === "Generative-Hexagon-Pattern-C");
+    const base = (await loadPatterns()).find((p) => p.name === "Generative-Hexagon-Pattern");
     const sheet = document.getElementById("sheet");
 
     for (const option of options) {

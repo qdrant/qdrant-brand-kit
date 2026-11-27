@@ -1,20 +1,11 @@
 [
-  "color-refracted-pattern-a",
   "color-sliced-pattern-a",
   "color-sliced-pattern-b",
   "motion-streaks-pattern-a",
   "motion-streaks-pattern-b",
-  "mesh-refracted-pattern-a",
-  "mesh-refracted-pattern-b",
-  "mesh-refracted-pattern-c",
-  "mesh-refracted-pattern-d",
-  "mesh-sliced-pattern-a",
-  "mesh-dithered-pattern-a",
-  "generative-hexagon-pattern-b",
-  "generative-hexagon-pattern-c",
-  "generative-burst-pattern-a",
-  "generative-dash-pattern-a",
-  "generative-dash-pattern-b",
-  "generative-glyph-pattern-a",
-  "generative-glyph-pattern-b"
+  "generative-hexagon-pattern",
+  "generative-burst-pattern",
+  "generative-dash-pattern",
+  "generative-pulse-pattern",
+  "generative-rings-pattern"
 ]
