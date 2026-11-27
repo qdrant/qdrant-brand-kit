@@ -4,12 +4,13 @@ How to make a printed creative: a flyer, a brochure, a poster, a roll-up, a busi
 
 **Everything that isn't physical comes from the same places as social creatives:** the primitives (colors, type, radius), the brand assets (logo, Qbot, imagery, icons), the parts in [`brand-components/`](../../brand-components/) and the composition rules in [`guidelines/`](../) (one hero, two text sizes, button placement). This folder adds what's physical (size, bleed, safe area, margins, folds, resolution, color conversion and export) and the few places where print differs: space imagery only on small prints (visual designer, 2026-11-26), a choice of look instead of the main-visual question, wider margins, and text sizes in pt (visual designer, 2026-11-20). Print uses the **light or the dark theme**, and the person picks **with or without a pattern** (visual designer, 2026-11-26).
 
-> **Large-format print is in progress** (visual designer, 2026-11-20). Booths, roll-ups and retractable banners, event backdrops, large banners and posters (A2 and bigger) aren't settled yet: margins, text sizes, image resolution, layout and export still need rules and testing. These rules are written and tested for pieces read up close (flyers, brochures, business cards, print PDFs). For a large-format piece, work from the vendor's spec, treat the result as a test, and have a designer check it. Booths go through the booth workflow in Figma for now.
+> **Large-format print is in progress** (visual designer, 2026-11-20). Booths, roll-ups and retractable banners, event backdrops, large banners and posters (A2 and bigger) aren't settled yet: margins, text sizes, image resolution, layout and export still need rules and testing. These rules are written and tested for pieces read up close (flyers, brochures, business cards, print PDFs). For a large-format piece, work from the vendor's spec, treat the result as a test, and have a designer check it. Booths follow [`booths.md`](booths.md) (visual designer, 2026-11-27).
 
 | File | What it is |
 | --- | --- |
 | `README.md` | The print rules (this page) |
 | `print.tokens.json` | Format presets as data: finished size, bleed, safe area, margin, folds, resolution and text sizes in pt. The printer's spec always overrides the physical values |
+| `booths.md`, `booths.tokens.json` | Booths: built from rules in the cloud, two-layer background, three drafts then the final PDF (visual designer, 2026-11-27) |
 | `stickers.md`, `stickers.tokens.json` | Stickers: contour and predefined shapes, their own logo, mask and cut rules (visual designer, 2026-11-27) |
 
 **This page is the only place for the print rules** (visual designer, 2026-11-26). Other files link here and keep at most a short summary. It absorbed the Print section of [`layout/`](../layout/) on 2026-11-26.

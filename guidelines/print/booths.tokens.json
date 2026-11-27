@@ -1,0 +1,60 @@
+{
+  "$description": "Booth settings (guidelines/print/booths.md, visual designer, 2026-11-27). Sizes in mm unless named in in. The vendor's spec always wins for size, bleed, safe area, keep-clear zones, dpi, color profile and file format. Values marked 'to confirm' are proposals from the WCNA26 test.",
+  "pieces": {
+    "backwall": { "name": "Back wall", "stands": true, "layers": ["logo", "heading", "supporting", "partnerLogos", "footerRow"] },
+    "counter":  { "name": "Counter or cabinet front", "stands": true, "layers": ["logo", "supporting"] },
+    "header":   { "name": "Header or fascia", "stands": false, "layers": ["logo", "heading"] },
+    "banner":   { "name": "Banner or roll-up", "stands": true, "layers": ["logo", "heading", "supporting", "footerRow"] },
+    "hanging":  { "name": "Hanging sign", "stands": false, "layers": ["logo", "heading"] }
+  },
+  "margin": { "$value": "8% of the short side, at least 1.5 x safe", "$description": "Print margin (README.md section 2); also the logo's clear space" },
+  "type": {
+    "title": { "$value": 440, "$description": "pt, the largest the heading may be; it shrinks until its longest word fits its column" },
+    "titleMin": { "$value": 360, "$description": "pt, about 90 mm cap height (to confirm: the WCNA26 tagline landed at 382 pt, 96 mm)" },
+    "supporting": { "$value": 128, "$description": "pt, about 32 mm cap height: supporting text, stats and labels" },
+    "capRatio": { "$value": 0.71, "$description": "Mona Sans cap height / font size, for the size checks" }
+  },
+  "logo": {
+    "file": "brand-assets/logo/qdrant-logo-white.svg",
+    "heightShare": { "$value": 0.062, "$description": "Logo height as a share of a wall's height: 5.9 in on the 95 in WCNA26 wall, 20% smaller than the first test (visual designer, 2026-11-27)" },
+    "counterHeightShare": { "$value": 0.12, "$description": "On counters and cabinets (to confirm: the first test's 170 mm on a 36 in cabinet was too big)" }
+  },
+  "eyeLevel": {
+    "band": { "$value": [48, 72], "$description": "in from the floor, standing walls" },
+    "floorClear": { "$value": 30, "$description": "in from the floor: nothing important below (people, stools, counters)" }
+  },
+  "qr": {
+    "min": { "$value": 300, "$description": "mm side, booth walls (README.md section 4)" },
+    "fromFloor": { "$value": [1000, 1600], "$description": "mm, where its center sits" }
+  },
+  "background": {
+    "base": { "preset": "motion-streaks-pattern-a", "colorway": "Background → Indigo 900", "$description": "Gradient + streaks; direction fixed at 110°. Draft preset: needs approval before real booths" },
+    "looks": ["generative-rings-pattern", "generative-pulse-pattern", "generative-hexagon-pattern", "generative-burst-pattern", "generative-dash-pattern"],
+    "lookAsLayer": { "$description": "No background at all: settings.background null, every colorway backdrop null, engine backdrop 'none'" },
+    "grain": { "$value": 4, "$description": "Noise on the painted background, so gradients don't band in CMYK" }
+  },
+  "look": {
+    "clear": { "$value": 2.5, "$description": "in of empty space around each content block" },
+    "fade": { "$value": 8, "$description": "in over which the look fades back in, linear" }
+  },
+  "dpi": {
+    "default": { "$value": 100, "$description": "When the spec gives none (Freeman: 100 for 4 to 8 ft viewing)" },
+    "min": { "$value": 75, "$description": "Never below, even for pieces seen from 15 ft or more" },
+    "max": { "$value": 250, "$description": "Vendors reject heavier files (Freeman's maximum)" }
+  },
+  "drafts": {
+    "count": 3,
+    "dpi": { "$value": 10, "$description": "A few seconds each; checks run on them" },
+    "vary": ["look", "variant", "colorway"],
+    "guides": ["safe", "margin", "keepClear", "eyeLevel", "floorClear"]
+  },
+  "final": {
+    "layoutDpi": { "$value": 20, "$description": "Layout and checks; only the background is painted at the vendor's dpi" },
+    "maxPageIn": { "$value": 200, "$description": "Largest PDF page Acrobat opens; bigger walls go at the vendor's scale" }
+  },
+  "color": {
+    "europe": "PSO Coated v3",
+    "us": "GRACoL 2013",
+    "$description": "Only when the spec names no profile (same exception as stickers). The proof says which was used"
+  }
+}

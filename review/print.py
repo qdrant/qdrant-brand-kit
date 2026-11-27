@@ -85,7 +85,18 @@ def main():
     ap.add_argument("--print-scale", choices=["normal", "small"], default="normal",
                     help="small: the smaller text sizes (titleMin, supportingMin), to keep text in the calm sky")
     ap.add_argument("--root", default=None, help="folder served at / (default: the page's folder)")
+    ap.add_argument("--dpi", type=float, default=None,
+                    help="layout and check resolution in dpi (default 300). Booths: 10 for drafts, 20 for the final "
+                         "(guidelines/print/booths.md); text and the logo stay vector in the PDF at any value")
+    ap.add_argument("--pattern-dpi", type=float, default=None,
+                    help="paint the background (pattern) layer at this dpi, the vendor's, while layout and checks run "
+                         "at --dpi. Booths: about 2 minutes for a 10 ft wall instead of 7 at 100 dpi throughout")
     a = ap.parse_args()
+    global DPI, PX_PER_MM, PT_PER_PX
+    if a.dpi:
+        DPI = a.dpi
+        PX_PER_MM = DPI / 25.4
+        PT_PER_PX = 72 / DPI
 
     defaults, fmt = load_format(a.format)
     from_spec = []
@@ -161,6 +172,16 @@ def main():
     rel = os.path.relpath(page, root).replace(os.sep, "/")
     from urllib.parse import quote
     url = f"http://127.0.0.1:{srv.server_address[1]}/{rel}?w={W}&h={H}&qd-print={quote(json.dumps(params))}"
+    # The background layer at its own dpi (--pattern-dpi). Same layout in mm, every px value scaled.
+    s_bg = (a.pattern_dpi / DPI) if a.pattern_dpi else 1
+    W_bg, H_bg = round(W * s_bg), round(H * s_bg)
+    params_bg = dict(params)
+    for k in ("w", "h", "dpi", "pxPerMm", "bleedPx", "slugPx", "markLenPx", "markGapPx", "markWeightPx", "u"):
+        params_bg[k] = params[k] * s_bg
+    params_bg["w"], params_bg["h"] = W_bg, H_bg
+    if "type" in params:
+        params_bg["type"] = {k: v * s_bg for k, v in params["type"].items()}
+    url_bg = f"http://127.0.0.1:{srv.server_address[1]}/{rel}?w={W_bg}&h={H_bg}&qd-print={quote(json.dumps(params_bg))}"
     from PIL import Image, ImageChops, ImageDraw
     Image.MAX_IMAGE_PIXELS = None
 
@@ -170,12 +191,14 @@ def main():
     backdrop_png = os.path.join(layer_dir, "backdrop.png")
     with tempfile.TemporaryDirectory() as tmp:
         raw = os.path.join(tmp, "raw.png")
-        for target, extra in ((full_png, ""), (full_png[:-4] + ".bg.png", "&qd-bg=1"),
-                              (backdrop_png, "&qd-layer=backdrop")):
-            render.chrome([f"--window-size={W},{H + render.EXTRA_H}", f"--screenshot={raw}", url + extra])
+        for target, extra, ww, hh, u0 in ((full_png, "", W, H, url), (full_png[:-4] + ".bg.png", "&qd-bg=1", W, H, url),
+                              (backdrop_png, "&qd-layer=backdrop", W_bg, H_bg, url_bg)):
+            render.chrome([f"--window-size={ww},{hh + render.EXTRA_H}", f"--screenshot={raw}", u0 + extra])
             if not os.path.exists(raw):
                 sys.exit("Chrome made no screenshot")
-            Image.open(raw).crop((0, 0, W, H)).save(target)
+            Image.open(raw).crop((0, 0, ww, hh)).save(target)
+    backdrop_check_png = backdrop_png[:-4] + "-check.png"   # the backdrop at the layout's dpi, for the checks
+    Image.open(backdrop_png).resize((W, H)).save(backdrop_check_png)
     dom = render.chrome([f"--window-size={W},{H + render.EXTRA_H}", "--dump-dom", url]).stdout
     mm = re.search(r'<script type="application/json" id="qd-measure">(.*?)</script>', dom, re.S)
     if not mm:
@@ -195,8 +218,13 @@ def main():
     rgb_pdf = os.path.join(a.out, f"{name}-rgb.pdf")
     backdrop = Image.open(backdrop_png).convert("RGB")
     # Grain on image fades, print only, so large fades don't band in CMYK (guidelines/print/ section 3).
+    # Grain over the whole pattern layer, so its gradients and glows don't band in CMYK, like the image fades
+    # below (guidelines/print/booths.md section 3).
+    if pinfo["canvases"]:
+        noise = Image.effect_noise(backdrop.size, 4).convert("RGB")
+        backdrop = ImageChops.add(backdrop, noise, 1.0, -128)
     for f in pinfo.get("fades", []):
-        box = (max(0, int(f["x"])), max(0, int(f["y"])), min(W, int(f["x"] + f["w"])), min(H, int(f["y"] + f["h"])))
+        box = (max(0, int(f["x"] * s_bg)), max(0, int(f["y"] * s_bg)), min(W_bg, int((f["x"] + f["w"]) * s_bg)), min(H_bg, int((f["y"] + f["h"]) * s_bg)))
         if box[2] > box[0] and box[3] > box[1]:
             region = backdrop.crop(box)
             noise = Image.effect_noise(region.size, 4).convert("RGB")  # about ±4 levels around 128
@@ -302,7 +330,7 @@ def main():
     # Text on a busy background: detail (edge density) behind each text box, in the backdrop (canvas color
     # and images only, so cards and buttons don't count).
     from PIL import ImageFilter
-    back_img = Image.open(backdrop_png).convert("RGB")
+    back_img = Image.open(backdrop_check_png).convert("RGB")
     busy = []
     from PIL import ImageStat
     for t in texts:
@@ -375,8 +403,9 @@ def main():
             img_bad.append(f"Qbot has its glow ({nm}): no glow in print")
         if is_space(i) and large:
             img_bad.append(f"space imagery on a large format ({nm}): small prints only")
-    if a.min_dpi and a.min_dpi > DPI and pinfo["canvases"]:
-        img_look.append(f"the vendor asks {a.min_dpi:g} dpi; patterns are painted at {DPI} dpi")
+    pat_dpi = a.pattern_dpi or DPI
+    if a.min_dpi and a.min_dpi > pat_dpi and pinfo["canvases"]:
+        img_look.append(f"the vendor asks {a.min_dpi:g} dpi; patterns are painted at {pat_dpi:g} dpi")
     row("Images", False if img_bad else ("look" if img_look else True),
         "; ".join(img_bad + img_look) if img_bad or img_look else
         ("images allowed for this piece" if pics else "no images") + " (guidelines/print/ sections 3 and 5)")
