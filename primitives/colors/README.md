@@ -97,7 +97,7 @@ Supporting colors in marketing: on dark backgrounds, step 500 of any family. On 
 
 - **Dark theme is the default.** Light for documents, light-mode UIs, and some light moments in creatives, like the [Hybrid Cloud ad](https://www.figma.com/design/EXDtNCOBfmPCWabNex7sSJ/Campaigns?node-id=2760-5635) (decided 2026-11-04).
 - **Print uses both themes, light or dark** (visual designer, 2026-11-26). It replaces "light for print" (2026-11-04). The other color rules hold in print too: no hex values, no gradients on text, red backgrounds only with a yes. How to choose for a printed piece is in [`guidelines/print/`](../../guidelines/print/).
-- **Amaranth is an accent** in UI and text: buttons, highlights, small marks. **Red pattern backgrounds are allowed** for creatives that need to grab attention (a red colorway, Hexagon-B, Dash-B), as [`guidelines/`](../../guidelines/) section 3 says (decided 2026-11-04). Never a flat amaranth fill behind text.
+- **Amaranth is an accent** in UI and text: buttons, highlights, small marks. **Red pattern backgrounds are allowed** for creatives that need to grab attention (an amaranth colorway), as [`guidelines/`](../../guidelines/) section 3 says (decided 2026-11-04). Never a flat amaranth fill behind text.
 - **Two gradients, never on text.** `gradient.brand` for hero moments, `gradient.headshot` only behind headshot cutouts. No others: the [button](../../brand-components/button/) is a flat `amaranth-600` since 2026-11-19.
 - **Never a hex value** in a creative, a component or a page. Use the variables.
 - **Contrast:** text on dark uses `text.primary` or `text.secondary`. Never light gray on medium gray. Design Lab checks WCAG AA: 4.5 for body text, 3.0 for text from 24 px.

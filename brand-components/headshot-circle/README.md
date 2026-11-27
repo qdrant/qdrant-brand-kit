@@ -100,3 +100,16 @@ Use `.qd-grid`. Rows are a `section` gap apart.
 ## Approved by / date
 
 Visual designer, 2026-11-04.
+
+## Photo background in the pattern's color family
+
+The photo background follows the pattern's color family, darker at the top and lighter at the bottom (visual designer, 2026-11-25):
+
+| Pattern family | Top | Bottom |
+| --- | --- | --- |
+| Indigo | `indigo-975` | `indigo-700` |
+| Amaranth | `amaranth-975` | `amaranth-700` |
+| Teal (on hold) | `teal-975` | `teal-700` |
+| Dark neutral | `neutral-1000` | `neutral-800` |
+
+Never a different family from the pattern: no indigo photo backgrounds on an amaranth pattern. Put `data-pattern-family="indigo"` (or `amaranth`, `teal`, `neutral`) on the canvas. Without it, the photo keeps the indigo headshot gradient.
