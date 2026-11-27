@@ -1,6 +1,6 @@
 // The Patterns tab's Explorations (2026-11-24): patterns on real sections from web/registry, each a fixed pairing
 // with a code (EX-01) to point at while curating. A pairing is a trial, not a decision: the sections keep their
-// own patterns until Juan says yes to one.
+// own patterns until the design lead says yes to one.
 //
 // slot is where the pattern goes: "background" behind the section (a background pattern), "cards" inside its
 // cards (a surface pattern). tone is the color it starts in; each pairing can switch it. No descriptions: the

@@ -39,7 +39,7 @@ function flagsFor(e: Pick<Exploration, "section" | "pattern">, tone: Tone) {
   const flags: { rule: string; source: string }[] = []
   if (e.section === "cta")
     flags.push({
-      rule: "No glows or patterns on a call to action for now (Juan, 2026-11-21)",
+      rule: "No glows or patterns on a call to action for now (design lead, 2026-11-21)",
       source: "web/registry/cta.ts",
     })
   if (tone === "primary")
@@ -347,7 +347,7 @@ export function PatternExplorationsView() {
           <p className="text-sm text-muted-foreground">
             The patterns on real sections, with their real copy, to see how they could work on the website. No pairing
             puts the pattern under any letters, at any size. These are trials, not decisions: the sections keep their
-            own patterns until Juan says yes to one.
+            own patterns until the design lead says yes to one.
           </p>
           <p className="font-mono text-xs text-muted-foreground">
             {all.length} explorations · {explorationGroups.length} components

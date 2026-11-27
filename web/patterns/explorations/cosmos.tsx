@@ -498,7 +498,7 @@ export const SUBJECT: PatternNote = {
 export const ROOM: PatternNote = {
   rule: "A pattern fills its section",
   source: "web/AGENTS.md, Adding a pattern",
-  text: "It lives along the bottom of the section and reads best with room under the content: the exploration adds it (in a footer, above the legal bar; in a hero or a header, at the bottom). Keeping it means the section gets that room, for Juan to decide.",
+  text: "It lives along the bottom of the section and reads best with room under the content: the exploration adds it (in a footer, above the legal bar; in a hero or a header, at the bottom). Keeping it means the section gets that room, for the design lead to decide.",
 }
 export const SIDE: PatternNote = {
   rule: "A pattern fills its section",
@@ -1027,7 +1027,7 @@ const constellationCorner = cosmos({
 const REFERENCE: PatternNote = {
   rule: "References are for patterns, never copies",
   source: "web/guidelines.ts, Content and originality",
-  text: "It comes from a reference site's dotted 3D surface (izum.study). It's redrawn with hexagons, the website's colors, light from above and vector-search hover moments, but a surface of points in perspective is close to that site's signature visual. Juan to decide.",
+  text: "It comes from a reference site's dotted 3D surface (izum.study). It's redrawn with hexagons, the website's colors, light from above and vector-search hover moments, but a surface of points in perspective is close to that site's signature visual. The design lead to decide.",
 }
 const RED: PatternNote = {
   rule: "Brand patterns are violet by default, red only with a yes",

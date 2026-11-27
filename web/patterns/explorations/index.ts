@@ -33,7 +33,7 @@ const STEPPED: PatternNote = {
 const FOOTER_ROOM: PatternNote = {
   rule: "A pattern fills its section",
   source: "web/AGENTS.md, Adding a pattern",
-  text: "It needs room between the footer's content and its legal bar: the exploration adds it there (the frame's room) and lifts the band over the legal bar. Keeping it means the footer section gets that room, for Juan to decide.",
+  text: "It needs room between the footer's content and its legal bar: the exploration adds it there (the frame's room) and lifts the band over the legal bar. Keeping it means the footer section gets that room, for the design lead to decide.",
 }
 
 const FOOTER_WORD: PatternNote = {
@@ -51,7 +51,7 @@ const FOOTER_WORD_FIELD = { unitPx: 280, shape: "text", text: "QDRANT", size: 1.
 const HORIZON_ROOM: PatternNote = {
   rule: "A pattern fills its section",
   source: "web/AGENTS.md, Adding a pattern",
-  text: "It needs room under the section's content: the exploration adds it (in a footer, above the legal bar; in a hero or a page header, at the bottom of the section). Keeping it means the section gets that room, for Juan to decide.",
+  text: "It needs room under the section's content: the exploration adds it (in a footer, above the legal bar; in a hero or a page header, at the bottom of the section). Keeping it means the section gets that room, for the design lead to decide.",
 }
 
 // A side pattern is for a split hero: it stays on the media's side, away from the text.
@@ -413,7 +413,7 @@ export const explorations: PatternDefinition[] = [
       {
         rule: "A pattern fills its section",
         source: "web/AGENTS.md, Adding a pattern",
-        text: "It needs room between the footer's content and its legal bar: the exploration adds 320px there (the frame's room) and lifts the band over the legal bar. Keeping it means the footer section gets that room, for Juan to decide.",
+        text: "It needs room between the footer's content and its legal bar: the exploration adds 320px there (the frame's room) and lifts the band over the legal bar. Keeping it means the footer section gets that room, for the design lead to decide.",
       },
       {
         rule: "No twinkling stars behind data",
@@ -422,7 +422,7 @@ export const explorations: PatternDefinition[] = [
       },
       {
         rule: "Mona Sans Mono replaced Geist Mono",
-        source: "primitives/typography/README.md (Juan, 2026-11-17)",
+        source: "primitives/typography/README.md (design lead, 2026-11-17)",
         text: "Pattern Studio draws the characters in Geist Mono, the brand's old mono. Here they're in Mona Sans Mono, Medium.",
       },
       LOOPS,
@@ -587,7 +587,7 @@ export const explorations: PatternDefinition[] = [
       HORIZON_ROOM,
       {
         rule: "Mona Sans Mono replaced Geist Mono",
-        source: "primitives/typography/README.md (Juan, 2026-11-17)",
+        source: "primitives/typography/README.md (design lead, 2026-11-17)",
         text: "Pattern Studio draws the characters in Geist Mono, the brand's old mono. Here they're in Mona Sans Mono, Medium.",
       },
       LOOPS,
@@ -681,7 +681,7 @@ export const explorations: PatternDefinition[] = [
       SIDE_ONLY,
       {
         rule: "Mona Sans Mono replaced Geist Mono",
-        source: "primitives/typography/README.md (Juan, 2026-11-17)",
+        source: "primitives/typography/README.md (design lead, 2026-11-17)",
         text: "Pattern Studio draws the characters in Geist Mono, the brand's old mono. Here they're in Mona Sans Mono, Medium.",
       },
       LOOPS,

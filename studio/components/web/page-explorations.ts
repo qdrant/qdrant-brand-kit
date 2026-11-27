@@ -8,7 +8,7 @@
 // and list it in `worlds` below.
 //
 // Patterns are kept few and far apart, so the page breathes: never two in a row, none behind figures (stats), and
-// the call to action's own rule ("No glows or patterns for now", Juan, 2026-11-21) is flagged where it's broken.
+// the call to action's own rule ("No glows or patterns for now", design lead, 2026-11-21) is flagged where it's broken.
 
 import type { Block } from "./blocks"
 import { explorationGroups } from "./pattern-explorations"

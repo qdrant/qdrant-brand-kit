@@ -30,7 +30,7 @@ import {
 const COPY = (what: string): PatternNote => ({
   rule: "References are for patterns, never copies",
   source: "web/guidelines.ts, Content and originality",
-  text: `It's drawn from ${what}, redrawn with hexagons, the website's colors and light from above. Juan to decide whether it's far enough from the original.`,
+  text: `It's drawn from ${what}, redrawn with hexagons, the website's colors and light from above. The design lead to decide whether it's far enough from the original.`,
 })
 const SCROLL: PatternNote = {
   rule: "Slow or still, and subtle",
