@@ -52,6 +52,27 @@ python3 review/print.py my-flyer.html --format flyer-a4 --out out/ --name spring
 - Text and the logo stay sharp at any size in the PDF. A backdrop with a pattern, a mask or an image fade goes in as one 300 dpi image painted at the printed size, because Chrome's PDF export loses CSS masks; a plain color backdrop stays a flat color.
 - Needs Ghostscript (`brew install ghostscript` on a Mac, `apt install ghostscript` on Linux) on top of what's listed above.
 
+## Stickers
+
+For stickers, read [`guidelines/print/stickers.md`](../guidelines/print/stickers.md) only. No HTML page: [`sticker/sticker.py`](sticker/sticker.py) builds the sticker straight from the image.
+
+```bash
+# Contour (die-cut around the subject): the image is the subject already cut out (RGBA).
+# --avoid: areas the logo stays off (face, visor, hands, a light), in image px.
+python3 review/sticker/sticker.py contour astronaut.png --out ~/stickers --name kubecon-astronaut --width 80 \
+  --avoid 660,60,910,330 --avoid 195,330,330,455
+
+# A predefined shape: the full image. --subject is the subject's mask (white on black); without it, rembg finds it.
+python3 review/sticker/sticker.py shape space.png --shape circle --size 70 --out ~/stickers --name kubecon-circle
+```
+
+- `--region EU`, `US` or `both` (default): PSO Coated v3 or GRACoL 2013, downloaded once into `~/.cache/qdrant-stickers` (stickers.md section 1).
+- It writes, per region, `<name>_EU.pdf` / `<name>_US.pdf` (PDF/X-4, CMYK only, `Artwork` and `CutContour` layers), plus `<name>-proof.png` (the cut drawn thick), `<name>-proof-cut.png` (the cut plate alone), `<name>-proof-art.png`, `<name>-sticker.md` (the checks) and `<name>_report.json`. It exits 1 if a check fails: never deliver a failed sticker.
+- Contour: places the logo tab on the outline, merges the die line and checks the border, the logo, notches and the single cut path. Shapes: places the logo by the shape (round: center top or bottom; corners: a corner), reframes within 300 ppi, and picks the softest mask that passes contrast without darkening the subject's head, torso or hands, up to 80%.
+- Every size, step and limit comes from [`guidelines/print/stickers.tokens.json`](../guidelines/print/stickers.tokens.json).
+- Needs Python with `numpy`, `opencv-python-headless`, `Pillow`, `pikepdf`, `svgelements` and `potracer` (`pip install numpy opencv-python-headless Pillow pikepdf svgelements potracer`); `rembg[cpu]` for shapes without `--subject`; `pdftoppm` and Ghostscript for the proof.
+- Not built yet: sheets of several stickers (A4, A5), and cutting out a freshly generated image (stickers.md section 8).
+
 ## What the checks can't judge
 
 `check.py` ends with a short list to review by eye: hierarchy and calm, top and bottom spread, crops, text on a calm part of a pattern, the logo version for the background, one hero, no eyebrow or made-up content. Look at every render before showing it.

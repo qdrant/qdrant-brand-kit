@@ -46,6 +46,7 @@ Logo height in px at each shape's reference canvas. `logo.css` scales it with `-
 | `story` | 1080×1920 | 300 × 80 | 30 |
 
 - **Minimum:** 24 px tall (90×24) on screen, 0.84 cm tall (3.1×0.84 cm) in print. A scaled-down canvas never takes the logo under 24 px.
+- **Stickers** rotate the logo, give it a white backing and use their own minimum: see [`guidelines/print/stickers.md`](../../guidelines/print/stickers.md) section 5 (visual designer, 2026-11-27).
 - **Full logo only** in creatives. The brandmark on its own isn't used there.
 
 ## Clear space

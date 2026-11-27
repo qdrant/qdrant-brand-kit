@@ -10,6 +10,7 @@ How to make a printed creative: a flyer, a brochure, a poster, a roll-up, a busi
 | --- | --- |
 | `README.md` | The print rules (this page) |
 | `print.tokens.json` | Format presets as data: finished size, bleed, safe area, margin, folds, resolution and text sizes in pt. The printer's spec always overrides the physical values |
+| `stickers.md`, `stickers.tokens.json` | Stickers: contour and predefined shapes, their own logo, mask and cut rules (visual designer, 2026-11-27) |
 
 **This page is the only place for the print rules** (visual designer, 2026-11-26). Other files link here and keep at most a short summary. It absorbed the Print section of [`layout/`](../layout/) on 2026-11-26.
 

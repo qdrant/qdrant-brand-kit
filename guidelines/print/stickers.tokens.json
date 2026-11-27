@@ -1,0 +1,58 @@
+{
+  "$description": "Sticker settings (guidelines/print/stickers.md, visual designer, 2026-11-27). Sizes in mm. The vendor's spec always wins for bleed, safe area, cut line name and profile.",
+  "defaults": {
+    "shape": "contour",
+    "layout": "single",
+    "bleed": { "$value": 1.5, "$description": "mm of paper white past a contour cut; 2 mm of image past a shape's cut. The vendor's value wins" },
+    "shapeBleed": { "$value": 2.0 },
+    "safe": { "$value": 3.0, "$description": "mm inside the cut, the vendor's cutting tolerance" },
+    "minPpi": { "$value": 300 }
+  },
+  "contour": {
+    "border": { "$value": 2.0, "$description": "White border and the logo's backing, the same width (to confirm: the hand-made reference is closer to 3 mm)" },
+    "closeMm": { "$value": 1.5, "$description": "Smooths notches where the logo tab meets the border" },
+    "minDetailMm": { "$value": 1.0, "$description": "No inside corners or necks tighter than this" },
+    "logo": { "file": "brand-assets/logo/qdrant-logo-light.svg", "overlap": 0.3, "$description": "Light logo on its white backing; its bottom edge sits 0.3 x its height over the artwork" }
+  },
+  "shape": {
+    "margin": { "$value": "8% of the short side, at least 1.5 x safe" },
+    "logo": { "file": "brand-assets/logo/qdrant-logo-white.svg" },
+    "presets": {
+      "circle": { "round": true },
+      "oval": { "round": true },
+      "square": { "round": false },
+      "rectangle": { "round": false },
+      "rounded": { "round": false, "cornerRadius": 4.0 }
+    }
+  },
+  "logo": {
+    "widthShare": { "$value": 0.2, "$description": "About 20% of the sticker's width" },
+    "minHeightMm": { "$value": 5.0, "$description": "Sticker exception to the 0.84 cm print minimum" },
+    "contrastWordmark": 4.5,
+    "contrastBrandmark": 3.0
+  },
+  "mask": {
+    "curve": "smootherstep",
+    "reachMax": { "$value": 0.7, "$description": "The fade runs up to 70% of the sticker from the edge nearest the logo" },
+    "steps": { "$value": [1.0, 0.7, 0.55, 0.4, 0.3, 0.2], "$description": "Image left at the edge: 1.0 = no mask; 0.2 = 80%, the strongest" },
+    "max": { "$value": 0.8, "$description": "Above 80% at the edge, generate the image again instead" },
+    "subjectFocal": { "$value": 0.6, "$description": "The upper 60% of the subject (head, torso, hands) is never darkened (1% at most)" },
+    "toward": "rich black C40 M0 Y0 K100 in print, neutral 950 on screen"
+  },
+  "color": {
+    "EU": { "profile": "PSO Coated v3", "url": "https://www.color.org/registry/profiles/PSOcoated_v3.icc" },
+    "US": { "profile": "GRACoL2013_CRPC6", "url": "https://www.color.org/registry/profiles/GRACoL2013_CRPC6.icc" },
+    "darkText": "K100 only",
+    "richBlack": "C40 M0 Y0 K100"
+  },
+  "cut": {
+    "spotName": { "$value": "CutContour", "$description": "Some vendors use Thru-cut, KissCut or Die: the vendor's name wins" },
+    "spotCmyk": [0, 1, 0, 0],
+    "strokePt": 0.25,
+    "overprint": true
+  },
+  "sheets": {
+    "a4": { "trim": [210, 297], "gap": 3.0, "status": "to build" },
+    "a5": { "trim": [148, 210], "gap": 3.0, "status": "to build" }
+  }
+}
