@@ -1,9 +1,13 @@
 import type { PatternDefinition, PatternNote } from "../types"
 import { cosmosPatterns } from "./cosmos"
 import { depthHazeVivid, depthHazeVividBackground } from "./depth-haze-vivid"
+import { fiberPatterns } from "./fibers"
 import { generativePattern } from "./generative"
+import { heroSpacePatterns } from "./hero-space"
+import { instrumentPatterns } from "./instruments"
 import { qbotPeek } from "./qbot"
 import { referencePatterns } from "./references"
+import { signaturePatterns } from "./signature"
 import { spacePatterns } from "./space"
 
 // Patterns being explored, not approved: they show only in the studio's Patterns tab, marked Exploring, and not in
@@ -782,6 +786,14 @@ export const explorations: PatternDefinition[] = [
   ...cosmosPatterns,
   // From the references the team shared (references.tsx).
   ...referencePatterns,
+  // From a fiber-optic image: hairline strands curling into a fan, with hexagon tips (fibers.tsx).
+  ...fiberPatterns,
+  // From a globe over orbit rings, an isometric field of nodes and a spiral of letters (instruments.tsx).
+  ...instrumentPatterns,
+  // From the brand's own world: the sky, the dunes, the LED panel, Qbot and the brand's patterns (signature.tsx).
+  ...signaturePatterns,
+  // The hero lab's three.js backgrounds, brought in as they are (hero-space.tsx, hero-lab/).
+  ...heroSpacePatterns,
   // An easter egg for a hero: Qbot peeks over the heading on the first hover (qbot.tsx).
   qbotPeek,
   // Depth haze with stars in more contrast and more movement, as a surface and a background (depth-haze-vivid.tsx).

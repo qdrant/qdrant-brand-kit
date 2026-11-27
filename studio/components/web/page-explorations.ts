@@ -10,6 +10,8 @@
 // Patterns are kept few and far apart, so the page breathes: never two in a row, none behind figures (stats), and
 // the call to action's own rule ("No glows or patterns for now", design lead, 2026-11-21) is flagged where it's broken.
 
+import { getSection } from "@qdrant/web/registry"
+
 import type { Block } from "./blocks"
 import { explorationGroups } from "./pattern-explorations"
 import { cloud } from "./page-worlds/cloud"
@@ -17,8 +19,9 @@ import { home } from "./page-worlds/home"
 
 export type PageBlock = Omit<Block, "uid">
 
-// A pattern on one section: a background behind it, or a surface in its cards.
-export type MixOption = { pattern?: string[]; cardPattern?: string }
+// A pattern on one section: a background behind it, or a surface in its cards, and the room it needs under the
+// section's content, if any (pad, in px, as in the Component Explorations; 2026-11-27).
+export type MixOption = { pattern?: string[]; cardPattern?: string; pad?: number }
 // Patterns per section, by the world's section keys.
 export type Mix = Partial<Record<string, MixOption>>
 
@@ -36,12 +39,12 @@ export type PageWorld = {
   source: string
   // Its sections in the page's order.
   sections: Record<string, PageBlock>
-  // Each section's name in the Randomize panel.
+  // Each section's name on its style menu.
   labels: Record<string, string>
   // Sections that never take a pattern (figures, the navbar).
   noPattern?: string[]
   versions: PageVersion[]
-  // The Randomize panel's first mix.
+  // The page the style menus start from.
   start: Mix
   // Where the live page has something the library can't show, said once so it isn't mistaken for a choice.
   gaps?: string[]
@@ -59,6 +62,10 @@ export const worldGroups = () =>
 
 export const sectionKeys = (world: PageWorld) => Object.keys(world.sections)
 
+// The sections that render, in order: the frame maps its root's children to these.
+export const renderedKeys = (world: PageWorld) =>
+  sectionKeys(world).filter((k) => getSection(world.sections[k].section))
+
 // A world's page with a mix of patterns.
 export const worldPage = (world: PageWorld, mix: Mix = {}): PageBlock[] =>
   sectionKeys(world).map((k) => ({ ...world.sections[k], ...mix[k] }) as PageBlock)
@@ -75,10 +82,12 @@ export const versionsOf = (world: PageWorld): ShownVersion[] =>
 // A version by its id, in any world, for the frame.
 export const getPageExploration = (id: string) => worlds.flatMap(versionsOf).find((p) => p.id === id)
 
-// ---- Randomize (2026-11-26) -------------------------------------------------------------------------------------------
-// Each section's pattern options, from the Component Explorations pairings on that same section and variant (a
-// background pattern or a card pattern). Pairings that need room the page doesn't give them (the footer's bands, the
-// horizons' padding) are left out.
+// ---- Styles (2026-11-26, as menus since 2026-11-27) ----------------------------------------------------------------
+// Each section's styles: none, or one of the Component Explorations pairings on that same section and variant (a
+// background pattern or a card pattern). A pairing that needs room under the section's content (a pad: the horizons,
+// the dunes, the hero lab's backgrounds) brings it along, and the frame adds it to that section (2026-11-27); the
+// footer's bands, which need room inside the footer, are left out. The page's view floats a menu of them over each
+// section.
 
 const OPTIONS = new WeakMap<PageWorld, Record<string, MixOption[]>>()
 
@@ -93,10 +102,14 @@ export function optionsFor(world: PageWorld): Record<string, MixOption[]> {
       const options = world.noPattern?.includes(k)
         ? []
         : pairings
-            .filter((e) => e.section === section && e.variant === variant && !e.room && !e.pad && !e.bandBottom)
-            .map((e): MixOption => (e.slot === "background" ? { pattern: [e.pattern] } : { cardPattern: e.pattern }))
+            .filter((e) => e.section === section && e.variant === variant && !e.room && !e.bandBottom)
+            .map((e): MixOption => ({
+              ...(e.slot === "background" ? { pattern: [e.pattern] } : { cardPattern: e.pattern }),
+              ...(e.pad ? { pad: e.pad } : {}),
+            }))
+            // One per pattern: the menu tells options apart by their pattern.
             .filter((o) => {
-              const key = JSON.stringify(o)
+              const key = `${o.cardPattern ? "cards" : "bg"}:${idOf(o)}`
               if (seen.has(key)) return false
               seen.add(key)
               return true
@@ -108,58 +121,7 @@ export function optionsFor(world: PageWorld): Record<string, MixOption[]> {
   return out
 }
 
-const idOf = (o?: MixOption) => o?.pattern?.[0] ?? o?.cardPattern ?? ""
-
-// A random mix that keeps the page breathing: at most four patterns, never two sections in a row, each pattern once,
-// and each section either plain or one of its own options.
-export function randomMix(world: PageWorld, rand: () => number = Math.random): Mix {
-  const options = optionsFor(world)
-  const mix: Mix = {}
-  let count = 0
-  let previous = false
-  const used = new Set<string>()
-  for (const k of sectionKeys(world)) {
-    const own = options[k] ?? []
-    if (previous || count >= 4 || !own.length || rand() < 0.45) {
-      previous = false
-      continue
-    }
-    // Each pattern once per page, so a mix reads as a combination rather than a repeat.
-    const fresh = own.filter((o) => !used.has(idOf(o)))
-    const pick = fresh[Math.floor(rand() * fresh.length)]
-    if (!pick) {
-      previous = false
-      continue
-    }
-    mix[k] = pick
-    used.add(idOf(pick))
-    count += 1
-    previous = true
-  }
-  return mix
-}
-
-// One section at a time: another of its own options, one the page doesn't use yet when there is one. The page's
-// rules (at most four, never two in a row) are shown, not enforced, so a single section can still be tried anywhere.
-export function shuffleSection(world: PageWorld, mix: Mix, key: string, rand: () => number = Math.random): Mix {
-  const current = idOf(mix[key])
-  const others = new Set(
-    Object.keys(mix)
-      .filter((k) => k !== key)
-      .map((k) => idOf(mix[k]))
-  )
-  const options = (optionsFor(world)[key] ?? []).filter((o) => idOf(o) !== current)
-  const fresh = options.filter((o) => !others.has(idOf(o)))
-  const pool = fresh.length ? fresh : options
-  const pick = pool[Math.floor(rand() * pool.length)]
-  return pick ? { ...mix, [key]: pick } : mix
-}
-
-export function clearSection(mix: Mix, key: string): Mix {
-  const next = { ...mix }
-  delete next[key]
-  return next
-}
+export const idOf = (o?: MixOption) => o?.pattern?.[0] ?? o?.cardPattern ?? ""
 
 // What breaks the page's rules in a mix, by section: a pattern next to another one, or a fifth one and over.
 export function mixWarnings(world: PageWorld, mix: Mix): Record<string, string> {

@@ -8,7 +8,7 @@ import { Plate } from "@qdrant/web/lib/plate"
 import { Section } from "@qdrant/web/lib/section"
 import { getPattern } from "@qdrant/web/patterns"
 
-import { decodeMix, getPageExploration, getWorld, worldPage, worlds } from "./page-explorations"
+import { decodeMix, getPageExploration, getWorld, renderedKeys, worldPage, worlds } from "./page-explorations"
 import {
   RenderBlock,
   defaultStyle,
@@ -78,6 +78,56 @@ export function WebFrame() {
     send()
     return () => ro.disconnect()
   }, [key])
+
+  // Pages Explorations (2026-11-27): a page built with the style menus. The studio sends each new mix by postMessage
+  // (qd-page-mix), so the page changes in place instead of reloading, and the page reports where each section sits
+  // (qd-frame-sections), so the studio can float each section's style menu over it. A section renders one element,
+  // so the root's children are the page's sections in order.
+  const mixWorld = params.get("page-mix") !== null ? (params.get("page-world") ?? "home") : null
+  const [liveMix, setLiveMix] = React.useState<string | null>(null)
+  React.useEffect(() => {
+    if (!mixWorld) return
+    const onMessage = (e: MessageEvent) => {
+      if (e.data?.type === "qd-page-mix" && e.data.key === key) setLiveMix(String(e.data.mix))
+    }
+    window.addEventListener("message", onMessage)
+    return () => window.removeEventListener("message", onMessage)
+  }, [key, mixWorld])
+  React.useEffect(() => {
+    const el = root.current
+    if (!mixWorld || !el || window.parent === window) return
+    const world = getWorld(mixWorld) ?? worlds[0]
+    if (!world) return
+    const keys = renderedKeys(world)
+    const send = () => {
+      const base = el.getBoundingClientRect().top
+      const sections = [...el.children].map((c, i) => {
+        const r = c.getBoundingClientRect()
+        return { key: keys[i] ?? "", top: r.top - base, height: r.height }
+      })
+      window.parent.postMessage({ type: "qd-frame-sections", key, sections }, "*")
+    }
+    const ro = new ResizeObserver(send)
+    ro.observe(el)
+    for (const c of el.children) ro.observe(c)
+    send()
+    return () => ro.disconnect()
+  }, [key, mixWorld, liveMix])
+  // A style can bring room under a section's content (its pad, 2026-11-27), as the Explorations' frames add it: set
+  // on that section's own element, since a wrapper would break the seams' :first-child and next-sibling rules.
+  React.useLayoutEffect(() => {
+    const el = root.current
+    if (!mixWorld || !el) return
+    const world = getWorld(mixWorld) ?? worlds[0]
+    if (!world) return
+    const mix = decodeMix(liveMix ?? params.get("page-mix"))
+    renderedKeys(world).forEach((k, i) => {
+      const section = el.children[i] as HTMLElement | undefined
+      const pad = mix[k]?.pad
+      if (pad) section?.style.setProperty("padding-bottom", `${pad}px`, "important")
+      else section?.style.removeProperty("padding-bottom")
+    })
+  })
 
   // On the canvas, the frame passes the wheel and the Space key to the canvas, so it can pan and zoom over frames
   // while the sections stay interactive.
@@ -155,13 +205,13 @@ export function WebFrame() {
 
   // A whole page from the Patterns tab's Pages Explorations (2026-11-26): its sections stacked, as on the website,
   // all in the page's theme (set on the root, never per section).
-  // Or a page mixed in the Randomize panel: page-world is the page (the home when it's missing) and page-mix its
-  // patterns per section (page-explorations.ts).
+  // Or a page built with the style menus: page-world is the page (the home when it's missing) and page-mix its
+  // patterns per section (page-explorations.ts), replaced by the studio's latest mix once it sends one.
   const pageId = params.get("page-exploration")
   const pageMix = params.get("page-mix")
   if (pageId || pageMix !== null) {
     const world = getWorld(params.get("page-world") ?? "home") ?? worlds[0]
-    const page = pageId ? getPageExploration(pageId) : { blocks: worldPage(world, decodeMix(pageMix)) }
+    const page = pageId ? getPageExploration(pageId) : { blocks: worldPage(world, decodeMix(liveMix ?? pageMix)) }
     return (
       <div
         ref={root}
