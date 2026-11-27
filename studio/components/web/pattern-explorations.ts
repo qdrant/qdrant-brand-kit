@@ -135,6 +135,18 @@ const groups: { title: string; hint: string; items: Omit<Exploration, "code">[] 
     ],
   },
   {
+    title: "Fibers",
+    hint: "From a fiber-optic image: hairline strands curling into a fan, each ending in a hexagon. Slow and subtle; hover a preview and the tips near the pointer lean toward it.",
+    items: [
+      { section: "hero", variant: "home", slot: "background", pattern: "ref-fiber-fan", tone: "secondary" },
+      { section: "hero", variant: "home", slot: "background", pattern: "ref-fiber-pulses", tone: "secondary" },
+      { section: "hero", variant: "home", slot: "background", pattern: "ref-fiber-flow", tone: "secondary" },
+      { section: "hero", variant: "product", slot: "background", pattern: "ref-fiber-fan-right", tone: "secondary" },
+      { section: "page-header", variant: "simple", slot: "background", pattern: "ref-fiber-pulses", tone: "secondary" },
+      { section: "feature-grid", variant: "cards", slot: "background", pattern: "ref-fiber-flow", tone: "secondary" },
+    ],
+  },
+  {
     title: "Hex terrain, with hover constellations",
     hint: "A surface of hexagons in perspective. Hover a preview: the hexagons near the pointer join and the rest dim.",
     items: [

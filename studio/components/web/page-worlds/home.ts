@@ -47,7 +47,7 @@ export const home: PageWorld = {
     {
       id: "home-curated",
       name: "Home, curated mix",
-      idea: "Four sections taken from the Component Explorations, spaced apart: the hero's Hex terrain spanning tree (EX-04), Halftone corner in the Deploy Anywhere cards (EX-33), Halftone field behind Engineered for Builders (EX-43) and Depth haze in the footer's newsletter card (EX-85).",
+      idea: "Four sections taken from the Component Explorations, spaced apart: the hero's Hex terrain spanning tree (EX-07), Halftone corner in the Deploy Anywhere cards (EX-39), Halftone field behind Engineered for Builders (EX-49) and Depth haze in the footer's newsletter card (EX-91).",
       mix: {
         hero: { pattern: ["cosmos-hex-terrain-tree"] },
         deploy: { cardPattern: "halftone-corner" },
