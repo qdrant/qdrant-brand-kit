@@ -13,7 +13,7 @@ const buttonVariants = cva(
         outline:
           "border-(--qd-ui-button-outline-border) bg-transparent hover:bg-input/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
         secondary:
-          "border-0 bg-secondary text-secondary-foreground shadow-(--qd-ui-button-raised) hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "border-0 bg-(--qd-ui-button-secondary-fill) text-secondary-foreground shadow-(--qd-ui-button-raised) hover:bg-[color-mix(in_oklch,var(--qd-ui-button-secondary-fill),var(--foreground)_5%)] aria-expanded:bg-(--qd-ui-button-secondary-fill) aria-expanded:text-secondary-foreground",
         ghost:
           "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
         destructive:

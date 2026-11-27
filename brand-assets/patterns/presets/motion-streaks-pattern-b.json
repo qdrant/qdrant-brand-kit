@@ -22,13 +22,22 @@
       "from": "color.background.default",
       "to": "color.teal.900",
       "streak": "color.teal.800",
-      "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
+      "onHold": "Waiting for the council's approval of the sub-direction (visual designer, 2026-11-24). Don't use it in creatives yet."
     },
     {
       "name": "Background → Neutral 800",
       "from": "color.background.default",
       "to": "color.neutral.800",
       "streak": "color.neutral.700"
+    },
+    {
+      "name": "Neutral 100 → Neutral 300",
+      "from": "color.neutral.100",
+      "to": "color.neutral.300",
+      "streak": "color.neutral.0",
+      "textColor": "dark",
+      "textMask": "none",
+      "onHold": "Light mode: on hold (visual designer, 2026-11-26). Don't use it in creatives yet."
     }
   ],
   "layers": [
@@ -43,12 +52,14 @@
     },
     "streaks": {
       "length": 72,
-      "direction": 124,
+      "direction": 110,
       "density": 40,
       "softness": 56,
       "opacity": 24
     },
-    "$letterColorSteps": "Letters run in the family's 800, 700, 600 (Vanesa, 2026-11-25), except letter variation 1 (renderPattern option letters: 1), which keeps 800, 600, 200.",
+    "$letterSteps": "Letters run in the family's 900, 800, 700 (dark neutral: Neutral 900, 800, 700), in place of the letter layer's own 800, 700, 600 (visual designer, 2026-11-26). Light mode keeps white letters.",
+    "letterSteps": [900, 800, 700],
+    "$letterColorSteps": "Letter variation 1 (renderPattern option letters: 1) keeps its own 800, 600, 200 (visual designer, 2026-11-25).",
     "letterColorSteps": {
       "1": [
         800,

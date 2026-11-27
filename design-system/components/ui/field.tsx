@@ -98,6 +98,9 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+// A FieldLabel that wraps a Field is a choice card. Its radio is never shown (design lead, 2026-11-24): the card's
+// border in the accent and its tint show what's selected, and its focus ring shows keyboard focus. The radio stays in the markup,
+// visually hidden, so the cards still work as one radio group with the keyboard and with screen readers.
 function FieldLabel({
   className,
   ...props
@@ -106,6 +109,7 @@ function FieldLabel({
     <Label
       data-slot="field-label"
       className={cn(
+        "has-[>[data-slot=field]]:relative has-[>[data-slot=field]]:[&_[data-slot=radio-group-item]]:sr-only has-[>[data-slot=field]]:has-data-checked:border-primary",
         "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-input/40 has-[>[data-slot=field]]:has-[:focus-visible]:border-ring has-[>[data-slot=field]]:has-[:focus-visible]:ring-2 has-[>[data-slot=field]]:has-[:focus-visible]:ring-ring/30 *:data-[slot=field]:p-2 dark:has-data-checked:bg-primary/10",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
         className

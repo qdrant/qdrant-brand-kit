@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 
 import { cn } from "@qdrant/design-system/lib/utils"
 
-// The Design system page's two tabs (Juan, 2026-11-21): Components, the list of components and each one's page,
+// The Design system page's two tabs (design lead, 2026-11-21): Components, the list of components and each one's page,
 // and Variations, whole alternative looks of the design system.
 const tabs = [
   { href: "/design-system", label: "Components" },

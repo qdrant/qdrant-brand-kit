@@ -31,16 +31,16 @@ Sizes in px at the reference canvas.
 | `portrait` | 0.65 up to 0.85 | 1080×1350 | 64 / 64 / 64 | 6 × 132, gutter 32 | 16 / 24 / 48 |
 | `story` | below 0.65 | 1080×1920 | 64 / 192 / 256 | 4 × 214, gutter 32 | 24 / 32 / 64 |
 
-- **Blog post hero, 916×458:** the size on qdrant.tech (decided by Vanesa on 2026-11-12, replaces 2002×1122). Ratio 2, so it's `wide`, at 0.424× (margin 34, logo 34). Pattern or generated image, decided per post (guidelines section 1). With a partner lockup as the only content, see [`partner-lockup`](../../brand-components/partner-lockup/).
-- **LinkedIn profile cover, 1584×396:** ratio 4, so it's `ultrawide`, at 0.528× (decided by Vanesa on 2026-11-11). LinkedIn's profile photo covers the bottom-left, so:
+- **Blog post hero, 916×458:** the size on qdrant.tech (decided by the visual designer on 2026-11-12, replaces 2002×1122). Ratio 2, so it's `wide`, at 0.424× (margin 34, logo 34). Pattern or generated image, decided per post (guidelines section 1). With a partner lockup as the only content, see [`partner-lockup`](../../brand-components/partner-lockup/).
+- **LinkedIn profile cover, 1584×396:** ratio 4, so it's `ultrawide`, at 0.528× (decided by the visual designer on 2026-11-11). LinkedIn's profile photo covers the bottom-left, so:
   - The **logo** stays top-left. Keep the **bottom-left** clear: pattern only, no text, no visual.
-  - **Dark only.** No light creatives on the cover: the light version was tried and not preferred (Vanesa, 2026-11-11).
-  - **Suggest, by team:** pattern-only covers (no visual, serious generative patterns like Burst or Hexagon) for **Sales** and other customer-facing roles; covers with Qbot (more playful) for **DevRel**. A recommendation only: anyone can pick the one they prefer (Vanesa, 2026-11-11).
+  - **Dark only.** No light creatives on the cover: the light version was tried and not preferred (visual designer, 2026-11-11).
+  - **Suggest, by team:** pattern-only covers (no visual, serious generative patterns like Burst or Hexagon) for **Sales** and other customer-facing roles; covers with Qbot (more playful) for **DevRel**. A recommendation only: anyone can pick the one they prefer (visual designer, 2026-11-11).
   - The **heading** goes on the **right**, on the grid, left-aligned and centered top to bottom. Title sizes are the ultrawide ones in [`typography/`](../../primitives/typography/).
   - **No visual:** heading on columns 9 to 12, title-short (128).
   - **With Qbot:** Qbot sits after the heading, never before it ([`guidelines/`](../) section 6), and the title steps down one size (104). Two placements: Qbot full height at the right margin, cut at the waist with the chest logo whole, heading on columns 7 to 9; or a bigger Qbot cut at the upper chest (the Peek crop), heading on columns 6 to 8. Beside Qbot the heading may be narrower than half the grid ([`guidelines/`](../) section 11 rule 8).
   - If the pattern needs a mask, the heading is on the right, so use `.qd-pattern-mask--from-right` (below).
-- **Display ads (ultrawide: 3000×400, 728×90, 320×100)** (Vanesa, 2026-11-16):
+- **Display ads (ultrawide: 3000×400, 728×90, 320×100)** (visual designer, 2026-11-16):
   - **Side by side:** logo, then title, then button in one row, left to right, with Qbot zoomed in at the right, cut by the bottom edge, face and chest logo whole.
   - Date and place go on **one line** if they fit; if not, they're dropped (ask first, guidelines section 11 rule 11).
   - The button stays at its own size, the logo's height. Never one title line tall.
@@ -48,7 +48,7 @@ Sizes in px at the reference canvas.
   - Items after the logo can't sit on the 12-column grid in a side-by-side row, so `review/check.py` doesn't check them for the grid there.
 - **Small units (300×250, 336×280, 300×600):** offer two options: **a**, logo, title and button with a big Qbot cut by the bottom edge; **b**, the same with the date and place, one line each. Make both and show them together, the recommended one marked; the person picks (2026-11-16, shown together since 2026-11-20). With no date or place, only **a**.
 - **Between groups:** 2 × `section` (96 on square and portrait, 128 on wide and story, 128 on ultrawide). The header, heading, body and visual are separate groups, with this one gap between each ([`guidelines/`](../) section 11, rule 9, decided 2026-11-11). No token yet: use `calc(2 * var(--qd-gap-section))`.
-- **Story safe zones:** 192 px top and 256 px bottom keep text clear of the profile bar and reply box. Only backgrounds, images and Qbot's cut body go there. Smaller since 2026-11-16 (was 256 / 344) so the groups get bigger gaps: the freed space goes to the gaps between groups. On stories with headshot cards, the cards get smaller before the gaps do: the one exception to the fit order in [`guidelines/`](../) section 11, rule 11 (Vanesa).
+- **Story safe zones:** 192 px top and 256 px bottom keep text clear of the profile bar and reply box. Only backgrounds, images and Qbot's cut body go there. Smaller since 2026-11-16 (was 256 / 344) so the groups get bigger gaps: the freed space goes to the gaps between groups. On stories with headshot cards, the cards get smaller before the gaps do: the one exception to the fit order in [`guidelines/`](../) section 11, rule 11 (visual designer).
 - **Other sizes:** the scale is the smaller of width ÷ reference width and height ÷ reference height. Every value is multiplied by it, so a 1200×627 post uses the Wide values at 0.58×. The 8 px grid holds exactly at the reference canvases.
 - The column counts were worked out for this folder (whole px, on the 8 px grid). They don't come from Figma or the brand skill yet.
 
@@ -75,7 +75,7 @@ For patterns whose small details would cross the text, mask the pattern so the t
 </div>
 ```
 
-- **One strength, 40%** (Vanesa, 2026-11-16). It replaced `--soft-1` (4%) and `--soft-2` (10%), which made creatives too dark. Those two class names still work and now give 40%, so older files don't break; don't use them in new work.
+- **One strength, 40%** (visual designer, 2026-11-16). It replaced `--soft-1` (4%) and `--soft-2` (10%), which made creatives too dark. Those two class names still work and now give 40%, so older files don't break; don't use them in new work.
 - **Text on the mask:** white text, white icons (`.qd-icon--on-pattern`), and the Dark logo on a dark creative.
 - The fade is an eased curve, so there's no visible line between the masked part and the pattern.
 - **One smooth gradient on every shape** (decided 2026-11-11). The mask is a single gradient across the whole canvas with a gentle (quadratic) start: the strength's low value on the text side, rising slowly and reaching 100% at 95% of the way across (down on square, portrait and story; to the right on wide; to the left with `--from-right`, e.g. the LinkedIn cover). There's no hold and no step, so nothing needs measuring. The CSS does it.
@@ -83,7 +83,7 @@ For patterns whose small details would cross the text, mask the pattern so the t
 
 ## Image background
 
-For a generated image ([`guidelines/`](../) section 5). Put `.qd-canvas--masked` on the canvas and one of these on the `<img>` (Vanesa, 2026-11-16):
+For a generated image ([`guidelines/`](../) section 5). Put `.qd-canvas--masked` on the canvas and one of these on the `<img>` (visual designer, 2026-11-16):
 
 | Class | What it does | Where |
 | --- | --- | --- |
@@ -130,7 +130,7 @@ The gap is a role, never a px value:
 
 ## Box
 
-Padding, fill and border, all from tokens. Pick the style by intent. The design system's web Card (`design-system/components/ui/card.tsx`) isn't used in creatives: its fill is the same dark as the creative background (Vanesa, 2026-11-19).
+Padding, fill and border, all from tokens. Pick the style by intent. The design system's web Card (`design-system/components/ui/card.tsx`) isn't used in creatives: its fill is the same dark as the creative background (visual designer, 2026-11-19).
 
 | Class | What it is | When |
 | --- | --- | --- |
@@ -213,5 +213,5 @@ In [`guidelines/print/`](../print/) (2026-11-20): the printer's spec, format pre
 
 ## To decide later
 
-- Whether Design Lab gets a `brand-kit/primitives/layout.yaml` (a request for Neil).
-- Grid columns and Box line colors, once there's a Figma social grid or Juan's system lands.
+- Whether Design Lab gets a `brand-kit/primitives/layout.yaml` (a request for the head of Growth & DevRel).
+- Grid columns and Box line colors, once there's a Figma social grid or the design lead's system lands.

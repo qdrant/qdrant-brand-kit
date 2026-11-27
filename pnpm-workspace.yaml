@@ -11,3 +11,9 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
   msw: false
+
+# Security fixes for dependencies we don't pin ourselves (2026-11-23). minimatch below 11.0.1 has a denial-of-service
+# bug (GHSA-g3hv-75wg-m249); ESLint and ts-morph (through the shadcn CLI) still ask for ^10, and their newer versions
+# have moved to ^11. Remove this once they're upgraded.
+overrides:
+  "minimatch@>=7.0.0 <11.0.1": "^11.0.5"

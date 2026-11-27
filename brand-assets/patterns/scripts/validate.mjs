@@ -61,7 +61,7 @@ for (const id of ids) {
   const where = p.name ?? id;
 
   // Name and file agree: Color-Sliced-Pattern-A <-> color-sliced-pattern-a.json.
-  // Generative patterns have no letter: one pattern per element, looks as variants (Vanesa, 2026-11-24).
+  // Generative patterns have no letter: one pattern per element, looks as variants (visual designer, 2026-11-24).
   const named = p.recipe === "generative-pattern" ? /^Generative-[A-Z][a-z]+-Pattern$/ : /^(Color|Motion)-[A-Z][a-z]+-Pattern-[A-Z]$/;
   if (!named.test(p.name ?? "")) errors.push(`${where}: name should look like ${p.recipe === "generative-pattern" ? "Generative-Burst-Pattern" : "Color-Sliced-Pattern-A"}`);
   else if (p.name.toLowerCase() !== id) errors.push(`${where}: file should be presets/${p.name.toLowerCase()}.json`);
@@ -77,7 +77,7 @@ for (const id of ids) {
     if (!looks.length) errors.push(`${where}: no colorways`);
     for (const look of looks) if (!look.name || !look.colors?.length || !look.backdrop) errors.push(`${where}: every colorway needs a name, colors and a backdrop`);
     // Elements are never lighter than the 500 step, so they blend with the gradient
-    // (Vanesa, 2026-11-25). Colorways on hold (light neutral) are exempt.
+    // (visual designer, 2026-11-25). Colorways on hold (light neutral) are exempt.
     for (const look of looks) if (!look.onHold) for (const ref of look.colors ?? []) {
       const step = Number(String(ref).match(/\.([0-9]+)\}$/)?.[1]);
       if (step < 500) errors.push(`${where} / ${look.name}: element color ${ref} is lighter than the 500 step`);
@@ -110,8 +110,8 @@ for (const id of ids) {
       if (!(v >= lo && v <= hi)) errors.push(`${where}: streaks.${key} is ${v}, outside the approved ${lo} to ${hi}`);
       else if (v % 8 !== 0) errors.push(`${where}: streaks.${key} is ${v}, not on the 8 grid`);
     }
-    const dirs = [0, 124, 144, 160, 288, 320]; // STREAK_DIRECTIONS in patterns/motion-streaks-pattern.js
-    if (!dirs.includes(p.settings?.streaks?.direction)) errors.push(`${where}: streaks.direction is ${p.settings?.streaks?.direction}; approved: ${dirs.join(", ")}`);
+    const dirs = [110]; // STREAK_DIRECTIONS in patterns/motion-streaks-pattern.js: one fixed angle (2026-11-26)
+    if (!dirs.includes(p.settings?.streaks?.direction)) errors.push(`${where}: streaks.direction is ${p.settings?.streaks?.direction}; the only direction is ${dirs.join(", ")}°`);
   }
 
   // Approved variants (generative): only engine settings the pattern already has.
@@ -123,7 +123,7 @@ for (const id of ids) {
   }
 
   // Open looks: the ranges hold the pattern as approved and every approved variant, every
-  // key is an engine setting, and cell bounds sit on the 8 grid (Vanesa, 2026-11-25).
+  // key is an engine setting, and cell bounds sit on the 8 grid (visual designer, 2026-11-25).
   const ranges = p.settings?.look?.ranges;
   if (ranges) {
     const engine = p.settings.engine ?? {};
@@ -142,6 +142,11 @@ for (const id of ids) {
     if (extra.length) errors.push(`${where}: letter option "${name}" sets ${extra.join(", ")}, which letter layers can't change`);
     if (values.scale != null && (values.scale < 0.45 || values.scale > 0.65)) errors.push(`${where}: letter option "${name}" scale ${values.scale} is outside 0.45 to 0.65`);
   }
+
+  // Letter color steps for the whole pattern (settings.letterSteps, visual designer 2026-11-26):
+  // three steps, the lightest never below 600, so the letters blend with the background.
+  const letterSteps = p.settings?.letterSteps;
+  if (letterSteps != null && !(Array.isArray(letterSteps) && letterSteps.length === 3 && letterSteps.every((x) => Number.isInteger(x) && x >= 600 && x <= 975))) errors.push(`${where}: settings.letterSteps must be three steps between 600 and 975`);
 
   // Approved stripes (Color-Sliced): thickness on the 8 grid, an angle in degrees.
   for (const s of p.settings?.stripes ?? []) {
@@ -164,7 +169,7 @@ for (const id of ids) {
     if ((layer.colorways?.length ?? 0) !== (p.colorways?.length ?? 0)) errors.push(`${where}: layer ${id} needs one colorway per pattern colorway (${p.colorways?.length}), in the same order`);
     if (!layer.settings?.tones?.[layer.settings?.tone]) errors.push(`${where}: layer ${id} tone curve "${layer.settings?.tone}" isn't in settings.tones`);
     for (const [i, look] of (layer.colorways ?? []).entries()) {
-      // Letters: the lightest is the 600 step (Vanesa, 2026-11-25), unless the pattern's colorway is on hold.
+      // Letters: the lightest is the 600 step (visual designer, 2026-11-25), unless the pattern's colorway is on hold.
       if (!p.colorways?.[i]?.onHold) for (const ref of look.colors ?? []) {
         const step = Number(String(ref).match(/\.([0-9]+)\}$/)?.[1]);
         if (step < 600) errors.push(`${where}: layer ${id} / ${look.name}: letter color ${ref} is lighter than the 600 step`);

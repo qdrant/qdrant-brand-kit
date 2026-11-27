@@ -21,13 +21,22 @@
       "from": "color.background.default",
       "to": "color.teal.900",
       "streak": "color.teal.800",
-      "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
+      "onHold": "Waiting for the council's approval of the sub-direction (visual designer, 2026-11-24). Don't use it in creatives yet."
     },
     {
       "name": "Background → Neutral 800",
       "from": "color.background.default",
       "to": "color.neutral.800",
       "streak": "color.neutral.700"
+    },
+    {
+      "name": "Neutral 100 → Neutral 300",
+      "from": "color.neutral.100",
+      "to": "color.neutral.300",
+      "streak": "color.neutral.0",
+      "textColor": "dark",
+      "textMask": "none",
+      "onHold": "Light mode: on hold (visual designer, 2026-11-26). Don't use it in creatives yet."
     }
   ],
   "settings": {
@@ -39,7 +48,7 @@
     },
     "streaks": {
       "length": 72,
-      "direction": 124,
+      "direction": 110,
       "density": 40,
       "softness": 56,
       "opacity": 24

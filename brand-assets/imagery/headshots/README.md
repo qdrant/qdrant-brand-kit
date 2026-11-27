@@ -68,7 +68,7 @@ python3 brand-assets/imagery/headshots/check-headshot.py path/to/cutout.png
 
 ## Examples
 
-`Neil-Kanungo.png` and `David-Stockton.png` (512 × 512, kept outside the repo in `~/Desktop/Tools/leadership-headshots/`) pass every check, and `prepare-headshot.py` keeps them at the same framing.
+Two leadership headshots (512 × 512, kept outside the repo in `~/Desktop/Tools/leadership-headshots/`) pass every check, and `prepare-headshot.py` keeps them at the same framing.
 
 ## Rules
 
@@ -78,4 +78,4 @@ python3 brand-assets/imagery/headshots/check-headshot.py path/to/cutout.png
 
 ## Still open
 
-- **Design Lab tool:** so people can prepare a headshot from Claude or the Create screen without installing anything. Design Lab would run `prepare-headshot.py` on its server. To request from Neil.
+- **Design Lab tool:** so people can prepare a headshot from Claude or the Create screen without installing anything. Design Lab would run `prepare-headshot.py` on its server. To request from the head of Growth & DevRel.

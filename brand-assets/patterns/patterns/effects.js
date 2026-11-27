@@ -100,6 +100,28 @@ export function sliceShift(px, frame, slice, sample) {
 
 const wrap = (v, size) => ((v % size) + size) % size;
 
+// Ordered dither (8 x 8 Bayer): turns color values from 0 to 255 (any precision) into
+// 8-bit pixels, nudging each by less than one level in a fixed pattern. Smooth gradients
+// stay smooth instead of breaking into bands, the pattern is invisible at normal size, and
+// it survives image compression better than random grain (visual designer, 2026-11-26).
+const BAYER_8 = [
+  0, 32, 8, 40, 2, 34, 10, 42, 48, 16, 56, 24, 50, 18, 58, 26,
+  12, 44, 4, 36, 14, 46, 6, 38, 60, 28, 52, 20, 62, 30, 54, 22,
+  3, 35, 11, 43, 1, 33, 9, 41, 51, 19, 59, 27, 49, 17, 57, 25,
+  15, 47, 7, 39, 13, 45, 5, 37, 63, 31, 55, 23, 61, 29, 53, 21,
+];
+
+export function orderedDither(exact, out, width) {
+  for (let i = 0, p = 0; i < exact.length; i += 4, p++) {
+    const x = p % width;
+    const y = (p - x) / width;
+    const t = (BAYER_8[(y & 7) * 8 + (x & 7)] + 0.5) / 64 - 0.5;
+    for (let c = 0; c < 3; c++) out[i + c] = Math.max(0, Math.min(255, Math.floor(exact[i + c] + 0.5 + t)));
+    out[i + 3] = 255;
+  }
+}
+
+
 // Figma's shader random: a float in [0, 1) from three floats, bit for bit.
 const f32 = new Float32Array(3);
 const u32 = new Uint32Array(f32.buffer);

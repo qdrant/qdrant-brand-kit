@@ -96,20 +96,22 @@
   --color-background: var(--background);
 }
 
-/* The accent, by context (Juan, 2026-11-15): amaranth for brand and marketing, indigo for product.
-   Marketing is the default (creatives, web pages, the studio's Design system and Web pages). Product UI puts
-   data-context="product" on its root; data-context="marketing" switches a piece back inside it. Declared only
-   on :root and the contexts, so a [data-theme] section inside a context keeps that context's accent. */
+/* The accent, by context: indigo for product, amaranth for brand and marketing (design lead, 2026-11-15). Product is
+   the default since 2026-11-23 (design lead): the design system is the product's, so its components are indigo. The
+   website and anything else for brand or marketing put data-context="marketing" on their root (a website page
+   has it next to data-web); data-context="product" switches a piece back inside it, like a Console screen on a
+   web page. Declared only on :root and the contexts, so a [data-theme] section inside a context keeps that
+   context's accent. Creatives don't load this file: their button takes amaranth from components/button.css. */
 :root,
-[data-context="marketing"] {
-  --qd-ui-accent: var(--qd-color-primary);
-  --qd-ui-accent-hover: var(--qd-color-primary-hover);
-  --qd-ui-accent-muted: var(--qd-color-amaranth-400);
-}
 [data-context="product"] {
   --qd-ui-accent: var(--qd-color-secondary);
   --qd-ui-accent-hover: var(--qd-color-indigo-700);
   --qd-ui-accent-muted: var(--qd-color-indigo-400);
+}
+[data-context="marketing"] {
+  --qd-ui-accent: var(--qd-color-primary);
+  --qd-ui-accent-hover: var(--qd-color-primary-hover);
+  --qd-ui-accent-muted: var(--qd-color-amaranth-400);
 }
 
 /* shadcn's tokens, mapped by meaning onto the Qdrant roles (primitives/colors/README.md "Roles").
@@ -118,7 +120,7 @@
    surfaces: `secondary` and `muted` are the highlight (`--qd-ui-highlight`) and `accent` the hover
    (`--qd-ui-hover`). The page, cards (and the sidebar) and popovers are `--qd-ui-page`, `--qd-ui-card` and
    `--qd-ui-popover`: Hairline's neutrals, not the primitives' background roles, which creatives keep. All of
-   them by theme below; `primary` and `ring` are the context's accent. Values that differ by theme (the highlight and the edges) go in the theme blocks below,
+   them by theme below; `primary` is the context's accent and `ring` is always indigo. Values that differ by theme (the highlight and the edges) go in the theme blocks below,
    never here: a [data-context] inside a light section would reset them to dark. */
 :root,
 [data-theme],
@@ -137,7 +139,9 @@
   --muted-foreground: var(--qd-color-text-secondary);
   --accent: var(--qd-ui-hover);
   --accent-foreground: var(--qd-color-text-primary);
-  --ring: var(--qd-ui-accent);
+  /* Focus is indigo in every context (design lead, 2026-11-24): an amaranth ring on the website read like an error.
+     secondary is indigo-600 in both themes. */
+  --ring: var(--qd-color-secondary);
   /* Charts never use the brand colors, so they stand apart from the accent and the brand (DESIGN.md,
      2026-11-16): the dataviz roles after amaranth and indigo, in their order. */
   --chart-1: var(--qd-color-dataviz-3);
@@ -155,7 +159,7 @@
 }
 
 /* Surfaces and edges, by theme (DESIGN.md, 2026-11-16).
-   - The surfaces are Hairline's (Juan, 2026-11-16). Dark: the page neutral-975, cards and the sidebar
+   - The surfaces are Hairline's (design lead, 2026-11-16). Dark: the page neutral-975, cards and the sidebar
      neutral-950, popovers neutral-925. Light: all white, apart by their soft borders and shadows.
    - The highlight, shadcn's `secondary` and `muted` (the secondary button, muted items, progress tracks,
      skeletons, calendar ranges, the tabs track): solid, since some of them overlap. Hairline's neutral-900 on
@@ -179,7 +183,7 @@
   --input: var(--qd-color-neutral-800);
   /* Destructive is text, borders and tints, never a solid fill: the soft destructive button, error text and
      invalid fields. red-400 on dark and red-700 on light keep it at 5.4:1 or more on its tint and 6.5:1 on
-     cards (Juan, 2026-11-21; it was the status error color, red-500, at 3.3 to 4.3:1). */
+     cards (design lead, 2026-11-21; it was the status error color, red-500, at 3.3 to 4.3:1). */
   --destructive: var(--qd-color-red-400);
   --sidebar-border: var(--border);
   /* The sidebar's hovered and active item: neutral-900 on the neutral-950 sidebar (dark), neutral-25 on

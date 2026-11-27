@@ -194,7 +194,7 @@
           ],
           "hex": "#040609"
         },
-        "$description": "The design system's dark page (Juan, 2026-11-16): halfway from 950 to black in sRGB, rounded so it keeps 950's hue (H 216°, S 56%, B 3.5%). Added in this repo first, then to the Figma file the same day."
+        "$description": "The design system's dark page (design lead, 2026-11-16): halfway from 950 to black in sRGB, rounded so it keeps 950's hue (H 216°, S 56%, B 3.5%). Added in this repo first, then to the Figma file the same day."
       },
       "1000": {
         "$type": "color",
@@ -355,7 +355,7 @@
           ],
           "hex": "#24060e"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from amaranth-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from amaranth-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -555,7 +555,7 @@
           ],
           "hex": "#100d26"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from indigo-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from indigo-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -755,7 +755,7 @@
           ],
           "hex": "#220604"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from red-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from red-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -955,7 +955,7 @@
           ],
           "hex": "#220d05"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from orange-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from orange-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -1155,7 +1155,7 @@
           ],
           "hex": "#08160b"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from green-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from green-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -1355,7 +1355,7 @@
           ],
           "hex": "#041817"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from teal-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from teal-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -1555,7 +1555,7 @@
           ],
           "hex": "#061920"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from cyan-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from cyan-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -1755,7 +1755,7 @@
           ],
           "hex": "#0a1525"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from blue-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from blue-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -1955,7 +1955,7 @@
           ],
           "hex": "#210929"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from purple-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from purple-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       },
       "a100": {
         "$type": "color",
@@ -2155,7 +2155,7 @@
           ],
           "hex": "#240819"
         },
-        "$description": "The deepest tint (Juan, 2026-11-19): halfway from pink-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from pink-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
       }
     }
   },
@@ -2298,7 +2298,7 @@
         "hover": {
           "$type": "color",
           "$value": "{color.amaranth.700}",
-          "$description": "The primary button on hover. amaranth-700 in both themes, so hover always darkens (Juan, 2026-11-21)"
+          "$description": "The primary button on hover. amaranth-700 in both themes, so hover always darkens (design lead, 2026-11-21)"
         },
         "subtle": {
           "$type": "color",
@@ -2555,7 +2555,8 @@
           },
           "text": {
             "$type": "color",
-            "$value": "{color.indigo.800}"
+            "$value": "{color.indigo.700}",
+            "$description": "indigo-700 since 2026-11-24 (design lead), one step lighter than indigo-800: 8.1:1 on white"
           }
         },
         "border": {

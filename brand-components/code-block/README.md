@@ -1,6 +1,6 @@
 # Code block
 
-Code in a creative: an install command, a query, a snippet from the docs. It's the design system's CodeBlock ([`design-system/components/ui/code-block.tsx`](../../design-system/components/ui/code-block.tsx)), drawn exactly as in the UI, with a few rules on top for creatives (Vanesa, 2026-11-25).
+Code in a creative: an install command, a query, a snippet from the docs. It's the design system's CodeBlock ([`design-system/components/ui/code-block.tsx`](../../design-system/components/ui/code-block.tsx)), drawn exactly as in the UI, with a few rules on top for creatives (visual designer, 2026-11-25).
 
 It's the one web component creatives use as it is. The others (Badge, Card, Avatar) stay out ([`brand-components/`](../)).
 
@@ -30,7 +30,7 @@ Part.
 
 ### Code block: only on calm patterns
 
-The see-through block goes only on patterns with no letters and no rows of lines, which would read like more code behind the code (Vanesa, 2026-11-25):
+The see-through block goes only on patterns with no letters and no rows of lines, which would read like more code behind the code (visual designer, 2026-11-25):
 
 - **Yes:** Generative-Burst-Pattern, Generative-Rings-Pattern, Generative-Hexagon-Pattern, Motion-Streaks-Pattern-A, Color-Sliced-Pattern-A.
 - **Never:** Generative-Dash-Pattern, Color-Sliced-Pattern-B, Motion-Streaks-Pattern-B. On these, use the code window, even for short code.
@@ -39,8 +39,8 @@ It sits where the text sits: in the text column, on the masked side of a masked 
 
 ### Code window: hugs the code
 
-- **The frame hugs the code block:** no empty space inside, no bleed off the canvas, inside the margins (Vanesa, 2026-11-25).
-- **Suggest:** Motion-Streaks-Pattern-B in Neutral 800, no mask, is the preferred look (Vanesa, 2026-11-25).
+- **The frame hugs the code block:** no empty space inside, no bleed off the canvas, inside the margins (visual designer, 2026-11-25).
+- **Suggest:** Motion-Streaks-Pattern-B in Neutral 800, no mask, is the preferred look (visual designer, 2026-11-25).
 - Dark only for now. A light window hasn't been tried.
 
 Layout per shape:
@@ -71,4 +71,4 @@ Layout per shape:
 
 ## Approved by
 
-Vanesa, 2026-11-25 (draft).
+Visual designer, 2026-11-25 (draft).

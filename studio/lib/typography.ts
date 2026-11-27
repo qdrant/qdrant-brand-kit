@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs"
 import path from "node:path"
 import type { CSSProperties } from "react"
 
-// What the Typography page (/typography) shows, so the type primitives can be refined in one place (Juan,
+// What the Typography page (/typography) shows, so the type primitives can be refined in one place (design lead,
 // 2026-11-17). The page measures every sample in the browser, so its details are always what the CSS gives.
 
 // One tab per family of the brand's type (the Mona Sans family, 2026-11-17), then the text in creatives. The

@@ -5,7 +5,7 @@
 // choice is the colorway, and colors are always token names, never hex.
 
 import { resolveToken, hexToRgba } from "./tokens.js";
-import { sliceShift, drawNoise, gradientSampler, makeFrame } from "./effects.js";
+import { sliceShift, drawNoise, gradientSampler, makeFrame, orderedDither } from "./effects.js";
 
 // color = { from, to } token references, from colorwayTokens() in tokens.js.
 // frame = makeFrame(width, height): any size or shape. Defaults to 1080 x 1080.
@@ -24,7 +24,11 @@ export function render(canvas, tokens, preset, color, frame = makeFrame(), optio
   const from = hexToRgba(resolveToken(tokens, color.from));
   const to = hexToRgba(resolveToken(tokens, color.to));
   const source = gradientSampler(from, to, gradient.angle, frame, gradient.fromStop, gradient.toStop);
-  sliceShift(image.data, frame, slice, source);
+  // Slices are worked out in full precision, then turned into 8-bit color with an ordered
+  // dither, so the long dark gradients don't band (visual designer, 2026-11-26).
+  const exact = new Float32Array(frame.width * frame.height * 4);
+  sliceShift(exact, frame, slice, source);
+  orderedDither(exact, image.data, frame.width);
   ctx.putImageData(image, 0, 0);
   if (noise) drawNoise(ctx, frame, noise);
 }

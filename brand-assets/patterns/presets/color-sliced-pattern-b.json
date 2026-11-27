@@ -4,12 +4,14 @@
   "textMaskByColorway": { "Neutral 1000 → Neutral 800": "none" },
   "recipe": "color-sliced-pattern",
   "extends": "color-sliced-pattern-a",
-  "$description": "Two layers, each from its own source (Vanesa, 2026-11-24). Base: Color-Sliced-Pattern-A, inherited whole (every colorway, the approved stripes, its slices), so A's changes reach B. Letters on top: generative-glyph-layer-a, varied with the Pattern Studio connector's terminal look through fromStudioParams(). An agent makes a B by picking an A colorway (and stripes) and a terminal-look letter variation: renderPattern(canvas, tokens, B, { colorway, stripes, letters }).",
+  "$description": "Two layers, each from its own source (visual designer, 2026-11-24). Base: Color-Sliced-Pattern-A, inherited whole (every colorway, the approved stripes, its slices), so A's changes reach B. Letters on top: generative-glyph-layer-a, varied with the Pattern Studio connector's terminal look through fromStudioParams(). An agent makes a B by picking an A colorway (and stripes) and a terminal-look letter variation: renderPattern(canvas, tokens, B, { colorway, stripes, letters }).",
   "layers": [
     "generative-glyph-layer-a"
   ],
   "settings": {
-    "$letterOptions": "Approved letter variations from the Pattern Studio connector's terminal look (Vanesa, 2026-11-24). Draw one with renderPattern(..., { letterOption: index }); they work on every colorway and stripe.",
+    "$letterSteps": "Letters run in the family's 950, 900, 800 (dark neutral: Neutral 950, 900, 800), in place of the letter layer's own 800, 700, 600 (visual designer, 2026-11-26). Light mode keeps white letters.",
+    "letterSteps": [950, 900, 800],
+    "$letterOptions": "Approved letter variations from the Pattern Studio connector's terminal look (visual designer, 2026-11-24). Draw one with renderPattern(..., { letterOption: index }); they work on every colorway and stripe.",
     "letterOptions": [
       {
         "name": "Terminal v8",

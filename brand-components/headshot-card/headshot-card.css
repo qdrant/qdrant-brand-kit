@@ -47,7 +47,7 @@
   overflow: hidden;
   aspect-ratio: 5 / 7;
   border-radius: calc(16 * var(--qd-canvas-u)); /* radius.md (16) at the reference canvas */
-  /* Gradient on an opaque base: the 70% gradient alone lets a pattern show through (Vanesa, 2026-11-04). */
+  /* Gradient on an opaque base: the 70% gradient alone lets a pattern show through (visual designer, 2026-11-04). */
   background: var(--qd-gradient-headshot), var(--qd-color-background-default);
 }
 /* The head sits one group gap below the top edge. 0.957 = the cutout below the 4.3% head line. */
@@ -84,7 +84,7 @@
 .qd-headshot-card__text { display: flex; flex-direction: column; }
 
 /* On a pattern: put .qd-on-pattern on the canvas or the row. Roles switch to neutral-300, which
-   keeps 3:1 down to the patterns' violet midtone (indigo-600; text.secondary fails there). Vanesa, 2026-11-04. */
+   keeps 3:1 down to the patterns' violet midtone (indigo-600; text.secondary fails there). Visual designer, 2026-11-04. */
 .qd-on-pattern .qd-headshot-card__role { color: var(--qd-color-neutral-300); }
 
 /* Photo background in the pattern's color family (visual designer, 2026-11-25): the same family as the

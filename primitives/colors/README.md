@@ -54,7 +54,7 @@ Use the roles, never a primitive step, unless a README names one. They're the sa
 | `primary.text` | `amaranth-400` | `amaranth-800` | Colored text, links and icons |
 | `secondary.secondary` | `indigo-600` | `indigo-600` | Secondary marks, and the accent in product UI |
 | `secondary.subtle` | `indigo-950` | `indigo-100` | Tags and soft fills |
-| `secondary.text` | `indigo-400` | `indigo-800` | Text and icons on its soft fill |
+| `secondary.text` | `indigo-400` | `indigo-700` | Text and icons on its soft fill. Light was `indigo-800` until 2026-11-24 (design lead): 700 reads less dark and keeps 8.1:1 on white, 6.6:1 on `secondary.subtle` |
 | `status.<state>.text` | 200 | 900 | Text and icons in badges and alerts |
 | `status.<state>.subtle` | 950 | 100 | Badge fill |
 | `status.<state>.alert-fill` | 975 | 50 | Alert fill |

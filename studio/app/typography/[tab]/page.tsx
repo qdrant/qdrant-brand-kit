@@ -20,7 +20,7 @@ import "../brand-components.css"
 
 export const metadata = { title: "Typography · Qdrant Studio" }
 
-// The sentence every style shows (Juan, 2026-11-17).
+// The sentence every style shows (design lead, 2026-11-17).
 const SAMPLE = "High-Performance Vector Search at Scale"
 
 // A creative's canvas at its reference size: 1 canvas unit is 1px, so sizes read as the CSS writes them.
@@ -38,7 +38,7 @@ export function generateStaticParams() {
 }
 
 // Every text style in primitives/typography, one tab per family of the Mona Sans family, then the text in
-// creatives and brand components, to refine the type primitives (Juan, 2026-11-17). Each one shows the sample
+// creatives and brand components, to refine the type primitives (design lead, 2026-11-17). Each one shows the sample
 // sentence and, in small type, its family, size, line height, letter spacing and weight, with its name as a tag.
 export default async function TypographyTab({
   params,

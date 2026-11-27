@@ -30,14 +30,14 @@ Before 2026-11-12 this was an 8 px scale named by step (`space.1` = 8 px to `spa
 
 ## Web and landing page layout
 
-Designed at a 1440px viewport, content centered in a fixed container. For social posts, ads and banners, see [`layout/`](../../guidelines/layout/). These move to `web/` when that folder exists.
+Designed at a 1440px viewport, content centered in a 1200px container (design lead, 2026-11-21; it was 1110px). The website's sections in [`web/`](../../web/) build on these. For social posts, ads and banners, see [`layout/`](../../guidelines/layout/).
 
 | Token | Value | Note |
 | --- | --- | --- |
 | `layout.viewport` | 1440px | Design width |
-| `layout.content-width` | 1110px | |
-| `layout.side-padding` | 165px | Off-grid on purpose: (1440 − 1110) / 2 |
-| `layout.column-gap` | 30px | Off-grid on purpose: three 350px cards + two 30px gaps = 1110px |
+| `layout.content-width` | 1200px | The content container |
+| `layout.side-padding` | 120px | (1440 − 1200) / 2 |
+| `layout.column-gap` | 24px | On the 4px grid: three 384px cards + two 24px gaps = 1200px (it was 30px, off-grid) |
 | `layout.narrow-content` | 800px | FAQ and other narrow content |
 | `layout.nav-height` | 110px | 64px on mobile |
 | `layout.section-padding-min` / `-max` | 80px / 120px | Hero and content sections; CTA sections use 120px |

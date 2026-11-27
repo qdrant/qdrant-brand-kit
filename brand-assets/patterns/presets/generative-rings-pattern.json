@@ -3,8 +3,8 @@
   "textMask": "both",
   "recipe": "generative-pattern",
   "extends": "generative-pattern.shared",
-  "source": "Pattern Studio export shared by Vanesa (Hex pulse settings), 1920 x 1080, 2026-11-24",
-  "$description": "Hexagons on a hex grid, lit in broken hexagon rings (frequency 19.4) by heavy multiply noise, on the Motion Streaks gradient without the streaks: background.default → the family's 900, hexagons in the family's 800, 600 and 200, like every generative pattern. Built from Vanesa's reference export (exploration X1). Ten approved variants (X3, X6, X8 to X10, X12 to X16): renderPattern(..., { variant: n }).",
+  "source": "Pattern Studio export shared by the visual designer (Hex pulse settings), 1920 x 1080, 2026-11-24",
+  "$description": "Hexagons on a hex grid, lit in broken hexagon rings (frequency 19.4) by heavy multiply noise, on the Motion Streaks gradient without the streaks: background.default → the family's 900, hexagons in the family's 800, 600 and 200, like every generative pattern. Built from the visual designer's reference export (exploration X1). Ten approved variants (X3, X6, X8 to X10, X12 to X16): renderPattern(..., { variant: n }).",
   "colorways": [
     {
       "name": "Background → Indigo 900",
@@ -59,7 +59,7 @@
           "at": 1.1667
         }
       ],
-      "onHold": "Waiting for the council's approval of the sub-direction (Vanesa, 2026-11-24). Don't use it in creatives yet."
+      "onHold": "Waiting for the council's approval of the sub-direction (visual designer, 2026-11-24). Don't use it in creatives yet."
     },
     {
       "name": "Background → Neutral 800",
@@ -78,6 +78,28 @@
           "at": 1.1667
         }
       ]
+    },
+    {
+      "name": "Neutral 100 → Neutral 300",
+      "colors": [
+        "{color.neutral.0}",
+        "{color.neutral.0}",
+        "{color.neutral.0}"
+      ],
+      "backdrop": [
+        {
+          "token": "{color.neutral.100}",
+          "at": 0.0559
+        },
+        {
+          "token": "{color.neutral.300}",
+          "at": 1.1667
+        }
+      ],
+      "fixedColors": true,
+      "textColor": "dark",
+      "textMask": "none",
+      "onHold": "Light mode: on hold (visual designer, 2026-11-26). Don't use it in creatives yet."
     }
   ],
   "settings": {
@@ -172,7 +194,7 @@
         "scale": 0.55
       }
     ],
-    "$look": "Open look (Vanesa, 2026-11-25): agents may make new variations of this pattern without the Pattern Studio connector, with renderPattern(..., { look: n }) or { look: { ... } }. Only the engine values in look.ranges change, and each stays inside its range (numbers: [min, max]; words: the listed choices; cell: on the 8 grid). Colors always come from the colorway. The ranges span the pattern as approved and its approved variants.",
+    "$look": "Open look (visual designer, 2026-11-25): agents may make new variations of this pattern without the Pattern Studio connector, with renderPattern(..., { look: n }) or { look: { ... } }. Only the engine values in look.ranges change, and each stays inside its range (numbers: [min, max]; words: the listed choices; cell: on the 8 grid). Colors always come from the colorway. The ranges span the pattern as approved and its approved variants.",
     "look": {
       "source": "Pattern Studio look hex-pulse",
       "ranges": {
@@ -227,5 +249,5 @@
       }
     }
   },
-  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (Vanesa, 2026-11-25). Dark neutral added 2026-11-24."
+  "$colors": "Elements in the family's 800, 700, 500: the lightest is never below 500 (visual designer, 2026-11-25). Dark neutral added 2026-11-24. Light mode (on hold): every element white (Neutral 0) on Neutral 100 → 300, kept white by fixedColors."
 }

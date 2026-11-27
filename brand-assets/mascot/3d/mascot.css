@@ -1,5 +1,5 @@
 /* Qbot (3D) in creatives. Load primitives/colors/colors.css first.
-   Placement rules: guidelines/README.md section 6 (Vanesa, 2026-11-04).
+   Placement rules: guidelines/README.md section 6 (visual designer, 2026-11-04).
 
    Use an approved pose PNG from references/ as it is (1024x1024, transparent).
    Crop its empty margins in CSS with object-view-box (source px), so the <img> box
