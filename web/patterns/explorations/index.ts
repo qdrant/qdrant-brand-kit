@@ -1,6 +1,7 @@
 import type { PatternDefinition, PatternNote } from "../types"
 import { cosmosPatterns } from "./cosmos"
 import { depthHazeVivid, depthHazeVividBackground } from "./depth-haze-vivid"
+import { fiberPatterns } from "./fibers"
 import { generativePattern } from "./generative"
 import { qbotPeek } from "./qbot"
 import { referencePatterns } from "./references"
@@ -782,6 +783,8 @@ export const explorations: PatternDefinition[] = [
   ...cosmosPatterns,
   // From the references the team shared (references.tsx).
   ...referencePatterns,
+  // From a fiber-optic image: hairline strands curling into a fan, with hexagon tips (fibers.tsx).
+  ...fiberPatterns,
   // An easter egg for a hero: Qbot peeks over the heading on the first hover (qbot.tsx).
   qbotPeek,
   // Depth haze with stars in more contrast and more movement, as a surface and a background (depth-haze-vivid.tsx).
