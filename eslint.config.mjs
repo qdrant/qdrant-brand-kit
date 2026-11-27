@@ -22,6 +22,8 @@ export default tseslint.config(
     "review/**",
     // shadcn's example demos, copied as-is by studio/scripts/fetch-examples.mjs
     "studio/examples/**",
+    // The hero lab's export, plain JavaScript generated outside this repo (web/patterns/explorations/hero-lab/README.md)
+    "web/patterns/explorations/hero-lab/**/*.js",
   ]),
   js.configs.recommended,
   ...tseslint.configs.recommended,

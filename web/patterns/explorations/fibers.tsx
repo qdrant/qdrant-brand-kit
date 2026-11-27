@@ -49,6 +49,7 @@ function bez(a: Pt, b: Pt, c: Pt, d: Pt, u: number): Pt {
 // hexagon. Two depths: far strands thinner and fainter, near ones a little stronger.
 
 type Fiber = {
+  sx: number // where it comes in, in fractions of the width (off the right edge, or the middle for a split fan)
   y0: number // where it enters on the right, in fractions of the height
   bx: number // how far left it runs before it turns
   cx: number // the curl's x
@@ -60,13 +61,14 @@ type Fiber = {
   lit: number // a pulse's light on the tip, fading
 }
 
-function fan(count: number, seed: number): Fiber[] {
+function fan(count: number, seed: number, sx = 1.04): Fiber[] {
   const rand = mulberry(seed)
   return Array.from({ length: count }, () => {
     // Tips spread over an arc around the curl, so the fan opens like the reference's.
     const angle = lerp(-1.45, -0.42, rand())
     const reach = lerp(0.42, 0.98, Math.sqrt(rand()))
     return {
+      sx,
       y0: 0.8 + rand() * 0.17,
       bx: 0.18 + rand() * 0.24,
       cx: -0.06 + rand() * 0.12,
@@ -95,14 +97,21 @@ function strand(f: Fiber, e: Env): [Pt, Pt, Pt, Pt] {
   }
   const y0 = (f.y0 + Math.sin(t * 0.07 + f.ph) * 0.006) * h
   return [
-    [w * 1.04, y0],
+    [w * f.sx, y0],
     [f.bx * w, y0 + 0.01 * h],
     [(f.cx + Math.sin(t * 0.09 + f.ph) * 0.01) * w, lerp(y0, ty, 0.55)],
     [tx, ty],
   ]
 }
 
-function drawFan(ctx: CanvasRenderingContext2D, fibers: Fiber[], e: Env, flip: boolean) {
+function drawFan(
+  ctx: CanvasRenderingContext2D,
+  fibers: Fiber[],
+  e: Env,
+  flip: boolean,
+  fadeFrom = 0.42,
+  fadeTo = 0.98
+) {
   const { w, h, p } = e
   ctx.save()
   if (flip) {
@@ -129,12 +138,20 @@ function drawFan(ctx: CanvasRenderingContext2D, fibers: Fiber[], e: Env, flip: b
   ctx.globalAlpha = 1
   // The strands fade toward the right, where they come in, so the bundle reads as arriving, not cut.
   const fade = ctx.createLinearGradient(0, 0, w, 0)
-  fade.addColorStop(0.42, "rgb(0 0 0 / 1)")
-  fade.addColorStop(0.98, "rgb(0 0 0 / 0)")
+  fade.addColorStop(fadeFrom, "rgb(0 0 0 / 1)")
+  fade.addColorStop(fadeTo, "rgb(0 0 0 / 0)")
+  // The fade clears everything outside what it fills, so a split fan limits it to its own half: the other half's
+  // strands stay as they are.
+  ctx.save()
+  if (fadeTo <= 0.5) {
+    ctx.beginPath()
+    ctx.rect(0, 0, w * 0.5, h)
+    ctx.clip()
+  }
   ctx.globalCompositeOperation = "destination-in"
   ctx.fillStyle = fade
   ctx.fillRect(0, 0, w, h)
-  ctx.globalCompositeOperation = "source-over"
+  ctx.restore()
 
   // Tips: a solid hexagon, and a faint outline for the near ones (the light, without a glow).
   const tips = batch(8)
@@ -182,6 +199,26 @@ const fiberFanRight = cosmos({
     init: () => ({ fibers: fan(64, 223) }),
     frame(ctx, s, e) {
       drawFan(ctx, s.fibers, e, true)
+    },
+  },
+})
+
+// Two smaller fans, mirrored, for centered layouts: the bundle rises from the middle of the bottom and curls up on
+// both sides, leaving the middle clear for the heading.
+const fiberFanSplit = cosmos({
+  id: "ref-fiber-fan-split",
+  name: "Fiber fan, both sides",
+  kind: "background",
+  description:
+    "Two fiber fans, mirrored: the strands come out of the middle of the bottom and curl up on both sides, leaving the middle clear. For centered layouts.",
+  notes: [FULL, SLOW, NO_GLOW, HOVER, COPY],
+  seed: 239,
+  spec: {
+    init: () => ({ left: fan(38, 239, 0.5), right: fan(38, 241, 0.5) }),
+    frame(ctx, s, e) {
+      // Each half fades in from the middle, so the two bundles meet softly.
+      drawFan(ctx, s.left, e, false, 0.36, 0.5)
+      drawFan(ctx, s.right, e, true, 0.36, 0.5)
     },
   },
 })
@@ -324,4 +361,4 @@ const fiberFlow = cosmos({
   },
 })
 
-export const fiberPatterns = [fiberFan, fiberFanRight, fiberPulses, fiberFlow]
+export const fiberPatterns = [fiberFan, fiberFanRight, fiberFanSplit, fiberPulses, fiberFlow]
