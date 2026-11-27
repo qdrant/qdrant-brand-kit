@@ -66,7 +66,7 @@ Stickers break three logo rules on purpose (visual designer, 2026-11-27). Everyt
 
 - **One PDF per sticker or sheet, PDF/X-4, CMYK only** (no RGB anywhere), converted with the profile from section 1, which is also the output intent.
 - **Two layers:** `Artwork` and `CutContour`. The cut is a spot color named by the vendor (default `CutContour`, C0 M100 Y0 K0), 0.25 pt stroke, no fill, overprint, one closed path per sticker.
-- **No fonts:** the logo is vector shapes from [`brand-assets/logo/`](../../brand-assets/logo/). The dark wordmark is K100 only; large dark areas are rich black C40 M0 Y0 K100 ([`README.md`](README.md) section 3).
+- **No fonts:** the logo is vector shapes from [`brand-assets/logo/`](../../brand-assets/logo/). The dark wordmark is K100 only; large dark areas are the rich black, C90 M70 Y45 K90 in Europe and C25 M10 Y0 K100 in the US ([`README.md`](README.md) section 3; visual designer, 2026-11-27).
 - **A proof PNG** with the cut line drawn thick, the cut plate on its own, and a zoom on the logo for contour stickers.
 - **New file names every round** (`_v2`, `_v3`): Acrobat keeps showing an older file with the same name.
 

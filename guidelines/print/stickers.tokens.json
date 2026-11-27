@@ -37,13 +37,13 @@
     "steps": { "$value": [1.0, 0.7, 0.55, 0.4, 0.3, 0.2], "$description": "Image left at the edge: 1.0 = no mask; 0.2 = 80%, the strongest" },
     "max": { "$value": 0.8, "$description": "Above 80% at the edge, generate the image again instead" },
     "subjectFocal": { "$value": 0.6, "$description": "The upper 60% of the subject (head, torso, hands) is never darkened (1% at most)" },
-    "toward": "rich black C40 M0 Y0 K100 in print, neutral 950 on screen"
+    "toward": "rich black in print (Europe C90 M70 Y45 K90, US C25 M10 Y0 K100), neutral 950 on screen"
   },
   "color": {
     "EU": { "profile": "PSO Coated v3", "url": "https://www.color.org/registry/profiles/PSOcoated_v3.icc" },
     "US": { "profile": "GRACoL2013_CRPC6", "url": "https://www.color.org/registry/profiles/GRACoL2013_CRPC6.icc" },
     "darkText": "K100 only",
-    "richBlack": "C40 M0 Y0 K100"
+    "richBlack": { "europe": "C90 M70 Y45 K90", "us": "C25 M10 Y0 K100" }
   },
   "cut": {
     "spotName": { "$value": "CutContour", "$description": "Some vendors use Thru-cut, KissCut or Die: the vendor's name wins" },

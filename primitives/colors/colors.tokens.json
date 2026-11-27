@@ -13,6 +13,20 @@
             1.0
           ],
           "hex": "#ffffff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M0 Y0 K0",
+              "cmykUS": "C0 M0 Y0 K0",
+              "pantone": "none (paper)",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.0
+              }
+            }
+          }
         }
       },
       "25": {
@@ -25,6 +39,20 @@
             0.9765
           ],
           "hex": "#f8f8f9"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M0 Y0 K5",
+              "cmykUS": "C0 M0 Y0 K5",
+              "pantone": "none (paper)",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 0.7,
+                "us": 0.9
+              }
+            }
+          }
         }
       },
       "50": {
@@ -37,6 +65,20 @@
             0.9608
           ],
           "hex": "#f3f3f5"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M0 Y0 K0",
+              "cmykUS": "C0 M0 Y0 K0",
+              "pantone": "none (paper)",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 2.5,
+                "us": 2.5
+              }
+            }
+          }
         }
       },
       "100": {
@@ -49,6 +91,21 @@
             0.9176
           ],
           "hex": "#e6e7ea"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C11 M7 Y5 K0",
+              "cmykUS": "C9 M7 Y6 K0",
+              "pantone": "663 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 1.8,
+                "pantone": 3.0
+              }
+            }
+          }
         }
       },
       "200": {
@@ -61,6 +118,21 @@
             0.8667
           ],
           "hex": "#d7d9dd"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C16 M11 Y9 K0",
+              "cmykUS": "C16 M11 Y10 K0",
+              "pantone": "427 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.5,
+                "us": 1.0,
+                "pantone": 2.4
+              }
+            }
+          }
         }
       },
       "300": {
@@ -73,6 +145,21 @@
             0.8353
           ],
           "hex": "#cdd0d5"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C21 M14 Y11 K1",
+              "cmykUS": "C21 M15 Y12 K0",
+              "pantone": "427 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.4,
+                "us": 0.3,
+                "pantone": 2.2
+              }
+            }
+          }
         }
       },
       "400": {
@@ -85,6 +172,21 @@
             0.7255
           ],
           "hex": "#adb2b9"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C32 M22 Y18 K5",
+              "cmykUS": "C35 M25 Y21 K1",
+              "pantone": "6337 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.3,
+                "us": 1.4,
+                "pantone": 3.2
+              }
+            }
+          }
         }
       },
       "500": {
@@ -97,6 +199,21 @@
             0.6
           ],
           "hex": "#889099"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C45 M31 Y24 K15",
+              "cmykUS": "C50 M35 Y30 K5",
+              "pantone": "430 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 1.0,
+                "pantone": 4.0
+              }
+            }
+          }
         }
       },
       "600": {
@@ -109,6 +226,21 @@
             0.4745
           ],
           "hex": "#636d79"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C56 M42 Y29 K29",
+              "cmykUS": "C62 M47 Y38 K18",
+              "pantone": "4129 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.0,
+                "pantone": 2.8
+              }
+            }
+          }
         }
       },
       "700": {
@@ -121,6 +253,21 @@
             0.3882
           ],
           "hex": "#4a5563"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C64 M48 Y31 K42",
+              "cmykUS": "C71 M56 Y43 K29",
+              "pantone": "4139 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.7,
+                "pantone": 2.4
+              }
+            }
+          }
         }
       },
       "800": {
@@ -133,6 +280,21 @@
             0.2627
           ],
           "hex": "#2c3543"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C73 M56 Y34 K61",
+              "cmykUS": "C82 M69 Y50 K50",
+              "pantone": "7546 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.7,
+                "pantone": 3.6
+              }
+            }
+          }
         }
       },
       "850": {
@@ -145,6 +307,21 @@
             0.2078
           ],
           "hex": "#1f2835"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C77 M60 Y35 K70",
+              "cmykUS": "C88 M76 Y53 K61",
+              "pantone": "4280 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.7,
+                "us": 1.3,
+                "pantone": 2.0
+              }
+            }
+          }
         }
       },
       "900": {
@@ -157,6 +334,21 @@
             0.1451
           ],
           "hex": "#141b25"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C80 M63 Y38 K80",
+              "cmykUS": "C91 M80 Y59 K74",
+              "pantone": "7547 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.8,
+                "us": 1.5,
+                "pantone": 1.9
+              }
+            }
+          }
         }
       },
       "925": {
@@ -169,6 +361,21 @@
             0.1137
           ],
           "hex": "#0f151d"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C50 M25 Y5 K95",
+              "cmykUS": "C50 M25 Y5 K95",
+              "pantone": "Black 6 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 1.7,
+                "us": 1.9,
+                "pantone": 1.4
+              }
+            }
+          }
         }
       },
       "950": {
@@ -181,6 +388,21 @@
             0.0667
           ],
           "hex": "#070b11"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C90 M70 Y45 K90",
+              "cmykUS": "C25 M10 Y0 K100",
+              "pantone": "Black 6 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 1.9,
+                "us": 2.1,
+                "pantone": 4.3
+              }
+            }
+          }
         }
       },
       "975": {
@@ -194,7 +416,22 @@
           ],
           "hex": "#040609"
         },
-        "$description": "The design system's dark page (design lead, 2026-11-16): halfway from 950 to black in sRGB, rounded so it keeps 950's hue (H 216°, S 56%, B 3.5%). Added in this repo first, then to the Figma file the same day."
+        "$description": "The design system's dark page (design lead, 2026-11-16): halfway from 950 to black in sRGB, rounded so it keeps 950's hue (H 216°, S 56%, B 3.5%). Added in this repo first, then to the Figma file the same day.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C83 M65 Y48 K93",
+              "cmykUS": "C86 M76 Y69 K92",
+              "pantone": "Black 6 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 3.2,
+                "us": 1.1,
+                "pantone": 6.0
+              }
+            }
+          }
+        }
       },
       "1000": {
         "$type": "color",
@@ -206,6 +443,21 @@
             0.0
           ],
           "hex": "#000000"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C83 M67 Y51 K95",
+              "cmykUS": "C86 M76 Y71 K96",
+              "pantone": "Black 6 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 3.7,
+                "us": 0.7,
+                "pantone": 7.6
+              }
+            }
+          }
         }
       },
       "$description": "Deep Space 216 neutral (HCT hue 255, saturation-balanced). 0 = white, 1000 = black. 850 and 925 support the background roles, and 975 is the design system's dark page."
@@ -221,6 +473,21 @@
             0.949
           ],
           "hex": "#fdf1f2"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C1 M7 Y3 K0",
+              "cmykUS": "C0 M7 Y3 K0",
+              "pantone": "663 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.2,
+                "us": 1.4,
+                "pantone": 5.2
+              }
+            }
+          }
         }
       },
       "100": {
@@ -233,6 +500,21 @@
             0.9059
           ],
           "hex": "#fce5e7"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C1 M13 Y5 K0",
+              "cmykUS": "C1 M13 Y5 K0",
+              "pantone": "705 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.2,
+                "us": 0.2,
+                "pantone": 2.9
+              }
+            }
+          }
         }
       },
       "200": {
@@ -245,6 +527,21 @@
             0.8353
           ],
           "hex": "#facfd5"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C1 M24 Y8 K0",
+              "cmykUS": "C0 M24 Y8 K0",
+              "pantone": "706 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.8,
+                "us": 0.0,
+                "pantone": 1.3
+              }
+            }
+          }
         }
       },
       "300": {
@@ -257,6 +554,21 @@
             0.698
           ],
           "hex": "#f9a6b2"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M44 Y15 K0",
+              "cmykUS": "C0 M45 Y15 K0",
+              "pantone": "1765 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.0,
+                "us": 0.9,
+                "pantone": 2.0
+              }
+            }
+          }
         }
       },
       "400": {
@@ -269,6 +581,21 @@
             0.5255
           ],
           "hex": "#f67186"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M67 Y29 K0",
+              "cmykUS": "C0 M69 Y26 K0",
+              "pantone": "1777 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.2,
+                "us": 1.4,
+                "pantone": 2.6
+              }
+            }
+          }
         }
       },
       "500": {
@@ -281,6 +608,21 @@
             0.3882
           ],
           "hex": "#f14463"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M83 Y45 K0",
+              "cmykUS": "C0 M85 Y42 K0",
+              "pantone": "1785 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.2,
+                "us": 1.4,
+                "pantone": 2.9
+              }
+            }
+          }
         }
       },
       "600": {
@@ -294,7 +636,22 @@
           ],
           "hex": "#dc244c"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C2 M93 Y54 K4",
+              "cmykUS": "C6 M97 Y58 K1",
+              "pantone": "192 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 0.5,
+                "us": 0.5,
+                "pantone": 1.8
+              }
+            }
+          }
+        }
       },
       "700": {
         "$type": "color",
@@ -306,6 +663,21 @@
             0.2549
           ],
           "hex": "#ba1e41"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C6 M93 Y55 K21",
+              "cmykUS": "C18 M100 Y64 K8",
+              "pantone": "193 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.3,
+                "us": 0.4,
+                "pantone": 1.2
+              }
+            }
+          }
         }
       },
       "800": {
@@ -318,6 +690,21 @@
             0.2392
           ],
           "hex": "#9b1e3d"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C11 M92 Y48 K35",
+              "cmykUS": "C25 M100 Y61 K22",
+              "pantone": "7420 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.6,
+                "us": 0.3,
+                "pantone": 1.4
+              }
+            }
+          }
         }
       },
       "900": {
@@ -330,6 +717,21 @@
             0.2314
           ],
           "hex": "#821f3b"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C18 M90 Y42 K45",
+              "cmykUS": "C30 M100 Y55 K35",
+              "pantone": "208 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.3,
+                "us": 0.0,
+                "pantone": 1.7
+              }
+            }
+          }
         }
       },
       "950": {
@@ -342,6 +744,21 @@
             0.1098
           ],
           "hex": "#480d1c"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C35 M91 Y45 K72",
+              "cmykUS": "C44 M99 Y62 K69",
+              "pantone": "4102 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.5,
+                "us": 1.5,
+                "pantone": 3.9
+              }
+            }
+          }
         }
       },
       "975": {
@@ -355,7 +772,22 @@
           ],
           "hex": "#24060e"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from amaranth-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from amaranth-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C60 M86 Y44 K86",
+              "cmykUS": "C65 M87 Y63 K87",
+              "pantone": "4975 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.1,
+                "us": 3.1,
+                "pantone": 8.0
+              }
+            }
+          }
+        }
       },
       "a100": {
         "$type": "color",
@@ -421,6 +853,21 @@
             1.0
           ],
           "hex": "#eff2ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C7 M4 Y0 K0",
+              "cmykUS": "C5 M4 Y0 K0",
+              "pantone": "656 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 2.7,
+                "us": 3.3,
+                "pantone": 4.9
+              }
+            }
+          }
         }
       },
       "100": {
@@ -433,6 +880,21 @@
             1.0
           ],
           "hex": "#e1e7ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C13 M8 Y0 K0",
+              "cmykUS": "C11 M7 Y0 K0",
+              "pantone": "2706 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 3.0,
+                "us": 3.5,
+                "pantone": 4.7
+              }
+            }
+          }
         }
       },
       "200": {
@@ -445,6 +907,21 @@
             1.0
           ],
           "hex": "#c9d1ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C24 M16 Y0 K0",
+              "cmykUS": "C21 M15 Y0 K0",
+              "pantone": "2120 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 5.5,
+                "us": 6.1,
+                "pantone": 4.7
+              }
+            }
+          }
         }
       },
       "300": {
@@ -457,6 +934,21 @@
             1.0
           ],
           "hex": "#a8b2ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C40 M29 Y0 K0",
+              "cmykUS": "C36 M27 Y0 K0",
+              "pantone": "2716 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 7.4,
+                "us": 7.4,
+                "pantone": 3.7
+              }
+            }
+          }
         }
       },
       "400": {
@@ -469,6 +961,21 @@
             1.0
           ],
           "hex": "#8385ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C60 M40 Y0 K0",
+              "cmykUS": "C60 M40 Y0 K0",
+              "pantone": "2715 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 6.9,
+                "us": 6.7,
+                "pantone": 6.5
+              }
+            }
+          }
         }
       },
       "500": {
@@ -481,6 +988,21 @@
             0.9922
           ],
           "hex": "#695dfd"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C78 M70 Y0 K0",
+              "cmykUS": "C75 M67 Y0 K0",
+              "pantone": "2725 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 13.1,
+                "us": 11.6,
+                "pantone": 7.4
+              }
+            }
+          }
         }
       },
       "600": {
@@ -494,7 +1016,22 @@
           ],
           "hex": "#6047ff"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C75 M65 Y0 K0",
+              "cmykUS": "C75 M65 Y0 K0",
+              "pantone": "2725 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 11.7,
+                "us": 11.8,
+                "pantone": 8.3
+              }
+            }
+          }
+        }
       },
       "700": {
         "$type": "color",
@@ -506,6 +1043,21 @@
             0.8275
           ],
           "hex": "#4a2cd3"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C96 M93 Y0 K0",
+              "cmykUS": "C84 M80 Y0 K0",
+              "pantone": "2098 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 10.3,
+                "us": 10.1,
+                "pantone": 5.7
+              }
+            }
+          }
         }
       },
       "800": {
@@ -518,6 +1070,21 @@
             0.6627
           ],
           "hex": "#3d29a9"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C96 M95 Y0 K0",
+              "cmykUS": "C87 M87 Y0 K0",
+              "pantone": "2098 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 5.1,
+                "us": 6.8,
+                "pantone": 2.0
+              }
+            }
+          }
         }
       },
       "900": {
@@ -530,6 +1097,21 @@
             0.5137
           ],
           "hex": "#352b83"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C94 M93 Y1 K3",
+              "cmykUS": "C94 M99 Y7 K1",
+              "pantone": "6329 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 0.6,
+                "us": 1.6,
+                "pantone": 0.8
+              }
+            }
+          }
         }
       },
       "950": {
@@ -542,6 +1124,21 @@
             0.2941
           ],
           "hex": "#201a4b"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C93 M92 Y15 K51",
+              "cmykUS": "C98 M100 Y42 K35",
+              "pantone": "275 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 4.4,
+                "pantone": 1.3
+              }
+            }
+          }
         }
       },
       "975": {
@@ -555,7 +1152,22 @@
           ],
           "hex": "#100d26"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from indigo-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from indigo-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C93 M82 Y27 K78",
+              "cmykUS": "C98 M98 Y57 K71",
+              "pantone": "5255 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.7,
+                "us": 3.7,
+                "pantone": 4.0
+              }
+            }
+          }
+        }
       },
       "a100": {
         "$type": "color",
@@ -621,6 +1233,21 @@
             0.949
           ],
           "hex": "#fdf2f2"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C1 M6 Y3 K0",
+              "cmykUS": "C0 M7 Y3 K0",
+              "pantone": "663 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.2,
+                "us": 1.4,
+                "pantone": 5.2
+              }
+            }
+          }
         }
       },
       "100": {
@@ -633,6 +1260,21 @@
             0.8824
           ],
           "hex": "#fde3e1"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M14 Y8 K0",
+              "cmykUS": "C0 M14 Y7 K0",
+              "pantone": "705 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.8,
+                "us": 0.0,
+                "pantone": 3.6
+              }
+            }
+          }
         }
       },
       "200": {
@@ -645,6 +1287,21 @@
             0.7882
           ],
           "hex": "#fdcbc9"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M26 Y14 K0",
+              "cmykUS": "C0 M26 Y13 K0",
+              "pantone": "6275 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.8,
+                "us": 0.8,
+                "pantone": 3.0
+              }
+            }
+          }
         }
       },
       "300": {
@@ -657,6 +1314,21 @@
             0.6314
           ],
           "hex": "#fca6a1"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M44 Y27 K0",
+              "cmykUS": "C0 M45 Y25 K0",
+              "pantone": "169 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.3,
+                "us": 1.3,
+                "pantone": 3.2
+              }
+            }
+          }
         }
       },
       "400": {
@@ -669,6 +1341,21 @@
             0.3961
           ],
           "hex": "#f96d65"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M69 Y53 K0",
+              "cmykUS": "C0 M70 Y51 K0",
+              "pantone": "2345 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 2.2,
+                "us": 1.8,
+                "pantone": 1.6
+              }
+            }
+          }
         }
       },
       "500": {
@@ -682,7 +1369,22 @@
           ],
           "hex": "#f24134"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M84 Y79 K0",
+              "cmykUS": "C0 M84 Y79 K0",
+              "pantone": "3556 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 1.2,
+                "us": 1.1,
+                "pantone": 1.8
+              }
+            }
+          }
+        }
       },
       "600": {
         "$type": "color",
@@ -694,6 +1396,21 @@
             0.0275
           ],
           "hex": "#df2107"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C1 M93 Y100 K4",
+              "cmykUS": "C3 M96 Y100 K1",
+              "pantone": "2347 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 1.6,
+                "pantone": 1.3
+              }
+            }
+          }
         }
       },
       "700": {
@@ -706,6 +1423,21 @@
             0.0196
           ],
           "hex": "#ba1b05"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C5 M95 Y100 K21",
+              "cmykUS": "C16 M100 Y100 K9",
+              "pantone": "3517 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.4,
+                "us": 4.0,
+                "pantone": 4.3
+              }
+            }
+          }
         }
       },
       "800": {
@@ -718,6 +1450,21 @@
             0.0627
           ],
           "hex": "#991d10"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C10 M93 Y90 K36",
+              "cmykUS": "C24 M100 Y100 K23",
+              "pantone": "484 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.5,
+                "us": 1.7,
+                "pantone": 4.0
+              }
+            }
+          }
         }
       },
       "900": {
@@ -730,6 +1477,21 @@
             0.098
           ],
           "hex": "#7d2119"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C18 M89 Y79 K48",
+              "cmykUS": "C28 M98 Y96 K38",
+              "pantone": "7623 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.6,
+                "us": 0.6,
+                "pantone": 4.8
+              }
+            }
+          }
         }
       },
       "950": {
@@ -742,6 +1504,21 @@
             0.0314
           ],
           "hex": "#430d08"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C32 M91 Y65 K76",
+              "cmykUS": "C45 M97 Y84 K73",
+              "pantone": "4102 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 2.3,
+                "pantone": 7.5
+              }
+            }
+          }
         }
       },
       "975": {
@@ -755,7 +1532,22 @@
           ],
           "hex": "#220604"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from red-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from red-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C55 M84 Y52 K88",
+              "cmykUS": "C62 M85 Y73 K89",
+              "pantone": "4975 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.6,
+                "us": 2.6,
+                "pantone": 8.0
+              }
+            }
+          }
+        }
       },
       "a100": {
         "$type": "color",
@@ -821,6 +1613,21 @@
             0.9373
           ],
           "hex": "#fffbef"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M2 Y7 K0",
+              "cmykUS": "C0 M2 Y7 K0",
+              "pantone": "6428 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.2,
+                "us": 1.4,
+                "pantone": 7.8
+              }
+            }
+          }
         }
       },
       "100": {
@@ -833,6 +1640,21 @@
             0.8118
           ],
           "hex": "#fff2cf"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M5 Y22 K0",
+              "cmykUS": "C0 M5 Y22 K0",
+              "pantone": "6232 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.1,
+                "us": 1.1,
+                "pantone": 2.9
+              }
+            }
+          }
         }
       },
       "200": {
@@ -845,6 +1667,21 @@
             0.6078
           ],
           "hex": "#ffe49b"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M10 Y45 K0",
+              "cmykUS": "C0 M10 Y45 K0",
+              "pantone": "1205 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.7,
+                "us": 0.7,
+                "pantone": 2.3
+              }
+            }
+          }
         }
       },
       "300": {
@@ -857,6 +1694,21 @@
             0.4
           ],
           "hex": "#ffd066"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M19 Y66 K0",
+              "cmykUS": "C0 M19 Y67 K0",
+              "pantone": "134 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.7,
+                "us": 0.0,
+                "pantone": 1.2
+              }
+            }
+          }
         }
       },
       "400": {
@@ -869,6 +1721,21 @@
             0.1725
           ],
           "hex": "#ffb82c"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M31 Y85 K0",
+              "cmykUS": "C0 M31 Y86 K0",
+              "pantone": "1235 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.0,
+                "us": 0.8,
+                "pantone": 1.1
+              }
+            }
+          }
         }
       },
       "500": {
@@ -882,7 +1749,22 @@
           ],
           "hex": "#fe9800"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C0 M45 Y90 K0",
+              "cmykUS": "C0 M48 Y95 K0",
+              "pantone": "2013 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 1.8,
+                "us": 1.7,
+                "pantone": 0.2
+              }
+            }
+          }
+        }
       },
       "600": {
         "$type": "color",
@@ -894,6 +1776,21 @@
             0.0667
           ],
           "hex": "#e07111"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C2 M61 Y93 K6",
+              "cmykUS": "C7 M65 Y100 K1",
+              "pantone": "6263 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.5,
+                "us": 0.5,
+                "pantone": 1.1
+              }
+            }
+          }
         }
       },
       "700": {
@@ -906,6 +1803,21 @@
             0.098
           ],
           "hex": "#b84e19"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C8 M73 Y89 K22",
+              "cmykUS": "C19 M78 Y100 K10",
+              "pantone": "167 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.4,
+                "pantone": 1.9
+              }
+            }
+          }
         }
       },
       "800": {
@@ -918,6 +1830,21 @@
             0.1059
           ],
           "hex": "#943d1b"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C16 M76 Y84 K36",
+              "cmykUS": "C25 M82 Y98 K25",
+              "pantone": "7526 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 1.0,
+                "pantone": 2.4
+              }
+            }
+          }
         }
       },
       "900": {
@@ -930,6 +1857,21 @@
             0.102
           ],
           "hex": "#79341a"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C22 M76 Y80 K49",
+              "cmykUS": "C30 M82 Y97 K40",
+              "pantone": "1685 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.6,
+                "us": 0.6,
+                "pantone": 2.5
+              }
+            }
+          }
         }
       },
       "950": {
@@ -942,6 +1884,21 @@
             0.0392
           ],
           "hex": "#451a0a"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C33 M80 Y70 K75",
+              "cmykUS": "C42 M88 Y92 K71",
+              "pantone": "4625 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.3,
+                "us": 1.1,
+                "pantone": 5.5
+              }
+            }
+          }
         }
       },
       "975": {
@@ -955,7 +1912,22 @@
           ],
           "hex": "#220d05"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from orange-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from orange-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C55 M75 Y57 K88",
+              "cmykUS": "C60 M81 Y79 K88",
+              "pantone": "4975 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 2.1,
+                "us": 1.1,
+                "pantone": 8.5
+              }
+            }
+          }
+        }
       },
       "a100": {
         "$type": "color",
@@ -1021,6 +1993,21 @@
             0.9569
           ],
           "hex": "#f2fcf4"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C5 M0 Y6 K0",
+              "cmykUS": "C5 M0 Y6 K0",
+              "pantone": "621 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.2,
+                "us": 2.6,
+                "pantone": 6.6
+              }
+            }
+          }
         }
       },
       "100": {
@@ -1033,6 +2020,21 @@
             0.902
           ],
           "hex": "#e1fae6"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C13 M0 Y12 K0",
+              "cmykUS": "C12 M0 Y14 K0",
+              "pantone": "621 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 4.0,
+                "us": 5.0,
+                "pantone": 7.3
+              }
+            }
+          }
         }
       },
       "200": {
@@ -1045,6 +2047,21 @@
             0.8118
           ],
           "hex": "#c5f4cf"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C24 M0 Y23 K0",
+              "cmykUS": "C24 M0 Y25 K0",
+              "pantone": "2253 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 5.8,
+                "us": 6.5,
+                "pantone": 2.6
+              }
+            }
+          }
         }
       },
       "300": {
@@ -1057,6 +2074,21 @@
             0.6588
           ],
           "hex": "#97eca8"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C40 M0 Y44 K0",
+              "cmykUS": "C41 M0 Y46 K0",
+              "pantone": "2267 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 7.6,
+                "us": 7.7,
+                "pantone": 3.4
+              }
+            }
+          }
         }
       },
       "400": {
@@ -1069,6 +2101,21 @@
             0.4549
           ],
           "hex": "#63d874"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C58 M0 Y70 K0",
+              "cmykUS": "C58 M0 Y70 K0",
+              "pantone": "2268 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 7.7,
+                "us": 7.2,
+                "pantone": 2.2
+              }
+            }
+          }
         }
       },
       "500": {
@@ -1081,6 +2128,21 @@
             0.3333
           ],
           "hex": "#4cc255"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C66 M0 Y82 K0",
+              "cmykUS": "C65 M0 Y83 K0",
+              "pantone": "6409 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 4.6,
+                "us": 3.5,
+                "pantone": 2.1
+              }
+            }
+          }
         }
       },
       "600": {
@@ -1094,7 +2156,22 @@
           ],
           "hex": "#3ca042"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C71 M4 Y87 K6",
+              "cmykUS": "C75 M10 Y95 K0",
+              "pantone": "7738 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.4,
+                "pantone": 1.6
+              }
+            }
+          }
+        }
       },
       "700": {
         "$type": "color",
@@ -1106,6 +2183,21 @@
             0.2196
           ],
           "hex": "#317e38"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C73 M12 Y86 K27",
+              "cmykUS": "C80 M26 Y100 K11",
+              "pantone": "356 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.4,
+                "us": 0.6,
+                "pantone": 3.3
+              }
+            }
+          }
         }
       },
       "800": {
@@ -1118,6 +2210,21 @@
             0.1922
           ],
           "hex": "#2a6331"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C73 M20 Y82 K44",
+              "cmykUS": "C81 M35 Y99 K28",
+              "pantone": "7483 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.5,
+                "us": 0.6,
+                "pantone": 3.8
+              }
+            }
+          }
         }
       },
       "900": {
@@ -1130,6 +2237,21 @@
             0.1725
           ],
           "hex": "#24512c"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C72 M25 Y77 K56",
+              "cmykUS": "C82 M41 Y96 K42",
+              "pantone": "357 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.0,
+                "pantone": 2.2
+              }
+            }
+          }
         }
       },
       "950": {
@@ -1142,6 +2264,21 @@
             0.0863
           ],
           "hex": "#102d16"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C74 M36 Y72 K78",
+              "cmykUS": "C84 M55 Y95 K71",
+              "pantone": "5605 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.6,
+                "us": 2.1,
+                "pantone": 6.6
+              }
+            }
+          }
         }
       },
       "975": {
@@ -1155,7 +2292,22 @@
           ],
           "hex": "#08160b"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from green-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from green-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C76 M51 Y62 K89",
+              "cmykUS": "C83 M66 Y81 K87",
+              "pantone": "Black 3 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.6,
+                "us": 3.3,
+                "pantone": 6.4
+              }
+            }
+          }
+        }
       },
       "a100": {
         "$type": "color",
@@ -1221,6 +2373,21 @@
             0.9804
           ],
           "hex": "#f1fdfa"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C6 M0 Y3 K0",
+              "cmykUS": "C5 M0 Y4 K0",
+              "pantone": "6148 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.4,
+                "us": 2.8,
+                "pantone": 6.2
+              }
+            }
+          }
         }
       },
       "100": {
@@ -1233,6 +2400,21 @@
             0.9412
           ],
           "hex": "#cffaf0"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C17 M0 Y10 K0",
+              "cmykUS": "C18 M0 Y11 K0",
+              "pantone": "573 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 6.8,
+                "us": 6.9,
+                "pantone": 5.2
+              }
+            }
+          }
         }
       },
       "200": {
@@ -1245,6 +2427,21 @@
             0.8863
           ],
           "hex": "#9ff5e2"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C31 M0 Y18 K0",
+              "cmykUS": "C35 M0 Y20 K0",
+              "pantone": "331 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 8.8,
+                "us": 8.9,
+                "pantone": 4.2
+              }
+            }
+          }
         }
       },
       "300": {
@@ -1257,6 +2454,21 @@
             0.8235
           ],
           "hex": "#5fead2"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C47 M0 Y29 K0",
+              "cmykUS": "C52 M0 Y28 K0",
+              "pantone": "3533 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 9.4,
+                "us": 9.7,
+                "pantone": 3.7
+              }
+            }
+          }
         }
       },
       "400": {
@@ -1269,6 +2481,21 @@
             0.7333
           ],
           "hex": "#13d3bb"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C62 M0 Y38 K0",
+              "cmykUS": "C65 M0 Y37 K0",
+              "pantone": "2239 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 7.1,
+                "us": 6.9,
+                "pantone": 1.4
+              }
+            }
+          }
         }
       },
       "500": {
@@ -1281,6 +2508,21 @@
             0.6431
           ],
           "hex": "#00b9a4"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C71 M0 Y44 K0",
+              "cmykUS": "C73 M0 Y44 K0",
+              "pantone": "6376 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 2.1,
+                "us": 1.9,
+                "pantone": 2.4
+              }
+            }
+          }
         }
       },
       "600": {
@@ -1294,7 +2536,22 @@
           ],
           "hex": "#009487"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C76 M10 Y47 K12",
+              "cmykUS": "C81 M18 Y52 K3",
+              "pantone": "7473 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 0.4,
+                "us": 0.4,
+                "pantone": 2.4
+              }
+            }
+          }
+        }
       },
       "700": {
         "$type": "color",
@@ -1306,6 +2563,21 @@
             0.4275
           ],
           "hex": "#0c766d"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C78 M20 Y49 K29",
+              "cmykUS": "C84 M29 Y57 K16",
+              "pantone": "328 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.4,
+                "us": 0.0,
+                "pantone": 1.8
+              }
+            }
+          }
         }
       },
       "800": {
@@ -1318,6 +2590,21 @@
             0.3451
           ],
           "hex": "#115e58"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C78 M27 Y49 K44",
+              "cmykUS": "C85 M37 Y61 K31",
+              "pantone": "7720 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.3,
+                "us": 0.8,
+                "pantone": 2.1
+              }
+            }
+          }
         }
       },
       "900": {
@@ -1330,6 +2617,21 @@
             0.2863
           ],
           "hex": "#164e49"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C78 M32 Y49 K55",
+              "cmykUS": "C86 M43 Y64 K43",
+              "pantone": "6384 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.9,
+                "pantone": 1.7
+              }
+            }
+          }
         }
       },
       "950": {
@@ -1342,6 +2644,21 @@
             0.1765
           ],
           "hex": "#082f2d"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C81 M42 Y49 K73",
+              "cmykUS": "C91 M55 Y69 K67",
+              "pantone": "5467 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.8,
+                "pantone": 2.7
+              }
+            }
+          }
         }
       },
       "975": {
@@ -1355,7 +2672,22 @@
           ],
           "hex": "#041817"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from teal-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from teal-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C84 M52 Y51 K87",
+              "cmykUS": "C91 M67 Y73 K84",
+              "pantone": "5463 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 2.0,
+                "us": 1.3,
+                "pantone": 6.4
+              }
+            }
+          }
+        }
       },
       "a100": {
         "$type": "color",
@@ -1421,6 +2753,21 @@
             0.9961
           ],
           "hex": "#eefefe"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C7 M0 Y1 K0",
+              "cmykUS": "C6 M0 Y2 K0",
+              "pantone": "6148 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 2.7,
+                "us": 3.7,
+                "pantone": 6.4
+              }
+            }
+          }
         }
       },
       "100": {
@@ -1433,6 +2780,21 @@
             0.9843
           ],
           "hex": "#d3f9fb"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C16 M0 Y5 K0",
+              "cmykUS": "C16 M0 Y5 K0",
+              "pantone": "628 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 4.8,
+                "us": 5.9,
+                "pantone": 6.2
+              }
+            }
+          }
         }
       },
       "200": {
@@ -1445,6 +2807,21 @@
             0.9686
           ],
           "hex": "#abf2f7"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C29 M0 Y9 K0",
+              "cmykUS": "C31 M0 Y8 K0",
+              "pantone": "317 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 6.3,
+                "us": 7.6,
+                "pantone": 4.5
+              }
+            }
+          }
         }
       },
       "300": {
@@ -1457,6 +2834,21 @@
             0.9529
           ],
           "hex": "#6ae8f3"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C45 M0 Y13 K0",
+              "cmykUS": "C49 M0 Y11 K0",
+              "pantone": "318 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 7.5,
+                "us": 7.9,
+                "pantone": 4.7
+              }
+            }
+          }
         }
       },
       "400": {
@@ -1469,6 +2861,21 @@
             0.902
           ],
           "hex": "#00d2e6"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C62 M0 Y16 K0",
+              "cmykUS": "C65 M0 Y14 K0",
+              "pantone": "2226 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 5.5,
+                "us": 6.0,
+                "pantone": 2.3
+              }
+            }
+          }
         }
       },
       "500": {
@@ -1482,7 +2889,22 @@
           ],
           "hex": "#00b7cf"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C71 M0 Y17 K0",
+              "cmykUS": "C71 M0 Y17 K0",
+              "pantone": "3125 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 0.3,
+                "us": 0.6,
+                "pantone": 2.6
+              }
+            }
+          }
+        }
       },
       "600": {
         "$type": "color",
@@ -1494,6 +2916,21 @@
             0.6824
           ],
           "hex": "#0092ae"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C75 M13 Y16 K14",
+              "cmykUS": "C80 M23 Y24 K2",
+              "pantone": "632 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.4,
+                "us": 0.6,
+                "pantone": 1.1
+              }
+            }
+          }
         }
       },
       "700": {
@@ -1506,6 +2943,21 @@
             0.5529
           ],
           "hex": "#05758d"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C78 M24 Y21 K29",
+              "cmykUS": "C85 M36 Y32 K10",
+              "pantone": "6131 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.7,
+                "us": 0.0,
+                "pantone": 1.3
+              }
+            }
+          }
         }
       },
       "800": {
@@ -1518,6 +2970,21 @@
             0.4471
           ],
           "hex": "#145f72"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C80 M33 Y27 K39",
+              "cmykUS": "C87 M46 Y40 K22",
+              "pantone": "7470 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.6,
+                "us": 0.7,
+                "pantone": 1.9
+              }
+            }
+          }
         }
       },
       "900": {
@@ -1530,6 +2997,21 @@
             0.3725
           ],
           "hex": "#194e5f"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C80 M41 Y30 K48",
+              "cmykUS": "C89 M55 Y44 K32",
+              "pantone": "2182 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.7,
+                "us": 0.0,
+                "pantone": 1.3
+              }
+            }
+          }
         }
       },
       "950": {
@@ -1542,6 +3024,21 @@
             0.2549
           ],
           "hex": "#0b3341"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C85 M49 Y33 K65",
+              "cmykUS": "C96 M67 Y52 K52",
+              "pantone": "547 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.3,
+                "pantone": 2.8
+              }
+            }
+          }
         }
       },
       "975": {
@@ -1555,7 +3052,22 @@
           ],
           "hex": "#061920"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from cyan-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from cyan-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C87 M57 Y41 K84",
+              "cmykUS": "C96 M76 Y65 K78",
+              "pantone": "5395 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.5,
+                "us": 1.3,
+                "pantone": 3.8
+              }
+            }
+          }
+        }
       },
       "a100": {
         "$type": "color",
@@ -1621,6 +3133,21 @@
             0.9882
           ],
           "hex": "#f0f6fc"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C6 M2 Y1 K0",
+              "cmykUS": "C5 M2 Y1 K0",
+              "pantone": "656 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.8,
+                "us": 1.8,
+                "pantone": 3.8
+              }
+            }
+          }
         }
       },
       "100": {
@@ -1633,6 +3160,21 @@
             0.9725
           ],
           "hex": "#dcebf8"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C15 M4 Y1 K0",
+              "cmykUS": "C14 M3 Y1 K0",
+              "pantone": "656 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.8,
+                "us": 0.7,
+                "pantone": 3.0
+              }
+            }
+          }
         }
       },
       "200": {
@@ -1645,6 +3187,21 @@
             0.9529
           ],
           "hex": "#c1dcf3"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C26 M6 Y0 K0",
+              "cmykUS": "C25 M6 Y1 K0",
+              "pantone": "2707 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 1.0,
+                "pantone": 2.5
+              }
+            }
+          }
         }
       },
       "300": {
@@ -1657,6 +3214,21 @@
             0.9373
           ],
           "hex": "#94c7ef"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C44 M11 Y0 K0",
+              "cmykUS": "C43 M10 Y0 K0",
+              "pantone": "283 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.7,
+                "us": 1.2,
+                "pantone": 1.7
+              }
+            }
+          }
         }
       },
       "400": {
@@ -1670,7 +3242,22 @@
           ],
           "hex": "#59a8e7"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C63 M21 Y0 K0",
+              "cmykUS": "C63 M21 Y0 K0",
+              "pantone": "284 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 2.5,
+                "us": 2.1,
+                "pantone": 2.2
+              }
+            }
+          }
+        }
       },
       "500": {
         "$type": "color",
@@ -1682,6 +3269,21 @@
             0.8824
           ],
           "hex": "#298be1"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C75 M37 Y0 K0",
+              "cmykUS": "C75 M37 Y0 K0",
+              "pantone": "279 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 3.9,
+                "us": 3.5,
+                "pantone": 1.8
+              }
+            }
+          }
         }
       },
       "600": {
@@ -1694,6 +3296,21 @@
             0.8118
           ],
           "hex": "#0070cf"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C85 M53 Y0 K0",
+              "cmykUS": "C84 M53 Y0 K0",
+              "pantone": "285 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 3.7,
+                "us": 3.1,
+                "pantone": 0.8
+              }
+            }
+          }
         }
       },
       "700": {
@@ -1706,6 +3323,21 @@
             0.7137
           ],
           "hex": "#005eb6"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C91 M62 Y0 K0",
+              "cmykUS": "C89 M62 Y0 K0",
+              "pantone": "300 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.7,
+                "us": 1.7,
+                "pantone": 0.3
+              }
+            }
+          }
         }
       },
       "800": {
@@ -1718,6 +3350,21 @@
             0.6039
           ],
           "hex": "#004b9a"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C98 M71 Y0 K1",
+              "cmykUS": "C97 M74 Y2 K0",
+              "pantone": "2945 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.7,
+                "us": 0.8,
+                "pantone": 0.7
+              }
+            }
+          }
         }
       },
       "900": {
@@ -1730,6 +3377,21 @@
             0.4745
           ],
           "hex": "#144179"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C92 M69 Y9 K27",
+              "cmykUS": "C98 M80 Y22 K8",
+              "pantone": "4154 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.4,
+                "pantone": 1.2
+              }
+            }
+          }
         }
       },
       "950": {
@@ -1742,6 +3404,21 @@
             0.2902
           ],
           "hex": "#13294a"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C91 M71 Y22 K58",
+              "cmykUS": "C100 M89 Y42 K40",
+              "pantone": "2767 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.5,
+                "us": 1.6,
+                "pantone": 0.3
+              }
+            }
+          }
         }
       },
       "975": {
@@ -1755,7 +3432,22 @@
           ],
           "hex": "#0a1525"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from blue-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from blue-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C89 M67 Y33 K81",
+              "cmykUS": "C99 M89 Y58 K73",
+              "pantone": "7547 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.4,
+                "us": 1.4,
+                "pantone": 4.5
+              }
+            }
+          }
+        }
       },
       "a100": {
         "$type": "color",
@@ -1821,6 +3513,21 @@
             1.0
           ],
           "hex": "#faf5ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C3 M5 Y0 K0",
+              "cmykUS": "C2 M5 Y0 K0",
+              "pantone": "663 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.6,
+                "us": 1.8,
+                "pantone": 5.0
+              }
+            }
+          }
         }
       },
       "100": {
@@ -1833,6 +3540,21 @@
             1.0
           ],
           "hex": "#f5eaff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C6 M9 Y0 K0",
+              "cmykUS": "C4 M9 Y0 K0",
+              "pantone": "7436 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 4.1,
+                "us": 4.8,
+                "pantone": 4.8
+              }
+            }
+          }
         }
       },
       "200": {
@@ -1845,6 +3567,21 @@
             1.0
           ],
           "hex": "#ebd4ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C13 M19 Y0 K0",
+              "cmykUS": "C9 M18 Y0 K0",
+              "pantone": "531 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 6.6,
+                "us": 7.3,
+                "pantone": 4.6
+              }
+            }
+          }
         }
       },
       "300": {
@@ -1857,6 +3594,21 @@
             1.0
           ],
           "hex": "#e1b3ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C24 M34 Y0 K0",
+              "cmykUS": "C19 M32 Y0 K0",
+              "pantone": "2562 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 9.6,
+                "us": 9.9,
+                "pantone": 5.1
+              }
+            }
+          }
         }
       },
       "400": {
@@ -1869,6 +3621,21 @@
             1.0
           ],
           "hex": "#d283ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C39 M55 Y0 K0",
+              "cmykUS": "C35 M51 Y0 K0",
+              "pantone": "2572 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 13.5,
+                "us": 12.9,
+                "pantone": 6.7
+              }
+            }
+          }
         }
       },
       "500": {
@@ -1881,6 +3648,21 @@
             1.0
           ],
           "hex": "#c655ff"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C53 M72 Y0 K0",
+              "cmykUS": "C49 M68 Y0 K0",
+              "pantone": "252 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 17.5,
+                "us": 15.2,
+                "pantone": 8.2
+              }
+            }
+          }
         }
       },
       "600": {
@@ -1893,6 +3675,21 @@
             0.8941
           ],
           "hex": "#af38e4"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C62 M84 Y0 K0",
+              "cmykUS": "C58 M79 Y0 K0",
+              "pantone": "2582 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 14.8,
+                "us": 13.0,
+                "pantone": 5.6
+              }
+            }
+          }
         }
       },
       "700": {
@@ -1906,7 +3703,22 @@
           ],
           "hex": "#932ebc"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C60 M85 Y0 K0",
+              "cmykUS": "C60 M85 Y0 K0",
+              "pantone": "2592 C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 8.1,
+                "us": 8.1,
+                "pantone": 2.0
+              }
+            }
+          }
+        }
       },
       "800": {
         "$type": "color",
@@ -1918,6 +3730,21 @@
             0.6
           ],
           "hex": "#792999"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C69 M93 Y0 K0",
+              "cmykUS": "C66 M93 Y0 K0",
+              "pantone": "527 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 3.4,
+                "us": 4.2,
+                "pantone": 2.9
+              }
+            }
+          }
         }
       },
       "900": {
@@ -1930,6 +3757,21 @@
             0.4824
           ],
           "hex": "#64277b"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C69 M93 Y3 K9",
+              "cmykUS": "C74 M100 Y11 K2",
+              "pantone": "2613 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 1.4,
+                "pantone": 2.2
+              }
+            }
+          }
         }
       },
       "950": {
@@ -1942,6 +3784,21 @@
             0.3216
           ],
           "hex": "#411252"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C75 M98 Y10 K44",
+              "cmykUS": "C84 M100 Y40 K30",
+              "pantone": "2627 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.6,
+                "us": 6.9,
+                "pantone": 1.5
+              }
+            }
+          }
         }
       },
       "975": {
@@ -1955,7 +3812,22 @@
           ],
           "hex": "#210929"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from purple-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from purple-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C82 M94 Y25 K74",
+              "cmykUS": "C89 M100 Y54 K69",
+              "pantone": "2695 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.5,
+                "us": 5.7,
+                "pantone": 7.0
+              }
+            }
+          }
+        }
       },
       "a100": {
         "$type": "color",
@@ -2021,6 +3893,21 @@
             0.9804
           ],
           "hex": "#faf3fa"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C3 M5 Y0 K0",
+              "cmykUS": "C2 M6 Y0 K0",
+              "pantone": "663 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.7,
+                "us": 0.2,
+                "pantone": 4.3
+              }
+            }
+          }
         }
       },
       "100": {
@@ -2033,6 +3920,21 @@
             0.9686
           ],
           "hex": "#f7e8f7"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C4 M11 Y0 K0",
+              "cmykUS": "C2 M11 Y0 K0",
+              "pantone": "7436 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 1.3,
+                "us": 1.6,
+                "pantone": 3.3
+              }
+            }
+          }
         }
       },
       "200": {
@@ -2045,6 +3947,21 @@
             0.9451
           ],
           "hex": "#f2d2f1"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C8 M21 Y0 K0",
+              "cmykUS": "C5 M21 Y0 K0",
+              "pantone": "517 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 3.3,
+                "us": 3.4,
+                "pantone": 3.6
+              }
+            }
+          }
         }
       },
       "300": {
@@ -2057,6 +3974,21 @@
             0.902
           ],
           "hex": "#ecace6"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C15 M39 Y0 K0",
+              "cmykUS": "C11 M38 Y0 K0",
+              "pantone": "2065 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 6.4,
+                "us": 6.0,
+                "pantone": 2.5
+              }
+            }
+          }
         }
       },
       "400": {
@@ -2069,6 +4001,21 @@
             0.8275
           ],
           "hex": "#e474d3"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C24 M63 Y0 K0",
+              "cmykUS": "C20 M62 Y0 K0",
+              "pantone": "2375 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 8.1,
+                "us": 7.7,
+                "pantone": 1.4
+              }
+            }
+          }
         }
       },
       "500": {
@@ -2081,6 +4028,21 @@
             0.7412
           ],
           "hex": "#de4ebd"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C26 M77 Y0 K0",
+              "cmykUS": "C24 M76 Y0 K0",
+              "pantone": "239 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 7.8,
+                "us": 7.0,
+                "pantone": 3.2
+              }
+            }
+          }
         }
       },
       "600": {
@@ -2094,7 +4056,22 @@
           ],
           "hex": "#d02e9d"
         },
-        "$description": "Main color of this family"
+        "$description": "Main color of this family",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C20 M85 Y0 K0",
+              "cmykUS": "C22 M87 Y0 K0",
+              "pantone": "Pink C",
+              "pantoneBrand": true,
+              "deltaE2000": {
+                "europe": 3.5,
+                "us": 3.5,
+                "pantone": 1.6
+              }
+            }
+          }
+        }
       },
       "700": {
         "$type": "color",
@@ -2106,6 +4083,21 @@
             0.498
           ],
           "hex": "#b4227f"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C26 M93 Y2 K5",
+              "cmykUS": "C29 M99 Y5 K0",
+              "pantone": "675 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.4,
+                "us": 0.3,
+                "pantone": 2.5
+              }
+            }
+          }
         }
       },
       "800": {
@@ -2118,6 +4110,21 @@
             0.4078
           ],
           "hex": "#942068"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C29 M92 Y7 K25",
+              "cmykUS": "C42 M100 Y21 K9",
+              "pantone": "7648 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 0.6,
+                "pantone": 1.4
+              }
+            }
+          }
         }
       },
       "900": {
@@ -2130,6 +4137,21 @@
             0.349
           ],
           "hex": "#7a2159"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C36 M90 Y14 K37",
+              "cmykUS": "C49 M100 Y28 K21",
+              "pantone": "242 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.6,
+                "us": 0.6,
+                "pantone": 1.5
+              }
+            }
+          }
         }
       },
       "950": {
@@ -2142,6 +4164,21 @@
             0.1961
           ],
           "hex": "#490f32"
+        },
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C49 M93 Y26 K64",
+              "cmykUS": "C59 M100 Y42 K58",
+              "pantone": "6320 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.0,
+                "us": 2.0,
+                "pantone": 5.2
+              }
+            }
+          }
         }
       },
       "975": {
@@ -2155,7 +4192,22 @@
           ],
           "hex": "#240819"
         },
-        "$description": "The deepest tint (design lead, 2026-11-19): halfway from pink-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file."
+        "$description": "The deepest tint (design lead, 2026-11-19): halfway from pink-950 to black, keeping its hue, like neutral-975. Step 1 of the adaptive scale in dark. Added in this repo first, then to the Figma file.",
+        "$extensions": {
+          "qdrant": {
+            "print": {
+              "cmykEurope": "C67 M87 Y36 K82",
+              "cmykUS": "C75 M91 Y59 K82",
+              "pantone": "6077 C",
+              "pantoneBrand": false,
+              "deltaE2000": {
+                "europe": 0.7,
+                "us": 4.0,
+                "pantone": 9.0
+              }
+            }
+          }
+        }
       }
     }
   },
