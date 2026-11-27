@@ -4,7 +4,7 @@ The other folders say how each piece is built. This one says **which pieces to p
 
 The layout rules for creatives (Canvas, Grid, Stack, Box and the checks) are in [`layout/`](layout/), moved here from `primitives/` on 2026-11-12 because layout is a rule, not a token.
 
-Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). Print differs in a few places: no patterns, a choice between space imagery and a plain look, wider margins, text sizes in pt (visual designer, 2026-11-20).
+Printed creatives use these same rules plus the print layer in [`print/`](print/): the printer's spec, format presets, bleed, safe area, folds and export (2026-11-20). [`print/`](print/) is the only place for the print rules; this page only links to it (visual designer, 2026-11-26).
 
 Three kinds of rule:
 
@@ -24,6 +24,8 @@ Decided by the visual designer on 2026-11-04.
 | **Qbot** | DevRel and community (with space imagery, whichever fits better) |
 | **Pattern only** | Sales, and guide or docs downloads (with the light card) |
 | **Headshots** | Speaker announcements (webinar, talk, panel) |
+
+**Print** asks different questions (the vendor's spec, and for large formats where the piece hangs or stands and what covers it): see [`print/`](print/) section 1.
 
 **Don't ask design questions.** Take these from the rules (visual designer, 2026-11-20):
 
@@ -94,6 +96,8 @@ Decided in the Pattern Library review (visual designer, 2026-11-24). Everything 
 - **Must:** generative pattern names have no letter (Generative-Hexagon-Pattern, not Hexagon-B): one pattern per element, its looks are variants.
 
 The patterns themselves are in [`brand-assets/patterns/`](../brand-assets/patterns/).
+
+**Print:** patterns in print are in [`print/`](print/) section 3.
 
 ## 3. Red backgrounds
 

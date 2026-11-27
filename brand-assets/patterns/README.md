@@ -157,6 +157,10 @@ A preset can say whether text on it needs the pattern mask from [`guidelines/lay
 | Generative-Pulse-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold), Background → Neutral 800, Neutral 100 → 300 (light mode, white elements, on hold); elements in 800, 700, 500 | Pattern Studio connector (Hex pulse look) | Outlined hexagons in big hexagon rings that fill the frame, 40 px grid, on the Motion Streaks gradient without the streaks |
 | Generative-Rings-Pattern | Background → Indigo 900, Background → Amaranth 900, Background → Teal 900 (on hold), Background → Neutral 800, Neutral 100 → 300 (light mode, white elements, on hold); elements in 800, 700, 500 | The visual designer's Pattern Studio export (Hex pulse settings) | Hexagons on a hex grid lit in broken hexagon rings by heavy noise, on the Motion Streaks gradient without the streaks. 10 approved variants (`{ variant: n }`): tighter rings, less noise, 24 or 48 px grids, outlined, fast fade, another seed, radial color, circle shape, dots |
 
+## In print
+
+Whether and how patterns go on printed pieces is in [`guidelines/print/`](../../guidelines/print/) section 3, the only place for the print rules (visual designer, 2026-11-26).
+
 ## Known limits
 
 - **Browser only.** Rendering uses a canvas, so they run in a browser. A server would need a canvas library.
